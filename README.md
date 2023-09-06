@@ -31,20 +31,21 @@ yarn add vue-screener
 
 <script lang="ts">
 import VueScreener from 'vue-screener'
+</script>
 ```
 
 ## Roadmap
 
-- [x] storybook documentation
-- [x] highlight search query
-- [x] paginated results
-- [x] GUI enables sort by field
-- [ ] GUI enables adding and removing table fields
-- [ ] GUI enables resize table fields
-- [ ] can fully customise style
-- [ ] support images, numbers, links
-- [ ] the style matches Mozilla Firefox JSON viewer in dark mode
-- [ ] the content of each cell can be extended like https://www.vuetable.com/guide/
+- [x] Storybook documentation
+- [x] Search query highlighting
+- [x] Pagination
+- [x] Sort by field (GUI)
+- [ ] Add/remove table columns (GUI)
+- [ ] Resize table columns (GUI)
+- [ ] Full style customization
+- [ ] Support for images, numbers, links and more
+- [ ] Dark mode styling inspired by Mozilla Firefox JSON viewer
+- [ ] Extensible cell content (like [VueTable](https://www.vuetable.com/guide/))
 
 ## Reading
 
