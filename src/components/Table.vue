@@ -33,7 +33,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { orderBy } from "natural-orderby";
-import highlightText from "@/utils/highlightText";
+import highlightText from "../utils/highlightText";
 import TableHeadField from "./TableHeadField.vue";
 import { normalisedRow } from "../utils/data.utils";
 
