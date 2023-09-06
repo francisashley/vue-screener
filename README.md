@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/francisashley/vue-screener/main/public/logo-with-outline.png" alt="Logo" style="max-width: 400px;">
+  <img src="https://raw.githubusercontent.com/francisashley/vue-screener/main/logo.png" alt="Logo" style="max-width: 400px;">
   <br/>
   <em>Easily search and filter data in Vue3</em>
   <br/>
