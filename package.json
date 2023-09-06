@@ -19,7 +19,9 @@
     "types": "vue-tsc",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prebuild": "rimraf ./dist",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "vue": "^3.3.4"
