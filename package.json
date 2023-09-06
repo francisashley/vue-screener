@@ -1,14 +1,21 @@
 {
-  "name": "vue-data-screener-vue3",
+  "name": "vue-screener",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "engines": {
-    "node": ">= 18"
+  "files": [],
+  "exports": {
+    ".": {
+      "import": "./dist/vue-screener.js",
+      "require": "./dist/vue-screener.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
   },
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "types": "vue-tsc",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -25,7 +32,7 @@
     "@storybook/vue3": "^7.4.0",
     "@storybook/vue3-vite": "^7.4.0",
     "@vitejs/plugin-vue": "^4.2.3",
-    "natural-orderby": "^3.0.2",
+    "natural-orderby": "^2.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.66.1",
