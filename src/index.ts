@@ -1,3 +1,3 @@
-import VueScreener from "./components/DataScreener.vue";
+import VueScreener from "./components/VueScreener.vue";
 
 export { VueScreener };

@@ -1,19 +1,14 @@
 <template>
   <section class="ds">
-    <ErrorMessage
-      v-if="!isValidInput"
-      message="Invalid data was provided. Please provide an
-      array of objects or an array of arrays."
-    />
-    <template v-else>
-      <AppHeader>
+    <template v-if="isValidInput">
+      <header class="ds__header">
         <div class="ds__title">Results</div>
-        <RenderFormat
+        <DataViewSelector
           class="ds__render-format"
           :active-format="renderFormat"
           @select-format="onSelectFormat"
         />
-        <Search
+        <VueScreenerSearch
           class="ds__search"
           :query="searchQuery"
           :is-valid-query="isRegExFriendlySearchQuery"
@@ -21,39 +16,40 @@
           @search="onSearch"
           @update-options="onUpdateOptions"
         />
-      </AppHeader>
-      <AppMain>
-        <ScreenerTable
+      </header>
+      <main>
+        <TableView
           v-if="renderFormat === 'table'"
           :fields="getFields"
           :rows="getPaginatedData"
           :highlight="searchQuery"
         />
-        <PrettyJson v-else :data="getPaginatedData" />
-      </AppMain>
-      <AppFooter>
+        <JsonView v-else :data="getPaginatedData" />
+      </main>
+      <footer class="ds__footer">
         <Pagination
           :total-items="getSearchedData.length"
           :per-page="perPage"
           :current-page="stagedCurrentPage"
           @change-page="onChangePage"
         />
-      </AppFooter>
+      </footer>
     </template>
+    <ErrorMessage
+      v-else
+      message="Invalid data was provided. Please provide an
+      array of objects or an array of arrays."
+    />
   </section>
 </template>
 
 <script lang="ts" setup>
-import PrettyJson from "./PrettyJson.vue";
-import Pagination from "./Pagination.vue";
-import ScreenerTable from "./ScreenerTable.vue";
-import AppHeader from "./AppHeader.vue";
-import AppMain from "./AppMain.vue";
-import AppFooter from "./AppFooter.vue";
-import RenderFormat from "./RenderFormat.vue";
-import Search from "./Search.vue";
-import { SearchQueryOption } from "./Search.vue";
-import ErrorMessage from "./ErrorMessage.vue";
+import JsonView from "./views/JsonView.vue";
+import TableView from "./views/TableView.vue";
+import DataViewSelector from "./stuff/DataViewSelector.vue";
+import VueScreenerSearch, { SearchQueryOption } from "./VueScreenerSearch.vue";
+import Pagination from "./stuff/Pagination.vue";
+import ErrorMessage from "./stuff/ErrorMessage.vue";
 import { isValidRegExp } from "../utils/regex.utils";
 import {
   NormalisedRow,
@@ -164,6 +160,16 @@ const onChangePage = (page: number) => {
   font-size: 14px;
 }
 
+.ds__header {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: white;
+  background: black;
+  font-weight: 400;
+  padding: 8px;
+}
+
 .ds__title {
   font-weight: 500;
   margin-right: auto;
@@ -175,5 +181,12 @@ const onChangePage = (page: number) => {
 
 .ds__search {
   margin-left: 8px;
+}
+
+.ds__footer {
+  border-bottom: thin solid;
+  border-left: thin solid;
+  border-right: thin solid;
+  padding: 8px;
 }
 </style>

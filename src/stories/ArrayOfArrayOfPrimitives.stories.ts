@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import DataScreener from "../components/DataScreener.vue";
+import VueScreener from "../components/VueScreener.vue";
 import primitivesData from "../fixtures/primitives-data.json";
 
-const meta: Meta<typeof DataScreener> = {
+const meta: Meta<typeof VueScreener> = {
   title: "Data/ArrayOfArrayOfPrimitives",
-  component: DataScreener,
+  component: VueScreener,
 };
 
 export default meta;
-type Story = StoryObj<typeof DataScreener>;
+type Story = StoryObj<typeof VueScreener>;
 
 export const ArrayOfArrayOfPrimitives: Story = {
   args: {

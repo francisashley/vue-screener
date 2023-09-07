@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
-import DataScreener from "../components/DataScreener.vue";
+import VueScreener from "../components/VueScreener.vue";
 
-const meta: Meta<typeof DataScreener> = {
+const meta: Meta<typeof VueScreener> = {
   title: "errors/FailsWhenProvidedInvalidData",
-  component: DataScreener,
+  component: VueScreener,
 };
 
 export default meta;
-type Story = StoryObj<typeof DataScreener>;
+type Story = StoryObj<typeof VueScreener>;
 
 export const ArrayOfDifferentObjects: Story = {
   args: {

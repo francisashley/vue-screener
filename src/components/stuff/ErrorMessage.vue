@@ -1,5 +1,5 @@
 <template>
-  <div class="ds-error-message">[VueDataScreenerError]: {{ message }}</div>
+  <div class="ds-error-message">[VueScreenerError]: {{ message }}</div>
 </template>
 
 <script lang="ts" setup>

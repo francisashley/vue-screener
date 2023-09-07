@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <DataScreener />
+    <VueScreener />
   </div>
 </template>
 
 <script setup lang="ts">
-import DataScreener from "./components/DataScreener.vue";
+import VueScreener from "./components/VueScreener.vue";
 </script>
 
 <style scoped></style>

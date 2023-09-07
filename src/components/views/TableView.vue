@@ -2,14 +2,16 @@
   <table class="ds-table">
     <thead>
       <tr>
-        <table-head-field
+        <th
           v-for="(field, index) in fields"
           :key="index"
-          :sort-direction="getSortDirection(field)"
-          @sort="onSort(field)"
+          class="ds-table-head-field"
+          :class="{ 'ds-table-head-field--is-sortable': true }"
+          @click="onSort(field)"
         >
           {{ field }}
-        </table-head-field>
+          <SortSelector :sort-direction="getSortDirection(field)" />
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -32,9 +34,9 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
 import { orderBy } from "natural-orderby";
-import highlightText from "../utils/highlightText";
-import TableHeadField from "./TableHeadField.vue";
-import { NormalisedRow } from "../utils/data.utils";
+import highlightText from "../../utils/highlightText";
+import { NormalisedRow } from "../../utils/data.utils";
+import SortSelector from "../stuff/SortSelector.vue";
 
 const {
   fields = [],
@@ -144,5 +146,20 @@ const onSort = (updatedSortField: string) => {
 
 .ds-table thead tr td.thumbnail {
   padding-right: 0 !important;
+}
+
+.ds-table-head-field {
+  font-weight: bold;
+  width: 0.1%;
+  white-space: nowrap;
+  padding: 2px 5px;
+  height: 24px;
+  box-sizing: border-box;
+  text-align: left;
+
+  &--is-sortable {
+    cursor: pointer;
+    user-select: none;
+  }
 }
 </style>
