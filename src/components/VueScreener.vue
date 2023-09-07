@@ -69,7 +69,7 @@ const {
   perPage = 25,
   currentPage = 1,
 } = defineProps<{
-  data: unknown[];
+  data?: unknown[];
   pickFields?: string[];
   perPage?: number;
   currentPage?: number;
