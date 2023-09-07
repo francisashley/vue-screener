@@ -35,7 +35,7 @@ import { defineComponent, PropType } from "vue";
 import { orderBy } from "natural-orderby";
 import highlightText from "../utils/highlightText";
 import TableHeadField from "./TableHeadField.vue";
-import { normalisedRow } from "../utils/data.utils";
+import { NormalisedRow } from "../utils/data.utils";
 
 export default defineComponent({
   name: "ScreenerTable",
@@ -46,7 +46,7 @@ export default defineComponent({
       default: () => [],
     },
     rows: {
-      type: Array as PropType<normalisedRow[]>,
+      type: Array as PropType<NormalisedRow[]>,
       default: () => [],
     },
     highlight: {
@@ -67,7 +67,7 @@ export default defineComponent({
   },
 
   computed: {
-    getSortedRows(): normalisedRow[] {
+    getSortedRows(): NormalisedRow[] {
       const rows = this.rows;
 
       const sortIndex =
@@ -85,7 +85,7 @@ export default defineComponent({
         return [
           ...orderBy(
             nonNullRows,
-            [(row: normalisedRow | null) => row?.[sortIndex]?.value],
+            [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
             [this.sortDirection],
           ),
           ...nullRows,

@@ -10,7 +10,7 @@ export function isValidInput(data: unknown): boolean {
   );
 }
 
-export interface normalisedField {
+export interface NormalisedField {
   key: string;
   value: unknown;
   hasValue: boolean;
@@ -26,27 +26,27 @@ export interface normalisedField {
     | "symbol";
 }
 
-export type normalisedRow = normalisedField[];
+export type NormalisedRow = NormalisedField[];
 
 export interface UnknownObject {
   [key: string | number]: unknown;
 }
 
-export function normaliseInput(data: UnknownObject[]): normalisedRow[] {
+export function normaliseInput(data: UnknownObject[]): NormalisedRow[] {
   // in the case that an array (data) of arrays (rows) has been provided [[],[],[]], convert to [{},{},{}]
   data = data.map((row) => (Array.isArray(row) ? { ...row } : row));
 
   // Normalise each field
-  const normaliseField = (field: string, value: unknown): normalisedField => ({
+  const normaliseField = (field: string, value: unknown): NormalisedField => ({
     key: field,
     value,
     type: getTypeOf(value),
     hasValue: value !== null || value !== undefined,
   });
 
-  let normalisedData = data.map((row: UnknownObject): normalisedRow => {
+  let normalisedData = data.map((row: UnknownObject): NormalisedRow => {
     return Object.keys(row).map(
-      (key): normalisedField => normaliseField(key, row[key]),
+      (key): NormalisedField => normaliseField(key, row[key]),
     );
   });
 
@@ -55,7 +55,7 @@ export function normaliseInput(data: UnknownObject[]): normalisedRow[] {
   normalisedData = normalisedData.map((row) => {
     return fields.map((field) => {
       return (
-        row.find((_field: normalisedField) => _field.key === field) ||
+        row.find((_field: NormalisedField) => _field.key === field) ||
         normaliseField(field, undefined)
       );
     });
@@ -64,7 +64,7 @@ export function normaliseInput(data: UnknownObject[]): normalisedRow[] {
   return normalisedData;
 }
 
-export function getFields(rows: normalisedRow[]): string[] {
+export function getFields(rows: NormalisedRow[]): string[] {
   const fields = new Set<string>();
 
   for (const row of rows) {
@@ -79,9 +79,9 @@ export function getFields(rows: normalisedRow[]): string[] {
 type ExcludesFalse = <T>(x: T | false) => x is T;
 
 export function pickFields(
-  rows: normalisedRow[],
+  rows: NormalisedRow[],
   pickFields: string[],
-): normalisedRow[] {
+): NormalisedRow[] {
   return rows.map((row) => {
     return pickFields
       .map((pickField) => row.find((field) => field.key === pickField) || false)
@@ -90,11 +90,11 @@ export function pickFields(
 }
 
 export function getPaginated(options: {
-  rows: normalisedRow[];
+  rows: NormalisedRow[];
   page: number;
   perPage: number;
   withPlaceholders: boolean;
-}): normalisedRow[] {
+}): NormalisedRow[] {
   let { rows = [] } = options;
   const { page = 1, perPage = 25, withPlaceholders = false } = options;
 
@@ -137,12 +137,12 @@ const meetsCriteria = (
 };
 
 export function search(options: {
-  rows: normalisedRow[];
+  rows: NormalisedRow[];
   searchQuery: string;
   useRegExp: boolean;
   matchCase: boolean;
   matchWord: boolean;
-}): normalisedRow[] {
+}): NormalisedRow[] {
   let { searchQuery = "" } = options;
 
   const {

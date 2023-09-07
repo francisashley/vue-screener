@@ -30,12 +30,12 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 
-export type searchQueryOption = "match-case" | "match-word" | "use-regex";
+export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
 
 const OPTIONS = new Set(["match-case", "match-word", "use-regex"]);
 
-type searchQueryInternalOption = {
-  id: searchQueryOption;
+type SearchQueryInternalOption = {
+  id: SearchQueryOption;
   title: string;
   text: string;
   isActive?: boolean;
@@ -53,7 +53,7 @@ export default defineComponent({
       default: true,
     },
     activeOptions: {
-      type: Array as PropType<searchQueryOption[]>,
+      type: Array as PropType<SearchQueryOption[]>,
       default: () => [],
       validator: (options: string[]) =>
         options.every((option) => OPTIONS.has(option)),
@@ -67,7 +67,7 @@ export default defineComponent({
         { id: "match-case", title: "Match case", text: "Aa" },
         { id: "match-word", title: "Match word", text: "ab" },
         { id: "use-regex", title: "Use regular expression", text: ".*" },
-      ] as searchQueryInternalOption[],
+      ] as SearchQueryInternalOption[],
     };
   },
   computed: {
@@ -76,8 +76,8 @@ export default defineComponent({
         (activeOption) => activeOption === "use-regex",
       );
     },
-    getOptions(): searchQueryInternalOption[] {
-      return this.options.map((option: searchQueryInternalOption) => ({
+    getOptions(): SearchQueryInternalOption[] {
+      return this.options.map((option: SearchQueryInternalOption) => ({
         ...option,
         isActive: this.activeOptions.includes(option.id),
       }));
@@ -120,7 +120,7 @@ export default defineComponent({
       this.$emit("search", searchQuery);
     },
 
-    toggleOption(option: searchQueryOption) {
+    toggleOption(option: SearchQueryOption) {
       let activeOptions = this.activeOptions;
       if (activeOptions.includes(option)) {
         activeOptions = activeOptions.filter(

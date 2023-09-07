@@ -19,14 +19,14 @@ import SortIcon from "./icons/Sort.vue";
 import SortUpIcon from "./icons/SortUp.vue";
 import SortDownIcon from "./icons/SortDown.vue";
 
-type sortDirection = null | "asc" | "desc";
+type SortDirection = null | "asc" | "desc";
 
 export default defineComponent({
   name: "DataScreenerTable",
 
   props: {
     isSortable: { type: Boolean, default: true },
-    sortDirection: { type: String as PropType<sortDirection>, default: null },
+    sortDirection: { type: String as PropType<SortDirection>, default: null },
   },
 
   components: {

@@ -1,4 +1,4 @@
-type returnType =
+type ReturnType =
   | "string"
   | "number"
   | "boolean"
@@ -9,7 +9,7 @@ type returnType =
   | "array"
   | "object";
 
-export default function (value: unknown): returnType {
+export default function (value: unknown): ReturnType {
   if (typeof value === "string") {
     return "string";
   } else if (typeof value === "number") {

@@ -53,11 +53,11 @@ import AppMain from "./AppMain.vue";
 import AppFooter from "./AppFooter.vue";
 import RenderFormat from "./RenderFormat.vue";
 import Search from "./Search.vue";
-import { searchQueryOption } from "./Search.vue";
+import { SearchQueryOption } from "./Search.vue";
 import ErrorMessage from "./ErrorMessage.vue";
 import { isValidRegExp } from "../utils/regex.utils";
 import {
-  normalisedRow,
+  NormalisedRow,
   UnknownObject,
   isValidInput,
   normaliseInput,
@@ -110,7 +110,7 @@ export default defineComponent({
       searchQuery: "" as string,
       stagedCurrentPage: this.currentPage as number,
       renderFormat: "table" as "table" | "raw",
-      searchQueryOptions: [] as searchQueryOption[],
+      searchQueryOptions: [] as SearchQueryOption[],
       searchedData: [],
     };
   },
@@ -124,7 +124,7 @@ export default defineComponent({
       return isValidRegExp(this.searchQuery);
     },
 
-    getNormalisedData(): normalisedRow[] {
+    getNormalisedData(): NormalisedRow[] {
       const data = isValidInput(this.data)
         ? normaliseInput(this.data as UnknownObject[])
         : [];
@@ -152,7 +152,7 @@ export default defineComponent({
       return this.searchQueryOptions.includes("match-word");
     },
 
-    getSearchedData(): normalisedRow[] {
+    getSearchedData(): NormalisedRow[] {
       return search({
         rows: this.getNormalisedData,
         searchQuery: this.searchQuery,
@@ -162,7 +162,7 @@ export default defineComponent({
       });
     },
 
-    getPaginatedData(): normalisedRow[] {
+    getPaginatedData(): NormalisedRow[] {
       return getPaginated({
         rows: this.searchQuery ? this.getSearchedData : this.getNormalisedData,
         page: this.stagedCurrentPage - 1,
@@ -177,7 +177,7 @@ export default defineComponent({
       this.searchQuery = query;
     },
 
-    onUpdateOptions(options: searchQueryOption[]) {
+    onUpdateOptions(options: SearchQueryOption[]) {
       this.searchQueryOptions = options;
       this.onSearch(this.searchQuery);
     },
