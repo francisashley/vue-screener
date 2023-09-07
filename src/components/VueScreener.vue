@@ -63,25 +63,27 @@ import {
 } from "../utils/data.utils";
 import { computed, ref } from "vue";
 
-const {
-  data = [],
-  pickFields = [],
-  perPage = 25,
-  currentPage = 1,
-} = defineProps<{
+type Props = {
   data?: unknown[];
   pickFields?: string[];
   perPage?: number;
   currentPage?: number;
-}>();
+};
+
+const props = withDefaults(defineProps<Props>(), {
+  data: () => [],
+  pickFields: () => [],
+  perPage: 25,
+  currentPage: 1,
+});
 
 const searchQuery = ref<string>("");
-const stagedCurrentPage = ref<number>(currentPage);
+const stagedCurrentPage = ref<number>(props.currentPage);
 const renderFormat = ref<"table" | "raw">("table");
 const searchQueryOptions = ref<SearchQueryOption[]>([]);
 
 const isValidInput = computed((): boolean => {
-  return isValidInputTool(data);
+  return isValidInputTool(props.data);
 });
 
 const isRegExFriendlySearchQuery = computed((): boolean => {
@@ -89,12 +91,12 @@ const isRegExFriendlySearchQuery = computed((): boolean => {
 });
 
 const getNormalisedData = computed((): NormalisedRow[] => {
-  const normalisedData = isValidInputTool(data)
-    ? normaliseInput(data as UnknownObject[])
+  const normalisedData = isValidInputTool(props.data)
+    ? normaliseInput(props.data as UnknownObject[])
     : [];
 
-  if (pickFields.length > 0) {
-    return pickFieldsTool(normalisedData, pickFields);
+  if (props.pickFields.length > 0) {
+    return pickFieldsTool(normalisedData, props.pickFields);
   }
 
   return normalisedData;
@@ -130,7 +132,7 @@ const getPaginatedData = computed((): NormalisedRow[] => {
   return getPaginated({
     rows: searchQuery.value ? getSearchedData.value : getNormalisedData.value,
     page: stagedCurrentPage.value - 1,
-    perPage: perPage,
+    perPage: props.perPage,
     withPlaceholders: true,
   });
 });
