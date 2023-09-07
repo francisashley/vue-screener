@@ -27,12 +27,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script lang="ts" setup>
+import { computed, ref } from "vue";
 
 export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
-
-const OPTIONS = new Set(["match-case", "match-word", "use-regex"]);
 
 type SearchQueryInternalOption = {
   id: SearchQueryOption;
@@ -41,98 +39,79 @@ type SearchQueryInternalOption = {
   isActive?: boolean;
 };
 
-export default defineComponent({
-  name: "DataScreenerSearch",
-  props: {
-    query: {
-      type: String,
-      default: "",
-    },
-    isValidQuery: {
-      type: Boolean,
-      default: true,
-    },
-    activeOptions: {
-      type: Array as PropType<SearchQueryOption[]>,
-      default: () => [],
-      validator: (options: string[]) =>
-        options.every((option) => OPTIONS.has(option)),
-    },
-  },
-  data() {
-    return {
-      history: [] as string[],
-      historyIndex: null as number | null,
-      options: [
-        { id: "match-case", title: "Match case", text: "Aa" },
-        { id: "match-word", title: "Match word", text: "ab" },
-        { id: "use-regex", title: "Use regular expression", text: ".*" },
-      ] as SearchQueryInternalOption[],
-    };
-  },
-  computed: {
-    useRegEx(): boolean {
-      return this.activeOptions.some(
-        (activeOption) => activeOption === "use-regex",
-      );
-    },
-    getOptions(): SearchQueryInternalOption[] {
-      return this.options.map((option: SearchQueryInternalOption) => ({
-        ...option,
-        isActive: this.activeOptions.includes(option.id),
-      }));
-    },
-  },
-  methods: {
-    debouncedSearch(event: Event): void {
-      const searchQuery = (event.target as HTMLInputElement).value;
-      this.search(searchQuery);
-      if (searchQuery) {
-        this.history.push(searchQuery);
-        this.historyIndex = this.history.length - 1;
-      }
-    },
+const {
+  query = "",
+  isValidQuery = true,
+  activeOptions = [],
+} = defineProps<{
+  query: string;
+  isValidQuery: boolean;
+  activeOptions: SearchQueryOption[];
+}>();
 
-    onKeydown(e: KeyboardEvent) {
-      const isPressingUp = e.key === "ArrowUp";
-      const isPressingDown = e.key === "ArrowDown";
+const emit = defineEmits(["search", "update-options"]);
 
-      if ((!isPressingUp && !isPressingDown) || this.historyIndex === null) {
-        return;
-      }
+const history = ref<string[]>([]);
+const historyIndex = ref<number | null>(null);
+const options = ref<SearchQueryInternalOption[]>([
+  { id: "match-case", title: "Match case", text: "Aa" },
+  { id: "match-word", title: "Match word", text: "ab" },
+  { id: "use-regex", title: "Use regular expression", text: ".*" },
+]);
 
-      // prevent the cursor moving to the start of the line when pressing up
-      e.preventDefault();
-
-      if (isPressingUp && this.historyIndex > 0) {
-        this.historyIndex--;
-      } else if (
-        isPressingDown &&
-        this.historyIndex < this.history.length - 1
-      ) {
-        this.historyIndex++;
-      }
-
-      this.search(this.history[this.historyIndex]);
-    },
-
-    search(searchQuery: string): void {
-      this.$emit("search", searchQuery);
-    },
-
-    toggleOption(option: SearchQueryOption) {
-      let activeOptions = this.activeOptions;
-      if (activeOptions.includes(option)) {
-        activeOptions = activeOptions.filter(
-          (activeOption) => activeOption !== option,
-        );
-      } else {
-        activeOptions = [...activeOptions, option];
-      }
-      this.$emit("update-options", activeOptions);
-    },
-  },
+const useRegEx = computed<boolean>(() => {
+  return activeOptions.some((activeOption) => activeOption === "use-regex");
 });
+const getOptions = computed<SearchQueryInternalOption[]>(() => {
+  return options.value.map((option: SearchQueryInternalOption) => ({
+    ...option,
+    isActive: activeOptions.includes(option.id),
+  }));
+});
+
+const debouncedSearch = (event: Event): void => {
+  const searchQuery = (event.target as HTMLInputElement).value;
+  search(searchQuery);
+  if (searchQuery) {
+    history.value.push(searchQuery);
+    historyIndex.value = history.value.length - 1;
+  }
+};
+
+const onKeydown = (e: KeyboardEvent) => {
+  const isPressingUp = e.key === "ArrowUp";
+  const isPressingDown = e.key === "ArrowDown";
+
+  if ((!isPressingUp && !isPressingDown) || historyIndex.value === null) {
+    return;
+  }
+
+  // prevent the cursor moving to the start of the line when pressing up
+  e.preventDefault();
+
+  if (isPressingUp && historyIndex.value > 0) {
+    historyIndex.value--;
+  } else if (isPressingDown && historyIndex.value < history.value.length - 1) {
+    historyIndex.value++;
+  }
+
+  search(history.value[historyIndex.value]);
+};
+
+const search = (searchQuery: string): void => {
+  emit("search", searchQuery);
+};
+
+const toggleOption = (option: SearchQueryOption) => {
+  if (activeOptions.includes(option)) {
+    emit(
+      "update-options",
+      activeOptions.filter((activeOption) => activeOption !== option),
+    );
+  } else {
+    emit("update-options", [...activeOptions, option]);
+  }
+};
 </script>
 
 <style>

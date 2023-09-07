@@ -5,52 +5,28 @@
       @click.prevent="onSelectFormat('table')"
       :class="[
         'ds-render-format__link',
-        props.activeFormat === 'table' && 'is-active',
+        activeFormat === 'table' && 'is-active',
       ]"
       v-text="'Table'"
     />
     <a
       href="#"
       @click.prevent="onSelectFormat('raw')"
-      :class="[
-        'ds-render-format__link',
-        props.activeFormat === 'raw' && 'is-active',
-      ]"
+      :class="['ds-render-format__link', activeFormat === 'raw' && 'is-active']"
       v-text="'Raw'"
     />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+const { activeFormat = "table" } = defineProps<{
+  activeFormat: "table" | "raw";
+}>();
 
-const FORMATS = new Set(["table", "raw"]);
+const emit = defineEmits(["select-format"]);
 
-export default defineComponent({
-  name: "DataScreenerRenderFormat",
-
-  props: {
-    activeFormat: {
-      type: String,
-      default: "table",
-      validator: (activeFormat: string) => FORMATS.has(activeFormat),
-    },
-  },
-
-  emits: {
-    "select-format": (format: "raw" | "table") => format,
-  },
-
-  setup(props, { emit }) {
-    const onSelectFormat = (format: "raw" | "table") =>
-      emit("select-format", format);
-
-    return {
-      onSelectFormat,
-      props,
-    };
-  },
-});
+const onSelectFormat = (format: "raw" | "table") =>
+  emit("select-format", format);
 </script>
 
 <style>

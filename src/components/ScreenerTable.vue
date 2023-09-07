@@ -5,7 +5,6 @@
         <table-head-field
           v-for="(field, index) in fields"
           :key="index"
-          :field="field"
           :sort-direction="getSortDirection(field)"
           @sort="onSort(field)"
         >
@@ -30,95 +29,75 @@
   </table>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script lang="ts" setup>
+import { computed, ref } from "vue";
 import { orderBy } from "natural-orderby";
 import highlightText from "../utils/highlightText";
 import TableHeadField from "./TableHeadField.vue";
 import { NormalisedRow } from "../utils/data.utils";
 
-export default defineComponent({
-  name: "ScreenerTable",
+const {
+  fields = [],
+  rows = [],
+  highlight = "",
+} = defineProps<{
+  fields: string[];
+  rows: NormalisedRow[];
+  highlight: string;
+}>();
 
-  props: {
-    fields: {
-      type: Array as PropType<string[]>,
-      default: () => [],
-    },
-    rows: {
-      type: Array as PropType<NormalisedRow[]>,
-      default: () => [],
-    },
-    highlight: {
-      type: String,
-      default: "",
-    },
-  },
+const sortField = ref<string | null>(null);
+const sortDirection = ref<"asc" | "desc">("desc");
 
-  data() {
-    return {
-      sortField: null as null | string,
-      sortDirection: "desc" as "asc" | "desc",
-    };
-  },
+const getSortedRows = computed((): NormalisedRow[] => {
+  const sortedRows = rows;
 
-  components: {
-    TableHeadField,
-  },
+  const sortIndex =
+    sortedRows[0]?.findIndex((column) => column.key === sortField.value) ??
+    null;
 
-  computed: {
-    getSortedRows(): NormalisedRow[] {
-      const rows = this.rows;
+  if (sortField.value && sortDirection.value) {
+    const nullRows = sortedRows.filter(
+      (row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined,
+    );
 
-      const sortIndex =
-        rows[0]?.findIndex((column) => column.key === this.sortField) ?? null;
+    const nonNullRows = sortedRows.filter(
+      (row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined,
+    );
 
-      if (this.sortField && this.sortDirection) {
-        const nullRows = rows.filter(
-          (row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined,
-        );
-
-        const nonNullRows = rows.filter(
-          (row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined,
-        );
-
-        return [
-          ...orderBy(
-            nonNullRows,
-            [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
-            [this.sortDirection],
-          ),
-          ...nullRows,
-        ];
-      } else {
-        return rows;
-      }
-    },
-  },
-
-  methods: {
-    getHighlighted(value: unknown, highlight: string) {
-      if (["string", "number"].includes(typeof value)) {
-        return highlightText(String(value), highlight);
-      }
-      return value;
-    },
-
-    getSortDirection(field: string): "asc" | "desc" | null {
-      if (this.sortField === field) {
-        return this.sortDirection;
-      }
-      return null;
-    },
-
-    onSort(sortField: string) {
-      if (this.sortField === sortField) {
-        this.sortDirection = this.sortDirection === "desc" ? "asc" : "desc";
-      }
-      this.sortField = sortField;
-    },
-  },
+    return [
+      ...orderBy(
+        nonNullRows,
+        [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
+        [sortDirection.value],
+      ),
+      ...nullRows,
+    ];
+  } else {
+    return sortedRows;
+  }
 });
+
+const getHighlighted = (value: unknown, highlight: string) => {
+  if (["string", "number"].includes(typeof value)) {
+    return highlightText(String(value), highlight);
+  }
+  return value;
+};
+
+const getSortDirection = (field: string): "asc" | "desc" | null => {
+  if (sortField.value === field) {
+    return sortDirection.value;
+  }
+  return null;
+};
+
+const onSort = (updatedSortField: string) => {
+  if (sortField.value === updatedSortField) {
+    sortDirection.value = sortDirection.value === "desc" ? "asc" : "desc";
+  }
+  sortField.value = updatedSortField;
+};
 </script>
 
 <style scoped>

@@ -43,8 +43,7 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script lang="ts" setup>
 import PrettyJson from "./PrettyJson.vue";
 import Pagination from "./Pagination.vue";
 import ScreenerTable from "./ScreenerTable.vue";
@@ -59,138 +58,103 @@ import { isValidRegExp } from "../utils/regex.utils";
 import {
   NormalisedRow,
   UnknownObject,
-  isValidInput,
+  isValidInput as isValidInputTool,
   normaliseInput,
-  pickFields,
-  getFields,
+  pickFields as pickFieldsTool,
+  getFields as getFieldsTool,
   search,
   getPaginated,
 } from "../utils/data.utils";
+import { computed, ref } from "vue";
 
-export default defineComponent({
-  name: "DataScreener",
+const {
+  data = [],
+  pickFields = [],
+  perPage = 25,
+  currentPage = 1,
+} = defineProps<{
+  data: unknown[];
+  pickFields?: string[];
+  perPage?: number;
+  currentPage?: number;
+}>();
 
-  props: {
-    data: {
-      type: Array as PropType<unknown[]>,
-      default: () => [],
-      validator: isValidInput,
-    },
-    pickFields: {
-      type: Array as PropType<string[]>,
-      default: () => [],
-      validator: (pickFields: string[]) => {
-        return pickFields.every((field) => typeof field === "string");
-      },
-    },
-    perPage: {
-      type: Number as PropType<number>,
-      default: 25,
-    },
-    currentPage: {
-      type: Number as PropType<number>,
-      default: 1,
-    },
-  },
+const searchQuery = ref<string>("");
+const stagedCurrentPage = ref<number>(currentPage);
+const renderFormat = ref<"table" | "raw">("table");
+const searchQueryOptions = ref<SearchQueryOption[]>([]);
 
-  components: {
-    PrettyJson,
-    Pagination,
-    ScreenerTable,
-    AppHeader,
-    AppMain,
-    AppFooter,
-    RenderFormat,
-    Search,
-    ErrorMessage,
-  },
-
-  data() {
-    return {
-      searchQuery: "" as string,
-      stagedCurrentPage: this.currentPage as number,
-      renderFormat: "table" as "table" | "raw",
-      searchQueryOptions: [] as SearchQueryOption[],
-      searchedData: [],
-    };
-  },
-
-  computed: {
-    isValidInput(): boolean {
-      return isValidInput(this.data);
-    },
-
-    isRegExFriendlySearchQuery(): boolean {
-      return isValidRegExp(this.searchQuery);
-    },
-
-    getNormalisedData(): NormalisedRow[] {
-      const data = isValidInput(this.data)
-        ? normaliseInput(this.data as UnknownObject[])
-        : [];
-
-      if (this.pickFields.length > 0) {
-        return pickFields(data, this.pickFields);
-      }
-
-      return data;
-    },
-
-    getFields(): string[] {
-      return getFields(this.getNormalisedData);
-    },
-
-    shouldUseRegEx(): boolean {
-      return this.searchQueryOptions.includes("use-regex");
-    },
-
-    shouldMatchCase(): boolean {
-      return this.searchQueryOptions.includes("match-case");
-    },
-
-    shouldMatchWord(): boolean {
-      return this.searchQueryOptions.includes("match-word");
-    },
-
-    getSearchedData(): NormalisedRow[] {
-      return search({
-        rows: this.getNormalisedData,
-        searchQuery: this.searchQuery,
-        useRegExp: this.shouldUseRegEx,
-        matchCase: this.shouldMatchCase,
-        matchWord: this.shouldMatchWord,
-      });
-    },
-
-    getPaginatedData(): NormalisedRow[] {
-      return getPaginated({
-        rows: this.searchQuery ? this.getSearchedData : this.getNormalisedData,
-        page: this.stagedCurrentPage - 1,
-        perPage: this.perPage,
-        withPlaceholders: true,
-      });
-    },
-  },
-
-  methods: {
-    onSearch(query: string) {
-      this.searchQuery = query;
-    },
-
-    onUpdateOptions(options: SearchQueryOption[]) {
-      this.searchQueryOptions = options;
-      this.onSearch(this.searchQuery);
-    },
-
-    onSelectFormat(format: "table" | "raw") {
-      this.renderFormat = format;
-    },
-
-    onChangePage(page: number) {
-      this.stagedCurrentPage = page;
-    },
-  },
+const isValidInput = computed((): boolean => {
+  return isValidInputTool(data);
 });
+
+const isRegExFriendlySearchQuery = computed((): boolean => {
+  return isValidRegExp(searchQuery.value);
+});
+
+const getNormalisedData = computed((): NormalisedRow[] => {
+  const normalisedData = isValidInputTool(data)
+    ? normaliseInput(data as UnknownObject[])
+    : [];
+
+  if (pickFields.length > 0) {
+    return pickFieldsTool(normalisedData, pickFields);
+  }
+
+  return normalisedData;
+});
+
+const getFields = computed((): string[] => {
+  return getFieldsTool(getNormalisedData.value);
+});
+
+const shouldUseRegEx = computed((): boolean => {
+  return searchQueryOptions.value.includes("use-regex");
+});
+
+const shouldMatchCase = computed((): boolean => {
+  return searchQueryOptions.value.includes("match-case");
+});
+
+const shouldMatchWord = computed((): boolean => {
+  return searchQueryOptions.value.includes("match-word");
+});
+
+const getSearchedData = computed((): NormalisedRow[] => {
+  return search({
+    rows: getNormalisedData.value,
+    searchQuery: searchQuery.value,
+    useRegExp: shouldUseRegEx.value,
+    matchCase: shouldMatchCase.value,
+    matchWord: shouldMatchWord.value,
+  });
+});
+
+const getPaginatedData = computed((): NormalisedRow[] => {
+  return getPaginated({
+    rows: searchQuery.value ? getSearchedData.value : getNormalisedData.value,
+    page: stagedCurrentPage.value - 1,
+    perPage: perPage,
+    withPlaceholders: true,
+  });
+});
+
+const onSearch = (query: string) => {
+  searchQuery.value = query;
+};
+
+const onUpdateOptions = (options: SearchQueryOption[]) => {
+  searchQueryOptions.value = options;
+  onSearch(searchQuery.value);
+};
+
+const onSelectFormat = (format: "table" | "raw") => {
+  renderFormat.value = format;
+};
+
+const onChangePage = (page: number) => {
+  stagedCurrentPage.value = page;
+};
 </script>
 
 <style>

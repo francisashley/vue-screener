@@ -24,79 +24,67 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script lang="ts" setup>
+import { computed, onMounted, watch } from "vue";
 
-export default defineComponent({
-  name: "DataScreenerPagination",
+const {
+  currentPage = 1,
+  totalItems = 0,
+  perPage = 25,
+} = defineProps<{
+  currentPage?: number;
+  totalItems?: number;
+  perPage?: number;
+}>();
 
-  props: {
-    currentPage: {
-      type: Number as PropType<number>,
-      default: 1,
-    },
-    totalItems: {
-      type: Number as PropType<number>,
-      default: null,
-      required: true,
-    },
-    perPage: {
-      type: Number as PropType<number>,
-      default: null,
-      required: true,
-    },
-  },
+const emit = defineEmits(["change-page"]);
 
-  computed: {
-    totalPages(): number {
-      return Math.ceil(this.totalItems / this.perPage);
-    },
-
-    pages(): number[] {
-      return Array.from(new Array(this.totalPages + 1).keys()).slice(1);
-    },
-
-    firstIndexOfCurrentPage() {
-      return this.currentPage * this.perPage - this.perPage + 1;
-    },
-
-    lastIndexOfCurrentPage() {
-      return this.currentPage * this.perPage > this.totalItems
-        ? this.totalItems
-        : this.currentPage * this.perPage;
-    },
-
-    currentPageIsInRange(): boolean {
-      return this.totalPages >= this.currentPage;
-    },
-  },
-
-  mounted() {
-    this.ensureCurrentPageIsValid();
-  },
-
-  watch: {
-    totalItems() {
-      this.ensureCurrentPageIsValid();
-    },
-  },
-
-  methods: {
-    isActive(page: number): boolean {
-      return page === this.currentPage;
-    },
-
-    ensureCurrentPageIsValid(): void {
-      if (!this.currentPageIsInRange) {
-        this.selectPage(this.totalPages ? this.totalPages : 1);
-      }
-    },
-
-    selectPage(page: number): void {
-      this.$emit("change-page", page);
-    },
-  },
+const totalPages = computed((): number => {
+  return Math.ceil(totalItems / perPage);
 });
+
+const pages = computed((): number[] => {
+  return Array.from(new Array(totalPages.value + 1).keys()).slice(1);
+});
+
+const firstIndexOfCurrentPage = computed(() => {
+  return currentPage * perPage - perPage + 1;
+});
+
+const lastIndexOfCurrentPage = computed(() => {
+  return currentPage * perPage > totalItems
+    ? totalItems
+    : currentPage * perPage;
+});
+
+const currentPageIsInRange = computed((): boolean => {
+  return totalPages.value >= currentPage;
+});
+
+onMounted(() => {
+  ensureCurrentPageIsValid();
+});
+
+watch(
+  () => totalItems,
+  () => {
+    ensureCurrentPageIsValid();
+  },
+);
+
+const isActive = (page: number): boolean => {
+  return page === currentPage;
+};
+
+const ensureCurrentPageIsValid = (): void => {
+  if (!currentPageIsInRange.value) {
+    selectPage(totalPages.value ? totalPages.value : 1);
+  }
+};
+
+const selectPage = (page: number): void => {
+  emit("change-page", page);
+};
 </script>
 
 <style scoped>

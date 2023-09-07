@@ -21,7 +21,7 @@ import SortDownIcon from "./icons/SortDown.vue";
 type SortDirection = null | "asc" | "desc";
 
 const { isSortable = true, sortDirection = null } = defineProps<{
-  isSortable: boolean;
+  isSortable?: boolean;
   sortDirection: SortDirection;
 }>();
 </script>
