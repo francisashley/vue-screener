@@ -1,5 +1,5 @@
 <template>
-  <td
+  <th
     class="ds-table-head-field"
     :class="{ 'ds-table-head-field--is-sortable': isSortable }"
     @click="isSortable && $emit('sort')"
@@ -10,7 +10,7 @@
       <sort-up-icon v-else-if="sortDirection === 'asc'" />
       <sort-down-icon v-else-if="sortDirection === 'desc'" />
     </div>
-  </td>
+  </th>
 </template>
 
 <script lang="ts" setup>
