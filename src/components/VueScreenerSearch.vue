@@ -1,22 +1,24 @@
 <template>
-  <div class="ds-search">
+  <div class="vue-screener__search">
     <input
       :value="query"
       @input="debouncedSearch"
       @keydown="onKeydown"
       type="text"
-      class="ds-search__search"
-      :class="[useRegEx && !isValidQuery && 'ds-search__search--error']"
+      class="vue-screener__search__input"
+      :class="[
+        useRegEx && !isValidQuery && 'vue-screener__search__input--error',
+      ]"
       placeholder="Search (↑↓ for history)"
     />
-    <div class="ds-search__options">
+    <div class="vue-screener__search__options">
       <button
         v-for="(option, i) in getOptions"
         :key="i"
-        class="ds-search__options-button"
+        class="vue-screener__search__options-button"
         :class="[
-          { 'ds-search__options-button--active': option.isActive },
-          'ds-search__options-button--' + option.id,
+          { 'vue-screener__search__options-button--active': option.isActive },
+          'vue-screener__search__options-button--' + option.id,
         ]"
         :title="option.title"
         @click="toggleOption(option.id)"
@@ -114,60 +116,60 @@ const toggleOption = (option: SearchQueryOption) => {
 };
 </script>
 
-<style>
-.ds-search {
+<style lang="scss">
+.vue-screener__search {
   position: relative;
-}
 
-.ds-search__search {
-  width: 300px;
-  padding: 0 84px 0 6px;
-  box-sizing: border-box;
-  font-size: 14px !important;
-  font-weight: normal !important;
-  height: 30px;
-  border: none;
-  border-left: thin solid;
-  border-radius: 2px;
-  border: 2px solid #fff;
-}
+  &__input {
+    width: 300px;
+    padding: 0 84px 0 6px;
+    box-sizing: border-box;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    height: 30px;
+    border: none;
+    border-left: thin solid;
+    border-radius: 2px;
+    border: 2px solid #fff;
+  }
 
-.ds-search__search--error {
-  border: 2px solid red;
-  outline-color: red;
-}
+  &__input--error {
+    border: 2px solid red;
+    outline-color: red;
+  }
 
-.ds-search__options {
-  display: flex;
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-}
+  &__options {
+    display: flex;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-.ds-search__options-button {
-  border: none;
-  background: none;
-  padding: 0 3px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  height: 24px;
-  border-radius: 2px;
-  width: 24px;
-  margin-left: 2px;
-}
+  &__options-button {
+    border: none;
+    background: none;
+    padding: 0 3px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    height: 24px;
+    border-radius: 2px;
+    width: 24px;
+    margin-left: 2px;
+  }
 
-.ds-search__options-button--match-word {
-  text-decoration: underline;
-}
+  &__options-button--match-word {
+    text-decoration: underline;
+  }
 
-.ds-search__options-button:not(.ds-search__options-button--active):hover {
-  background: rgba(0, 0, 0, 0.1);
-}
+  &__options-button:not(#{&}__options-button--active):hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
 
-.ds-search__options-button--active {
-  color: #fff;
-  background: #3e51b5;
+  &__options-button--active {
+    color: #fff;
+    background: #3e51b5;
+  }
 }
 </style>

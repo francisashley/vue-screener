@@ -31,7 +31,60 @@ yarn add vue-screener
 
 <script lang="ts">
 import VueScreener from 'vue-screener'
+import 'vue-screener/style.css'
 </script>
+```
+
+## Theming
+
+```
+// Base classes
+.vue-screener
+
+// Header classes
+.vue-screener__header
+.vue-screener__header-title
+
+// Footer classes
+.vue-screener__footer
+
+// Search input classes
+.vue-screener__search
+.vue-screener__search__input
+.vue-screener__search__input--error
+.vue-screener__search__options
+.vue-screener__search__options-button
+.vue-screener__search__options-button--active
+.vue-screener__search__options-button--match-word
+
+// View selector classes
+.vue-screener__view-selector
+.vue-screener__view-selector__link
+.vue-screener__view-selector__link.is-active
+
+// Table view classes
+.vue-screener__table
+.vue-screener__table__thead
+.vue-screener__table__th
+.vue-screener__table__th--is-sortable
+.vue-screener__table__tr
+.vue-screener__table__td
+
+// JSON view classes
+.vue-screener__json-view
+
+// Sort selector classes
+.vue-screener__sort-selector
+
+// Pagination classes
+.vue-screener__pagination__buttons
+.vue-screener__pagination__buttons-button
+.vue-screener__pagination__buttons-button a
+.vue-screener__pagination__buttons-button--active a
+.vue-screener__pagination__details
+
+// Error message classes
+.vue-screener__error-message
 ```
 
 ## Roadmap

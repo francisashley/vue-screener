@@ -1,5 +1,7 @@
 <template>
-  <div class="ds-error-message">[VueScreenerError]: {{ message }}</div>
+  <div class="vue-screener__error-message">
+    [VueScreenerError]: {{ message }}
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -8,8 +10,8 @@ defineProps<{
 }>();
 </script>
 
-<style scoped>
-.ds-error-message {
+<style>
+.vue-screener__error-message {
   border: thin solid red;
   color: red;
 }

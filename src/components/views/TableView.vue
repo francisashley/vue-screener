@@ -1,12 +1,12 @@
 <template>
-  <table class="ds-table">
-    <thead>
-      <tr>
+  <table class="vue-screener__table-view">
+    <thead class="vue-screener__table-view__thead">
+      <tr class="vue-screener__table-view__tr">
         <th
           v-for="(field, index) in fields"
           :key="index"
-          class="ds-table-head-field"
-          :class="{ 'ds-table-head-field--is-sortable': true }"
+          class="vue-screener__table-view__th"
+          :class="{ 'vue-screener__table-view__th--is-sortable': true }"
           @click="onSort(field)"
         >
           {{ field }}
@@ -15,7 +15,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(row, j) in getSortedRows" :key="j">
+      <tr
+        class="vue-screener__table-view__tr"
+        v-for="(row, j) in getSortedRows"
+        :key="j"
+      >
         <template v-if="row">
           <td
             v-for="(field, k) in row"
@@ -23,9 +27,12 @@
             v-html="
               field.hasValue ? getHighlighted(field.value, highlight) : ''
             "
+            class="vue-screener__table-view__td"
           />
         </template>
-        <template v-else><td colspan="100%" /></template>
+        <template v-else
+          ><td colspan="100%" class="vue-screener__table-view__td"
+        /></template>
       </tr>
     </tbody>
   </table>
@@ -102,64 +109,46 @@ const onSort = (updatedSortField: string) => {
 };
 </script>
 
-<style scoped>
-.ds-table {
+<style lang="scss">
+.vue-screener__table-view {
   width: 100%;
   white-space: nowrap;
   border-bottom: thin solid #000;
   width: 100%;
   white-space: nowrap;
   border-collapse: collapse;
-}
 
-.ds-table thead {
-  font-weight: bold;
-}
+  &__thead {
+    font-weight: bold;
+  }
 
-.ds-table td {
-  width: 0.1%;
-  white-space: nowrap;
-  padding: 2px 5px;
-  height: 24px;
-  box-sizing: border-box;
-}
+  &__th {
+    font-weight: bold;
+    width: 0.1%;
+    white-space: nowrap;
+    padding: 2px 5px;
+    height: 24px;
+    box-sizing: border-box;
+    text-align: left;
+    border: thin solid #000;
 
-.ds-table td.title {
-  width: 100%;
-}
+    &--is-sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
 
-.ds-table td.thumbnail {
-  padding: 0 !important;
-  width: 140px;
-}
+  &__tr {
+    border: thin solid #000;
+  }
 
-.ds-table td.thumbnail img {
-  height: 28px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.ds table tr,
-.ds table td {
-  border: thin solid #000;
-}
-
-.ds-table thead tr td.thumbnail {
-  padding-right: 0 !important;
-}
-
-.ds-table-head-field {
-  font-weight: bold;
-  width: 0.1%;
-  white-space: nowrap;
-  padding: 2px 5px;
-  height: 24px;
-  box-sizing: border-box;
-  text-align: left;
-
-  &--is-sortable {
-    cursor: pointer;
-    user-select: none;
+  &__td {
+    width: 0.1%;
+    white-space: nowrap;
+    padding: 2px 5px;
+    height: 24px;
+    box-sizing: border-box;
+    border: thin solid #000;
   }
 }
 </style>

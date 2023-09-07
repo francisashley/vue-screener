@@ -1,15 +1,15 @@
 <template>
-  <section class="ds">
+  <section class="vue-screener">
     <template v-if="isValidInput">
-      <header class="ds__header">
-        <div class="ds__title">Results</div>
-        <DataViewSelector
-          class="ds__render-format"
+      <header class="vue-screener__header">
+        <div class="vue-screener__header-title">Results</div>
+        <ViewSelector
+          class="vue-screener__view-selector"
           :active-format="renderFormat"
           @select-format="onSelectFormat"
         />
         <VueScreenerSearch
-          class="ds__search"
+          class="vue-screener__search"
           :query="searchQuery"
           :is-valid-query="isRegExFriendlySearchQuery"
           :active-options="searchQueryOptions"
@@ -26,7 +26,7 @@
         />
         <JsonView v-else :data="getPaginatedData" />
       </main>
-      <footer class="ds__footer">
+      <footer class="vue-screener__footer">
         <Pagination
           :total-items="getSearchedData.length"
           :per-page="perPage"
@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import JsonView from "./views/JsonView.vue";
 import TableView from "./views/TableView.vue";
-import DataViewSelector from "./stuff/DataViewSelector.vue";
+import ViewSelector from "./stuff/ViewSelector.vue";
 import VueScreenerSearch, { SearchQueryOption } from "./VueScreenerSearch.vue";
 import Pagination from "./stuff/Pagination.vue";
 import ErrorMessage from "./stuff/ErrorMessage.vue";
@@ -153,40 +153,40 @@ const onChangePage = (page: number) => {
 };
 </script>
 
-<style>
-.ds {
+<style lang="scss">
+.vue-screener {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
-}
 
-.ds__header {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  color: white;
-  background: black;
-  font-weight: 400;
-  padding: 8px;
-}
+  &__header {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    background: black;
+    font-weight: 400;
+    padding: 8px;
+  }
 
-.ds__title {
-  font-weight: 500;
-  margin-right: auto;
-}
+  &__header-title {
+    font-weight: 500;
+    margin-right: auto;
+  }
 
-.ds__render-format {
-  margin-left: auto;
-}
+  &__data-view-selector {
+    margin-left: auto;
+  }
 
-.ds__search {
-  margin-left: 8px;
-}
+  &__search {
+    margin-left: 8px;
+  }
 
-.ds__footer {
-  border-bottom: thin solid;
-  border-left: thin solid;
-  border-right: thin solid;
-  padding: 8px;
+  &__footer {
+    border-bottom: thin solid;
+    border-left: thin solid;
+    border-right: thin solid;
+    padding: 8px;
+  }
 }
 </style>

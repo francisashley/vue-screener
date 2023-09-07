@@ -1,5 +1,5 @@
 <template>
-  <div class="ds-table-head-field__sortable-icon">
+  <div class="vue-screener__sort-selector">
     <sort-icon v-if="sortDirection === null" />
     <sort-up-icon v-else-if="sortDirection === 'asc'" />
     <sort-down-icon v-else-if="sortDirection === 'desc'" />
@@ -18,8 +18,8 @@ const { sortDirection = null } = defineProps<{
 }>();
 </script>
 
-<style lang="scss" scoped>
-.ds-table-head-field__sortable-icon {
+<style lang="scss">
+.vue-screener__sort-selector {
   margin-left: auto;
   height: 24px;
   display: inline-flex;

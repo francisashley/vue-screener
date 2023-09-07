@@ -1,16 +1,18 @@
 <template>
-  <div class="ds-pagination">
-    <ul v-if="pages.length > 1" class="ds-pagination__buttons">
+  <div class="vue-screener__pagination">
+    <ul v-if="pages.length > 1" class="vue-screener__pagination__buttons">
       <li
         v-for="page in pages"
         :key="page"
-        class="ds-pagination__buttons-button"
-        :class="isActive(page) && 'ds-pagination__buttons-button--active'"
+        class="vue-screener__pagination__buttons-button"
+        :class="
+          isActive(page) && 'vue-screener__pagination__buttons-button--active'
+        "
       >
         <a href="#" @click.prevent="selectPage(page)">{{ page }}</a>
       </li>
     </ul>
-    <div class="ds-pagination__details">
+    <div class="vue-screener__pagination__details">
       <template v-if="!totalItems">Showing 0 results</template>
       <template v-else-if="lastIndexOfCurrentPage < perPage">
         Showing {{ lastIndexOfCurrentPage }} of {{ totalItems }}
@@ -87,33 +89,33 @@ const selectPage = (page: number): void => {
 };
 </script>
 
-<style scoped>
-.ds-pagination {
+<style lang="scss">
+.vue-screener__pagination {
   display: flex;
-}
 
-.ds-pagination__buttons {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 !important;
-  margin: 0 !important;
-  list-style-type: none;
-}
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style-type: none;
+  }
 
-.ds-pagination__buttons-button {
-  margin: 0 10px 0 0 !important;
-}
+  &__buttons-button {
+    margin: 0 10px 0 0 !important;
+  }
 
-.ds-pagination__buttons-button a {
-  text-decoration: none;
-}
+  &__buttons-button a {
+    text-decoration: none;
+  }
 
-.ds-pagination__buttons-button--active a {
-  color: #000 !important;
-}
+  &__buttons-button--active a {
+    color: #000 !important;
+  }
 
-.ds-pagination__details {
-  margin-left: auto;
-  white-space: nowrap;
+  &__details {
+    margin-left: auto;
+    white-space: nowrap;
+  }
 }
 </style>
