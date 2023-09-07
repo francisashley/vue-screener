@@ -13,28 +13,17 @@
   </td>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script lang="ts" setup>
 import SortIcon from "./icons/Sort.vue";
 import SortUpIcon from "./icons/SortUp.vue";
 import SortDownIcon from "./icons/SortDown.vue";
 
 type SortDirection = null | "asc" | "desc";
 
-export default defineComponent({
-  name: "DataScreenerTable",
-
-  props: {
-    isSortable: { type: Boolean, default: true },
-    sortDirection: { type: String as PropType<SortDirection>, default: null },
-  },
-
-  components: {
-    SortIcon,
-    SortUpIcon,
-    SortDownIcon,
-  },
-});
+const { isSortable = true, sortDirection = null } = defineProps<{
+  isSortable: boolean;
+  sortDirection: SortDirection;
+}>();
 </script>
 
 <style lang="scss" scoped>

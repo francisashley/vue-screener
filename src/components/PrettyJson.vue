@@ -2,19 +2,8 @@
   <pre class="ds-pretty">{{ JSON.stringify(data, null, 2) }}</pre>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "DataScreenerPrettyJson",
-
-  props: {
-    data: {
-      type: [Array, Object],
-      default: () => [],
-    },
-  },
-});
+<script lang="ts" setup>
+const { data = [] } = defineProps<{ data: unknown }>();
 </script>
 
 <style scoped>

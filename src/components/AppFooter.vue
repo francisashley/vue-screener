@@ -4,13 +4,7 @@
   </footer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "DataScreenerFooter",
-});
-</script>
+<script lang="ts" setup></script>
 
 <style scoped>
 .ds-footer {

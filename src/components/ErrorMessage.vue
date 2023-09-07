@@ -2,19 +2,10 @@
   <div class="ds-error-message">[VueDataScreenerError]: {{ message }}</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "DataScreenerErrorMessage",
-
-  props: {
-    message: {
-      type: String,
-      default: "",
-    },
-  },
-});
+<script lang="ts" setup>
+defineProps<{
+  message: string;
+}>();
 </script>
 
 <style scoped>
