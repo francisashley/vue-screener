@@ -8,5 +8,4 @@
 import DataScreener from "./components/DataScreener.vue";
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

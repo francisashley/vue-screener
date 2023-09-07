@@ -38,7 +38,7 @@ import TableHeadField from "./TableHeadField.vue";
 import { normalisedRow } from "../utils/data.utils";
 
 export default defineComponent({
-  name: "DataScreenerTable",
+  name: "ScreenerTable",
 
   props: {
     fields: {

@@ -17,13 +17,13 @@
           class="ds__search"
           :query="searchQuery"
           :is-valid-query="isRegExFriendlySearchQuery"
-          :activeOptions="searchQueryOptions"
+          :active-options="searchQueryOptions"
           @search="onSearch"
           @update-options="onUpdateOptions"
         />
       </AppHeader>
       <AppMain>
-        <Table
+        <ScreenerTable
           v-if="renderFormat === 'table'"
           :fields="getFields"
           :rows="getPaginatedData"
@@ -47,7 +47,7 @@
 import { defineComponent, PropType } from "vue";
 import PrettyJson from "./PrettyJson.vue";
 import Pagination from "./Pagination.vue";
-import Table from "./Table.vue";
+import ScreenerTable from "./ScreenerTable.vue";
 import AppHeader from "./AppHeader.vue";
 import AppMain from "./AppMain.vue";
 import AppFooter from "./AppFooter.vue";
@@ -96,7 +96,7 @@ export default defineComponent({
   components: {
     PrettyJson,
     Pagination,
-    Table,
+    ScreenerTable,
     AppHeader,
     AppMain,
     AppFooter,

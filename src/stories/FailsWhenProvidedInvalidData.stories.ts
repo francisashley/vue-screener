@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/vue3';
+import type { Meta, StoryObj } from "@storybook/vue3";
 import DataScreener from "../components/DataScreener.vue";
 
 const meta: Meta<typeof DataScreener> = {
