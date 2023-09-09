@@ -163,6 +163,7 @@ const onChangePage = (page: number) => {
   border: thin solid black;
   border-radius: 8px;
   overflow: hidden;
+  background: #fff;
 
   &__header {
     display: flex;
