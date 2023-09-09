@@ -1,6 +1,11 @@
 <template>
-  <div class="vue-screener__pagination">
-    <div class="vue-screener__pagination__details">
+  <div :class="['vue-screener__pagination', classes?.PAGINATION]">
+    <div
+      :class="[
+        'vue-screener__pagination__details',
+        classes?.PAGINATION_DETAILS,
+      ]"
+    >
       <template v-if="!totalItems">Showing 0 results</template>
       <template v-else-if="lastIndexOfCurrentPage < perPage">
         Showing {{ lastIndexOfCurrentPage }} of {{ totalItems }}
@@ -11,14 +16,20 @@
         {{ totalItems }}
       </template>
     </div>
-    <ul class="vue-screener__pagination__buttons">
+    <ul
+      :class="[
+        'vue-screener__pagination__buttons',
+        classes?.PAGINATION_BUTTONS,
+      ]"
+    >
       <li
         v-for="page in pages"
         :key="page"
         class="vue-screener__pagination__buttons-button"
-        :class="
-          isActive(page) && 'vue-screener__pagination__buttons-button--active'
-        "
+        :class="[
+          isActive(page) && 'vue-screener__pagination__buttons-button--active',
+          classes?.PAGINATION_BUTTONS_BUTTON,
+        ]"
       >
         <a href="#" @click.prevent="selectPage(page)">{{ page }}</a>
       </li>
@@ -28,12 +39,14 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, watch } from "vue";
+import { InlineClass } from "../VueScreener.vue";
 
 const props = withDefaults(
   defineProps<{
     currentPage?: number;
     totalItems?: number;
     perPage?: number;
+    classes?: Partial<Record<InlineClass, string>>;
   }>(),
   {
     currentPage: 1,

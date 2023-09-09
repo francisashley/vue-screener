@@ -119,6 +119,44 @@ import { formatPrice } from './utils/currency'
 
 ## Theming
 
+Add custom classes:
+
+```vue
+<vue-screener
+  :classes="{
+    "SCREENER": "...",
+    "HEADER": "...",
+    "MAIN": "...",
+    "FOOTER": "...",
+    "HEADER_TITLE": "...",
+    "SEARCH_INPUT": "...",
+    "SETTINGS": "...",
+    "SETTINGS_DROPDOWN_BUTTON": "...",
+    "SETTINGS_DROPDOWN_SUB_HEADING": "...",
+    "SETTINGS_DROPDOWN_OPTIONS": "...",
+    "SETTINGS_DROPDOWN_OPTIONS_BUTTON": "...",
+    "SETTINGS_VIEW_SELECTOR_CONTAINER": "...",
+    "SETTINGS_VIEW_SELECTOR_LINK": "...",
+    "TABLE_VIEW": "...",
+    "TABLE_VIEW_CELL": "...",
+    "TABLE_VIEW_HEADER_CELL": "...",
+    "TABLE_VIEW_VALUE_CELL": "...",
+    "TABLE_VIEW_SORT": "...",
+    "TABLE_VIEW_SORT_NONE": "...",
+    "TABLE_VIEW_SORT_ASC": "...",
+    "TABLE_VIEW_SORT_DESC": "...",
+    "JSON_VIEW": "...",
+    "PAGINATION": "...",
+    "PAGINATION_DETAILS": "...",
+    "PAGINATION_BUTTONS": "...",
+    "PAGINATION_BUTTONS_BUTTON": "...",
+    "ERROR_MESSAGE": "...",
+  }"
+/>
+```
+
+Or style default classes:
+
 ```
 // Base classes
 .vue-screener

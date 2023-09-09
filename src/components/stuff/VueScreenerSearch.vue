@@ -12,6 +12,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
+import { InlineClass } from "../VueScreener.vue";
 
 export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
 
@@ -19,10 +20,12 @@ const {
   query = "",
   isValidQuery = true,
   searchOptions = [],
+  classes = () => ({}),
 } = defineProps<{
   query: string;
   isValidQuery: boolean;
   searchOptions: SearchQueryOption[];
+  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["search", "update-options"]);

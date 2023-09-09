@@ -1,5 +1,8 @@
 <template>
-  <div :style="tableStyle" class="vue-screener__table-view">
+  <div
+    :style="tableStyle"
+    :class="['vue-screener__table-view', classes?.TABLE_VIEW]"
+  >
     <template v-for="(cell, i) in getCells">
       <template v-if="cell.isHeader">
         <slot
@@ -13,13 +16,14 @@
             :key="i"
             :cell="cell"
             :sort-direction="getSortDirection(cell.field)"
+            :classes="classes"
             @on-sort="emit('on-sort', $event)"
           />
         </slot>
       </template>
       <template v-else-if="cell.isValue">
         <slot name="value-cell" :key="i" :cell="cell">
-          <ValueCell :key="i" :cell="cell" />
+          <ValueCell :key="i" :cell="cell" :classes="classes" />
         </slot>
       </template>
     </template>
@@ -33,6 +37,7 @@ import { NormalisedRow } from "../../utils/data.utils";
 import HeaderCell from "./TableViewHeaderCell.vue";
 import ValueCell from "./TableViewValueCell.vue";
 import { Cell } from "./TableViewCell.vue";
+import { InlineClass } from "../VueScreener.vue";
 
 const props = defineProps<{
   fields: string[];
@@ -40,6 +45,7 @@ const props = defineProps<{
   highlight: string;
   sortField: null | string;
   sortDirection: null | "asc" | "desc";
+  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["on-sort"]);
