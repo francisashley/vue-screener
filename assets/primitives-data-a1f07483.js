@@ -587,7 +587,7 @@ const _hoisted_4 = ["disabled"];
 const _hoisted_5 = ["disabled"];
 const _hoisted_6 = ["value"];
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
   return openBlock(), createElementBlock(
     "div",
     {
@@ -608,24 +608,12 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             ],
             64
             /* STABLE_FRAGMENT */
-          )) : $setup.lastIndexOfCurrentPage < $props.perPage ? (openBlock(), createElementBlock(
+          )) : (openBlock(), createElementBlock(
             Fragment,
             { key: 1 },
             [
               createTextVNode(
-                toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
-                1
-                /* TEXT */
-              )
-            ],
-            64
-            /* STABLE_FRAGMENT */
-          )) : (openBlock(), createElementBlock(
-            Fragment,
-            { key: 2 },
-            [
-              createTextVNode(
-                toDisplayString($setup.firstIndexOfCurrentPage) + "-" + toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
+                " Showing " + toDisplayString($setup.firstIndexOfCurrentPage) + "-" + toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
                 1
                 /* TEXT */
               )
@@ -650,8 +638,9 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--first",
               !$setup.canNavigateFirst && "vue-screener__pagination__button--disabled",
-              (_d = $props.classes) == null ? void 0 : _d.PAGINATION_FIRST_BUTTON,
-              !$setup.canNavigateFirst && ((_e = $props.classes) == null ? void 0 : _e["PAGINATION_BUTTON--DISABLED"])
+              (_d = $props.classes) == null ? void 0 : _d.PAGINATION_BUTTON,
+              (_e = $props.classes) == null ? void 0 : _e.PAGINATION_FIRST_BUTTON,
+              !$setup.canNavigateFirst && ((_f = $props.classes) == null ? void 0 : _f["PAGINATION_BUTTON--DISABLED"])
             ])
           }, " First ", 10, _hoisted_1$5),
           createBaseVNode("button", {
@@ -661,16 +650,16 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--prev",
               !$setup.canNavigatePrev && "vue-screener__pagination__button--disabled",
-              (_f = $props.classes) == null ? void 0 : _f.PAGINATION_BUTTON,
-              (_g = $props.classes) == null ? void 0 : _g.PAGINATION_PREV_BUTTON,
-              !$setup.canNavigatePrev && ((_h = $props.classes) == null ? void 0 : _h["PAGINATION_BUTTON--DISABLED"])
+              (_g = $props.classes) == null ? void 0 : _g.PAGINATION_BUTTON,
+              (_h = $props.classes) == null ? void 0 : _h.PAGINATION_PREV_BUTTON,
+              !$setup.canNavigatePrev && ((_i = $props.classes) == null ? void 0 : _i["PAGINATION_BUTTON--DISABLED"])
             ])
           }, " Prev ", 10, _hoisted_2$3),
           (openBlock(true), createElementBlock(
             Fragment,
             null,
             renderList($setup.getPages, (page) => {
-              var _a2, _b2, _c2, _d2;
+              var _a2, _b2, _c2;
               return openBlock(), createElementBlock("button", {
                 key: page,
                 onClick: ($event) => $setup.handleSelectPage(page),
@@ -681,8 +670,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
                   $setup.isActive(page) && "vue-screener__pagination__button--active",
                   (_a2 = $props.classes) == null ? void 0 : _a2.PAGINATION_BUTTON,
                   (_b2 = $props.classes) == null ? void 0 : _b2.PAGINATION_PAGE_BUTTON,
-                  !$setup.canNavigateFirst && ((_c2 = $props.classes) == null ? void 0 : _c2["PAGINATION_BUTTON--DISABLED"]),
-                  $setup.isActive(page) && ((_d2 = $props.classes) == null ? void 0 : _d2["PAGINATION_BUTTON--ACTIVE"])
+                  !$setup.canNavigateFirst && ((_c2 = $props.classes) == null ? void 0 : _c2["PAGINATION_BUTTON--DISABLED"])
                 ])
               }, toDisplayString(page), 11, _hoisted_3$2);
             }),
@@ -696,9 +684,9 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--next",
               !$setup.canNavigateNext && "vue-screener__pagination__button--disabled",
-              (_i = $props.classes) == null ? void 0 : _i.PAGINATION_BUTTON,
-              (_j = $props.classes) == null ? void 0 : _j.PAGINATION_NEXT_BUTTON,
-              !$setup.canNavigateNext && ((_k = $props.classes) == null ? void 0 : _k["PAGINATION_BUTTON--DISABLED"])
+              (_j = $props.classes) == null ? void 0 : _j.PAGINATION_BUTTON,
+              (_k = $props.classes) == null ? void 0 : _k.PAGINATION_NEXT_BUTTON,
+              !$setup.canNavigateNext && ((_l = $props.classes) == null ? void 0 : _l["PAGINATION_BUTTON--DISABLED"])
             ])
           }, " Next ", 10, _hoisted_4),
           createBaseVNode("button", {
@@ -708,8 +696,8 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--last",
               !$setup.canNavigateLast && "vue-screener__pagination__button--disabled",
-              (_l = $props.classes) == null ? void 0 : _l.PAGINATION_BUTTON,
-              (_m = $props.classes) == null ? void 0 : _m.PAGINATION_LAST_BUTTON
+              (_m = $props.classes) == null ? void 0 : _m.PAGINATION_BUTTON,
+              (_n = $props.classes) == null ? void 0 : _n.PAGINATION_LAST_BUTTON
             ])
           }, " Last ", 10, _hoisted_5)
         ],
@@ -721,7 +709,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
         {
           class: normalizeClass([
             "vue-screener__pagination__per-page",
-            (_n = $props.classes) == null ? void 0 : _n.PAGINATION_PER_PAGE
+            (_o = $props.classes) == null ? void 0 : _o.PAGINATION_PER_PAGE
           ])
         },
         [
@@ -733,7 +721,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             onInput: $setup.handleChangePerPage,
             class: normalizeClass([
               "vue-screener__pagination__per-page-input",
-              (_o = $props.classes) == null ? void 0 : _o.PAGINATION_PER_PAGE_INPUT
+              (_p = $props.classes) == null ? void 0 : _p.PAGINATION_PER_PAGE_INPUT
             ])
           }, null, 42, _hoisted_6)
         ],
