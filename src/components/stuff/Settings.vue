@@ -54,7 +54,7 @@ const props = defineProps<{
   searchOptions: SearchQueryOption[];
 }>();
 
-const emit = defineEmits(["select-format", "update-options"]);
+const emit = defineEmits(["select-format", "change-search-options"]);
 
 type SearchQueryInternalOption = {
   id: SearchQueryOption;
@@ -79,11 +79,11 @@ const getOptions = computed<SearchQueryInternalOption[]>(() => {
 const toggleOption = (option: SearchQueryOption) => {
   if (props.searchOptions.includes(option)) {
     emit(
-      "update-options",
+      "change-search-options",
       props.searchOptions.filter((activeOption) => activeOption !== option),
     );
   } else {
-    emit("update-options", [...props.searchOptions, option]);
+    emit("change-search-options", [...props.searchOptions, option]);
   }
 };
 </script>
