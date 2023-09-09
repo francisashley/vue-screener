@@ -625,7 +625,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             { key: 2 },
             [
               createTextVNode(
-                " Showing " + toDisplayString($setup.firstIndexOfCurrentPage) + "-" + toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
+                toDisplayString($setup.firstIndexOfCurrentPage) + "-" + toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
                 1
                 /* TEXT */
               )
@@ -670,7 +670,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             Fragment,
             null,
             renderList($setup.getPages, (page) => {
-              var _a2, _b2, _c2;
+              var _a2, _b2, _c2, _d2;
               return openBlock(), createElementBlock("button", {
                 key: page,
                 onClick: ($event) => $setup.handleSelectPage(page),
@@ -681,7 +681,8 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
                   $setup.isActive(page) && "vue-screener__pagination__button--active",
                   (_a2 = $props.classes) == null ? void 0 : _a2.PAGINATION_BUTTON,
                   (_b2 = $props.classes) == null ? void 0 : _b2.PAGINATION_PAGE_BUTTON,
-                  !$setup.canNavigateFirst && ((_c2 = $props.classes) == null ? void 0 : _c2["PAGINATION_BUTTON--DISABLED"])
+                  !$setup.canNavigateFirst && ((_c2 = $props.classes) == null ? void 0 : _c2["PAGINATION_BUTTON--DISABLED"]),
+                  $setup.isActive(page) && ((_d2 = $props.classes) == null ? void 0 : _d2["PAGINATION_BUTTON--ACTIVE"])
                 ])
               }, toDisplayString(page), 11, _hoisted_3$2);
             }),
