@@ -58,7 +58,7 @@ import {
   UnknownObject,
   isValidInput as isValidInputTool,
   normaliseInput,
-  pickFields as pickFieldsTool,
+  pickFields,
   getFields as getFieldsTool,
   search,
   getPaginated,
@@ -67,14 +67,14 @@ import { computed, ref } from "vue";
 
 type Props = {
   data?: unknown[];
-  pickFields?: string[];
+  pick?: string[];
   perPage?: number;
   currentPage?: number;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   data: () => [],
-  pickFields: () => [],
+  pick: () => [],
   perPage: 15,
   currentPage: 1,
 });
@@ -97,8 +97,8 @@ const getNormalisedData = computed((): NormalisedRow[] => {
     ? normaliseInput(props.data as UnknownObject[])
     : [];
 
-  if (props.pickFields.length > 0) {
-    return pickFieldsTool(normalisedData, props.pickFields);
+  if (props.pick.length > 0) {
+    return pickFields(normalisedData, props.pick);
   }
 
   return normalisedData;

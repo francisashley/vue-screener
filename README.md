@@ -22,9 +22,15 @@ yarn add vue-screener
 <template>
   <vue-screener
     :data="[
-      { type: 'fruit', name: 'Pears'},
-      { type: 'fruit', name: 'Orange'},
-      { type: 'vegetable', name: 'Brussels sprouts'}
+      { category: 'Technology', product: 'Laptop', price: '£799', inStock: true },
+      { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true },
+      { category: 'Home Decor', product: 'Table Lamp', price: '£30', inStock: false },
+      { category: 'Books', product: 'Adventure Novel', price: '£12', inStock: true },
+      { category: 'Electronics', product: 'Smartphone', price: '£399', inStock: true },
+      { category: 'Kitchen', product: 'Coffee Maker', price: '£65', inStock: false },
+      { category: 'Clothing', product: 'Dress', price: '£40', inStock: true },
+      { category: 'Technology', product: 'Headphones', price: '£49', inStock: true },
+      { category: 'Home Decor', product: 'Throw Pillow', price: '£15', inStock: true },
     ]"
   />
 </template>
@@ -35,6 +41,17 @@ import 'vue-screener/style.css'
 </script>
 ```
 
+## Options
+
+Pick fields (in order) to show:
+
+```js
+<template>
+  <vue-screener
+    :pick="['price', 'product', 'technology']"
+  />
+</template>
+```
 ## Theming
 
 ```
