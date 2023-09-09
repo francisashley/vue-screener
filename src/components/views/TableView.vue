@@ -153,6 +153,8 @@ const onSort = (updatedSortField: string) => {
 
 <style lang="scss">
 .vue-screener__table-view {
+  color: black;
+
   &__cell {
     border-bottom: thin solid black;
     border-right: thin solid black;

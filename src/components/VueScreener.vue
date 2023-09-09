@@ -46,7 +46,9 @@
 <script lang="ts" setup>
 import JsonView from "./views/JsonView.vue";
 import TableView from "./views/TableView.vue";
-import VueScreenerSearch, { SearchQueryOption } from "./VueScreenerSearch.vue";
+import VueScreenerSearch, {
+  SearchQueryOption,
+} from "./stuff/VueScreenerSearch.vue";
 import Pagination from "./stuff/Pagination.vue";
 import ErrorMessage from "./stuff/ErrorMessage.vue";
 import Settings from "./stuff/Settings.vue";
