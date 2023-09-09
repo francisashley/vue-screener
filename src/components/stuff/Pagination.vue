@@ -17,6 +17,7 @@
           'vue-screener__pagination__button',
           'vue-screener__pagination__button--first',
           !canNavigateFirst && 'vue-screener__pagination__button--disabled',
+          classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_FIRST_BUTTON,
           !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
