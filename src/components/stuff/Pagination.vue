@@ -45,7 +45,6 @@
         :class="[
           'vue-screener__pagination__button',
           'vue-screener__pagination__button--page',
-          !canNavigateFirst && 'vue-screener__pagination__button--disabled',
           isActive(page) && 'vue-screener__pagination__button--active',
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_PAGE_BUTTON,
