@@ -1116,7 +1116,14 @@ function getFields(rows) {
 }
 function pickFields(rows, pickFields2) {
   return rows.map((row) => {
-    return row.filter((field) => pickFields2.includes(field.key));
+    const pickedRow = [];
+    pickFields2.forEach((pickField) => {
+      const pickedField = row.find((field) => field.key === pickField);
+      if (pickedField) {
+        pickedRow.push(pickedField);
+      }
+    });
+    return pickedRow;
   });
 }
 function excludeFields(rows, excludeFields2) {

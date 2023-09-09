@@ -50,9 +50,9 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   });
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./custom-cells.story-aadb84c5.js"), true ? ["assets/custom-cells.story-aadb84c5.js","assets/vendor-e4b58c02.js","assets/primitives-data-672fa279.js"] : void 0));
-const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./sticky-actions.story-dad28577.js"), true ? ["assets/sticky-actions.story-dad28577.js","assets/vendor-e4b58c02.js","assets/primitives-data-672fa279.js"] : void 0));
-const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./usage.story-b0f7967e.js"), true ? ["assets/usage.story-b0f7967e.js","assets/vendor-e4b58c02.js","assets/primitives-data-672fa279.js"] : void 0));
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./custom-cells.story-857d92b6.js"), true ? ["assets/custom-cells.story-857d92b6.js","assets/vendor-e4b58c02.js","assets/primitives-data-e3ffcb8b.js"] : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./sticky-actions.story-c04db814.js"), true ? ["assets/sticky-actions.story-c04db814.js","assets/vendor-e4b58c02.js","assets/primitives-data-e3ffcb8b.js"] : void 0));
+const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./usage.story-01309d66.js"), true ? ["assets/usage.story-01309d66.js","assets/vendor-e4b58c02.js","assets/primitives-data-e3ffcb8b.js"] : void 0));
 let files = [
   { "id": "src-stories-custom-cells-story-vue", "path": ["custom-cells"], "filePath": "src/stories/custom-cells.story.vue", "story": { "id": "src-stories-custom-cells-story-vue", "title": "custom-cells", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-custom-cells-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 0, component: Comp0, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-custom-cells-story-vue-56ca9899.js"), true ? [] : void 0) },
   { "id": "src-stories-sticky-actions-story-vue", "path": ["sticky-actions"], "filePath": "src/stories/sticky-actions.story.vue", "story": { "id": "src-stories-sticky-actions-story-vue", "title": "sticky-actions", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-sticky-actions-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 1, component: Comp1, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-sticky-actions-story-vue-b51ee9f9.js"), true ? [] : void 0) },
@@ -79,12 +79,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-71e98bcf.js"), true ? ["assets/HomeView.vue-71e98bcf.js","assets/vendor-e4b58c02.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-20b428bf.js"), true ? ["assets/HomeView.vue-20b428bf.js","assets/vendor-e4b58c02.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-3977964a.js"), true ? ["assets/StoryView.vue-3977964a.js","assets/vendor-e4b58c02.js","assets/MobileOverlay.vue2-599d2250.js","assets/BaseEmpty.vue-35ce6f07.js","assets/state-a7715a6f.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-d8e882a5.js"), true ? ["assets/StoryView.vue-d8e882a5.js","assets/vendor-e4b58c02.js","assets/MobileOverlay.vue2-619d45f8.js","assets/BaseEmpty.vue-1dd3f567.js","assets/state-edf6a0f7.js"] : void 0)
     }
   ]
 });
