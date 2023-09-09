@@ -80,7 +80,14 @@ export function pickFields(
   pickFields: string[],
 ): NormalisedRow[] {
   return rows.map((row) => {
-    return row.filter((field) => pickFields.includes(field.key));
+    const pickedRow: NormalisedRow = [];
+    pickFields.forEach((pickField) => {
+      const pickedField = row.find((field) => field.key === pickField);
+      if (pickedField) {
+        pickedRow.push(pickedField);
+      }
+    });
+    return pickedRow;
   });
 }
 
