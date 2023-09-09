@@ -11,7 +11,7 @@
         {{ totalItems }}
       </template>
     </div>
-    <ul v-if="pages.length > 1" class="vue-screener__pagination__buttons">
+    <ul class="vue-screener__pagination__buttons">
       <li
         v-for="page in pages"
         :key="page"
@@ -29,20 +29,23 @@
 <script lang="ts" setup>
 import { computed, onMounted, watch } from "vue";
 
-const {
-  currentPage = 1,
-  totalItems = 0,
-  perPage = 25,
-} = defineProps<{
-  currentPage?: number;
-  totalItems?: number;
-  perPage?: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    currentPage?: number;
+    totalItems?: number;
+    perPage?: number;
+  }>(),
+  {
+    currentPage: 1,
+    totalItems: 0,
+    perPage: 25,
+  },
+);
 
 const emit = defineEmits(["change-page"]);
 
 const totalPages = computed((): number => {
-  return Math.ceil(totalItems / perPage);
+  return Math.ceil(props.totalItems / props.perPage) || 1;
 });
 
 const pages = computed((): number[] => {
@@ -50,17 +53,17 @@ const pages = computed((): number[] => {
 });
 
 const firstIndexOfCurrentPage = computed(() => {
-  return currentPage * perPage - perPage + 1;
+  return props.currentPage * props.perPage - props.perPage + 1;
 });
 
 const lastIndexOfCurrentPage = computed(() => {
-  return currentPage * perPage > totalItems
-    ? totalItems
-    : currentPage * perPage;
+  return props.currentPage * props.perPage > props.totalItems
+    ? props.totalItems
+    : props.currentPage * props.perPage;
 });
 
 const currentPageIsInRange = computed((): boolean => {
-  return totalPages.value >= currentPage;
+  return totalPages.value >= props.currentPage;
 });
 
 onMounted(() => {
@@ -68,14 +71,14 @@ onMounted(() => {
 });
 
 watch(
-  () => totalItems,
+  () => props.totalItems,
   () => {
     ensureCurrentPageIsValid();
   },
 );
 
 const isActive = (page: number): boolean => {
-  return page === currentPage;
+  return page === props.currentPage;
 };
 
 const ensureCurrentPageIsValid = (): void => {
