@@ -73,6 +73,27 @@ Exclude fields:
 </template>
 ```
 
+Add a sticky column at the start for putting stuff in.
+
+```vue
+<template>
+  <vue-screener :data="data" include-actions>
+    <template #sticky-actions-head="props">
+      <StickyHeaderCell v-bind="props">Actions</StickyHeaderCell>
+    </template>
+    <template #sticky-actions-value="props">
+      <StickyValueCell v-bind="props">
+        <button @click="handleClickEdit(props.cell)">Edit</button>
+        <button @click="handleClickDelete(props.cell)">Delete</button>
+      </StickyValueCell>
+    </template>
+  </vue-screener>
+</template>
+<script setup>
+import VueScreener, { StickyValueHead, StickyValueCell } from 'vue-screener'
+</script>
+```
+
 ## Slots
 
 Custom header cell renderer:
@@ -140,7 +161,9 @@ Add custom classes:
     "TABLE_VIEW": "...",
     "TABLE_VIEW_CELL": "...",
     "TABLE_VIEW_HEADER_CELL": "...",
+    "TABLE_VIEW_STICKY_HEADER_CELL": "...",
     "TABLE_VIEW_VALUE_CELL": "...",
+    "TABLE_VIEW_STICKY_VALUE_CELL": "...",
     "TABLE_VIEW_SORT": "...",
     "TABLE_VIEW_SORT_NONE": "...",
     "TABLE_VIEW_SORT_ASC": "...",

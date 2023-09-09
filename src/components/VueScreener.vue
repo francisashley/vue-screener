@@ -30,6 +30,7 @@
           :sort-direction="sortDirection"
           :sort-field="sortField"
           :classes="classes"
+          :include-sticky-actions="includeStickyActions"
           @on-sort="handleSort"
         >
           <template #header-cell="cellPops">
@@ -37,6 +38,12 @@
           </template>
           <template #value-cell="cellPops">
             <slot name="value-cell" v-bind="cellPops" />
+          </template>
+          <template #sticky-actions-head="cellPops">
+            <slot name="sticky-actions-head" v-bind="cellPops" />
+          </template>
+          <template #sticky-actions-value="cellPops">
+            <slot name="sticky-actions-value" v-bind="cellPops" />
           </template>
         </TableView>
         <JsonView v-else :data="getPaginatedData" :class="classes.JSON_VIEW" />
@@ -102,7 +109,9 @@ export type InlineClass =
   | "TABLE_VIEW"
   | "TABLE_VIEW_CELL"
   | "TABLE_VIEW_HEADER_CELL"
+  | "TABLE_VIEW_STICKY_HEADER_CELL"
   | "TABLE_VIEW_VALUE_CELL"
+  | "TABLE_VIEW_STICKY_VALUE_CELL"
   | "TABLE_VIEW_SORT"
   | "TABLE_VIEW_SORT_NONE"
   | "TABLE_VIEW_SORT_ASC"
@@ -131,6 +140,7 @@ type Props = {
   perPage?: number;
   currentPage?: number;
   classes?: Partial<Record<InlineClass, string>>;
+  includeStickyActions?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -141,6 +151,7 @@ const props = withDefaults(defineProps<Props>(), {
   perPage: 15,
   currentPage: 1,
   classes: () => ({}),
+  includeStickyActions: false,
 });
 
 const searchQuery = ref<string>("");

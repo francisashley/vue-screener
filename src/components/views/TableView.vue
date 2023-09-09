@@ -6,8 +6,17 @@
     <template v-for="(cell, i) in getCells">
       <template v-if="cell.isHeader">
         <slot
+          v-if="cell.isStickyAction"
+          name="sticky-actions-head"
+          :key="'sticky-actions-head-' + i"
+          :cell="cell"
+        >
+          <HeaderCell :cell="cell" :classes="classes" />
+        </slot>
+        <slot
+          v-else
           name="header-cell"
-          :key="i"
+          :key="'col-' + i"
           :cell="cell"
           :sort-direction="getSortDirection(cell.field)"
           @on-sort="emit('on-sort', $event)"
@@ -22,7 +31,15 @@
         </slot>
       </template>
       <template v-else-if="cell.isValue">
-        <slot name="value-cell" :key="i" :cell="cell">
+        <slot
+          v-if="cell.isStickyAction"
+          name="sticky-actions-value"
+          :key="'sticky-actions-value-' + i"
+          :cell="cell"
+        >
+          <ValueCell :key="i" :cell="cell" :classes="classes" />
+        </slot>
+        <slot v-else name="value-cell" :key="i" :cell="cell">
           <ValueCell :key="i" :cell="cell" :classes="classes" />
         </slot>
       </template>
@@ -46,6 +63,7 @@ const props = defineProps<{
   sortField: null | string;
   sortDirection: null | "asc" | "desc";
   classes?: Partial<Record<InlineClass, string>>;
+  includeStickyActions?: boolean;
 }>();
 
 const emit = defineEmits(["on-sort"]);
@@ -59,10 +77,21 @@ const getCells = computed(() => {
       value: field,
       isHeader: true,
       isFirst: i === 0,
-      isLast: i === props.fields.length - 1,
+      isLast: !props.includeStickyActions && i === props.fields.length - 1,
       type: "string",
     });
   });
+
+  if (props.includeStickyActions) {
+    fields.push({
+      field: "",
+      value: "",
+      isHeader: true,
+      isLast: true,
+      isStickyAction: true,
+      type: "string",
+    });
+  }
 
   props.rows.forEach((row) => {
     row?.forEach((col, i) => {
@@ -71,19 +100,36 @@ const getCells = computed(() => {
         isValue: true,
         value: col.hasValue ? getHighlighted(col.value, props.highlight) : "",
         isFirst: i === 0,
-        isLast: i === row.length - 1,
+        isLast: !props.includeStickyActions && i === row.length - 1,
         type: col.type,
+        row,
       });
     });
+
+    if (props.includeStickyActions) {
+      fields.push({
+        field: "",
+        value: "",
+        isValue: true,
+        isLast: true,
+        isStickyAction: true,
+        type: "string",
+        row,
+      });
+    }
   });
 
   return fields;
 });
 
 const tableStyle = computed(() => {
+  let cols = props.fields.reduce((acc) => acc + " 1fr", "");
+
+  if (props.includeStickyActions) cols += " 1fr";
+
   return {
     display: "grid",
-    "grid-template-columns": props.fields.reduce((acc) => acc + " 1fr", ""),
+    "grid-template-columns": cols,
   };
 });
 

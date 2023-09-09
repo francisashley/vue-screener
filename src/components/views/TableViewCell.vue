@@ -5,6 +5,7 @@
       cell.isFirst && 'vue-screener__table-view__cell--is-first',
       cell.isLast && 'vue-screener__table-view__cell--is-last',
       cell.hasValue && 'vue-screener__table-view__cell--hasValue',
+      cell.isStickyAction && 'vue-screener__table-view__cell--is-sticky-action',
       cell.type === 'string' && 'vue-screener__table-view__cell--string',
       cell.type === 'number' && 'vue-screener__table-view__cell--number',
       cell.type === 'boolean' && 'vue-screener__table-view__cell--boolean',
@@ -34,6 +35,8 @@ export type Cell = {
   hasValue?: boolean;
   isHeader?: boolean;
   isValue?: boolean;
+  isStickyAction?: boolean;
+  row?: unknown;
 };
 
 defineProps<{
@@ -54,6 +57,14 @@ defineProps<{
 
   &__cell--is-last {
     border-right: unset;
+  }
+
+  &__cell--is-sticky-action {
+    position: sticky;
+    background: white;
+    right: 0;
+    border-left: thin solid black;
+    margin-left: -1px;
   }
 }
 </style>

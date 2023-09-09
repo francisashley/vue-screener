@@ -3,6 +3,7 @@
     :class="[
       'vue-screener__table-view__cell--is-header',
       classes?.TABLE_VIEW_HEADER_CELL,
+      cell.isStickyAction && classes?.TABLE_VIEW_STICKY_HEADER_CELL,
     ]"
     :cell="cell"
     :classes="classes"
@@ -26,7 +27,7 @@ import TableCell, { Cell } from "./TableViewCell.vue";
 
 const props = defineProps<{
   cell: Cell;
-  sortDirection: null | "asc" | "desc";
+  sortDirection?: null | "asc" | "desc";
   classes?: Partial<Record<InlineClass, string>>;
 }>();
 

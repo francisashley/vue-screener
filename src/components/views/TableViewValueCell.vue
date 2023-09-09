@@ -1,7 +1,11 @@
 <template>
   <TableCell
     :cell="cell"
-    class="vue-screener__table-view__cell--is-value"
+    :class="[
+      'vue-screener__table-view__cell--is-value',
+      classes?.TABLE_VIEW_VALUE_CELL,
+      cell.isStickyAction && classes?.TABLE_VIEW_STICKY_VALUE_CELL,
+    ]"
     :classes="classes"
   >
     <slot />

@@ -24,7 +24,7 @@ import { InlineClass } from "../VueScreener.vue";
 type SortDirection = null | "asc" | "desc";
 
 const { sortDirection = null } = defineProps<{
-  sortDirection: SortDirection;
+  sortDirection?: SortDirection;
   classes?: Partial<Record<InlineClass, string>>;
 }>();
 </script>
