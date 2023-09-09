@@ -18,6 +18,9 @@ jobs:
           yarn
           yarn story:build
 
+      - name: Disable Jekyll
+        run: touch .nojekyll
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
