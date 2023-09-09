@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      HISTOIRE_BASE: vue-screener/
+      HISTOIRE_BASE: /vue-screener/
 
     steps:
       - name: Checkout 🛎️
