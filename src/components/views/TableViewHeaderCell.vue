@@ -4,7 +4,9 @@
     :cell="cell"
     @click="handleClickHeader"
   >
-    <span v-html="cell.value" />
+    <slot>
+      <span v-html="cell.value" />
+    </slot>
     <SortSelector v-if="cell.isHeader" :sort-direction="sortDirection" />
   </TableCell>
 </template>

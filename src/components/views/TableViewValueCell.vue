@@ -1,5 +1,7 @@
 <template>
-  <TableCell :cell="cell" class="vue-screener__table-view__cell--is-value" />
+  <TableCell :cell="cell" class="vue-screener__table-view__cell--is-value">
+    <slot />
+  </TableCell>
 </template>
 
 <script lang="ts" setup>

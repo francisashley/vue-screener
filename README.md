@@ -73,6 +73,50 @@ Exclude fields:
 </template>
 ```
 
+## Slots
+
+Custom header cell renderer:
+
+```vue
+<template>
+  <vue-screener :data="data">
+    <template #header-cell="props">
+      <HeaderCell v-bind="props">
+        {{ props.field }}
+        <CurrencyPicker  v-if="props.field === 'price'" />
+      </HeaderCell>
+    </template>
+  </vue-screener>
+</template>
+<script>
+import VueScreener, { HeaderCell } from 'vue-screener'
+import CurrencyPicker from './components/currency-picker'
+</script>
+```
+
+Custom value cell renderer:
+
+```vue
+<template>
+  <vue-screener :data="data">
+    <template #value-cell="props">
+      <ValueCell v-bind="props">
+        <span v-if="props.field === 'price'">
+          {{ formatPrice(props.value) }}
+        </span>
+        <template v-else>
+          {{ props.value }}
+        </template>
+      </ValueCell>
+    </template>
+  </vue-screener>
+</template>
+<script>
+import VueScreener, { ValueCell } from 'vue-screener'
+import { formatPrice } from './utils/currency'
+</script>
+```
+
 ## Theming
 
 ```

@@ -26,7 +26,14 @@
           :sort-direction="sortDirection"
           :sort-field="sortField"
           @on-sort="handleSort"
-        />
+        >
+          <template #header-cell="cellPops">
+            <slot name="header-cell" v-bind="cellPops" />
+          </template>
+          <template #value-cell="cellPops">
+            <slot name="value-cell" v-bind="cellPops" />
+          </template>
+        </TableView>
         <JsonView v-else :data="getPaginatedData" />
       </main>
       <footer class="vue-screener__footer">

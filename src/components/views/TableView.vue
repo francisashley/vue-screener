@@ -1,14 +1,27 @@
 <template>
   <div :style="tableStyle" class="vue-screener__table-view">
     <template v-for="(cell, i) in getCells">
-      <HeaderCell
-        :key="i"
-        v-if="cell.isHeader"
-        :cell="cell"
-        :sort-direction="getSortDirection(cell.field)"
-        @on-sort="emit('on-sort', $event)"
-      />
-      <ValueCell :key="i" v-if="cell.isValue" :cell="cell" />
+      <template v-if="cell.isHeader">
+        <slot
+          name="header-cell"
+          :key="i"
+          :cell="cell"
+          :sort-direction="getSortDirection(cell.field)"
+          @on-sort="emit('on-sort', $event)"
+        >
+          <HeaderCell
+            :key="i"
+            :cell="cell"
+            :sort-direction="getSortDirection(cell.field)"
+            @on-sort="emit('on-sort', $event)"
+          />
+        </slot>
+      </template>
+      <template v-else-if="cell.isValue">
+        <slot name="value-cell" :key="i" :cell="cell">
+          <ValueCell :key="i" :cell="cell" />
+        </slot>
+      </template>
     </template>
   </div>
 </template>
