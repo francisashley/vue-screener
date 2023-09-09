@@ -1,7 +1,7 @@
 import { Q as defineAsyncComponent, R as createRouter, S as createWebHistory, U as createWebHashHistory, V as useDark, W as useToggle, k as watch, X as markRaw, E as reactive, d as defineComponent, r as ref, Y as watchEffect, o as openBlock, q as createBlock, Z as mergeProps, _ as resolveDynamicComponent, h as createCommentVNode } from "./vendor-fa5968e9.js";
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
-  return "/" + dep;
+  return "/vue-screener/" + dep;
 };
 const seen = {};
 const __vitePreload = function preload(baseModule, deps, importerUrl) {
@@ -57,7 +57,7 @@ const config = { "plugins": [{ "name": "builtin:tailwind-tokens" }, { "name": "b
 const logos = {};
 const histoireConfig = config;
 const customLogos = logos;
-const base = "/";
+const base = "/vue-screener/";
 function createRouterHistory() {
   switch (histoireConfig.routerMode) {
     case "hash":
@@ -73,12 +73,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-b386f2a3.js"), true ? ["assets/HomeView.vue-b386f2a3.js","assets/vendor-fa5968e9.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-08d8e60c.js"), true ? ["assets/HomeView.vue-08d8e60c.js","assets/vendor-fa5968e9.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-d399251b.js"), true ? ["assets/StoryView.vue-d399251b.js","assets/vendor-fa5968e9.js","assets/MobileOverlay.vue2-dfed1c27.js","assets/BaseEmpty.vue-b65ecbbe.js","assets/state-30b8acc7.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-4643f2b4.js"), true ? ["assets/StoryView.vue-4643f2b4.js","assets/vendor-fa5968e9.js","assets/MobileOverlay.vue2-a7352832.js","assets/BaseEmpty.vue-f2b63a79.js","assets/state-6308d254.js"] : void 0)
     }
   ]
 });
