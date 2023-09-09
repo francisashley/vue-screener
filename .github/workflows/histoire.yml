@@ -5,17 +5,22 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    env:
+      HISTOIRE_BASE: vue-screener/
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+
       - name: Install and Build 🔧
         run: |
           yarn
           yarn story:build
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          HISTOIRE_BASE: vue-screener/
           branch: gh-pages # The branch the action should deploy to.
           folder: docs # The folder that the build-storybook script generates files.
           clean: true # Automatically remove deleted files from the deploy branch
