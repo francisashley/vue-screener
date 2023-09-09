@@ -1,99 +1,51 @@
 <template>
   <div :style="tableStyle" class="vue-screener__table-view">
-    <div
-      v-for="(cell, i) in getCells"
-      :key="i"
-      :class="[
-        'vue-screener__table-view__cell',
-        cell.isHeader && 'vue-screener__table-view__cell--is-header',
-        cell.isValue && 'vue-screener__table-view__cell--is-value',
-        cell.isFirst && 'vue-screener__table-view__cell--is-first',
-        cell.isLast && 'vue-screener__table-view__cell--is-last',
-        cell.hasValue && 'vue-screener__table-view__cell--hasValue',
-        cell.type === 'string' && 'vue-screener__table-view__cell--string',
-        cell.type === 'number' && 'vue-screener__table-view__cell--number',
-        cell.type === 'boolean' && 'vue-screener__table-view__cell--boolean',
-        cell.type === 'symbol' && 'vue-screener__table-view__cell--symbol',
-        cell.type === 'undefined' &&
-          'vue-screener__table-view__cell--undefined',
-        cell.type === 'object' && 'vue-screener__table-view__cell--object',
-        cell.type === 'null' && 'vue-screener__table-view__cell--null',
-      ]"
-      @click="cell.isHeader && onSort(cell.field)"
-    >
-      <span v-html="cell.value" />
-      <SortSelector
-        v-if="cell.isHeader"
-        :sort-direction="getSortDirection(cell.field)"
-      />
-    </div>
+    <template v-for="(cell, i) in getCells">
+      <template v-if="cell.isHeader">
+        <slot
+          name="header-cell"
+          :key="i"
+          :cell="cell"
+          :sort-direction="getSortDirection(cell.field)"
+          @on-sort="emit('on-sort', $event)"
+        >
+          <HeaderCell
+            :key="i"
+            :cell="cell"
+            :sort-direction="getSortDirection(cell.field)"
+            @on-sort="emit('on-sort', $event)"
+          />
+        </slot>
+      </template>
+      <template v-else-if="cell.isValue">
+        <slot name="value-cell" :key="i" :cell="cell">
+          <ValueCell :key="i" :cell="cell" />
+        </slot>
+      </template>
+    </template>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
+import { highlightText } from "../../utils/text.utils";
 import { NormalisedRow } from "../../utils/data.utils";
-import SortSelector from "../stuff/SortSelector.vue";
-import { orderBy } from "natural-orderby";
-import highlightText from "../../utils/highlightText";
+import HeaderCell from "./TableViewHeaderCell.vue";
+import ValueCell from "./TableViewValueCell.vue";
+import { Cell } from "./TableViewCell.vue";
 
 const props = defineProps<{
   fields: string[];
   rows: NormalisedRow[];
   highlight: string;
+  sortField: null | string;
+  sortDirection: null | "asc" | "desc";
 }>();
 
-const sortField = ref<string | null>(null);
-const sortDirection = ref<"asc" | "desc">("desc");
-
-const getSortedRows = computed((): NormalisedRow[] => {
-  const sortedRows = props.rows;
-
-  const sortIndex =
-    sortedRows[0]?.findIndex((column) => column.key === sortField.value) ??
-    null;
-
-  if (sortField.value && sortDirection.value) {
-    const nullRows = sortedRows.filter(
-      (row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined,
-    );
-
-    const nonNullRows = sortedRows.filter(
-      (row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined,
-    );
-
-    return [
-      ...orderBy(
-        nonNullRows,
-        [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
-        [sortDirection.value],
-      ),
-      ...nullRows,
-    ];
-  } else {
-    return sortedRows;
-  }
-});
+const emit = defineEmits(["on-sort"]);
 
 const getCells = computed(() => {
-  const fields: {
-    field: string;
-    value: unknown;
-    isHeader?: boolean;
-    isValue?: boolean;
-    isFirst?: boolean;
-    isLast?: boolean;
-    hasValue?: boolean;
-    type?:
-      | "string"
-      | "number"
-      | "boolean"
-      | "symbol"
-      | "undefined"
-      | "object"
-      | "array"
-      | "null";
-  }[] = [];
+  const fields: Cell[] = [];
 
   props.fields.forEach((field, i) => {
     fields.push({
@@ -106,7 +58,7 @@ const getCells = computed(() => {
     });
   });
 
-  getSortedRows.value.forEach((row) => {
+  props.rows.forEach((row) => {
     row?.forEach((col, i) => {
       fields.push({
         field: col.key,
@@ -137,22 +89,17 @@ const getHighlighted = (value: unknown, highlight: string) => {
 };
 
 const getSortDirection = (field: string): "asc" | "desc" | null => {
-  if (sortField.value === field) {
-    return sortDirection.value;
+  if (props.sortField === field) {
+    return props.sortDirection;
   }
   return null;
-};
-
-const onSort = (updatedSortField: string) => {
-  if (sortField.value === updatedSortField) {
-    sortDirection.value = sortDirection.value === "desc" ? "asc" : "desc";
-  }
-  sortField.value = updatedSortField;
 };
 </script>
 
 <style lang="scss">
 .vue-screener__table-view {
+  color: black;
+
   &__cell {
     border-bottom: thin solid black;
     border-right: thin solid black;

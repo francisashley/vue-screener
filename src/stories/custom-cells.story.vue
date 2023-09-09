@@ -5,7 +5,20 @@
         <HstSelect v-model="state.select" title="Data" :options="options" />
       </template>
       <template #default>
-        <VueScreener :data="state.data" />
+        <VueScreener :data="state.data">
+          <template #header-cell="props">
+            <HeaderCell v-bind="props" :style="{ background: 'red' }">
+              <span v-html="props.cell.value" />
+              [stuff]
+            </HeaderCell>
+          </template>
+          <template #value-cell="props">
+            <ValueCell v-bind="props" :style="{ background: 'blue' }">
+              <span v-html="props.cell.value" />
+              [stuff]
+            </ValueCell>
+          </template>
+        </VueScreener>
       </template>
     </Variant>
   </Story>
@@ -13,9 +26,9 @@
 
 <script lang="ts" setup>
 import { reactive, watch } from "vue";
-import VueScreener from "./components/VueScreener.vue";
-import baseData from "./fixtures/data.json";
-import primitivesData from "./fixtures/primitives-data.json";
+import { HeaderCell, ValueCell, VueScreener } from "../index";
+import baseData from "../fixtures/data.json";
+import primitivesData from "../fixtures/primitives-data.json";
 
 const options = {
   "array-of-objects": "Array of objects",
@@ -57,7 +70,6 @@ watch(
       default:
         break;
     }
-    console.log("a", state.select);
   },
 );
 </script>

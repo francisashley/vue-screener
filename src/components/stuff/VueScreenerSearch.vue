@@ -80,6 +80,7 @@ const search = (searchQuery: string): void => {
   border-left: thin solid;
   border-radius: 4px;
   border: 2px solid #fff;
+  color: black;
 
   &--error {
     border: 2px solid red;

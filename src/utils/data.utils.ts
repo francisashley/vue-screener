@@ -1,5 +1,4 @@
 import { escapeRegExp } from "./regex.utils";
-import getTypeOf from "./getTypeOf";
 import { isValidRegExp } from "../utils/regex.utils";
 
 export function isValidInput(data: unknown): boolean {
@@ -76,16 +75,21 @@ export function getFields(rows: NormalisedRow[]): string[] {
   return Array.from(fields);
 }
 
-type ExcludesFalse = <T>(x: T | false) => x is T;
-
 export function pickFields(
   rows: NormalisedRow[],
   pickFields: string[],
 ): NormalisedRow[] {
   return rows.map((row) => {
-    return pickFields
-      .map((pickField) => row.find((field) => field.key === pickField) || false)
-      .filter(Boolean as unknown as ExcludesFalse);
+    return row.filter((field) => pickFields.includes(field.key));
+  });
+}
+
+export function excludeFields(
+  rows: NormalisedRow[],
+  excludeFields: string[],
+): NormalisedRow[] {
+  return rows.map((row) => {
+    return row.filter((field) => !excludeFields.includes(field.key));
   });
 }
 
@@ -170,4 +174,38 @@ export function search(options: {
       return false;
     });
   });
+}
+
+export type DataType =
+  | "string"
+  | "number"
+  | "boolean"
+  | "symbol"
+  | "undefined"
+  | "object"
+  | "null"
+  | "array"
+  | "object";
+
+export function getTypeOf(value: unknown): DataType {
+  if (typeof value === "string") {
+    return "string";
+  } else if (typeof value === "number") {
+    return "number";
+  } else if (typeof value === "boolean") {
+    return "boolean";
+  } else if (typeof value === "symbol") {
+    return "symbol";
+  } else if (typeof value === "undefined") {
+    return "undefined";
+  } else if (typeof value === "object") {
+    if (value === null) {
+      return "null";
+    } else if (Array.isArray(value)) {
+      return "array";
+    }
+    return "object";
+  }
+
+  throw `Could not establish type of \`${value}\``;
 }
