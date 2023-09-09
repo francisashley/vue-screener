@@ -169,6 +169,7 @@ const onChangePage = (page: number) => {
     background: black;
     font-weight: 400;
     padding: 8px;
+    border-radius: 8px 8px 0 0;
   }
 
   &__header-title {
@@ -185,6 +186,7 @@ const onChangePage = (page: number) => {
     border-left: thin solid;
     border-right: thin solid;
     padding: 8px;
+    border-radius: 0 0 8px 8px;
   }
 }
 </style>
