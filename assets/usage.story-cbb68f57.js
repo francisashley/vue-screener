@@ -1,4 +1,4 @@
-import { aq as defineComponent, ar as openBlock, as as createElementBlock, at as toDisplayString, au as createBaseVNode, av as createBlock, aw as createCommentVNode, ax as ref, ay as computed, az as orderBy, aA as Fragment, aB as renderList, aC as normalizeStyle, aD as normalizeClass, aE as withModifiers, aF as onMounted, aG as watch, aH as createTextVNode, aI as createVNode, aJ as reactive, aK as resolveComponent, aL as withCtx } from "./vendor-4b24b92d.js";
+import { aq as defineComponent, ar as openBlock, as as createElementBlock, at as toDisplayString, au as createBaseVNode, av as createBlock, aw as createCommentVNode, ax as ref, ay as computed, az as orderBy, aA as Fragment, aB as renderList, aC as normalizeStyle, aD as normalizeClass, aE as onMounted, aF as watch, aG as createTextVNode, aH as withModifiers, aI as directive, aJ as withDirectives, aK as renderSlot, aL as createVNode, aM as withCtx, aN as Transition, aO as reactive, aP as resolveComponent } from "./vendor-be3c8bde.js";
 const JsonView_vue_vue_type_style_index_0_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -7,7 +7,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
   __name: "JsonView",
   props: {
     data: { type: null, required: true }
@@ -19,20 +19,20 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$a = { class: "vue-screener__json-view" };
-function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_1$d = { class: "vue-screener__json-view" };
+function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     "pre",
-    _hoisted_1$a,
+    _hoisted_1$d,
     toDisplayString(JSON.stringify($props.data, null, 2)),
     1
     /* TEXT */
   );
 }
-_sfc_main$b.__file = "src/components/views/JsonView.vue";
-const JsonView = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/JsonView.vue"]]);
-const _sfc_main$a = {};
-const _hoisted_1$9 = {
+_sfc_main$e.__file = "src/components/views/JsonView.vue";
+const JsonView = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/JsonView.vue"]]);
+const _sfc_main$d = {};
+const _hoisted_1$c = {
   "aria-hidden": "true",
   focusable: "false",
   "data-prefix": "fas",
@@ -42,7 +42,7 @@ const _hoisted_1$9 = {
   viewBox: "0 0 320 512",
   style: { "height": "1rem", "width": "1rem" }
 };
-const _hoisted_2$6 = /* @__PURE__ */ createBaseVNode(
+const _hoisted_2$8 = /* @__PURE__ */ createBaseVNode(
   "path",
   {
     fill: "currentColor",
@@ -53,16 +53,16 @@ const _hoisted_2$6 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$5 = [
-  _hoisted_2$6
+const _hoisted_3$6 = [
+  _hoisted_2$8
 ];
-function _sfc_render$a(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$5);
+function _sfc_render$d(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$c, _hoisted_3$6);
 }
-_sfc_main$a.__file = "src/components/icons/Sort.vue";
-const SortIcon = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/Sort.vue"]]);
-const _sfc_main$9 = {};
-const _hoisted_1$8 = {
+_sfc_main$d.__file = "src/components/icons/Sort.vue";
+const SortIcon = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/Sort.vue"]]);
+const _sfc_main$c = {};
+const _hoisted_1$b = {
   "aria-hidden": "true",
   focusable: "false",
   "data-prefix": "fas",
@@ -72,7 +72,7 @@ const _hoisted_1$8 = {
   viewBox: "0 0 320 512",
   style: { "height": "1rem", "width": "1rem" }
 };
-const _hoisted_2$5 = /* @__PURE__ */ createBaseVNode(
+const _hoisted_2$7 = /* @__PURE__ */ createBaseVNode(
   "path",
   {
     fill: "currentColor",
@@ -83,16 +83,16 @@ const _hoisted_2$5 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$4 = [
-  _hoisted_2$5
+const _hoisted_3$5 = [
+  _hoisted_2$7
 ];
-function _sfc_render$9(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$8, _hoisted_3$4);
+function _sfc_render$c(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$b, _hoisted_3$5);
 }
-_sfc_main$9.__file = "src/components/icons/SortUp.vue";
-const SortUpIcon = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortUp.vue"]]);
-const _sfc_main$8 = {};
-const _hoisted_1$7 = {
+_sfc_main$c.__file = "src/components/icons/SortUp.vue";
+const SortUpIcon = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$c], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortUp.vue"]]);
+const _sfc_main$b = {};
+const _hoisted_1$a = {
   "aria-hidden": "true",
   focusable: "false",
   "data-prefix": "fas",
@@ -102,7 +102,7 @@ const _hoisted_1$7 = {
   viewBox: "0 0 320 512",
   style: { "height": "1rem", "width": "1rem" }
 };
-const _hoisted_2$4 = /* @__PURE__ */ createBaseVNode(
+const _hoisted_2$6 = /* @__PURE__ */ createBaseVNode(
   "path",
   {
     fill: "currentColor",
@@ -113,16 +113,16 @@ const _hoisted_2$4 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$3 = [
-  _hoisted_2$4
+const _hoisted_3$4 = [
+  _hoisted_2$6
 ];
-function _sfc_render$8(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$7, _hoisted_3$3);
+function _sfc_render$b(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$a, _hoisted_3$4);
 }
-_sfc_main$8.__file = "src/components/icons/SortDown.vue";
-const SortDownIcon = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortDown.vue"]]);
+_sfc_main$b.__file = "src/components/icons/SortDown.vue";
+const SortDownIcon = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortDown.vue"]]);
 const SortSelector_vue_vue_type_style_index_0_lang = "";
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "SortSelector",
   props: {
     sortDirection: { type: [null, String], required: true }
@@ -134,14 +134,14 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$6 = { class: "vue-screener__sort-selector" };
-function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$6, [
+const _hoisted_1$9 = { class: "vue-screener__sort-selector" };
+function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$9, [
     $props.sortDirection === null ? (openBlock(), createBlock($setup["SortIcon"], { key: 0 })) : $props.sortDirection === "asc" ? (openBlock(), createBlock($setup["SortUpIcon"], { key: 1 })) : $props.sortDirection === "desc" ? (openBlock(), createBlock($setup["SortDownIcon"], { key: 2 })) : createCommentVNode("v-if", true)
   ]);
 }
-_sfc_main$7.__file = "src/components/stuff/SortSelector.vue";
-const SortSelector = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/SortSelector.vue"]]);
+_sfc_main$a.__file = "src/components/stuff/SortSelector.vue";
+const SortSelector = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/SortSelector.vue"]]);
 const reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 const reHasRegExpChar = RegExp(reRegExpChar.source);
 function escapeRegExp(string) {
@@ -160,7 +160,7 @@ function highlightText(value, highlight) {
   return value.replace(highlightExp, (match) => `<mark>${match}</mark>`);
 }
 const TableView_vue_vue_type_style_index_0_lang = "";
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TableView",
   props: {
     fields: { type: Array, required: true },
@@ -253,9 +253,9 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$5 = ["onClick"];
-const _hoisted_2$3 = ["innerHTML"];
-function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_1$8 = ["onClick"];
+const _hoisted_2$5 = ["innerHTML"];
+function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     "div",
     {
@@ -288,12 +288,12 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
           }, [
             createBaseVNode("span", {
               innerHTML: cell.value
-            }, null, 8, _hoisted_2$3),
+            }, null, 8, _hoisted_2$5),
             cell.isHeader ? (openBlock(), createBlock($setup["SortSelector"], {
               key: 0,
               "sort-direction": $setup.getSortDirection(cell.field)
             }, null, 8, ["sort-direction"])) : createCommentVNode("v-if", true)
-          ], 10, _hoisted_1$5);
+          ], 10, _hoisted_1$8);
         }),
         128
         /* KEYED_FRAGMENT */
@@ -303,67 +303,15 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     /* STYLE */
   );
 }
-_sfc_main$6.__file = "src/components/views/TableView.vue";
-const TableView = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/TableView.vue"]]);
-const ViewSelector_vue_vue_type_style_index_0_lang = "";
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  __name: "ViewSelector",
-  props: {
-    activeFormat: { type: String, required: true }
-  },
-  emits: ["select-format"],
-  setup(__props, { expose: __expose, emit }) {
-    __expose();
-    const onSelectFormat = (format) => emit("select-format", format);
-    const __returned__ = { emit, onSelectFormat };
-    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
-    return __returned__;
-  }
-});
-const _hoisted_1$4 = { class: "vue-screener__view-selector" };
-function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$4, [
-    createBaseVNode(
-      "a",
-      {
-        href: "#",
-        onClick: _cache[0] || (_cache[0] = withModifiers(($event) => $setup.onSelectFormat("table"), ["prevent"])),
-        class: normalizeClass([
-          "vue-screener__view-selector__link",
-          $props.activeFormat === "table" && "is-active"
-        ]),
-        textContent: "Table"
-      },
-      null,
-      2
-      /* CLASS */
-    ),
-    createBaseVNode(
-      "a",
-      {
-        href: "#",
-        onClick: _cache[1] || (_cache[1] = withModifiers(($event) => $setup.onSelectFormat("raw"), ["prevent"])),
-        class: normalizeClass([
-          "vue-screener__view-selector__link",
-          $props.activeFormat === "raw" && "is-active"
-        ]),
-        textContent: "Raw"
-      },
-      null,
-      2
-      /* CLASS */
-    )
-  ]);
-}
-_sfc_main$5.__file = "src/components/stuff/ViewSelector.vue";
-const ViewSelector = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/ViewSelector.vue"]]);
+_sfc_main$9.__file = "src/components/views/TableView.vue";
+const TableView = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/TableView.vue"]]);
 const VueScreenerSearch_vue_vue_type_style_index_0_lang = "";
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "VueScreenerSearch",
   props: {
     query: { type: String, required: true },
     isValidQuery: { type: Boolean, required: true },
-    activeOptions: { type: Array, required: true }
+    searchOptions: { type: Array, required: true }
   },
   emits: ["search", "update-options"],
   setup(__props, { expose: __expose, emit }) {
@@ -371,23 +319,12 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     const {
       query = "",
       isValidQuery = true,
-      activeOptions = []
+      searchOptions = []
     } = __props;
     const history = ref([]);
     const historyIndex = ref(null);
-    const options = ref([
-      { id: "match-case", title: "Match case", text: "Aa" },
-      { id: "match-word", title: "Match word", text: "ab" },
-      { id: "use-regex", title: "Use regular expression", text: ".*" }
-    ]);
     const useRegEx = computed(() => {
-      return activeOptions.some((activeOption) => activeOption === "use-regex");
-    });
-    const getOptions = computed(() => {
-      return options.value.map((option) => ({
-        ...option,
-        isActive: activeOptions.includes(option.id)
-      }));
+      return searchOptions.some((activeOption) => activeOption === "use-regex");
     });
     const debouncedSearch = (event) => {
       const searchQuery = event.target.value;
@@ -414,102 +351,62 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     const search2 = (searchQuery) => {
       emit("search", searchQuery);
     };
-    const toggleOption = (option) => {
-      if (activeOptions.includes(option)) {
-        emit(
-          "update-options",
-          activeOptions.filter((activeOption) => activeOption !== option)
-        );
-      } else {
-        emit("update-options", [...activeOptions, option]);
-      }
-    };
-    const __returned__ = { emit, history, historyIndex, options, useRegEx, getOptions, debouncedSearch, onKeydown, search: search2, toggleOption };
+    const __returned__ = { emit, history, historyIndex, useRegEx, debouncedSearch, onKeydown, search: search2 };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const _hoisted_1$3 = { class: "vue-screener__search" };
-const _hoisted_2$2 = ["value"];
-const _hoisted_3$2 = { class: "vue-screener__search__options" };
-const _hoisted_4$2 = ["title", "onClick"];
-function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$3, [
-    createBaseVNode("input", {
-      value: $props.query,
-      onInput: $setup.debouncedSearch,
-      onKeydown: $setup.onKeydown,
-      type: "text",
-      class: normalizeClass(["vue-screener__search__input", [
-        $setup.useRegEx && !$props.isValidQuery && "vue-screener__search__input--error"
-      ]]),
-      placeholder: "Search (↑↓ for history)"
-    }, null, 42, _hoisted_2$2),
-    createBaseVNode("div", _hoisted_3$2, [
-      (openBlock(true), createElementBlock(
-        Fragment,
-        null,
-        renderList($setup.getOptions, (option, i) => {
-          return openBlock(), createElementBlock("button", {
-            key: i,
-            class: normalizeClass(["vue-screener__search__options-button", [
-              { "vue-screener__search__options-button--active": option.isActive },
-              "vue-screener__search__options-button--" + option.id
-            ]]),
-            title: option.title,
-            onClick: ($event) => $setup.toggleOption(option.id)
-          }, toDisplayString(option.text), 11, _hoisted_4$2);
-        }),
-        128
-        /* KEYED_FRAGMENT */
-      ))
-    ])
-  ]);
+const _hoisted_1$7 = ["value"];
+function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("input", {
+    value: $props.query,
+    onInput: $setup.debouncedSearch,
+    onKeydown: $setup.onKeydown,
+    type: "text",
+    class: normalizeClass(["vue-screener__search", [$setup.useRegEx && !$props.isValidQuery && "vue-screener__search--error"]]),
+    placeholder: "Search..."
+  }, null, 42, _hoisted_1$7);
 }
-_sfc_main$4.__file = "src/components/VueScreenerSearch.vue";
-const VueScreenerSearch = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/VueScreenerSearch.vue"]]);
+_sfc_main$8.__file = "src/components/VueScreenerSearch.vue";
+const VueScreenerSearch = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/VueScreenerSearch.vue"]]);
 const Pagination_vue_vue_type_style_index_0_lang = "";
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "Pagination",
   props: {
-    currentPage: { type: Number, required: false },
-    totalItems: { type: Number, required: false },
-    perPage: { type: Number, required: false }
+    currentPage: { type: Number, required: false, default: 1 },
+    totalItems: { type: Number, required: false, default: 0 },
+    perPage: { type: Number, required: false, default: 25 }
   },
   emits: ["change-page"],
   setup(__props, { expose: __expose, emit }) {
     __expose();
-    const {
-      currentPage = 1,
-      totalItems = 0,
-      perPage = 25
-    } = __props;
+    const props = __props;
     const totalPages = computed(() => {
-      return Math.ceil(totalItems / perPage);
+      return Math.ceil(props.totalItems / props.perPage) || 1;
     });
     const pages = computed(() => {
       return Array.from(new Array(totalPages.value + 1).keys()).slice(1);
     });
     const firstIndexOfCurrentPage = computed(() => {
-      return currentPage * perPage - perPage + 1;
+      return props.currentPage * props.perPage - props.perPage + 1;
     });
     const lastIndexOfCurrentPage = computed(() => {
-      return currentPage * perPage > totalItems ? totalItems : currentPage * perPage;
+      return props.currentPage * props.perPage > props.totalItems ? props.totalItems : props.currentPage * props.perPage;
     });
     const currentPageIsInRange = computed(() => {
-      return totalPages.value >= currentPage;
+      return totalPages.value >= props.currentPage;
     });
     onMounted(() => {
       ensureCurrentPageIsValid();
     });
     watch(
-      () => totalItems,
+      () => props.totalItems,
       () => {
         ensureCurrentPageIsValid();
       }
     );
     const isActive = (page) => {
-      return page === currentPage;
+      return page === props.currentPage;
     };
     const ensureCurrentPageIsValid = () => {
       if (!currentPageIsInRange.value) {
@@ -519,49 +416,18 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     const selectPage = (page) => {
       emit("change-page", page);
     };
-    const __returned__ = { emit, totalPages, pages, firstIndexOfCurrentPage, lastIndexOfCurrentPage, currentPageIsInRange, isActive, ensureCurrentPageIsValid, selectPage };
+    const __returned__ = { props, emit, totalPages, pages, firstIndexOfCurrentPage, lastIndexOfCurrentPage, currentPageIsInRange, isActive, ensureCurrentPageIsValid, selectPage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const _hoisted_1$2 = { class: "vue-screener__pagination" };
-const _hoisted_2$1 = {
-  key: 0,
-  class: "vue-screener__pagination__buttons"
-};
-const _hoisted_3$1 = ["onClick"];
-const _hoisted_4$1 = { class: "vue-screener__pagination__details" };
-function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$2, [
-    $setup.pages.length > 1 ? (openBlock(), createElementBlock("ul", _hoisted_2$1, [
-      (openBlock(true), createElementBlock(
-        Fragment,
-        null,
-        renderList($setup.pages, (page) => {
-          return openBlock(), createElementBlock(
-            "li",
-            {
-              key: page,
-              class: normalizeClass([
-                "vue-screener__pagination__buttons-button",
-                $setup.isActive(page) && "vue-screener__pagination__buttons-button--active"
-              ])
-            },
-            [
-              createBaseVNode("a", {
-                href: "#",
-                onClick: withModifiers(($event) => $setup.selectPage(page), ["prevent"])
-              }, toDisplayString(page), 9, _hoisted_3$1)
-            ],
-            2
-            /* CLASS */
-          );
-        }),
-        128
-        /* KEYED_FRAGMENT */
-      ))
-    ])) : createCommentVNode("v-if", true),
-    createBaseVNode("div", _hoisted_4$1, [
+const _hoisted_1$6 = { class: "vue-screener__pagination" };
+const _hoisted_2$4 = { class: "vue-screener__pagination__details" };
+const _hoisted_3$3 = { class: "vue-screener__pagination__buttons" };
+const _hoisted_4$2 = ["onClick"];
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$6, [
+    createBaseVNode("div", _hoisted_2$4, [
       !$props.totalItems ? (openBlock(), createElementBlock(
         Fragment,
         { key: 0 },
@@ -595,13 +461,41 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
         64
         /* STABLE_FRAGMENT */
       ))
+    ]),
+    createBaseVNode("ul", _hoisted_3$3, [
+      (openBlock(true), createElementBlock(
+        Fragment,
+        null,
+        renderList($setup.pages, (page) => {
+          return openBlock(), createElementBlock(
+            "li",
+            {
+              key: page,
+              class: normalizeClass([
+                "vue-screener__pagination__buttons-button",
+                $setup.isActive(page) && "vue-screener__pagination__buttons-button--active"
+              ])
+            },
+            [
+              createBaseVNode("a", {
+                href: "#",
+                onClick: withModifiers(($event) => $setup.selectPage(page), ["prevent"])
+              }, toDisplayString(page), 9, _hoisted_4$2)
+            ],
+            2
+            /* CLASS */
+          );
+        }),
+        128
+        /* KEYED_FRAGMENT */
+      ))
     ])
   ]);
 }
-_sfc_main$3.__file = "src/components/stuff/Pagination.vue";
-const Pagination = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/Pagination.vue"]]);
+_sfc_main$7.__file = "src/components/stuff/Pagination.vue";
+const Pagination = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/Pagination.vue"]]);
 const ErrorMessage_vue_vue_type_style_index_0_lang = "";
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "ErrorMessage",
   props: {
     message: { type: String, required: true }
@@ -613,18 +507,240 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$1 = { class: "vue-screener__error-message" };
-function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_1$5 = { class: "vue-screener__error-message" };
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     "div",
-    _hoisted_1$1,
+    _hoisted_1$5,
     " [VueScreenerError]: " + toDisplayString($props.message),
     1
     /* TEXT */
   );
 }
-_sfc_main$2.__file = "src/components/stuff/ErrorMessage.vue";
-const ErrorMessage = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/ErrorMessage.vue"]]);
+_sfc_main$6.__file = "src/components/stuff/ErrorMessage.vue";
+const ErrorMessage = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/ErrorMessage.vue"]]);
+const Dropdown_vue_vue_type_style_index_0_lang = "";
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  __name: "Dropdown",
+  setup(__props, { expose: __expose }) {
+    __expose();
+    const show = ref(false);
+    const toggleDropdown = () => show.value = !show.value;
+    const handleClickOutside = () => show.value = false;
+    const __returned__ = { show, toggleDropdown, handleClickOutside, get vOnClickaway() {
+      return directive;
+    } };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const _hoisted_1$4 = { class: "vue-screener__dropdown" };
+const _hoisted_2$3 = {
+  key: 0,
+  class: "vue-screener__dropdown__dropdown-content"
+};
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  return withDirectives((openBlock(), createElementBlock("div", _hoisted_1$4, [
+    renderSlot(_ctx.$slots, "dropdown-button", {
+      show: $setup.show,
+      toggle: $setup.toggleDropdown
+    }),
+    createVNode(Transition, { name: "vue-screener__dropdown__dropdown-content" }, {
+      default: withCtx(() => [
+        $setup.show ? (openBlock(), createElementBlock("div", _hoisted_2$3, [
+          renderSlot(_ctx.$slots, "default")
+        ])) : createCommentVNode("v-if", true)
+      ]),
+      _: 3
+      /* FORWARDED */
+    })
+  ])), [
+    [$setup["vOnClickaway"], $setup.handleClickOutside]
+  ]);
+}
+_sfc_main$5.__file = "src/components/stuff/Dropdown.vue";
+const Dropdown = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/Dropdown.vue"]]);
+const ViewSelector_vue_vue_type_style_index_0_lang = "";
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  __name: "ViewSelector",
+  props: {
+    activeFormat: { type: String, required: true }
+  },
+  emits: ["select-format"],
+  setup(__props, { expose: __expose, emit }) {
+    __expose();
+    const onSelectFormat = (format) => emit("select-format", format);
+    const __returned__ = { emit, onSelectFormat };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const _hoisted_1$3 = { class: "vue-screener__view-selector" };
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$3, [
+    createBaseVNode(
+      "a",
+      {
+        href: "#",
+        onClick: _cache[0] || (_cache[0] = withModifiers(($event) => $setup.onSelectFormat("table"), ["prevent"])),
+        class: normalizeClass([
+          "vue-screener__view-selector__link",
+          $props.activeFormat === "table" && "is-active"
+        ]),
+        textContent: "Table"
+      },
+      null,
+      2
+      /* CLASS */
+    ),
+    createBaseVNode(
+      "a",
+      {
+        href: "#",
+        onClick: _cache[1] || (_cache[1] = withModifiers(($event) => $setup.onSelectFormat("raw"), ["prevent"])),
+        class: normalizeClass([
+          "vue-screener__view-selector__link",
+          $props.activeFormat === "raw" && "is-active"
+        ]),
+        textContent: "Raw"
+      },
+      null,
+      2
+      /* CLASS */
+    )
+  ]);
+}
+_sfc_main$4.__file = "src/components/stuff/ViewSelector.vue";
+const ViewSelector = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/ViewSelector.vue"]]);
+const _sfc_main$3 = {};
+const _hoisted_1$2 = {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24",
+  fill: "currentColor",
+  class: "vue-screener__settings-button-icon"
+};
+const _hoisted_2$2 = /* @__PURE__ */ createBaseVNode(
+  "path",
+  {
+    "fill-rule": "evenodd",
+    d: "M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 00-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 00-2.282.819l-.922 1.597a1.875 1.875 0 00.432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 000 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 00-.432 2.385l.922 1.597a1.875 1.875 0 002.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 002.28-.819l.923-1.597a1.875 1.875 0 00-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 000-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 00-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 00-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 00-1.85-1.567h-1.843zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z",
+    "clip-rule": "evenodd"
+  },
+  null,
+  -1
+  /* HOISTED */
+);
+const _hoisted_3$2 = [
+  _hoisted_2$2
+];
+function _sfc_render$3(_ctx, _cache) {
+  return openBlock(), createElementBlock("svg", _hoisted_1$2, _hoisted_3$2);
+}
+_sfc_main$3.__file = "src/components/icons/Cog.vue";
+const CogIcon = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$3], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/Cog.vue"]]);
+const Settings_vue_vue_type_style_index_0_lang = "";
+const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+  __name: "Settings",
+  props: {
+    activeFormat: { type: String, required: true },
+    searchOptions: { type: Array, required: true }
+  },
+  emits: ["select-format", "change-search-options"],
+  setup(__props, { expose: __expose, emit }) {
+    __expose();
+    const props = __props;
+    const options = ref([
+      { id: "match-case", title: "Match case", text: "Aa" },
+      { id: "match-word", title: "Match word", text: "ab" },
+      { id: "use-regex", title: "Use regular expression", text: ".*" }
+    ]);
+    const getOptions = computed(() => {
+      return options.value.map((option) => ({
+        ...option,
+        isActive: props.searchOptions.includes(option.id)
+      }));
+    });
+    const toggleOption = (option) => {
+      if (props.searchOptions.includes(option)) {
+        emit(
+          "change-search-options",
+          props.searchOptions.filter((activeOption) => activeOption !== option)
+        );
+      } else {
+        emit("change-search-options", [...props.searchOptions, option]);
+      }
+    };
+    const __returned__ = { props, emit, options, getOptions, toggleOption, Dropdown, ViewSelector, CogIcon };
+    Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
+    return __returned__;
+  }
+});
+const _hoisted_1$1 = { class: "vue-screener__settings" };
+const _hoisted_2$1 = ["onClick"];
+const _hoisted_3$1 = /* @__PURE__ */ createBaseVNode(
+  "h3",
+  { class: "vue-screener__settings-heading" },
+  "Search",
+  -1
+  /* HOISTED */
+);
+const _hoisted_4$1 = { class: "vue-screener__settings__options" };
+const _hoisted_5$1 = ["title", "onClick"];
+const _hoisted_6 = /* @__PURE__ */ createBaseVNode(
+  "h3",
+  { class: "vue-screener__settings-heading" },
+  "Presentation",
+  -1
+  /* HOISTED */
+);
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+    createVNode($setup["Dropdown"], null, {
+      "dropdown-button": withCtx(({ show, toggle }) => [
+        createBaseVNode("button", {
+          class: normalizeClass(["vue-screener__settings-button", [show && "vue-screener__settings-button--active"]]),
+          onClick: toggle
+        }, [
+          createVNode($setup["CogIcon"])
+        ], 10, _hoisted_2$1)
+      ]),
+      default: withCtx(() => [
+        _hoisted_3$1,
+        createBaseVNode("div", _hoisted_4$1, [
+          (openBlock(true), createElementBlock(
+            Fragment,
+            null,
+            renderList($setup.getOptions, (option, i) => {
+              return openBlock(), createElementBlock("button", {
+                key: i,
+                class: normalizeClass(["vue-screener__settings__options-button", [
+                  {
+                    "vue-screener__settings__options-button--active": option.isActive
+                  },
+                  "vue-screener__settings__options-button--" + option.id
+                ]]),
+                title: option.title,
+                onClick: ($event) => $setup.toggleOption(option.id)
+              }, toDisplayString(option.text), 11, _hoisted_5$1);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ]),
+        _hoisted_6,
+        createVNode($setup["ViewSelector"], {
+          class: "vue-screener__view-selector",
+          "active-format": $props.activeFormat,
+          onSelectFormat: _cache[0] || (_cache[0] = ($event) => $setup.emit("select-format", $event))
+        }, null, 8, ["active-format"])
+      ]),
+      _: 1
+      /* STABLE */
+    })
+  ]);
+}
+_sfc_main$2.__file = "src/components/stuff/Settings.vue";
+const Settings = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/Settings.vue"]]);
 function getTypeOf(value) {
   if (typeof value === "string") {
     return "string";
@@ -739,7 +855,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   props: {
     data: { type: Array, required: false, default: () => [] },
     pickFields: { type: Array, required: false, default: () => [] },
-    perPage: { type: Number, required: false, default: 25 },
+    perPage: { type: Number, required: false, default: 15 },
     currentPage: { type: Number, required: false, default: 1 }
   },
   setup(__props, { expose: __expose }) {
@@ -748,7 +864,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     const searchQuery = ref("");
     const stagedCurrentPage = ref(props.currentPage);
     const renderFormat = ref("table");
-    const searchQueryOptions = ref([]);
+    const searchOptions = ref([]);
     const isValidInput$1 = computed(() => {
       return isValidInput(props.data);
     });
@@ -766,13 +882,13 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       return getFields(getNormalisedData.value);
     });
     const shouldUseRegEx = computed(() => {
-      return searchQueryOptions.value.includes("use-regex");
+      return searchOptions.value.includes("use-regex");
     });
     const shouldMatchCase = computed(() => {
-      return searchQueryOptions.value.includes("match-case");
+      return searchOptions.value.includes("match-case");
     });
     const shouldMatchWord = computed(() => {
-      return searchQueryOptions.value.includes("match-word");
+      return searchOptions.value.includes("match-word");
     });
     const getSearchedData = computed(() => {
       return search({
@@ -794,8 +910,8 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     const onSearch = (query) => {
       searchQuery.value = query;
     };
-    const onUpdateOptions = (options) => {
-      searchQueryOptions.value = options;
+    const onChangeSearchOptions = (options) => {
+      searchOptions.value = options;
       onSearch(searchQuery.value);
     };
     const onSelectFormat = (format) => {
@@ -804,7 +920,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     const onChangePage = (page) => {
       stagedCurrentPage.value = page;
     };
-    const __returned__ = { props, searchQuery, stagedCurrentPage, renderFormat, searchQueryOptions, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getPaginatedData, onSearch, onUpdateOptions, onSelectFormat, onChangePage, JsonView, TableView, ViewSelector, VueScreenerSearch, Pagination, ErrorMessage };
+    const __returned__ = { props, searchQuery, stagedCurrentPage, renderFormat, searchOptions, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getPaginatedData, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, JsonView, TableView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -818,7 +934,8 @@ const _hoisted_3 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_4 = { class: "vue-screener__footer" };
+const _hoisted_4 = { class: "vue-screener__main" };
+const _hoisted_5 = { class: "vue-screener__footer" };
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("section", _hoisted_1, [
     $setup.isValidInput ? (openBlock(), createElementBlock(
@@ -827,21 +944,21 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
       [
         createBaseVNode("header", _hoisted_2, [
           _hoisted_3,
-          createVNode($setup["ViewSelector"], {
-            class: "vue-screener__view-selector",
-            "active-format": $setup.renderFormat,
-            onSelectFormat: $setup.onSelectFormat
-          }, null, 8, ["active-format"]),
           createVNode($setup["VueScreenerSearch"], {
             class: "vue-screener__search",
             query: $setup.searchQuery,
             "is-valid-query": $setup.isRegExFriendlySearchQuery,
-            "active-options": $setup.searchQueryOptions,
-            onSearch: $setup.onSearch,
-            onUpdateOptions: $setup.onUpdateOptions
-          }, null, 8, ["query", "is-valid-query", "active-options"])
+            "search-options": $setup.searchOptions,
+            onSearch: $setup.onSearch
+          }, null, 8, ["query", "is-valid-query", "search-options"]),
+          createVNode($setup["Settings"], {
+            "active-format": $setup.renderFormat,
+            onSelectFormat: $setup.onSelectFormat,
+            "search-options": $setup.searchOptions,
+            onChangeSearchOptions: $setup.onChangeSearchOptions
+          }, null, 8, ["active-format", "search-options"])
         ]),
-        createBaseVNode("main", null, [
+        createBaseVNode("main", _hoisted_4, [
           $setup.renderFormat === "table" ? (openBlock(), createBlock($setup["TableView"], {
             key: 0,
             fields: $setup.getFields,
@@ -852,7 +969,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
             data: $setup.getPaginatedData
           }, null, 8, ["data"]))
         ]),
-        createBaseVNode("footer", _hoisted_4, [
+        createBaseVNode("footer", _hoisted_5, [
           createVNode($setup["Pagination"], {
             "total-items": $setup.getSearchedData.length,
             "per-page": $props.perPage,

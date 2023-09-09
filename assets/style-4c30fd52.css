@@ -2883,7 +2883,7 @@ body {
   cursor: pointer;
 }.vue-screener__table-view__cell {
   border-bottom: thin solid black;
-  border-left: thin solid black;
+  border-right: thin solid black;
   padding: 2px 5px;
 }
 .vue-screener__table-view__cell--is-header {
@@ -2895,77 +2895,25 @@ body {
   cursor: pointer;
 }
 .vue-screener__table-view__cell--is-last {
-  border-right: thin solid black;
-}.vue-screener__view-selector {
-  font-size: 12px;
-  height: 30px;
-  display: flex;
-  overflow: hidden;
-  align-items: center;
-  border-radius: 2px;
-  background: #fff;
-}
-.vue-screener__view-selector__link {
-  text-decoration: none;
-  font-weight: 500;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  color: #000;
-}
-.vue-screener__view-selector__link.is-active {
-  background: #3f51b5;
-  color: #fff;
+  border-right: unset;
 }.vue-screener__search {
-  position: relative;
-}
-.vue-screener__search__input {
-  width: 300px;
-  padding: 0 84px 0 6px;
+  width: 200px;
+  padding: 0 4px;
   box-sizing: border-box;
   font-size: 14px !important;
   font-weight: normal !important;
-  height: 30px;
+  height: 26px;
   border: none;
   border-left: thin solid;
-  border-radius: 2px;
+  border-radius: 4px;
   border: 2px solid #fff;
 }
-.vue-screener__search__input--error {
+.vue-screener__search--error {
   border: 2px solid red;
   outline-color: red;
-}
-.vue-screener__search__options {
-  display: flex;
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.vue-screener__search__options-button {
-  border: none;
-  background: none;
-  padding: 0 3px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  height: 24px;
-  border-radius: 2px;
-  width: 24px;
-  margin-left: 2px;
-}
-.vue-screener__search__options-button--match-word {
-  text-decoration: underline;
-}
-.vue-screener__search__options-button:not(.vue-screener__search__options-button--active):hover {
-  background: rgba(0, 0, 0, 0.1);
-}
-.vue-screener__search__options-button--active {
-  color: #fff;
-  background: #3e51b5;
 }.vue-screener__pagination {
   display: flex;
+  justify-content: space-between;
 }
 .vue-screener__pagination__buttons {
   display: flex;
@@ -2984,16 +2932,124 @@ body {
   color: #000 !important;
 }
 .vue-screener__pagination__details {
-  margin-left: auto;
   white-space: nowrap;
 }
 .vue-screener__error-message {
   border: thin solid red;
   color: red;
 }
-.vue-screener {
+.vue-screener__dropdown {
+  position: relative;
+}
+.vue-screener__dropdown__dropdown-content {
+  transform-origin: top right;
+  position: absolute;
+  right: 0;
+  margin-top: 4px;
+  width: 100px;
+  background: #333333;
+  border-radius: 4px;
+  padding: 8px;
+  color: white;
+}
+.vue-screener__dropdown__dropdown-content-enter-active, .vue-screener__dropdown__dropdown-content-leave-active {
+  transition: all 0.2s;
+}
+.vue-screener__dropdown__dropdown-content-enter, .vue-screener__dropdown__dropdown-content-leave-to {
+  opacity: 0;
+  transform: translateY(-5px);
+}.vue-screener__view-selector {
+  font-size: 12px;
+  height: 20px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  border-radius: 2px;
+}
+.vue-screener__view-selector__link {
+  text-decoration: none;
+  font-weight: 500;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: #000;
+  width: 32px;
+  text-align: center;
+  justify-content: center;
+  background: #fff;
+}
+.vue-screener__view-selector__link:last-child {
+  border-radius: 0 4px 4px 0;
+}
+.vue-screener__view-selector__link.is-active, .vue-screener__view-selector__link:hover {
+  background: #3f51b5;
+  color: #fff;
+}.vue-screener__settings-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  background: transparent;
+  padding: 6px;
+  margin-left: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.vue-screener__settings-button--active, .vue-screener__settings-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.vue-screener__settings-button-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.vue-screener__settings-heading {
+  font-weight: 400;
+  margin: 0 0 6px 0;
+  font-size: 9px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.vue-screener__settings__options {
+  display: flex;
+  gap: 4px;
+}
+.vue-screener__settings__options-button {
+  border: none;
+  background: none;
+  padding: 0 3px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0 3px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border-radius: 4px;
+  height: 20px;
+  width: 26px;
+  background: white;
+  margin-bottom: 8px;
+}
+.vue-screener__settings__options-button--match-word {
+  text-decoration: underline;
+}
+.vue-screener__settings__options-button--active, .vue-screener__settings__options-button:hover {
+  color: #fff;
+  background: #3e51b5;
+}.vue-screener {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
+  border: thin solid black;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .vue-screener__header {
   display: flex;
@@ -3002,21 +3058,18 @@ body {
   color: white;
   background: black;
   font-weight: 400;
-  padding: 8px;
+  padding: 4px 4px 4px 8px;
 }
 .vue-screener__header-title {
   font-weight: 500;
   margin-right: auto;
 }
-.vue-screener__data-view-selector {
-  margin-left: auto;
-}
 .vue-screener__search {
   margin-left: 8px;
 }
+.vue-screener__main {
+  overflow-x: auto;
+}
 .vue-screener__footer {
-  border-bottom: thin solid;
-  border-left: thin solid;
-  border-right: thin solid;
   padding: 8px;
 }
