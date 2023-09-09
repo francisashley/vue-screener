@@ -437,8 +437,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     const {
       query = "",
       isValidQuery = true,
-      searchOptions = [],
-      classes = () => ({})
+      searchOptions = []
     } = __props;
     const history = ref([]);
     const historyIndex = ref(null);
