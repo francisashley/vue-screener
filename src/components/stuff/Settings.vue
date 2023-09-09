@@ -1,44 +1,41 @@
 <template>
-  <div class="vue-screener__settings">
-    <Dropdown>
-      <template #dropdown-button="{ show, toggle }">
+  <Dropdown class="vue-screener__settings">
+    <template #dropdown-button="{ show, toggle }">
+      <button
+        class="vue-screener__settings-button"
+        :class="[show && 'vue-screener__settings-button--active']"
+        @click="toggle"
+      >
+        <CogIcon />
+      </button>
+    </template>
+    <template #default>
+      <h3 class="vue-screener__settings-heading">Search</h3>
+      <div class="vue-screener__settings__options">
         <button
-          class="vue-screener__settings-button"
-          :class="[show && 'vue-screener__settings-button--active']"
-          @click="toggle"
+          v-for="(option, i) in getOptions"
+          :key="i"
+          class="vue-screener__settings__options-button"
+          :class="[
+            {
+              'vue-screener__settings__options-button--active': option.isActive,
+            },
+            'vue-screener__settings__options-button--' + option.id,
+          ]"
+          :title="option.title"
+          @click="toggleOption(option.id)"
         >
-          <CogIcon />
+          {{ option.text }}
         </button>
-      </template>
-      <template #default>
-        <h3 class="vue-screener__settings-heading">Search</h3>
-        <div class="vue-screener__settings__options">
-          <button
-            v-for="(option, i) in getOptions"
-            :key="i"
-            class="vue-screener__settings__options-button"
-            :class="[
-              {
-                'vue-screener__settings__options-button--active':
-                  option.isActive,
-              },
-              'vue-screener__settings__options-button--' + option.id,
-            ]"
-            :title="option.title"
-            @click="toggleOption(option.id)"
-          >
-            {{ option.text }}
-          </button>
-        </div>
-        <h3 class="vue-screener__settings-heading">Presentation</h3>
-        <ViewSelector
-          class="vue-screener__view-selector"
-          :active-format="activeFormat"
-          @select-format="emit('select-format', $event)"
-        />
-      </template>
-    </Dropdown>
-  </div>
+      </div>
+      <h3 class="vue-screener__settings-heading">Presentation</h3>
+      <ViewSelector
+        class="vue-screener__view-selector"
+        :active-format="activeFormat"
+        @select-format="emit('select-format', $event)"
+      />
+    </template>
+  </Dropdown>
 </template>
 
 <script lang="ts" setup>
