@@ -49,7 +49,6 @@
           isActive(page) && 'vue-screener__pagination__button--active',
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_PAGE_BUTTON,
-          !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
       >
         {{ page }}
