@@ -17,7 +17,7 @@
           @change-search-options="onChangeSearchOptions"
         />
       </header>
-      <main>
+      <main class="vue-screener__main">
         <TableView
           v-if="renderFormat === 'table'"
           :fields="getFields"
@@ -160,6 +160,9 @@ const onChangePage = (page: number) => {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
+  border: thin solid black;
+  border-radius: 8px;
+  overflow: hidden;
 
   &__header {
     display: flex;
@@ -169,7 +172,6 @@ const onChangePage = (page: number) => {
     background: black;
     font-weight: 400;
     padding: 4px 4px 4px 8px;
-    border-radius: 8px 8px 0 0;
   }
 
   &__header-title {
@@ -181,12 +183,12 @@ const onChangePage = (page: number) => {
     margin-left: 8px;
   }
 
+  &__main {
+    overflow-x: auto;
+  }
+
   &__footer {
-    border-bottom: thin solid;
-    border-left: thin solid;
-    border-right: thin solid;
     padding: 8px;
-    border-radius: 0 0 8px 8px;
   }
 }
 </style>

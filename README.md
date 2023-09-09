@@ -45,6 +45,9 @@ import 'vue-screener/style.css'
 .vue-screener__header
 .vue-screener__header-title
 
+// Main classes
+.vue-screener__main
+
 // Footer classes
 .vue-screener__footer
 

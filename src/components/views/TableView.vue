@@ -155,7 +155,7 @@ const onSort = (updatedSortField: string) => {
 .vue-screener__table-view {
   &__cell {
     border-bottom: thin solid black;
-    border-left: thin solid black;
+    border-right: thin solid black;
     padding: 2px 5px;
   }
 
@@ -169,7 +169,7 @@ const onSort = (updatedSortField: string) => {
   }
 
   &__cell--is-last {
-    border-right: thin solid black;
+    border-right: unset;
   }
 }
 </style>
