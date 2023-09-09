@@ -147,9 +147,16 @@ Add custom classes:
     "TABLE_VIEW_SORT_DESC": "...",
     "JSON_VIEW": "...",
     "PAGINATION": "...",
-    "PAGINATION_DETAILS": "...",
-    "PAGINATION_BUTTONS": "...",
-    "PAGINATION_BUTTONS_BUTTON": "...",
+    "PAGINATION_INFO": "...",
+    "PAGINATION_NAV": "...",
+    "PAGINATION_BUTTON": "...",
+    "PAGINATION_FIRST_BUTTON": "...",
+    "PAGINATION_PREV_BUTTON": "...",
+    "PAGINATION_PAGE_BUTTON": "...",
+    "PAGINATION_NEXT_BUTTON": "...",
+    "PAGINATION_LAST_BUTTON": "...",
+    "PAGINATION_PER_PAGE": "...",
+    "PAGINATION_PER_PAGE_INPUT": "...",
     "ERROR_MESSAGE": "...",
   }"
 />
@@ -213,11 +220,19 @@ Or style default classes:
 .vue-screener__sort-selector
 
 // Pagination classes
-.vue-screener__pagination__buttons
-.vue-screener__pagination__buttons-button
-.vue-screener__pagination__buttons-button a
-.vue-screener__pagination__buttons-button--active a
-.vue-screener__pagination__details
+.vue-screener__pagination__nav
+.vue-screener__pagination__button
+.vue-screener__pagination__button--first
+.vue-screener__pagination__button--prev
+.vue-screener__pagination__button--page
+.vue-screener__pagination__button--next
+.vue-screener__pagination__button--last
+.vue-screener__pagination__button--active
+.vue-screener__pagination__button--disabled
+.vue-screener__pagination__info
+.vue-screener__pagination__per-page
+.vue-screener__pagination__per-page-input
+
 
 // Error message classes
 .vue-screener__error-message

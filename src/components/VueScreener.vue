@@ -44,10 +44,11 @@
       <footer :class="['vue-screener__footer', classes.FOOTER]">
         <Pagination
           :total-items="getSearchedData.length"
-          :per-page="perPage"
+          :per-page="stagedPerPage"
           :current-page="stagedCurrentPage"
           :classes="classes"
           @change-page="onChangePage"
+          @change-per-page="onChangePerPage"
         />
       </footer>
     </template>
@@ -108,9 +109,18 @@ export type InlineClass =
   | "TABLE_VIEW_SORT_DESC"
   | "JSON_VIEW"
   | "PAGINATION"
-  | "PAGINATION_DETAILS"
-  | "PAGINATION_BUTTONS"
-  | "PAGINATION_BUTTONS_BUTTON"
+  | "PAGINATION_INFO"
+  | "PAGINATION_NAV"
+  | "PAGINATION_BUTTON"
+  | "PAGINATION_BUTTON--ACTIVE"
+  | "PAGINATION_BUTTON--DISABLED"
+  | "PAGINATION_FIRST_BUTTON"
+  | "PAGINATION_PREV_BUTTON"
+  | "PAGINATION_PAGE_BUTTON"
+  | "PAGINATION_NEXT_BUTTON"
+  | "PAGINATION_LAST_BUTTON"
+  | "PAGINATION_PER_PAGE"
+  | "PAGINATION_PER_PAGE_INPUT"
   | "ERROR_MESSAGE";
 
 type Props = {
@@ -135,6 +145,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const searchQuery = ref<string>("");
 const stagedCurrentPage = ref<number>(props.currentPage);
+const stagedPerPage = ref<number>(props.perPage);
 const renderFormat = ref<"table" | "raw">("table");
 const searchOptions = ref<SearchQueryOption[]>([]);
 const sortField = ref<string | null>(null);
@@ -225,7 +236,7 @@ const getPaginatedData = computed((): NormalisedRow[] => {
   return getPaginated({
     rows: getSortedData.value,
     page: stagedCurrentPage.value - 1,
-    perPage: props.perPage,
+    perPage: stagedPerPage.value,
     withPlaceholders: true,
   });
 });
@@ -245,6 +256,10 @@ const onSelectFormat = (format: "table" | "raw") => {
 
 const onChangePage = (page: number) => {
   stagedCurrentPage.value = page;
+};
+
+const onChangePerPage = (perPage: number) => {
+  stagedPerPage.value = perPage;
 };
 
 const handleSort = (updatedSortField: string) => {
