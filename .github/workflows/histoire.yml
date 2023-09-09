@@ -14,6 +14,8 @@ jobs:
           yarn story:build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
+        env:
+          HISTOIRE_BASE: vue-screener/
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: docs # The folder that the build-storybook script generates files.
