@@ -77,6 +77,7 @@
           !canNavigateLast && 'vue-screener__pagination__button--disabled',
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_LAST_BUTTON,
+          !canNavigateLast && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
       >
         Last
