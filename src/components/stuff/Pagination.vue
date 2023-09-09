@@ -52,6 +52,7 @@
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_PAGE_BUTTON,
           !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
+          isActive(page) && classes?.['PAGINATION_BUTTON--ACTIVE'],
         ]"
       >
         {{ page }}
