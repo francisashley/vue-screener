@@ -28,7 +28,7 @@ const { activeFormat = "table" } = defineProps<{
 
 const emit = defineEmits(["select-format"]);
 
-const onSelectFormat = (format: "raw" | "table") =>
+const onSelectFormat = (format: "table" | "raw") =>
   emit("select-format", format);
 </script>
 

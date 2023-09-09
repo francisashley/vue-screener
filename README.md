@@ -63,12 +63,20 @@ import 'vue-screener/style.css'
 .vue-screener__view-selector__link.is-active
 
 // Table view classes
-.vue-screener__table
-.vue-screener__table__thead
-.vue-screener__table__th
-.vue-screener__table__th--is-sortable
-.vue-screener__table__tr
-.vue-screener__table__td
+.vue-screener__table-view
+.vue-screener__table-view__cell
+.vue-screener__table-view__cell--is-header
+.vue-screener__table-view__cell--is-data-cell
+.vue-screener__table-view__cell--is-first
+.vue-screener__table-view__cell--is-last
+.vue-screener__table-view__cell--hasValue
+.vue-screener__table-view__cell--string
+.vue-screener__table-view__cell--number
+.vue-screener__table-view__cell--boolean
+.vue-screener__table-view__cell--symbol
+.vue-screener__table-view__cell--undefined
+.vue-screener__table-view__cell--object
+.vue-screener__table-view__cell--null
 
 // JSON view classes
 .vue-screener__json-view
