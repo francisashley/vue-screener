@@ -1,5 +1,4 @@
 import { escapeRegExp } from "./regex.utils";
-import getTypeOf from "./getTypeOf";
 import { isValidRegExp } from "../utils/regex.utils";
 
 export function isValidInput(data: unknown): boolean {
@@ -175,4 +174,38 @@ export function search(options: {
       return false;
     });
   });
+}
+
+type ReturnType =
+  | "string"
+  | "number"
+  | "boolean"
+  | "symbol"
+  | "undefined"
+  | "object"
+  | "null"
+  | "array"
+  | "object";
+
+export function getTypeOf(value: unknown): ReturnType {
+  if (typeof value === "string") {
+    return "string";
+  } else if (typeof value === "number") {
+    return "number";
+  } else if (typeof value === "boolean") {
+    return "boolean";
+  } else if (typeof value === "symbol") {
+    return "symbol";
+  } else if (typeof value === "undefined") {
+    return "undefined";
+  } else if (typeof value === "object") {
+    if (value === null) {
+      return "null";
+    } else if (Array.isArray(value)) {
+      return "array";
+    }
+    return "object";
+  }
+
+  throw `Could not establish type of \`${value}\``;
 }

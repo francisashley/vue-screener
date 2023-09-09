@@ -35,7 +35,7 @@ import { computed, ref } from "vue";
 import { NormalisedRow } from "../../utils/data.utils";
 import SortSelector from "../stuff/SortSelector.vue";
 import { orderBy } from "natural-orderby";
-import highlightText from "../../utils/highlightText";
+import { highlightText } from "../../utils/text.utils";
 
 const props = defineProps<{
   fields: string[];

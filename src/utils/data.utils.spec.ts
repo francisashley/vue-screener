@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import getTypeOf from "./getTypeOf";
+import { getTypeOf } from "./data.utils";
 
 test("Identifies boolean", () => {
   expect(getTypeOf(true)).toBe("boolean");
