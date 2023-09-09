@@ -233,6 +233,7 @@ const handleChangePerPage = (event: Event): void => {
   justify-content: space-between;
   align-items: center;
   white-space: nowrap;
+  color: #000;
 
   &__info {
     white-space: nowrap;
@@ -248,10 +249,6 @@ const handleChangePerPage = (event: Event): void => {
 
   &__button {
     margin: 0 10px 0 0 !important;
-  }
-
-  &__button--page {
-    color: #000;
   }
 
   &__button--active {
