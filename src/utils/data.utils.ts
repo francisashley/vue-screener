@@ -176,7 +176,7 @@ export function search(options: {
   });
 }
 
-type ReturnType =
+export type DataType =
   | "string"
   | "number"
   | "boolean"
@@ -187,7 +187,7 @@ type ReturnType =
   | "array"
   | "object";
 
-export function getTypeOf(value: unknown): ReturnType {
+export function getTypeOf(value: unknown): DataType {
   if (typeof value === "string") {
     return "string";
   } else if (typeof value === "number") {
