@@ -98,7 +98,7 @@ const toggleOption = (option: SearchQueryOption) => {
     border: 0;
     background: transparent;
     padding: 6px;
-    margin-left: 8px;
+    margin-left: 4px;
     cursor: pointer;
     border-radius: 4px;
 

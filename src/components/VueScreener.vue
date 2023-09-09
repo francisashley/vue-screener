@@ -168,7 +168,7 @@ const onChangePage = (page: number) => {
     color: white;
     background: black;
     font-weight: 400;
-    padding: 8px;
+    padding: 4px 4px 4px 8px;
     border-radius: 8px 8px 0 0;
   }
 
