@@ -587,7 +587,7 @@ const _hoisted_4 = ["disabled"];
 const _hoisted_5 = ["disabled"];
 const _hoisted_6 = ["value"];
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q;
   return openBlock(), createElementBlock(
     "div",
     {
@@ -697,7 +697,8 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button--last",
               !$setup.canNavigateLast && "vue-screener__pagination__button--disabled",
               (_m = $props.classes) == null ? void 0 : _m.PAGINATION_BUTTON,
-              (_n = $props.classes) == null ? void 0 : _n.PAGINATION_LAST_BUTTON
+              (_n = $props.classes) == null ? void 0 : _n.PAGINATION_LAST_BUTTON,
+              !$setup.canNavigateLast && ((_o = $props.classes) == null ? void 0 : _o["PAGINATION_BUTTON--DISABLED"])
             ])
           }, " Last ", 10, _hoisted_5)
         ],
@@ -709,7 +710,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
         {
           class: normalizeClass([
             "vue-screener__pagination__per-page",
-            (_o = $props.classes) == null ? void 0 : _o.PAGINATION_PER_PAGE
+            (_p = $props.classes) == null ? void 0 : _p.PAGINATION_PER_PAGE
           ])
         },
         [
@@ -721,7 +722,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             onInput: $setup.handleChangePerPage,
             class: normalizeClass([
               "vue-screener__pagination__per-page-input",
-              (_p = $props.classes) == null ? void 0 : _p.PAGINATION_PER_PAGE_INPUT
+              (_q = $props.classes) == null ? void 0 : _q.PAGINATION_PER_PAGE_INPUT
             ])
           }, null, 42, _hoisted_6)
         ],

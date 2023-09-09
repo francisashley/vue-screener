@@ -2937,6 +2937,7 @@ body {
   justify-content: space-between;
   align-items: center;
   white-space: nowrap;
+  color: #000;
 }
 .vue-screener__pagination__info {
   white-space: nowrap;
@@ -2950,9 +2951,6 @@ body {
 }
 .vue-screener__pagination__button {
   margin: 0 10px 0 0 !important;
-}
-.vue-screener__pagination__button--page {
-  color: #000;
 }
 .vue-screener__pagination__button--active {
   color: blue;
