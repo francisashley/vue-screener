@@ -2,7 +2,7 @@
   <section class="vue-screener">
     <template v-if="isValidInput">
       <header class="vue-screener__header">
-        <div class="vue-screener__header-title">Results</div>
+        <div class="vue-screener__header-title">{{ props.title }}</div>
         <VueScreenerSearch
           class="vue-screener__search"
           :query="searchQuery"
@@ -68,6 +68,7 @@ import { computed, ref } from "vue";
 
 type Props = {
   data?: unknown[];
+  title?: string;
   pick?: string[];
   exclude?: string[];
   perPage?: number;
@@ -76,6 +77,7 @@ type Props = {
 
 const props = withDefaults(defineProps<Props>(), {
   data: () => [],
+  title: "Results",
   pick: () => [],
   exclude: () => [],
   perPage: 15,

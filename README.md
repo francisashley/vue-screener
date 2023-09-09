@@ -18,7 +18,7 @@ yarn add vue-screener
 
 ## Basic usage
 
-```js
+```vue
 <template>
   <vue-screener
     :data="[
@@ -43,11 +43,20 @@ import 'vue-screener/style.css'
 
 ## Options
 
+Set the title:
+
+```vue
+<template>
+  <vue-screener title="Product data" />
+</template>
+```
+
 Pick fields (in order) to show:
 
-```js
+```vue
 <template>
   <vue-screener
+    :data="data"
     :pick="['price', 'product', 'technology']"
   />
 </template>
@@ -55,9 +64,10 @@ Pick fields (in order) to show:
 
 Exclude fields:
 
-```js
+```vue
 <template>
   <vue-screener
+    :data="data"
     :exclude="['price', 'product', 'technology']"
   />
 </template>
