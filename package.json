@@ -22,7 +22,7 @@
     "types": "vue-tsc",
     "preview": "vite preview",
     "story:dev": "histoire dev",
-    "story:build": "histoire build",
+    "story:build": "histoire build && touch ./docs/.nojekyll",
     "story:preview": "histoire preview",
     "prebuild": "rimraf ./dist",
     "prepublishOnly": "yarn build",
