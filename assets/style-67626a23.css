@@ -2881,41 +2881,21 @@ body {
   align-items: center;
   float: right;
   cursor: pointer;
-}.vue-screener__table-view {
-  width: 100%;
-  white-space: nowrap;
-  border-bottom: thin solid #000;
-  width: 100%;
-  white-space: nowrap;
-  border-collapse: collapse;
-}
-.vue-screener__table-view__thead {
-  font-weight: bold;
-}
-.vue-screener__table-view__th {
-  font-weight: bold;
-  width: 0.1%;
-  white-space: nowrap;
+}.vue-screener__table-view__cell {
+  border-bottom: thin solid black;
+  border-left: thin solid black;
   padding: 2px 5px;
-  height: 24px;
-  box-sizing: border-box;
-  text-align: left;
-  border: thin solid #000;
 }
-.vue-screener__table-view__th--is-sortable {
+.vue-screener__table-view__cell--is-header {
+  font-weight: bold;
+  white-space: nowrap;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
-  user-select: none;
 }
-.vue-screener__table-view__tr {
-  border: thin solid #000;
-}
-.vue-screener__table-view__td {
-  width: 0.1%;
-  white-space: nowrap;
-  padding: 2px 5px;
-  height: 24px;
-  box-sizing: border-box;
-  border: thin solid #000;
+.vue-screener__table-view__cell--is-last {
+  border-right: thin solid black;
 }.vue-screener__view-selector {
   font-size: 12px;
   height: 30px;
