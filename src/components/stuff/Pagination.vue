@@ -1,14 +1,9 @@
 <template>
   <div :class="['vue-screener__pagination', classes?.PAGINATION]">
-    <div
-      :class="[
-        'vue-screener__pagination__details',
-        classes?.PAGINATION_DETAILS,
-      ]"
-    >
+    <div :class="['vue-screener__pagination__info', classes?.PAGINATION_INFO]">
       <template v-if="!totalItems">Showing 0 results</template>
       <template v-else-if="lastIndexOfCurrentPage < perPage">
-        Showing {{ lastIndexOfCurrentPage }} of {{ totalItems }}
+        {{ lastIndexOfCurrentPage }} of {{ totalItems }}
       </template>
       <template v-else>
         Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
@@ -16,35 +11,98 @@
         {{ totalItems }}
       </template>
     </div>
-    <ul
-      :class="[
-        'vue-screener__pagination__buttons',
-        classes?.PAGINATION_BUTTONS,
-      ]"
-    >
-      <li
-        v-for="page in pages"
-        :key="page"
-        class="vue-screener__pagination__buttons-button"
+
+    <ul :class="['vue-screener__pagination__nav', classes?.PAGINATION_NAV]">
+      <button
+        :disabled="!canNavigateFirst"
+        @click="handleClickFirst"
         :class="[
-          isActive(page) && 'vue-screener__pagination__buttons-button--active',
-          classes?.PAGINATION_BUTTONS_BUTTON,
+          'vue-screener__pagination__button',
+          'vue-screener__pagination__button--first',
+          !canNavigateFirst && 'vue-screener__pagination__button--disabled',
+          classes?.PAGINATION_FIRST_BUTTON,
+          !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
       >
-        <a href="#" @click.prevent="selectPage(page)">{{ page }}</a>
-      </li>
+        First
+      </button>
+      <button
+        :disabled="!canNavigatePrev"
+        @click="handleClickPrev"
+        :class="[
+          'vue-screener__pagination__button',
+          'vue-screener__pagination__button--prev',
+          !canNavigatePrev && 'vue-screener__pagination__button--disabled',
+          classes?.PAGINATION_BUTTON,
+          classes?.PAGINATION_PREV_BUTTON,
+          !canNavigatePrev && classes?.['PAGINATION_BUTTON--DISABLED'],
+        ]"
+      >
+        Prev
+      </button>
+      <button
+        v-for="page in getPages"
+        :key="page"
+        @click="handleSelectPage(page)"
+        :class="[
+          'vue-screener__pagination__button',
+          'vue-screener__pagination__button--page',
+          !canNavigateFirst && 'vue-screener__pagination__button--disabled',
+          isActive(page) && 'vue-screener__pagination__button--active',
+          classes?.PAGINATION_BUTTON,
+          classes?.PAGINATION_PAGE_BUTTON,
+          !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
+        ]"
+      >
+        {{ page }}
+      </button>
+      <button
+        :disabled="!canNavigateNext"
+        @click="handleClickNext"
+        :class="[
+          'vue-screener__pagination__button',
+          'vue-screener__pagination__button--next',
+          !canNavigateNext && 'vue-screener__pagination__button--disabled',
+          classes?.PAGINATION_BUTTON,
+          classes?.PAGINATION_NEXT_BUTTON,
+          !canNavigateNext && classes?.['PAGINATION_BUTTON--DISABLED'],
+        ]"
+      >
+        Next
+      </button>
+      <button
+        :disabled="!canNavigateLast"
+        @click="handleClickLast"
+        :class="[
+          'vue-screener__pagination__button',
+          'vue-screener__pagination__button--last',
+          !canNavigateLast && 'vue-screener__pagination__button--disabled',
+          classes?.PAGINATION_BUTTON,
+          classes?.PAGINATION_LAST_BUTTON,
+        ]"
+      >
+        Last
+      </button>
     </ul>
-    <input
-      type="number"
-      :value="perPage"
-      min="1"
-      step="1"
-      @input="handleChangePerPage"
+
+    <div
       :class="[
-        'vue-screener__pagination__per-page-input',
-        classes?.PAGINATION_PER_PAGE_INPUT,
+        'vue-screener__pagination__per-page',
+        classes?.PAGINATION_PER_PAGE,
       ]"
-    />
+    >
+      <input
+        type="number"
+        :value="perPage"
+        min="1"
+        step="1"
+        @input="handleChangePerPage"
+        :class="[
+          'vue-screener__pagination__per-page-input',
+          classes?.PAGINATION_PER_PAGE_INPUT,
+        ]"
+      />
+    </div>
   </div>
 </template>
 
@@ -73,8 +131,37 @@ const totalPages = computed((): number => {
   return Math.ceil(props.totalItems / props.perPage) || 1;
 });
 
-const pages = computed((): number[] => {
-  return Array.from(new Array(totalPages.value + 1).keys()).slice(1);
+const getPages = computed(() => {
+  let pages = [props.currentPage - 1, props.currentPage, props.currentPage + 1];
+  pages = pages.filter((page) => page > 0);
+
+  if (pages.length < 3) {
+    pages.push(pages[pages.length - 1] + 1);
+  }
+
+  pages = pages.filter((page) => page <= totalPages.value);
+
+  if (pages.length < 3 && pages[0] > 1) {
+    pages.unshift(pages[0] - 1);
+  }
+
+  return pages;
+});
+
+const canNavigateFirst = computed(() => {
+  return props.currentPage > 1;
+});
+
+const canNavigatePrev = computed(() => {
+  return props.currentPage > 1;
+});
+
+const canNavigateNext = computed(() => {
+  return props.currentPage < totalPages.value;
+});
+
+const canNavigateLast = computed(() => {
+  return props.currentPage < totalPages.value;
 });
 
 const firstIndexOfCurrentPage = computed(() => {
@@ -108,12 +195,31 @@ const isActive = (page: number): boolean => {
 
 const ensureCurrentPageIsValid = (): void => {
   if (!currentPageIsInRange.value) {
-    selectPage(totalPages.value ? totalPages.value : 1);
+    handleSelectPage(totalPages.value ? totalPages.value : 1);
   }
 };
 
-const selectPage = (page: number): void => {
-  emit("change-page", page);
+const handleClickFirst = () => {
+  emit("change-page", 1);
+};
+
+const handleClickPrev = () => {
+  emit("change-page", canNavigatePrev.value ? props.currentPage - 1 : 1);
+};
+
+const handleClickNext = () => {
+  emit(
+    "change-page",
+    canNavigateNext.value ? props.currentPage + 1 : totalPages.value,
+  );
+};
+
+const handleClickLast = () => {
+  emit("change-page", totalPages.value);
+};
+
+const handleSelectPage = (targetPage: number) => {
+  emit("change-page", targetPage);
 };
 
 const handleChangePerPage = (event: Event): void => {
@@ -126,29 +232,37 @@ const handleChangePerPage = (event: Event): void => {
 .vue-screener__pagination {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
 
-  &__buttons {
+  &__info {
+    white-space: nowrap;
+    width: 150px;
+  }
+
+  &__nav {
     display: flex;
-    flex-wrap: wrap;
-    padding: 0 !important;
+    padding: 0 8px !important;
     margin: 0 !important;
     list-style-type: none;
   }
 
-  &__buttons-button {
+  &__button {
     margin: 0 10px 0 0 !important;
   }
 
-  &__buttons-button a {
-    text-decoration: none;
+  &__button--page {
+    color: #000;
   }
 
-  &__buttons-button--active a {
-    color: #000 !important;
+  &__button--active {
+    color: blue;
   }
 
-  &__details {
-    white-space: nowrap;
+  &__per-page {
+    width: 150px;
+    display: inline-flex;
+    justify-content: end;
   }
 
   &__per-page-input {
