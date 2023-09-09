@@ -145,7 +145,7 @@ function normalizeClass$1(value) {
   }
   return res.trim();
 }
-function normalizeProps(props) {
+function normalizeProps$1(props) {
   if (!props)
     return null;
   let { class: klass, style } = props;
@@ -11937,7 +11937,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
       "v-popper--shown": _ctx.slotData.isShown
     }])
   }, [
-    renderSlot$1(_ctx.$slots, "default", normalizeProps(guardReactiveProps$1(_ctx.slotData)))
+    renderSlot$1(_ctx.$slots, "default", normalizeProps$1(guardReactiveProps$1(_ctx.slotData)))
   ], 2);
 }
 var Popper$1 = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$3]]);
@@ -12775,6 +12775,18 @@ function normalizeClass(value) {
     }
   }
   return res.trim();
+}
+function normalizeProps(props) {
+  if (!props)
+    return null;
+  let { class: klass, style } = props;
+  if (klass && !isString$1(klass)) {
+    props.class = normalizeClass(klass);
+  }
+  if (style) {
+    props.style = normalizeStyle(style);
+  }
+  return props;
 }
 const HTML_TAGS = "html,body,base,head,link,meta,style,title,address,article,aside,footer,header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot";
 const SVG_TAGS = "svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,feDistantLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,text,textPath,title,tspan,unknown,use,view";
@@ -26906,6 +26918,40 @@ const omitInheritStoryProps = [
   "slots",
   "lastSelectedVariant"
 ];
+const clickEventType = function() {
+  return document.ontouchstart !== null ? "click" : "touchstart";
+};
+const UNIQUE_ID = "__vue_click_away__";
+const onMounted = function(el2, binding, vnode) {
+  onUnmounted(el2);
+  let vm = vnode.context;
+  let callback = binding.value;
+  let nextTick2 = false;
+  setTimeout(function() {
+    nextTick2 = true;
+  }, 0);
+  el2[UNIQUE_ID] = function(event) {
+    if ((!el2 || !el2.contains(event.target)) && callback && nextTick2 && typeof callback === "function") {
+      return callback.call(vm, event);
+    }
+  };
+  document.addEventListener(clickEventType(), el2[UNIQUE_ID], false);
+};
+const onUnmounted = function(el2) {
+  document.removeEventListener(clickEventType(), el2[UNIQUE_ID], false);
+  delete el2[UNIQUE_ID];
+};
+const onUpdated = function(el2, binding, vnode) {
+  if (binding.value === binding.oldValue) {
+    return;
+  }
+  onMounted(el2, binding, vnode);
+};
+const directive = {
+  mounted: onMounted,
+  updated: onUpdated,
+  unmounted: onUnmounted
+};
 var compareNumbers = function compareNumbers2(numberA, numberB) {
   if (numberA < numberB) {
     return -1;
@@ -27201,40 +27247,6 @@ function orderBy(collection, identifiers, orders) {
   var validatedOrders = getOrders(orders);
   return baseOrderBy(collection, validatedIdentifiers, validatedOrders);
 }
-const clickEventType = function() {
-  return document.ontouchstart !== null ? "click" : "touchstart";
-};
-const UNIQUE_ID = "__vue_click_away__";
-const onMounted = function(el2, binding, vnode) {
-  onUnmounted(el2);
-  let vm = vnode.context;
-  let callback = binding.value;
-  let nextTick2 = false;
-  setTimeout(function() {
-    nextTick2 = true;
-  }, 0);
-  el2[UNIQUE_ID] = function(event) {
-    if ((!el2 || !el2.contains(event.target)) && callback && nextTick2 && typeof callback === "function") {
-      return callback.call(vm, event);
-    }
-  };
-  document.addEventListener(clickEventType(), el2[UNIQUE_ID], false);
-};
-const onUnmounted = function(el2) {
-  document.removeEventListener(clickEventType(), el2[UNIQUE_ID], false);
-  delete el2[UNIQUE_ID];
-};
-const onUpdated = function(el2, binding, vnode) {
-  if (binding.value === binding.oldValue) {
-    return;
-  }
-  onMounted(el2, binding, vnode);
-};
-const directive = {
-  mounted: onMounted,
-  updated: onUpdated,
-  unmounted: onUnmounted
-};
 const ga = {
   name: "HstButton"
 }, Uo = /* @__PURE__ */ defineComponent$1({
@@ -48931,27 +48943,30 @@ export {
   onUnmounted$2 as a7,
   VTooltip as a8,
   createStaticVNode as a9,
-  Fragment as aA,
-  renderList as aB,
-  normalizeStyle as aC,
-  normalizeClass as aD,
-  onMounted$1 as aE,
-  watch as aF,
-  createTextVNode as aG,
-  withModifiers as aH,
-  directive as aI,
-  withDirectives as aJ,
-  renderSlot as aK,
-  createVNode as aL,
-  withCtx as aM,
-  Transition as aN,
-  reactive as aO,
-  resolveComponent as aP,
-  useFocus as aQ,
-  refDebounced as aR,
-  flexsearch_bundleExports as aS,
-  client$1 as aT,
-  client as aU,
+  createTextVNode as aA,
+  createElementBlock as aB,
+  toDisplayString as aC,
+  createCommentVNode as aD,
+  renderSlot as aE,
+  normalizeClass as aF,
+  computed as aG,
+  Fragment as aH,
+  renderList as aI,
+  normalizeStyle as aJ,
+  ref as aK,
+  onMounted$1 as aL,
+  withModifiers as aM,
+  directive as aN,
+  withDirectives as aO,
+  Transition as aP,
+  orderBy as aQ,
+  normalizeProps as aR,
+  guardReactiveProps as aS,
+  useFocus as aT,
+  refDebounced as aU,
+  flexsearch_bundleExports as aV,
+  client$1 as aW,
+  client as aX,
   toRaw$1 as aa,
   Dropdown as ab,
   clone as ac,
@@ -48969,15 +48984,15 @@ export {
   scrollIntoView as ao,
   useMediaQuery as ap,
   defineComponent as aq,
-  openBlock as ar,
-  createElementBlock as as,
-  toDisplayString as at,
-  createBaseVNode as au,
+  reactive as ar,
+  watch as as,
+  resolveComponent as at,
+  openBlock as au,
   createBlock as av,
-  createCommentVNode as aw,
-  ref as ax,
-  computed as ay,
-  orderBy as az,
+  withCtx as aw,
+  createVNode as ax,
+  mergeProps as ay,
+  createBaseVNode as az,
   createElementBlock$1 as b,
   computed$2 as c,
   defineComponent$1 as d,

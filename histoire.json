@@ -1,7 +1,29 @@
 {
   "stories": [
     {
-      "id": "src-usage-story-vue",
+      "id": "src-stories-custom-cells-story-vue",
+      "title": "custom-cells",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-stories-custom-cells-story-vue-0",
+          "title": "default"
+        }
+      ],
+      "relativePath": "src/stories/custom-cells.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "custom-cells"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-usage-story-vue",
       "title": "usage",
       "layout": {
         "type": "single",
@@ -10,11 +32,11 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-usage-story-vue-0",
+          "id": "src-stories-usage-story-vue-0",
           "title": "default"
         }
       ],
-      "relativePath": "src/usage.story.vue",
+      "relativePath": "src/stories/usage.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
         "usage"

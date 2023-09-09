@@ -1,4 +1,4 @@
-import { Q as defineAsyncComponent, R as createRouter, S as createWebHistory, U as createWebHashHistory, V as useDark, W as useToggle, k as watch, X as markRaw, E as reactive, d as defineComponent, r as ref, Y as watchEffect, o as openBlock, q as createBlock, Z as mergeProps, _ as resolveDynamicComponent, h as createCommentVNode } from "./vendor-be3c8bde.js";
+import { Q as defineAsyncComponent, R as createRouter, S as createWebHistory, U as createWebHashHistory, V as useDark, W as useToggle, k as watch, X as markRaw, E as reactive, d as defineComponent, r as ref, Y as watchEffect, o as openBlock, q as createBlock, Z as mergeProps, _ as resolveDynamicComponent, h as createCommentVNode } from "./vendor-91e65c6f.js";
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
   return "/vue-screener/" + dep;
@@ -50,9 +50,13 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   });
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./usage.story-cbb68f57.js"), true ? ["assets/usage.story-cbb68f57.js","assets/vendor-be3c8bde.js"] : void 0));
-let files = [{ "id": "src-usage-story-vue", "path": ["usage"], "filePath": "src/usage.story.vue", "story": { "id": "src-usage-story-vue", "title": "usage", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-usage-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 0, component: Comp0, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-usage-story-vue-21868ffa.js"), true ? [] : void 0) }];
-let tree = [{ "title": "usage", "index": 0 }];
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./custom-cells.story-5d92ad03.js"), true ? ["assets/custom-cells.story-5d92ad03.js","assets/vendor-91e65c6f.js","assets/primitives-data-7f39503b.js"] : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./usage.story-d12b0696.js"), true ? ["assets/usage.story-d12b0696.js","assets/vendor-91e65c6f.js","assets/primitives-data-7f39503b.js"] : void 0));
+let files = [
+  { "id": "src-stories-custom-cells-story-vue", "path": ["custom-cells"], "filePath": "src/stories/custom-cells.story.vue", "story": { "id": "src-stories-custom-cells-story-vue", "title": "custom-cells", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-custom-cells-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 0, component: Comp0, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-custom-cells-story-vue-56ca9899.js"), true ? [] : void 0) },
+  { "id": "src-stories-usage-story-vue", "path": ["usage"], "filePath": "src/stories/usage.story.vue", "story": { "id": "src-stories-usage-story-vue", "title": "usage", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-usage-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 1, component: Comp1, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-usage-story-vue-d3f0ef14.js"), true ? [] : void 0) }
+];
+let tree = [{ "title": "custom-cells", "index": 0 }, { "title": "usage", "index": 1 }];
 const config = { "plugins": [{ "name": "builtin:tailwind-tokens" }, { "name": "builtin:vanilla-support", "supportPlugin": { "id": "vanilla", "moduleName": "/home/runner/work/vue-screener/vue-screener/node_modules/histoire/dist/node/builtin-plugins/vanilla-support", "setupFn": "setupVanilla" } }, { "name": "@histoire/plugin-vue", "supportPlugin": { "id": "vue3", "moduleName": "@histoire/plugin-vue", "setupFn": "setupVue3", "importStoriesPrepend": "import { defineAsyncComponent as defineAsyncComponentVue3 } from 'vue'" }, "commands": [{ "id": "histoire:plugin-vue:generate-story", "label": "Generate Vue 3 story from component", "icon": "https://vuejs.org/logo.svg", "searchText": "generate create", "clientSetupFile": "@histoire/plugin-vue/dist/commands/generate-story.client.js" }] }], "outDir": "/home/runner/work/vue-screener/vue-screener/docs", "storyMatch": ["**/*.story.vue", "**/*.story.svelte"], "storyIgnored": ["**/node_modules/**", "**/dist/**"], "supportMatch": [{ "id": "vanilla", "patterns": ["**/*.js"], "pluginIds": ["vanilla"] }, { "id": "vue", "patterns": ["**/*.vue"], "pluginIds": ["vue3"] }], "tree": { "file": "title", "order": "asc" }, "theme": { "title": "Histoire", "colors": { "primary": { "50": "#ecfdf5", "100": "#d1fae5", "200": "#a7f3d0", "300": "#6ee7b7", "400": "#34d399", "500": "#10b981", "600": "#059669", "700": "#047857", "800": "#065f46", "900": "#064e3b" }, "gray": { "50": "#fafafa", "100": "#f4f4f5", "200": "#e4e4e7", "300": "#d4d4d8", "400": "#a1a1aa", "500": "#71717a", "600": "#52525b", "700": "#3f3f46", "750": "#323238", "800": "#27272a", "850": "#1f1f21", "900": "#18181b", "950": "#101012" } }, "defaultColorScheme": "auto", "storeColorScheme": true, "darkClass": "dark" }, "responsivePresets": [{ "label": "Mobile (Small)", "width": 320, "height": 560 }, { "label": "Mobile (Medium)", "width": 360, "height": 640 }, { "label": "Mobile (Large)", "width": 414, "height": 896 }, { "label": "Tablet", "width": 768, "height": 1024 }, { "label": "Laptop (Small)", "width": 1024, "height": null }, { "label": "Laptop (Large)", "width": 1366, "height": null }, { "label": "Desktop", "width": 1920, "height": null }, { "label": "4K", "width": 3840, "height": null }], "backgroundPresets": [{ "label": "Transparent", "color": "transparent", "contrastColor": "#333" }, { "label": "White", "color": "#fff", "contrastColor": "#333" }, { "label": "Light gray", "color": "#aaa", "contrastColor": "#000" }, { "label": "Dark gray", "color": "#333", "contrastColor": "#fff" }, { "label": "Black", "color": "#000", "contrastColor": "#eee" }], "sandboxDarkClass": "dark", "routerMode": "hash", "build": { "excludeFromVendorsChunk": [] }, "viteIgnorePlugins": [] };
 const logos = {};
 const histoireConfig = config;
@@ -73,12 +77,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-d2b25c1d.js"), true ? ["assets/HomeView.vue-d2b25c1d.js","assets/vendor-be3c8bde.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-ec5b08df.js"), true ? ["assets/HomeView.vue-ec5b08df.js","assets/vendor-91e65c6f.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-decd5cf9.js"), true ? ["assets/StoryView.vue-decd5cf9.js","assets/vendor-be3c8bde.js","assets/MobileOverlay.vue2-76924c2a.js","assets/BaseEmpty.vue-01811997.js","assets/state-c60f2061.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-5b25e529.js"), true ? ["assets/StoryView.vue-5b25e529.js","assets/vendor-91e65c6f.js","assets/MobileOverlay.vue2-89eab5db.js","assets/BaseEmpty.vue-5f0a86aa.js","assets/state-21882865.js"] : void 0)
     }
   ]
 });
@@ -168,8 +172,8 @@ function mapVariant(variant, existingVariant) {
   return result;
 }
 const clientSupportPlugins = {
-  "vanilla": () => __vitePreload(() => import("./vendor-be3c8bde.js").then((n) => n.aT), true ? [] : void 0),
-  "vue3": () => __vitePreload(() => import("./vendor-be3c8bde.js").then((n) => n.aU), true ? [] : void 0)
+  "vanilla": () => __vitePreload(() => import("./vendor-91e65c6f.js").then((n) => n.aW), true ? [] : void 0),
+  "vue3": () => __vitePreload(() => import("./vendor-91e65c6f.js").then((n) => n.aX), true ? [] : void 0)
 };
 const __default__ = {
   inheritAttrs: false
