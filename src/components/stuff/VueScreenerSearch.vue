@@ -20,7 +20,6 @@ const {
   query = "",
   isValidQuery = true,
   searchOptions = [],
-  classes = () => ({}),
 } = defineProps<{
   query: string;
   isValidQuery: boolean;
