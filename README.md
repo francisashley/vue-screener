@@ -150,6 +150,7 @@ Add custom classes:
     "PAGINATION_DETAILS": "...",
     "PAGINATION_BUTTONS": "...",
     "PAGINATION_BUTTONS_BUTTON": "...",
+    "PAGINATION_PER_PAGE_INPUT": "...",
     "ERROR_MESSAGE": "...",
   }"
 />
@@ -218,6 +219,7 @@ Or style default classes:
 .vue-screener__pagination__buttons-button a
 .vue-screener__pagination__buttons-button--active a
 .vue-screener__pagination__details
+.vue-screener__pagination__per-page-input
 
 // Error message classes
 .vue-screener__error-message

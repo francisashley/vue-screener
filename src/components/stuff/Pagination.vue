@@ -34,6 +34,17 @@
         <a href="#" @click.prevent="selectPage(page)">{{ page }}</a>
       </li>
     </ul>
+    <input
+      type="number"
+      :value="perPage"
+      min="1"
+      step="1"
+      @input="handleChangePerPage"
+      :class="[
+        'vue-screener__pagination__per-page-input',
+        classes?.PAGINATION_PER_PAGE_INPUT,
+      ]"
+    />
   </div>
 </template>
 
@@ -52,10 +63,11 @@ const props = withDefaults(
     currentPage: 1,
     totalItems: 0,
     perPage: 25,
+    classes: () => ({}),
   },
 );
 
-const emit = defineEmits(["change-page"]);
+const emit = defineEmits(["change-page", "change-per-page"]);
 
 const totalPages = computed((): number => {
   return Math.ceil(props.totalItems / props.perPage) || 1;
@@ -103,6 +115,11 @@ const ensureCurrentPageIsValid = (): void => {
 const selectPage = (page: number): void => {
   emit("change-page", page);
 };
+
+const handleChangePerPage = (event: Event): void => {
+  const perPage = Number((event.target as HTMLInputElement).value);
+  emit("change-per-page", perPage);
+};
 </script>
 
 <style lang="scss">
@@ -132,6 +149,10 @@ const selectPage = (page: number): void => {
 
   &__details {
     white-space: nowrap;
+  }
+
+  &__per-page-input {
+    width: 60px;
   }
 }
 </style>
