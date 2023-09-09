@@ -23,6 +23,9 @@
           :fields="getFields"
           :rows="getPaginatedData"
           :highlight="searchQuery"
+          :sort-direction="sortDirection"
+          :sort-field="sortField"
+          @on-sort="handleSort"
         />
         <JsonView v-else :data="getPaginatedData" />
       </main>
@@ -65,6 +68,7 @@ import {
   getPaginated,
 } from "../utils/data.utils";
 import { computed, ref } from "vue";
+import { orderBy } from "natural-orderby";
 
 type Props = {
   data?: unknown[];
@@ -88,6 +92,8 @@ const searchQuery = ref<string>("");
 const stagedCurrentPage = ref<number>(props.currentPage);
 const renderFormat = ref<"table" | "raw">("table");
 const searchOptions = ref<SearchQueryOption[]>([]);
+const sortField = ref<string | null>(null);
+const sortDirection = ref<"asc" | "desc">("desc");
 
 const isValidInput = computed((): boolean => {
   return isValidInputTool(props.data);
@@ -139,9 +145,40 @@ const getSearchedData = computed((): NormalisedRow[] => {
   });
 });
 
+const getSortedData = computed((): NormalisedRow[] => {
+  const sortedRows = searchQuery.value
+    ? getSearchedData.value
+    : getNormalisedData.value;
+
+  const sortIndex =
+    sortedRows[0]?.findIndex((column) => column.key === sortField.value) ??
+    null;
+
+  if (sortField.value && sortDirection.value) {
+    const nullRows = sortedRows.filter(
+      (row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined,
+    );
+
+    const nonNullRows = sortedRows.filter(
+      (row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined,
+    );
+
+    return [
+      ...orderBy(
+        nonNullRows,
+        [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
+        [sortDirection.value],
+      ),
+      ...nullRows,
+    ];
+  } else {
+    return sortedRows;
+  }
+});
+
 const getPaginatedData = computed((): NormalisedRow[] => {
   return getPaginated({
-    rows: searchQuery.value ? getSearchedData.value : getNormalisedData.value,
+    rows: getSortedData.value,
     page: stagedCurrentPage.value - 1,
     perPage: props.perPage,
     withPlaceholders: true,
@@ -163,6 +200,13 @@ const onSelectFormat = (format: "table" | "raw") => {
 
 const onChangePage = (page: number) => {
   stagedCurrentPage.value = page;
+};
+
+const handleSort = (updatedSortField: string) => {
+  if (sortField.value === updatedSortField) {
+    sortDirection.value = sortDirection.value === "desc" ? "asc" : "desc";
+  }
+  sortField.value = updatedSortField;
 };
 </script>
 

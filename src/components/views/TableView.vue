@@ -6,7 +6,7 @@
         v-if="cell.isHeader"
         :cell="cell"
         :sort-direction="getSortDirection(cell.field)"
-        @on-sort="handleSort"
+        @on-sort="emit('on-sort', $event)"
       />
       <ValueCell :key="i" v-if="cell.isValue" :cell="cell" />
     </template>
@@ -14,8 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
-import { orderBy } from "natural-orderby";
+import { computed } from "vue";
 import { highlightText } from "../../utils/text.utils";
 import { NormalisedRow } from "../../utils/data.utils";
 import HeaderCell from "./TableViewHeaderCell.vue";
@@ -26,39 +25,11 @@ const props = defineProps<{
   fields: string[];
   rows: NormalisedRow[];
   highlight: string;
+  sortField: null | string;
+  sortDirection: null | "asc" | "desc";
 }>();
 
-const sortField = ref<string | null>(null);
-const sortDirection = ref<"asc" | "desc">("desc");
-
-const getSortedRows = computed((): NormalisedRow[] => {
-  const sortedRows = props.rows;
-
-  const sortIndex =
-    sortedRows[0]?.findIndex((column) => column.key === sortField.value) ??
-    null;
-
-  if (sortField.value && sortDirection.value) {
-    const nullRows = sortedRows.filter(
-      (row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined,
-    );
-
-    const nonNullRows = sortedRows.filter(
-      (row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined,
-    );
-
-    return [
-      ...orderBy(
-        nonNullRows,
-        [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
-        [sortDirection.value],
-      ),
-      ...nullRows,
-    ];
-  } else {
-    return sortedRows;
-  }
-});
+const emit = defineEmits(["on-sort"]);
 
 const getCells = computed(() => {
   const fields: Cell[] = [];
@@ -74,7 +45,7 @@ const getCells = computed(() => {
     });
   });
 
-  getSortedRows.value.forEach((row) => {
+  props.rows.forEach((row) => {
     row?.forEach((col, i) => {
       fields.push({
         field: col.key,
@@ -105,17 +76,10 @@ const getHighlighted = (value: unknown, highlight: string) => {
 };
 
 const getSortDirection = (field: string): "asc" | "desc" | null => {
-  if (sortField.value === field) {
-    return sortDirection.value;
+  if (props.sortField === field) {
+    return props.sortDirection;
   }
   return null;
-};
-
-const handleSort = (updatedSortField: string) => {
-  if (sortField.value === updatedSortField) {
-    sortDirection.value = sortDirection.value === "desc" ? "asc" : "desc";
-  }
-  sortField.value = updatedSortField;
 };
 </script>
 
