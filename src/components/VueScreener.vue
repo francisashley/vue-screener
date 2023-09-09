@@ -59,6 +59,7 @@ import {
   isValidInput as isValidInputTool,
   normaliseInput,
   pickFields,
+  excludeFields,
   getFields as getFieldsTool,
   search,
   getPaginated,
@@ -68,6 +69,7 @@ import { computed, ref } from "vue";
 type Props = {
   data?: unknown[];
   pick?: string[];
+  exclude?: string[];
   perPage?: number;
   currentPage?: number;
 };
@@ -75,6 +77,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   data: () => [],
   pick: () => [],
+  exclude: () => [],
   perPage: 15,
   currentPage: 1,
 });
@@ -93,12 +96,16 @@ const isRegExFriendlySearchQuery = computed((): boolean => {
 });
 
 const getNormalisedData = computed((): NormalisedRow[] => {
-  const normalisedData = isValidInputTool(props.data)
+  let normalisedData = isValidInputTool(props.data)
     ? normaliseInput(props.data as UnknownObject[])
     : [];
 
   if (props.pick.length > 0) {
-    return pickFields(normalisedData, props.pick);
+    normalisedData = pickFields(normalisedData, props.pick);
+  }
+
+  if (props.exclude.length > 0) {
+    normalisedData = excludeFields(normalisedData, props.exclude);
   }
 
   return normalisedData;

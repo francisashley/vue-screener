@@ -52,6 +52,17 @@ Pick fields (in order) to show:
   />
 </template>
 ```
+
+Exclude fields:
+
+```js
+<template>
+  <vue-screener
+    :exclude="['price', 'product', 'technology']"
+  />
+</template>
+```
+
 ## Theming
 
 ```

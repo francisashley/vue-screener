@@ -76,16 +76,21 @@ export function getFields(rows: NormalisedRow[]): string[] {
   return Array.from(fields);
 }
 
-type ExcludesFalse = <T>(x: T | false) => x is T;
-
 export function pickFields(
   rows: NormalisedRow[],
   pickFields: string[],
 ): NormalisedRow[] {
   return rows.map((row) => {
-    return pickFields
-      .map((pickField) => row.find((field) => field.key === pickField) || false)
-      .filter(Boolean as unknown as ExcludesFalse);
+    return row.filter((field) => pickFields.includes(field.key));
+  });
+}
+
+export function excludeFields(
+  rows: NormalisedRow[],
+  excludeFields: string[],
+): NormalisedRow[] {
+  return rows.map((row) => {
+    return row.filter((field) => !excludeFields.includes(field.key));
   });
 }
 
