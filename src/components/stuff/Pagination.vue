@@ -6,7 +6,7 @@
         {{ lastIndexOfCurrentPage }} of {{ totalItems }}
       </template>
       <template v-else>
-        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
+        {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
         of
         {{ totalItems }}
       </template>
