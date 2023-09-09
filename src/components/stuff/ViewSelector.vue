@@ -33,30 +33,36 @@ const onSelectFormat = (format: "table" | "raw") =>
 </script>
 
 <style lang="scss">
-.vue-screener {
-  &__view-selector {
-    font-size: 12px;
-    height: 30px;
-    display: flex;
-    overflow: hidden;
-    align-items: center;
-    border-radius: 2px;
-    background: #fff;
-  }
+.vue-screener__view-selector {
+  font-size: 12px;
+  height: 20px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  border-radius: 2px;
 
-  &__view-selector__link {
+  &__link {
     text-decoration: none;
     font-weight: 500;
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 12px;
+    padding: 0 8px;
     color: #000;
-  }
+    width: 32px;
+    text-align: center;
+    justify-content: center;
+    background: #fff;
 
-  &__view-selector__link.is-active {
-    background: #3f51b5;
-    color: #fff;
+    &:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+
+    &.is-active,
+    &:hover {
+      background: #3f51b5;
+      color: #fff;
+    }
   }
 }
 </style>

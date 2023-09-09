@@ -3,21 +3,21 @@
     <template v-if="isValidInput">
       <header class="vue-screener__header">
         <div class="vue-screener__header-title">Results</div>
-        <ViewSelector
-          class="vue-screener__view-selector"
-          :active-format="renderFormat"
-          @select-format="onSelectFormat"
-        />
         <VueScreenerSearch
           class="vue-screener__search"
           :query="searchQuery"
           :is-valid-query="isRegExFriendlySearchQuery"
-          :active-options="searchQueryOptions"
+          :search-options="searchOptions"
           @search="onSearch"
-          @update-options="onUpdateOptions"
+        />
+        <Settings
+          :active-format="renderFormat"
+          @select-format="onSelectFormat"
+          :search-options="searchOptions"
+          @change-search-options="onChangeSearchOptions"
         />
       </header>
-      <main>
+      <main class="vue-screener__main">
         <TableView
           v-if="renderFormat === 'table'"
           :fields="getFields"
@@ -46,10 +46,10 @@
 <script lang="ts" setup>
 import JsonView from "./views/JsonView.vue";
 import TableView from "./views/TableView.vue";
-import ViewSelector from "./stuff/ViewSelector.vue";
 import VueScreenerSearch, { SearchQueryOption } from "./VueScreenerSearch.vue";
 import Pagination from "./stuff/Pagination.vue";
 import ErrorMessage from "./stuff/ErrorMessage.vue";
+import Settings from "./stuff/Settings.vue";
 import { isValidRegExp } from "../utils/regex.utils";
 import {
   NormalisedRow,
@@ -73,14 +73,14 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   data: () => [],
   pickFields: () => [],
-  perPage: 25,
+  perPage: 15,
   currentPage: 1,
 });
 
 const searchQuery = ref<string>("");
 const stagedCurrentPage = ref<number>(props.currentPage);
 const renderFormat = ref<"table" | "raw">("table");
-const searchQueryOptions = ref<SearchQueryOption[]>([]);
+const searchOptions = ref<SearchQueryOption[]>([]);
 
 const isValidInput = computed((): boolean => {
   return isValidInputTool(props.data);
@@ -107,15 +107,15 @@ const getFields = computed((): string[] => {
 });
 
 const shouldUseRegEx = computed((): boolean => {
-  return searchQueryOptions.value.includes("use-regex");
+  return searchOptions.value.includes("use-regex");
 });
 
 const shouldMatchCase = computed((): boolean => {
-  return searchQueryOptions.value.includes("match-case");
+  return searchOptions.value.includes("match-case");
 });
 
 const shouldMatchWord = computed((): boolean => {
-  return searchQueryOptions.value.includes("match-word");
+  return searchOptions.value.includes("match-word");
 });
 
 const getSearchedData = computed((): NormalisedRow[] => {
@@ -141,8 +141,8 @@ const onSearch = (query: string) => {
   searchQuery.value = query;
 };
 
-const onUpdateOptions = (options: SearchQueryOption[]) => {
-  searchQueryOptions.value = options;
+const onChangeSearchOptions = (options: SearchQueryOption[]) => {
+  searchOptions.value = options;
   onSearch(searchQuery.value);
 };
 
@@ -160,6 +160,9 @@ const onChangePage = (page: number) => {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
+  border: thin solid black;
+  border-radius: 8px;
+  overflow: hidden;
 
   &__header {
     display: flex;
@@ -168,7 +171,7 @@ const onChangePage = (page: number) => {
     color: white;
     background: black;
     font-weight: 400;
-    padding: 8px;
+    padding: 4px 4px 4px 8px;
   }
 
   &__header-title {
@@ -176,18 +179,15 @@ const onChangePage = (page: number) => {
     margin-right: auto;
   }
 
-  &__data-view-selector {
-    margin-left: auto;
-  }
-
   &__search {
     margin-left: 8px;
   }
 
+  &__main {
+    overflow-x: auto;
+  }
+
   &__footer {
-    border-bottom: thin solid;
-    border-left: thin solid;
-    border-right: thin solid;
     padding: 8px;
   }
 }

@@ -45,17 +45,25 @@ import 'vue-screener/style.css'
 .vue-screener__header
 .vue-screener__header-title
 
+// Main classes
+.vue-screener__main
+
 // Footer classes
 .vue-screener__footer
 
-// Search input classes
+// Search input class
 .vue-screener__search
-.vue-screener__search__input
-.vue-screener__search__input--error
-.vue-screener__search__options
-.vue-screener__search__options-button
-.vue-screener__search__options-button--active
-.vue-screener__search__options-button--match-word
+.vue-screener__search--error
+
+// Options input class
+.vue-screener__settings__options
+.vue-screener__settings__options-button
+.vue-screener__settings__options-button--active
+.vue-screener__settings__options-button--match-word
+
+// Dropdown classes
+.vue-screener__dropdown
+.vue-screener__dropdown__dropdown-content
 
 // View selector classes
 .vue-screener__view-selector
