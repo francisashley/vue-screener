@@ -17,9 +17,9 @@
           'vue-screener__pagination__button',
           'vue-screener__pagination__button--first',
           !canNavigateFirst && 'vue-screener__pagination__button--disabled',
+          !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_FIRST_BUTTON,
-          !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
       >
         First
@@ -31,9 +31,9 @@
           'vue-screener__pagination__button',
           'vue-screener__pagination__button--prev',
           !canNavigatePrev && 'vue-screener__pagination__button--disabled',
+          !canNavigatePrev && classes?.['PAGINATION_BUTTON--DISABLED'],
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_PREV_BUTTON,
-          !canNavigatePrev && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
       >
         Prev
@@ -46,6 +46,7 @@
           'vue-screener__pagination__button',
           'vue-screener__pagination__button--page',
           isActive(page) && 'vue-screener__pagination__button--active',
+          isActive(page) && classes?.['PAGINATION_BUTTON--ACTIVE'],
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_PAGE_BUTTON,
         ]"
@@ -59,9 +60,9 @@
           'vue-screener__pagination__button',
           'vue-screener__pagination__button--next',
           !canNavigateNext && 'vue-screener__pagination__button--disabled',
+          !canNavigateNext && classes?.['PAGINATION_BUTTON--DISABLED'],
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_NEXT_BUTTON,
-          !canNavigateNext && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
       >
         Next
@@ -73,9 +74,9 @@
           'vue-screener__pagination__button',
           'vue-screener__pagination__button--last',
           !canNavigateLast && 'vue-screener__pagination__button--disabled',
+          !canNavigateLast && classes?.['PAGINATION_BUTTON--DISABLED'],
           classes?.PAGINATION_BUTTON,
           classes?.PAGINATION_LAST_BUTTON,
-          !canNavigateLast && classes?.['PAGINATION_BUTTON--DISABLED'],
         ]"
       >
         Last
@@ -256,7 +257,7 @@ const handleChangePerPage = (event: Event): void => {
   &__per-page {
     width: 150px;
     display: inline-flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   &__per-page-input {
