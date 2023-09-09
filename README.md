@@ -73,7 +73,7 @@ Exclude fields:
 </template>
 ```
 
-Add a sticky column at the start for putting stuff in.
+Add a sticky column at the end to put stuff in.
 
 ```vue
 <template>
