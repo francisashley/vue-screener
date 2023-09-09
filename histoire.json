@@ -23,6 +23,28 @@
       "markdownFile": null
     },
     {
+      "id": "src-stories-sticky-actions-story-vue",
+      "title": "sticky-actions",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-stories-sticky-actions-story-vue-0",
+          "title": "default"
+        }
+      ],
+      "relativePath": "src/stories/sticky-actions.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "sticky-actions"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-stories-usage-story-vue",
       "title": "usage",
       "layout": {

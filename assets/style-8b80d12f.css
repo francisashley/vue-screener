@@ -2891,6 +2891,13 @@ body {
 }
 .vue-screener__table-view__cell--is-last {
   border-right: unset;
+}
+.vue-screener__table-view__cell--is-sticky-action {
+  position: sticky;
+  background: white;
+  right: 0;
+  border-left: thin solid black;
+  margin-left: -1px;
 }.vue-screener__table-view__cell--is-header {
   font-weight: bold;
   white-space: nowrap;
@@ -2958,7 +2965,7 @@ body {
 .vue-screener__pagination__per-page {
   width: 150px;
   display: inline-flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .vue-screener__pagination__per-page-input {
   width: 60px;

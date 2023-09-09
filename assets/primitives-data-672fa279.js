@@ -1,4 +1,4 @@
-import { aq as defineComponent, au as openBlock, aB as createElementBlock, aC as toDisplayString, az as createBaseVNode, av as createBlock, aD as normalizeClass, aE as createCommentVNode, aF as renderSlot, aw as withCtx, aG as computed, aH as Fragment, aI as renderList, aJ as normalizeStyle, aK as ref, aL as onMounted, as as watch, aA as createTextVNode, aM as directive, aN as withDirectives, ax as createVNode, aO as Transition, aP as withModifiers, aQ as orderBy, aR as normalizeProps, aS as guardReactiveProps } from "./vendor-68d73671.js";
+import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, az as createBaseVNode, av as createBlock, aF as normalizeClass, aG as createCommentVNode, aH as renderSlot, aw as withCtx, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, ax as createVNode, aM as ref, aN as onMounted, as as watch, aA as createTextVNode, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as orderBy, aB as normalizeProps, aC as guardReactiveProps } from "./vendor-e4b58c02.js";
 const JsonView_vue_vue_type_style_index_0_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -142,7 +142,7 @@ const SortSelector_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "SortSelector",
   props: {
-    sortDirection: { type: [null, String], required: true },
+    sortDirection: { type: [null, String], required: false },
     classes: { type: Object, required: false }
   },
   setup(__props, { expose: __expose }) {
@@ -202,6 +202,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
         $props.cell.isFirst && "vue-screener__table-view__cell--is-first",
         $props.cell.isLast && "vue-screener__table-view__cell--is-last",
         $props.cell.hasValue && "vue-screener__table-view__cell--hasValue",
+        $props.cell.isStickyAction && "vue-screener__table-view__cell--is-sticky-action",
         $props.cell.type === "string" && "vue-screener__table-view__cell--string",
         $props.cell.type === "number" && "vue-screener__table-view__cell--number",
         $props.cell.type === "boolean" && "vue-screener__table-view__cell--boolean",
@@ -230,7 +231,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "TableViewHeaderCell",
   props: {
     cell: { type: Object, required: true },
-    sortDirection: { type: [null, String], required: true },
+    sortDirection: { type: [null, String], required: false },
     classes: { type: Object, required: false }
   },
   emits: ["on-sort"],
@@ -247,11 +248,12 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$7 = ["innerHTML"];
 function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a;
+  var _a, _b;
   return openBlock(), createBlock($setup["TableCell"], {
     class: normalizeClass([
       "vue-screener__table-view__cell--is-header",
-      (_a = $props.classes) == null ? void 0 : _a.TABLE_VIEW_HEADER_CELL
+      (_a = $props.classes) == null ? void 0 : _a.TABLE_VIEW_HEADER_CELL,
+      $props.cell.isStickyAction && ((_b = $props.classes) == null ? void 0 : _b.TABLE_VIEW_STICKY_HEADER_CELL)
     ]),
     cell: $props.cell,
     classes: $props.classes,
@@ -289,9 +291,14 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   }
 });
 function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  var _a, _b;
   return openBlock(), createBlock($setup["TableCell"], {
     cell: $props.cell,
-    class: "vue-screener__table-view__cell--is-value",
+    class: normalizeClass([
+      "vue-screener__table-view__cell--is-value",
+      (_a = $props.classes) == null ? void 0 : _a.TABLE_VIEW_VALUE_CELL,
+      $props.cell.isStickyAction && ((_b = $props.classes) == null ? void 0 : _b.TABLE_VIEW_STICKY_VALUE_CELL)
+    ]),
     classes: $props.classes
   }, {
     default: withCtx(() => [
@@ -299,7 +306,7 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     ]),
     _: 3
     /* FORWARDED */
-  }, 8, ["cell", "classes"]);
+  }, 8, ["cell", "class", "classes"]);
 }
 _sfc_main$9.__file = "src/components/views/TableViewValueCell.vue";
 const ValueCell = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/TableViewValueCell.vue"]]);
@@ -312,7 +319,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     highlight: { type: String, required: true },
     sortField: { type: [null, String], required: true },
     sortDirection: { type: [null, String], required: true },
-    classes: { type: Object, required: false }
+    classes: { type: Object, required: false },
+    includeStickyActions: { type: Boolean, required: false }
   },
   emits: ["on-sort"],
   setup(__props, { expose: __expose, emit }) {
@@ -326,10 +334,20 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           value: field,
           isHeader: true,
           isFirst: i === 0,
-          isLast: i === props.fields.length - 1,
+          isLast: !props.includeStickyActions && i === props.fields.length - 1,
           type: "string"
         });
       });
+      if (props.includeStickyActions) {
+        fields.push({
+          field: "",
+          value: "",
+          isHeader: true,
+          isLast: true,
+          isStickyAction: true,
+          type: "string"
+        });
+      }
       props.rows.forEach((row) => {
         row == null ? void 0 : row.forEach((col, i) => {
           fields.push({
@@ -337,17 +355,32 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
             isValue: true,
             value: col.hasValue ? getHighlighted(col.value, props.highlight) : "",
             isFirst: i === 0,
-            isLast: i === row.length - 1,
-            type: col.type
+            isLast: !props.includeStickyActions && i === row.length - 1,
+            type: col.type,
+            row
           });
         });
+        if (props.includeStickyActions) {
+          fields.push({
+            field: "",
+            value: "",
+            isValue: true,
+            isLast: true,
+            isStickyAction: true,
+            type: "string",
+            row
+          });
+        }
       });
       return fields;
     });
     const tableStyle = computed(() => {
+      let cols = props.fields.reduce((acc) => acc + " 1fr", "");
+      if (props.includeStickyActions)
+        cols += " 1fr";
       return {
         display: "grid",
-        "grid-template-columns": props.fields.reduce((acc) => acc + " 1fr", "")
+        "grid-template-columns": cols
       };
     });
     const getHighlighted = (value, highlight) => {
@@ -384,29 +417,62 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
             Fragment,
             null,
             [
-              cell.isHeader ? renderSlot(_ctx.$slots, "header-cell", {
-                key: i,
-                cell,
-                sortDirection: $setup.getSortDirection(cell.field),
-                onOnSort: _cache[0] || (_cache[0] = ($event) => $setup.emit("on-sort", $event))
-              }, () => [
-                (openBlock(), createBlock($setup["HeaderCell"], {
-                  key: i,
-                  cell,
-                  "sort-direction": $setup.getSortDirection(cell.field),
-                  classes: $props.classes,
-                  onOnSort: _cache[1] || (_cache[1] = ($event) => $setup.emit("on-sort", $event))
-                }, null, 8, ["cell", "sort-direction", "classes"]))
-              ]) : cell.isValue ? renderSlot(_ctx.$slots, "value-cell", {
-                key: i,
-                cell
-              }, () => [
-                (openBlock(), createBlock($setup["ValueCell"], {
-                  key: i,
-                  cell,
-                  classes: $props.classes
-                }, null, 8, ["cell", "classes"]))
-              ]) : createCommentVNode("v-if", true)
+              cell.isHeader ? (openBlock(), createElementBlock(
+                Fragment,
+                { key: 0 },
+                [
+                  cell.isStickyAction ? renderSlot(_ctx.$slots, "sticky-actions-head", {
+                    key: "sticky-actions-head-" + i,
+                    cell
+                  }, () => [
+                    createVNode($setup["HeaderCell"], {
+                      cell,
+                      classes: $props.classes
+                    }, null, 8, ["cell", "classes"])
+                  ]) : renderSlot(_ctx.$slots, "header-cell", {
+                    key: "col-" + i,
+                    cell,
+                    sortDirection: $setup.getSortDirection(cell.field),
+                    onOnSort: _cache[0] || (_cache[0] = ($event) => $setup.emit("on-sort", $event))
+                  }, () => [
+                    (openBlock(), createBlock($setup["HeaderCell"], {
+                      key: i,
+                      cell,
+                      "sort-direction": $setup.getSortDirection(cell.field),
+                      classes: $props.classes,
+                      onOnSort: _cache[1] || (_cache[1] = ($event) => $setup.emit("on-sort", $event))
+                    }, null, 8, ["cell", "sort-direction", "classes"]))
+                  ])
+                ],
+                64
+                /* STABLE_FRAGMENT */
+              )) : cell.isValue ? (openBlock(), createElementBlock(
+                Fragment,
+                { key: 1 },
+                [
+                  cell.isStickyAction ? renderSlot(_ctx.$slots, "sticky-actions-value", {
+                    key: "sticky-actions-value-" + i,
+                    cell
+                  }, () => [
+                    (openBlock(), createBlock($setup["ValueCell"], {
+                      key: i,
+                      cell,
+                      classes: $props.classes
+                    }, null, 8, ["cell", "classes"]))
+                  ]) : renderSlot(_ctx.$slots, "value-cell", {
+                    key: i,
+                    cell
+                  }, () => [
+                    (openBlock(), createBlock($setup["ValueCell"], {
+                      key: i,
+                      cell,
+                      classes: $props.classes
+                    }, null, 8, ["cell", "classes"]))
+                  ])
+                ],
+                64
+                /* STABLE_FRAGMENT */
+              )) : createCommentVNode("v-if", true)
             ],
             64
             /* STABLE_FRAGMENT */
@@ -638,9 +704,9 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--first",
               !$setup.canNavigateFirst && "vue-screener__pagination__button--disabled",
-              (_d = $props.classes) == null ? void 0 : _d.PAGINATION_BUTTON,
-              (_e = $props.classes) == null ? void 0 : _e.PAGINATION_FIRST_BUTTON,
-              !$setup.canNavigateFirst && ((_f = $props.classes) == null ? void 0 : _f["PAGINATION_BUTTON--DISABLED"])
+              !$setup.canNavigateFirst && ((_d = $props.classes) == null ? void 0 : _d["PAGINATION_BUTTON--DISABLED"]),
+              (_e = $props.classes) == null ? void 0 : _e.PAGINATION_BUTTON,
+              (_f = $props.classes) == null ? void 0 : _f.PAGINATION_FIRST_BUTTON
             ])
           }, " First ", 10, _hoisted_1$5),
           createBaseVNode("button", {
@@ -650,9 +716,9 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--prev",
               !$setup.canNavigatePrev && "vue-screener__pagination__button--disabled",
-              (_g = $props.classes) == null ? void 0 : _g.PAGINATION_BUTTON,
-              (_h = $props.classes) == null ? void 0 : _h.PAGINATION_PREV_BUTTON,
-              !$setup.canNavigatePrev && ((_i = $props.classes) == null ? void 0 : _i["PAGINATION_BUTTON--DISABLED"])
+              !$setup.canNavigatePrev && ((_g = $props.classes) == null ? void 0 : _g["PAGINATION_BUTTON--DISABLED"]),
+              (_h = $props.classes) == null ? void 0 : _h.PAGINATION_BUTTON,
+              (_i = $props.classes) == null ? void 0 : _i.PAGINATION_PREV_BUTTON
             ])
           }, " Prev ", 10, _hoisted_2$3),
           (openBlock(true), createElementBlock(
@@ -666,11 +732,10 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
                 class: normalizeClass([
                   "vue-screener__pagination__button",
                   "vue-screener__pagination__button--page",
-                  !$setup.canNavigateFirst && "vue-screener__pagination__button--disabled",
                   $setup.isActive(page) && "vue-screener__pagination__button--active",
-                  (_a2 = $props.classes) == null ? void 0 : _a2.PAGINATION_BUTTON,
-                  (_b2 = $props.classes) == null ? void 0 : _b2.PAGINATION_PAGE_BUTTON,
-                  !$setup.canNavigateFirst && ((_c2 = $props.classes) == null ? void 0 : _c2["PAGINATION_BUTTON--DISABLED"])
+                  $setup.isActive(page) && ((_a2 = $props.classes) == null ? void 0 : _a2["PAGINATION_BUTTON--ACTIVE"]),
+                  (_b2 = $props.classes) == null ? void 0 : _b2.PAGINATION_BUTTON,
+                  (_c2 = $props.classes) == null ? void 0 : _c2.PAGINATION_PAGE_BUTTON
                 ])
               }, toDisplayString(page), 11, _hoisted_3$2);
             }),
@@ -684,9 +749,9 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--next",
               !$setup.canNavigateNext && "vue-screener__pagination__button--disabled",
-              (_j = $props.classes) == null ? void 0 : _j.PAGINATION_BUTTON,
-              (_k = $props.classes) == null ? void 0 : _k.PAGINATION_NEXT_BUTTON,
-              !$setup.canNavigateNext && ((_l = $props.classes) == null ? void 0 : _l["PAGINATION_BUTTON--DISABLED"])
+              !$setup.canNavigateNext && ((_j = $props.classes) == null ? void 0 : _j["PAGINATION_BUTTON--DISABLED"]),
+              (_k = $props.classes) == null ? void 0 : _k.PAGINATION_BUTTON,
+              (_l = $props.classes) == null ? void 0 : _l.PAGINATION_NEXT_BUTTON
             ])
           }, " Next ", 10, _hoisted_4),
           createBaseVNode("button", {
@@ -696,9 +761,9 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
               "vue-screener__pagination__button",
               "vue-screener__pagination__button--last",
               !$setup.canNavigateLast && "vue-screener__pagination__button--disabled",
-              (_m = $props.classes) == null ? void 0 : _m.PAGINATION_BUTTON,
-              (_n = $props.classes) == null ? void 0 : _n.PAGINATION_LAST_BUTTON,
-              !$setup.canNavigateLast && ((_o = $props.classes) == null ? void 0 : _o["PAGINATION_BUTTON--DISABLED"])
+              !$setup.canNavigateLast && ((_m = $props.classes) == null ? void 0 : _m["PAGINATION_BUTTON--DISABLED"]),
+              (_n = $props.classes) == null ? void 0 : _n.PAGINATION_BUTTON,
+              (_o = $props.classes) == null ? void 0 : _o.PAGINATION_LAST_BUTTON
             ])
           }, " Last ", 10, _hoisted_5)
         ],
@@ -1138,7 +1203,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     exclude: { type: Array, required: false, default: () => [] },
     perPage: { type: Number, required: false, default: 15 },
     currentPage: { type: Number, required: false, default: 1 },
-    classes: { type: Object, required: false, default: () => ({}) }
+    classes: { type: Object, required: false, default: () => ({}) },
+    includeStickyActions: { type: Boolean, required: false, default: false }
   },
   setup(__props, { expose: __expose }) {
     __expose();
@@ -1307,6 +1373,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 "sort-direction": $setup.sortDirection,
                 "sort-field": $setup.sortField,
                 classes: $props.classes,
+                "include-sticky-actions": $props.includeStickyActions,
                 onOnSort: $setup.handleSort
               }, {
                 "header-cell": withCtx((cellPops) => [
@@ -1315,9 +1382,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 "value-cell": withCtx((cellPops) => [
                   renderSlot(_ctx.$slots, "value-cell", normalizeProps(guardReactiveProps(cellPops)))
                 ]),
+                "sticky-actions-head": withCtx((cellPops) => [
+                  renderSlot(_ctx.$slots, "sticky-actions-head", normalizeProps(guardReactiveProps(cellPops)))
+                ]),
+                "sticky-actions-value": withCtx((cellPops) => [
+                  renderSlot(_ctx.$slots, "sticky-actions-value", normalizeProps(guardReactiveProps(cellPops)))
+                ]),
                 _: 3
                 /* FORWARDED */
-              }, 8, ["fields", "rows", "highlight", "sort-direction", "sort-field", "classes"])) : (openBlock(), createBlock($setup["JsonView"], {
+              }, 8, ["fields", "rows", "highlight", "sort-direction", "sort-field", "classes", "include-sticky-actions"])) : (openBlock(), createBlock($setup["JsonView"], {
                 key: 1,
                 data: $setup.getPaginatedData,
                 class: normalizeClass($props.classes.JSON_VIEW)
