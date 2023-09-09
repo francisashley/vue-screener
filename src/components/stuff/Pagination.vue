@@ -2,9 +2,6 @@
   <div :class="['vue-screener__pagination', classes?.PAGINATION]">
     <div :class="['vue-screener__pagination__info', classes?.PAGINATION_INFO]">
       <template v-if="!totalItems">Showing 0 results</template>
-      <template v-else-if="lastIndexOfCurrentPage < perPage">
-        {{ lastIndexOfCurrentPage }} of {{ totalItems }}
-      </template>
       <template v-else>
         Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
         of
