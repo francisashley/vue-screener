@@ -1,0 +1,27 @@
+{
+  "stories": [
+    {
+      "id": "src-usage-story-vue",
+      "title": "usage",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-usage-story-vue-0",
+          "title": "default"
+        }
+      ],
+      "relativePath": "src/usage.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "usage"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    }
+  ],
+  "markdownFiles": []
+}
