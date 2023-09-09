@@ -2935,25 +2935,35 @@ body {
 }.vue-screener__pagination {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
 }
-.vue-screener__pagination__buttons {
+.vue-screener__pagination__info {
+  white-space: nowrap;
+  width: 150px;
+}
+.vue-screener__pagination__nav {
   display: flex;
-  flex-wrap: wrap;
-  padding: 0 !important;
+  padding: 0 8px !important;
   margin: 0 !important;
   list-style-type: none;
 }
-.vue-screener__pagination__buttons-button {
+.vue-screener__pagination__button {
   margin: 0 10px 0 0 !important;
 }
-.vue-screener__pagination__buttons-button a {
-  text-decoration: none;
+.vue-screener__pagination__button--page {
+  color: #000;
 }
-.vue-screener__pagination__buttons-button--active a {
-  color: #000 !important;
+.vue-screener__pagination__button--active {
+  color: blue;
 }
-.vue-screener__pagination__details {
-  white-space: nowrap;
+.vue-screener__pagination__per-page {
+  width: 150px;
+  display: inline-flex;
+  justify-content: end;
+}
+.vue-screener__pagination__per-page-input {
+  width: 60px;
 }
 .vue-screener__error-message {
   border: thin solid red;

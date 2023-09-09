@@ -1,4 +1,4 @@
-import { aq as defineComponent, au as openBlock, aB as createElementBlock, aC as toDisplayString, az as createBaseVNode, av as createBlock, aD as normalizeClass, aE as createCommentVNode, aF as renderSlot, aw as withCtx, aG as computed, aH as Fragment, aI as renderList, aJ as normalizeStyle, aK as ref, aL as onMounted, as as watch, aA as createTextVNode, aM as withModifiers, aN as directive, aO as withDirectives, ax as createVNode, aP as Transition, aQ as orderBy, aR as normalizeProps, aS as guardReactiveProps } from "./vendor-9ac4e630.js";
+import { aq as defineComponent, au as openBlock, aB as createElementBlock, aC as toDisplayString, az as createBaseVNode, av as createBlock, aD as normalizeClass, aE as createCommentVNode, aF as renderSlot, aw as withCtx, aG as computed, aH as Fragment, aI as renderList, aJ as normalizeStyle, aK as ref, aL as onMounted, as as watch, aA as createTextVNode, aM as directive, aN as withDirectives, ax as createVNode, aO as Transition, aP as withModifiers, aQ as orderBy, aR as normalizeProps, aS as guardReactiveProps } from "./vendor-68d73671.js";
 const JsonView_vue_vue_type_style_index_0_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -59,7 +59,7 @@ const _hoisted_1$b = {
   viewBox: "0 0 320 512",
   style: { "height": "1rem", "width": "1rem" }
 };
-const _hoisted_2$5 = /* @__PURE__ */ createBaseVNode(
+const _hoisted_2$6 = /* @__PURE__ */ createBaseVNode(
   "path",
   {
     fill: "currentColor",
@@ -70,11 +70,11 @@ const _hoisted_2$5 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$4 = [
-  _hoisted_2$5
+const _hoisted_3$5 = [
+  _hoisted_2$6
 ];
 function _sfc_render$f(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$b, _hoisted_3$4);
+  return openBlock(), createElementBlock("svg", _hoisted_1$b, _hoisted_3$5);
 }
 _sfc_main$f.__file = "src/components/icons/Sort.vue";
 const SortIcon = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/Sort.vue"]]);
@@ -89,7 +89,7 @@ const _hoisted_1$a = {
   viewBox: "0 0 320 512",
   style: { "height": "1rem", "width": "1rem" }
 };
-const _hoisted_2$4 = /* @__PURE__ */ createBaseVNode(
+const _hoisted_2$5 = /* @__PURE__ */ createBaseVNode(
   "path",
   {
     fill: "currentColor",
@@ -100,11 +100,11 @@ const _hoisted_2$4 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$3 = [
-  _hoisted_2$4
+const _hoisted_3$4 = [
+  _hoisted_2$5
 ];
 function _sfc_render$e(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$a, _hoisted_3$3);
+  return openBlock(), createElementBlock("svg", _hoisted_1$a, _hoisted_3$4);
 }
 _sfc_main$e.__file = "src/components/icons/SortUp.vue";
 const SortUpIcon = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortUp.vue"]]);
@@ -119,7 +119,7 @@ const _hoisted_1$9 = {
   viewBox: "0 0 320 512",
   style: { "height": "1rem", "width": "1rem" }
 };
-const _hoisted_2$3 = /* @__PURE__ */ createBaseVNode(
+const _hoisted_2$4 = /* @__PURE__ */ createBaseVNode(
   "path",
   {
     fill: "currentColor",
@@ -130,11 +130,11 @@ const _hoisted_2$3 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$2 = [
-  _hoisted_2$3
+const _hoisted_3$3 = [
+  _hoisted_2$4
 ];
 function _sfc_render$d(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$2);
+  return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$3);
 }
 _sfc_main$d.__file = "src/components/icons/SortDown.vue";
 const SortDownIcon = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortDown.vue"]]);
@@ -494,17 +494,38 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     currentPage: { type: Number, required: false, default: 1 },
     totalItems: { type: Number, required: false, default: 0 },
     perPage: { type: Number, required: false, default: 25 },
-    classes: { type: Object, required: false }
+    classes: { type: Object, required: false, default: () => ({}) }
   },
-  emits: ["change-page"],
+  emits: ["change-page", "change-per-page"],
   setup(__props, { expose: __expose, emit }) {
     __expose();
     const props = __props;
     const totalPages = computed(() => {
       return Math.ceil(props.totalItems / props.perPage) || 1;
     });
-    const pages = computed(() => {
-      return Array.from(new Array(totalPages.value + 1).keys()).slice(1);
+    const getPages = computed(() => {
+      let pages = [props.currentPage - 1, props.currentPage, props.currentPage + 1];
+      pages = pages.filter((page) => page > 0);
+      if (pages.length < 3) {
+        pages.push(pages[pages.length - 1] + 1);
+      }
+      pages = pages.filter((page) => page <= totalPages.value);
+      if (pages.length < 3 && pages[0] > 1) {
+        pages.unshift(pages[0] - 1);
+      }
+      return pages;
+    });
+    const canNavigateFirst = computed(() => {
+      return props.currentPage > 1;
+    });
+    const canNavigatePrev = computed(() => {
+      return props.currentPage > 1;
+    });
+    const canNavigateNext = computed(() => {
+      return props.currentPage < totalPages.value;
+    });
+    const canNavigateLast = computed(() => {
+      return props.currentPage < totalPages.value;
     });
     const firstIndexOfCurrentPage = computed(() => {
       return props.currentPage * props.perPage - props.perPage + 1;
@@ -529,20 +550,44 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
     const ensureCurrentPageIsValid = () => {
       if (!currentPageIsInRange.value) {
-        selectPage(totalPages.value ? totalPages.value : 1);
+        handleSelectPage(totalPages.value ? totalPages.value : 1);
       }
     };
-    const selectPage = (page) => {
-      emit("change-page", page);
+    const handleClickFirst = () => {
+      emit("change-page", 1);
     };
-    const __returned__ = { props, emit, totalPages, pages, firstIndexOfCurrentPage, lastIndexOfCurrentPage, currentPageIsInRange, isActive, ensureCurrentPageIsValid, selectPage };
+    const handleClickPrev = () => {
+      emit("change-page", canNavigatePrev.value ? props.currentPage - 1 : 1);
+    };
+    const handleClickNext = () => {
+      emit(
+        "change-page",
+        canNavigateNext.value ? props.currentPage + 1 : totalPages.value
+      );
+    };
+    const handleClickLast = () => {
+      emit("change-page", totalPages.value);
+    };
+    const handleSelectPage = (targetPage) => {
+      emit("change-page", targetPage);
+    };
+    const handleChangePerPage = (event) => {
+      const perPage = Number(event.target.value);
+      emit("change-per-page", perPage);
+    };
+    const __returned__ = { props, emit, totalPages, getPages, canNavigateFirst, canNavigatePrev, canNavigateNext, canNavigateLast, firstIndexOfCurrentPage, lastIndexOfCurrentPage, currentPageIsInRange, isActive, ensureCurrentPageIsValid, handleClickFirst, handleClickPrev, handleClickNext, handleClickLast, handleSelectPage, handleChangePerPage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const _hoisted_1$5 = ["onClick"];
+const _hoisted_1$5 = ["disabled"];
+const _hoisted_2$3 = ["disabled"];
+const _hoisted_3$2 = ["onClick"];
+const _hoisted_4 = ["disabled"];
+const _hoisted_5 = ["disabled"];
+const _hoisted_6 = ["value"];
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  var _a, _b, _c;
+  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o;
   return openBlock(), createElementBlock(
     "div",
     {
@@ -552,10 +597,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
       createBaseVNode(
         "div",
         {
-          class: normalizeClass([
-            "vue-screener__pagination__details",
-            (_b = $props.classes) == null ? void 0 : _b.PAGINATION_DETAILS
-          ])
+          class: normalizeClass(["vue-screener__pagination__info", (_b = $props.classes) == null ? void 0 : _b.PAGINATION_INFO])
         },
         [
           !$props.totalItems ? (openBlock(), createElementBlock(
@@ -571,7 +613,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
             { key: 1 },
             [
               createTextVNode(
-                " Showing " + toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
+                toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
                 1
                 /* TEXT */
               )
@@ -598,39 +640,101 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
       createBaseVNode(
         "ul",
         {
-          class: normalizeClass([
-            "vue-screener__pagination__buttons",
-            (_c = $props.classes) == null ? void 0 : _c.PAGINATION_BUTTONS
-          ])
+          class: normalizeClass(["vue-screener__pagination__nav", (_c = $props.classes) == null ? void 0 : _c.PAGINATION_NAV])
         },
         [
+          createBaseVNode("button", {
+            disabled: !$setup.canNavigateFirst,
+            onClick: $setup.handleClickFirst,
+            class: normalizeClass([
+              "vue-screener__pagination__button",
+              "vue-screener__pagination__button--first",
+              !$setup.canNavigateFirst && "vue-screener__pagination__button--disabled",
+              (_d = $props.classes) == null ? void 0 : _d.PAGINATION_FIRST_BUTTON,
+              !$setup.canNavigateFirst && ((_e = $props.classes) == null ? void 0 : _e["PAGINATION_BUTTON--DISABLED"])
+            ])
+          }, " First ", 10, _hoisted_1$5),
+          createBaseVNode("button", {
+            disabled: !$setup.canNavigatePrev,
+            onClick: $setup.handleClickPrev,
+            class: normalizeClass([
+              "vue-screener__pagination__button",
+              "vue-screener__pagination__button--prev",
+              !$setup.canNavigatePrev && "vue-screener__pagination__button--disabled",
+              (_f = $props.classes) == null ? void 0 : _f.PAGINATION_BUTTON,
+              (_g = $props.classes) == null ? void 0 : _g.PAGINATION_PREV_BUTTON,
+              !$setup.canNavigatePrev && ((_h = $props.classes) == null ? void 0 : _h["PAGINATION_BUTTON--DISABLED"])
+            ])
+          }, " Prev ", 10, _hoisted_2$3),
           (openBlock(true), createElementBlock(
             Fragment,
             null,
-            renderList($setup.pages, (page) => {
-              var _a2;
-              return openBlock(), createElementBlock(
-                "li",
-                {
-                  key: page,
-                  class: normalizeClass(["vue-screener__pagination__buttons-button", [
-                    $setup.isActive(page) && "vue-screener__pagination__buttons-button--active",
-                    (_a2 = $props.classes) == null ? void 0 : _a2.PAGINATION_BUTTONS_BUTTON
-                  ]])
-                },
-                [
-                  createBaseVNode("a", {
-                    href: "#",
-                    onClick: withModifiers(($event) => $setup.selectPage(page), ["prevent"])
-                  }, toDisplayString(page), 9, _hoisted_1$5)
-                ],
-                2
-                /* CLASS */
-              );
+            renderList($setup.getPages, (page) => {
+              var _a2, _b2, _c2;
+              return openBlock(), createElementBlock("button", {
+                key: page,
+                onClick: ($event) => $setup.handleSelectPage(page),
+                class: normalizeClass([
+                  "vue-screener__pagination__button",
+                  "vue-screener__pagination__button--page",
+                  !$setup.canNavigateFirst && "vue-screener__pagination__button--disabled",
+                  $setup.isActive(page) && "vue-screener__pagination__button--active",
+                  (_a2 = $props.classes) == null ? void 0 : _a2.PAGINATION_BUTTON,
+                  (_b2 = $props.classes) == null ? void 0 : _b2.PAGINATION_PAGE_BUTTON,
+                  !$setup.canNavigateFirst && ((_c2 = $props.classes) == null ? void 0 : _c2["PAGINATION_BUTTON--DISABLED"])
+                ])
+              }, toDisplayString(page), 11, _hoisted_3$2);
             }),
             128
             /* KEYED_FRAGMENT */
-          ))
+          )),
+          createBaseVNode("button", {
+            disabled: !$setup.canNavigateNext,
+            onClick: $setup.handleClickNext,
+            class: normalizeClass([
+              "vue-screener__pagination__button",
+              "vue-screener__pagination__button--next",
+              !$setup.canNavigateNext && "vue-screener__pagination__button--disabled",
+              (_i = $props.classes) == null ? void 0 : _i.PAGINATION_BUTTON,
+              (_j = $props.classes) == null ? void 0 : _j.PAGINATION_NEXT_BUTTON,
+              !$setup.canNavigateNext && ((_k = $props.classes) == null ? void 0 : _k["PAGINATION_BUTTON--DISABLED"])
+            ])
+          }, " Next ", 10, _hoisted_4),
+          createBaseVNode("button", {
+            disabled: !$setup.canNavigateLast,
+            onClick: $setup.handleClickLast,
+            class: normalizeClass([
+              "vue-screener__pagination__button",
+              "vue-screener__pagination__button--last",
+              !$setup.canNavigateLast && "vue-screener__pagination__button--disabled",
+              (_l = $props.classes) == null ? void 0 : _l.PAGINATION_BUTTON,
+              (_m = $props.classes) == null ? void 0 : _m.PAGINATION_LAST_BUTTON
+            ])
+          }, " Last ", 10, _hoisted_5)
+        ],
+        2
+        /* CLASS */
+      ),
+      createBaseVNode(
+        "div",
+        {
+          class: normalizeClass([
+            "vue-screener__pagination__per-page",
+            (_n = $props.classes) == null ? void 0 : _n.PAGINATION_PER_PAGE
+          ])
+        },
+        [
+          createBaseVNode("input", {
+            type: "number",
+            value: $props.perPage,
+            min: "1",
+            step: "1",
+            onInput: $setup.handleChangePerPage,
+            class: normalizeClass([
+              "vue-screener__pagination__per-page-input",
+              (_o = $props.classes) == null ? void 0 : _o.PAGINATION_PER_PAGE_INPUT
+            ])
+          }, null, 42, _hoisted_6)
         ],
         2
         /* CLASS */
@@ -1051,6 +1155,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const props = __props;
     const searchQuery = ref("");
     const stagedCurrentPage = ref(props.currentPage);
+    const stagedPerPage = ref(props.perPage);
     const renderFormat = ref("table");
     const searchOptions = ref([]);
     const sortField = ref(null);
@@ -1122,7 +1227,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return getPaginated({
         rows: getSortedData.value,
         page: stagedCurrentPage.value - 1,
-        perPage: props.perPage,
+        perPage: stagedPerPage.value,
         withPlaceholders: true
       });
     });
@@ -1139,13 +1244,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const onChangePage = (page) => {
       stagedCurrentPage.value = page;
     };
+    const onChangePerPage = (perPage) => {
+      stagedPerPage.value = perPage;
+    };
     const handleSort = (updatedSortField) => {
       if (sortField.value === updatedSortField) {
         sortDirection.value = sortDirection.value === "desc" ? "asc" : "desc";
       }
       sortField.value = updatedSortField;
     };
-    const __returned__ = { props, searchQuery, stagedCurrentPage, renderFormat, searchOptions, sortField, sortDirection, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getSortedData, getPaginatedData, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, handleSort, JsonView, TableView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
+    const __returned__ = { props, searchQuery, stagedCurrentPage, stagedPerPage, renderFormat, searchOptions, sortField, sortDirection, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getSortedData, getPaginatedData, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, onChangePerPage, handleSort, JsonView, TableView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -1236,10 +1344,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             [
               createVNode($setup["Pagination"], {
                 "total-items": $setup.getSearchedData.length,
-                "per-page": $props.perPage,
+                "per-page": $setup.stagedPerPage,
                 "current-page": $setup.stagedCurrentPage,
                 classes: $props.classes,
-                onChangePage: $setup.onChangePage
+                onChangePage: $setup.onChangePage,
+                onChangePerPage: $setup.onChangePerPage
               }, null, 8, ["total-items", "per-page", "current-page", "classes"])
             ],
             2
