@@ -1,4 +1,4 @@
-import { aq as defineComponent, ar as openBlock, as as createElementBlock, at as toDisplayString, au as createBaseVNode, av as createBlock, aw as createCommentVNode, ax as ref, ay as computed, az as orderBy, aA as Fragment, aB as renderList, aC as normalizeClass, aD as createTextVNode, aE as createVNode, aF as withModifiers, aG as onMounted, aH as watch, aI as reactive, aJ as resolveComponent, aK as withCtx } from "./vendor-fa5968e9.js";
+import { aq as defineComponent, ar as openBlock, as as createElementBlock, at as toDisplayString, au as createBaseVNode, av as createBlock, aw as createCommentVNode, ax as ref, ay as computed, az as orderBy, aA as Fragment, aB as renderList, aC as normalizeStyle, aD as normalizeClass, aE as withModifiers, aF as onMounted, aG as watch, aH as createTextVNode, aI as createVNode, aJ as reactive, aK as resolveComponent, aL as withCtx } from "./vendor-4b24b92d.js";
 const JsonView_vue_vue_type_style_index_0_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -31,23 +31,6 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$b.__file = "src/components/views/JsonView.vue";
 const JsonView = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$b], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/JsonView.vue"]]);
-const reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-const reHasRegExpChar = RegExp(reRegExpChar.source);
-function escapeRegExp(string) {
-  return string && reHasRegExpChar.test(string) ? string.replace(reRegExpChar, "\\$&") : string || "";
-}
-function isValidRegExp(pattern) {
-  try {
-    new RegExp(pattern);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-function highlightText(value, highlight) {
-  const highlightExp = new RegExp(escapeRegExp(highlight), "ig");
-  return value.replace(highlightExp, (match) => `<mark>${match}</mark>`);
-}
 const _sfc_main$a = {};
 const _hoisted_1$9 = {
   "aria-hidden": "true",
@@ -70,11 +53,11 @@ const _hoisted_2$6 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$6 = [
+const _hoisted_3$5 = [
   _hoisted_2$6
 ];
 function _sfc_render$a(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$6);
+  return openBlock(), createElementBlock("svg", _hoisted_1$9, _hoisted_3$5);
 }
 _sfc_main$a.__file = "src/components/icons/Sort.vue";
 const SortIcon = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/Sort.vue"]]);
@@ -100,11 +83,11 @@ const _hoisted_2$5 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$5 = [
+const _hoisted_3$4 = [
   _hoisted_2$5
 ];
 function _sfc_render$9(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$8, _hoisted_3$5);
+  return openBlock(), createElementBlock("svg", _hoisted_1$8, _hoisted_3$4);
 }
 _sfc_main$9.__file = "src/components/icons/SortUp.vue";
 const SortUpIcon = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortUp.vue"]]);
@@ -130,11 +113,11 @@ const _hoisted_2$4 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3$4 = [
+const _hoisted_3$3 = [
   _hoisted_2$4
 ];
 function _sfc_render$8(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$7, _hoisted_3$4);
+  return openBlock(), createElementBlock("svg", _hoisted_1$7, _hoisted_3$3);
 }
 _sfc_main$8.__file = "src/components/icons/SortDown.vue";
 const SortDownIcon = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortDown.vue"]]);
@@ -159,6 +142,23 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$7.__file = "src/components/stuff/SortSelector.vue";
 const SortSelector = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/SortSelector.vue"]]);
+const reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+const reHasRegExpChar = RegExp(reRegExpChar.source);
+function escapeRegExp(string) {
+  return string && reHasRegExpChar.test(string) ? string.replace(reRegExpChar, "\\$&") : string || "";
+}
+function isValidRegExp(pattern) {
+  try {
+    new RegExp(pattern);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+function highlightText(value, highlight) {
+  const highlightExp = new RegExp(escapeRegExp(highlight), "ig");
+  return value.replace(highlightExp, (match) => `<mark>${match}</mark>`);
+}
 const TableView_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "TableView",
@@ -169,16 +169,12 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { expose: __expose }) {
     __expose();
-    const {
-      fields = [],
-      rows = [],
-      highlight = ""
-    } = __props;
+    const props = __props;
     const sortField = ref(null);
     const sortDirection = ref("desc");
     const getSortedRows = computed(() => {
       var _a;
-      const sortedRows = rows;
+      const sortedRows = props.rows;
       const sortIndex = ((_a = sortedRows[0]) == null ? void 0 : _a.findIndex((column) => column.key === sortField.value)) ?? null;
       if (sortField.value && sortDirection.value) {
         const nullRows = sortedRows.filter(
@@ -202,9 +198,41 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
         return sortedRows;
       }
     });
-    const getHighlighted = (value, highlight2) => {
+    const getCells = computed(() => {
+      const fields = [];
+      props.fields.forEach((field, i) => {
+        fields.push({
+          field,
+          value: field,
+          isHeader: true,
+          isFirst: i === 0,
+          isLast: i === props.fields.length - 1,
+          type: "string"
+        });
+      });
+      getSortedRows.value.forEach((row) => {
+        row == null ? void 0 : row.forEach((col, i) => {
+          fields.push({
+            field: col.key,
+            isValue: true,
+            value: col.hasValue ? getHighlighted(col.value, props.highlight) : "",
+            isFirst: i === 0,
+            isLast: i === row.length - 1,
+            type: col.type
+          });
+        });
+      });
+      return fields;
+    });
+    const tableStyle = computed(() => {
+      return {
+        display: "grid",
+        "grid-template-columns": props.fields.reduce((acc) => acc + " 1fr", "")
+      };
+    });
+    const getHighlighted = (value, highlight) => {
       if (["string", "number"].includes(typeof value)) {
-        return highlightText(String(value), highlight2);
+        return highlightText(String(value), highlight);
       }
       return value;
     };
@@ -220,78 +248,60 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       }
       sortField.value = updatedSortField;
     };
-    const __returned__ = { sortField, sortDirection, getSortedRows, getHighlighted, getSortDirection, onSort, SortSelector };
+    const __returned__ = { props, sortField, sortDirection, getSortedRows, getCells, tableStyle, getHighlighted, getSortDirection, onSort, SortSelector };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const _hoisted_1$5 = { class: "vue-screener__table-view" };
-const _hoisted_2$3 = { class: "vue-screener__table-view__thead" };
-const _hoisted_3$3 = { class: "vue-screener__table-view__tr" };
-const _hoisted_4$3 = ["onClick"];
-const _hoisted_5 = ["innerHTML"];
-const _hoisted_6 = {
-  key: 1,
-  colspan: "100%",
-  class: "vue-screener__table-view__td"
-};
+const _hoisted_1$5 = ["onClick"];
+const _hoisted_2$3 = ["innerHTML"];
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("table", _hoisted_1$5, [
-    createBaseVNode("thead", _hoisted_2$3, [
-      createBaseVNode("tr", _hoisted_3$3, [
-        (openBlock(true), createElementBlock(
-          Fragment,
-          null,
-          renderList($props.fields, (field, index) => {
-            return openBlock(), createElementBlock("th", {
-              key: index,
-              class: normalizeClass(["vue-screener__table-view__th", { "vue-screener__table-view__th--is-sortable": true }]),
-              onClick: ($event) => $setup.onSort(field)
-            }, [
-              createTextVNode(
-                toDisplayString(field) + " ",
-                1
-                /* TEXT */
-              ),
-              createVNode($setup["SortSelector"], {
-                "sort-direction": $setup.getSortDirection(field)
-              }, null, 8, ["sort-direction"])
-            ], 8, _hoisted_4$3);
-          }),
-          128
-          /* KEYED_FRAGMENT */
-        ))
-      ])
-    ]),
-    createBaseVNode("tbody", null, [
+  return openBlock(), createElementBlock(
+    "div",
+    {
+      style: normalizeStyle($setup.tableStyle),
+      class: "vue-screener__table-view"
+    },
+    [
       (openBlock(true), createElementBlock(
         Fragment,
         null,
-        renderList($setup.getSortedRows, (row, j) => {
-          return openBlock(), createElementBlock("tr", {
-            class: "vue-screener__table-view__tr",
-            key: j
+        renderList($setup.getCells, (cell, i) => {
+          return openBlock(), createElementBlock("div", {
+            key: i,
+            class: normalizeClass([
+              "vue-screener__table-view__cell",
+              cell.isHeader && "vue-screener__table-view__cell--is-header",
+              cell.isValue && "vue-screener__table-view__cell--is-value",
+              cell.isFirst && "vue-screener__table-view__cell--is-first",
+              cell.isLast && "vue-screener__table-view__cell--is-last",
+              cell.hasValue && "vue-screener__table-view__cell--hasValue",
+              cell.type === "string" && "vue-screener__table-view__cell--string",
+              cell.type === "number" && "vue-screener__table-view__cell--number",
+              cell.type === "boolean" && "vue-screener__table-view__cell--boolean",
+              cell.type === "symbol" && "vue-screener__table-view__cell--symbol",
+              cell.type === "undefined" && "vue-screener__table-view__cell--undefined",
+              cell.type === "object" && "vue-screener__table-view__cell--object",
+              cell.type === "null" && "vue-screener__table-view__cell--null"
+            ]),
+            onClick: ($event) => cell.isHeader && $setup.onSort(cell.field)
           }, [
-            row ? (openBlock(true), createElementBlock(
-              Fragment,
-              { key: 0 },
-              renderList(row, (field, k) => {
-                return openBlock(), createElementBlock("td", {
-                  key: k,
-                  innerHTML: field.hasValue ? $setup.getHighlighted(field.value, $props.highlight) : "",
-                  class: "vue-screener__table-view__td"
-                }, null, 8, _hoisted_5);
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            )) : (openBlock(), createElementBlock("td", _hoisted_6))
-          ]);
+            createBaseVNode("span", {
+              innerHTML: cell.value
+            }, null, 8, _hoisted_2$3),
+            cell.isHeader ? (openBlock(), createBlock($setup["SortSelector"], {
+              key: 0,
+              "sort-direction": $setup.getSortDirection(cell.field)
+            }, null, 8, ["sort-direction"])) : createCommentVNode("v-if", true)
+          ], 10, _hoisted_1$5);
         }),
         128
         /* KEYED_FRAGMENT */
       ))
-    ])
-  ]);
+    ],
+    4
+    /* STYLE */
+  );
 }
 _sfc_main$6.__file = "src/components/views/TableView.vue";
 const TableView = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/TableView.vue"]]);
