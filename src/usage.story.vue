@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { reactive, watch } from "vue";
-import VueScreener from "./components/VueScreener.vue";
+import { VueScreener } from "./index";
 import baseData from "./fixtures/data.json";
 import primitivesData from "./fixtures/primitives-data.json";
 
