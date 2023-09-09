@@ -1,13 +1,16 @@
 <template>
-  <section class="vue-screener">
+  <section :class="['vue-screener', classes.SCREENER]">
     <template v-if="isValidInput">
-      <header class="vue-screener__header">
-        <div class="vue-screener__header-title">{{ props.title }}</div>
+      <header :class="['vue-screener__header', classes.HEADER]">
+        <div :class="['vue-screener__header-title', classes.HEADER_TITLE]">
+          {{ props.title }}
+        </div>
         <VueScreenerSearch
-          class="vue-screener__search"
+          :class="['vue-screener__search', classes.SEARCH_INPUT]"
           :query="searchQuery"
           :is-valid-query="isRegExFriendlySearchQuery"
           :search-options="searchOptions"
+          :classes="classes"
           @search="onSearch"
         />
         <Settings
@@ -15,9 +18,10 @@
           @select-format="onSelectFormat"
           :search-options="searchOptions"
           @change-search-options="onChangeSearchOptions"
+          :classes="classes"
         />
       </header>
-      <main class="vue-screener__main">
+      <main :class="['vue-screener__main', classes.MAIN]">
         <TableView
           v-if="renderFormat === 'table'"
           :fields="getFields"
@@ -25,6 +29,7 @@
           :highlight="searchQuery"
           :sort-direction="sortDirection"
           :sort-field="sortField"
+          :classes="classes"
           @on-sort="handleSort"
         >
           <template #header-cell="cellPops">
@@ -34,13 +39,14 @@
             <slot name="value-cell" v-bind="cellPops" />
           </template>
         </TableView>
-        <JsonView v-else :data="getPaginatedData" />
+        <JsonView v-else :data="getPaginatedData" :class="classes.JSON_VIEW" />
       </main>
-      <footer class="vue-screener__footer">
+      <footer :class="['vue-screener__footer', classes.FOOTER]">
         <Pagination
           :total-items="getSearchedData.length"
           :per-page="perPage"
           :current-page="stagedCurrentPage"
+          :classes="classes"
           @change-page="onChangePage"
         />
       </footer>
@@ -49,6 +55,7 @@
       v-else
       message="Invalid data was provided. Please provide an
       array of objects or an array of arrays."
+      :class="classes.ERROR_MESSAGE"
     />
   </section>
 </template>
@@ -77,6 +84,35 @@ import {
 import { computed, ref } from "vue";
 import { orderBy } from "natural-orderby";
 
+export type InlineClass =
+  | "SCREENER"
+  | "HEADER"
+  | "MAIN"
+  | "FOOTER"
+  | "HEADER_TITLE"
+  | "SEARCH_INPUT"
+  | "SETTINGS"
+  | "SETTINGS_DROPDOWN_BUTTON"
+  | "SETTINGS_DROPDOWN_SUB_HEADING"
+  | "SETTINGS_DROPDOWN_OPTIONS"
+  | "SETTINGS_DROPDOWN_OPTIONS_BUTTON"
+  | "SETTINGS_VIEW_SELECTOR_CONTAINER"
+  | "SETTINGS_VIEW_SELECTOR_LINK"
+  | "TABLE_VIEW"
+  | "TABLE_VIEW_CELL"
+  | "TABLE_VIEW_HEADER_CELL"
+  | "TABLE_VIEW_VALUE_CELL"
+  | "TABLE_VIEW_SORT"
+  | "TABLE_VIEW_SORT_NONE"
+  | "TABLE_VIEW_SORT_ASC"
+  | "TABLE_VIEW_SORT_DESC"
+  | "JSON_VIEW"
+  | "PAGINATION"
+  | "PAGINATION_DETAILS"
+  | "PAGINATION_BUTTONS"
+  | "PAGINATION_BUTTONS_BUTTON"
+  | "ERROR_MESSAGE";
+
 type Props = {
   data?: unknown[];
   title?: string;
@@ -84,6 +120,7 @@ type Props = {
   exclude?: string[];
   perPage?: number;
   currentPage?: number;
+  classes?: Partial<Record<InlineClass, string>>;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -93,6 +130,7 @@ const props = withDefaults(defineProps<Props>(), {
   exclude: () => [],
   perPage: 15,
   currentPage: 1,
+  classes: () => ({}),
 });
 
 const searchQuery = ref<string>("");

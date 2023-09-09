@@ -1,17 +1,32 @@
 <template>
-  <Dropdown class="vue-screener__settings">
+  <Dropdown :class="['vue-screener__settings', classes?.SETTINGS]">
     <template #dropdown-button="{ show, toggle }">
       <button
         class="vue-screener__settings-button"
-        :class="[show && 'vue-screener__settings-button--active']"
+        :class="[
+          show && 'vue-screener__settings-button--active',
+          classes?.SETTINGS_DROPDOWN_BUTTON,
+        ]"
         @click="toggle"
       >
         <CogIcon />
       </button>
     </template>
     <template #default>
-      <h3 class="vue-screener__settings-heading">Search</h3>
-      <div class="vue-screener__settings__options">
+      <h3
+        :class="[
+          'vue-screener__settings-heading',
+          classes?.SETTINGS_DROPDOWN_SUB_HEADING,
+        ]"
+      >
+        Search
+      </h3>
+      <div
+        :class="[
+          'vue-screener__settings__options',
+          classes?.SETTINGS_DROPDOWN_OPTIONS,
+        ]"
+      >
         <button
           v-for="(option, i) in getOptions"
           :key="i"
@@ -21,6 +36,7 @@
               'vue-screener__settings__options-button--active': option.isActive,
             },
             'vue-screener__settings__options-button--' + option.id,
+            classes?.SETTINGS_DROPDOWN_OPTIONS_BUTTON,
           ]"
           :title="option.title"
           @click="toggleOption(option.id)"
@@ -32,6 +48,7 @@
       <ViewSelector
         class="vue-screener__view-selector"
         :active-format="activeFormat"
+        :classes="classes"
         @select-format="emit('select-format', $event)"
       />
     </template>
@@ -43,12 +60,14 @@ import { computed, ref } from "vue";
 import Dropdown from "./Dropdown.vue";
 import ViewSelector from "./ViewSelector.vue";
 import CogIcon from "../icons/Cog.vue";
+import { InlineClass } from "../VueScreener.vue";
 
 export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
 
 const props = defineProps<{
   activeFormat: "table" | "raw";
   searchOptions: SearchQueryOption[];
+  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["select-format", "change-search-options"]);

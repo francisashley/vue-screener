@@ -12,6 +12,7 @@
       cell.type === 'undefined' && 'vue-screener__table-view__cell--undefined',
       cell.type === 'object' && 'vue-screener__table-view__cell--object',
       cell.type === 'null' && 'vue-screener__table-view__cell--null',
+      classes?.TABLE_VIEW_CELL,
     ]"
   >
     <slot>
@@ -22,6 +23,7 @@
 
 <script lang="ts" setup>
 import { DataType } from "@/utils/data.utils";
+import { InlineClass } from "../VueScreener.vue";
 
 export type Cell = {
   field: string;
@@ -36,6 +38,7 @@ export type Cell = {
 
 defineProps<{
   cell: Cell;
+  classes?: Partial<Record<InlineClass, string>>;
 }>();
 </script>
 

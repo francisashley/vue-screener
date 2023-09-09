@@ -6,6 +6,7 @@
       :class="[
         'vue-screener__view-selector__link',
         activeFormat === 'table' && 'is-active',
+        classes?.SETTINGS_VIEW_SELECTOR_CONTAINER,
       ]"
       v-text="'Table'"
     />
@@ -15,6 +16,8 @@
       :class="[
         'vue-screener__view-selector__link',
         activeFormat === 'raw' && 'is-active',
+        ,
+        classes?.SETTINGS_VIEW_SELECTOR_LINK,
       ]"
       v-text="'Raw'"
     />
@@ -22,8 +25,11 @@
 </template>
 
 <script lang="ts" setup>
+import { InlineClass } from "../VueScreener.vue";
+
 const { activeFormat = "table" } = defineProps<{
   activeFormat: "table" | "raw";
+  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["select-format"]);
