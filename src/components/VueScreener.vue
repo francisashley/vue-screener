@@ -73,7 +73,7 @@ type Props = {
 const props = withDefaults(defineProps<Props>(), {
   data: () => [],
   pickFields: () => [],
-  perPage: 25,
+  perPage: 15,
   currentPage: 1,
 });
 
