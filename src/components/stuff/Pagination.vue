@@ -1,5 +1,16 @@
 <template>
   <div class="vue-screener__pagination">
+    <div class="vue-screener__pagination__details">
+      <template v-if="!totalItems">Showing 0 results</template>
+      <template v-else-if="lastIndexOfCurrentPage < perPage">
+        Showing {{ lastIndexOfCurrentPage }} of {{ totalItems }}
+      </template>
+      <template v-else>
+        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
+        of
+        {{ totalItems }}
+      </template>
+    </div>
     <ul v-if="pages.length > 1" class="vue-screener__pagination__buttons">
       <li
         v-for="page in pages"
@@ -12,17 +23,6 @@
         <a href="#" @click.prevent="selectPage(page)">{{ page }}</a>
       </li>
     </ul>
-    <div class="vue-screener__pagination__details">
-      <template v-if="!totalItems">Showing 0 results</template>
-      <template v-else-if="lastIndexOfCurrentPage < perPage">
-        Showing {{ lastIndexOfCurrentPage }} of {{ totalItems }}
-      </template>
-      <template v-else>
-        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
-        of
-        {{ totalItems }}
-      </template>
-    </div>
   </div>
 </template>
 
@@ -92,6 +92,7 @@ const selectPage = (page: number): void => {
 <style lang="scss">
 .vue-screener__pagination {
   display: flex;
+  justify-content: space-between;
 
   &__buttons {
     display: flex;
@@ -114,7 +115,6 @@ const selectPage = (page: number): void => {
   }
 
   &__details {
-    margin-left: auto;
     white-space: nowrap;
   }
 }
