@@ -3050,6 +3050,7 @@ body {
   border: thin solid black;
   border-radius: 8px;
   overflow: hidden;
+  background: #fff;
 }
 .vue-screener__header {
   display: flex;
