@@ -156,6 +156,8 @@ export function search(options: {
 }): NormalisedRow[] {
   let { searchQuery = "" } = options;
 
+  if (!searchQuery) return options.rows;
+
   const {
     rows,
     useRegExp = false,
