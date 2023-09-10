@@ -1,5 +1,5 @@
 import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-e4b58c02.js";
-import { _ as _export_sfc, b as baseData, p as primitivesData, a as VueScreener } from "./primitives-data-e3ffcb8b.js";
+import { _ as _export_sfc, b as baseData, p as primitivesData, a as VueScreener } from "./primitives-data-5e25c873.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "usage.story",
   setup(__props, { expose: __expose }) {

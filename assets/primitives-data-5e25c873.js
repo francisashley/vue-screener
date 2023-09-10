@@ -360,7 +360,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
             row
           });
         });
-        if (props.includeStickyActions) {
+        if (props.includeStickyActions && row) {
           fields.push({
             field: "",
             value: "",
