@@ -106,7 +106,7 @@ const getCells = computed(() => {
       });
     });
 
-    if (props.includeStickyActions) {
+    if (props.includeStickyActions && row) {
       fields.push({
         field: "",
         value: "",
