@@ -158,6 +158,20 @@ export function search(options: {
 
   if (!searchQuery) return options.rows;
 
+  const excludeFieldMatches: [string, string][] = [];
+  searchQuery = searchQuery.replace(/(?<!\w)-\w+:\w+/g, (match) => {
+    const [field, value] = match.replace("-", "").split(":");
+    excludeFieldMatches.push([field, value]);
+    return "";
+  });
+
+  const includeFieldMatches: [string, string][] = [];
+  searchQuery = searchQuery.replace(/\b\w+:\w+\b/g, (match) => {
+    const [field, value] = match.split(":");
+    includeFieldMatches.push([field, value]);
+    return "";
+  });
+
   const {
     rows,
     useRegExp = false,
@@ -171,16 +185,47 @@ export function search(options: {
   }
 
   return rows.filter((row): boolean => {
-    return row.some((field): boolean => {
-      const value = String(field.value ?? "");
-      if (getTypeOf(value)) {
-        return meetsCriteria(String(field.value ?? ""), searchQuery, {
+    const hasExcludeFilters = Boolean(excludeFieldMatches.length);
+    const hasIncludeFilters = Boolean(includeFieldMatches.length);
+
+    if (hasExcludeFilters) {
+      const shouldExclude = excludeFieldMatches.every(([field, value]) => {
+        const cell = row.find((cell) => cell.key === field);
+        if (!cell) return false;
+
+        const passesCriteria = meetsCriteria(cell.value as string, value, {
           matchCase,
-          matchWord,
+          matchWord: true,
           useRegExp,
         });
-      }
-      return false;
+
+        return passesCriteria;
+      });
+
+      if (shouldExclude) return false;
+    }
+
+    if (hasIncludeFilters) {
+      const shouldInclude = includeFieldMatches.every(([field, value]) => {
+        const cell = row.find((cell) => cell.key === field);
+        if (!cell) return false;
+
+        return meetsCriteria(cell.value as string, value, {
+          matchCase,
+          matchWord: true,
+          useRegExp,
+        });
+      });
+
+      if (!shouldInclude) return false;
+    }
+
+    return row.some((field): boolean => {
+      return meetsCriteria(String(field.value ?? ""), searchQuery, {
+        matchCase,
+        matchWord,
+        useRegExp,
+      });
     });
   });
 }
