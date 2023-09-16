@@ -20,7 +20,7 @@ const testCriteria = (
     matchCase: boolean;
     matchWord: boolean;
     useRegExp: boolean;
-  },
+  }
 ): boolean => {
   const { matchCase = false, matchWord = false, useRegExp = false } = options;
 
@@ -35,6 +35,41 @@ const testCriteria = (
   }
 
   return new RegExp(pattern, flags).test(subject);
+};
+
+/**
+ * Parse search query and extract filters.
+ * 
+ * - Include filters use the pattern: `field:value`.
+ * - Exclude filters use the pattern: `-field:value`.
+ *
+ * @param {string} searchQuery - The search query to parse.
+ * @returns {{
+ *   searchQuery: string,
+ *   includeFilters: [field: string, value: string][],
+ *   excludeFilters: [field: string, value: string][]
+ * }} - Parsed search query, include filters, and exclude filters.
+ */
+const parseSearchQuery = (searchQuery: string) => {
+  const excludeFilters: [field: string, value: string][] = [];
+  searchQuery = searchQuery.replace(/(?<!\w)-\w+:\w+/g, (match) => {
+    const [field, value] = match.replace("-", "").split(":");
+    excludeFilters.push([field, value]);
+    return "";
+  });
+
+  const includeFilters: [field: string, value: string][] = [];
+  searchQuery = searchQuery.replace(/\b\w+:\w+\b/g, (match) => {
+    const [field, value] = match.split(":");
+    includeFilters.push([field, value]);
+    return "";
+  });
+
+  return {
+    searchQuery,
+    excludeFilters,
+    includeFilters,
+  };
 };
 
 /**
@@ -59,38 +94,25 @@ export function search(options: {
 
   if (!searchQuery) return options.rows;
 
-  const excludeFieldMatches: [string, string][] = [];
-  searchQuery = searchQuery.replace(/(?<!\w)-\w+:\w+/g, (match) => {
-    const [field, value] = match.replace("-", "").split(":");
-    excludeFieldMatches.push([field, value]);
-    return "";
-  });
+  let {
+    searchQuery: parsedSearchQuery,
+    excludeFilters,
+    includeFilters,
+  } = parseSearchQuery(searchQuery);
 
-  const includeFieldMatches: [string, string][] = [];
-  searchQuery = searchQuery.replace(/\b\w+:\w+\b/g, (match) => {
-    const [field, value] = match.split(":");
-    includeFieldMatches.push([field, value]);
-    return "";
-  });
-
-  const {
-    rows,
-    useRegExp = false,
-    matchCase = false,
-    matchWord = false,
-  } = options;
+  const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
 
   // escape regex
-  if (!useRegExp || !isValidRegExp(searchQuery)) {
-    searchQuery = escapeRegExp(searchQuery);
+  if (!useRegExp || !isValidRegExp(parsedSearchQuery)) {
+    parsedSearchQuery = escapeRegExp(parsedSearchQuery);
   }
 
   return rows.filter((row): boolean => {
-    const hasExcludeFilters = Boolean(excludeFieldMatches.length);
-    const hasIncludeFilters = Boolean(includeFieldMatches.length);
+    const hasExcludeFilters = Boolean(excludeFilters.length);
+    const hasIncludeFilters = Boolean(includeFilters.length);
 
     if (hasExcludeFilters) {
-      const shouldExclude = excludeFieldMatches.every(([field, value]) => {
+      const shouldExclude = excludeFilters.every(([field, value]) => {
         const cell = row.find((cell) => cell.key === field);
         if (!cell) return false;
 
@@ -107,7 +129,7 @@ export function search(options: {
     }
 
     if (hasIncludeFilters) {
-      const shouldInclude = includeFieldMatches.every(([field, value]) => {
+      const shouldInclude = includeFilters.every(([field, value]) => {
         const cell = row.find((cell) => cell.key === field);
         if (!cell) return false;
 
@@ -122,7 +144,7 @@ export function search(options: {
     }
 
     return row.some((field): boolean => {
-      return testCriteria(String(field.value ?? ""), searchQuery, {
+      return testCriteria(String(field.value ?? ""), parsedSearchQuery, {
         matchCase,
         matchWord,
         useRegExp,
