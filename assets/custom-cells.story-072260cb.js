@@ -1,5 +1,6 @@
 import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode, ay as mergeProps, az as createBaseVNode, aA as createTextVNode } from "./vendor-e4b58c02.js";
-import { _ as _export_sfc, b as baseData, p as primitivesData, H as HeaderCell, V as ValueCell, a as VueScreener } from "./primitives-data-5e25c873.js";
+import { _ as _export_sfc, p as primitivesData, H as HeaderCell, V as ValueCell, a as VueScreener } from "./primitives-data-4c0f0b54.js";
+import { b as baseData } from "./data-f7c6478e.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "custom-cells.story",
   setup(__props, { expose: __expose }) {

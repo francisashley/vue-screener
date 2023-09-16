@@ -45,6 +45,28 @@
       "markdownFile": null
     },
     {
+      "id": "src-stories-stress-test-story-vue",
+      "title": "stress-test",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-stories-stress-test-story-vue-0",
+          "title": "default"
+        }
+      ],
+      "relativePath": "src/stories/stress-test.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "stress-test"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-stories-usage-story-vue",
       "title": "usage",
       "layout": {
