@@ -1,6 +1,6 @@
 import { escapeRegExp } from "./regex.utils";
 import { isValidRegExp } from "../utils/regex.utils";
-import { NormalisedRow } from "./data.utils";
+import { NormalisedField, NormalisedRow } from "./data.utils";
 
 /**
  * Check if a subject string meets the search criteria.
@@ -39,7 +39,7 @@ const testCriteria = (
 
 /**
  * Parse search query and extract filters.
- * 
+ *
  * - Include filters use the pattern: `field:value`.
  * - Exclude filters use the pattern: `-field:value`.
  *
@@ -107,48 +107,52 @@ export function search(options: {
     parsedSearchQuery = escapeRegExp(parsedSearchQuery);
   }
 
-  return rows.filter((row): boolean => {
-    const hasExcludeFilters = Boolean(excludeFilters.length);
-    const hasIncludeFilters = Boolean(includeFilters.length);
-
-    if (hasExcludeFilters) {
-      const shouldExclude = excludeFilters.every(([field, value]) => {
-        const cell = row.find((cell) => cell.key === field);
-        if (!cell) return false;
-
-        const passesCriteria = testCriteria(cell.value as string, value, {
+  // Check if any of the filters match the row.
+  const testFilters = (
+    filters: [string, string][],
+    rowMap: Record<string, NormalisedField>
+  ): boolean => {
+    return filters.some(([field, value]) => {
+      if (rowMap[field]) {
+        return testCriteria(rowMap[field].value as string, value, {
           matchCase,
           matchWord: true,
           useRegExp,
         });
-
-        return passesCriteria;
-      });
-
-      if (shouldExclude) return false;
-    }
-
-    if (hasIncludeFilters) {
-      const shouldInclude = includeFilters.every(([field, value]) => {
-        const cell = row.find((cell) => cell.key === field);
-        if (!cell) return false;
-
-        return testCriteria(cell.value as string, value, {
-          matchCase,
-          matchWord: true,
-          useRegExp,
-        });
-      });
-
-      if (!shouldInclude) return false;
-    }
-
-    return row.some((field): boolean => {
-      return testCriteria(String(field.value ?? ""), parsedSearchQuery, {
-        matchCase,
-        matchWord,
-        useRegExp,
-      });
+      }
     });
+  };
+
+  return rows.filter((row): boolean => {
+    const rowMap: Record<string, NormalisedField> = row.reduce(
+      (acc, field) => ({ ...acc, [field.key]: field }),
+      {}
+    );
+
+    let shouldExclude = false;
+    let shouldInclude = true;
+    let meetsSearchCriteria = true;
+
+    if (excludeFilters.length && testFilters(excludeFilters, rowMap)) {
+      shouldExclude = true;
+    }
+
+    if (includeFilters.length && !testFilters(includeFilters, rowMap)) {
+      shouldInclude = false;
+    }
+
+    meetsSearchCriteria = row.some((field) => {
+      if (
+        testCriteria(String(field.value ?? ""), parsedSearchQuery, {
+          matchCase,
+          matchWord,
+          useRegExp,
+        })
+      ) {
+        return true;
+      }
+    });
+
+    return !shouldExclude && shouldInclude && meetsSearchCriteria;
   });
 }
