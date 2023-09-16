@@ -1,7 +1,6 @@
 <template>
   <input
     :value="query"
-    @input="debouncedSearch"
     @keydown="onKeydown"
     type="text"
     class="vue-screener__search"
@@ -36,25 +35,26 @@ const useRegEx = computed<boolean>(() => {
   return searchOptions.some((activeOption) => activeOption === "use-regex");
 });
 
-const debouncedSearch = (event: Event): void => {
-  const searchQuery = (event.target as HTMLInputElement).value;
-  search(searchQuery);
-  if (searchQuery) {
-    history.value.push(searchQuery);
-    historyIndex.value = history.value.length - 1;
-  }
-};
+const onKeydown = (event: KeyboardEvent) => {
+  const isPressingUp = event.key === "ArrowUp";
+  const isPressingDown = event.key === "ArrowDown";
+  const isEnter = event.key === "Enter";
 
-const onKeydown = (e: KeyboardEvent) => {
-  const isPressingUp = e.key === "ArrowUp";
-  const isPressingDown = e.key === "ArrowDown";
+  if (isEnter) {
+    const searchQuery = (event.target as HTMLInputElement).value;
+    search(searchQuery);
+    if (searchQuery) {
+      history.value.push(searchQuery);
+      historyIndex.value = history.value.length - 1;
+    }
+  }
 
   if ((!isPressingUp && !isPressingDown) || historyIndex.value === null) {
     return;
   }
 
   // prevent the cursor moving to the start of the line when pressing up
-  e.preventDefault();
+  event.preventDefault();
 
   if (isPressingUp && historyIndex.value > 0) {
     historyIndex.value--;
