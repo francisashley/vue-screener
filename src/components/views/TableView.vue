@@ -125,7 +125,7 @@ const getCells = computed(() => {
 const tableStyle = computed(() => {
   let cols = props.fields.reduce((acc) => acc + " 1fr", "");
 
-  if (props.includeStickyActions) cols += " 1fr";
+  if (props.includeStickyActions) cols += " min-content";
 
   return {
     display: "grid",

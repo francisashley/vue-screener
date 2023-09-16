@@ -86,9 +86,9 @@ import {
   pickFields,
   excludeFields,
   getFields as getFieldsTool,
-  search,
   getPaginated,
 } from "../utils/data.utils";
+import { search } from "../utils/search.utils";
 import { computed, ref } from "vue";
 import { orderBy } from "natural-orderby";
 

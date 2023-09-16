@@ -1,6 +1,3 @@
-import { escapeRegExp } from "./regex.utils";
-import { isValidRegExp } from "../utils/regex.utils";
-
 export function isValidInput(data: unknown): boolean {
   const isObject = (val: unknown) => typeof val === "object" && val !== null;
   return (
@@ -121,66 +118,6 @@ export function getPaginated(options: {
   }
 
   return rows;
-}
-
-const meetsCriteria = (
-  inputText: string,
-  pattern: string,
-  options: {
-    matchCase: boolean;
-    matchWord: boolean;
-    useRegExp: boolean;
-  },
-): boolean => {
-  const { matchCase = false, matchWord = false, useRegExp = false } = options;
-
-  const flags = matchCase ? "g" : "gi";
-
-  if (matchWord) {
-    pattern = `\\b(${pattern})\\b`;
-  }
-
-  if (!useRegExp) {
-    inputText = escapeRegExp(inputText);
-  }
-
-  return new RegExp(pattern, flags).test(inputText);
-};
-
-export function search(options: {
-  rows: NormalisedRow[];
-  searchQuery: string;
-  useRegExp: boolean;
-  matchCase: boolean;
-  matchWord: boolean;
-}): NormalisedRow[] {
-  let { searchQuery = "" } = options;
-
-  const {
-    rows,
-    useRegExp = false,
-    matchCase = false,
-    matchWord = false,
-  } = options;
-
-  // escape regex
-  if (!useRegExp || !isValidRegExp(searchQuery)) {
-    searchQuery = escapeRegExp(searchQuery);
-  }
-
-  return rows.filter((row): boolean => {
-    return row.some((field): boolean => {
-      const value = String(field.value ?? "");
-      if (getTypeOf(value)) {
-        return meetsCriteria(String(field.value ?? ""), searchQuery, {
-          matchCase,
-          matchWord,
-          useRegExp,
-        });
-      }
-      return false;
-    });
-  });
 }
 
 export type DataType =
