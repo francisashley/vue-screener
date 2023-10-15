@@ -23,16 +23,16 @@ const testCriteria = (
   }
 ): boolean => {
   const { matchCase = false, matchWord = false, useRegExp = false } = options;
-
-  const flags = matchCase ? "g" : "gi";
+  
+  if (!useRegExp) {
+    pattern = escapeRegExp(pattern);
+  }
 
   if (matchWord) {
     pattern = `\\b(${pattern})\\b`;
   }
 
-  if (!useRegExp) {
-    subject = escapeRegExp(subject);
-  }
+  const flags = matchCase ? "g" : "gi";
 
   return new RegExp(pattern, flags).test(subject);
 };
@@ -101,11 +101,6 @@ export function search(options: {
   } = parseSearchQuery(searchQuery);
 
   const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
-
-  // escape regex
-  if (!useRegExp || !isValidRegExp(parsedSearchQuery)) {
-    parsedSearchQuery = escapeRegExp(parsedSearchQuery);
-  }
 
   // Check if any of the filters match the row.
   const testFilters = (
