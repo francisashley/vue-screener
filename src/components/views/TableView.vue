@@ -37,10 +37,10 @@
           :key="'sticky-actions-value-' + i"
           :cell="cell"
         >
-          <ValueCell :key="i" :cell="cell" :classes="classes" />
+          <ValueCell :key="i" :cell="cell" :classes="classes" :highlight-text="highlightText" />
         </slot>
         <slot v-else name="value-cell" :key="i" :cell="cell">
-          <ValueCell :key="i" :cell="cell" :classes="classes" />
+          <ValueCell :key="i" :cell="cell" :classes="classes" :highlight-text="highlightText" />
         </slot>
       </template>
     </template>
@@ -101,7 +101,7 @@ const getCells = computed(() => {
         field: col.key,
         isValue: true,
         value: col.hasValue ? col.value : "",
-        highlightedValue: col.hasValue ? getHighlighted(col.value, props.highlight) : "",
+        highlightedValue: col.hasValue ? highlightText(String(col.value), props.highlight) : "",
         isFirst: i === 0,
         isLast: !props.includeStickyActions && i === row.length - 1,
         type: col.type,
@@ -136,13 +136,6 @@ const tableStyle = computed(() => {
     "grid-template-columns": cols,
   };
 });
-
-const getHighlighted = (value: unknown, highlight: string) => {
-  if (["string", "number"].includes(typeof value) && highlight) {
-    return highlightText(String(value), highlight);
-  }
-  return value;
-};
 
 const getSortDirection = (field: string): "asc" | "desc" | null => {
   if (props.sortField === field) {
