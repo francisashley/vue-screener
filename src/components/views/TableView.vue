@@ -107,7 +107,9 @@ const getCells = computed(() => {
         field: col.key,
         isValue: true,
         value: col.hasValue ? col.value : "",
-        highlightedValue: col.hasValue ? highlightText(String(col.value), props.highlight) : "",
+        highlightedValue: col.hasValue
+          ? highlightText(col.value ? String(col.value) : "", props.highlight)
+          : "",
         isFirst: i === 0,
         isLast: !props.includeStickyActions && i === row.length - 1,
         type: col.type,
