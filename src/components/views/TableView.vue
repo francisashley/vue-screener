@@ -75,6 +75,7 @@ const getCells = computed(() => {
     fields.push({
       field,
       value: field,
+      highlightedValue: "",
       isHeader: true,
       isFirst: i === 0,
       isLast: !props.includeStickyActions && i === props.fields.length - 1,
@@ -86,6 +87,7 @@ const getCells = computed(() => {
     fields.push({
       field: "",
       value: "",
+      highlightedValue: "",
       isHeader: true,
       isLast: true,
       isStickyAction: true,
@@ -98,7 +100,8 @@ const getCells = computed(() => {
       fields.push({
         field: col.key,
         isValue: true,
-        value: col.hasValue ? getHighlighted(col.value, props.highlight) : "",
+        value: col.hasValue ? col.value : "",
+        highlightedValue: col.hasValue ? getHighlighted(col.value, props.highlight) : "",
         isFirst: i === 0,
         isLast: !props.includeStickyActions && i === row.length - 1,
         type: col.type,
@@ -110,6 +113,7 @@ const getCells = computed(() => {
       fields.push({
         field: "",
         value: "",
+        highlightedValue: "",
         isValue: true,
         isLast: true,
         isStickyAction: true,

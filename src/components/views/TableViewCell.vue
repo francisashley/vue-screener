@@ -29,6 +29,7 @@ import { InlineClass } from "../VueScreener.vue";
 export type Cell = {
   field: string;
   value: unknown;
+  highlightedValue: unknown;
   type?: DataType;
   isFirst?: boolean;
   isLast?: boolean;
