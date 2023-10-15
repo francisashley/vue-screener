@@ -1,5 +1,4 @@
 import { escapeRegExp } from "./regex.utils";
-import { isValidRegExp } from "../utils/regex.utils";
 import { NormalisedField, NormalisedRow } from "./data.utils";
 
 /**
