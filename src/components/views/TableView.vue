@@ -33,11 +33,19 @@
           name="sticky-actions-value"
           :key="'sticky-actions-value-' + i"
           :cell="cell"
-          :highlight-text="highlightText"
+          :highlight="highlightText"
+          :highlight-value="highlight"
         >
           <ValueCell :key="i" :cell="cell" :classes="classes" />
         </slot>
-        <slot v-else name="value-cell" :key="i" :cell="cell" :highlight-text="highlightText">
+        <slot
+          v-else
+          name="value-cell"
+          :key="i"
+          :cell="cell"
+          :highlight="highlightText"
+          :highlight-value="highlight"
+        >
           <ValueCell :key="i" :cell="cell" :classes="classes" />
         </slot>
       </template>
