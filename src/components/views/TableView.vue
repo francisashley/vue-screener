@@ -134,7 +134,7 @@ const tableStyle = computed(() => {
 });
 
 const getHighlighted = (value: unknown, highlight: string) => {
-  if (["string", "number"].includes(typeof value)) {
+  if (["string", "number"].includes(typeof value) && highlight) {
     return highlightText(String(value), highlight);
   }
   return value;
