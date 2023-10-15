@@ -33,17 +33,17 @@
           :include-sticky-actions="includeStickyActions"
           @on-sort="handleSort"
         >
-          <template #header-cell="cellPops">
-            <slot name="header-cell" v-bind="cellPops" />
+          <template #header-cell="cellProps">
+            <slot name="header-cell" v-bind="cellProps" />
           </template>
-          <template #value-cell="cellPops">
-            <slot name="value-cell" v-bind="cellPops" />
+          <template #value-cell="cellProps">
+            <slot name="value-cell" v-bind="cellProps" />
           </template>
-          <template #sticky-actions-head="cellPops">
-            <slot name="sticky-actions-head" v-bind="cellPops" />
+          <template #sticky-actions-head="cellProps">
+            <slot name="sticky-actions-head" v-bind="cellProps" />
           </template>
-          <template #sticky-actions-value="cellPops">
-            <slot name="sticky-actions-value" v-bind="cellPops" />
+          <template #sticky-actions-value="cellProps">
+            <slot name="sticky-actions-value" v-bind="cellProps" />
           </template>
         </TableView>
         <JsonView v-else :data="getPaginatedData" :class="classes.JSON_VIEW" />
