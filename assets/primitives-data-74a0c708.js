@@ -45,8 +45,11 @@ function isValidRegExp(pattern) {
   }
 }
 function highlightText(value, highlight) {
-  const highlightExp = new RegExp(escapeRegExp(highlight), "ig");
-  return value.replace(highlightExp, (match) => `<mark>${match}</mark>`);
+  if (["string", "number"].includes(typeof value) && highlight) {
+    const highlightExp = new RegExp(escapeRegExp(highlight), "ig");
+    return value.replace(highlightExp, (match) => `<mark>${match}</mark>`);
+  }
+  return value;
 }
 const _sfc_main$f = {};
 const _hoisted_1$b = {
@@ -216,7 +219,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     [
       renderSlot(_ctx.$slots, "default", {}, () => [
         createBaseVNode("span", {
-          innerHTML: $props.cell.value
+          innerHTML: $props.cell.highlightedValue
         }, null, 8, _hoisted_1$8)
       ])
     ],
@@ -332,6 +335,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         fields.push({
           field,
           value: field,
+          highlightedValue: "",
           isHeader: true,
           isFirst: i === 0,
           isLast: !props.includeStickyActions && i === props.fields.length - 1,
@@ -342,6 +346,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         fields.push({
           field: "",
           value: "",
+          highlightedValue: "",
           isHeader: true,
           isLast: true,
           isStickyAction: true,
@@ -353,7 +358,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           fields.push({
             field: col.key,
             isValue: true,
-            value: col.hasValue ? getHighlighted(col.value, props.highlight) : "",
+            value: col.hasValue ? col.value : "",
+            highlightedValue: col.hasValue ? highlightText(String(col.value), props.highlight) : "",
             isFirst: i === 0,
             isLast: !props.includeStickyActions && i === row.length - 1,
             type: col.type,
@@ -364,6 +370,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
           fields.push({
             field: "",
             value: "",
+            highlightedValue: "",
             isValue: true,
             isLast: true,
             isStickyAction: true,
@@ -383,19 +390,15 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         "grid-template-columns": cols
       };
     });
-    const getHighlighted = (value, highlight) => {
-      if (["string", "number"].includes(typeof value)) {
-        return highlightText(String(value), highlight);
-      }
-      return value;
-    };
     const getSortDirection = (field) => {
       if (props.sortField === field) {
         return props.sortDirection;
       }
       return null;
     };
-    const __returned__ = { props, emit, getCells, tableStyle, getHighlighted, getSortDirection, HeaderCell, ValueCell };
+    const __returned__ = { props, emit, getCells, tableStyle, getSortDirection, get highlightText() {
+      return highlightText;
+    }, HeaderCell, ValueCell };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -457,8 +460,9 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                     (openBlock(), createBlock($setup["ValueCell"], {
                       key: i,
                       cell,
-                      classes: $props.classes
-                    }, null, 8, ["cell", "classes"]))
+                      classes: $props.classes,
+                      "highlight-text": $setup.highlightText
+                    }, null, 8, ["cell", "classes", "highlight-text"]))
                   ]) : renderSlot(_ctx.$slots, "value-cell", {
                     key: i,
                     cell
@@ -466,8 +470,9 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                     (openBlock(), createBlock($setup["ValueCell"], {
                       key: i,
                       cell,
-                      classes: $props.classes
-                    }, null, 8, ["cell", "classes"]))
+                      classes: $props.classes,
+                      "highlight-text": $setup.highlightText
+                    }, null, 8, ["cell", "classes", "highlight-text"]))
                   ])
                 ],
                 64
@@ -1427,17 +1432,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 "include-sticky-actions": $props.includeStickyActions,
                 onOnSort: $setup.handleSort
               }, {
-                "header-cell": withCtx((cellPops) => [
-                  renderSlot(_ctx.$slots, "header-cell", normalizeProps(guardReactiveProps(cellPops)))
+                "header-cell": withCtx((cellProps) => [
+                  renderSlot(_ctx.$slots, "header-cell", normalizeProps(guardReactiveProps(cellProps)))
                 ]),
-                "value-cell": withCtx((cellPops) => [
-                  renderSlot(_ctx.$slots, "value-cell", normalizeProps(guardReactiveProps(cellPops)))
+                "value-cell": withCtx((cellProps) => [
+                  renderSlot(_ctx.$slots, "value-cell", normalizeProps(guardReactiveProps(cellProps)))
                 ]),
-                "sticky-actions-head": withCtx((cellPops) => [
-                  renderSlot(_ctx.$slots, "sticky-actions-head", normalizeProps(guardReactiveProps(cellPops)))
+                "sticky-actions-head": withCtx((cellProps) => [
+                  renderSlot(_ctx.$slots, "sticky-actions-head", normalizeProps(guardReactiveProps(cellProps)))
                 ]),
-                "sticky-actions-value": withCtx((cellPops) => [
-                  renderSlot(_ctx.$slots, "sticky-actions-value", normalizeProps(guardReactiveProps(cellPops)))
+                "sticky-actions-value": withCtx((cellProps) => [
+                  renderSlot(_ctx.$slots, "sticky-actions-value", normalizeProps(guardReactiveProps(cellProps)))
                 ]),
                 _: 3
                 /* FORWARDED */
