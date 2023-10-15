@@ -1,8 +1,5 @@
 <template>
-  <div
-    :style="tableStyle"
-    :class="['vue-screener__table-view', classes?.TABLE_VIEW]"
-  >
+  <div :style="tableStyle" :class="['vue-screener__table-view', classes?.TABLE_VIEW]">
     <template v-for="(cell, i) in getCells">
       <template v-if="cell.isHeader">
         <slot
@@ -36,11 +33,12 @@
           name="sticky-actions-value"
           :key="'sticky-actions-value-' + i"
           :cell="cell"
+          :highlight-text="highlightText"
         >
-          <ValueCell :key="i" :cell="cell" :classes="classes" :highlight-text="highlightText" />
+          <ValueCell :key="i" :cell="cell" :classes="classes" />
         </slot>
-        <slot v-else name="value-cell" :key="i" :cell="cell">
-          <ValueCell :key="i" :cell="cell" :classes="classes" :highlight-text="highlightText" />
+        <slot v-else name="value-cell" :key="i" :cell="cell" :highlight-text="highlightText">
+          <ValueCell :key="i" :cell="cell" :classes="classes" />
         </slot>
       </template>
     </template>
