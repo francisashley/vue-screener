@@ -359,7 +359,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
             field: col.key,
             isValue: true,
             value: col.hasValue ? col.value : "",
-            highlightedValue: col.hasValue ? highlightText(String(col.value), props.highlight) : "",
+            highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : "", props.highlight) : "",
             isFirst: i === 0,
             isLast: !props.includeStickyActions && i === row.length - 1,
             type: col.type,
@@ -455,24 +455,26 @@ function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
                 [
                   cell.isStickyAction ? renderSlot(_ctx.$slots, "sticky-actions-value", {
                     key: "sticky-actions-value-" + i,
-                    cell
+                    cell,
+                    highlight: $setup.highlightText,
+                    highlightValue: $props.highlight
                   }, () => [
                     (openBlock(), createBlock($setup["ValueCell"], {
                       key: i,
                       cell,
-                      classes: $props.classes,
-                      "highlight-text": $setup.highlightText
-                    }, null, 8, ["cell", "classes", "highlight-text"]))
+                      classes: $props.classes
+                    }, null, 8, ["cell", "classes"]))
                   ]) : renderSlot(_ctx.$slots, "value-cell", {
                     key: i,
-                    cell
+                    cell,
+                    highlight: $setup.highlightText,
+                    highlightValue: $props.highlight
                   }, () => [
                     (openBlock(), createBlock($setup["ValueCell"], {
                       key: i,
                       cell,
-                      classes: $props.classes,
-                      "highlight-text": $setup.highlightText
-                    }, null, 8, ["cell", "classes", "highlight-text"]))
+                      classes: $props.classes
+                    }, null, 8, ["cell", "classes"]))
                   ])
                 ],
                 64

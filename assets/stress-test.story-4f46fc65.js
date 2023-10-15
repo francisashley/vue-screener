@@ -1,5 +1,5 @@
 import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-e4b58c02.js";
-import { _ as _export_sfc, p as primitivesData, a as VueScreener } from "./primitives-data-74a0c708.js";
+import { _ as _export_sfc, p as primitivesData, a as VueScreener } from "./primitives-data-599f3e14.js";
 const baseData = [
   {
     id: 1,

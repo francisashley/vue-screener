@@ -50,10 +50,10 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   });
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./custom-cells.story-1526d89d.js"), true ? ["assets/custom-cells.story-1526d89d.js","assets/vendor-e4b58c02.js","assets/primitives-data-74a0c708.js","assets/data-f7c6478e.js"] : void 0));
-const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./sticky-actions.story-b12f2656.js"), true ? ["assets/sticky-actions.story-b12f2656.js","assets/vendor-e4b58c02.js","assets/primitives-data-74a0c708.js","assets/data-f7c6478e.js"] : void 0));
-const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./stress-test.story-c026596d.js"), true ? ["assets/stress-test.story-c026596d.js","assets/vendor-e4b58c02.js","assets/primitives-data-74a0c708.js"] : void 0));
-const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./usage.story-1ce39804.js"), true ? ["assets/usage.story-1ce39804.js","assets/vendor-e4b58c02.js","assets/primitives-data-74a0c708.js","assets/data-f7c6478e.js"] : void 0));
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./custom-cells.story-5d2f1322.js"), true ? ["assets/custom-cells.story-5d2f1322.js","assets/vendor-e4b58c02.js","assets/primitives-data-599f3e14.js","assets/data-f7c6478e.js"] : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./sticky-actions.story-23ef50d3.js"), true ? ["assets/sticky-actions.story-23ef50d3.js","assets/vendor-e4b58c02.js","assets/primitives-data-599f3e14.js","assets/data-f7c6478e.js"] : void 0));
+const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./stress-test.story-4f46fc65.js"), true ? ["assets/stress-test.story-4f46fc65.js","assets/vendor-e4b58c02.js","assets/primitives-data-599f3e14.js"] : void 0));
+const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./usage.story-54124d17.js"), true ? ["assets/usage.story-54124d17.js","assets/vendor-e4b58c02.js","assets/primitives-data-599f3e14.js","assets/data-f7c6478e.js"] : void 0));
 let files = [
   { "id": "src-stories-custom-cells-story-vue", "path": ["custom-cells"], "filePath": "src/stories/custom-cells.story.vue", "story": { "id": "src-stories-custom-cells-story-vue", "title": "custom-cells", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-custom-cells-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 0, component: Comp0, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-custom-cells-story-vue-56ca9899.js"), true ? [] : void 0) },
   { "id": "src-stories-sticky-actions-story-vue", "path": ["sticky-actions"], "filePath": "src/stories/sticky-actions.story.vue", "story": { "id": "src-stories-sticky-actions-story-vue", "title": "sticky-actions", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-sticky-actions-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 1, component: Comp1, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-sticky-actions-story-vue-b51ee9f9.js"), true ? [] : void 0) },
@@ -81,12 +81,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-f4255175.js"), true ? ["assets/HomeView.vue-f4255175.js","assets/vendor-e4b58c02.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-0ff1eb07.js"), true ? ["assets/HomeView.vue-0ff1eb07.js","assets/vendor-e4b58c02.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-f4da0f9d.js"), true ? ["assets/StoryView.vue-f4da0f9d.js","assets/vendor-e4b58c02.js","assets/MobileOverlay.vue2-b0adf6fb.js","assets/BaseEmpty.vue-82e6eae7.js","assets/state-11377e90.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-e487c6bc.js"), true ? ["assets/StoryView.vue-e487c6bc.js","assets/vendor-e4b58c02.js","assets/MobileOverlay.vue2-9ef55800.js","assets/BaseEmpty.vue-404657d3.js","assets/state-95ddfd13.js"] : void 0)
     }
   ]
 });

@@ -1,8 +1,8 @@
-import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode, ay as mergeProps, az as createBaseVNode, aA as createTextVNode } from "./vendor-e4b58c02.js";
-import { _ as _export_sfc, p as primitivesData, H as HeaderCell, V as ValueCell, a as VueScreener } from "./primitives-data-74a0c708.js";
+import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode, aB as normalizeProps, aC as guardReactiveProps, aA as createTextVNode, az as createBaseVNode } from "./vendor-e4b58c02.js";
+import { _ as _export_sfc, p as primitivesData, a as VueScreener, H as HeaderCell, V as ValueCell } from "./primitives-data-599f3e14.js";
 import { b as baseData } from "./data-f7c6478e.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "custom-cells.story",
+  __name: "sticky-actions.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const options = {
@@ -40,21 +40,20 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             state.data = ["a", "b", "c", "d"];
             break;
         }
+        console.log("a", state.select);
       }
     );
-    const __returned__ = { options, state, get HeaderCell() {
-      return HeaderCell;
-    }, get ValueCell() {
-      return ValueCell;
-    }, get VueScreener() {
+    const handleClickEdit = (cell) => console.log("edit", cell);
+    const handleClickDelete = (cell) => console.log("delete", cell);
+    const __returned__ = { options, state, handleClickEdit, handleClickDelete, get VueScreener() {
       return VueScreener;
-    } };
+    }, HeaderCell, ValueCell };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
-const _hoisted_1 = ["innerHTML"];
-const _hoisted_2 = ["innerHTML"];
+const _hoisted_1 = ["onClick"];
+const _hoisted_2 = ["onClick"];
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_HstSelect = resolveComponent("HstSelect");
   const _component_Variant = resolveComponent("Variant");
@@ -72,18 +71,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         default: withCtx(() => [
           createVNode($setup["VueScreener"], {
-            data: $setup.state.data
+            data: $setup.state.data,
+            "include-sticky-actions": ""
           }, {
-            "header-cell": withCtx((props) => [
+            "sticky-actions-head": withCtx((props) => [
               createVNode(
                 $setup["HeaderCell"],
-                mergeProps(props, { style: { background: "red" } }),
+                normalizeProps(guardReactiveProps(props)),
                 {
                   default: withCtx(() => [
-                    createBaseVNode("span", {
-                      innerHTML: props.cell.value
-                    }, null, 8, _hoisted_1),
-                    createTextVNode(" [stuff] ")
+                    createTextVNode("Actions")
                   ]),
                   _: 2
                   /* DYNAMIC */
@@ -92,16 +89,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 /* FULL_PROPS, DYNAMIC_SLOTS */
               )
             ]),
-            "value-cell": withCtx((props) => [
+            "sticky-actions-value": withCtx((props) => [
               createVNode(
                 $setup["ValueCell"],
-                mergeProps(props, { style: { background: "blue" } }),
+                normalizeProps(guardReactiveProps(props)),
                 {
                   default: withCtx(() => [
-                    createBaseVNode("span", {
-                      innerHTML: props.cell.value
-                    }, null, 8, _hoisted_2),
-                    createTextVNode(" [stuff] ")
+                    createBaseVNode("button", {
+                      onClick: ($event) => $setup.handleClickEdit(props.cell)
+                    }, "Edit", 8, _hoisted_1),
+                    createBaseVNode("button", {
+                      onClick: ($event) => $setup.handleClickDelete(props.cell)
+                    }, "Delete", 8, _hoisted_2)
                   ]),
                   _: 2
                   /* DYNAMIC */
@@ -122,8 +121,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/custom-cells.story.vue";
-const customCells_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/custom-cells.story.vue"]]);
+_sfc_main.__file = "src/stories/sticky-actions.story.vue";
+const stickyActions_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/sticky-actions.story.vue"]]);
 export {
-  customCells_story as default
+  stickyActions_story as default
 };
