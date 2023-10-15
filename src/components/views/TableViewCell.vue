@@ -17,7 +17,7 @@
     ]"
   >
     <slot>
-      <span v-html="cell.value" />
+      <span v-html="cell.highlightedValue" />
     </slot>
   </div>
 </template>
