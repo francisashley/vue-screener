@@ -169,6 +169,7 @@ Add custom classes:
     "TABLE_VIEW_SORT_ASC": "...",
     "TABLE_VIEW_SORT_DESC": "...",
     "JSON_VIEW": "...",
+    "NO_DATA_VIEW": "....",
     "PAGINATION": "...",
     "PAGINATION_INFO": "...",
     "PAGINATION_NAV": "...",
@@ -238,6 +239,9 @@ Or style default classes:
 
 // JSON view classes
 .vue-screener__json-view
+
+// No data view
+.vue-screener__no-data-view
 
 // Sort selector classes
 .vue-screener__sort-selector

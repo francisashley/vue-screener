@@ -24,7 +24,7 @@
       </header>
       <main :class="['vue-screener__main', classes.MAIN]">
         <TableView
-          v-if="renderFormat === 'table'"
+          v-if="hasData && renderFormat === 'table'"
           :fields="getFields"
           :rows="getPaginatedData"
           :highlight="highlightQuery"
@@ -47,7 +47,8 @@
             <slot name="sticky-actions-value" v-bind="cellProps" />
           </template>
         </TableView>
-        <JsonView v-else :data="getPaginatedData" :class="classes.JSON_VIEW" />
+        <JsonView v-else-if="hasData" :data="getPaginatedData" :class="classes.JSON_VIEW" />
+        <NoDataView v-else  :class="classes.NO_DATA_VIEW" />
       </main>
       <footer :class="['vue-screener__footer', classes.FOOTER]">
         <Pagination
@@ -72,6 +73,7 @@
 <script lang="ts" setup>
 import JsonView from "./views/JsonView.vue";
 import TableView from "./views/TableView.vue";
+import NoDataView from "./views/NoDataView.vue";
 import VueScreenerSearch, {
   SearchQueryOption,
 } from "./stuff/VueScreenerSearch.vue";
@@ -118,6 +120,7 @@ export type InlineClass =
   | "TABLE_VIEW_SORT_ASC"
   | "TABLE_VIEW_SORT_DESC"
   | "JSON_VIEW"
+  | "NO_DATA_VIEW"
   | "PAGINATION"
   | "PAGINATION_INFO"
   | "PAGINATION_NAV"
@@ -246,12 +249,22 @@ const getSortedData = computed((): NormalisedRow[] => {
 });
 
 const getPaginatedData = computed((): NormalisedRow[] => {
+  console.log(` >>>`, getPaginated({
+    rows: getSortedData.value,
+    page: stagedCurrentPage.value - 1,
+    perPage: stagedPerPage.value,
+    withPlaceholders: true,
+  }))
   return getPaginated({
     rows: getSortedData.value,
     page: stagedCurrentPage.value - 1,
     perPage: stagedPerPage.value,
     withPlaceholders: true,
-  });
+  })
+});
+
+const hasData = computed((): Boolean => {
+  return getPaginatedData.value.filter(row => row !==null).length > 0
 });
 
 const onInputSearch = (query: string) => {
