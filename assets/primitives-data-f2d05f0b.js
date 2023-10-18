@@ -504,7 +504,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     searchOptions: { type: Array, required: true },
     classes: { type: Object, required: false }
   },
-  emits: ["search", "update-options"],
+  emits: ["input", "search", "update-options"],
   setup(__props, { expose: __expose, emit }) {
     __expose();
     const {
@@ -521,8 +521,8 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       const isPressingUp = event.key === "ArrowUp";
       const isPressingDown = event.key === "ArrowDown";
       const isEnter = event.key === "Enter";
+      const searchQuery = event.target.value;
       if (isEnter) {
-        const searchQuery = event.target.value;
         search2(searchQuery);
         if (searchQuery) {
           history.value.push(searchQuery);
@@ -540,10 +540,14 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       }
       search2(history.value[historyIndex.value]);
     };
+    const onInput = (event) => {
+      const query2 = event.target.value;
+      emit("input", query2);
+    };
     const search2 = (searchQuery) => {
       emit("search", searchQuery);
     };
-    const __returned__ = { emit, history, historyIndex, useRegEx, onKeydown, search: search2 };
+    const __returned__ = { emit, history, historyIndex, useRegEx, onKeydown, onInput, search: search2 };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -553,6 +557,7 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("input", {
     value: $props.query,
     onKeydown: $setup.onKeydown,
+    onInput: $setup.onInput,
     type: "text",
     class: normalizeClass(["vue-screener__search", [$setup.useRegEx && !$props.isValidQuery && "vue-screener__search--error"]]),
     placeholder: "Search..."
@@ -1173,13 +1178,13 @@ function getTypeOf(value) {
 }
 const testCriteria = (subject, pattern, options) => {
   const { matchCase = false, matchWord = false, useRegExp = false } = options;
-  const flags = matchCase ? "g" : "gi";
+  if (!useRegExp) {
+    pattern = escapeRegExp(pattern);
+  }
   if (matchWord) {
     pattern = `\\b(${pattern})\\b`;
   }
-  if (!useRegExp) {
-    subject = escapeRegExp(subject);
-  }
+  const flags = matchCase ? "g" : "gi";
   return new RegExp(pattern, flags).test(subject);
 };
 const parseSearchQuery = (searchQuery) => {
@@ -1211,9 +1216,6 @@ function search(options) {
     includeFilters
   } = parseSearchQuery(searchQuery);
   const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
-  if (!useRegExp || !isValidRegExp(parsedSearchQuery)) {
-    parsedSearchQuery = escapeRegExp(parsedSearchQuery);
-  }
   const testFilters = (filters, rowMap) => {
     return filters.some(([field, value]) => {
       if (rowMap[field]) {
@@ -1268,6 +1270,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     __expose();
     const props = __props;
     const searchQuery = ref("");
+    const highlightQuery = ref("");
     const stagedCurrentPage = ref(props.currentPage);
     const stagedPerPage = ref(props.perPage);
     const renderFormat = ref("table");
@@ -1345,12 +1348,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         withPlaceholders: true
       });
     });
+    const onInputSearch = (query) => {
+      highlightQuery.value = query;
+    };
     const onSearch = (query) => {
       searchQuery.value = query;
+      highlightQuery.value = query;
     };
     const onChangeSearchOptions = (options) => {
       searchOptions.value = options;
-      onSearch(searchQuery.value);
+      onSearch(highlightQuery.value);
     };
     const onSelectFormat = (format) => {
       renderFormat.value = format;
@@ -1367,7 +1374,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
       sortField.value = updatedSortField;
     };
-    const __returned__ = { props, searchQuery, stagedCurrentPage, stagedPerPage, renderFormat, searchOptions, sortField, sortDirection, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getSortedData, getPaginatedData, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, onChangePerPage, handleSort, JsonView, TableView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
+    const __returned__ = { props, searchQuery, highlightQuery, stagedCurrentPage, stagedPerPage, renderFormat, searchOptions, sortField, sortDirection, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getSortedData, getPaginatedData, onInputSearch, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, onChangePerPage, handleSort, JsonView, TableView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -1404,6 +1411,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 "is-valid-query": $setup.isRegExFriendlySearchQuery,
                 "search-options": $setup.searchOptions,
                 classes: $props.classes,
+                onInput: $setup.onInputSearch,
                 onSearch: $setup.onSearch
               }, null, 8, ["class", "query", "is-valid-query", "search-options", "classes"]),
               createVNode($setup["Settings"], {
@@ -1427,7 +1435,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 key: 0,
                 fields: $setup.getFields,
                 rows: $setup.getPaginatedData,
-                highlight: $setup.searchQuery,
+                highlight: $setup.highlightQuery,
                 "sort-direction": $setup.sortDirection,
                 "sort-field": $setup.sortField,
                 classes: $props.classes,
