@@ -126,7 +126,7 @@ const props = withDefaults(
 const emit = defineEmits(["change-page", "change-per-page"]);
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.totalItems / props.perPage) || 1;
+  return Math.ceil(props.totalItems / props.perPage) || 0;
 });
 
 const getPages = computed(() => {
