@@ -14,7 +14,7 @@
           </template>
           <template #value-cell="props">
             <ValueCell v-bind="props" :style="{ background: 'blue' }">
-              <span v-html="props.cell.value" />
+              <span v-html="props.highlight(String(props.cell.value), props.highlightValue)" />
               [stuff]
             </ValueCell>
           </template>
