@@ -11,6 +11,7 @@
           :is-valid-query="isRegExFriendlySearchQuery"
           :search-options="searchOptions"
           :classes="classes"
+          @input="onInputSearch"
           @search="onSearch"
         />
         <Settings
@@ -26,7 +27,7 @@
           v-if="renderFormat === 'table'"
           :fields="getFields"
           :rows="getPaginatedData"
-          :highlight="searchQuery"
+          :highlight="highlightQuery"
           :sort-direction="sortDirection"
           :sort-field="sortField"
           :classes="classes"
@@ -155,6 +156,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const searchQuery = ref<string>("");
+const highlightQuery = ref<string>("");
 const stagedCurrentPage = ref<number>(props.currentPage);
 const stagedPerPage = ref<number>(props.perPage);
 const renderFormat = ref<"table" | "raw">("table");
@@ -252,13 +254,18 @@ const getPaginatedData = computed((): NormalisedRow[] => {
   });
 });
 
+const onInputSearch = (query: string) => {
+  highlightQuery.value = query;
+};
+
 const onSearch = (query: string) => {
   searchQuery.value = query;
+  highlightQuery.value = query;
 };
 
 const onChangeSearchOptions = (options: SearchQueryOption[]) => {
   searchOptions.value = options;
-  onSearch(searchQuery.value);
+  onSearch(highlightQuery.value);
 };
 
 const onSelectFormat = (format: "table" | "raw") => {

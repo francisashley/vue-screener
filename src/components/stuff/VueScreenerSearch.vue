@@ -2,6 +2,7 @@
   <input
     :value="query"
     @keydown="onKeydown"
+    @input="onInput"
     type="text"
     class="vue-screener__search"
     :class="[useRegEx && !isValidQuery && 'vue-screener__search--error']"
@@ -26,7 +27,7 @@ const {
   classes?: Partial<Record<InlineClass, string>>;
 }>();
 
-const emit = defineEmits(["search", "update-options"]);
+const emit = defineEmits(["input", "search", "update-options"]);
 
 const history = ref<string[]>([]);
 const historyIndex = ref<number | null>(null);
@@ -40,8 +41,9 @@ const onKeydown = (event: KeyboardEvent) => {
   const isPressingDown = event.key === "ArrowDown";
   const isEnter = event.key === "Enter";
 
+  const searchQuery = (event.target as HTMLInputElement).value;
+
   if (isEnter) {
-    const searchQuery = (event.target as HTMLInputElement).value;
     search(searchQuery);
     if (searchQuery) {
       history.value.push(searchQuery);
@@ -63,6 +65,12 @@ const onKeydown = (event: KeyboardEvent) => {
   }
 
   search(history.value[historyIndex.value]);
+};
+
+const onInput = (event: Event) => {
+  const query = (event.target as HTMLInputElement).value;
+
+  emit("input", query);
 };
 
 const search = (searchQuery: string): void => {
