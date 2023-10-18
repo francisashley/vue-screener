@@ -2883,6 +2883,7 @@ body {
   cursor: pointer;
 }.vue-screener__table-view {
   color: black;
+  white-space: nowrap;
 }
 .vue-screener__table-view__cell {
   border-bottom: thin solid black;
@@ -2923,6 +2924,10 @@ body {
 }
 .vue-screener__table-view__cell--is-last {
   border-right: unset;
+}.vue-screener__no-data-view {
+  text-align: center;
+  padding: 150px 0;
+  border-bottom: thin solid;
 }.vue-screener__search {
   width: 200px;
   padding: 0 4px;

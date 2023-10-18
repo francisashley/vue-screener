@@ -1,8 +1,8 @@
 {
   "stories": [
     {
-      "id": "src-stories-custom-cells-story-vue",
-      "title": "custom-cells",
+      "id": "src-stories-1-basic-usage-story-vue",
+      "title": "1 basic-usage",
       "layout": {
         "type": "single",
         "iframe": true
@@ -10,21 +10,21 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-stories-custom-cells-story-vue-0",
+          "id": "src-stories-1-basic-usage-story-vue-0",
           "title": "default"
         }
       ],
-      "relativePath": "src/stories/custom-cells.story.vue",
+      "relativePath": "src/stories/1 basic-usage.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "custom-cells"
+        "1 basic-usage"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-sticky-actions-story-vue",
-      "title": "sticky-actions",
+      "id": "src-stories-2-sticky-actions-story-vue",
+      "title": "2 sticky-actions",
       "layout": {
         "type": "single",
         "iframe": true
@@ -32,21 +32,21 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-stories-sticky-actions-story-vue-0",
+          "id": "src-stories-2-sticky-actions-story-vue-0",
           "title": "default"
         }
       ],
-      "relativePath": "src/stories/sticky-actions.story.vue",
+      "relativePath": "src/stories/2 sticky-actions.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "sticky-actions"
+        "2 sticky-actions"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-stress-test-story-vue",
-      "title": "stress-test",
+      "id": "src-stories-3-custom-cells-story-vue",
+      "title": "3 custom-cells",
       "layout": {
         "type": "single",
         "iframe": true
@@ -54,21 +54,21 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-stories-stress-test-story-vue-0",
+          "id": "src-stories-3-custom-cells-story-vue-0",
           "title": "default"
         }
       ],
-      "relativePath": "src/stories/stress-test.story.vue",
+      "relativePath": "src/stories/3 custom-cells.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "stress-test"
+        "3 custom-cells"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-usage-story-vue",
-      "title": "usage",
+      "id": "src-stories-4-stress-test-story-vue",
+      "title": "4 stress-test",
       "layout": {
         "type": "single",
         "iframe": true
@@ -76,14 +76,36 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-stories-usage-story-vue-0",
+          "id": "src-stories-4-stress-test-story-vue-0",
           "title": "default"
         }
       ],
-      "relativePath": "src/stories/usage.story.vue",
+      "relativePath": "src/stories/4 stress-test.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "usage"
+        "4 stress-test"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-5-no-data-story-vue",
+      "title": "5 no-data",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-stories-5-no-data-story-vue-0",
+          "title": "default"
+        }
+      ],
+      "relativePath": "src/stories/5 no-data.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "5 no-data"
       ],
       "virtual": false,
       "markdownFile": null
