@@ -288,7 +288,6 @@ const handleSort = (updatedSortField: string) => {
   font-size: 14px;
   border: thin solid black;
   border-radius: 8px;
-  overflow: hidden;
   background: #fff;
 
   &__header {
