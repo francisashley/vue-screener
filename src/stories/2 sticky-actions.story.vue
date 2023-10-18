@@ -11,8 +11,10 @@
           </template>
           <template #sticky-actions-value="props">
             <ValueCell v-bind="props">
-              <button @click="handleClickEdit(props.cell)">Edit</button>
-              <button @click="handleClickDelete(props.cell)">Delete</button>
+              <div :style="{display: 'flex', gap: '4px'}">
+                <button @click="handleClickEdit(props.cell)">Edit</button>
+                <button @click="handleClickDelete(props.cell)">Delete</button>
+              </div>
             </ValueCell>
           </template>
         </VueScreener>

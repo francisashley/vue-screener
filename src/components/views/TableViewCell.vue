@@ -49,6 +49,7 @@ defineProps<{
 <style lang="scss">
 .vue-screener__table-view {
   color: black;
+  white-space: nowrap;
 
   &__cell {
     border-bottom: thin solid black;
