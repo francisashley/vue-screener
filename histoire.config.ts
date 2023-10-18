@@ -7,5 +7,5 @@ export default defineConfig({
   outDir: "docs",
   vite: {
     base: process.env.HISTOIRE_BASE || "/",
-  },
+  }
 });
