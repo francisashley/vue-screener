@@ -1349,12 +1349,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     });
     const getPaginatedData = computed(() => {
-      console.log(` >>>`, getPaginated({
-        rows: getSortedData.value,
-        page: stagedCurrentPage.value - 1,
-        perPage: stagedPerPage.value,
-        withPlaceholders: true
-      }));
       return getPaginated({
         rows: getSortedData.value,
         page: stagedCurrentPage.value - 1,

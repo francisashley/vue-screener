@@ -50,11 +50,11 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   });
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./1 basic-usage.story-a9d25690.js"), true ? ["assets/1 basic-usage.story-a9d25690.js","assets/vendor-7fc758f2.js","assets/VueScreener-b4e3eb70.js","assets/data-f7c6478e.js","assets/primitives-data-16d3af5c.js"] : void 0));
-const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./2 sticky-actions.story-b845a83a.js"), true ? ["assets/2 sticky-actions.story-b845a83a.js","assets/vendor-7fc758f2.js","assets/VueScreener-b4e3eb70.js","assets/data-f7c6478e.js","assets/primitives-data-16d3af5c.js"] : void 0));
-const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./3 custom-cells.story-cee6fce7.js"), true ? ["assets/3 custom-cells.story-cee6fce7.js","assets/vendor-7fc758f2.js","assets/VueScreener-b4e3eb70.js","assets/data-f7c6478e.js","assets/primitives-data-16d3af5c.js"] : void 0));
-const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./4 stress-test.story-e8adbcd6.js"), true ? ["assets/4 stress-test.story-e8adbcd6.js","assets/vendor-7fc758f2.js","assets/VueScreener-b4e3eb70.js","assets/primitives-data-16d3af5c.js"] : void 0));
-const Comp4 = defineAsyncComponent(() => __vitePreload(() => import("./5 no-data.story-3ce77697.js"), true ? ["assets/5 no-data.story-3ce77697.js","assets/vendor-7fc758f2.js","assets/VueScreener-b4e3eb70.js"] : void 0));
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./1 basic-usage.story-92667ae8.js"), true ? ["assets/1 basic-usage.story-92667ae8.js","assets/vendor-7fc758f2.js","assets/VueScreener-efab0c84.js","assets/data-f7c6478e.js","assets/primitives-data-16d3af5c.js"] : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./2 sticky-actions.story-9ec2aa88.js"), true ? ["assets/2 sticky-actions.story-9ec2aa88.js","assets/vendor-7fc758f2.js","assets/VueScreener-efab0c84.js","assets/data-f7c6478e.js","assets/primitives-data-16d3af5c.js"] : void 0));
+const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./3 custom-cells.story-41b022a4.js"), true ? ["assets/3 custom-cells.story-41b022a4.js","assets/vendor-7fc758f2.js","assets/VueScreener-efab0c84.js","assets/data-f7c6478e.js","assets/primitives-data-16d3af5c.js"] : void 0));
+const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./4 stress-test.story-d5969a77.js"), true ? ["assets/4 stress-test.story-d5969a77.js","assets/vendor-7fc758f2.js","assets/VueScreener-efab0c84.js","assets/primitives-data-16d3af5c.js"] : void 0));
+const Comp4 = defineAsyncComponent(() => __vitePreload(() => import("./5 no-data.story-7c26bb21.js"), true ? ["assets/5 no-data.story-7c26bb21.js","assets/vendor-7fc758f2.js","assets/VueScreener-efab0c84.js"] : void 0));
 let files = [
   { "id": "src-stories-1-basic-usage-story-vue", "path": ["1 basic-usage"], "filePath": "src/stories/1 basic-usage.story.vue", "story": { "id": "src-stories-1-basic-usage-story-vue", "title": "1 basic-usage", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-1-basic-usage-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 0, component: Comp0, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-1-basic-usage-story-vue-8d34001b.js"), true ? [] : void 0) },
   { "id": "src-stories-2-sticky-actions-story-vue", "path": ["2 sticky-actions"], "filePath": "src/stories/2 sticky-actions.story.vue", "story": { "id": "src-stories-2-sticky-actions-story-vue", "title": "2 sticky-actions", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-2-sticky-actions-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 1, component: Comp1, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-2-sticky-actions-story-vue-5ebb22bd.js"), true ? [] : void 0) },
@@ -83,12 +83,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-85fdd921.js"), true ? ["assets/HomeView.vue-85fdd921.js","assets/vendor-7fc758f2.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-87116e8d.js"), true ? ["assets/HomeView.vue-87116e8d.js","assets/vendor-7fc758f2.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-0055317a.js"), true ? ["assets/StoryView.vue-0055317a.js","assets/vendor-7fc758f2.js","assets/MobileOverlay.vue2-72609d4e.js","assets/BaseEmpty.vue-79505bde.js","assets/state-c99da291.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-6929da43.js"), true ? ["assets/StoryView.vue-6929da43.js","assets/vendor-7fc758f2.js","assets/MobileOverlay.vue2-1d8af0af.js","assets/BaseEmpty.vue-0d552b8d.js","assets/state-661a194c.js"] : void 0)
     }
   ]
 });

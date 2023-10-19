@@ -1,5 +1,5 @@
 import { aq as defineComponent, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-7fc758f2.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-b4e3eb70.js";
+import { _ as _export_sfc, V as VueScreener } from "./VueScreener-efab0c84.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "5 no-data.story",
   setup(__props, { expose: __expose }) {
