@@ -106,7 +106,7 @@ export function search(options: {
   const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
 
   // Check if any of the filters match the row.
-  const testFilters = (
+  const testExcludeFilters = (
     filters: [string, string][],
     rowMap: Record<string, NormalisedField>
   ): boolean => {
@@ -121,6 +121,22 @@ export function search(options: {
     });
   };
 
+  const testIncludeFilters = (
+    filters: [string, string][],
+    rowMap: Record<string, NormalisedField>
+  ): boolean => {
+    return filters.every(([field, value]) => {
+      if (rowMap[field]) {
+        return testCriteria(rowMap[field].value as string, value, {
+          matchCase,
+          matchWord: true,
+          useRegExp,
+        });
+      }
+    });
+  };
+
+
   // Filter the rows.
   return rows.filter((row): boolean => {
     // Create a map of the row fields for easy look up.
@@ -133,11 +149,11 @@ export function search(options: {
     let shouldInclude = true;
     let meetsSearchCriteria = true;
 
-    if (excludeFilters.length && testFilters(excludeFilters, rowMap)) {
+    if (excludeFilters.length && testExcludeFilters(excludeFilters, rowMap)) {
       shouldExclude = true;
     }
 
-    if (includeFilters.length && !testFilters(includeFilters, rowMap)) {
+    if (includeFilters.length && !testIncludeFilters(includeFilters, rowMap)) {
       shouldInclude = false;
     }
 
