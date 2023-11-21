@@ -22,7 +22,7 @@ const testCriteria = (
   }
 ): boolean => {
   const { matchCase = false, matchWord = false, useRegExp = false } = options;
-  
+
   if (!useRegExp) {
     pattern = escapeRegExp(pattern);
   }
@@ -51,17 +51,37 @@ const testCriteria = (
  */
 const parseSearchQuery = (searchQuery: string) => {
   const excludeFilters: [field: string, value: string][] = [];
+  // get exclude filters that look like: field:value
   searchQuery = searchQuery.replace(/(?<!\w)-\w+:\w+/g, (match) => {
     const [field, value] = match.replace("-", "").split(":");
     excludeFilters.push([field, value]);
     return "";
   });
 
+  // get exclude filters that look like: -field:"value" or -field:"some value"
+  searchQuery = searchQuery
+    .replace(/(?<!\w)-\w+:"[^"]*"$/g, (match) => {
+      const [field, value] = match.replace("-", "").split(":");
+      excludeFilters.push([field, value.slice(1, -1)]);
+      return "";
+    })
+    .trim();
+
   const includeFilters: [field: string, value: string][] = [];
+  // get include filters that look like: field:value
   searchQuery = searchQuery
     .replace(/\b\w+:\w+\b/g, (match) => {
       const [field, value] = match.split(":");
       includeFilters.push([field, value]);
+      return "";
+    })
+    .trim();
+
+  // get include filters that look like: field:"value" or field:"some value"
+  searchQuery = searchQuery
+    .replace(/\b\w+:"[^"]*"$/g, (match) => {
+      const [field, value] = match.split(":");
+      includeFilters.push([field, value.slice(1, -1)]);
       return "";
     })
     .trim();
@@ -135,7 +155,6 @@ export function search(options: {
       }
     });
   };
-
 
   // Filter the rows.
   return rows.filter((row): boolean => {
