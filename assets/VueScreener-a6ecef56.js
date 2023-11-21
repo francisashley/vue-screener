@@ -1202,12 +1202,22 @@ const parseSearchQuery = (searchQuery) => {
     excludeFilters.push([field, value]);
     return "";
   });
+  searchQuery = searchQuery.replace(new RegExp('(?<!\\w)-\\w+:"[^"]*"$', "g"), (match) => {
+    const [field, value] = match.replace("-", "").split(":");
+    excludeFilters.push([field, value.slice(1, -1)]);
+    return "";
+  }).trim();
   const includeFilters = [];
   searchQuery = searchQuery.replace(/\b\w+:\w+\b/g, (match) => {
     const [field, value] = match.split(":");
     includeFilters.push([field, value]);
     return "";
-  });
+  }).trim();
+  searchQuery = searchQuery.replace(/\b\w+:"[^"]*"$/g, (match) => {
+    const [field, value] = match.split(":");
+    includeFilters.push([field, value.slice(1, -1)]);
+    return "";
+  }).trim();
   return {
     searchQuery,
     excludeFilters,
@@ -1224,8 +1234,19 @@ function search(options) {
     includeFilters
   } = parseSearchQuery(searchQuery);
   const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
-  const testFilters = (filters, rowMap) => {
+  const testExcludeFilters = (filters, rowMap) => {
     return filters.some(([field, value]) => {
+      if (rowMap[field]) {
+        return testCriteria(rowMap[field].value, value, {
+          matchCase,
+          matchWord: true,
+          useRegExp
+        });
+      }
+    });
+  };
+  const testIncludeFilters = (filters, rowMap) => {
+    return filters.every(([field, value]) => {
       if (rowMap[field]) {
         return testCriteria(rowMap[field].value, value, {
           matchCase,
@@ -1243,10 +1264,10 @@ function search(options) {
     let shouldExclude = false;
     let shouldInclude = true;
     let meetsSearchCriteria = true;
-    if (excludeFilters.length && testFilters(excludeFilters, rowMap)) {
+    if (excludeFilters.length && testExcludeFilters(excludeFilters, rowMap)) {
       shouldExclude = true;
     }
-    if (includeFilters.length && !testFilters(includeFilters, rowMap)) {
+    if (includeFilters.length && !testIncludeFilters(includeFilters, rowMap)) {
       shouldInclude = false;
     }
     meetsSearchCriteria = row.some((field) => {

@@ -1,9 +1,9 @@
-import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-7fc758f2.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-efab0c84.js";
-import { b as baseData } from "./data-f7c6478e.js";
+import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode, aC as mergeProps, aB as createBaseVNode, aA as createTextVNode } from "./vendor-7fc758f2.js";
+import { _ as _export_sfc, H as HeaderCell, a as ValueCell, V as VueScreener } from "./VueScreener-a6ecef56.js";
+import { b as baseData } from "./data-32ab9faf.js";
 import { p as primitivesData } from "./primitives-data-16d3af5c.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "1 basic-usage.story",
+  __name: "3 custom-cells.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const options = {
@@ -41,16 +41,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             state.data = ["a", "b", "c", "d"];
             break;
         }
-        console.log("a", state.select);
       }
     );
-    const __returned__ = { options, state, get VueScreener() {
+    const __returned__ = { options, state, get HeaderCell() {
+      return HeaderCell;
+    }, get ValueCell() {
+      return ValueCell;
+    }, get VueScreener() {
       return VueScreener;
     } };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
 });
+const _hoisted_1 = ["innerHTML"];
+const _hoisted_2 = ["innerHTML"];
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_HstSelect = resolveComponent("HstSelect");
   const _component_Variant = resolveComponent("Variant");
@@ -69,7 +74,46 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode($setup["VueScreener"], {
             data: $setup.state.data
-          }, null, 8, ["data"])
+          }, {
+            "header-cell": withCtx((props) => [
+              createVNode(
+                $setup["HeaderCell"],
+                mergeProps(props, { style: { background: "red" } }),
+                {
+                  default: withCtx(() => [
+                    createBaseVNode("span", {
+                      innerHTML: props.cell.value
+                    }, null, 8, _hoisted_1),
+                    createTextVNode(" [stuff] ")
+                  ]),
+                  _: 2
+                  /* DYNAMIC */
+                },
+                1040
+                /* FULL_PROPS, DYNAMIC_SLOTS */
+              )
+            ]),
+            "value-cell": withCtx((props) => [
+              createVNode(
+                $setup["ValueCell"],
+                mergeProps(props, { style: { background: "blue" } }),
+                {
+                  default: withCtx(() => [
+                    createBaseVNode("span", {
+                      innerHTML: props.highlight(String(props.cell.value), props.highlightValue)
+                    }, null, 8, _hoisted_2),
+                    createTextVNode(" [stuff] ")
+                  ]),
+                  _: 2
+                  /* DYNAMIC */
+                },
+                1040
+                /* FULL_PROPS, DYNAMIC_SLOTS */
+              )
+            ]),
+            _: 1
+            /* STABLE */
+          }, 8, ["data"])
         ]),
         _: 1
         /* STABLE */
@@ -79,8 +123,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/1 basic-usage.story.vue";
-const _1_basicUsage_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1 basic-usage.story.vue"]]);
+_sfc_main.__file = "src/stories/3 custom-cells.story.vue";
+const _3_customCells_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/3 custom-cells.story.vue"]]);
 export {
-  _1_basicUsage_story as default
+  _3_customCells_story as default
 };
