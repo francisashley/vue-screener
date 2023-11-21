@@ -58,11 +58,13 @@ const parseSearchQuery = (searchQuery: string) => {
   });
 
   const includeFilters: [field: string, value: string][] = [];
-  searchQuery = searchQuery.replace(/\b\w+:\w+\b/g, (match) => {
-    const [field, value] = match.split(":");
-    includeFilters.push([field, value]);
-    return "";
-  });
+  searchQuery = searchQuery
+    .replace(/\b\w+:\w+\b/g, (match) => {
+      const [field, value] = match.split(":");
+      includeFilters.push([field, value]);
+      return "";
+    })
+    .trim();
 
   return {
     searchQuery,
@@ -93,12 +95,14 @@ export function search(options: {
 
   if (!searchQuery) return options.rows;
 
+  // Parse search query and extract filters.
   let {
     searchQuery: parsedSearchQuery,
     excludeFilters,
     includeFilters,
   } = parseSearchQuery(searchQuery);
 
+  // Get the search options.
   const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
 
   // Check if any of the filters match the row.
@@ -117,7 +121,9 @@ export function search(options: {
     });
   };
 
+  // Filter the rows.
   return rows.filter((row): boolean => {
+    // Create a map of the row fields for easy look up.
     const rowMap: Record<string, NormalisedField> = row.reduce(
       (acc, field) => ({ ...acc, [field.key]: field }),
       {}
