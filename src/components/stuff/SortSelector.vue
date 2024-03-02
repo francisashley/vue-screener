@@ -1,31 +1,29 @@
 <template>
-  <div :class="['vue-screener__sort-selector', classes?.TABLE_VIEW_SORT]">
+  <div class="vue-screener__sort-selector">
     <sort-icon
-      :class="classes?.TABLE_VIEW_SORT_NONE"
+      class="vue-screener__sort-icon vue-screener__sort-icon--none"
       v-if="sortDirection === null"
     />
     <sort-up-icon
-      :class="classes?.TABLE_VIEW_SORT_ASC"
+      class="vue-screener__sort-icon vue-screener__sort-icon--asc"
       v-else-if="sortDirection === 'asc'"
     />
     <sort-down-icon
-      :class="classes?.TABLE_VIEW_SORT_DESC"
+      class="vue-screener__sort-icon vue-screener__sort-icon--desc"
       v-else-if="sortDirection === 'desc'"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import SortIcon from "../icons/Sort.vue";
-import SortUpIcon from "../icons/SortUp.vue";
-import SortDownIcon from "../icons/SortDown.vue";
-import { InlineClass } from "../VueScreener.vue";
+import SortIcon from "../icons/SortIcon.vue";
+import SortUpIcon from "../icons/SortUpIcon.vue";
+import SortDownIcon from "../icons/SortDownIcon.vue";
 
 type SortDirection = null | "asc" | "desc";
 
 const { sortDirection = null } = defineProps<{
   sortDirection?: SortDirection;
-  classes?: Partial<Record<InlineClass, string>>;
 }>();
 </script>
 

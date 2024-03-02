@@ -1,19 +1,18 @@
 <template>
   <div
     :class="[
-      'vue-screener__table-view__cell',
-      cell.isFirst && 'vue-screener__table-view__cell--is-first',
-      cell.isLast && 'vue-screener__table-view__cell--is-last',
-      cell.hasValue && 'vue-screener__table-view__cell--hasValue',
-      cell.isStickyAction && 'vue-screener__table-view__cell--is-sticky-action',
-      cell.type === 'string' && 'vue-screener__table-view__cell--string',
-      cell.type === 'number' && 'vue-screener__table-view__cell--number',
-      cell.type === 'boolean' && 'vue-screener__table-view__cell--boolean',
-      cell.type === 'symbol' && 'vue-screener__table-view__cell--symbol',
-      cell.type === 'undefined' && 'vue-screener__table-view__cell--undefined',
-      cell.type === 'object' && 'vue-screener__table-view__cell--object',
-      cell.type === 'null' && 'vue-screener__table-view__cell--null',
-      classes?.TABLE_VIEW_CELL,
+      'vs-table-view__cell',
+      cell.isFirst && 'vs-table-view__cell--is-first',
+      cell.isLast && 'vs-table-view__cell--is-last',
+      cell.hasValue && 'vs-table-view__cell--hasValue',
+      cell.isStickyAction && 'vs-table-view__cell--is-sticky-action',
+      cell.type === 'string' && 'vs-table-view__cell--string',
+      cell.type === 'number' && 'vs-table-view__cell--number',
+      cell.type === 'boolean' && 'vs-table-view__cell--boolean',
+      cell.type === 'symbol' && 'vs-table-view__cell--symbol',
+      cell.type === 'undefined' && 'vs-table-view__cell--undefined',
+      cell.type === 'object' && 'vs-table-view__cell--object',
+      cell.type === 'null' && 'vs-table-view__cell--null',
     ]"
   >
     <slot>
@@ -24,7 +23,6 @@
 
 <script lang="ts" setup>
 import { DataType } from "@/utils/data.utils";
-import { InlineClass } from "../VueScreener.vue";
 
 export type Cell = {
   field: string;
@@ -42,12 +40,11 @@ export type Cell = {
 
 defineProps<{
   cell: Cell;
-  classes?: Partial<Record<InlineClass, string>>;
 }>();
 </script>
 
 <style lang="scss">
-.vue-screener__table-view {
+.vs-table-view {
   color: black;
   white-space: nowrap;
 

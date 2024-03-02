@@ -1,6 +1,6 @@
 <template>
-  <div :class="['vue-screener__pagination', classes?.PAGINATION]">
-    <div :class="['vue-screener__pagination__info', classes?.PAGINATION_INFO]">
+  <div class="vs-pagination">
+    <div class="vs-pagination__info">
       <template v-if="!totalItems">Showing 0 results</template>
       <template v-else>
         Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
@@ -9,17 +9,14 @@
       </template>
     </div>
 
-    <ul :class="['vue-screener__pagination__nav', classes?.PAGINATION_NAV]">
+    <ul class="vs-pagination__nav">
       <button
         :disabled="!canNavigateFirst"
         @click="handleClickFirst"
         :class="[
-          'vue-screener__pagination__button',
-          'vue-screener__pagination__button--first',
-          !canNavigateFirst && 'vue-screener__pagination__button--disabled',
-          !canNavigateFirst && classes?.['PAGINATION_BUTTON--DISABLED'],
-          classes?.PAGINATION_BUTTON,
-          classes?.PAGINATION_FIRST_BUTTON,
+          'vs-pagination__button',
+          'vs-pagination__button--first',
+          !canNavigateFirst && 'vs-pagination__button--disabled',
         ]"
       >
         First
@@ -28,12 +25,9 @@
         :disabled="!canNavigatePrev"
         @click="handleClickPrev"
         :class="[
-          'vue-screener__pagination__button',
-          'vue-screener__pagination__button--prev',
-          !canNavigatePrev && 'vue-screener__pagination__button--disabled',
-          !canNavigatePrev && classes?.['PAGINATION_BUTTON--DISABLED'],
-          classes?.PAGINATION_BUTTON,
-          classes?.PAGINATION_PREV_BUTTON,
+          'vs-pagination__button',
+          'vs-pagination__button--prev',
+          !canNavigatePrev && 'vs-pagination__button--disabled',
         ]"
       >
         Prev
@@ -43,12 +37,9 @@
         :key="page"
         @click="handleSelectPage(page)"
         :class="[
-          'vue-screener__pagination__button',
-          'vue-screener__pagination__button--page',
-          isActive(page) && 'vue-screener__pagination__button--active',
-          isActive(page) && classes?.['PAGINATION_BUTTON--ACTIVE'],
-          classes?.PAGINATION_BUTTON,
-          classes?.PAGINATION_PAGE_BUTTON,
+          'vs-pagination__button',
+          'vs-pagination__button--page',
+          isActive(page) && 'vs-pagination__button--active',
         ]"
       >
         {{ page }}
@@ -57,12 +48,9 @@
         :disabled="!canNavigateNext"
         @click="handleClickNext"
         :class="[
-          'vue-screener__pagination__button',
-          'vue-screener__pagination__button--next',
-          !canNavigateNext && 'vue-screener__pagination__button--disabled',
-          !canNavigateNext && classes?.['PAGINATION_BUTTON--DISABLED'],
-          classes?.PAGINATION_BUTTON,
-          classes?.PAGINATION_NEXT_BUTTON,
+          'vs-pagination__button',
+          'vs-pagination__button--next',
+          !canNavigateNext && 'vs-pagination__button--disabled',
         ]"
       >
         Next
@@ -71,34 +59,23 @@
         :disabled="!canNavigateLast"
         @click="handleClickLast"
         :class="[
-          'vue-screener__pagination__button',
-          'vue-screener__pagination__button--last',
-          !canNavigateLast && 'vue-screener__pagination__button--disabled',
-          !canNavigateLast && classes?.['PAGINATION_BUTTON--DISABLED'],
-          classes?.PAGINATION_BUTTON,
-          classes?.PAGINATION_LAST_BUTTON,
+          'vs-pagination__button',
+          'vs-pagination__button--last',
+          !canNavigateLast && 'vs-pagination__button--disabled',
         ]"
       >
         Last
       </button>
     </ul>
 
-    <div
-      :class="[
-        'vue-screener__pagination__per-page',
-        classes?.PAGINATION_PER_PAGE,
-      ]"
-    >
+    <div class="vs-pagination__per-page">
       <input
         type="number"
         :value="perPage"
         min="1"
         step="1"
         @input="handleChangePerPage"
-        :class="[
-          'vue-screener__pagination__per-page-input',
-          classes?.PAGINATION_PER_PAGE_INPUT,
-        ]"
+        class="vs-pagination__per-page-input"
       />
     </div>
   </div>
@@ -106,20 +83,17 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, watch } from "vue";
-import { InlineClass } from "../VueScreener.vue";
 
 const props = withDefaults(
   defineProps<{
     currentPage?: number;
     totalItems?: number;
     perPage?: number;
-    classes?: Partial<Record<InlineClass, string>>;
   }>(),
   {
     currentPage: 1,
     totalItems: 0,
     perPage: 25,
-    classes: () => ({}),
   },
 );
 
@@ -227,7 +201,7 @@ const handleChangePerPage = (event: Event): void => {
 </script>
 
 <style lang="scss">
-.vue-screener__pagination {
+.vs-pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;

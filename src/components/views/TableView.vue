@@ -1,5 +1,5 @@
 <template>
-  <div :style="tableStyle" :class="['vue-screener__table-view', classes?.TABLE_VIEW]">
+  <div :style="tableStyle" class="vs-table-view">
     <template v-for="(cell, i) in getCells">
       <template v-if="cell.isHeader">
         <slot
@@ -8,7 +8,7 @@
           :key="'sticky-actions-head-' + i"
           :cell="cell"
         >
-          <HeaderCell :cell="cell" :classes="classes" />
+          <HeaderCell :cell="cell" />
         </slot>
         <slot
           v-else
@@ -22,7 +22,6 @@
             :key="i"
             :cell="cell"
             :sort-direction="getSortDirection(cell.field)"
-            :classes="classes"
             @on-sort="emit('on-sort', $event)"
           />
         </slot>
@@ -36,7 +35,7 @@
           :highlight="highlightText"
           :highlight-value="highlight"
         >
-          <ValueCell :key="i" :cell="cell" :classes="classes" />
+          <ValueCell :key="i" :cell="cell" />
         </slot>
         <slot
           v-else
@@ -46,7 +45,7 @@
           :highlight="highlightText"
           :highlight-value="highlight"
         >
-          <ValueCell :key="i" :cell="cell" :classes="classes" />
+          <ValueCell :key="i" :cell="cell" />
         </slot>
       </template>
     </template>
@@ -60,7 +59,6 @@ import { NormalisedRow } from "../../utils/data.utils";
 import HeaderCell from "./TableViewHeaderCell.vue";
 import ValueCell from "./TableViewValueCell.vue";
 import { Cell } from "./TableViewCell.vue";
-import { InlineClass } from "../VueScreener.vue";
 
 const props = defineProps<{
   fields: string[];
@@ -68,7 +66,7 @@ const props = defineProps<{
   highlight: string;
   sortField: null | string;
   sortDirection: null | "asc" | "desc";
-  classes?: Partial<Record<InlineClass, string>>;
+
   includeStickyActions?: boolean;
 }>();
 
@@ -154,7 +152,7 @@ const getSortDirection = (field: string): "asc" | "desc" | null => {
 </script>
 
 <style lang="scss">
-.vue-screener__table-view {
+.vs-table-view {
   color: black;
 
   &__cell {

@@ -1,12 +1,11 @@
 <template>
-  <div class="vue-screener__view-selector">
+  <div class="vs-view-selector">
     <a
       href="#"
       @click.prevent="onSelectFormat('table')"
       :class="[
-        'vue-screener__view-selector__link',
-        activeFormat === 'table' && 'is-active',
-        classes?.SETTINGS_VIEW_SELECTOR_CONTAINER,
+        'vs-view-selector__link',
+        activeFormat === 'table' && 'vs-view-selector__link--is-active',
       ]"
       v-text="'Table'"
     />
@@ -14,10 +13,8 @@
       href="#"
       @click.prevent="onSelectFormat('raw')"
       :class="[
-        'vue-screener__view-selector__link',
-        activeFormat === 'raw' && 'is-active',
-        ,
-        classes?.SETTINGS_VIEW_SELECTOR_LINK,
+        'vs-view-selector__link',
+        activeFormat === 'raw' && 'vs-view-selector__link--is-active',
       ]"
       v-text="'Raw'"
     />
@@ -25,11 +22,8 @@
 </template>
 
 <script lang="ts" setup>
-import { InlineClass } from "../VueScreener.vue";
-
 const { activeFormat = "table" } = defineProps<{
   activeFormat: "table" | "raw";
-  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["select-format"]);
@@ -39,7 +33,7 @@ const onSelectFormat = (format: "table" | "raw") =>
 </script>
 
 <style lang="scss">
-.vue-screener__view-selector {
+.vs-view-selector {
   font-size: 12px;
   height: 20px;
   display: flex;
@@ -64,7 +58,7 @@ const onSelectFormat = (format: "table" | "raw") =>
       border-radius: 0 4px 4px 0;
     }
 
-    &.is-active,
+    &--is-active,
     &:hover {
       background: #3f51b5;
       color: #fff;
