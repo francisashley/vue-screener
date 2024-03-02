@@ -2867,7 +2867,7 @@ body {
   min-height: 100%;
 }
 
-.vue-screener__json-view {
+.vs-json-view {
   font-size: 12px;
   background: #f7f7f7;
   margin: 0;
@@ -2881,40 +2881,40 @@ body {
   align-items: center;
   float: right;
   cursor: pointer;
-}.vue-screener__table-view {
+}.vs-table-view {
   color: black;
   white-space: nowrap;
 }
-.vue-screener__table-view__cell {
+.vs-table-view__cell {
   border-bottom: thin solid black;
   border-right: thin solid black;
   padding: 2px 5px;
 }
-.vue-screener__table-view__cell--is-last {
+.vs-table-view__cell--is-last {
   border-right: unset;
 }
-.vue-screener__table-view__cell--is-sticky-action {
+.vs-table-view__cell--is-sticky-action {
   position: sticky;
   background: white;
   right: 0;
   border-left: thin solid black;
   margin-left: -1px;
-}.vue-screener__table-view__cell--is-header {
+}.vs-table-view__cell--is-header {
   font-weight: bold;
   white-space: nowrap;
   height: 24px;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-}.vue-screener__table-view {
+}.vs-table-view {
   color: black;
 }
-.vue-screener__table-view__cell {
+.vs-table-view__cell {
   border-bottom: thin solid black;
   border-right: thin solid black;
   padding: 2px 5px;
 }
-.vue-screener__table-view__cell--is-header {
+.vs-table-view__cell--is-header {
   font-weight: bold;
   white-space: nowrap;
   height: 24px;
@@ -2922,13 +2922,13 @@ body {
   align-items: center;
   cursor: pointer;
 }
-.vue-screener__table-view__cell--is-last {
+.vs-table-view__cell--is-last {
   border-right: unset;
-}.vue-screener__no-data-view {
+}.vs-no-data-view {
   text-align: center;
   padding: 150px 0;
   border-bottom: thin solid;
-}.vue-screener__search {
+}.vs-search {
   width: 200px;
   padding: 0 4px;
   box-sizing: border-box;
@@ -2941,48 +2941,48 @@ body {
   border: 2px solid #fff;
   color: black;
 }
-.vue-screener__search--error {
+.vs-search--error {
   border: 2px solid red;
   outline-color: red;
-}.vue-screener__pagination {
+}.vs-pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
   white-space: nowrap;
   color: #000;
 }
-.vue-screener__pagination__info {
+.vs-pagination__info {
   white-space: nowrap;
   width: 150px;
 }
-.vue-screener__pagination__nav {
+.vs-pagination__nav {
   display: flex;
   padding: 0 8px !important;
   margin: 0 !important;
   list-style-type: none;
 }
-.vue-screener__pagination__button {
+.vs-pagination__button {
   margin: 0 10px 0 0 !important;
 }
-.vue-screener__pagination__button--active {
+.vs-pagination__button--active {
   color: blue;
 }
-.vue-screener__pagination__per-page {
+.vs-pagination__per-page {
   width: 150px;
   display: inline-flex;
   justify-content: flex-end;
 }
-.vue-screener__pagination__per-page-input {
+.vs-pagination__per-page-input {
   width: 60px;
 }
-.vue-screener__error-message {
+.vs-error-message {
   border: thin solid red;
   color: red;
 }
-.vue-screener__dropdown {
+.vs-dropdown {
   position: relative;
 }
-.vue-screener__dropdown__dropdown-content {
+.vs-dropdown__content {
   transform-origin: top right;
   position: absolute;
   right: 0;
@@ -2993,13 +2993,13 @@ body {
   padding: 8px;
   color: white;
 }
-.vue-screener__dropdown__dropdown-content-enter-active, .vue-screener__dropdown__dropdown-content-leave-active {
+.vs-dropdown__content-enter-active, .vs-dropdown__content-leave-active {
   transition: all 0.2s;
 }
-.vue-screener__dropdown__dropdown-content-enter, .vue-screener__dropdown__dropdown-content-leave-to {
+.vs-dropdown__content-enter, .vs-dropdown__content-leave-to {
   opacity: 0;
   transform: translateY(-5px);
-}.vue-screener__view-selector {
+}.vs-view-selector {
   font-size: 12px;
   height: 20px;
   display: flex;
@@ -3007,7 +3007,7 @@ body {
   align-items: center;
   border-radius: 2px;
 }
-.vue-screener__view-selector__link {
+.vs-view-selector__link {
   text-decoration: none;
   font-weight: 500;
   height: 100%;
@@ -3020,13 +3020,13 @@ body {
   justify-content: center;
   background: #fff;
 }
-.vue-screener__view-selector__link:last-child {
+.vs-view-selector__link:last-child {
   border-radius: 0 4px 4px 0;
 }
-.vue-screener__view-selector__link.is-active, .vue-screener__view-selector__link:hover {
+.vs-view-selector__link--is-active, .vs-view-selector__link:hover {
   background: #3f51b5;
   color: #fff;
-}.vue-screener__settings-button {
+}.vs-settings__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3038,10 +3038,10 @@ body {
   cursor: pointer;
   border-radius: 4px;
 }
-.vue-screener__settings-button--active, .vue-screener__settings-button:hover {
+.vs-settings__button--active, .vs-settings__button:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
-.vue-screener__settings-button-icon {
+.vs-settings__button-icon {
   width: 16px;
   height: 16px;
   display: inline-flex;
@@ -3049,18 +3049,18 @@ body {
   justify-content: center;
   color: white;
 }
-.vue-screener__settings-heading {
+.vs-settings__heading {
   font-weight: 400;
   margin: 0 0 6px 0;
   font-size: 9px;
   text-transform: uppercase;
   opacity: 0.8;
 }
-.vue-screener__settings__options {
+.vs-settings__options {
   display: flex;
   gap: 4px;
 }
-.vue-screener__settings__options-button {
+.vs-settings__options-button {
   border: none;
   background: none;
   padding: 0 3px;
@@ -3079,20 +3079,20 @@ body {
   background: white;
   margin-bottom: 8px;
 }
-.vue-screener__settings__options-button--match-word {
+.vs-settings__options-button--match-word {
   text-decoration: underline;
 }
-.vue-screener__settings__options-button--active, .vue-screener__settings__options-button:hover {
+.vs-settings__options-button--active, .vs-settings__options-button:hover {
   color: #fff;
   background: #3e51b5;
-}.vue-screener {
+}.vs-vue-screener {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   border: thin solid black;
   border-radius: 8px;
   background: #fff;
 }
-.vue-screener__header {
+.vs-header {
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -3101,16 +3101,16 @@ body {
   font-weight: 400;
   padding: 4px 4px 4px 8px;
 }
-.vue-screener__header-title {
+.vs-title {
   font-weight: 500;
   margin-right: auto;
 }
-.vue-screener__search {
+.vs-search {
   margin-left: 8px;
 }
-.vue-screener__main {
+.vs-main {
   overflow-x: auto;
 }
-.vue-screener__footer {
+.vs-footer {
   padding: 8px;
 }

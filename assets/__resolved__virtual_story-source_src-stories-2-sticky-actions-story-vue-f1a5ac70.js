@@ -11,7 +11,7 @@ const __resolved__virtual_storySource_srcStories2StickyActionsStoryVue = `<templ
           </template>
           <template #sticky-actions-value="props">
             <ValueCell v-bind="props">
-              <div :style="{display: 'flex', gap: '4px'}">
+              <div :style="{ display: 'flex', gap: '4px' }">
                 <button @click="handleClickEdit(props.cell)">Edit</button>
                 <button @click="handleClickDelete(props.cell)">Delete</button>
               </div>
