@@ -2874,7 +2874,7 @@ body {
   padding: 10px;
   border: thin solid;
 }
-.vue-screener__sort-selector {
+.vs__sort-selector {
   margin-left: auto;
   height: 24px;
   display: inline-flex;

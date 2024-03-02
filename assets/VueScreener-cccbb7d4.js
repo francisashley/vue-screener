@@ -154,18 +154,18 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$b = { class: "vue-screener__sort-selector" };
+const _hoisted_1$b = { class: "vs__sort-selector" };
 function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", _hoisted_1$b, [
     $props.sortDirection === null ? (openBlock(), createBlock($setup["SortIcon"], {
       key: 0,
-      class: "vue-screener__sort-icon vue-screener__sort-icon--none"
+      class: "vs__sort-icon vs__sort-icon--none"
     })) : $props.sortDirection === "asc" ? (openBlock(), createBlock($setup["SortUpIcon"], {
       key: 1,
-      class: "vue-screener__sort-icon vue-screener__sort-icon--asc"
+      class: "vs__sort-icon vs__sort-icon--asc"
     })) : $props.sortDirection === "desc" ? (openBlock(), createBlock($setup["SortDownIcon"], {
       key: 2,
-      class: "vue-screener__sort-icon vue-screener__sort-icon--desc"
+      class: "vs__sort-icon vs__sort-icon--desc"
     })) : createCommentVNode("v-if", true)
   ]);
 }
@@ -862,7 +862,7 @@ const _hoisted_1$2 = {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24",
   fill: "currentColor",
-  class: "vue-screener__settings-button-icon"
+  class: "vs__settings-button-icon"
 };
 const _hoisted_2$2 = /* @__PURE__ */ createBaseVNode(
   "path",
