@@ -140,129 +140,60 @@ import { formatPrice } from './utils/currency'
 
 ## Theming
 
-Add custom classes:
-
-```vue
-<vue-screener
-  :classes="{
-    "SCREENER": "...",
-    "HEADER": "...",
-    "MAIN": "...",
-    "FOOTER": "...",
-    "HEADER_TITLE": "...",
-    "SEARCH_INPUT": "...",
-    "SETTINGS": "...",
-    "SETTINGS_DROPDOWN_BUTTON": "...",
-    "SETTINGS_DROPDOWN_SUB_HEADING": "...",
-    "SETTINGS_DROPDOWN_OPTIONS": "...",
-    "SETTINGS_DROPDOWN_OPTIONS_BUTTON": "...",
-    "SETTINGS_VIEW_SELECTOR_CONTAINER": "...",
-    "SETTINGS_VIEW_SELECTOR_LINK": "...",
-    "TABLE_VIEW": "...",
-    "TABLE_VIEW_CELL": "...",
-    "TABLE_VIEW_HEADER_CELL": "...",
-    "TABLE_VIEW_STICKY_HEADER_CELL": "...",
-    "TABLE_VIEW_VALUE_CELL": "...",
-    "TABLE_VIEW_STICKY_VALUE_CELL": "...",
-    "TABLE_VIEW_SORT": "...",
-    "TABLE_VIEW_SORT_NONE": "...",
-    "TABLE_VIEW_SORT_ASC": "...",
-    "TABLE_VIEW_SORT_DESC": "...",
-    "JSON_VIEW": "...",
-    "NO_DATA_VIEW": "....",
-    "PAGINATION": "...",
-    "PAGINATION_INFO": "...",
-    "PAGINATION_NAV": "...",
-    "PAGINATION_BUTTON": "...",
-    "PAGINATION_FIRST_BUTTON": "...",
-    "PAGINATION_PREV_BUTTON": "...",
-    "PAGINATION_PAGE_BUTTON": "...",
-    "PAGINATION_NEXT_BUTTON": "...",
-    "PAGINATION_LAST_BUTTON": "...",
-    "PAGINATION_PER_PAGE": "...",
-    "PAGINATION_PER_PAGE_INPUT": "...",
-    "ERROR_MESSAGE": "...",
-  }"
-/>
-```
-
-Or style default classes:
+Style using classes:
 
 ```
-// Base classes
-.vue-screener
-
-// Header classes
-.vue-screener__header
-.vue-screener__header-title
-
-// Main classes
-.vue-screener__main
-
-// Footer classes
-.vue-screener__footer
-
-// Search input class
-.vue-screener__search
-.vue-screener__search--error
-
-// Options input class
-.vue-screener__settings__options
-.vue-screener__settings__options-button
-.vue-screener__settings__options-button--active
-.vue-screener__settings__options-button--match-word
-
-// Dropdown classes
-.vue-screener__dropdown
-.vue-screener__dropdown__dropdown-content
-
-// View selector classes
-.vue-screener__view-selector
-.vue-screener__view-selector__link
-.vue-screener__view-selector__link.is-active
-
-// Table view classes
-.vue-screener__table-view
-.vue-screener__table-view__cell
-.vue-screener__table-view__cell--is-header
-.vue-screener__table-view__cell--is-data-cell
-.vue-screener__table-view__cell--is-first
-.vue-screener__table-view__cell--is-last
-.vue-screener__table-view__cell--hasValue
-.vue-screener__table-view__cell--string
-.vue-screener__table-view__cell--number
-.vue-screener__table-view__cell--boolean
-.vue-screener__table-view__cell--symbol
-.vue-screener__table-view__cell--undefined
-.vue-screener__table-view__cell--object
-.vue-screener__table-view__cell--null
-
-// JSON view classes
-.vue-screener__json-view
-
-// No data view
-.vue-screener__no-data-view
-
-// Sort selector classes
-.vue-screener__sort-selector
-
-// Pagination classes
-.vue-screener__pagination__nav
-.vue-screener__pagination__button
-.vue-screener__pagination__button--first
-.vue-screener__pagination__button--prev
-.vue-screener__pagination__button--page
-.vue-screener__pagination__button--next
-.vue-screener__pagination__button--last
-.vue-screener__pagination__button--active
-.vue-screener__pagination__button--disabled
-.vue-screener__pagination__info
-.vue-screener__pagination__per-page
-.vue-screener__pagination__per-page-input
-
-
-// Error message classes
-.vue-screener__error-message
+.vs-vue-screener ✅
+  .vs-header 
+    .vs-title
+    .vs-search
+    .vs-search--error
+    .vs-settings
+    .vs-settings__button
+    .vs-settings__button--active
+    .vs-settings__heading
+    .vs-settings__options
+    .vs-settings__options-button
+    .vs-settings__options-button--active
+    .vs-settings__options-button--match-word
+    .vs-settings__options-button--match-case
+    .vs-settings__options-button--use-regex
+    .vs-view-selector
+    .vs-view-selector__link
+    .vs-view-selector__link--is-active
+    .vs-dropdown
+    .vs-dropdown__content
+  .vs-main
+    .vs-table-view
+    .vs-table-view__cell
+    .vs-table-view__cell--is-header
+    .vs-table-view__cell--is-value
+    .vs-table-view__cell--is-first
+    .vs-table-view__cell--is-last
+    .vs-table-view__cell--hasValue
+    .vs-table-view__cell--string
+    .vs-table-view__cell--number
+    .vs-table-view__cell--boolean
+    .vs-table-view__cell--symbol
+    .vs-table-view__cell--undefined
+    .vs-table-view__cell--object
+    .vs-table-view__cell--null
+    .vs-json-view
+    .vs-no-data-view
+  .vs-footer
+    .vs-pagination__nav
+    .vs-pagination__button
+    .vs-pagination__button--first
+    .vs-pagination__button--prev
+    .vs-pagination__button--page
+    .vs-pagination__button--next
+    .vs-pagination__button--last
+    .vs-pagination__button--active
+    .vs-pagination__button--disabled
+    .vs-pagination__info
+    .vs-pagination__per-page
+    .vs-pagination__per-page-input
+  .vs-error-message
 ```
 
 ## Roadmap

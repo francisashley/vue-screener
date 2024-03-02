@@ -1,8 +1,8 @@
 <template>
-  <div v-on-clickaway="handleClickOutside" class="vue-screener__dropdown">
+  <div v-on-clickaway="handleClickOutside" class="vs-dropdown">
     <slot name="dropdown-button" :show="show" :toggle="toggleDropdown" />
-    <transition name="vue-screener__dropdown__dropdown-content">
-      <div v-if="show" class="vue-screener__dropdown__dropdown-content">
+    <transition name="vs-dropdown__content">
+      <div v-if="show" class="vs-dropdown__content">
         <slot />
       </div>
     </transition>
@@ -20,10 +20,10 @@ const handleClickOutside = () => (show.value = false);
 </script>
 
 <style lang="scss">
-.vue-screener__dropdown {
+.vs-dropdown {
   position: relative;
 
-  &__dropdown-content {
+  &__content {
     transform-origin: top right;
     position: absolute;
     right: 0;
@@ -35,13 +35,13 @@ const handleClickOutside = () => (show.value = false);
     color: white;
   }
 
-  &__dropdown-content-enter-active,
-  &__dropdown-content-leave-active {
+  &__content-enter-active,
+  &__content-leave-active {
     transition: all 0.2s;
   }
 
-  &__dropdown-content-enter,
-  &__dropdown-content-leave-to {
+  &__content-enter,
+  &__content-leave-to {
     opacity: 0;
     transform: translateY(-5px);
   }

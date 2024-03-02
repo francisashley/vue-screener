@@ -1,7 +1,5 @@
 <template>
-  <div class="vue-screener__error-message">
-    [VueScreenerError]: {{ message }}
-  </div>
+  <div class="vs-error-message">[VueScreenerError]: {{ message }}</div>
 </template>
 
 <script lang="ts" setup>
@@ -11,7 +9,7 @@ defineProps<{
 </script>
 
 <style>
-.vue-screener__error-message {
+.vs-error-message {
   border: thin solid red;
   color: red;
 }

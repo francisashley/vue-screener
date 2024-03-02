@@ -4,15 +4,14 @@
     @keydown="onKeydown"
     @input="onInput"
     type="text"
-    class="vue-screener__search"
-    :class="[useRegEx && !isValidQuery && 'vue-screener__search--error']"
+    class="vs-search"
+    :class="[useRegEx && !isValidQuery && 'vs-search--error']"
     placeholder="Search..."
   />
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import { InlineClass } from "../VueScreener.vue";
 
 export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
 
@@ -24,7 +23,6 @@ const {
   query: string;
   isValidQuery: boolean;
   searchOptions: SearchQueryOption[];
-  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["input", "search", "update-options"]);
@@ -79,7 +77,7 @@ const search = (searchQuery: string): void => {
 </script>
 
 <style lang="scss">
-.vue-screener__search {
+.vs-search {
   width: 200px;
   padding: 0 4px;
   box-sizing: border-box;

@@ -1,42 +1,26 @@
 <template>
-  <Dropdown :class="['vue-screener__settings', classes?.SETTINGS]">
+  <Dropdown class="vs-settings">
     <template #dropdown-button="{ show, toggle }">
       <button
-        class="vue-screener__settings-button"
-        :class="[
-          show && 'vue-screener__settings-button--active',
-          classes?.SETTINGS_DROPDOWN_BUTTON,
-        ]"
+        class="vs-settings__button"
+        :class="[show && 'vs-settings__button--active']"
         @click="toggle"
       >
         <CogIcon />
       </button>
     </template>
     <template #default>
-      <h3
-        :class="[
-          'vue-screener__settings-heading',
-          classes?.SETTINGS_DROPDOWN_SUB_HEADING,
-        ]"
-      >
-        Search
-      </h3>
-      <div
-        :class="[
-          'vue-screener__settings__options',
-          classes?.SETTINGS_DROPDOWN_OPTIONS,
-        ]"
-      >
+      <h3 class="vs-settings__heading">Search</h3>
+      <div class="vs-settings__options">
         <button
           v-for="(option, i) in getOptions"
           :key="i"
-          class="vue-screener__settings__options-button"
+          class="vs-settings__options-button"
           :class="[
             {
-              'vue-screener__settings__options-button--active': option.isActive,
+              'vs-settings__options-button--active': option.isActive,
             },
-            'vue-screener__settings__options-button--' + option.id,
-            classes?.SETTINGS_DROPDOWN_OPTIONS_BUTTON,
+            'vs-settings__options-button--' + option.id,
           ]"
           :title="option.title"
           @click="toggleOption(option.id)"
@@ -44,11 +28,9 @@
           {{ option.text }}
         </button>
       </div>
-      <h3 class="vue-screener__settings-heading">Presentation</h3>
+      <h3 class="vs-settings__heading">Presentation</h3>
       <ViewSelector
-        class="vue-screener__view-selector"
         :active-format="activeFormat"
-        :classes="classes"
         @select-format="emit('select-format', $event)"
       />
     </template>
@@ -60,14 +42,12 @@ import { computed, ref } from "vue";
 import Dropdown from "./Dropdown.vue";
 import ViewSelector from "./ViewSelector.vue";
 import CogIcon from "../icons/CogIcon.vue";
-import { InlineClass } from "../VueScreener.vue";
 
 export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
 
 const props = defineProps<{
   activeFormat: "table" | "raw";
   searchOptions: SearchQueryOption[];
-  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["select-format", "change-search-options"]);
@@ -105,8 +85,8 @@ const toggleOption = (option: SearchQueryOption) => {
 </script>
 
 <style lang="scss">
-.vue-screener__settings {
-  &-button {
+.vs-settings {
+  &__button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -124,7 +104,7 @@ const toggleOption = (option: SearchQueryOption) => {
     }
   }
 
-  &-button-icon {
+  &__button-icon {
     width: 16px;
     height: 16px;
     display: inline-flex;
@@ -133,7 +113,7 @@ const toggleOption = (option: SearchQueryOption) => {
     color: white;
   }
 
-  &-heading {
+  &__heading {
     font-weight: 400;
     margin: 0 0 6px 0;
     font-size: 9px;

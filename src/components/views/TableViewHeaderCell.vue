@@ -1,34 +1,26 @@
 <template>
   <TableCell
     :class="[
-      'vue-screener__table-view__cell--is-header',
-      classes?.TABLE_VIEW_HEADER_CELL,
-      cell.isStickyAction && classes?.TABLE_VIEW_STICKY_HEADER_CELL,
+      'vs-table-view__cell--is-header',
+      cell.isStickyAction && 'vs-table-view__cell--is-sticky',
     ]"
     :cell="cell"
-    :classes="classes"
     @click="handleClickHeader"
   >
     <slot>
       <span v-html="cell.value" />
     </slot>
-    <SortSelector
-      v-if="cell.isHeader"
-      :sort-direction="sortDirection"
-      :classes="classes"
-    />
+    <SortSelector v-if="cell.isHeader" :sort-direction="sortDirection" />
   </TableCell>
 </template>
 
 <script lang="ts" setup>
-import { InlineClass } from "../VueScreener.vue";
 import SortSelector from "../stuff/SortSelector.vue";
 import TableCell, { Cell } from "./TableViewCell.vue";
 
 const props = defineProps<{
   cell: Cell;
   sortDirection?: null | "asc" | "desc";
-  classes?: Partial<Record<InlineClass, string>>;
 }>();
 
 const emit = defineEmits(["on-sort"]);
@@ -39,8 +31,8 @@ const handleClickHeader = () => {
 </script>
 
 <style lang="scss">
-.vue-screener__table-view {
-  &__cell--is-header {
+.vs-table-view__cell {
+  &--is-header {
     font-weight: bold;
     white-space: nowrap;
     height: 24px;
