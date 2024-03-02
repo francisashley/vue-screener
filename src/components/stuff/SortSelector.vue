@@ -16,9 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import SortIcon from "../icons/Sort.vue";
-import SortUpIcon from "../icons/SortUp.vue";
-import SortDownIcon from "../icons/SortDown.vue";
+import SortIcon from "../icons/SortIcon.vue";
+import SortUpIcon from "../icons/SortUpIcon.vue";
+import SortDownIcon from "../icons/SortDownIcon.vue";
 import { InlineClass } from "../VueScreener.vue";
 
 type SortDirection = null | "asc" | "desc";

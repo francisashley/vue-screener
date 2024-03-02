@@ -59,7 +59,7 @@
 import { computed, ref } from "vue";
 import Dropdown from "./Dropdown.vue";
 import ViewSelector from "./ViewSelector.vue";
-import CogIcon from "../icons/Cog.vue";
+import CogIcon from "../icons/CogIcon.vue";
 import { InlineClass } from "../VueScreener.vue";
 
 export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
