@@ -1,15 +1,15 @@
 <template>
-  <div class="vs__sort-selector">
+  <div class="vs-sort-selector">
     <sort-icon
-      class="vs__sort-icon vs__sort-icon--none"
+      class="vs-sort-selector__icon vs-sort-selector__icon--none"
       v-if="sortDirection === null"
     />
     <sort-up-icon
-      class="vs__sort-icon vs__sort-icon--asc"
+      class="vs-sort-selector__icon vs-sort-selector__icon--asc"
       v-else-if="sortDirection === 'asc'"
     />
     <sort-down-icon
-      class="vs__sort-icon vs__sort-icon--desc"
+      class="vs-sort-selector__icon vs-sort-selector__icon--desc"
       v-else-if="sortDirection === 'desc'"
     />
   </div>
@@ -28,7 +28,7 @@ const { sortDirection = null } = defineProps<{
 </script>
 
 <style lang="scss">
-.vs__sort-selector {
+.vs-sort-selector {
   margin-left: auto;
   height: 24px;
   display: inline-flex;

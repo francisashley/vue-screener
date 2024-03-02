@@ -178,6 +178,11 @@ Style using classes:
     .vs-table-view__cell--undefined
     .vs-table-view__cell--object
     .vs-table-view__cell--null
+      .vs-sort-selector
+      .vs-sort-selector__icon
+      .vs-sort-selector__icon--none
+      .vs-sort-selector__icon--asc
+      .vs-sort-selector__icon--desc
     .vs-json-view
     .vs-no-data-view
   .vs-footer
