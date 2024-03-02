@@ -3,7 +3,7 @@
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     fill="currentColor"
-    class="vue-screener__settings-button-icon"
+    class="vs__settings-button-icon"
   >
     <path
       fill-rule="evenodd"

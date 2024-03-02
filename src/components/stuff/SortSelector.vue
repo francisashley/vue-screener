@@ -1,15 +1,15 @@
 <template>
-  <div class="vue-screener__sort-selector">
+  <div class="vs__sort-selector">
     <sort-icon
-      class="vue-screener__sort-icon vue-screener__sort-icon--none"
+      class="vs__sort-icon vs__sort-icon--none"
       v-if="sortDirection === null"
     />
     <sort-up-icon
-      class="vue-screener__sort-icon vue-screener__sort-icon--asc"
+      class="vs__sort-icon vs__sort-icon--asc"
       v-else-if="sortDirection === 'asc'"
     />
     <sort-down-icon
-      class="vue-screener__sort-icon vue-screener__sort-icon--desc"
+      class="vs__sort-icon vs__sort-icon--desc"
       v-else-if="sortDirection === 'desc'"
     />
   </div>
@@ -28,7 +28,7 @@ const { sortDirection = null } = defineProps<{
 </script>
 
 <style lang="scss">
-.vue-screener__sort-selector {
+.vs__sort-selector {
   margin-left: auto;
   height: 24px;
   display: inline-flex;
