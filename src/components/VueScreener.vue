@@ -20,7 +20,14 @@
           @change-search-options="onChangeSearchOptions"
         />
       </header>
-      <main class="vs-main">
+      <main
+        class="vs-main"
+        :class="{
+          'vs-main--is-x-scrollable': isXScrollable,
+          'vs-main--is-x-scrolled-end': isXScrolledEnd,
+        }"
+        ref="mainEl"
+      >
         <TableView
           v-if="hasData && renderFormat === 'table'"
           :fields="getFields"
@@ -88,8 +95,9 @@ import {
   getPaginated,
 } from "../utils/data.utils";
 import { search } from "../utils/search.utils";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { orderBy } from "natural-orderby";
+import { observeHorizontalScrollability } from "../utils/scroll.utils";
 
 type Props = {
   data?: unknown[];
@@ -111,6 +119,19 @@ const props = withDefaults(defineProps<Props>(), {
   currentPage: 1,
   includeStickyActions: false,
   includeHeader: true,
+});
+
+const mainEl = ref();
+const isXScrollable = ref(false);
+const isXScrolledEnd = ref(false);
+
+onMounted(() => {
+  if (mainEl.value) {
+    observeHorizontalScrollability(mainEl.value, (state) => {
+      isXScrollable.value = state.isXScrollable;
+      isXScrolledEnd.value = state.isXScrolledEnd;
+    });
+  }
 });
 
 const searchQuery = ref<string>("");

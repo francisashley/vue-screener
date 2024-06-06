@@ -164,6 +164,8 @@ Style using classes:
     .vs-dropdown
     .vs-dropdown__content
   .vs-main
+  .vs-main--is-x-scrollable
+  .vs-main--is-x-scrolled-end
     .vs-table-view
     .vs-table-view__row
     .vs-table-view__row--header
