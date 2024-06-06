@@ -57,7 +57,6 @@ defineProps<{
 
   &__cell--is-sticky-action {
     position: sticky;
-    background: white;
     right: 0;
     border-left: thin solid black;
     margin-left: -1px;
