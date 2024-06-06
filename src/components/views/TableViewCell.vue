@@ -47,7 +47,6 @@ defineProps<{
   white-space: nowrap;
 
   &__cell {
-    border-bottom: thin solid black;
     border-right: thin solid black;
     padding: 2px 5px;
   }

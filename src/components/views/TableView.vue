@@ -154,23 +154,8 @@ const getSortDirection = (field: string): "asc" | "desc" | null => {
 .vs-table-view {
   color: black;
 
-  &__cell {
+  &__row {
     border-bottom: thin solid black;
-    border-right: thin solid black;
-    padding: 2px 5px;
-  }
-
-  &__cell--is-header {
-    font-weight: bold;
-    white-space: nowrap;
-    height: 24px;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  &__cell--is-last {
-    border-right: unset;
   }
 }
 </style>
