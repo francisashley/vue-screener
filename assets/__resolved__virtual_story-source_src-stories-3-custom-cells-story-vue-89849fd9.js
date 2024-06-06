@@ -14,7 +14,14 @@ const __resolved__virtual_storySource_srcStories3CustomCellsStoryVue = `<templat
           </template>
           <template #value-cell="props">
             <ValueCell v-bind="props" :style="{ background: 'blue' }">
-              <span v-html="props.highlight(String(props.cell.value), props.highlightValue)" />
+              <span
+                v-html="
+                  props.highlight(
+                    String(props.cell.value),
+                    props.highlightValue,
+                  )
+                "
+              />
               [stuff]
             </ValueCell>
           </template>

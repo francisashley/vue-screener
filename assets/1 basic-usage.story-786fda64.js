@@ -1,9 +1,9 @@
 import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-e300ac54.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-690833a9.js";
+import { _ as _export_sfc, V as VueScreener } from "./VueScreener-c494e486.js";
 import { b as baseData } from "./data-32ab9faf.js";
 import { p as primitivesData } from "./primitives-data-16d3af5c.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "6 hide-header.story",
+  __name: "1 basic-usage.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const options = {
@@ -68,8 +68,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         ]),
         default: withCtx(() => [
           createVNode($setup["VueScreener"], {
-            data: $setup.state.data,
-            "include-header": false
+            data: $setup.state.data
           }, null, 8, ["data"])
         ]),
         _: 1
@@ -80,8 +79,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/6 hide-header.story.vue";
-const _6_hideHeader_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/6 hide-header.story.vue"]]);
+_sfc_main.__file = "src/stories/1 basic-usage.story.vue";
+const _1_basicUsage_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1 basic-usage.story.vue"]]);
 export {
-  _6_hideHeader_story as default
+  _1_basicUsage_story as default
 };

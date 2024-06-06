@@ -1,4 +1,4 @@
-import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, aB as createBaseVNode, av as createBlock, aF as createCommentVNode, aG as renderSlot, aH as normalizeClass, aw as withCtx, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, ax as createVNode, aM as ref, aN as onMounted, as as watch, aA as createTextVNode, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as orderBy, ay as normalizeProps, az as guardReactiveProps } from "./vendor-e300ac54.js";
+import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, aB as createBaseVNode, av as createBlock, aF as createCommentVNode, aG as renderSlot, aH as normalizeClass, aw as withCtx, ax as createVNode, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, aM as ref, aN as onMounted, as as watch, aA as createTextVNode, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as orderBy, ay as normalizeProps, az as guardReactiveProps } from "./vendor-e300ac54.js";
 const JsonView_vue_vue_type_style_index_0_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -252,10 +252,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
           innerHTML: $props.cell.value
         }, null, 8, _hoisted_1$9)
       ]),
-      $props.cell.isHeader ? (openBlock(), createBlock($setup["SortSelector"], {
-        key: 0,
-        "sort-direction": $props.sortDirection
-      }, null, 8, ["sort-direction"])) : createCommentVNode("v-if", true)
+      createVNode($setup["SortSelector"], { "sort-direction": $props.sortDirection }, null, 8, ["sort-direction"])
     ]),
     _: 3
     /* FORWARDED */
@@ -307,14 +304,13 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose, emit }) {
     __expose();
     const props = __props;
-    const getCells = computed(() => {
+    const getFields2 = computed(() => {
       const fields = [];
       props.fields.forEach((field, i) => {
         fields.push({
           field,
           value: field,
           highlightedValue: "",
-          isHeader: true,
           isFirst: i === 0,
           isLast: !props.includeStickyActions && i === props.fields.length - 1,
           type: "string"
@@ -325,39 +321,39 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           field: "",
           value: "",
           highlightedValue: "",
-          isHeader: true,
           isLast: true,
           isStickyAction: true,
           type: "string"
         });
       }
-      props.rows.forEach((row) => {
-        row == null ? void 0 : row.forEach((col, i) => {
-          fields.push({
+      return fields;
+    });
+    const getRows = computed(() => {
+      return props.rows.map((row) => {
+        const cells = row.map((col, i) => {
+          return {
             field: col.key,
-            isValue: true,
             value: col.hasValue ? col.value : "",
             highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : "", props.highlight) : "",
             isFirst: i === 0,
             isLast: !props.includeStickyActions && i === row.length - 1,
             type: col.type,
             row
-          });
+          };
         });
         if (props.includeStickyActions && row) {
-          fields.push({
+          cells.push({
             field: "",
             value: "",
             highlightedValue: "",
-            isValue: true,
             isLast: true,
             isStickyAction: true,
             type: "string",
             row
           });
         }
+        return cells;
       });
-      return fields;
     });
     const tableStyle = computed(() => {
       let cols = props.fields.reduce((acc) => acc + " 1fr", "");
@@ -368,13 +364,23 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         "grid-template-columns": cols
       };
     });
+    const rowStyle = computed(() => {
+      let colCount = props.fields.length;
+      if (props.includeStickyActions)
+        colCount++;
+      return {
+        display: "grid",
+        "grid-template-columns": "subgrid",
+        "grid-column": `1 / ${colCount + 1}`
+      };
+    });
     const getSortDirection = (field) => {
       if (props.sortField === field) {
         return props.sortDirection;
       }
       return null;
     };
-    const __returned__ = { props, emit, getCells, tableStyle, getSortDirection, get highlightText() {
+    const __returned__ = { props, emit, getFields: getFields2, getRows, tableStyle, rowStyle, getSortDirection, get highlightText() {
       return highlightText;
     }, HeaderCell, ValueCell };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
@@ -389,75 +395,72 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
       class: "vs-table-view"
     },
     [
+      createBaseVNode(
+        "div",
+        {
+          style: normalizeStyle($setup.rowStyle),
+          class: "vs-table-view__row vs-table-view__row--header"
+        },
+        [
+          (openBlock(true), createElementBlock(
+            Fragment,
+            null,
+            renderList($setup.getFields, (cell, i) => {
+              return renderSlot(_ctx.$slots, cell.isStickyAction ? "sticky-actions-head" : "header-cell", {
+                key: i,
+                cell,
+                sortDirection: $setup.getSortDirection(cell.field),
+                onOnSort: _cache[0] || (_cache[0] = ($event) => $setup.emit("on-sort", $event))
+              }, () => [
+                createVNode($setup["HeaderCell"], {
+                  cell,
+                  "sort-direction": $setup.getSortDirection(cell.field),
+                  onOnSort: _cache[1] || (_cache[1] = ($event) => $setup.emit("on-sort", $event))
+                }, null, 8, ["cell", "sort-direction"])
+              ]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ],
+        4
+        /* STYLE */
+      ),
       (openBlock(true), createElementBlock(
         Fragment,
         null,
-        renderList($setup.getCells, (cell, i) => {
+        renderList($setup.getRows, (row, i) => {
           return openBlock(), createElementBlock(
-            Fragment,
-            null,
+            "div",
+            {
+              style: normalizeStyle($setup.rowStyle),
+              key: i,
+              class: "vs-table-view__row vs-table-view__row--record"
+            },
             [
-              cell.isHeader ? (openBlock(), createElementBlock(
+              (openBlock(true), createElementBlock(
                 Fragment,
-                { key: 0 },
-                [
-                  cell.isStickyAction ? renderSlot(_ctx.$slots, "sticky-actions-head", {
-                    key: "sticky-actions-head-" + i,
-                    cell
-                  }, () => [
-                    createVNode($setup["HeaderCell"], { cell }, null, 8, ["cell"])
-                  ]) : renderSlot(_ctx.$slots, "header-cell", {
-                    key: "col-" + i,
+                null,
+                renderList(row, (cell, j) => {
+                  return renderSlot(_ctx.$slots, cell.isStickyAction ? "sticky-actions-value" : "value-cell", {
                     cell,
-                    sortDirection: $setup.getSortDirection(cell.field),
-                    onOnSort: _cache[0] || (_cache[0] = ($event) => $setup.emit("on-sort", $event))
-                  }, () => [
-                    (openBlock(), createBlock($setup["HeaderCell"], {
-                      key: i,
-                      cell,
-                      "sort-direction": $setup.getSortDirection(cell.field),
-                      onOnSort: _cache[1] || (_cache[1] = ($event) => $setup.emit("on-sort", $event))
-                    }, null, 8, ["cell", "sort-direction"]))
-                  ])
-                ],
-                64
-                /* STABLE_FRAGMENT */
-              )) : cell.isValue ? (openBlock(), createElementBlock(
-                Fragment,
-                { key: 1 },
-                [
-                  cell.isStickyAction ? renderSlot(_ctx.$slots, "sticky-actions-value", {
-                    key: "sticky-actions-value-" + i,
-                    cell,
+                    key: j,
                     highlight: $setup.highlightText,
                     highlightValue: $props.highlight
                   }, () => [
-                    (openBlock(), createBlock($setup["ValueCell"], {
-                      key: i,
-                      cell
-                    }, null, 8, ["cell"]))
-                  ]) : renderSlot(_ctx.$slots, "value-cell", {
-                    key: i,
-                    cell,
-                    highlight: $setup.highlightText,
-                    highlightValue: $props.highlight
-                  }, () => [
-                    (openBlock(), createBlock($setup["ValueCell"], {
-                      key: i,
-                      cell
-                    }, null, 8, ["cell"]))
-                  ])
-                ],
-                64
-                /* STABLE_FRAGMENT */
-              )) : createCommentVNode("v-if", true)
+                    createVNode($setup["ValueCell"], { cell }, null, 8, ["cell"])
+                  ]);
+                }),
+                128
+                /* KEYED_FRAGMENT */
+              ))
             ],
-            64
-            /* STABLE_FRAGMENT */
+            4
+            /* STYLE */
           );
         }),
-        256
-        /* UNKEYED_FRAGMENT */
+        128
+        /* KEYED_FRAGMENT */
       ))
     ],
     4

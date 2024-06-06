@@ -2886,7 +2886,6 @@ body {
   white-space: nowrap;
 }
 .vs-table-view__cell {
-  border-bottom: thin solid black;
   border-right: thin solid black;
   padding: 2px 5px;
 }
@@ -2909,21 +2908,8 @@ body {
 }.vs-table-view {
   color: black;
 }
-.vs-table-view__cell {
+.vs-table-view__row {
   border-bottom: thin solid black;
-  border-right: thin solid black;
-  padding: 2px 5px;
-}
-.vs-table-view__cell--is-header {
-  font-weight: bold;
-  white-space: nowrap;
-  height: 24px;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-}
-.vs-table-view__cell--is-last {
-  border-right: unset;
 }.vs-no-data-view {
   text-align: center;
   padding: 150px 0;
