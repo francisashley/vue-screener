@@ -1,4 +1,4 @@
-import { Q as defineAsyncComponent, R as createRouter, S as createWebHistory, U as createWebHashHistory, V as useDark, W as useToggle, k as watch, X as markRaw, E as reactive, d as defineComponent, r as ref, Y as watchEffect, o as openBlock, q as createBlock, Z as mergeProps, _ as resolveDynamicComponent, h as createCommentVNode } from "./vendor-e300ac54.js";
+import { Q as defineAsyncComponent, R as createRouter, S as createWebHistory, U as createWebHashHistory, V as useDark, W as useToggle, k as watch, X as markRaw, E as reactive, d as defineComponent, r as ref, Y as watchEffect, o as openBlock, q as createBlock, Z as mergeProps, _ as resolveDynamicComponent, h as createCommentVNode } from "./vendor-c986319e.js";
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
   return "/vue-screener/" + dep;
@@ -50,12 +50,12 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   });
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./1 basic-usage.story-fa9623e9.js"), true ? ["assets/1 basic-usage.story-fa9623e9.js","assets/vendor-e300ac54.js","assets/VueScreener-faf598f6.js","assets/primitives-data-4454990d.js"] : void 0));
-const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./2 sticky-actions.story-0f1469c2.js"), true ? ["assets/2 sticky-actions.story-0f1469c2.js","assets/vendor-e300ac54.js","assets/VueScreener-faf598f6.js","assets/primitives-data-4454990d.js"] : void 0));
-const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./3 custom-cells.story-1b81b0ed.js"), true ? ["assets/3 custom-cells.story-1b81b0ed.js","assets/vendor-e300ac54.js","assets/VueScreener-faf598f6.js","assets/primitives-data-4454990d.js"] : void 0));
-const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./4 stress-test.story-df8a48dc.js"), true ? ["assets/4 stress-test.story-df8a48dc.js","assets/vendor-e300ac54.js","assets/VueScreener-faf598f6.js"] : void 0));
-const Comp4 = defineAsyncComponent(() => __vitePreload(() => import("./5 no-data.story-373a21e5.js"), true ? ["assets/5 no-data.story-373a21e5.js","assets/vendor-e300ac54.js","assets/VueScreener-faf598f6.js"] : void 0));
-const Comp5 = defineAsyncComponent(() => __vitePreload(() => import("./6 hide-header.story-cb9e9eab.js"), true ? ["assets/6 hide-header.story-cb9e9eab.js","assets/vendor-e300ac54.js","assets/VueScreener-faf598f6.js","assets/primitives-data-4454990d.js"] : void 0));
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./1 basic-usage.story-32264f0c.js"), true ? ["assets/1 basic-usage.story-32264f0c.js","assets/vendor-c986319e.js","assets/VueScreener-c8a96240.js","assets/primitives-data-4454990d.js"] : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./2 sticky-actions.story-320ddefe.js"), true ? ["assets/2 sticky-actions.story-320ddefe.js","assets/vendor-c986319e.js","assets/VueScreener-c8a96240.js","assets/primitives-data-4454990d.js"] : void 0));
+const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./3 custom-cells.story-b507e76d.js"), true ? ["assets/3 custom-cells.story-b507e76d.js","assets/vendor-c986319e.js","assets/VueScreener-c8a96240.js","assets/primitives-data-4454990d.js"] : void 0));
+const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./4 stress-test.story-1abf1082.js"), true ? ["assets/4 stress-test.story-1abf1082.js","assets/vendor-c986319e.js","assets/VueScreener-c8a96240.js"] : void 0));
+const Comp4 = defineAsyncComponent(() => __vitePreload(() => import("./5 no-data.story-081c9bd0.js"), true ? ["assets/5 no-data.story-081c9bd0.js","assets/vendor-c986319e.js","assets/VueScreener-c8a96240.js"] : void 0));
+const Comp5 = defineAsyncComponent(() => __vitePreload(() => import("./6 hide-header.story-6709cff8.js"), true ? ["assets/6 hide-header.story-6709cff8.js","assets/vendor-c986319e.js","assets/VueScreener-c8a96240.js","assets/primitives-data-4454990d.js"] : void 0));
 let files = [
   { "id": "src-stories-1-basic-usage-story-vue", "path": ["1 basic-usage"], "filePath": "src/stories/1 basic-usage.story.vue", "story": { "id": "src-stories-1-basic-usage-story-vue", "title": "1 basic-usage", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-1-basic-usage-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 0, component: Comp0, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-1-basic-usage-story-vue-8d34001b.js"), true ? [] : void 0) },
   { "id": "src-stories-2-sticky-actions-story-vue", "path": ["2 sticky-actions"], "filePath": "src/stories/2 sticky-actions.story.vue", "story": { "id": "src-stories-2-sticky-actions-story-vue", "title": "2 sticky-actions", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "src-stories-2-sticky-actions-story-vue-0", "title": "default" }] }, "supportPluginId": "vue3", "index": 1, component: Comp1, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-2-sticky-actions-story-vue-f1a5ac70.js"), true ? [] : void 0) },
@@ -85,12 +85,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-290d154e.js"), true ? ["assets/HomeView.vue-290d154e.js","assets/vendor-e300ac54.js"] : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-0790ea18.js"), true ? ["assets/HomeView.vue-0790ea18.js","assets/vendor-c986319e.js"] : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-f4ef2a49.js"), true ? ["assets/StoryView.vue-f4ef2a49.js","assets/vendor-e300ac54.js","assets/MobileOverlay.vue2-865074ec.js","assets/BaseEmpty.vue-56670c53.js","assets/state-5772a581.js"] : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-d60208c8.js"), true ? ["assets/StoryView.vue-d60208c8.js","assets/vendor-c986319e.js","assets/MobileOverlay.vue2-09fe7828.js","assets/BaseEmpty.vue-b5e1b8a4.js","assets/state-f2381a6c.js"] : void 0)
     }
   ]
 });
@@ -180,8 +180,8 @@ function mapVariant(variant, existingVariant) {
   return result;
 }
 const clientSupportPlugins = {
-  "vanilla": () => __vitePreload(() => import("./vendor-e300ac54.js").then((n) => n.aW), true ? [] : void 0),
-  "vue3": () => __vitePreload(() => import("./vendor-e300ac54.js").then((n) => n.aX), true ? [] : void 0)
+  "vanilla": () => __vitePreload(() => import("./vendor-c986319e.js").then((n) => n.aX), true ? [] : void 0),
+  "vue3": () => __vitePreload(() => import("./vendor-c986319e.js").then((n) => n.aY), true ? [] : void 0)
 };
 const __default__ = {
   inheritAttrs: false

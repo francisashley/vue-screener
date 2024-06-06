@@ -1,5 +1,5 @@
-import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-e300ac54.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-faf598f6.js";
+import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-c986319e.js";
+import { _ as _export_sfc, V as VueScreener } from "./VueScreener-c8a96240.js";
 import { b as baseData, p as primitivesData } from "./primitives-data-4454990d.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "6 hide-header.story",

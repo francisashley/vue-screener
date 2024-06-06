@@ -1,4 +1,4 @@
-import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, aB as createBaseVNode, av as createBlock, aF as createCommentVNode, aG as renderSlot, aH as normalizeClass, aw as withCtx, ax as createVNode, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, aA as createTextVNode, aM as ref, aN as onMounted, as as watch, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as orderBy, ay as normalizeProps, az as guardReactiveProps } from "./vendor-e300ac54.js";
+import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, aB as createBaseVNode, av as createBlock, aF as createCommentVNode, aG as renderSlot, aH as normalizeClass, aw as withCtx, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, ax as createVNode, aA as createTextVNode, aM as ref, aN as onMounted, as as watch, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as debounce, aT as orderBy, ay as normalizeProps, az as guardReactiveProps } from "./vendor-c986319e.js";
 const JsonView_vue_vue_type_style_index_0_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -222,7 +222,8 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TableViewHeaderCell",
   props: {
     cell: { type: Object, required: true },
-    sortDirection: { type: [null, String], required: false }
+    sortDirection: { type: [null, String], required: false },
+    isSortable: { type: Boolean, required: false }
   },
   emits: ["on-sort"],
   setup(__props, { expose: __expose, emit }) {
@@ -241,6 +242,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock($setup["TableCell"], {
     class: normalizeClass([
       "vs-table-view__cell--is-header",
+      $props.isSortable && "vs-table-view__cell--is-sortable",
       $props.cell.isStickyAction && "vs-table-view__cell--is-sticky"
     ]),
     cell: $props.cell,
@@ -252,7 +254,10 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
           innerHTML: $props.cell.value
         }, null, 8, _hoisted_1$9)
       ]),
-      createVNode($setup["SortSelector"], { "sort-direction": $props.sortDirection }, null, 8, ["sort-direction"])
+      $props.isSortable ? (openBlock(), createBlock($setup["SortSelector"], {
+        key: 0,
+        "sort-direction": $props.sortDirection
+      }, null, 8, ["sort-direction"])) : createCommentVNode("v-if", true)
     ]),
     _: 3
     /* FORWARDED */
@@ -305,16 +310,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     __expose();
     const props = __props;
     const getFields2 = computed(() => {
-      const fields = [];
-      props.fields.forEach((field, i) => {
-        fields.push({
+      const fields = props.fields.map((field, i) => {
+        return {
           field,
           value: field,
           highlightedValue: "",
           isFirst: i === 0,
-          isLast: !props.includeStickyActions && i === props.fields.length - 1,
+          isLast: i === props.fields.length - 1,
           type: "string"
-        });
+        };
       });
       if (props.includeStickyActions) {
         fields.push({
@@ -336,7 +340,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             value: col.hasValue ? col.value : "",
             highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : "", props.highlight) : "",
             isFirst: i === 0,
-            isLast: !props.includeStickyActions && i === row.length - 1,
+            isLast: i === row.length - 1,
             type: col.type,
             row
           };
@@ -415,8 +419,9 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
                 createVNode($setup["HeaderCell"], {
                   cell,
                   "sort-direction": $setup.getSortDirection(cell.field),
+                  "is-sortable": !cell.isStickyAction,
                   onOnSort: _cache[1] || (_cache[1] = ($event) => $setup.emit("on-sort", $event))
-                }, null, 8, ["cell", "sort-direction"])
+                }, null, 8, ["cell", "sort-direction", "is-sortable"])
               ]);
             }),
             128
@@ -652,7 +657,7 @@ const _hoisted_1$6 = { class: "vs-pagination" };
 const _hoisted_2$4 = { class: "vs-pagination__info" };
 const _hoisted_3$3 = { class: "vs-pagination__nav" };
 const _hoisted_4$2 = ["disabled"];
-const _hoisted_5$2 = ["disabled"];
+const _hoisted_5$1 = ["disabled"];
 const _hoisted_6 = ["onClick"];
 const _hoisted_7 = ["disabled"];
 const _hoisted_8 = ["disabled"];
@@ -701,7 +706,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
           "vs-pagination__button--prev",
           !$setup.canNavigatePrev && "vs-pagination__button--disabled"
         ])
-      }, " Prev ", 10, _hoisted_5$2),
+      }, " Prev ", 10, _hoisted_5$1),
       (openBlock(true), createElementBlock(
         Fragment,
         null,
@@ -942,7 +947,7 @@ const _hoisted_2$1 = /* @__PURE__ */ createBaseVNode(
 );
 const _hoisted_3$1 = { class: "vs-settings__options" };
 const _hoisted_4$1 = ["title", "onClick"];
-const _hoisted_5$1 = /* @__PURE__ */ createBaseVNode(
+const _hoisted_5 = /* @__PURE__ */ createBaseVNode(
   "h3",
   { class: "vs-settings__heading" },
   "Presentation",
@@ -982,7 +987,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
           /* KEYED_FRAGMENT */
         ))
       ]),
-      _hoisted_5$1,
+      _hoisted_5,
       createVNode($setup["ViewSelector"], {
         "active-format": $props.activeFormat,
         onSelectFormat: _cache[0] || (_cache[0] = ($event) => $setup.emit("select-format", $event))
@@ -1176,6 +1181,35 @@ function search(options) {
     return !shouldExclude && shouldInclude && meetsSearchCriteria;
   });
 }
+function isHorizontallyScrollable(element) {
+  return element.scrollWidth > element.clientWidth;
+}
+function isScrolledToStartHorizontally(element) {
+  return element.scrollLeft === 0;
+}
+function isScrolledToEndHorizontally(element) {
+  return Math.round(element.scrollWidth - element.scrollLeft) === element.clientWidth;
+}
+function observeHorizontalScrollability(element, callback, debounceTime = 20) {
+  const updateScrollState = debounce(() => {
+    callback({
+      isXScrollable: isHorizontallyScrollable(element),
+      isXScrolledStart: isScrolledToStartHorizontally(element),
+      isXScrolledEnd: isScrolledToEndHorizontally(element)
+    });
+  }, debounceTime);
+  updateScrollState();
+  const resizeObserver = new ResizeObserver(updateScrollState);
+  resizeObserver.observe(element);
+  element.addEventListener("scroll", updateScrollState);
+  return {
+    disconnect: () => {
+      updateScrollState.cancel();
+      resizeObserver.disconnect();
+      element.removeEventListener("scroll", updateScrollState);
+    }
+  };
+}
 const VueScreener_vue_vue_type_style_index_0_lang = "";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "VueScreener",
@@ -1192,6 +1226,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose }) {
     __expose();
     const props = __props;
+    const mainEl = ref();
+    const isXScrollable = ref(false);
+    const isXScrolledEnd = ref(false);
+    onMounted(() => {
+      if (mainEl.value) {
+        observeHorizontalScrollability(mainEl.value, (state) => {
+          isXScrollable.value = state.isXScrollable;
+          isXScrolledEnd.value = state.isXScrolledEnd;
+        });
+      }
+    });
     const searchQuery = ref("");
     const highlightQuery = ref("");
     const stagedCurrentPage = ref(props.currentPage);
@@ -1300,7 +1345,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
       sortField.value = updatedSortField;
     };
-    const __returned__ = { props, searchQuery, highlightQuery, stagedCurrentPage, stagedPerPage, renderFormat, searchOptions, sortField, sortDirection, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getSortedData, getPaginatedData, hasData, onInputSearch, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, onChangePerPage, handleSort, JsonView, TableView, NoDataView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
+    const __returned__ = { props, mainEl, isXScrollable, isXScrolledEnd, searchQuery, highlightQuery, stagedCurrentPage, stagedPerPage, renderFormat, searchOptions, sortField, sortDirection, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getSortedData, getPaginatedData, hasData, onInputSearch, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, onChangePerPage, handleSort, JsonView, TableView, NoDataView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -1311,8 +1356,7 @@ const _hoisted_2 = {
   class: "vs-header"
 };
 const _hoisted_3 = { class: "vs-title" };
-const _hoisted_4 = { class: "vs-main" };
-const _hoisted_5 = { class: "vs-footer" };
+const _hoisted_4 = { class: "vs-footer" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("section", _hoisted_1, [
     $setup.isValidInput ? (openBlock(), createElementBlock(
@@ -1342,37 +1386,49 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             onChangeSearchOptions: $setup.onChangeSearchOptions
           }, null, 8, ["active-format", "search-options"])
         ])) : createCommentVNode("v-if", true),
-        createBaseVNode("main", _hoisted_4, [
-          $setup.hasData && $setup.renderFormat === "table" ? (openBlock(), createBlock($setup["TableView"], {
-            key: 0,
-            fields: $setup.getFields,
-            rows: $setup.getPaginatedData,
-            highlight: $setup.highlightQuery,
-            "sort-direction": $setup.sortDirection,
-            "sort-field": $setup.sortField,
-            "include-sticky-actions": $props.includeStickyActions,
-            onOnSort: $setup.handleSort
-          }, {
-            "header-cell": withCtx((cellProps) => [
-              renderSlot(_ctx.$slots, "header-cell", normalizeProps(guardReactiveProps(cellProps)))
-            ]),
-            "value-cell": withCtx((cellProps) => [
-              renderSlot(_ctx.$slots, "value-cell", normalizeProps(guardReactiveProps(cellProps)))
-            ]),
-            "sticky-actions-head": withCtx((cellProps) => [
-              renderSlot(_ctx.$slots, "sticky-actions-head", normalizeProps(guardReactiveProps(cellProps)))
-            ]),
-            "sticky-actions-value": withCtx((cellProps) => [
-              renderSlot(_ctx.$slots, "sticky-actions-value", normalizeProps(guardReactiveProps(cellProps)))
-            ]),
-            _: 3
-            /* FORWARDED */
-          }, 8, ["fields", "rows", "highlight", "sort-direction", "sort-field", "include-sticky-actions"])) : $setup.hasData ? (openBlock(), createBlock($setup["JsonView"], {
-            key: 1,
-            data: $setup.getPaginatedData
-          }, null, 8, ["data"])) : (openBlock(), createBlock($setup["NoDataView"], { key: 2 }))
-        ]),
-        createBaseVNode("footer", _hoisted_5, [
+        createBaseVNode(
+          "main",
+          {
+            class: normalizeClass(["vs-main", {
+              "vs-main--is-x-scrollable": $setup.isXScrollable,
+              "vs-main--is-x-scrolled-end": $setup.isXScrolledEnd
+            }]),
+            ref: "mainEl"
+          },
+          [
+            $setup.hasData && $setup.renderFormat === "table" ? (openBlock(), createBlock($setup["TableView"], {
+              key: 0,
+              fields: $setup.getFields,
+              rows: $setup.getPaginatedData,
+              highlight: $setup.highlightQuery,
+              "sort-direction": $setup.sortDirection,
+              "sort-field": $setup.sortField,
+              "include-sticky-actions": $props.includeStickyActions,
+              onOnSort: $setup.handleSort
+            }, {
+              "header-cell": withCtx((cellProps) => [
+                renderSlot(_ctx.$slots, "header-cell", normalizeProps(guardReactiveProps(cellProps)))
+              ]),
+              "value-cell": withCtx((cellProps) => [
+                renderSlot(_ctx.$slots, "value-cell", normalizeProps(guardReactiveProps(cellProps)))
+              ]),
+              "sticky-actions-head": withCtx((cellProps) => [
+                renderSlot(_ctx.$slots, "sticky-actions-head", normalizeProps(guardReactiveProps(cellProps)))
+              ]),
+              "sticky-actions-value": withCtx((cellProps) => [
+                renderSlot(_ctx.$slots, "sticky-actions-value", normalizeProps(guardReactiveProps(cellProps)))
+              ]),
+              _: 3
+              /* FORWARDED */
+            }, 8, ["fields", "rows", "highlight", "sort-direction", "sort-field", "include-sticky-actions"])) : $setup.hasData ? (openBlock(), createBlock($setup["JsonView"], {
+              key: 1,
+              data: $setup.getPaginatedData
+            }, null, 8, ["data"])) : (openBlock(), createBlock($setup["NoDataView"], { key: 2 }))
+          ],
+          2
+          /* CLASS */
+        ),
+        createBaseVNode("footer", _hoisted_4, [
           createVNode($setup["Pagination"], {
             "total-items": $setup.getSearchedData.length,
             "per-page": $setup.stagedPerPage,
