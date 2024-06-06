@@ -1,4 +1,4 @@
-import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, aB as createBaseVNode, av as createBlock, aF as createCommentVNode, aG as renderSlot, aH as normalizeClass, aw as withCtx, ax as createVNode, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, aM as ref, aN as onMounted, as as watch, aA as createTextVNode, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as orderBy, ay as normalizeProps, az as guardReactiveProps } from "./vendor-e300ac54.js";
+import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, aB as createBaseVNode, av as createBlock, aF as createCommentVNode, aG as renderSlot, aH as normalizeClass, aw as withCtx, ax as createVNode, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, aA as createTextVNode, aM as ref, aN as onMounted, as as watch, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as orderBy, ay as normalizeProps, az as guardReactiveProps } from "./vendor-e300ac54.js";
 const JsonView_vue_vue_type_style_index_0_lang = "";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -330,7 +330,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     });
     const getRows = computed(() => {
       return props.rows.map((row) => {
-        const cells = row.map((col, i) => {
+        const cells = row == null ? void 0 : row.map((col, i) => {
           return {
             field: col.key,
             value: col.hasValue ? col.value : "",
@@ -453,7 +453,17 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
                 }),
                 128
                 /* KEYED_FRAGMENT */
-              ))
+              )),
+              createCommentVNode(" Fill empty rows on last page "),
+              !row ? (openBlock(), createElementBlock(
+                Fragment,
+                { key: 0 },
+                [
+                  createTextVNode(" ")
+                ],
+                64
+                /* STABLE_FRAGMENT */
+              )) : createCommentVNode("v-if", true)
             ],
             4
             /* STYLE */
