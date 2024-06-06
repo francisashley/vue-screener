@@ -1,7 +1,7 @@
 <template>
   <section class="vs-vue-screener">
     <template v-if="isValidInput">
-      <header class="vs-header">
+      <header class="vs-header" v-if="includeHeader">
         <div class="vs-title">
           {{ props.title }}
         </div>
@@ -99,6 +99,7 @@ type Props = {
   perPage?: number;
   currentPage?: number;
   includeStickyActions?: boolean;
+  includeHeader?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -109,6 +110,7 @@ const props = withDefaults(defineProps<Props>(), {
   perPage: 15,
   currentPage: 1,
   includeStickyActions: false,
+  includeHeader: true,
 });
 
 const searchQuery = ref<string>("");
