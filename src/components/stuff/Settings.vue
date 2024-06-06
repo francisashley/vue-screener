@@ -6,7 +6,7 @@
         :class="[show && 'vs-settings__button--active']"
         @click="toggle"
       >
-        <CogIcon />
+        <CogIcon class="vs-settings__button-icon" />
       </button>
     </template>
     <template #default>
