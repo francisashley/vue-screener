@@ -63,17 +63,15 @@ const props = defineProps<{
 const emit = defineEmits(["on-sort"]);
 
 const getFields = computed(() => {
-  const fields: Cell[] = [];
-
-  props.fields.forEach((field, i) => {
-    fields.push({
+  const fields: Cell[] = props.fields.map((field, i) => {
+    return {
       field,
       value: field,
       highlightedValue: "",
       isFirst: i === 0,
-      isLast: !props.includeStickyActions && i === props.fields.length - 1,
+      isLast: i === props.fields.length - 1,
       type: "string",
-    });
+    };
   });
 
   if (props.includeStickyActions) {
@@ -100,7 +98,7 @@ const getRows = computed(() => {
           ? highlightText(col.value ? String(col.value) : "", props.highlight)
           : "",
         isFirst: i === 0,
-        isLast: !props.includeStickyActions && i === row.length - 1,
+        isLast: i === row.length - 1,
         type: col.type,
         row,
       };
