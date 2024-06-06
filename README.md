@@ -169,6 +169,8 @@ Style using classes:
     .vs-table-view__row--header
     .vs-table-view__row--record
     .vs-table-view__cell
+    .vs-table-view__cell--is-sortable
+    .vs-table-view__cell--is-sticky
     .vs-table-view__cell--is-header
     .vs-table-view__cell--is-value
     .vs-table-view__cell--is-first

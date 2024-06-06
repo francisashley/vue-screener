@@ -15,6 +15,7 @@
         <HeaderCell
           :cell="cell"
           :sort-direction="getSortDirection(cell.field)"
+          :is-sortable="!cell.isStickyAction"
           @on-sort="emit('on-sort', $event)"
         />
       </slot>
