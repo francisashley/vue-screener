@@ -258,6 +258,7 @@ const handleSort = (updatedSortField: string) => {
     border: thin solid black;
     border-radius: 8px;
     background: #fff;
+    overflow: hidden;
   }
 
   &-header {
