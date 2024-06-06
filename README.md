@@ -36,7 +36,7 @@ yarn add vue-screener
 </template>
 
 <script lang="ts">
-import VueScreener from 'vue-screener'
+import { VueScreener } from 'vue-screener'
 import 'vue-screener/style.css'
 </script>
 ```
