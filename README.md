@@ -226,4 +226,5 @@ Style using classes:
 https://medium.com/evodeck/responsive-data-tables-with-css-grid-3c58ecf04723
 
 ## License
+
 MIT
