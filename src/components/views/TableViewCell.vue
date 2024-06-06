@@ -32,8 +32,6 @@ export type Cell = {
   isFirst?: boolean;
   isLast?: boolean;
   hasValue?: boolean;
-  isHeader?: boolean;
-  isValue?: boolean;
   isStickyAction?: boolean;
   row?: unknown;
 };
@@ -49,7 +47,6 @@ defineProps<{
   white-space: nowrap;
 
   &__cell {
-    border-bottom: thin solid black;
     border-right: thin solid black;
     padding: 2px 5px;
   }
@@ -65,5 +62,14 @@ defineProps<{
     border-left: thin solid black;
     margin-left: -1px;
   }
+}
+
+.vs-main--is-x-scrollable .vs-table-view__cell--is-sticky-action {
+  box-shadow: -3px 0px 2px rgba(0, 0, 0, 0.11);
+  transition: box-shadow 300ms ease-out;
+}
+
+.vs-main--is-x-scrolled-end .vs-table-view__cell--is-sticky-action {
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0) !important;
 }
 </style>

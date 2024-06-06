@@ -33,6 +33,7 @@ const handleClickOutside = () => (show.value = false);
     border-radius: 4px;
     padding: 8px;
     color: white;
+    z-index: 1;
   }
 
   &__content-enter-active,

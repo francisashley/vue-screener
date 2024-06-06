@@ -1,6 +1,6 @@
 {
   "name": "vue-screener",
-  "version": "0.6.4",
+  "version": "0.7.1",
   "type": "module",
   "description": "Easily search and filter data in Vue3.",
   "author": "Francis Ashley",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@histoire/plugin-vue": "^0.17.1",
+    "@types/lodash-es": "^4.17.12",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
     "@vitejs/plugin-vue": "^4.2.3",
@@ -43,6 +44,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-vue": "^9.17.0",
     "histoire": "^0.17.0",
+    "lodash-es": "^4.17.21",
     "natural-orderby": "^2.0.3",
     "prettier": "^3.0.3",
     "react": "^18.2.0",

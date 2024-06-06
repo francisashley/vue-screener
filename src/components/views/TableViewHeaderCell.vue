@@ -2,6 +2,7 @@
   <TableCell
     :class="[
       'vs-table-view__cell--is-header',
+      isSortable && 'vs-table-view__cell--is-sortable',
       cell.isStickyAction && 'vs-table-view__cell--is-sticky',
     ]"
     :cell="cell"
@@ -10,7 +11,7 @@
     <slot>
       <span v-html="cell.value" />
     </slot>
-    <SortSelector v-if="cell.isHeader" :sort-direction="sortDirection" />
+    <SortSelector :sort-direction="sortDirection" v-if="isSortable" />
   </TableCell>
 </template>
 
@@ -21,6 +22,7 @@ import TableCell, { Cell } from "./TableViewCell.vue";
 const props = defineProps<{
   cell: Cell;
   sortDirection?: null | "asc" | "desc";
+  isSortable?: boolean;
 }>();
 
 const emit = defineEmits(["on-sort"]);
@@ -38,6 +40,8 @@ const handleClickHeader = () => {
     height: 24px;
     display: inline-flex;
     align-items: center;
+  }
+  &--is-sortable {
     cursor: pointer;
   }
 }

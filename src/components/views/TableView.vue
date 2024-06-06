@@ -1,54 +1,45 @@
 <template>
   <div :style="tableStyle" class="vs-table-view">
-    <template v-for="(cell, i) in getCells">
-      <template v-if="cell.isHeader">
-        <slot
-          v-if="cell.isStickyAction"
-          name="sticky-actions-head"
-          :key="'sticky-actions-head-' + i"
-          :cell="cell"
-        >
-          <HeaderCell :cell="cell" />
-        </slot>
-        <slot
-          v-else
-          name="header-cell"
-          :key="'col-' + i"
+    <div
+      :style="rowStyle"
+      class="vs-table-view__row vs-table-view__row--header"
+    >
+      <slot
+        v-for="(cell, i) in getFields"
+        :key="i"
+        :name="cell.isStickyAction ? 'sticky-actions-head' : 'header-cell'"
+        :cell="cell"
+        :sort-direction="getSortDirection(cell.field)"
+        @on-sort="emit('on-sort', $event)"
+      >
+        <HeaderCell
           :cell="cell"
           :sort-direction="getSortDirection(cell.field)"
+          :is-sortable="!cell.isStickyAction"
           @on-sort="emit('on-sort', $event)"
-        >
-          <HeaderCell
-            :key="i"
-            :cell="cell"
-            :sort-direction="getSortDirection(cell.field)"
-            @on-sort="emit('on-sort', $event)"
-          />
-        </slot>
-      </template>
-      <template v-else-if="cell.isValue">
-        <slot
-          v-if="cell.isStickyAction"
-          name="sticky-actions-value"
-          :key="'sticky-actions-value-' + i"
-          :cell="cell"
-          :highlight="highlightText"
-          :highlight-value="highlight"
-        >
-          <ValueCell :key="i" :cell="cell" />
-        </slot>
-        <slot
-          v-else
-          name="value-cell"
-          :key="i"
-          :cell="cell"
-          :highlight="highlightText"
-          :highlight-value="highlight"
-        >
-          <ValueCell :key="i" :cell="cell" />
-        </slot>
-      </template>
-    </template>
+        />
+      </slot>
+    </div>
+
+    <div
+      :style="rowStyle"
+      v-for="(row, i) in getRows"
+      :key="i"
+      class="vs-table-view__row vs-table-view__row--record"
+    >
+      <slot
+        :name="cell.isStickyAction ? 'sticky-actions-value' : 'value-cell'"
+        :cell="cell"
+        v-for="(cell, j) in row"
+        :key="j"
+        :highlight="highlightText"
+        :highlight-value="highlight"
+      >
+        <ValueCell :cell="cell" />
+      </slot>
+      <!-- Fill empty rows on last page -->
+      <template v-if="!row">&nbsp;</template>
+    </div>
   </div>
 </template>
 
@@ -66,25 +57,21 @@ const props = defineProps<{
   highlight: string;
   sortField: null | string;
   sortDirection: null | "asc" | "desc";
-
   includeStickyActions?: boolean;
 }>();
 
 const emit = defineEmits(["on-sort"]);
 
-const getCells = computed(() => {
-  const fields: Cell[] = [];
-
-  props.fields.forEach((field, i) => {
-    fields.push({
+const getFields = computed(() => {
+  const fields: Cell[] = props.fields.map((field, i) => {
+    return {
       field,
       value: field,
       highlightedValue: "",
-      isHeader: true,
       isFirst: i === 0,
-      isLast: !props.includeStickyActions && i === props.fields.length - 1,
+      isLast: i === props.fields.length - 1,
       type: "string",
-    });
+    };
   });
 
   if (props.includeStickyActions) {
@@ -92,44 +79,45 @@ const getCells = computed(() => {
       field: "",
       value: "",
       highlightedValue: "",
-      isHeader: true,
       isLast: true,
       isStickyAction: true,
       type: "string",
     });
   }
 
-  props.rows.forEach((row) => {
-    row?.forEach((col, i) => {
-      fields.push({
+  return fields;
+});
+
+const getRows = computed(() => {
+  return props.rows.map((row) => {
+    const cells: Cell[] = row?.map((col, i) => {
+      return {
         field: col.key,
-        isValue: true,
         value: col.hasValue ? col.value : "",
         highlightedValue: col.hasValue
           ? highlightText(col.value ? String(col.value) : "", props.highlight)
           : "",
         isFirst: i === 0,
-        isLast: !props.includeStickyActions && i === row.length - 1,
+        isLast: i === row.length - 1,
         type: col.type,
         row,
-      });
+      };
     });
 
     if (props.includeStickyActions && row) {
-      fields.push({
+      cells.push({
         field: "",
         value: "",
         highlightedValue: "",
-        isValue: true,
         isLast: true,
         isStickyAction: true,
         type: "string",
         row,
       });
     }
-  });
 
-  return fields;
+    return cells;
+  });
 });
 
 const tableStyle = computed(() => {
@@ -140,6 +128,18 @@ const tableStyle = computed(() => {
   return {
     display: "grid",
     "grid-template-columns": cols,
+  };
+});
+
+const rowStyle = computed(() => {
+  let colCount = props.fields.length;
+
+  if (props.includeStickyActions) colCount++;
+
+  return {
+    display: "grid",
+    "grid-template-columns": "subgrid",
+    "grid-column": `1 / ${colCount + 1}`,
   };
 });
 
@@ -155,23 +155,8 @@ const getSortDirection = (field: string): "asc" | "desc" | null => {
 .vs-table-view {
   color: black;
 
-  &__cell {
+  &__row {
     border-bottom: thin solid black;
-    border-right: thin solid black;
-    padding: 2px 5px;
-  }
-
-  &__cell--is-header {
-    font-weight: bold;
-    white-space: nowrap;
-    height: 24px;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  &__cell--is-last {
-    border-right: unset;
   }
 }
 </style>

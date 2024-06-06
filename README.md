@@ -164,8 +164,15 @@ Style using classes:
     .vs-dropdown
     .vs-dropdown__content
   .vs-main
+  .vs-main--is-x-scrollable
+  .vs-main--is-x-scrolled-end
     .vs-table-view
+    .vs-table-view__row
+    .vs-table-view__row--header
+    .vs-table-view__row--record
     .vs-table-view__cell
+    .vs-table-view__cell--is-sortable
+    .vs-table-view__cell--is-sticky
     .vs-table-view__cell--is-header
     .vs-table-view__cell--is-value
     .vs-table-view__cell--is-first
