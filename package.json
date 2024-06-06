@@ -1,6 +1,6 @@
 {
   "name": "vue-screener",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "type": "module",
   "description": "Easily search and filter data in Vue3.",
   "author": "Francis Ashley",
@@ -11,7 +11,8 @@
   "exports": {
     ".": {
       "import": "./dist/vue-screener.js",
-      "require": "./dist/vue-screener.umd.cjs"
+      "require": "./dist/vue-screener.umd.cjs",
+      "types": "./dist/index.d.ts"
     },
     "./style.css": "./dist/style.css"
   },
