@@ -2874,7 +2874,7 @@ body {
   padding: 10px;
   border: thin solid;
 }
-.vs__sort-selector {
+.vs-sort-selector {
   margin-left: auto;
   height: 24px;
   display: inline-flex;

@@ -1,5 +1,5 @@
 import { aq as defineComponent, ar as reactive, as as watch, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-e300ac54.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-cccbb7d4.js";
+import { _ as _export_sfc, V as VueScreener } from "./VueScreener-b6865a19.js";
 import { b as baseData } from "./data-32ab9faf.js";
 import { p as primitivesData } from "./primitives-data-16d3af5c.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({

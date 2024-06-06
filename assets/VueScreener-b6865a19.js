@@ -154,18 +154,18 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$b = { class: "vs__sort-selector" };
+const _hoisted_1$b = { class: "vs-sort-selector" };
 function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", _hoisted_1$b, [
     $props.sortDirection === null ? (openBlock(), createBlock($setup["SortIcon"], {
       key: 0,
-      class: "vs__sort-icon vs__sort-icon--none"
+      class: "vs-sort-selector__icon vs-sort-selector__icon--none"
     })) : $props.sortDirection === "asc" ? (openBlock(), createBlock($setup["SortUpIcon"], {
       key: 1,
-      class: "vs__sort-icon vs__sort-icon--asc"
+      class: "vs-sort-selector__icon vs-sort-selector__icon--asc"
     })) : $props.sortDirection === "desc" ? (openBlock(), createBlock($setup["SortDownIcon"], {
       key: 2,
-      class: "vs__sort-icon vs__sort-icon--desc"
+      class: "vs-sort-selector__icon vs-sort-selector__icon--desc"
     })) : createCommentVNode("v-if", true)
   ]);
 }
