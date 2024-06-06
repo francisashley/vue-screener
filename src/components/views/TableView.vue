@@ -89,7 +89,7 @@ const getFields = computed(() => {
 
 const getRows = computed(() => {
   return props.rows.map((row) => {
-    const cells: Cell[] = row.map((col, i) => {
+    const cells: Cell[] = row?.map((col, i) => {
       return {
         field: col.key,
         value: col.hasValue ? col.value : "",
