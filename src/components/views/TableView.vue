@@ -1,6 +1,9 @@
 <template>
   <div :style="tableStyle" class="vs-table-view">
-    <div :style="rowStyle">
+    <div
+      :style="rowStyle"
+      class="vs-table-view__row vs-table-view__row--header"
+    >
       <slot
         v-for="(cell, i) in getFields"
         :key="i"
@@ -17,7 +20,12 @@
       </slot>
     </div>
 
-    <div :style="rowStyle" v-for="(row, i) in getRows" :key="i">
+    <div
+      :style="rowStyle"
+      v-for="(row, i) in getRows"
+      :key="i"
+      class="vs-table-view__row vs-table-view__row--record"
+    >
       <slot
         :name="cell.isStickyAction ? 'sticky-actions-value' : 'value-cell'"
         :cell="cell"
