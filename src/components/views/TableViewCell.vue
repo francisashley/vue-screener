@@ -32,8 +32,6 @@ export type Cell = {
   isFirst?: boolean;
   isLast?: boolean;
   hasValue?: boolean;
-  isHeader?: boolean;
-  isValue?: boolean;
   isStickyAction?: boolean;
   row?: unknown;
 };

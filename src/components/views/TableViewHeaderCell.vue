@@ -10,7 +10,7 @@
     <slot>
       <span v-html="cell.value" />
     </slot>
-    <SortSelector v-if="cell.isHeader" :sort-direction="sortDirection" />
+    <SortSelector :sort-direction="sortDirection" />
   </TableCell>
 </template>
 

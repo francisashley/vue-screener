@@ -16,6 +16,7 @@
     "prefer-const": ["warn", { "destructuring": "all" }],
     // not needed for vue 3
     "vue/no-multiple-template-root": "off",
-    "vue/multi-word-component-names": "off"
+    "vue/multi-word-component-names": "off",
+    "vue/no-v-for-template-key": "off"
   }
 }
