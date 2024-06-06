@@ -3091,6 +3091,7 @@ body {
   border: thin solid black;
   border-radius: 8px;
   background: #fff;
+  overflow: hidden;
 }
 .vs-header {
   display: flex;

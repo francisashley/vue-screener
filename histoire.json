@@ -109,6 +109,28 @@
       ],
       "virtual": false,
       "markdownFile": null
+    },
+    {
+      "id": "src-stories-6-hide-header-story-vue",
+      "title": "6 hide-header",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "src-stories-6-hide-header-story-vue-0",
+          "title": "default"
+        }
+      ],
+      "relativePath": "src/stories/6 hide-header.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "6 hide-header"
+      ],
+      "virtual": false,
+      "markdownFile": null
     }
   ],
   "markdownFiles": []

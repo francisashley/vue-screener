@@ -861,8 +861,7 @@ const _sfc_main$2 = {};
 const _hoisted_1$2 = {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24",
-  fill: "currentColor",
-  class: "vs__settings-button-icon"
+  fill: "currentColor"
 };
 const _hoisted_2$2 = /* @__PURE__ */ createBaseVNode(
   "path",
@@ -944,7 +943,7 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
         class: normalizeClass(["vs-settings__button", [show && "vs-settings__button--active"]]),
         onClick: toggle
       }, [
-        createVNode($setup["CogIcon"])
+        createVNode($setup["CogIcon"], { class: "vs-settings__button-icon" })
       ], 10, _hoisted_1$1)
     ]),
     default: withCtx(() => [
@@ -1174,7 +1173,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     exclude: { type: Array, required: false, default: () => [] },
     perPage: { type: Number, required: false, default: 15 },
     currentPage: { type: Number, required: false, default: 1 },
-    includeStickyActions: { type: Boolean, required: false, default: false }
+    includeStickyActions: { type: Boolean, required: false, default: false },
+    includeHeader: { type: Boolean, required: false, default: true }
   },
   setup(__props, { expose: __expose }) {
     __expose();
@@ -1293,7 +1293,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1 = { class: "vs-vue-screener" };
-const _hoisted_2 = { class: "vs-header" };
+const _hoisted_2 = {
+  key: 0,
+  class: "vs-header"
+};
 const _hoisted_3 = { class: "vs-title" };
 const _hoisted_4 = { class: "vs-main" };
 const _hoisted_5 = { class: "vs-footer" };
@@ -1303,7 +1306,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       Fragment,
       { key: 0 },
       [
-        createBaseVNode("header", _hoisted_2, [
+        $props.includeHeader ? (openBlock(), createElementBlock("header", _hoisted_2, [
           createBaseVNode(
             "div",
             _hoisted_3,
@@ -1325,7 +1328,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             "search-options": $setup.searchOptions,
             onChangeSearchOptions: $setup.onChangeSearchOptions
           }, null, 8, ["active-format", "search-options"])
-        ]),
+        ])) : createCommentVNode("v-if", true),
         createBaseVNode("main", _hoisted_4, [
           $setup.hasData && $setup.renderFormat === "table" ? (openBlock(), createBlock($setup["TableView"], {
             key: 0,
