@@ -36,6 +36,8 @@
       >
         <ValueCell :cell="cell" />
       </slot>
+      <!-- Fill empty rows on last page -->
+      <template v-if="!row">&nbsp;</template>
     </div>
   </div>
 </template>
