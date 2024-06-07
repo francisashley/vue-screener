@@ -71,7 +71,7 @@
     <div class="vs-pagination__per-page">
       <input
         type="number"
-        :value="perPage"
+        :value="screener.perPage.value"
         min="1"
         step="1"
         @input="handleChangePerPage"
@@ -82,29 +82,24 @@
 </template>
 
 <script lang="ts" setup>
+import { Screener } from "@/interfaces/screener";
 import { computed, onMounted, watch } from "vue";
 
 const props = withDefaults(
-  defineProps<{
-    currentPage?: number;
-    totalItems?: number;
-    perPage?: number;
-  }>(),
-  {
-    currentPage: 1,
-    totalItems: 0,
-    perPage: 25,
-  },
+  defineProps<{ screener: Screener; totalItems?: number }>(),
+  { totalItems: 0 },
 );
 
-const emit = defineEmits(["change-page", "change-per-page"]);
-
 const totalPages = computed((): number => {
-  return Math.ceil(props.totalItems / props.perPage) || 0;
+  return Math.ceil(props.totalItems / props.screener.perPage.value) || 0;
 });
 
 const getPages = computed(() => {
-  let pages = [props.currentPage - 1, props.currentPage, props.currentPage + 1];
+  let pages = [
+    props.screener.currentPage.value - 1,
+    props.screener.currentPage.value,
+    props.screener.currentPage.value + 1,
+  ];
   pages = pages.filter((page) => page > 0);
 
   if (pages.length < 3) {
@@ -121,33 +116,38 @@ const getPages = computed(() => {
 });
 
 const canNavigateFirst = computed(() => {
-  return props.currentPage > 1;
+  return props.screener.currentPage.value > 1;
 });
 
 const canNavigatePrev = computed(() => {
-  return props.currentPage > 1;
+  return props.screener.currentPage.value > 1;
 });
 
 const canNavigateNext = computed(() => {
-  return props.currentPage < totalPages.value;
+  return props.screener.currentPage.value < totalPages.value;
 });
 
 const canNavigateLast = computed(() => {
-  return props.currentPage < totalPages.value;
+  return props.screener.currentPage.value < totalPages.value;
 });
 
 const firstIndexOfCurrentPage = computed(() => {
-  return props.currentPage * props.perPage - props.perPage + 1;
+  return (
+    props.screener.currentPage.value * props.screener.perPage.value -
+    props.screener.perPage.value +
+    1
+  );
 });
 
 const lastIndexOfCurrentPage = computed(() => {
-  return props.currentPage * props.perPage > props.totalItems
+  return props.screener.currentPage.value * props.screener.perPage.value >
+    props.totalItems
     ? props.totalItems
-    : props.currentPage * props.perPage;
+    : props.screener.currentPage.value * props.screener.perPage.value;
 });
 
 const currentPageIsInRange = computed((): boolean => {
-  return totalPages.value >= props.currentPage;
+  return totalPages.value >= props.screener.currentPage.value;
 });
 
 onMounted(() => {
@@ -162,7 +162,7 @@ watch(
 );
 
 const isActive = (page: number): boolean => {
-  return page === props.currentPage;
+  return page === props.screener.currentPage.value;
 };
 
 const ensureCurrentPageIsValid = (): void => {
@@ -172,31 +172,32 @@ const ensureCurrentPageIsValid = (): void => {
 };
 
 const handleClickFirst = () => {
-  emit("change-page", 1);
+  props.screener.currentPage.value = 1;
 };
 
 const handleClickPrev = () => {
-  emit("change-page", canNavigatePrev.value ? props.currentPage - 1 : 1);
+  props.screener.currentPage.value = canNavigatePrev.value
+    ? props.screener.currentPage.value - 1
+    : 1;
 };
 
 const handleClickNext = () => {
-  emit(
-    "change-page",
-    canNavigateNext.value ? props.currentPage + 1 : totalPages.value,
-  );
+  props.screener.currentPage.value = canNavigateNext.value
+    ? props.screener.currentPage.value + 1
+    : totalPages.value;
 };
 
 const handleClickLast = () => {
-  emit("change-page", totalPages.value);
+  props.screener.currentPage.value = totalPages.value;
 };
 
 const handleSelectPage = (targetPage: number) => {
-  emit("change-page", targetPage);
+  props.screener.currentPage.value = targetPage;
 };
 
 const handleChangePerPage = (event: Event): void => {
   const perPage = Number((event.target as HTMLInputElement).value);
-  emit("change-per-page", perPage);
+  props.screener.perPage.value = perPage;
 };
 </script>
 

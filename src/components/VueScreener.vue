@@ -56,11 +56,8 @@
       </main>
       <footer class="vs-footer">
         <Pagination
+          :screener="screener"
           :total-items="getSearchedData.length"
-          :per-page="screener.perPage.value"
-          :current-page="screener.currentPage.value"
-          @change-page="onChangePage"
-          @change-per-page="onChangePerPage"
         />
       </footer>
     </template>
@@ -249,14 +246,6 @@ const onChangeSearchOptions = (options: SearchQueryOption[]) => {
 
 const onSelectFormat = (format: "table" | "raw") => {
   screener.renderFormat.value = format;
-};
-
-const onChangePage = (page: number) => {
-  screener.currentPage.value = page;
-};
-
-const onChangePerPage = (newPerPage: number) => {
-  screener.perPage.value = newPerPage;
 };
 
 const handleSort = (updatedSortField: string) => {
