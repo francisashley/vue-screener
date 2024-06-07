@@ -57,8 +57,8 @@
       <footer class="vs-footer">
         <Pagination
           :total-items="getSearchedData.length"
-          :per-page="stagedPerPage"
-          :current-page="stagedCurrentPage"
+          :per-page="perPage"
+          :current-page="currentPage"
           @change-page="onChangePage"
           @change-per-page="onChangePerPage"
         />
@@ -98,6 +98,7 @@ import { search } from "../utils/search.utils";
 import { computed, onMounted, ref } from "vue";
 import { orderBy } from "natural-orderby";
 import { observeHorizontalScrollability } from "../utils/scroll.utils";
+import { useScreener } from "../hooks/use-screener";
 
 type Props = {
   data?: unknown[];
@@ -134,14 +135,19 @@ onMounted(() => {
   }
 });
 
-const searchQuery = ref<string>("");
-const highlightQuery = ref<string>("");
-const stagedCurrentPage = ref<number>(props.currentPage);
-const stagedPerPage = ref<number>(props.perPage);
-const renderFormat = ref<"table" | "raw">("table");
-const searchOptions = ref<SearchQueryOption[]>([]);
-const sortField = ref<string | null>(null);
-const sortDirection = ref<"asc" | "desc">("desc");
+const {
+  searchQuery,
+  highlightQuery,
+  currentPage,
+  perPage,
+  renderFormat,
+  searchOptions,
+  sortField,
+  sortDirection,
+} = useScreener({
+  defaultCurrentPage: props.currentPage,
+  defaultPerPage: props.perPage,
+});
 
 const isValidInput = computed((): boolean => {
   return isValidInputTool(props.data);
@@ -227,8 +233,8 @@ const getSortedData = computed((): NormalisedRow[] => {
 const getPaginatedData = computed((): NormalisedRow[] => {
   return getPaginated({
     rows: getSortedData.value,
-    page: stagedCurrentPage.value - 1,
-    perPage: stagedPerPage.value,
+    page: currentPage.value - 1,
+    perPage: perPage.value,
     withPlaceholders: true,
   });
 });
@@ -256,11 +262,11 @@ const onSelectFormat = (format: "table" | "raw") => {
 };
 
 const onChangePage = (page: number) => {
-  stagedCurrentPage.value = page;
+  currentPage.value = page;
 };
 
-const onChangePerPage = (perPage: number) => {
-  stagedPerPage.value = perPage;
+const onChangePerPage = (newPerPage: number) => {
+  perPage.value = newPerPage;
 };
 
 const handleSort = (updatedSortField: string) => {
