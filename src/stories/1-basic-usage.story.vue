@@ -9,6 +9,9 @@
     <Variant title="Array of mixed objects">
       <VueScreener :data="mixedObjectsData" />
     </Variant>
+    <Variant title="Custom title">
+      <VueScreener title="Custom title" :data="baseData" />
+    </Variant>
   </Story>
 </template>
 
