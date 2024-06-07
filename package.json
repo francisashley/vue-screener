@@ -19,7 +19,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "build": "vite build && vue-tsc --emitDeclarationOnly && rimraf ./dist/stories && rimraf ./dist/utils && rimraf ./dist/components/icons && rimraf ./dist/components/stuff",
     "types": "vue-tsc",
     "preview": "vite preview",
     "story:dev": "histoire dev",
