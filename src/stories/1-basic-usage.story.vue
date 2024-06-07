@@ -15,6 +15,9 @@
     <Variant title="Custom title">
       <VueScreener title="Custom title" :data="baseData" />
     </Variant>
+    <Variant title="Hide header">
+      <VueScreener :data="baseData" :include-header="false" />
+    </Variant>
   </Story>
 </template>
 
