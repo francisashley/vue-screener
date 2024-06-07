@@ -88,12 +88,12 @@ export function pickFields(
   });
 }
 
-export function excludeFields(
+export function omitFields(
   rows: NormalisedRow[],
-  excludeFields: string[],
+  omitFields: string[],
 ): NormalisedRow[] {
   return rows.map((row) => {
-    return row.filter((field) => !excludeFields.includes(field.key));
+    return row.filter((field) => !omitFields.includes(field.key));
   });
 }
 

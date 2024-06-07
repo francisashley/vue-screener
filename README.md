@@ -62,13 +62,13 @@ Pick fields (in order) to show:
 </template>
 ```
 
-Exclude fields:
+Omit fields:
 
 ```vue
 <template>
   <vue-screener
     :data="data"
-    :exclude="['price', 'product', 'technology']"
+    :omit="['price', 'product', 'technology']"
   />
 </template>
 ```

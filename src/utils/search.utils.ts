@@ -19,7 +19,7 @@ const testCriteria = (
     matchCase: boolean;
     matchWord: boolean;
     useRegExp: boolean;
-  }
+  },
 ): boolean => {
   const { matchCase = false, matchWord = false, useRegExp = false } = options;
 
@@ -111,24 +111,29 @@ export function search(options: {
   matchCase: boolean;
   matchWord: boolean;
 }): NormalisedRow[] {
-  let { searchQuery = "" } = options;
+  const { searchQuery = "" } = options;
 
   if (!searchQuery) return options.rows;
 
   // Parse search query and extract filters.
-  let {
+  const {
     searchQuery: parsedSearchQuery,
     excludeFilters,
     includeFilters,
   } = parseSearchQuery(searchQuery);
 
   // Get the search options.
-  const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
+  const {
+    rows,
+    useRegExp = false,
+    matchCase = false,
+    matchWord = false,
+  } = options;
 
   // Check if any of the filters match the row.
   const testExcludeFilters = (
     filters: [string, string][],
-    rowMap: Record<string, NormalisedField>
+    rowMap: Record<string, NormalisedField>,
   ): boolean => {
     return filters.some(([field, value]) => {
       if (rowMap[field]) {
@@ -143,7 +148,7 @@ export function search(options: {
 
   const testIncludeFilters = (
     filters: [string, string][],
-    rowMap: Record<string, NormalisedField>
+    rowMap: Record<string, NormalisedField>,
   ): boolean => {
     return filters.every(([field, value]) => {
       if (rowMap[field]) {
@@ -161,7 +166,7 @@ export function search(options: {
     // Create a map of the row fields for easy look up.
     const rowMap: Record<string, NormalisedField> = row.reduce(
       (acc, field) => ({ ...acc, [field.key]: field }),
-      {}
+      {},
     );
 
     let shouldExclude = false;

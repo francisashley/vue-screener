@@ -90,7 +90,7 @@ import {
   isValidInput as isValidInputTool,
   normaliseInput,
   pickFields,
-  excludeFields,
+  omitFields,
   getFields as getFieldsTool,
   getPaginated,
 } from "../utils/data.utils";
@@ -103,7 +103,7 @@ type Props = {
   data?: unknown[];
   title?: string;
   pick?: string[];
-  exclude?: string[];
+  omit?: string[];
   perPage?: number;
   currentPage?: number;
   includeStickyActions?: boolean;
@@ -114,7 +114,7 @@ const props = withDefaults(defineProps<Props>(), {
   data: () => [],
   title: "Results",
   pick: () => [],
-  exclude: () => [],
+  omit: () => [],
   perPage: 15,
   currentPage: 1,
   includeStickyActions: false,
@@ -160,8 +160,8 @@ const getNormalisedData = computed((): NormalisedRow[] => {
     normalisedData = pickFields(normalisedData, props.pick);
   }
 
-  if (props.exclude.length > 0) {
-    normalisedData = excludeFields(normalisedData, props.exclude);
+  if (props.omit.length > 0) {
+    normalisedData = omitFields(normalisedData, props.omit);
   }
 
   return normalisedData;
