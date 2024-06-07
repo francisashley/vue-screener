@@ -81,11 +81,7 @@ import Settings from "./stuff/Settings.vue";
 import { isValidRegExp } from "../utils/regex.utils";
 import {
   NormalisedRow,
-  UnknownObject,
   isValidInput as isValidInputTool,
-  normaliseInput,
-  pickFields,
-  omitFields,
   getFields as getFieldsTool,
   getPaginated,
 } from "../utils/data.utils";
@@ -121,6 +117,8 @@ const screener = useScreener({
   defaultCurrentPage: props.currentPage,
   defaultPerPage: props.perPage,
   defaultData: props.data,
+  pick: props.pick,
+  omit: props.omit,
 });
 
 const mainEl = ref();
@@ -144,29 +142,13 @@ const isRegExFriendlySearchQuery = computed((): boolean => {
   return isValidRegExp(screener.searchQuery.value);
 });
 
-const getNormalisedData = computed((): NormalisedRow[] => {
-  let normalisedData = isValidInputTool(screener.data.value)
-    ? normaliseInput(screener.data.value as UnknownObject[])
-    : [];
-
-  if (props.pick.length > 0) {
-    normalisedData = pickFields(normalisedData, props.pick);
-  }
-
-  if (props.omit.length > 0) {
-    normalisedData = omitFields(normalisedData, props.omit);
-  }
-
-  return normalisedData;
-});
-
 const getFields = computed((): string[] => {
-  return getFieldsTool(getNormalisedData.value);
+  return getFieldsTool(screener.normalisedData.value);
 });
 
 const getSearchedData = computed((): NormalisedRow[] => {
   return search({
-    rows: getNormalisedData.value,
+    rows: screener.normalisedData.value,
     searchQuery: screener.searchQuery.value,
     useRegExp: screener.shouldUseRegEx.value,
     matchCase: screener.shouldMatchCase.value,
@@ -177,7 +159,7 @@ const getSearchedData = computed((): NormalisedRow[] => {
 const getSortedData = computed((): NormalisedRow[] => {
   const sortedRows = screener.searchQuery.value
     ? getSearchedData.value
-    : getNormalisedData.value;
+    : screener.normalisedData.value;
 
   const sortIndex =
     sortedRows[0]?.findIndex(

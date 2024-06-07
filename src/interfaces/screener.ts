@@ -1,4 +1,5 @@
 import { SearchQueryOption } from "@/components/stuff/ScreenerSearch.vue";
+import { NormalisedRow } from "@/utils/data.utils";
 import { ComputedRef, Ref } from "vue";
 
 export type Screener = {
@@ -14,4 +15,5 @@ export type Screener = {
   shouldMatchCase: ComputedRef<boolean>;
   shouldMatchWord: ComputedRef<boolean>;
   data: Ref<unknown[]>;
+  normalisedData: ComputedRef<NormalisedRow[]>;
 };

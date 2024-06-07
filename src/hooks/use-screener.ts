@@ -1,5 +1,13 @@
 import { SearchQueryOption } from "@/components/stuff/ScreenerSearch.vue";
 import { Screener } from "@/interfaces/screener";
+import {
+  NormalisedRow,
+  UnknownObject,
+  isValidInput,
+  normaliseInput,
+  omitFields,
+  pickFields,
+} from "../utils/data.utils";
 import { computed, ref } from "vue";
 
 const searchQuery = ref<string>("");
@@ -16,6 +24,8 @@ type ScreenerOptions = {
   defaultCurrentPage?: number;
   defaultPerPage?: number;
   defaultData?: unknown[];
+  pick?: string[];
+  omit?: string[];
 };
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
   currentPage.value = options.defaultCurrentPage ?? currentPage.value;
@@ -34,6 +44,22 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     searchOptions.value.includes("match-word"),
   );
 
+  const normalisedData = computed((): NormalisedRow[] => {
+    let normalisedData = isValidInput(data.value)
+      ? normaliseInput(data.value as UnknownObject[])
+      : [];
+
+    if (options.pick && options.pick.length > 0) {
+      normalisedData = pickFields(normalisedData, options.pick);
+    }
+
+    if (options.omit && options.omit.length > 0) {
+      normalisedData = omitFields(normalisedData, options.omit);
+    }
+
+    return normalisedData;
+  });
+
   return {
     searchQuery,
     highlightQuery,
@@ -47,5 +73,6 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldMatchCase,
     shouldMatchWord,
     data,
+    normalisedData,
   };
 };
