@@ -10,11 +10,7 @@
         </template>
         <template #value-cell="props">
           <ValueCell v-bind="props" :style="{ background: 'blue' }">
-            <span
-              v-html="
-                props.highlight(String(props.cell.value), props.highlightValue)
-              "
-            />
+            <span v-html="props.highlight(String(props.cell.value), props.highlightValue)" />
             [stuff]
           </ValueCell>
         </template>
@@ -24,6 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { HeaderCell, ValueCell, VueScreener } from "../index";
-import baseData from "../fixtures/data.json";
+import { HeaderCell, ValueCell, VueScreener } from '../index'
+import baseData from '../fixtures/data.json'
 </script>

@@ -60,54 +60,53 @@
     </template>
     <ErrorMessage
       v-else
-      message="Invalid data was provided. Please provide an
-      array of objects or an array of arrays."
+      message="Invalid data was provided. Please provide an array of objects or an array of arrays."
       class="vs-error-message"
     />
   </section>
 </template>
 
 <script lang="ts" setup>
-import JsonView from "./views/JsonView.vue";
-import TableView from "./views/TableView.vue";
-import NoDataView from "./views/NoDataView.vue";
-import ScreenerSearch, { SearchQueryOption } from "./stuff/ScreenerSearch.vue";
-import Pagination from "./stuff/Pagination.vue";
-import ErrorMessage from "./stuff/ErrorMessage.vue";
-import Settings from "./stuff/Settings.vue";
-import { isValidRegExp } from "../utils/regex.utils";
+import JsonView from './views/JsonView.vue'
+import TableView from './views/TableView.vue'
+import NoDataView from './views/NoDataView.vue'
+import ScreenerSearch, { SearchQueryOption } from './stuff/ScreenerSearch.vue'
+import Pagination from './stuff/Pagination.vue'
+import ErrorMessage from './stuff/ErrorMessage.vue'
+import Settings from './stuff/Settings.vue'
+import { isValidRegExp } from '../utils/regex.utils'
 import {
   NormalisedRow,
   isValidInput as isValidInputTool,
   getFields as getFieldsTool,
   getPaginated,
-} from "../utils/data.utils";
-import { computed, onMounted, ref } from "vue";
-import { orderBy } from "natural-orderby";
-import { observeHorizontalScrollability } from "../utils/scroll.utils";
-import { useScreener } from "../hooks/use-screener";
+} from '../utils/data.utils'
+import { computed, onMounted, ref } from 'vue'
+import { orderBy } from 'natural-orderby'
+import { observeHorizontalScrollability } from '../utils/scroll.utils'
+import { useScreener } from '../hooks/use-screener'
 
 type Props = {
-  data?: unknown[];
-  title?: string;
-  pick?: string[];
-  omit?: string[];
-  perPage?: number;
-  currentPage?: number;
-  includeStickyActions?: boolean;
-  includeHeader?: boolean;
-};
+  data?: unknown[]
+  title?: string
+  pick?: string[]
+  omit?: string[]
+  perPage?: number
+  currentPage?: number
+  includeStickyActions?: boolean
+  includeHeader?: boolean
+}
 
 const props = withDefaults(defineProps<Props>(), {
   data: () => [],
-  title: "Results",
+  title: 'Results',
   pick: () => [],
   omit: () => [],
   perPage: 15,
   currentPage: 1,
   includeStickyActions: false,
   includeHeader: true,
-});
+})
 
 const screener = useScreener({
   defaultCurrentPage: props.currentPage,
@@ -115,64 +114,51 @@ const screener = useScreener({
   defaultData: props.data,
   pick: props.pick,
   omit: props.omit,
-});
+})
 
-const mainEl = ref();
-const isXScrollable = ref(false);
-const isXScrolledEnd = ref(false);
+const mainEl = ref()
+const isXScrollable = ref(false)
+const isXScrolledEnd = ref(false)
 
 onMounted(() => {
   if (mainEl.value) {
     observeHorizontalScrollability(mainEl.value, (state) => {
-      isXScrollable.value = state.isXScrollable;
-      isXScrolledEnd.value = state.isXScrolledEnd;
-    });
+      isXScrollable.value = state.isXScrollable
+      isXScrolledEnd.value = state.isXScrolledEnd
+    })
   }
-});
+})
 
 const isValidInput = computed((): boolean => {
-  return isValidInputTool(screener.data.value);
-});
+  return isValidInputTool(screener.data.value)
+})
 
 const isRegExFriendlySearchQuery = computed((): boolean => {
-  return isValidRegExp(screener.searchQuery.value);
-});
+  return isValidRegExp(screener.searchQuery.value)
+})
 
 const getFields = computed((): string[] => {
-  return getFieldsTool(screener.normalisedData.value);
-});
+  return getFieldsTool(screener.normalisedData.value)
+})
 
 const getSortedData = computed((): NormalisedRow[] => {
-  const sortedRows = screener.searchQuery.value
-    ? screener.searchedData.value
-    : screener.normalisedData.value;
+  const sortedRows = screener.searchQuery.value ? screener.searchedData.value : screener.normalisedData.value
 
-  const sortIndex =
-    sortedRows[0]?.findIndex(
-      (column) => column.key === screener.sortField.value,
-    ) ?? null;
+  const sortIndex = sortedRows[0]?.findIndex((column) => column.key === screener.sortField.value) ?? null
 
   if (screener.sortField.value && screener.sortDirection.value) {
-    const nullRows = sortedRows.filter(
-      (row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined,
-    );
+    const nullRows = sortedRows.filter((row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined)
 
-    const nonNullRows = sortedRows.filter(
-      (row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined,
-    );
+    const nonNullRows = sortedRows.filter((row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined)
 
     return [
-      ...orderBy(
-        nonNullRows,
-        [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
-        [screener.sortDirection.value],
-      ),
+      ...orderBy(nonNullRows, [(row: NormalisedRow | null) => row?.[sortIndex]?.value], [screener.sortDirection.value]),
       ...nullRows,
-    ];
+    ]
   } else {
-    return sortedRows;
+    return sortedRows
   }
-});
+})
 
 const getPaginatedData = computed((): NormalisedRow[] => {
   return getPaginated({
@@ -180,46 +166,44 @@ const getPaginatedData = computed((): NormalisedRow[] => {
     page: screener.currentPage.value - 1,
     perPage: screener.perPage.value,
     withPlaceholders: true,
-  });
-});
+  })
+})
 
 const hasData = computed((): boolean => {
-  return getPaginatedData.value.filter((row) => row !== null).length > 0;
-});
+  return getPaginatedData.value.filter((row) => row !== null).length > 0
+})
 
 const onInputSearch = (query: string) => {
-  screener.highlightQuery.value = query;
-};
+  screener.highlightQuery.value = query
+}
 
 const onSearch = (query: string) => {
-  screener.searchQuery.value = query;
-  screener.highlightQuery.value = query;
-};
+  screener.searchQuery.value = query
+  screener.highlightQuery.value = query
+}
 
 const onChangeSearchOptions = (options: SearchQueryOption[]) => {
-  screener.searchOptions.value = options;
-  onSearch(screener.highlightQuery.value);
-};
+  screener.searchOptions.value = options
+  onSearch(screener.highlightQuery.value)
+}
 
-const onSelectFormat = (format: "table" | "raw") => {
-  screener.renderFormat.value = format;
-};
+const onSelectFormat = (format: 'table' | 'raw') => {
+  screener.renderFormat.value = format
+}
 
 const handleSort = (updatedSortField: string) => {
   if (screener.sortField.value === updatedSortField) {
-    screener.sortDirection.value =
-      screener.sortDirection.value === "desc" ? "asc" : "desc";
+    screener.sortDirection.value = screener.sortDirection.value === 'desc' ? 'asc' : 'desc'
   }
-  screener.sortField.value = updatedSortField;
-};
+  screener.sortField.value = updatedSortField
+}
 </script>
 
 <style lang="scss">
 .vs {
   &-vue-screener {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 14px;
     border: thin solid black;
     border-radius: 8px;

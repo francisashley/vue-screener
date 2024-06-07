@@ -19,11 +19,11 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from "../index";
-import baseData from "../fixtures/data.json";
-import HeaderCell from "../components/views/TableViewHeaderCell.vue";
-import ValueCell from "../components/views/TableViewValueCell.vue";
+import { VueScreener } from '../index'
+import baseData from '../fixtures/data.json'
+import HeaderCell from '../components/views/TableViewHeaderCell.vue'
+import ValueCell from '../components/views/TableViewValueCell.vue'
 
-const handleClickEdit = (cell: unknown) => console.log("edit", cell);
-const handleClickDelete = (cell: unknown) => console.log("delete", cell);
+const handleClickEdit = (cell: unknown) => console.log('edit', cell)
+const handleClickDelete = (cell: unknown) => console.log('delete', cell)
 </script>

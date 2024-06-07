@@ -82,123 +82,111 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener } from "@/interfaces/screener";
-import { computed, onMounted, watch } from "vue";
+import { Screener } from '@/interfaces/screener'
+import { computed, onMounted, watch } from 'vue'
 
-const props = defineProps<{ screener: Screener }>();
+const props = defineProps<{ screener: Screener }>()
 
 const totalPages = computed((): number => {
-  return (
-    Math.ceil(props.screener.totalItems.value / props.screener.perPage.value) ||
-    0
-  );
-});
+  return Math.ceil(props.screener.totalItems.value / props.screener.perPage.value) || 0
+})
 
 const getPages = computed(() => {
   let pages = [
     props.screener.currentPage.value - 1,
     props.screener.currentPage.value,
     props.screener.currentPage.value + 1,
-  ];
-  pages = pages.filter((page) => page > 0);
+  ]
+  pages = pages.filter((page) => page > 0)
 
   if (pages.length < 3) {
-    pages.push(pages[pages.length - 1] + 1);
+    pages.push(pages[pages.length - 1] + 1)
   }
 
-  pages = pages.filter((page) => page <= totalPages.value);
+  pages = pages.filter((page) => page <= totalPages.value)
 
   if (pages.length < 3 && pages[0] > 1) {
-    pages.unshift(pages[0] - 1);
+    pages.unshift(pages[0] - 1)
   }
 
-  return pages;
-});
+  return pages
+})
 
 const canNavigateFirst = computed(() => {
-  return props.screener.currentPage.value > 1;
-});
+  return props.screener.currentPage.value > 1
+})
 
 const canNavigatePrev = computed(() => {
-  return props.screener.currentPage.value > 1;
-});
+  return props.screener.currentPage.value > 1
+})
 
 const canNavigateNext = computed(() => {
-  return props.screener.currentPage.value < totalPages.value;
-});
+  return props.screener.currentPage.value < totalPages.value
+})
 
 const canNavigateLast = computed(() => {
-  return props.screener.currentPage.value < totalPages.value;
-});
+  return props.screener.currentPage.value < totalPages.value
+})
 
 const firstIndexOfCurrentPage = computed(() => {
-  return (
-    props.screener.currentPage.value * props.screener.perPage.value -
-    props.screener.perPage.value +
-    1
-  );
-});
+  return props.screener.currentPage.value * props.screener.perPage.value - props.screener.perPage.value + 1
+})
 
 const lastIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.perPage.value >
-    props.screener.totalItems.value
+  return props.screener.currentPage.value * props.screener.perPage.value > props.screener.totalItems.value
     ? props.screener.totalItems.value
-    : props.screener.currentPage.value * props.screener.perPage.value;
-});
+    : props.screener.currentPage.value * props.screener.perPage.value
+})
 
 const currentPageIsInRange = computed((): boolean => {
-  return totalPages.value >= props.screener.currentPage.value;
-});
+  return totalPages.value >= props.screener.currentPage.value
+})
 
 onMounted(() => {
-  ensureCurrentPageIsValid();
-});
+  ensureCurrentPageIsValid()
+})
 
 watch(
   () => props.screener.totalItems.value,
   () => {
-    ensureCurrentPageIsValid();
+    ensureCurrentPageIsValid()
   },
-);
+)
 
 const isActive = (page: number): boolean => {
-  return page === props.screener.currentPage.value;
-};
+  return page === props.screener.currentPage.value
+}
 
 const ensureCurrentPageIsValid = (): void => {
   if (!currentPageIsInRange.value) {
-    handleSelectPage(totalPages.value ? totalPages.value : 1);
+    handleSelectPage(totalPages.value ? totalPages.value : 1)
   }
-};
+}
 
 const handleClickFirst = () => {
-  props.screener.currentPage.value = 1;
-};
+  props.screener.currentPage.value = 1
+}
 
 const handleClickPrev = () => {
-  props.screener.currentPage.value = canNavigatePrev.value
-    ? props.screener.currentPage.value - 1
-    : 1;
-};
+  props.screener.currentPage.value = canNavigatePrev.value ? props.screener.currentPage.value - 1 : 1
+}
 
 const handleClickNext = () => {
-  props.screener.currentPage.value = canNavigateNext.value
-    ? props.screener.currentPage.value + 1
-    : totalPages.value;
-};
+  props.screener.currentPage.value = canNavigateNext.value ? props.screener.currentPage.value + 1 : totalPages.value
+}
 
 const handleClickLast = () => {
-  props.screener.currentPage.value = totalPages.value;
-};
+  props.screener.currentPage.value = totalPages.value
+}
 
 const handleSelectPage = (targetPage: number) => {
-  props.screener.currentPage.value = targetPage;
-};
+  props.screener.currentPage.value = targetPage
+}
 
 const handleChangePerPage = (event: Event): void => {
-  const perPage = Number((event.target as HTMLInputElement).value);
-  props.screener.perPage.value = perPage;
-};
+  const perPage = Number((event.target as HTMLInputElement).value)
+  props.screener.perPage.value = perPage
+}
 </script>
 
 <style lang="scss">

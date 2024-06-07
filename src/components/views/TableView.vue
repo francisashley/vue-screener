@@ -1,9 +1,6 @@
 <template>
   <div :style="tableStyle" class="vs-table-view">
-    <div
-      :style="rowStyle"
-      class="vs-table-view__row vs-table-view__row--header"
-    >
+    <div :style="rowStyle" class="vs-table-view__row vs-table-view__row--header">
       <slot
         v-for="(cell, i) in getFields"
         :key="i"
@@ -21,12 +18,7 @@
       </slot>
     </div>
 
-    <div
-      :style="rowStyle"
-      v-for="(row, i) in getRows"
-      :key="i"
-      class="vs-table-view__row vs-table-view__row--record"
-    >
+    <div :style="rowStyle" v-for="(row, i) in getRows" :key="i" class="vs-table-view__row vs-table-view__row--record">
       <slot
         :name="cell.isStickyAction ? 'sticky-actions-value' : 'value-cell'"
         :cell="cell"
@@ -44,111 +36,109 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { highlightText } from "../../utils/text.utils";
-import { NormalisedRow } from "../../utils/data.utils";
-import HeaderCell from "./TableViewHeaderCell.vue";
-import ValueCell from "./TableViewValueCell.vue";
-import { Cell } from "./TableViewCell.vue";
+import { computed } from 'vue'
+import { highlightText } from '../../utils/text.utils'
+import { NormalisedRow } from '../../utils/data.utils'
+import HeaderCell from './TableViewHeaderCell.vue'
+import ValueCell from './TableViewValueCell.vue'
+import { Cell } from './TableViewCell.vue'
 
 const props = defineProps<{
-  fields: string[];
-  rows: NormalisedRow[];
-  highlight: string;
-  sortField: null | string;
-  sortDirection: null | "asc" | "desc";
-  includeStickyActions?: boolean;
-}>();
+  fields: string[]
+  rows: NormalisedRow[]
+  highlight: string
+  sortField: null | string
+  sortDirection: null | 'asc' | 'desc'
+  includeStickyActions?: boolean
+}>()
 
-const emit = defineEmits(["on-sort"]);
+const emit = defineEmits(['on-sort'])
 
 const getFields = computed(() => {
   const fields: Cell[] = props.fields.map((field, i) => {
     return {
       field,
       value: field,
-      highlightedValue: "",
+      highlightedValue: '',
       isFirst: i === 0,
       isLast: i === props.fields.length - 1,
-      type: "string",
-    };
-  });
+      type: 'string',
+    }
+  })
 
   if (props.includeStickyActions) {
     fields.push({
-      field: "",
-      value: "",
-      highlightedValue: "",
+      field: '',
+      value: '',
+      highlightedValue: '',
       isLast: true,
       isStickyAction: true,
-      type: "string",
-    });
+      type: 'string',
+    })
   }
 
-  return fields;
-});
+  return fields
+})
 
 const getRows = computed(() => {
   return props.rows.map((row) => {
     const cells: Cell[] = row?.map((col, i) => {
       return {
         field: col.key,
-        value: col.hasValue ? col.value : "",
-        highlightedValue: col.hasValue
-          ? highlightText(col.value ? String(col.value) : "", props.highlight)
-          : "",
+        value: col.hasValue ? col.value : '',
+        highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : '', props.highlight) : '',
         isFirst: i === 0,
         isLast: i === row.length - 1,
         type: col.type,
         row,
-      };
-    });
+      }
+    })
 
     if (props.includeStickyActions && row) {
       cells.push({
-        field: "",
-        value: "",
-        highlightedValue: "",
+        field: '',
+        value: '',
+        highlightedValue: '',
         isLast: true,
         isStickyAction: true,
-        type: "string",
+        type: 'string',
         row,
-      });
+      })
     }
 
-    return cells;
-  });
-});
+    return cells
+  })
+})
 
 const tableStyle = computed(() => {
-  let cols = props.fields.reduce((acc) => acc + " 1fr", "");
+  let cols = props.fields.reduce((acc) => acc + ' 1fr', '')
 
-  if (props.includeStickyActions) cols += " min-content";
+  if (props.includeStickyActions) cols += ' min-content'
 
   return {
-    display: "grid",
-    "grid-template-columns": cols,
-  };
-});
+    display: 'grid',
+    'grid-template-columns': cols,
+  }
+})
 
 const rowStyle = computed(() => {
-  let colCount = props.fields.length;
+  let colCount = props.fields.length
 
-  if (props.includeStickyActions) colCount++;
+  if (props.includeStickyActions) colCount++
 
   return {
-    display: "grid",
-    "grid-template-columns": "subgrid",
-    "grid-column": `1 / ${colCount + 1}`,
-  };
-});
-
-const getSortDirection = (field: string): "asc" | "desc" | null => {
-  if (props.sortField === field) {
-    return props.sortDirection;
+    display: 'grid',
+    'grid-template-columns': 'subgrid',
+    'grid-column': `1 / ${colCount + 1}`,
   }
-  return null;
-};
+})
+
+const getSortDirection = (field: string): 'asc' | 'desc' | null => {
+  if (props.sortField === field) {
+    return props.sortDirection
+  }
+  return null
+}
 </script>
 
 <style lang="scss">

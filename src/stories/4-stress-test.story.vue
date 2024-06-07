@@ -9,6 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from "../index";
-import baseData from "../fixtures/stress-data.json";
+import { VueScreener } from '../index'
+import baseData from '../fixtures/stress-data.json'
 </script>

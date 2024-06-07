@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import { directive as vOnClickaway } from "vue3-click-away";
+import { ref } from 'vue'
+import { directive as vOnClickaway } from 'vue3-click-away'
 
-const show = ref<boolean>(false);
+const show = ref<boolean>(false)
 
-const toggleDropdown = () => (show.value = !show.value);
-const handleClickOutside = () => (show.value = false);
+const toggleDropdown = () => (show.value = !show.value)
+const handleClickOutside = () => (show.value = false)
 </script>
 
 <style lang="scss">

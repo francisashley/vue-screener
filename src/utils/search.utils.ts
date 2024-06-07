@@ -1,5 +1,5 @@
-import { escapeRegExp } from "./regex.utils";
-import { NormalisedField, NormalisedRow } from "./data.utils";
+import { escapeRegExp } from './regex.utils'
+import { NormalisedField, NormalisedRow } from './data.utils'
 
 /**
  * Check if a subject string meets the search criteria.
@@ -16,25 +16,25 @@ const testCriteria = (
   subject: string,
   pattern: string,
   options: {
-    matchCase: boolean;
-    matchWord: boolean;
-    useRegExp: boolean;
+    matchCase: boolean
+    matchWord: boolean
+    useRegExp: boolean
   },
 ): boolean => {
-  const { matchCase = false, matchWord = false, useRegExp = false } = options;
+  const { matchCase = false, matchWord = false, useRegExp = false } = options
 
   if (!useRegExp) {
-    pattern = escapeRegExp(pattern);
+    pattern = escapeRegExp(pattern)
   }
 
   if (matchWord) {
-    pattern = `\\b(${pattern})\\b`;
+    pattern = `\\b(${pattern})\\b`
   }
 
-  const flags = matchCase ? "g" : "gi";
+  const flags = matchCase ? 'g' : 'gi'
 
-  return new RegExp(pattern, flags).test(subject);
-};
+  return new RegExp(pattern, flags).test(subject)
+}
 
 /**
  * Parse search query and extract filters.
@@ -50,48 +50,48 @@ const testCriteria = (
  * }} - Parsed search query, include filters, and exclude filters.
  */
 const parseSearchQuery = (searchQuery: string) => {
-  const excludeFilters: [field: string, value: string][] = [];
+  const excludeFilters: [field: string, value: string][] = []
   // get exclude filters that look like: field:value
   searchQuery = searchQuery.replace(/(?<!\w)-\w+:\w+/g, (match) => {
-    const [field, value] = match.replace("-", "").split(":");
-    excludeFilters.push([field, value]);
-    return "";
-  });
+    const [field, value] = match.replace('-', '').split(':')
+    excludeFilters.push([field, value])
+    return ''
+  })
 
   // get exclude filters that look like: -field:"value" or -field:"some value"
   searchQuery = searchQuery
     .replace(/(?<!\w)-\w+:"[^"]*"$/g, (match) => {
-      const [field, value] = match.replace("-", "").split(":");
-      excludeFilters.push([field, value.slice(1, -1)]);
-      return "";
+      const [field, value] = match.replace('-', '').split(':')
+      excludeFilters.push([field, value.slice(1, -1)])
+      return ''
     })
-    .trim();
+    .trim()
 
-  const includeFilters: [field: string, value: string][] = [];
+  const includeFilters: [field: string, value: string][] = []
   // get include filters that look like: field:value
   searchQuery = searchQuery
     .replace(/\b\w+:\w+\b/g, (match) => {
-      const [field, value] = match.split(":");
-      includeFilters.push([field, value]);
-      return "";
+      const [field, value] = match.split(':')
+      includeFilters.push([field, value])
+      return ''
     })
-    .trim();
+    .trim()
 
   // get include filters that look like: field:"value" or field:"some value"
   searchQuery = searchQuery
     .replace(/\b\w+:"[^"]*"$/g, (match) => {
-      const [field, value] = match.split(":");
-      includeFilters.push([field, value.slice(1, -1)]);
-      return "";
+      const [field, value] = match.split(':')
+      includeFilters.push([field, value.slice(1, -1)])
+      return ''
     })
-    .trim();
+    .trim()
 
   return {
     searchQuery,
     excludeFilters,
     includeFilters,
-  };
-};
+  }
+}
 
 /**
  * Search for rows based on specified criteria.
@@ -105,94 +105,76 @@ const parseSearchQuery = (searchQuery: string) => {
  * @returns {NormalisedRow[]} - The matched data.
  */
 export function search(options: {
-  rows: NormalisedRow[];
-  searchQuery: string;
-  useRegExp: boolean;
-  matchCase: boolean;
-  matchWord: boolean;
+  rows: NormalisedRow[]
+  searchQuery: string
+  useRegExp: boolean
+  matchCase: boolean
+  matchWord: boolean
 }): NormalisedRow[] {
-  const { searchQuery = "" } = options;
+  const { searchQuery = '' } = options
 
-  if (!searchQuery) return options.rows;
+  if (!searchQuery) return options.rows
 
   // Parse search query and extract filters.
-  const {
-    searchQuery: parsedSearchQuery,
-    excludeFilters,
-    includeFilters,
-  } = parseSearchQuery(searchQuery);
+  const { searchQuery: parsedSearchQuery, excludeFilters, includeFilters } = parseSearchQuery(searchQuery)
 
   // Get the search options.
-  const {
-    rows,
-    useRegExp = false,
-    matchCase = false,
-    matchWord = false,
-  } = options;
+  const { rows, useRegExp = false, matchCase = false, matchWord = false } = options
 
   // Check if any of the filters match the row.
-  const testExcludeFilters = (
-    filters: [string, string][],
-    rowMap: Record<string, NormalisedField>,
-  ): boolean => {
+  const testExcludeFilters = (filters: [string, string][], rowMap: Record<string, NormalisedField>): boolean => {
     return filters.some(([field, value]) => {
       if (rowMap[field]) {
         return testCriteria(rowMap[field].value as string, value, {
           matchCase,
           matchWord: true,
           useRegExp,
-        });
+        })
       }
-    });
-  };
+    })
+  }
 
-  const testIncludeFilters = (
-    filters: [string, string][],
-    rowMap: Record<string, NormalisedField>,
-  ): boolean => {
+  const testIncludeFilters = (filters: [string, string][], rowMap: Record<string, NormalisedField>): boolean => {
     return filters.every(([field, value]) => {
       if (rowMap[field]) {
         return testCriteria(rowMap[field].value as string, value, {
           matchCase,
           matchWord: true,
           useRegExp,
-        });
+        })
       }
-    });
-  };
+    })
+  }
 
   // Filter the rows.
   return rows.filter((row): boolean => {
     // Create a map of the row fields for easy look up.
-    const rowMap: Record<string, NormalisedField> = row.reduce(
-      (acc, field) => ({ ...acc, [field.key]: field }),
-      {},
-    );
+    const rowMap: Record<string, NormalisedField> = row.reduce((acc, field) => ({ ...acc, [field.key]: field }), {})
 
-    let shouldExclude = false;
-    let shouldInclude = true;
-    let meetsSearchCriteria = true;
+    let shouldExclude = false
+    let shouldInclude = true
+    let meetsSearchCriteria = true
 
     if (excludeFilters.length && testExcludeFilters(excludeFilters, rowMap)) {
-      shouldExclude = true;
+      shouldExclude = true
     }
 
     if (includeFilters.length && !testIncludeFilters(includeFilters, rowMap)) {
-      shouldInclude = false;
+      shouldInclude = false
     }
 
     meetsSearchCriteria = row.some((field) => {
       if (
-        testCriteria(String(field.value ?? ""), parsedSearchQuery, {
+        testCriteria(String(field.value ?? ''), parsedSearchQuery, {
           matchCase,
           matchWord,
           useRegExp,
         })
       ) {
-        return true;
+        return true
       }
-    });
+    })
 
-    return !shouldExclude && shouldInclude && meetsSearchCriteria;
-  });
+    return !shouldExclude && shouldInclude && meetsSearchCriteria
+  })
 }

@@ -22,23 +22,23 @@
 </template>
 
 <script lang="ts" setup>
-import { DataType } from "../../utils/data.utils";
+import { DataType } from '../../utils/data.utils'
 
 export type Cell = {
-  field: string;
-  value: unknown;
-  highlightedValue: unknown;
-  type?: DataType;
-  isFirst?: boolean;
-  isLast?: boolean;
-  hasValue?: boolean;
-  isStickyAction?: boolean;
-  row?: unknown;
-};
+  field: string
+  value: unknown
+  highlightedValue: unknown
+  type?: DataType
+  isFirst?: boolean
+  isLast?: boolean
+  hasValue?: boolean
+  isStickyAction?: boolean
+  row?: unknown
+}
 
 defineProps<{
-  cell: Cell;
-}>();
+  cell: Cell
+}>()
 </script>
 
 <style lang="scss">

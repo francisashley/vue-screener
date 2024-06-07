@@ -1,26 +1,20 @@
-import { debounce } from "lodash-es";
+import { debounce } from 'lodash-es'
 
 function isHorizontallyScrollable(element: HTMLElement) {
-  return element.scrollWidth > element.clientWidth;
+  return element.scrollWidth > element.clientWidth
 }
 
 function isScrolledToStartHorizontally(element: HTMLElement) {
-  return element.scrollLeft === 0;
+  return element.scrollLeft === 0
 }
 
 function isScrolledToEndHorizontally(element: HTMLElement) {
-  return (
-    Math.round(element.scrollWidth - element.scrollLeft) === element.clientWidth
-  );
+  return Math.round(element.scrollWidth - element.scrollLeft) === element.clientWidth
 }
 
 export function observeHorizontalScrollability(
   element: HTMLElement,
-  callback: (state: {
-    isXScrollable: boolean;
-    isXScrolledStart: boolean;
-    isXScrolledEnd: boolean;
-  }) => void,
+  callback: (state: { isXScrollable: boolean; isXScrolledStart: boolean; isXScrolledEnd: boolean }) => void,
   debounceTime: number = 20,
 ) {
   const updateScrollState = debounce(() => {
@@ -28,21 +22,21 @@ export function observeHorizontalScrollability(
       isXScrollable: isHorizontallyScrollable(element),
       isXScrolledStart: isScrolledToStartHorizontally(element),
       isXScrolledEnd: isScrolledToEndHorizontally(element),
-    });
-  }, debounceTime);
+    })
+  }, debounceTime)
 
-  updateScrollState();
+  updateScrollState()
 
-  const resizeObserver = new ResizeObserver(updateScrollState);
-  resizeObserver.observe(element);
+  const resizeObserver = new ResizeObserver(updateScrollState)
+  resizeObserver.observe(element)
 
-  element.addEventListener("scroll", updateScrollState);
+  element.addEventListener('scroll', updateScrollState)
 
   return {
     disconnect: () => {
-      updateScrollState.cancel();
-      resizeObserver.disconnect();
-      element.removeEventListener("scroll", updateScrollState);
+      updateScrollState.cancel()
+      resizeObserver.disconnect()
+      element.removeEventListener('scroll', updateScrollState)
     },
-  };
+  }
 }

@@ -16,20 +16,20 @@
 </template>
 
 <script lang="ts" setup>
-import SortSelector from "../stuff/SortSelector.vue";
-import TableCell, { Cell } from "./TableViewCell.vue";
+import SortSelector from '../stuff/SortSelector.vue'
+import TableCell, { Cell } from './TableViewCell.vue'
 
 const props = defineProps<{
-  cell: Cell;
-  sortDirection?: null | "asc" | "desc";
-  isSortable?: boolean;
-}>();
+  cell: Cell
+  sortDirection?: null | 'asc' | 'desc'
+  isSortable?: boolean
+}>()
 
-const emit = defineEmits(["on-sort"]);
+const emit = defineEmits(['on-sort'])
 
 const handleClickHeader = () => {
-  emit("on-sort", props.cell.field);
-};
+  emit('on-sort', props.cell.field)
+}
 </script>
 
 <style lang="scss">

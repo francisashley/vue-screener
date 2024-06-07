@@ -11,69 +11,69 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, ref } from 'vue'
 
-export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
+export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
 
 const {
-  query = "",
+  query = '',
   isValidQuery = true,
   searchOptions = [],
 } = defineProps<{
-  query: string;
-  isValidQuery: boolean;
-  searchOptions: SearchQueryOption[];
-}>();
+  query: string
+  isValidQuery: boolean
+  searchOptions: SearchQueryOption[]
+}>()
 
-const emit = defineEmits(["input", "search", "update-options"]);
+const emit = defineEmits(['input', 'search', 'update-options'])
 
-const history = ref<string[]>([]);
-const historyIndex = ref<number | null>(null);
+const history = ref<string[]>([])
+const historyIndex = ref<number | null>(null)
 
 const useRegEx = computed<boolean>(() => {
-  return searchOptions.some((activeOption) => activeOption === "use-regex");
-});
+  return searchOptions.some((activeOption) => activeOption === 'use-regex')
+})
 
 const onKeydown = (event: KeyboardEvent) => {
-  const isPressingUp = event.key === "ArrowUp";
-  const isPressingDown = event.key === "ArrowDown";
-  const isEnter = event.key === "Enter";
+  const isPressingUp = event.key === 'ArrowUp'
+  const isPressingDown = event.key === 'ArrowDown'
+  const isEnter = event.key === 'Enter'
 
-  const searchQuery = (event.target as HTMLInputElement).value;
+  const searchQuery = (event.target as HTMLInputElement).value
 
   if (isEnter) {
-    search(searchQuery);
+    search(searchQuery)
     if (searchQuery) {
-      history.value.push(searchQuery);
-      historyIndex.value = history.value.length - 1;
+      history.value.push(searchQuery)
+      historyIndex.value = history.value.length - 1
     }
   }
 
   if ((!isPressingUp && !isPressingDown) || historyIndex.value === null) {
-    return;
+    return
   }
 
   // prevent the cursor moving to the start of the line when pressing up
-  event.preventDefault();
+  event.preventDefault()
 
   if (isPressingUp && historyIndex.value > 0) {
-    historyIndex.value--;
+    historyIndex.value--
   } else if (isPressingDown && historyIndex.value < history.value.length - 1) {
-    historyIndex.value++;
+    historyIndex.value++
   }
 
-  search(history.value[historyIndex.value]);
-};
+  search(history.value[historyIndex.value])
+}
 
 const onInput = (event: Event) => {
-  const query = (event.target as HTMLInputElement).value;
+  const query = (event.target as HTMLInputElement).value
 
-  emit("input", query);
-};
+  emit('input', query)
+}
 
 const search = (searchQuery: string): void => {
-  emit("search", searchQuery);
-};
+  emit('search', searchQuery)
+}
 </script>
 
 <style lang="scss">

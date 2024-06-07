@@ -1,65 +1,48 @@
-import { SearchQueryOption } from "@/components/stuff/ScreenerSearch.vue";
-import { Screener } from "@/interfaces/screener";
-import {
-  NormalisedRow,
-  UnknownObject,
-  isValidInput,
-  normaliseInput,
-  omitFields,
-  pickFields,
-} from "../utils/data.utils";
-import { computed, ref } from "vue";
-import { search } from "../utils/search.utils";
+import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
+import { Screener } from '@/interfaces/screener'
+import { NormalisedRow, UnknownObject, isValidInput, normaliseInput, omitFields, pickFields } from '../utils/data.utils'
+import { computed, ref } from 'vue'
+import { search } from '../utils/search.utils'
 
-const searchQuery = ref<string>("");
-const highlightQuery = ref<string>("");
-const currentPage = ref<number>(1);
-const perPage = ref<number>(15);
-const renderFormat = ref<"table" | "raw">("table");
-const searchOptions = ref<SearchQueryOption[]>([]);
-const sortField = ref<string | null>(null);
-const sortDirection = ref<"asc" | "desc">("desc");
-const data = ref<unknown[]>([]);
+const searchQuery = ref<string>('')
+const highlightQuery = ref<string>('')
+const currentPage = ref<number>(1)
+const perPage = ref<number>(15)
+const renderFormat = ref<'table' | 'raw'>('table')
+const searchOptions = ref<SearchQueryOption[]>([])
+const sortField = ref<string | null>(null)
+const sortDirection = ref<'asc' | 'desc'>('desc')
+const data = ref<unknown[]>([])
 
 type ScreenerOptions = {
-  defaultCurrentPage?: number;
-  defaultPerPage?: number;
-  defaultData?: unknown[];
-  pick?: string[];
-  omit?: string[];
-};
+  defaultCurrentPage?: number
+  defaultPerPage?: number
+  defaultData?: unknown[]
+  pick?: string[]
+  omit?: string[]
+}
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
-  currentPage.value = options.defaultCurrentPage ?? currentPage.value;
-  perPage.value = options.defaultPerPage ?? perPage.value;
-  data.value = options.defaultData ?? data.value;
+  currentPage.value = options.defaultCurrentPage ?? currentPage.value
+  perPage.value = options.defaultPerPage ?? perPage.value
+  data.value = options.defaultData ?? data.value
 
-  const shouldUseRegEx = computed((): boolean =>
-    searchOptions.value.includes("use-regex"),
-  );
-
-  const shouldMatchCase = computed((): boolean =>
-    searchOptions.value.includes("match-case"),
-  );
-
-  const shouldMatchWord = computed((): boolean =>
-    searchOptions.value.includes("match-word"),
-  );
+  const shouldUseRegEx = computed((): boolean => searchOptions.value.includes('use-regex'))
+  const shouldMatchCase = computed((): boolean => searchOptions.value.includes('match-case'))
+  const shouldMatchWord = computed((): boolean => searchOptions.value.includes('match-word'))
 
   const normalisedData = computed((): NormalisedRow[] => {
-    let normalisedData = isValidInput(data.value)
-      ? normaliseInput(data.value as UnknownObject[])
-      : [];
+    let normalisedData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
 
     if (options.pick && options.pick.length > 0) {
-      normalisedData = pickFields(normalisedData, options.pick);
+      normalisedData = pickFields(normalisedData, options.pick)
     }
 
     if (options.omit && options.omit.length > 0) {
-      normalisedData = omitFields(normalisedData, options.omit);
+      normalisedData = omitFields(normalisedData, options.omit)
     }
 
-    return normalisedData;
-  });
+    return normalisedData
+  })
 
   const searchedData = computed((): NormalisedRow[] => {
     return search({
@@ -68,8 +51,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
       useRegExp: shouldUseRegEx.value,
       matchCase: shouldMatchCase.value,
       matchWord: shouldMatchWord.value,
-    });
-  });
+    })
+  })
 
   return {
     searchQuery,
@@ -87,5 +70,5 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     normalisedData,
     searchedData,
     totalItems: computed(() => searchedData.value.length),
-  };
-};
+  }
+}

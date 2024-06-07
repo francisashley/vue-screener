@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from "../index";
-import baseData from "../fixtures/data.json";
-import primitivesData from "../fixtures/primitives-data.json";
-import mixedObjectsData from "../fixtures/mix-objects-data.json";
+import { VueScreener } from '../index'
+import baseData from '../fixtures/data.json'
+import primitivesData from '../fixtures/primitives-data.json'
+import mixedObjectsData from '../fixtures/mix-objects-data.json'
 </script>

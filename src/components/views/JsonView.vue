@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-const { data = [] } = defineProps<{ data: unknown }>();
+const { data = [] } = defineProps<{ data: unknown }>()
 </script>
 
 <style>
