@@ -22,11 +22,8 @@
       </header>
       <main
         class="vs-main"
-        :class="{
-          'vs-main--is-x-scrollable': isXScrollable,
-          'vs-main--is-x-scrolled-end': isXScrolledEnd,
-        }"
-        ref="mainEl"
+        :class="{ 'vs-main--is-x-scrollable': isScrollable, 'vs-main--is-x-scrolled-end': isScrolledEnd }"
+        ref="mainRef"
       >
         <TableView
           v-if="hasData && screener.renderFormat.value === 'table'"
@@ -81,10 +78,10 @@ import {
   getFields as getFieldsTool,
   getPaginated,
 } from '../utils/data.utils'
-import { computed, onMounted, ref } from 'vue'
+import { computed } from 'vue'
 import { orderBy } from 'natural-orderby'
-import { observeHorizontalScrollability } from '../utils/scroll.utils'
 import { useScreener } from '../hooks/use-screener'
+import { useScrollable } from '../hooks/use-scrollable'
 
 type Props = {
   data?: unknown[]
@@ -116,18 +113,7 @@ const screener = useScreener({
   omit: props.omit,
 })
 
-const mainEl = ref()
-const isXScrollable = ref(false)
-const isXScrolledEnd = ref(false)
-
-onMounted(() => {
-  if (mainEl.value) {
-    observeHorizontalScrollability(mainEl.value, (state) => {
-      isXScrollable.value = state.isXScrollable
-      isXScrolledEnd.value = state.isXScrolledEnd
-    })
-  }
-})
+const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
 
 const isValidInput = computed((): boolean => {
   return isValidInputTool(screener.data.value)
