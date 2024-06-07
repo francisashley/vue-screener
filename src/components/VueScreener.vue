@@ -6,17 +6,17 @@
           {{ props.title }}
         </div>
         <ScreenerSearch
-          :query="searchQuery"
+          :query="screener.searchQuery.value"
           :is-valid-query="isRegExFriendlySearchQuery"
-          :search-options="searchOptions"
+          :search-options="screener.searchOptions.value"
           @input="onInputSearch"
           @search="onSearch"
           class="vs-search"
         />
         <Settings
-          :active-format="renderFormat"
+          :active-format="screener.renderFormat.value"
           @select-format="onSelectFormat"
-          :search-options="searchOptions"
+          :search-options="screener.searchOptions.value"
           @change-search-options="onChangeSearchOptions"
         />
       </header>
@@ -29,12 +29,12 @@
         ref="mainEl"
       >
         <TableView
-          v-if="hasData && renderFormat === 'table'"
+          v-if="hasData && screener.renderFormat.value === 'table'"
           :fields="getFields"
           :rows="getPaginatedData"
-          :highlight="highlightQuery"
-          :sort-direction="sortDirection"
-          :sort-field="sortField"
+          :highlight="screener.highlightQuery.value"
+          :sort-direction="screener.sortDirection.value"
+          :sort-field="screener.sortField.value"
           :include-sticky-actions="includeStickyActions"
           @on-sort="handleSort"
         >
@@ -57,8 +57,8 @@
       <footer class="vs-footer">
         <Pagination
           :total-items="getSearchedData.length"
-          :per-page="perPage"
-          :current-page="currentPage"
+          :per-page="screener.perPage.value"
+          :current-page="screener.currentPage.value"
           @change-page="onChangePage"
           @change-per-page="onChangePerPage"
         />
@@ -120,6 +120,11 @@ const props = withDefaults(defineProps<Props>(), {
   includeHeader: true,
 });
 
+const screener = useScreener({
+  defaultCurrentPage: props.currentPage,
+  defaultPerPage: props.perPage,
+});
+
 const mainEl = ref();
 const isXScrollable = ref(false);
 const isXScrolledEnd = ref(false);
@@ -133,26 +138,12 @@ onMounted(() => {
   }
 });
 
-const {
-  searchQuery,
-  highlightQuery,
-  currentPage,
-  perPage,
-  renderFormat,
-  searchOptions,
-  sortField,
-  sortDirection,
-} = useScreener({
-  defaultCurrentPage: props.currentPage,
-  defaultPerPage: props.perPage,
-});
-
 const isValidInput = computed((): boolean => {
   return isValidInputTool(props.data);
 });
 
 const isRegExFriendlySearchQuery = computed((): boolean => {
-  return isValidRegExp(searchQuery.value);
+  return isValidRegExp(screener.searchQuery.value);
 });
 
 const getNormalisedData = computed((): NormalisedRow[] => {
@@ -176,21 +167,21 @@ const getFields = computed((): string[] => {
 });
 
 const shouldUseRegEx = computed((): boolean => {
-  return searchOptions.value.includes("use-regex");
+  return screener.searchOptions.value.includes("use-regex");
 });
 
 const shouldMatchCase = computed((): boolean => {
-  return searchOptions.value.includes("match-case");
+  return screener.searchOptions.value.includes("match-case");
 });
 
 const shouldMatchWord = computed((): boolean => {
-  return searchOptions.value.includes("match-word");
+  return screener.searchOptions.value.includes("match-word");
 });
 
 const getSearchedData = computed((): NormalisedRow[] => {
   return search({
     rows: getNormalisedData.value,
-    searchQuery: searchQuery.value,
+    searchQuery: screener.searchQuery.value,
     useRegExp: shouldUseRegEx.value,
     matchCase: shouldMatchCase.value,
     matchWord: shouldMatchWord.value,
@@ -198,15 +189,16 @@ const getSearchedData = computed((): NormalisedRow[] => {
 });
 
 const getSortedData = computed((): NormalisedRow[] => {
-  const sortedRows = searchQuery.value
+  const sortedRows = screener.searchQuery.value
     ? getSearchedData.value
     : getNormalisedData.value;
 
   const sortIndex =
-    sortedRows[0]?.findIndex((column) => column.key === sortField.value) ??
-    null;
+    sortedRows[0]?.findIndex(
+      (column) => column.key === screener.sortField.value,
+    ) ?? null;
 
-  if (sortField.value && sortDirection.value) {
+  if (screener.sortField.value && screener.sortDirection.value) {
     const nullRows = sortedRows.filter(
       (row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined,
     );
@@ -219,7 +211,7 @@ const getSortedData = computed((): NormalisedRow[] => {
       ...orderBy(
         nonNullRows,
         [(row: NormalisedRow | null) => row?.[sortIndex]?.value],
-        [sortDirection.value],
+        [screener.sortDirection.value],
       ),
       ...nullRows,
     ];
@@ -231,8 +223,8 @@ const getSortedData = computed((): NormalisedRow[] => {
 const getPaginatedData = computed((): NormalisedRow[] => {
   return getPaginated({
     rows: getSortedData.value,
-    page: currentPage.value - 1,
-    perPage: perPage.value,
+    page: screener.currentPage.value - 1,
+    perPage: screener.perPage.value,
     withPlaceholders: true,
   });
 });
@@ -242,36 +234,37 @@ const hasData = computed((): boolean => {
 });
 
 const onInputSearch = (query: string) => {
-  highlightQuery.value = query;
+  screener.highlightQuery.value = query;
 };
 
 const onSearch = (query: string) => {
-  searchQuery.value = query;
-  highlightQuery.value = query;
+  screener.searchQuery.value = query;
+  screener.highlightQuery.value = query;
 };
 
 const onChangeSearchOptions = (options: SearchQueryOption[]) => {
-  searchOptions.value = options;
-  onSearch(highlightQuery.value);
+  screener.searchOptions.value = options;
+  onSearch(screener.highlightQuery.value);
 };
 
 const onSelectFormat = (format: "table" | "raw") => {
-  renderFormat.value = format;
+  screener.renderFormat.value = format;
 };
 
 const onChangePage = (page: number) => {
-  currentPage.value = page;
+  screener.currentPage.value = page;
 };
 
 const onChangePerPage = (newPerPage: number) => {
-  perPage.value = newPerPage;
+  screener.perPage.value = newPerPage;
 };
 
 const handleSort = (updatedSortField: string) => {
-  if (sortField.value === updatedSortField) {
-    sortDirection.value = sortDirection.value === "desc" ? "asc" : "desc";
+  if (screener.sortField.value === updatedSortField) {
+    screener.sortDirection.value =
+      screener.sortDirection.value === "desc" ? "asc" : "desc";
   }
-  sortField.value = updatedSortField;
+  screener.sortField.value = updatedSortField;
 };
 </script>
 

@@ -11,12 +11,11 @@ const searchOptions = ref<SearchQueryOption[]>([]);
 const sortField = ref<string | null>(null);
 const sortDirection = ref<"asc" | "desc">("desc");
 
-export const useScreener = (
-  options: {
-    defaultCurrentPage?: number;
-    defaultPerPage?: number;
-  } = {},
-): Screener => {
+type ScreenerOptions = {
+  defaultCurrentPage?: number;
+  defaultPerPage?: number;
+};
+export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const { defaultCurrentPage, defaultPerPage } = options;
   currentPage.value = defaultCurrentPage ?? currentPage.value;
   perPage.value = defaultPerPage ?? perPage.value;
