@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DataType } from "@/utils/data.utils";
+import { DataType } from "../../utils/data.utils";
 
 export type Cell = {
   field: string;
