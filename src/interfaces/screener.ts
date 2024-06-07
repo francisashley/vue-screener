@@ -1,4 +1,4 @@
-import { SearchQueryOption } from "@/components/stuff/VueScreenerSearch.vue";
+import { SearchQueryOption } from "@/components/stuff/ScreenerSearch.vue";
 import { Ref } from "vue";
 
 export type Screener = {

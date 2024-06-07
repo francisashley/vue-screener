@@ -5,7 +5,7 @@
         <div class="vs-title">
           {{ props.title }}
         </div>
-        <VueScreenerSearch
+        <ScreenerSearch
           :query="searchQuery"
           :is-valid-query="isRegExFriendlySearchQuery"
           :search-options="searchOptions"
@@ -77,9 +77,7 @@
 import JsonView from "./views/JsonView.vue";
 import TableView from "./views/TableView.vue";
 import NoDataView from "./views/NoDataView.vue";
-import VueScreenerSearch, {
-  SearchQueryOption,
-} from "./stuff/VueScreenerSearch.vue";
+import ScreenerSearch, { SearchQueryOption } from "./stuff/ScreenerSearch.vue";
 import Pagination from "./stuff/Pagination.vue";
 import ErrorMessage from "./stuff/ErrorMessage.vue";
 import Settings from "./stuff/Settings.vue";

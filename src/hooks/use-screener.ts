@@ -1,4 +1,4 @@
-import { SearchQueryOption } from "@/components/stuff/VueScreenerSearch.vue";
+import { SearchQueryOption } from "@/components/stuff/ScreenerSearch.vue";
 import { Screener } from "@/interfaces/screener";
 import { ref } from "vue";
 
