@@ -10,15 +10,17 @@ const renderFormat = ref<"table" | "raw">("table");
 const searchOptions = ref<SearchQueryOption[]>([]);
 const sortField = ref<string | null>(null);
 const sortDirection = ref<"asc" | "desc">("desc");
+const data = ref<unknown[]>([]);
 
 type ScreenerOptions = {
   defaultCurrentPage?: number;
   defaultPerPage?: number;
+  defaultData?: unknown[];
 };
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
-  const { defaultCurrentPage, defaultPerPage } = options;
-  currentPage.value = defaultCurrentPage ?? currentPage.value;
-  perPage.value = defaultPerPage ?? perPage.value;
+  currentPage.value = options.defaultCurrentPage ?? currentPage.value;
+  perPage.value = options.defaultPerPage ?? perPage.value;
+  data.value = options.defaultData ?? data.value;
 
   const shouldUseRegEx = computed((): boolean =>
     searchOptions.value.includes("use-regex"),
@@ -44,5 +46,6 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldUseRegEx,
     shouldMatchCase,
     shouldMatchWord,
+    data,
   };
 };

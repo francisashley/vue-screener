@@ -120,6 +120,7 @@ const props = withDefaults(defineProps<Props>(), {
 const screener = useScreener({
   defaultCurrentPage: props.currentPage,
   defaultPerPage: props.perPage,
+  defaultData: props.data,
 });
 
 const mainEl = ref();
@@ -136,7 +137,7 @@ onMounted(() => {
 });
 
 const isValidInput = computed((): boolean => {
-  return isValidInputTool(props.data);
+  return isValidInputTool(screener.data.value);
 });
 
 const isRegExFriendlySearchQuery = computed((): boolean => {
@@ -144,8 +145,8 @@ const isRegExFriendlySearchQuery = computed((): boolean => {
 });
 
 const getNormalisedData = computed((): NormalisedRow[] => {
-  let normalisedData = isValidInputTool(props.data)
-    ? normaliseInput(props.data as UnknownObject[])
+  let normalisedData = isValidInputTool(screener.data.value)
+    ? normaliseInput(screener.data.value as UnknownObject[])
     : [];
 
   if (props.pick.length > 0) {

@@ -13,4 +13,5 @@ export type Screener = {
   shouldUseRegEx: ComputedRef<boolean>;
   shouldMatchCase: ComputedRef<boolean>;
   shouldMatchWord: ComputedRef<boolean>;
+  data: Ref<unknown[]>;
 };
