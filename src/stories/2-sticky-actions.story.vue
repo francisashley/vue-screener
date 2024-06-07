@@ -1,5 +1,5 @@
 <template>
-  <Story title="3) Sticky Actions">
+  <Story title="2) Sticky Actions">
     <Variant title="default" width="100">
       <template #controls>
         <HstSelect v-model="state.select" title="Data" :options="options" />

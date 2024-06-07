@@ -1,5 +1,5 @@
 <template>
-  <Story title="7) Hide Header">
+  <Story title="5) Hide Header">
     <Variant title="default">
       <template #controls>
         <HstSelect v-model="state.select" title="Data" :options="options" />

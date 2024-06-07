@@ -1,5 +1,5 @@
 <template>
-  <Story title="4) Custom Cells">
+  <Story title="3) Custom Cells">
     <Variant title="default">
       <template #controls>
         <HstSelect v-model="state.select" title="Data" :options="options" />
