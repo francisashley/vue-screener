@@ -16,4 +16,6 @@ export type Screener = {
   shouldMatchWord: ComputedRef<boolean>;
   data: Ref<unknown[]>;
   normalisedData: ComputedRef<NormalisedRow[]>;
+  searchedData: ComputedRef<NormalisedRow[]>;
+  totalItems: ComputedRef<number>;
 };

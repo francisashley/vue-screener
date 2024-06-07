@@ -55,10 +55,7 @@
         <NoDataView v-else />
       </main>
       <footer class="vs-footer">
-        <Pagination
-          :screener="screener"
-          :total-items="getSearchedData.length"
-        />
+        <Pagination :screener="screener" />
       </footer>
     </template>
     <ErrorMessage
@@ -85,7 +82,6 @@ import {
   getFields as getFieldsTool,
   getPaginated,
 } from "../utils/data.utils";
-import { search } from "../utils/search.utils";
 import { computed, onMounted, ref } from "vue";
 import { orderBy } from "natural-orderby";
 import { observeHorizontalScrollability } from "../utils/scroll.utils";
@@ -146,19 +142,9 @@ const getFields = computed((): string[] => {
   return getFieldsTool(screener.normalisedData.value);
 });
 
-const getSearchedData = computed((): NormalisedRow[] => {
-  return search({
-    rows: screener.normalisedData.value,
-    searchQuery: screener.searchQuery.value,
-    useRegExp: screener.shouldUseRegEx.value,
-    matchCase: screener.shouldMatchCase.value,
-    matchWord: screener.shouldMatchWord.value,
-  });
-});
-
 const getSortedData = computed((): NormalisedRow[] => {
   const sortedRows = screener.searchQuery.value
-    ? getSearchedData.value
+    ? screener.searchedData.value
     : screener.normalisedData.value;
 
   const sortIndex =

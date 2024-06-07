@@ -9,6 +9,7 @@ import {
   pickFields,
 } from "../utils/data.utils";
 import { computed, ref } from "vue";
+import { search } from "../utils/search.utils";
 
 const searchQuery = ref<string>("");
 const highlightQuery = ref<string>("");
@@ -60,6 +61,16 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return normalisedData;
   });
 
+  const searchedData = computed((): NormalisedRow[] => {
+    return search({
+      rows: normalisedData.value,
+      searchQuery: searchQuery.value,
+      useRegExp: shouldUseRegEx.value,
+      matchCase: shouldMatchCase.value,
+      matchWord: shouldMatchWord.value,
+    });
+  });
+
   return {
     searchQuery,
     highlightQuery,
@@ -74,5 +85,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldMatchWord,
     data,
     normalisedData,
+    searchedData,
+    totalItems: computed(() => searchedData.value.length),
   };
 };

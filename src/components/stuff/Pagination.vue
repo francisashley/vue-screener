@@ -1,11 +1,11 @@
 <template>
   <div class="vs-pagination">
     <div class="vs-pagination__info">
-      <template v-if="!totalItems">Showing 0 results</template>
+      <template v-if="!screener.totalItems.value">Showing 0 results</template>
       <template v-else>
         Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
         of
-        {{ totalItems }}
+        {{ screener.totalItems.value }}
       </template>
     </div>
 
@@ -85,13 +85,13 @@
 import { Screener } from "@/interfaces/screener";
 import { computed, onMounted, watch } from "vue";
 
-const props = withDefaults(
-  defineProps<{ screener: Screener; totalItems?: number }>(),
-  { totalItems: 0 },
-);
+const props = defineProps<{ screener: Screener }>();
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.totalItems / props.screener.perPage.value) || 0;
+  return (
+    Math.ceil(props.screener.totalItems.value / props.screener.perPage.value) ||
+    0
+  );
 });
 
 const getPages = computed(() => {
@@ -141,8 +141,8 @@ const firstIndexOfCurrentPage = computed(() => {
 
 const lastIndexOfCurrentPage = computed(() => {
   return props.screener.currentPage.value * props.screener.perPage.value >
-    props.totalItems
-    ? props.totalItems
+    props.screener.totalItems.value
+    ? props.screener.totalItems.value
     : props.screener.currentPage.value * props.screener.perPage.value;
 });
 
@@ -155,7 +155,7 @@ onMounted(() => {
 });
 
 watch(
-  () => props.totalItems,
+  () => props.screener.totalItems.value,
   () => {
     ensureCurrentPageIsValid();
   },
