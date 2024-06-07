@@ -1,5 +1,5 @@
 <template>
-  <Story>
+  <Story title="5) Stress Test">
     <Variant title="default">
       <template #default>
         <VueScreener :data="baseData" />

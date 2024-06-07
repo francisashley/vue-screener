@@ -1,11 +1,27 @@
 <template>
-  <Story>
+  <Story title="2) Custom Title">
     <Variant title="default">
       <template #controls>
         <HstSelect v-model="state.select" title="Data" :options="options" />
       </template>
       <template #default>
-        <VueScreener :data="state.data" :include-header="false" />
+        <VueScreener
+          title="Custom title"
+          :data="state.data"
+          include-sticky-actions
+        >
+          <template #sticky-actions-head="props">
+            <HeaderCell v-bind="props">Actions</HeaderCell>
+          </template>
+          <template #sticky-actions-value="props">
+            <ValueCell v-bind="props">
+              <div :style="{ display: 'flex', gap: '4px' }">
+                <button @click="handleClickEdit(props.cell)">Edit</button>
+                <button @click="handleClickDelete(props.cell)">Delete</button>
+              </div>
+            </ValueCell>
+          </template>
+        </VueScreener>
       </template>
     </Variant>
   </Story>
@@ -16,6 +32,8 @@ import { reactive, watch } from "vue";
 import { VueScreener } from "../index";
 import baseData from "../fixtures/data.json";
 import primitivesData from "../fixtures/primitives-data.json";
+import HeaderCell from "../components/views/TableViewHeaderCell.vue";
+import ValueCell from "../components/views/TableViewValueCell.vue";
 
 const options = {
   "array-of-objects": "Array of objects",
@@ -60,4 +78,7 @@ watch(
     console.log("a", state.select);
   },
 );
+
+const handleClickEdit = (cell: unknown) => console.log("edit", cell);
+const handleClickDelete = (cell: unknown) => console.log("delete", cell);
 </script>

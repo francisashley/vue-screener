@@ -1,5 +1,5 @@
 <template>
-  <Story>
+  <Story title="6) No Data">
     <Variant title="default">
       <template #default>
         <VueScreener :data="[]" />

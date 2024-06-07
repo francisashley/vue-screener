@@ -1,11 +1,31 @@
 <template>
-  <Story>
+  <Story title="4) Custom Cells">
     <Variant title="default">
       <template #controls>
         <HstSelect v-model="state.select" title="Data" :options="options" />
       </template>
       <template #default>
-        <VueScreener :data="state.data" />
+        <VueScreener :data="state.data">
+          <template #header-cell="props">
+            <HeaderCell v-bind="props" :style="{ background: 'red' }">
+              <span v-html="props.cell.value" />
+              [stuff]
+            </HeaderCell>
+          </template>
+          <template #value-cell="props">
+            <ValueCell v-bind="props" :style="{ background: 'blue' }">
+              <span
+                v-html="
+                  props.highlight(
+                    String(props.cell.value),
+                    props.highlightValue,
+                  )
+                "
+              />
+              [stuff]
+            </ValueCell>
+          </template>
+        </VueScreener>
       </template>
     </Variant>
   </Story>
@@ -13,7 +33,7 @@
 
 <script lang="ts" setup>
 import { reactive, watch } from "vue";
-import { VueScreener } from "../index";
+import { HeaderCell, ValueCell, VueScreener } from "../index";
 import baseData from "../fixtures/data.json";
 import primitivesData from "../fixtures/primitives-data.json";
 
@@ -57,7 +77,6 @@ watch(
       default:
         break;
     }
-    console.log("a", state.select);
   },
 );
 </script>
