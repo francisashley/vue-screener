@@ -163,25 +163,13 @@ const getFields = computed((): string[] => {
   return getFieldsTool(getNormalisedData.value);
 });
 
-const shouldUseRegEx = computed((): boolean => {
-  return screener.searchOptions.value.includes("use-regex");
-});
-
-const shouldMatchCase = computed((): boolean => {
-  return screener.searchOptions.value.includes("match-case");
-});
-
-const shouldMatchWord = computed((): boolean => {
-  return screener.searchOptions.value.includes("match-word");
-});
-
 const getSearchedData = computed((): NormalisedRow[] => {
   return search({
     rows: getNormalisedData.value,
     searchQuery: screener.searchQuery.value,
-    useRegExp: shouldUseRegEx.value,
-    matchCase: shouldMatchCase.value,
-    matchWord: shouldMatchWord.value,
+    useRegExp: screener.shouldUseRegEx.value,
+    matchCase: screener.shouldMatchCase.value,
+    matchWord: screener.shouldMatchWord.value,
   });
 });
 

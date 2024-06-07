@@ -1,5 +1,5 @@
 import { SearchQueryOption } from "@/components/stuff/ScreenerSearch.vue";
-import { Ref } from "vue";
+import { ComputedRef, Ref } from "vue";
 
 export type Screener = {
   searchQuery: Ref<string>;
@@ -10,4 +10,7 @@ export type Screener = {
   searchOptions: Ref<SearchQueryOption[]>;
   sortField: Ref<string | null>;
   sortDirection: Ref<"asc" | "desc">;
+  shouldUseRegEx: ComputedRef<boolean>;
+  shouldMatchCase: ComputedRef<boolean>;
+  shouldMatchWord: ComputedRef<boolean>;
 };

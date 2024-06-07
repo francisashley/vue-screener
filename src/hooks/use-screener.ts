@@ -1,6 +1,6 @@
 import { SearchQueryOption } from "@/components/stuff/ScreenerSearch.vue";
 import { Screener } from "@/interfaces/screener";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 const searchQuery = ref<string>("");
 const highlightQuery = ref<string>("");
@@ -20,6 +20,18 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   currentPage.value = defaultCurrentPage ?? currentPage.value;
   perPage.value = defaultPerPage ?? perPage.value;
 
+  const shouldUseRegEx = computed((): boolean =>
+    searchOptions.value.includes("use-regex"),
+  );
+
+  const shouldMatchCase = computed((): boolean =>
+    searchOptions.value.includes("match-case"),
+  );
+
+  const shouldMatchWord = computed((): boolean =>
+    searchOptions.value.includes("match-word"),
+  );
+
   return {
     searchQuery,
     highlightQuery,
@@ -29,5 +41,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     searchOptions,
     sortField,
     sortDirection,
+    shouldUseRegEx,
+    shouldMatchCase,
+    shouldMatchWord,
   };
 };
