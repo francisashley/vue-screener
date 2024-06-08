@@ -1,40 +1,39 @@
 <template>
   <TableCell
-    :value="cell.highlightedValue"
-    :is-first="cell.isFirst"
-    :is-last="cell.isLast"
-    :has-value="cell.hasValue"
-    :is-pinned="cell.isPinned"
-    :type="cell.type"
+    :value="column.field"
+    :is-first="column.isFirst"
+    :is-last="column.isLast"
+    :has-value="Boolean(column.field)"
+    :is-pinned="column.isPinned"
+    type="string"
     :class="[
       'vs-table__cell--is-header',
-      isSortable && 'vs-table__cell--is-sortable',
-      cell.isPinned && 'vs-table__cell--is-pinned',
+      column.isSortable && 'vs-table__cell--is-sortable',
+      column.isPinned && 'vs-table__cell--is-pinned',
     ]"
     @click="handleClickHeader"
   >
     <slot>
-      <span v-html="cell.value" />
+      <span v-html="column.field" />
     </slot>
-    <SortSelector :sort-direction="sortDirection" v-if="isSortable" />
+    <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
   </TableCell>
 </template>
 
 <script lang="ts" setup>
-import { Cell } from '@/interfaces/screener'
+import { NeueColumn } from '@/interfaces/screener'
 import SortSelector from '../stuff/SortSelector.vue'
 import TableCell from './TableCell.vue'
 
 const props = defineProps<{
-  cell: Cell
+  column: NeueColumn
   sortDirection?: null | 'asc' | 'desc'
-  isSortable?: boolean
 }>()
 
 const emit = defineEmits(['on-sort'])
 
 const handleClickHeader = () => {
-  emit('on-sort', props.cell.field)
+  emit('on-sort', props.column.field)
 }
 </script>
 

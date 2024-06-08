@@ -58,7 +58,7 @@ const getRows = computed(() => {
 })
 
 const rowStyle = computed(() => {
-  let colCount = props.screener.fields.value.length
+  let colCount = props.screener.neueColumns.value.length
 
   if (props.screener.includePinned.value) colCount++
 

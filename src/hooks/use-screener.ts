@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { Columns, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
+import { Columns, NeueColumn, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
 import { getPaginated, isValidInput, normaliseInput, omitFields, pickFields } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -109,6 +109,27 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return paginatedData.value.filter((row) => row !== null).length > 0
   })
 
+  /// columns
+  const neueColumns = computed<NeueColumn[]>(() => {
+    const _fields = fields.value
+    if (includePinned.value) _fields.push('pinned')
+
+    const columns = _fields.map((field, i) => {
+      return {
+        field: field,
+        label: field,
+        width: '1fr',
+        isFirst: i === 0,
+        isLast: i === fields.value.length - 1,
+        isPinned: field === 'pinned',
+        isSortable: field !== 'pinned',
+      }
+    })
+
+    return columns
+  })
+  ///
+
   return {
     title,
     includePinned,
@@ -131,8 +152,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     paginatedData,
     totalItems: computed(() => searchedData.value.length),
     hasError,
-    fields,
     hasData,
+    neueColumns,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query

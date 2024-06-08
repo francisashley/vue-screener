@@ -23,8 +23,8 @@ export type Screener = {
   paginatedData: ComputedRef<NormalisedRow[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
-  fields: ComputedRef<string[]>
   hasData: ComputedRef<boolean>
+  neueColumns: ComputedRef<NeueColumn[]>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void
@@ -34,12 +34,13 @@ export type Screener = {
 //////////// New types ////////////
 
 export type NeueColumn = {
-  key: string // The unique identifier for the column. This must match a field in the data for values to show.
+  field: string // The unique identifier for the column. This must match a field in the data for values to show.
   label: string // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
   isFirst: boolean // Flag indicating if it is the first value in the row. TODO: is this needed?
   isLast: boolean // Flag indicating if it is the last value in the row. TODO: is this needed?
   isPinned: boolean // Flag indicating if the field is pinned. TODO: is this needed?
+  isSortable: boolean // Flag indicating if the field is sortable. TODO: is this needed?
 }
 
 export type NeueItem = {

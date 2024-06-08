@@ -30,8 +30,8 @@ const props = defineProps<{
 }>()
 
 const tableStyle = computed(() => {
-  let cols = props.screener.fields.value.reduce((acc, field) => {
-    const column = props.screener.columns.value[field as any]
+  let cols = props.screener.neueColumns.value.reduce((acc, field) => {
+    const column = props.screener.neueColumns.value[field.key as any]
     let width = column?.width ?? '1fr'
     if (!isNaN(Number(width))) width = width + 'px'
     return acc + ' ' + width
