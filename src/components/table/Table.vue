@@ -6,11 +6,8 @@
       </template>
     </TableHeader>
     <TableBody :screener="screener">
-      <template #value-cell="dataProps">
-        <slot name="value-cell" v-bind="dataProps" />
-      </template>
-      <template #pinned-value="dataProps">
-        <slot name="pinned-value" v-bind="dataProps" />
+      <template #data="dataProps">
+        <slot name="data" v-bind="dataProps" />
       </template>
     </TableBody>
   </div>

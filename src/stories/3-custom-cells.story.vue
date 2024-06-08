@@ -8,7 +8,7 @@
             [stuff]
           </Head>
         </template>
-        <template #value-cell="props">
+        <template #data="props">
           <Data v-bind="props" :style="{ background: 'blue' }">
             <span v-html="props.highlight(String(props.item.fields[props.column.field].value), props.highlightValue)" />
             [stuff]

@@ -3,7 +3,7 @@
     <template v-if="item">
       <slot
         v-for="(column, j) in screener.neueColumns.value"
-        :name="column.isPinned ? 'pinned-value' : 'value-cell'"
+        name="data"
         :column="column"
         :item="item"
         :key="j"

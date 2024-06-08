@@ -12,11 +12,8 @@
         <template #head="headProps">
           <slot name="head" v-bind="headProps" />
         </template>
-        <template #value-cell="dataProps">
-          <slot name="value-cell" v-bind="dataProps" />
-        </template>
-        <template #pinned-value="dataProps">
-          <slot name="pinned-value" v-bind="dataProps" />
+        <template #data="dataProps">
+          <slot name="data" v-bind="dataProps" />
         </template>
       </Table>
     </ScreenerMain>

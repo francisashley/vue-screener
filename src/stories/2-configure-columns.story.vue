@@ -50,22 +50,22 @@
           email: { field: 'email', width: '200px' },
           gender: { field: 'gender', width: '100px' },
           ip_address: { field: 'ip_address', width: 'minmax(150px, 1fr)' },
-          extra_column: { with: '100px' },
+          extra_column: { width: '100px' },
         }"
       />
     </Variant>
     <Variant title="Pin to the side" width="100">
       <VueScreener :data="baseData" include-pinned>
         <template #head="props">
-          <TableHead v-if="props.column.isPinned" v-bind="props">Actions</TableHead>
+          <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
         </template>
-        <template #pinned-value="props">
-          <TableData v-bind="props">
+        <template #data="props">
+          <Data v-if="props.column.isPinned" v-bind="props">
             <div :style="{ display: 'flex', gap: '4px' }">
-              <button @click="handleClickEdit(props.cell)">Edit</button>
-              <button @click="handleClickDelete(props.cell)">Delete</button>
+              <button @click="handleClickEdit(props.item)">Edit</button>
+              <button @click="handleClickDelete(props.column)">Delete</button>
             </div>
-          </TableData>
+          </Data>
         </template>
       </VueScreener>
     </Variant>
@@ -86,9 +86,9 @@ import { VueScreener } from '../index'
 import baseData from '../fixtures/data.json'
 import primitivesData from '../fixtures/primitives-data.json'
 import mixedObjectsData from '../fixtures/mix-objects-data.json'
-import TableHead from '../components/table/TableHead.vue'
-import TableData from '../components/table/TableData.vue'
+import Head from '../components/table/TableHead.vue'
+import Data from '../components/table/TableData.vue'
 
-const handleClickEdit = (cell: unknown) => console.log('edit', cell)
-const handleClickDelete = (cell: unknown) => console.log('delete', cell)
+const handleClickEdit = (item: unknown) => console.log('edit', item)
+const handleClickDelete = (item: unknown) => console.log('delete', item)
 </script>

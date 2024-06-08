@@ -81,7 +81,7 @@ Add a pinned column on the right to put stuff in.
     <template #head="props">
       <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
     </template>
-    <template #pinned-value="props">
+    <template #data="props">
       <Data v-bind="props">
         <button @click="handleClickEdit(props.cell)">Edit</button>
         <button @click="handleClickDelete(props.cell)">Delete</button>
@@ -120,20 +120,20 @@ Custom value cell renderer:
 ```vue
 <template>
   <vue-screener :data="data">
-    <template #value-cell="props">
-      <ValueCell v-bind="props">
+    <template #data="props">
+      <Data v-bind="props">
         <span v-if="props.field === 'price'">
           {{ formatPrice(props.value) }}
         </span>
         <template v-else>
           {{ props.value }}
         </template>
-      </ValueCell>
+      </Data>
     </template>
   </vue-screener>
 </template>
 <script>
-import VueScreener, { ValueCell } from 'vue-screener'
+import VueScreener, { Data } from 'vue-screener'
 import { formatPrice } from './utils/currency'
 </script>
 ```
