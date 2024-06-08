@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { Cell, Columns, NeueColumn, NeueItem, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
+import { Columns, NeueColumn, NeueItem, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
 import {
   getPaginated,
   getPaginatedNeue,
@@ -147,36 +147,6 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return columns
   })
 
-  const rows = computed(() => {
-    return paginatedData.value.map((row) => {
-      const cells: Cell[] = row?.map((col, i) => {
-        return {
-          field: col.key,
-          value: col.hasValue ? col.value : '',
-          highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : '', highlightQuery.value) : '',
-          isFirst: i === 0,
-          isLast: i === row.length - 1,
-          type: col.type,
-          row,
-        }
-      })
-
-      if (includePinned.value && row) {
-        cells.push({
-          field: '',
-          value: '',
-          highlightedValue: '',
-          isLast: true,
-          isPinned: true,
-          type: 'string',
-          row,
-        })
-      }
-
-      return cells
-    })
-  })
-
   const neueData = computed((): NeueItem[] => {
     let neueData = isValidInput(data.value) ? normaliseInputNeue(data.value as UnknownObject[]) : []
 
@@ -276,7 +246,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldMatchWord,
     columns,
     data,
-    rows,
+    items: preparedItems,
     normalisedData,
     searchedData,
     sortedData,
@@ -285,7 +255,6 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     hasError,
     hasData,
     neueColumns,
-    items: preparedItems,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query
