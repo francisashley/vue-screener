@@ -42,6 +42,7 @@
     <Variant title="Extra columns" width="100">
       <VueScreener
         :data="baseData"
+        :pick="['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'extra_column']"
         :columns="{
           id: { field: 'id', width: '50px' },
           first_name: { field: 'first_name', width: '150px' },

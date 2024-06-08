@@ -1,11 +1,11 @@
 <template>
   <TableCell
-    :value="item.fields[column.field].htmlValue"
+    :value="item.fields[column.field]?.htmlValue"
     :is-first="column.isFirst"
     :is-last="column.isLast"
-    :has-value="item.fields[column.field].hasValue"
+    :has-value="item.fields[column.field]?.hasValue"
     :is-pinned="column.isPinned"
-    :type="item.fields[column.field].type"
+    :type="item.fields[column.field]?.type"
     :class="['vs-table__cell--is-value', column.isPinned && 'vs-table__cell--is-pinned']"
   >
     <slot />

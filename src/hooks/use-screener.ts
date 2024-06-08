@@ -135,31 +135,33 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const columns = computed<Column[]>(() => {
-    const fields = getFields(normalisedData.value)
+    const fields = options.pick?.length ? options.pick : getFields(normalisedData.value)
 
-    let _columns = fields.map((field, i) => {
-      let width = inputColumns.value[field]?.width ?? '1fr'
+    let columns: Column[] = fields.map((field, i) => {
+      const inputColumn = inputColumns.value[field] ?? {}
+      let width = inputColumn.width ?? '1fr'
       if (!isNaN(Number(width))) width = width + 'px'
       return {
-        field: field,
+        field,
         label: field,
-        width: width,
         isFirst: i === 0,
         isLast: i === fields.length - 1,
         isPinned: field === 'pinned',
         isSortable: field !== 'pinned',
+        ...inputColumn,
+        width,
       }
     })
 
     if (options.pick && options.pick.length > 0) {
-      _columns = pickColumns(_columns, options.pick)
+      columns = pickColumns(columns, options.pick)
     }
 
     if (options.omit && options.omit.length > 0) {
-      _columns = omitColumns(_columns, options.omit)
+      columns = omitColumns(columns, options.omit)
     }
 
-    return _columns
+    return columns
   })
 
   return {
