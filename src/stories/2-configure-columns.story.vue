@@ -56,8 +56,8 @@
     </Variant>
     <Variant title="Pin to the side" width="100">
       <VueScreener :data="baseData" include-pinned>
-        <template #pinned-head="props">
-          <TableHead v-bind="props">Actions</TableHead>
+        <template #head="props">
+          <TableHead v-if="props.column.isPinned" v-bind="props">Actions</TableHead>
         </template>
         <template #pinned-value="props">
           <TableData v-bind="props">

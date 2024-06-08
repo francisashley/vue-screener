@@ -3,7 +3,7 @@
     <slot
       v-for="(column, i) in props.screener.neueColumns.value"
       :key="i"
-      :name="column.isPinned ? 'pinned-head' : 'header-cell'"
+      name="head"
       :column="column"
       :sort-direction="getSortDirection(column.field)"
       @on-sort="screener.actions.sort"

@@ -1,19 +1,16 @@
 <template>
   <div :style="tableStyle" class="vs-table">
     <TableHeader :screener="screener">
-      <template #header-cell="cellProps">
-        <slot name="header-cell" v-bind="cellProps" />
-      </template>
-      <template #pinned-head="cellProps">
-        <slot name="pinned-head" v-bind="cellProps" />
+      <template #head="headProps">
+        <slot name="head" v-bind="headProps" />
       </template>
     </TableHeader>
     <TableBody :screener="screener">
-      <template #value-cell="cellProps">
-        <slot name="value-cell" v-bind="cellProps" />
+      <template #value-cell="dataProps">
+        <slot name="value-cell" v-bind="dataProps" />
       </template>
-      <template #pinned-value="cellProps">
-        <slot name="pinned-value" v-bind="cellProps" />
+      <template #pinned-value="dataProps">
+        <slot name="pinned-value" v-bind="dataProps" />
       </template>
     </TableBody>
   </div>

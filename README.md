@@ -78,8 +78,8 @@ Add a pinned column on the right to put stuff in.
 ```vue
 <template>
   <VueScreener :data="data" include-actions>
-    <template #pinned-head="props">
-      <Head v-bind="props">Actions</Head>
+    <template #head="props">
+      <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
     </template>
     <template #pinned-value="props">
       <Data v-bind="props">
