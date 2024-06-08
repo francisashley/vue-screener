@@ -1,15 +1,19 @@
 import { DataType, NormalisedField, NormalisedRow, UnknownObject } from '@/interfaces/screener'
 
+/**
+ * Checks if data is an array of arrays or objects.
+ * @param {unknown} data - The data to check.
+ * @returns {boolean} True if valid, false otherwise.
+ */
 export function isValidInput(data: unknown): boolean {
   const isObject = (val: unknown) => typeof val === 'object' && val !== null
   return Array.isArray(data) && data.every((row: unknown) => Array.isArray(row) || isObject(row))
 }
 
 /**
- * Normalises the input data into a consistent format.
- *
- * @param {UnknownObject[]} data - The input data to be normalised. This can be an array of objects or an array of arrays.
- * @returns {NormalisedRow[]} The normalised data. Each row is an array of objects, where each object represents a field with its key, value, type, and a flag indicating if it has a value.
+ * Transforms input data into a consistent format.
+ * @param {UnknownObject[]} data - The input data.
+ * @returns {NormalisedRow[]} The normalised data.
  */
 export function normaliseInput(data: UnknownObject[]): NormalisedRow[] {
   // If the input data is an array of arrays, convert it to an array of objects.
@@ -38,46 +42,53 @@ export function normaliseInput(data: UnknownObject[]): NormalisedRow[] {
   })
 }
 
+/**
+ * Extracts unique field keys from normalised rows.
+ * @param {NormalisedRow[]} rows - The normalised rows.
+ * @returns {string[]} Unique field keys.
+ */
 export function getFields(rows: NormalisedRow[]): string[] {
-  const fields = new Set<string>()
-
-  for (const row of rows) {
-    for (const field of row) {
-      fields.add(field.key)
-    }
-  }
-
+  const fields = new Set<string>(rows.flatMap((row) => row.map((field) => field.key)))
   return Array.from(fields)
 }
 
+/**
+ * Picks specified fields from normalised rows.
+ * @param {NormalisedRow[]} rows - The normalised rows.
+ * @param {string[]} pickFields - Fields to pick.
+ * @returns {NormalisedRow[]} Rows with picked fields.
+ */
 export function pickFields(rows: NormalisedRow[], pickFields: string[]): NormalisedRow[] {
-  return rows.map((row) => {
-    const pickedRow: NormalisedRow = []
-    pickFields.forEach((pickField) => {
-      const pickedField = row.find((field) => field.key === pickField)
-      if (pickedField) {
-        pickedRow.push(pickedField)
-      }
-    })
-    return pickedRow
-  })
+  return rows.map((row) => row.filter((field) => pickFields.includes(field.key)))
 }
 
+/**
+ * Omits specified fields from normalised rows.
+ * @param {NormalisedRow[]} rows - The normalised rows.
+ * @param {string[]} omitFields - Fields to omit.
+ * @returns {NormalisedRow[]} Rows without omitted fields.
+ */
 export function omitFields(rows: NormalisedRow[], omitFields: string[]): NormalisedRow[] {
-  return rows.map((row) => {
-    return row.filter((field) => !omitFields.includes(field.key))
-  })
+  const omitFieldsSet = new Set(omitFields)
+  return rows.map((row) => row.filter((field) => !omitFieldsSet.has(field.key)))
 }
 
-export function getPaginated(options: {
+/**
+ * Returns a paginated subset of normalised rows.
+ * @param {Object} options - The options for pagination.
+ * @returns {NormalisedRow[]} Paginated rows.
+ */
+export function getPaginated({
+  rows = [],
+  page = 1,
+  perPage = 25,
+  withPlaceholders = false,
+}: {
   rows: NormalisedRow[]
   page: number
   perPage: number
   withPlaceholders: boolean
 }): NormalisedRow[] {
-  let { rows = [] } = options
-  const { page = 1, perPage = 25, withPlaceholders = false } = options
-
   const start = perPage * page
   const end = start + perPage
 
@@ -92,25 +103,32 @@ export function getPaginated(options: {
   return rows
 }
 
+/**
+ * Returns the data type of the value.
+ * @param {unknown} value - The value to check.
+ * @returns {DataType} Data type of the value.
+ * @throws If type of value cannot be established.
+ */
 export function getTypeOf(value: unknown): DataType {
-  if (typeof value === 'string') {
-    return 'string'
-  } else if (typeof value === 'number') {
-    return 'number'
-  } else if (typeof value === 'boolean') {
-    return 'boolean'
-  } else if (typeof value === 'symbol') {
-    return 'symbol'
-  } else if (typeof value === 'undefined') {
-    return 'undefined'
-  } else if (typeof value === 'object') {
-    if (value === null) {
-      return 'null'
-    } else if (Array.isArray(value)) {
-      return 'array'
-    }
-    return 'object'
+  switch (typeof value) {
+    case 'string':
+      return 'string'
+    case 'number':
+      return 'number'
+    case 'boolean':
+      return 'boolean'
+    case 'symbol':
+      return 'symbol'
+    case 'undefined':
+      return 'undefined'
+    case 'object':
+      if (value === null) {
+        return 'null'
+      } else if (Array.isArray(value)) {
+        return 'array'
+      }
+      return 'object'
+    default:
+      throw `Could not establish type of \`${value}\``
   }
-
-  throw `Could not establish type of \`${value}\``
 }

@@ -40,7 +40,9 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   data.value = options.defaultData ?? data.value
 
   const normalisedData = computed((): NormalisedRow[] => {
-    let normalisedData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
+    if (!isValidInput(data.value)) return []
+
+    let normalisedData = normaliseInput(data.value as UnknownObject[])
 
     if (options.pick && options.pick.length > 0) {
       normalisedData = pickFields(normalisedData, options.pick)
