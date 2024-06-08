@@ -17,6 +17,8 @@ export type Screener = {
   data: Ref<unknown[]>
   normalisedData: ComputedRef<NormalisedRow[]>
   searchedData: ComputedRef<NormalisedRow[]>
+  sortedData: ComputedRef<NormalisedRow[]>
+  paginatedData: ComputedRef<NormalisedRow[]>
   totalItems: ComputedRef<number>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void

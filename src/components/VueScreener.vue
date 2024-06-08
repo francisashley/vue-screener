@@ -15,7 +15,7 @@
           v-if="hasData && screener.renderFormat.value === 'table'"
           :screener="screener"
           :fields="getFields"
-          :rows="getPaginatedData"
+          :rows="screener.paginatedData.value"
           :include-sticky-actions="includeStickyActions"
           @on-sort="handleSort"
         >
@@ -32,7 +32,7 @@
             <slot name="sticky-actions-value" v-bind="cellProps" />
           </template>
         </TableView>
-        <JsonView v-else-if="hasData" :data="getPaginatedData" />
+        <JsonView v-else-if="hasData" :data="screener.paginatedData.value" />
         <NoDataView v-else />
       </main>
       <footer class="vs-footer">
@@ -56,20 +56,14 @@ import Pagination from './stuff/Pagination.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
 import Settings from './stuff/Settings.vue'
 import { isValidRegExp } from '../utils/regex.utils'
-import {
-  NormalisedRow,
-  isValidInput as isValidInputTool,
-  getFields as getFieldsTool,
-  getPaginated,
-} from '../utils/data.utils'
+import { isValidInput as isValidInputTool, getFields as getFieldsTool } from '../utils/data.utils'
 import { computed } from 'vue'
-import { orderBy } from 'natural-orderby'
 import { useScreener } from '../hooks/use-screener'
 import { useScrollable } from '../hooks/use-scrollable'
 
 type Props = {
-  data?: unknown[]
   title?: string
+  data?: unknown[]
   pick?: string[]
   omit?: string[]
   perPage?: number
@@ -79,8 +73,8 @@ type Props = {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  data: () => [],
   title: 'Results',
+  data: () => [],
   pick: () => [],
   omit: () => [],
   perPage: 15,
@@ -111,36 +105,8 @@ const getFields = computed((): string[] => {
   return getFieldsTool(screener.normalisedData.value)
 })
 
-const getSortedData = computed((): NormalisedRow[] => {
-  const sortedRows = screener.searchQuery.value ? screener.searchedData.value : screener.normalisedData.value
-
-  const sortIndex = sortedRows[0]?.findIndex((column) => column.key === screener.sortField.value) ?? null
-
-  if (screener.sortField.value && screener.sortDirection.value) {
-    const nullRows = sortedRows.filter((row) => row?.[sortIndex] === null || row?.[sortIndex] === undefined)
-
-    const nonNullRows = sortedRows.filter((row) => row?.[sortIndex] !== null && row?.[sortIndex] !== undefined)
-
-    return [
-      ...orderBy(nonNullRows, [(row: NormalisedRow | null) => row?.[sortIndex]?.value], [screener.sortDirection.value]),
-      ...nullRows,
-    ]
-  } else {
-    return sortedRows
-  }
-})
-
-const getPaginatedData = computed((): NormalisedRow[] => {
-  return getPaginated({
-    rows: getSortedData.value,
-    page: screener.currentPage.value - 1,
-    perPage: screener.perPage.value,
-    withPlaceholders: true,
-  })
-})
-
 const hasData = computed((): boolean => {
-  return getPaginatedData.value.filter((row) => row !== null).length > 0
+  return screener.paginatedData.value.filter((row) => row !== null).length > 0
 })
 
 const handleSort = (updatedSortField: string) => {
