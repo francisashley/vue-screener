@@ -24,13 +24,21 @@ import ScreenerFooter from './ScreenerFooter.vue'
 import { useScreener } from '../hooks/use-screener'
 
 type Props = {
+  // The title to be displayed in the header
   title?: string
+  // The data to be displayed in the table
   data?: unknown[]
+  // The specific fields to be displayed in the table
   pick?: string[]
+  // The fields to be excluded from the table
   omit?: string[]
+  // The number of items to be displayed per page in the table
   perPage?: number
+  // The current page number in the table
   currentPage?: number
+  // A flag to determine if an extra pinned column should be displayed on the right
   includeStickyActions?: boolean
+  // A flag to toggle the visibility of the header
   includeHeader?: boolean
 }
 
