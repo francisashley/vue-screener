@@ -31,6 +31,31 @@ export type Screener = {
   }
 }
 
+//////////// New types ////////////
+
+export type NeueColumn = {
+  key: string // The unique identifier for the column. This must match a field in the data for values to show.
+  width: string // The width of the column. Defaults to '1fr' if not provided.
+}
+
+export type NeueItem = {
+  data: unknown // The original data for the item.
+  fields: Record<string, NeueField> // The processed data for each field in the item, used for rendering.
+}
+
+export type NeueField = {
+  field: string // The field name.
+  value: string // Value of the field.
+  htmlValue: string // HTML representation of the value, used for rendering.
+  type: DataType // Data type of the value.
+  isFirst: boolean // Flag indicating if it is the first value in the row. TODO: is this needed?
+  isLast: boolean // Flag indicating if it is the last value in the row. TODO: is this needed?
+  hasValue: boolean // Flag indicating if the field has a value.
+  isPinned: boolean // Flag indicating if the field is pinned. TODO: is this needed?
+}
+
+//////////// End New types ////////
+
 export type Column = {
   field: string
   width: string // defaults to `1fr`
