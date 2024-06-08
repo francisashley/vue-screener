@@ -3,7 +3,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
     <Variant title="Control widths" width="100">
       <VueScreener
         :data="baseData"
-        :columns="{
+        :column-config="{
           id: { field: 'id', width: '50px' },
           first_name: { field: 'first_name', width: '150px' },
           last_name: { field: 'last_name', width: '150px' },
@@ -16,7 +16,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
       <br />
       <VueScreener
         :data="primitivesData"
-        :columns="{
+        :column-config="{
           0: { field: 0, width: '50px' },
           1: { field: 1, width: '100px' },
           2: { field: 2, width: '100px' },
@@ -29,7 +29,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
       <VueScreener
         :data="mixedObjectsData"
         :pick="['id', 'type', 'name', 'address', 'country', 'flag_colours']"
-        :columns="{
+        :column-config="{
           type: { field: 'type', width: '75px' },
           name: { field: 'name', width: '100px' },
           id: { field: 'id', width: '50px' },
@@ -42,7 +42,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
     <Variant title="Control labels" width="100">
       <VueScreener
         :data="baseData"
-        :columns="{
+        :column-config="{
           id: { field: 'id', label: 'ID' },
           first_name: { field: 'first_name', label: 'First name' },
           last_name: { field: 'last_name', label: 'Last name' },
@@ -55,7 +55,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
       <br />
       <VueScreener
         :data="primitivesData"
-        :columns="{
+        :column-config="{
           0: { field: 0, label: 'ID' },
           1: { field: 1, label: 'First name' },
           2: { field: 2, label: 'Last name' },
@@ -68,7 +68,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
       <VueScreener
         :data="mixedObjectsData"
         :pick="['id', 'name', 'address', 'country', 'flag_colours']"
-        :columns="{
+        :column-config="{
           id: { field: 'id', label: 'ID' },
           name: { field: 'name', label: 'Name' },
           address: { field: 'address', label: 'Address' },
@@ -81,7 +81,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
       <VueScreener
         :data="baseData"
         :pick="['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'extra_column']"
-        :columns="{
+        :column-config="{
           id: { field: 'id', width: '50px' },
           first_name: { field: 'first_name', width: '150px' },
           last_name: { field: 'last_name', width: '150px' },
@@ -97,7 +97,7 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
       <VueScreener
         :data="baseData"
         :pick="['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'actions']"
-        :columns="{
+        :column-config="{
           actions: { field: 'actions', isPinned: true },
         }"
       >

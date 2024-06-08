@@ -1286,9 +1286,9 @@ const useScreener = (options = {}) => {
   const sortField = ref(null);
   const sortDirection = ref("desc");
   const data = ref([]);
-  const inputColumns = ref({});
+  const columnConfig = ref({});
   title.value = options.title ?? title.value;
-  inputColumns.value = options.inputColumns ?? inputColumns.value;
+  columnConfig.value = options.columnConfig ?? columnConfig.value;
   currentPage.value = options.defaultCurrentPage ?? currentPage.value;
   perPage.value = options.defaultPerPage ?? perPage.value;
   data.value = options.defaultData ?? data.value;
@@ -1361,7 +1361,7 @@ const useScreener = (options = {}) => {
     var _a;
     const fields = ((_a = options.pick) == null ? void 0 : _a.length) ? options.pick : getFields(normalisedData.value);
     let columns2 = fields.map((field, i) => {
-      const inputColumn = inputColumns.value[field] ?? {};
+      const inputColumn = columnConfig.value[field] ?? {};
       let width = inputColumn.width ?? "1fr";
       if (!isNaN(Number(width)))
         width = width + "px";
@@ -1425,7 +1425,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: {
     title: { type: String, required: false, default: "Results" },
     data: { type: Array, required: false, default: () => [] },
-    columns: { type: Object, required: false, default: () => ({}) },
+    columnConfig: { type: Object, required: false, default: () => ({}) },
     pick: { type: Array, required: false, default: () => [] },
     omit: { type: Array, required: false, default: () => [] },
     perPage: { type: Number, required: false, default: 15 },
@@ -1439,7 +1439,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       defaultCurrentPage: __props.currentPage,
       defaultPerPage: __props.perPage,
       defaultData: __props.data,
-      inputColumns: __props.columns,
+      columnConfig: __props.columnConfig,
       pick: __props.pick,
       omit: __props.omit
     });

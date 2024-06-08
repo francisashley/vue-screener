@@ -1,5 +1,5 @@
 import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode, aw as normalizeProps, ax as mergeProps, ay as createTextVNode, az as createCommentVNode, aA as createBaseVNode } from "./vendor-DC0MkHh5.js";
-import { _ as _export_sfc, V as VueScreener, H as Head, D as Data } from "./VueScreener-DSaeHHIm.js";
+import { _ as _export_sfc, V as VueScreener, H as Head, D as Data } from "./VueScreener-Zb5Ngo-L.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-D5HdiZTi.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
@@ -64,7 +64,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode($setup["VueScreener"], {
             data: $setup.baseData,
-            columns: {
+            "column-config": {
               id: { field: "id", width: "50px" },
               first_name: { field: "first_name", width: "150px" },
               last_name: { field: "last_name", width: "150px" },
@@ -77,7 +77,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           _hoisted_1,
           createVNode($setup["VueScreener"], {
             data: $setup.primitivesData,
-            columns: {
+            "column-config": {
               0: { field: 0, width: "50px" },
               1: { field: 1, width: "100px" },
               2: { field: 2, width: "100px" },
@@ -90,7 +90,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode($setup["VueScreener"], {
             data: $setup.mixedObjectsData,
             pick: ["id", "type", "name", "address", "country", "flag_colours"],
-            columns: {
+            "column-config": {
               type: { field: "type", width: "75px" },
               name: { field: "name", width: "100px" },
               id: { field: "id", width: "50px" },
@@ -110,7 +110,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode($setup["VueScreener"], {
             data: $setup.baseData,
-            columns: {
+            "column-config": {
               id: { field: "id", label: "ID" },
               first_name: { field: "first_name", label: "First name" },
               last_name: { field: "last_name", label: "Last name" },
@@ -123,7 +123,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           _hoisted_3,
           createVNode($setup["VueScreener"], {
             data: $setup.primitivesData,
-            columns: {
+            "column-config": {
               0: { field: 0, label: "ID" },
               1: { field: 1, label: "First name" },
               2: { field: 2, label: "Last name" },
@@ -136,7 +136,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode($setup["VueScreener"], {
             data: $setup.mixedObjectsData,
             pick: ["id", "name", "address", "country", "flag_colours"],
-            columns: {
+            "column-config": {
               id: { field: "id", label: "ID" },
               name: { field: "name", label: "Name" },
               address: { field: "address", label: "Address" },
@@ -156,7 +156,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode($setup["VueScreener"], {
             data: $setup.baseData,
             pick: ["id", "first_name", "last_name", "full_name", "email", "gender", "ip_address", "extra_column"],
-            columns: {
+            "column-config": {
               id: { field: "id", width: "50px" },
               first_name: { field: "first_name", width: "150px" },
               last_name: { field: "last_name", width: "150px" },
@@ -179,7 +179,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           createVNode($setup["VueScreener"], {
             data: $setup.baseData,
             pick: ["id", "first_name", "last_name", "full_name", "email", "gender", "ip_address", "actions"],
-            columns: {
+            "column-config": {
               actions: { field: "actions", isPinned: true }
             }
           }, {
