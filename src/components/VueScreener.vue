@@ -1,7 +1,7 @@
 <template>
   <section class="vs-app">
-    <ScreenerHeader v-if="!hasError && includeHeader" :title="title" :screener="screener" />
-    <ScreenerMain :screener="screener" :include-sticky-actions="includeStickyActions" :has-error="hasError">
+    <ScreenerHeader v-if="!screener.hasError.value && includeHeader" :screener="screener" />
+    <ScreenerMain :screener="screener">
       <template #header-cell="cellProps">
         <slot name="header-cell" v-bind="cellProps" />
       </template>
@@ -13,7 +13,7 @@
       </template>
       <template #sticky-actions-value="cellProps"> <slot name="sticky-actions-value" v-bind="cellProps" /> </template>
     </ScreenerMain>
-    <ScreenerFooter v-if="!hasError" :screener="screener" />
+    <ScreenerFooter v-if="!screener.hasError.value" :screener="screener" />
   </section>
 </template>
 
@@ -21,8 +21,6 @@
 import ScreenerHeader from './ScreenerHeader.vue'
 import ScreenerMain from './ScreenerMain.vue'
 import ScreenerFooter from './ScreenerFooter.vue'
-import { isValidInput as isValidInputTool } from '../utils/data.utils'
-import { computed } from 'vue'
 import { useScreener } from '../hooks/use-screener'
 
 type Props = {
@@ -48,15 +46,13 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const screener = useScreener({
+  title: props.title,
+  includeStickyActions: props.includeStickyActions,
   defaultCurrentPage: props.currentPage,
   defaultPerPage: props.perPage,
   defaultData: props.data,
   pick: props.pick,
   omit: props.omit,
-})
-
-const hasError = computed((): boolean => {
-  return !isValidInputTool(screener.data.value)
 })
 </script>
 

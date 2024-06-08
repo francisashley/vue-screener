@@ -3,6 +3,8 @@ import { NormalisedRow } from '@/utils/data.utils'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
+  title: Ref<string>
+  includeStickyActions: Ref<boolean>
   searchQuery: Ref<string>
   highlightQuery: Ref<string>
   currentPage: Ref<number>
@@ -20,6 +22,7 @@ export type Screener = {
   sortedData: ComputedRef<NormalisedRow[]>
   paginatedData: ComputedRef<NormalisedRow[]>
   totalItems: ComputedRef<number>
+  hasError: ComputedRef<boolean>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void

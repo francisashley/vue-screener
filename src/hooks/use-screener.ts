@@ -13,6 +13,8 @@ import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
 
+const title = ref<string>('Results')
+const includeStickyActions = ref<boolean>(false)
 const searchQuery = ref<string>('')
 const highlightQuery = ref<string>('')
 const currentPage = ref<number>(1)
@@ -24,6 +26,8 @@ const sortDirection = ref<'asc' | 'desc'>('desc')
 const data = ref<unknown[]>([])
 
 type ScreenerOptions = {
+  title?: string
+  includeStickyActions?: boolean
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultData?: unknown[]
@@ -31,6 +35,8 @@ type ScreenerOptions = {
   omit?: string[]
 }
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
+  title.value = options.title ?? title.value
+  includeStickyActions.value = options.includeStickyActions ?? includeStickyActions.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
   data.value = options.defaultData ?? data.value
@@ -91,7 +97,13 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
   })
 
+  const hasError = computed((): boolean => {
+    return !isValidInput(data.value)
+  })
+
   return {
+    title,
+    includeStickyActions,
     searchQuery,
     highlightQuery,
     currentPage,
@@ -109,6 +121,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     sortedData,
     paginatedData,
     totalItems: computed(() => searchedData.value.length),
+    hasError,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query

@@ -5,7 +5,7 @@
     ref="mainRef"
   >
     <ErrorMessage
-      v-if="hasError"
+      v-if="screener.hasError.value"
       message="Invalid data was provided. Please provide an array of objects or an array of arrays."
       class="vs-error-message"
     />
@@ -14,7 +14,7 @@
       :screener="screener"
       :fields="getFields"
       :rows="screener.paginatedData.value"
-      :include-sticky-actions="includeStickyActions"
+      :include-sticky-actions="screener.includeStickyActions.value"
     >
       <template #header-cell="cellProps">
         <slot name="header-cell" v-bind="cellProps" />
@@ -46,8 +46,6 @@ import ErrorMessage from './stuff/ErrorMessage.vue'
 
 type Props = {
   screener: Screener
-  includeStickyActions?: boolean
-  hasError?: boolean
 }
 
 const props = defineProps<Props>()

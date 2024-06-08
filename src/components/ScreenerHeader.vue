@@ -1,6 +1,6 @@
 <template>
   <header class="vs-header">
-    <div class="vs-title" v-text="props.title" />
+    <div class="vs-title" v-text="screener.title.value" />
     <ScreenerSearch :screener="screener" :is-valid-query="isRegExFriendlySearchQuery" class="vs-search" />
     <Settings :screener="screener" />
   </header>
@@ -14,7 +14,6 @@ import { computed } from 'vue'
 import { Screener } from '../interfaces/screener'
 
 type Props = {
-  title?: string
   screener: Screener
 }
 
