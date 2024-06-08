@@ -1,13 +1,13 @@
-import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode, aw as normalizeProps, ax as guardReactiveProps, ay as createTextVNode, az as createBaseVNode } from "./vendor-ZCGMzaIs.js";
-import { _ as _export_sfc, V as VueScreener, H as HeaderCell, a as ValueCell } from "./VueScreener-jzm78S1M.js";
+import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode, aw as normalizeProps, ax as mergeProps, ay as createTextVNode, az as createCommentVNode, aA as createBaseVNode } from "./vendor-DC0MkHh5.js";
+import { _ as _export_sfc, V as VueScreener, H as Head, D as Data } from "./VueScreener-DSaeHHIm.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-D5HdiZTi.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "2-configure-columns.story",
   setup(__props, { expose: __expose }) {
     __expose();
-    const handleClickEdit = (cell) => console.log("edit", cell);
-    const handleClickDelete = (cell) => console.log("delete", cell);
+    const handleClickEdit = (item) => console.log("edit", item);
+    const handleClickDelete = (item) => console.log("delete", item);
     const __returned__ = { handleClickEdit, handleClickDelete, get VueScreener() {
       return VueScreener;
     }, get baseData() {
@@ -16,7 +16,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return primitivesData;
     }, get mixedObjectsData() {
       return mixedObjectsData;
-    }, HeaderCell, ValueCell };
+    }, Head, Data };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -35,9 +35,23 @@ const _hoisted_2 = /* @__PURE__ */ createBaseVNode(
   -1
   /* HOISTED */
 );
-const _hoisted_3 = { style: { display: "flex", gap: "4px" } };
-const _hoisted_4 = ["onClick"];
-const _hoisted_5 = ["onClick"];
+const _hoisted_3 = /* @__PURE__ */ createBaseVNode(
+  "br",
+  null,
+  null,
+  -1
+  /* HOISTED */
+);
+const _hoisted_4 = /* @__PURE__ */ createBaseVNode(
+  "br",
+  null,
+  null,
+  -1
+  /* HOISTED */
+);
+const _hoisted_5 = { style: { display: "flex", gap: "4px" } };
+const _hoisted_6 = ["onClick"];
+const _hoisted_7 = ["onClick"];
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Variant = resolveComponent("Variant");
   const _component_Story = resolveComponent("Story");
@@ -90,18 +104,89 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
       }),
       createVNode(_component_Variant, {
-        title: "Sticky Actions",
+        title: "Control labels",
         width: "100"
       }, {
         default: withCtx(() => [
           createVNode($setup["VueScreener"], {
             data: $setup.baseData,
-            "include-sticky-actions": ""
+            columns: {
+              id: { field: "id", label: "ID" },
+              first_name: { field: "first_name", label: "First name" },
+              last_name: { field: "last_name", label: "Last name" },
+              full_name: { field: "full_name", label: "Full name" },
+              email: { field: "email", label: "Email" },
+              gender: { field: "gender", label: "Gender" },
+              ip_address: { field: "ip_address", label: "IP address" }
+            }
+          }, null, 8, ["data"]),
+          _hoisted_3,
+          createVNode($setup["VueScreener"], {
+            data: $setup.primitivesData,
+            columns: {
+              0: { field: 0, label: "ID" },
+              1: { field: 1, label: "First name" },
+              2: { field: 2, label: "Last name" },
+              3: { field: 3, label: "Email" },
+              4: { field: 4, label: "Gender" },
+              5: { field: 5, label: "IP address" }
+            }
+          }, null, 8, ["data"]),
+          _hoisted_4,
+          createVNode($setup["VueScreener"], {
+            data: $setup.mixedObjectsData,
+            pick: ["id", "name", "address", "country", "flag_colours"],
+            columns: {
+              id: { field: "id", label: "ID" },
+              name: { field: "name", label: "Name" },
+              address: { field: "address", label: "Address" },
+              country: { field: "country", label: "Country" },
+              flag_colours: { field: "flag_colours", label: "Flag colours" }
+            }
+          }, null, 8, ["data"])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      createVNode(_component_Variant, {
+        title: "Extra columns",
+        width: "100"
+      }, {
+        default: withCtx(() => [
+          createVNode($setup["VueScreener"], {
+            data: $setup.baseData,
+            pick: ["id", "first_name", "last_name", "full_name", "email", "gender", "ip_address", "extra_column"],
+            columns: {
+              id: { field: "id", width: "50px" },
+              first_name: { field: "first_name", width: "150px" },
+              last_name: { field: "last_name", width: "150px" },
+              full_name: { field: "full_name", width: "150px" },
+              email: { field: "email", width: "200px" },
+              gender: { field: "gender", width: "100px" },
+              ip_address: { field: "ip_address", width: "minmax(150px, 1fr)" },
+              extra_column: { width: "100px" }
+            }
+          }, null, 8, ["data"])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      createVNode(_component_Variant, {
+        title: "Pin to the side",
+        width: "100"
+      }, {
+        default: withCtx(() => [
+          createVNode($setup["VueScreener"], {
+            data: $setup.baseData,
+            pick: ["id", "first_name", "last_name", "full_name", "email", "gender", "ip_address", "actions"],
+            columns: {
+              actions: { field: "actions", isPinned: true }
+            }
           }, {
-            "sticky-actions-head": withCtx((props) => [
-              createVNode(
-                $setup["HeaderCell"],
-                normalizeProps(guardReactiveProps(props)),
+            head: withCtx((props) => [
+              props.column.isPinned ? (openBlock(), createBlock(
+                $setup["Head"],
+                normalizeProps(mergeProps({ key: 0 }, props)),
                 {
                   default: withCtx(() => [
                     createTextVNode("Actions")
@@ -111,21 +196,21 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 },
                 1040
                 /* FULL_PROPS, DYNAMIC_SLOTS */
-              )
+              )) : createCommentVNode("v-if", true)
             ]),
-            "sticky-actions-value": withCtx((props) => [
-              createVNode(
-                $setup["ValueCell"],
-                normalizeProps(guardReactiveProps(props)),
+            data: withCtx((props) => [
+              props.column.isPinned ? (openBlock(), createBlock(
+                $setup["Data"],
+                normalizeProps(mergeProps({ key: 0 }, props)),
                 {
                   default: withCtx(() => [
-                    createBaseVNode("div", _hoisted_3, [
+                    createBaseVNode("div", _hoisted_5, [
                       createBaseVNode("button", {
-                        onClick: ($event) => $setup.handleClickEdit(props.cell)
-                      }, "Edit", 8, _hoisted_4),
+                        onClick: ($event) => $setup.handleClickEdit(props.item)
+                      }, "Edit", 8, _hoisted_6),
                       createBaseVNode("button", {
-                        onClick: ($event) => $setup.handleClickDelete(props.cell)
-                      }, "Delete", 8, _hoisted_5)
+                        onClick: ($event) => $setup.handleClickDelete(props.column)
+                      }, "Delete", 8, _hoisted_7)
                     ])
                   ]),
                   _: 2
@@ -133,7 +218,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 },
                 1040
                 /* FULL_PROPS, DYNAMIC_SLOTS */
-              )
+              )) : createCommentVNode("v-if", true)
             ]),
             _: 1
             /* STABLE */

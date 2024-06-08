@@ -1,14 +1,14 @@
-import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode, aA as mergeProps, az as createBaseVNode, ay as createTextVNode } from "./vendor-ZCGMzaIs.js";
-import { _ as _export_sfc, H as HeaderCell, a as ValueCell, V as VueScreener } from "./VueScreener-jzm78S1M.js";
+import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode, ax as mergeProps, aA as createBaseVNode, ay as createTextVNode } from "./vendor-DC0MkHh5.js";
+import { _ as _export_sfc, H as Head, D as Data, V as VueScreener } from "./VueScreener-DSaeHHIm.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "3-custom-cells.story",
   setup(__props, { expose: __expose }) {
     __expose();
-    const __returned__ = { get HeaderCell() {
-      return HeaderCell;
-    }, get ValueCell() {
-      return ValueCell;
+    const __returned__ = { get Head() {
+      return Head;
+    }, get Data() {
+      return Data;
     }, get VueScreener() {
       return VueScreener;
     }, get baseData() {
@@ -28,14 +28,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       createVNode(_component_Variant, { title: "default" }, {
         default: withCtx(() => [
           createVNode($setup["VueScreener"], { data: $setup.baseData }, {
-            "header-cell": withCtx((props) => [
+            head: withCtx((props) => [
               createVNode(
-                $setup["HeaderCell"],
+                $setup["Head"],
                 mergeProps(props, { style: { background: "red" } }),
                 {
                   default: withCtx(() => [
                     createBaseVNode("span", {
-                      innerHTML: props.cell.value
+                      innerHTML: props.column.label
                     }, null, 8, _hoisted_1),
                     createTextVNode(" [stuff] ")
                   ]),
@@ -46,14 +46,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 /* FULL_PROPS, DYNAMIC_SLOTS */
               )
             ]),
-            "value-cell": withCtx((props) => [
+            data: withCtx((props) => [
               createVNode(
-                $setup["ValueCell"],
+                $setup["Data"],
                 mergeProps(props, { style: { background: "blue" } }),
                 {
                   default: withCtx(() => [
                     createBaseVNode("span", {
-                      innerHTML: props.highlight(String(props.cell.value), props.highlightValue)
+                      innerHTML: props.highlight(String(props.item.fields[props.column.field].value), props.highlightValue)
                     }, null, 8, _hoisted_2),
                     createTextVNode(" [stuff] ")
                   ]),

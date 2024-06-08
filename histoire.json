@@ -61,18 +61,26 @@
         },
         {
           "id": "src-stories-2-configure-columns-story-vue-1",
-          "title": "Sticky Actions"
+          "title": "Control labels"
         },
         {
           "id": "src-stories-2-configure-columns-story-vue-2",
-          "title": "Pick fields"
+          "title": "Extra columns"
         },
         {
           "id": "src-stories-2-configure-columns-story-vue-3",
-          "title": "Omit fields"
+          "title": "Pin to the side"
         },
         {
           "id": "src-stories-2-configure-columns-story-vue-4",
+          "title": "Pick fields"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-5",
+          "title": "Omit fields"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-6",
           "title": "Pick + omit fields"
         }
       ],
