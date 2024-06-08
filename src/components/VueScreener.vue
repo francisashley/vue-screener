@@ -2,9 +2,7 @@
   <section class="vs-vue-screener">
     <template v-if="isValidInput">
       <header class="vs-header" v-if="includeHeader">
-        <div class="vs-title">
-          {{ props.title }}
-        </div>
+        <div class="vs-title" v-text="props.title" />
         <ScreenerSearch :screener="screener" :is-valid-query="isRegExFriendlySearchQuery" class="vs-search" />
         <Settings :screener="screener" @change-search-options="onChangeSearchOptions" />
       </header>
