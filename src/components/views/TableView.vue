@@ -7,13 +7,13 @@
         :name="cell.isStickyAction ? 'sticky-actions-head' : 'header-cell'"
         :cell="cell"
         :sort-direction="getSortDirection(cell.field)"
-        @on-sort="emit('on-sort', $event)"
+        @on-sort="screener.actions.sort"
       >
         <HeaderCell
           :cell="cell"
           :sort-direction="getSortDirection(cell.field)"
           :is-sortable="!cell.isStickyAction"
-          @on-sort="emit('on-sort', $event)"
+          @on-sort="screener.actions.sort"
         />
       </slot>
     </div>
@@ -50,8 +50,6 @@ const props = defineProps<{
   rows: NormalisedRow[]
   includeStickyActions?: boolean
 }>()
-
-const emit = defineEmits(['on-sort'])
 
 const getFields = computed(() => {
   const fields: Cell[] = props.fields.map((field, i) => {

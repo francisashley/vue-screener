@@ -117,6 +117,12 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
           searchOptions.value = options
         }
       },
+      sort: (field: string) => {
+        if (sortField.value === field) {
+          sortDirection.value = sortDirection.value === 'desc' ? 'asc' : 'desc'
+        }
+        sortField.value = field
+      },
     },
   }
 }

@@ -22,5 +22,6 @@ export type Screener = {
   totalItems: ComputedRef<number>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
+    sort: (field: string) => void
   }
 }

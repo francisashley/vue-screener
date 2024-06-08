@@ -17,7 +17,6 @@
           :fields="getFields"
           :rows="screener.paginatedData.value"
           :include-sticky-actions="includeStickyActions"
-          @on-sort="handleSort"
         >
           <template #header-cell="cellProps">
             <slot name="header-cell" v-bind="cellProps" />
@@ -108,13 +107,6 @@ const getFields = computed((): string[] => {
 const hasData = computed((): boolean => {
   return screener.paginatedData.value.filter((row) => row !== null).length > 0
 })
-
-const handleSort = (updatedSortField: string) => {
-  if (screener.sortField.value === updatedSortField) {
-    screener.sortDirection.value = screener.sortDirection.value === 'desc' ? 'asc' : 'desc'
-  }
-  screener.sortField.value = updatedSortField
-}
 </script>
 
 <style lang="scss">
