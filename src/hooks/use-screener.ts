@@ -12,6 +12,7 @@ import {
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
+import { getFields } from '../utils/data.utils'
 
 type ScreenerOptions = {
   title?: string
@@ -104,6 +105,14 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return !isValidInput(data.value)
   })
 
+  const fields = computed((): string[] => {
+    return getFields(normalisedData.value)
+  })
+
+  const hasData = computed((): boolean => {
+    return paginatedData.value.filter((row) => row !== null).length > 0
+  })
+
   return {
     title,
     includeStickyActions,
@@ -126,6 +135,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     paginatedData,
     totalItems: computed(() => searchedData.value.length),
     hasError,
+    fields,
+    hasData,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query

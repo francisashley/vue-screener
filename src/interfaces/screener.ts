@@ -31,6 +31,8 @@ export type Screener = {
   paginatedData: ComputedRef<NormalisedRow[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
+  fields: ComputedRef<string[]>
+  hasData: ComputedRef<boolean>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void

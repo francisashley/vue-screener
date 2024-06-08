@@ -38,7 +38,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { highlightText } from '../../utils/text.utils'
-import { NormalisedRow } from '../../utils/data.utils'
 import HeaderCell from './TableViewHeaderCell.vue'
 import ValueCell from './TableViewValueCell.vue'
 import { Cell } from './TableViewCell.vue'
@@ -46,24 +45,21 @@ import { Screener } from '@/interfaces/screener'
 
 const props = defineProps<{
   screener: Screener
-  fields: string[]
-  rows: NormalisedRow[]
-  includeStickyActions?: boolean
 }>()
 
 const getFields = computed(() => {
-  const fields: Cell[] = props.fields.map((field, i) => {
+  const fields: Cell[] = props.screener.fields.value.map((field, i) => {
     return {
       field,
       value: field,
       highlightedValue: '',
       isFirst: i === 0,
-      isLast: i === props.fields.length - 1,
+      isLast: i === props.screener.fields.value.length - 1,
       type: 'string',
     }
   })
 
-  if (props.includeStickyActions) {
+  if (props.screener.includeStickyActions.value) {
     fields.push({
       field: '',
       value: '',
@@ -78,7 +74,7 @@ const getFields = computed(() => {
 })
 
 const getRows = computed(() => {
-  return props.rows.map((row) => {
+  return props.screener.paginatedData.value.map((row) => {
     const cells: Cell[] = row?.map((col, i) => {
       return {
         field: col.key,
@@ -93,7 +89,7 @@ const getRows = computed(() => {
       }
     })
 
-    if (props.includeStickyActions && row) {
+    if (props.screener.includeStickyActions.value && row) {
       cells.push({
         field: '',
         value: '',
@@ -110,14 +106,14 @@ const getRows = computed(() => {
 })
 
 const tableStyle = computed(() => {
-  let cols = props.fields.reduce((acc, field) => {
+  let cols = props.screener.fields.value.reduce((acc, field) => {
     const column = props.screener.columns.value[field as any]
     let width = column?.width ?? '1fr'
     if (!isNaN(Number(width))) width = width + 'px'
     return acc + ' ' + width
   }, '')
 
-  if (props.includeStickyActions) cols += ' min-content'
+  if (props.screener.includeStickyActions.value) cols += ' min-content'
 
   return {
     display: 'grid',
@@ -126,9 +122,9 @@ const tableStyle = computed(() => {
 })
 
 const rowStyle = computed(() => {
-  let colCount = props.fields.length
+  let colCount = props.screener.fields.value.length
 
-  if (props.includeStickyActions) colCount++
+  if (props.screener.includeStickyActions.value) colCount++
 
   return {
     display: 'grid',

@@ -2,16 +2,26 @@
   <section class="vs-app">
     <ScreenerHeader v-if="!screener.hasError.value && includeHeader" :screener="screener" />
     <ScreenerMain :screener="screener">
-      <template #header-cell="cellProps">
-        <slot name="header-cell" v-bind="cellProps" />
-      </template>
-      <template #value-cell="cellProps">
-        <slot name="value-cell" v-bind="cellProps" />
-      </template>
-      <template #sticky-actions-head="cellProps">
-        <slot name="sticky-actions-head" v-bind="cellProps" />
-      </template>
-      <template #sticky-actions-value="cellProps"> <slot name="sticky-actions-value" v-bind="cellProps" /> </template>
+      <ErrorMessage
+        v-if="screener.hasError.value"
+        message="Invalid data was provided. Please provide an array of objects or an array of arrays."
+      />
+      <NoDataView v-else-if="!screener.hasData.value" />
+      <JsonView v-else-if="screener.renderFormat.value === 'raw'" :data="screener.paginatedData.value" />
+      <TableView v-else :screener="screener">
+        <template #header-cell="cellProps">
+          <slot name="header-cell" v-bind="cellProps" />
+        </template>
+        <template #value-cell="cellProps">
+          <slot name="value-cell" v-bind="cellProps" />
+        </template>
+        <template #sticky-actions-head="cellProps">
+          <slot name="sticky-actions-head" v-bind="cellProps" />
+        </template>
+        <template #sticky-actions-value="cellProps">
+          <slot name="sticky-actions-value" v-bind="cellProps" />
+        </template>
+      </TableView>
     </ScreenerMain>
     <ScreenerFooter v-if="!screener.hasError.value" :screener="screener" />
   </section>
@@ -21,6 +31,10 @@
 import ScreenerHeader from './ScreenerHeader.vue'
 import ScreenerMain from './ScreenerMain.vue'
 import ScreenerFooter from './ScreenerFooter.vue'
+import JsonView from './views/JsonView.vue'
+import TableView from './views/TableView.vue'
+import NoDataView from './views/NoDataView.vue'
+import ErrorMessage from './stuff/ErrorMessage.vue'
 import { useScreener } from '../hooks/use-screener'
 import { Columns } from '@/interfaces/screener'
 
