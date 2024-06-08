@@ -17,10 +17,6 @@ export type Screener = {
   shouldMatchWord: ComputedRef<boolean>
   columns: Ref<Columns>
   data: Ref<unknown[]>
-  normalisedData: ComputedRef<NormalisedRow[]>
-  searchedData: ComputedRef<NormalisedRow[]>
-  sortedData: ComputedRef<NormalisedRow[]>
-  paginatedData: ComputedRef<NormalisedRow[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>

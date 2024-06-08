@@ -7,7 +7,7 @@
         message="Invalid data was provided. Please provide an array of objects or an array of arrays."
       />
       <NoDataView v-else-if="!screener.hasData.value" />
-      <JsonView v-else-if="screener.renderFormat.value === 'raw'" :data="screener.paginatedData.value" />
+      <JsonView v-else-if="screener.renderFormat.value === 'raw'" :data="screener.data.value" />
       <Table v-else :screener="screener">
         <template #head="headProps">
           <slot name="head" v-bind="headProps" />
