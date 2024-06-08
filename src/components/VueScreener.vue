@@ -47,8 +47,6 @@ type Props = {
   perPage?: number
   // The current page number in the table
   currentPage?: number
-  // A flag to determine if an extra pinned column should be displayed on the right
-  includePinned?: boolean
   // A flag to toggle the visibility of the header
   includeHeader?: boolean
 }
@@ -61,13 +59,11 @@ const {
   omit = [],
   perPage = 15,
   currentPage = 1,
-  includePinned = false,
   includeHeader = true,
 } = defineProps<Props>()
 
 const screener = useScreener({
   title,
-  includePinned,
   defaultCurrentPage: currentPage,
   defaultPerPage: perPage,
   defaultData: data,

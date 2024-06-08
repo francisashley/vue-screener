@@ -8,7 +8,6 @@ import { highlightText } from '../utils/text.utils'
 
 type ScreenerOptions = {
   title?: string
-  includePinned?: boolean
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultData?: unknown[]
@@ -19,7 +18,6 @@ type ScreenerOptions = {
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
   // State
   const title = ref<string>('Results')
-  const includePinned = ref<boolean>(false)
   const searchQuery = ref<string>('')
   const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
@@ -34,7 +32,6 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   // Set default state
   title.value = options.title ?? title.value
   inputColumns.value = options.inputColumns ?? inputColumns.value
-  includePinned.value = options.includePinned ?? includePinned.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
   data.value = options.defaultData ?? data.value
@@ -48,27 +45,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const normalisedData = computed((): Item[] => {
-    let normalisedData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
-
-    if (includePinned.value) {
-      normalisedData = normalisedData.map((item) => {
-        return {
-          ...item,
-          fields: {
-            ...item.fields,
-            pinned: {
-              field: 'pinned',
-              type: 'string',
-              value: '',
-              htmlValue: '',
-              hasValue: false,
-            },
-          },
-        }
-      })
-    }
-
-    return normalisedData
+    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
   })
 
   const searchedData = computed((): Item[] => {
@@ -146,8 +123,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
         label: field,
         isFirst: i === 0,
         isLast: i === fields.length - 1,
-        isPinned: field === 'pinned',
-        isSortable: field !== 'pinned',
+        isPinned: false,
+        isSortable: true,
         ...inputColumn,
         width,
       }
@@ -166,7 +143,6 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
 
   return {
     title,
-    includePinned,
     searchQuery,
     highlightQuery,
     currentPage,

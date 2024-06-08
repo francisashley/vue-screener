@@ -56,7 +56,13 @@
       />
     </Variant>
     <Variant title="Pin to the side" width="100">
-      <VueScreener :data="baseData" include-pinned>
+      <VueScreener
+        :data="baseData"
+        :pick="['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'actions']"
+        :columns="{
+          actions: { field: 'actions', isPinned: true },
+        }"
+      >
         <template #head="props">
           <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
         </template>

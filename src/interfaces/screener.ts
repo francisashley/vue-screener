@@ -3,7 +3,6 @@ import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
   title: Ref<string>
-  includePinned: Ref<boolean>
   searchQuery: Ref<string>
   highlightQuery: Ref<string>
   currentPage: Ref<number>
@@ -37,7 +36,7 @@ export type Column = {
   isSortable: boolean // Flag indicating if the field is sortable. TODO: is this needed?
 }
 
-export type InputColumn = Partial<Pick<Column, 'field' | 'width'>>
+export type InputColumn = Partial<Pick<Column, 'field' | 'width' | 'isPinned'>>
 export type InputColumns = Record<string | number, InputColumn>
 
 export type Item = {

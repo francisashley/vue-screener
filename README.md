@@ -77,14 +77,23 @@ Add a pinned column on the right to put stuff in.
 
 ```vue
 <template>
-  <VueScreener :data="data" include-actions>
+  <VueScreener
+    :columns="[
+      { category: 'Technology', product: 'Laptop', price: '£799', inStock: true },
+      { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true }
+    ]"
+    :columns="{
+      action: { field: 'action', isPinned: true }
+    }"
+    :pick=""
+  >
     <template #head="props">
       <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
     </template>
     <template #data="props">
-      <Data v-bind="props">
-        <button @click="handleClickEdit(props.cell)">Edit</button>
-        <button @click="handleClickDelete(props.cell)">Delete</button>
+      <Data v-if="props.column.field === 'action'" v-bind="props">
+        <button @click="handleClickEdit(props.item)">Edit</button>
+        <button @click="handleClickDelete(props.item)">Delete</button>
       </Data>
     </template>
   </VueScreener>

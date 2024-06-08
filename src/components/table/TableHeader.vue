@@ -23,9 +23,7 @@ const props = defineProps<{
 }>()
 
 const rowStyle = computed(() => {
-  let colCount = props.screener.columns.value.length
-
-  if (props.screener.includePinned.value) colCount++
+  const colCount = props.screener.columns.value.length
 
   return {
     display: 'grid',
