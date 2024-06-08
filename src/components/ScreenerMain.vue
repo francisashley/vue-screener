@@ -4,8 +4,13 @@
     :class="{ 'vs-main--is-scrollable': isScrollable, 'vs-main--is-scrolled-end': isScrolledEnd }"
     ref="mainRef"
   >
+    <ErrorMessage
+      v-if="hasError"
+      message="Invalid data was provided. Please provide an array of objects or an array of arrays."
+      class="vs-error-message"
+    />
     <TableView
-      v-if="hasData && screener.renderFormat.value === 'table'"
+      v-else-if="hasData && screener.renderFormat.value === 'table'"
       :screener="screener"
       :fields="getFields"
       :rows="screener.paginatedData.value"
@@ -37,10 +42,12 @@ import { getFields as getFieldsTool } from '../utils/data.utils'
 import { computed } from 'vue'
 import { useScrollable } from '../hooks/use-scrollable'
 import { Screener } from '@/interfaces/screener'
+import ErrorMessage from './stuff/ErrorMessage.vue'
 
 type Props = {
   screener: Screener
   includeStickyActions?: boolean
+  hasError?: boolean
 }
 
 const props = defineProps<Props>()

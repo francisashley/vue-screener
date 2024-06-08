@@ -1,26 +1,19 @@
 <template>
   <section class="vs-app">
-    <template v-if="isValidInput">
-      <ScreenerHeader v-if="includeHeader" :title="title" :screener="screener" />
-      <ScreenerMain :screener="screener" :include-sticky-actions="includeStickyActions">
-        <template #header-cell="cellProps">
-          <slot name="header-cell" v-bind="cellProps" />
-        </template>
-        <template #value-cell="cellProps">
-          <slot name="value-cell" v-bind="cellProps" />
-        </template>
-        <template #sticky-actions-head="cellProps">
-          <slot name="sticky-actions-head" v-bind="cellProps" />
-        </template>
-        <template #sticky-actions-value="cellProps"> <slot name="sticky-actions-value" v-bind="cellProps" /> </template>
-      </ScreenerMain>
-      <ScreenerFooter :screener="screener" />
-    </template>
-    <ErrorMessage
-      v-else
-      message="Invalid data was provided. Please provide an array of objects or an array of arrays."
-      class="vs-error-message"
-    />
+    <ScreenerHeader v-if="!hasError && includeHeader" :title="title" :screener="screener" />
+    <ScreenerMain :screener="screener" :include-sticky-actions="includeStickyActions" :has-error="hasError">
+      <template #header-cell="cellProps">
+        <slot name="header-cell" v-bind="cellProps" />
+      </template>
+      <template #value-cell="cellProps">
+        <slot name="value-cell" v-bind="cellProps" />
+      </template>
+      <template #sticky-actions-head="cellProps">
+        <slot name="sticky-actions-head" v-bind="cellProps" />
+      </template>
+      <template #sticky-actions-value="cellProps"> <slot name="sticky-actions-value" v-bind="cellProps" /> </template>
+    </ScreenerMain>
+    <ScreenerFooter v-if="!hasError" :screener="screener" />
   </section>
 </template>
 
@@ -28,7 +21,6 @@
 import ScreenerHeader from './ScreenerHeader.vue'
 import ScreenerMain from './ScreenerMain.vue'
 import ScreenerFooter from './ScreenerFooter.vue'
-import ErrorMessage from './stuff/ErrorMessage.vue'
 import { isValidInput as isValidInputTool } from '../utils/data.utils'
 import { computed } from 'vue'
 import { useScreener } from '../hooks/use-screener'
@@ -63,8 +55,8 @@ const screener = useScreener({
   omit: props.omit,
 })
 
-const isValidInput = computed((): boolean => {
-  return isValidInputTool(screener.data.value)
+const hasError = computed((): boolean => {
+  return !isValidInputTool(screener.data.value)
 })
 </script>
 
