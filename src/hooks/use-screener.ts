@@ -136,13 +136,14 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
 
   const neueColumns = computed<NeueColumn[]>(() => {
     const fields = getFields(neueData.value)
-    if (includePinned.value) fields.push('pinned')
 
-    let columns = fields.map((field, i) => {
+    let _columns = fields.map((field, i) => {
+      let width = columns.value[field]?.width ?? '1fr'
+      if (!isNaN(Number(width))) width = width + 'px'
       return {
         field: field,
         label: field,
-        width: '1fr',
+        width: width,
         isFirst: i === 0,
         isLast: i === fields.length - 1,
         isPinned: field === 'pinned',
@@ -151,14 +152,14 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
 
     if (options.pick && options.pick.length > 0) {
-      columns = pickColumns(columns, options.pick)
+      _columns = pickColumns(_columns, options.pick)
     }
 
     if (options.omit && options.omit.length > 0) {
-      columns = omitColumns(columns, options.omit)
+      _columns = omitColumns(_columns, options.omit)
     }
 
-    return columns
+    return _columns
   })
 
   return {
