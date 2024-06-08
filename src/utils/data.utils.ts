@@ -1,4 +1,4 @@
-import { DataType, NeueColumn, NeueField, NeueItem, UnknownObject } from '@/interfaces/screener'
+import { DataType, Column, Field, Item, UnknownObject } from '@/interfaces/screener'
 
 /**
  * Checks if data is an array of arrays or objects.
@@ -13,14 +13,14 @@ export function isValidInput(data: unknown): boolean {
 /**
  * Transforms input data into a consistent format.
  * @param {UnknownObject[]} data - The input data.
- * @returns {NeueItem[]} The normalised data.
+ * @returns {Item[]} The normalised data.
  */
-export function normaliseInput(data: UnknownObject[]): NeueItem[] {
+export function normaliseInput(data: UnknownObject[]): Item[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
-  const normaliseFieldNeue = (field: string, value: unknown): NeueField => ({
+  const normaliseFieldNeue = (field: string, value: unknown): Field => ({
     field,
     type: getTypeOf(value),
     value: value as any,
@@ -29,8 +29,8 @@ export function normaliseInput(data: UnknownObject[]): NeueItem[] {
   })
 
   // Normalise each item into an array of normalised fields.
-  const normalisedData = transformedData.map((item: UnknownObject): NeueItem => {
-    const fields: Record<string, NeueField> = {}
+  const normalisedData = transformedData.map((item: UnknownObject): Item => {
+    const fields: Record<string, Field> = {}
     Object.keys(item).forEach((key) => {
       fields[key] = normaliseFieldNeue(key, item[key])
     })
@@ -52,31 +52,31 @@ export function normaliseInput(data: UnknownObject[]): NeueItem[] {
 
 /**
  * Picks specified fields from normalised columns.
- * @param {NeueColumn[]} columns - The columns.
+ * @param {Column[]} columns - The columns.
  * @param {string[]} pickColumns - Fields to pick.
- * @returns {NeueColumn[]} Rows with picked fields.
+ * @returns {Column[]} Rows with picked fields.
  */
-export function pickColumns(columns: NeueColumn[], pickColumns: string[]): NeueColumn[] {
+export function pickColumns(columns: Column[], pickColumns: string[]): Column[] {
   return columns.filter((column) => pickColumns.includes(column.field))
 }
 
 /**
  * Omits specified fields from normalised columns.
- * @param {NeueColumn[]} columns - The columns.
+ * @param {Column[]} columns - The columns.
  * @param {string[]} omitColumns - Fields to omit.
- * @returns {NeueColumn[]} Rows without omitted fields.
+ * @returns {Column[]} Rows without omitted fields.
  */
-export function omitColumns(columns: NeueColumn[], omitColumns: string[]): NeueColumn[] {
+export function omitColumns(columns: Column[], omitColumns: string[]): Column[] {
   const omitFieldsSet = new Set(omitColumns)
   return columns.filter((column) => !omitFieldsSet.has(column.field))
 }
 
 /**
  * Extracts unique field keys from normalised items.
- * @param {NeueItem[]} items - The normalised items.
+ * @param {Item[]} items - The normalised items.
  * @returns {string[]} Unique field keys.
  */
-export function getFields(items: NeueItem[]): string[] {
+export function getFields(items: Item[]): string[] {
   const fields = new Set<string>(items.flatMap((item) => Object.values(item.fields).map((field) => field.field)))
   return Array.from(fields)
 }
@@ -84,7 +84,7 @@ export function getFields(items: NeueItem[]): string[] {
 /**
  * Returns a paginated subset of normalised items.
  * @param {Object} options - The options for pagination.
- * @returns {NeueItem[]} Paginated items.
+ * @returns {Item[]} Paginated items.
  */
 export function getPaginated({
   items = [],
@@ -92,11 +92,11 @@ export function getPaginated({
   perPage = 25,
   withPlaceholders = false,
 }: {
-  items: NeueItem[]
+  items: Item[]
   page: number
   perPage: number
   withPlaceholders: boolean
-}): NeueItem[] {
+}): Item[] {
   const start = perPage * page
   const end = start + perPage
 

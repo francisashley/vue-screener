@@ -19,17 +19,15 @@ export type Screener = {
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>
-  neueColumns: ComputedRef<NeueColumn[]>
-  items: ComputedRef<(NeueItem | null)[]>
+  neueColumns: ComputedRef<Column[]>
+  items: ComputedRef<(Item | null)[]>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void
   }
 }
 
-//////////// New types ////////////
-
-export type NeueColumn = {
+export type Column = {
   field: string // The unique identifier for the column. This must match a field in the data for values to show.
   label: string // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
@@ -39,23 +37,21 @@ export type NeueColumn = {
   isSortable: boolean // Flag indicating if the field is sortable. TODO: is this needed?
 }
 
-export type InputColumn = Partial<Pick<NeueColumn, 'field' | 'width'>>
+export type InputColumn = Partial<Pick<Column, 'field' | 'width'>>
 export type InputColumns = Record<string, InputColumn>
 
-export type NeueItem = {
+export type Item = {
   data: unknown // The original data for the item.
-  fields: Record<string, NeueField> // The processed data for each field in the item, used for rendering.
+  fields: Record<string, Field> // The processed data for each field in the item, used for rendering.
 }
 
-export type NeueField = {
+export type Field = {
   field: string // The field name.
   type: DataType // Data type of the value.
   value?: number | string | null // Value of the field.
   htmlValue: string // HTML representation of the value, used for rendering.
   hasValue: boolean // Flag indicating if the field has a value.
 }
-
-//////////// End New types ////////
 
 export interface UnknownObject {
   [key: string | number]: unknown

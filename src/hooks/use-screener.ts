@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { InputColumns, NeueColumn, NeueItem, Screener, UnknownObject } from '@/interfaces/screener'
+import { InputColumns, Column, Item, Screener, UnknownObject } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -47,7 +47,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return !isValidInput(data.value)
   })
 
-  const neueData = computed((): NeueItem[] => {
+  const neueData = computed((): Item[] => {
     let neueData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
 
     if (includePinned.value) {
@@ -71,7 +71,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return neueData
   })
 
-  const neueSearchedData = computed((): NeueItem[] => {
+  const neueSearchedData = computed((): Item[] => {
     return search({
       items: neueData.value,
       searchQuery: searchQuery.value,
@@ -81,7 +81,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
   })
 
-  const sortedDataNeue = computed((): NeueItem[] => {
+  const sortedDataNeue = computed((): Item[] => {
     const sortedItems = searchQuery.value ? neueSearchedData.value : neueData.value
 
     if (sortField.value && sortDirection.value) {
@@ -94,7 +94,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
       )
 
       return [
-        ...orderBy(nonNullItems, [(item: NeueItem | null) => item.data[sortField.value]], [sortDirection.value]),
+        ...orderBy(nonNullItems, [(item: Item | null) => item.data[sortField.value]], [sortDirection.value]),
         ...nullItems,
       ]
     } else {
@@ -102,7 +102,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     }
   })
 
-  const paginatedDataNeue = computed((): NeueItem[] => {
+  const paginatedDataNeue = computed((): Item[] => {
     return getPaginated({
       items: sortedDataNeue.value,
       page: currentPage.value - 1,
@@ -134,7 +134,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
   })
 
-  const neueColumns = computed<NeueColumn[]>(() => {
+  const neueColumns = computed<Column[]>(() => {
     const fields = getFields(neueData.value)
 
     let _columns = fields.map((field, i) => {

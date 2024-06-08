@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-import { NeueColumn, NeueItem } from '@/interfaces/screener'
+import { Column, Item } from '@/interfaces/screener'
 import TableCell from './TableCell.vue'
 
-defineProps<{ column: NeueColumn; item: NeueItem }>()
+defineProps<{ column: Column; item: Item }>()
 </script>

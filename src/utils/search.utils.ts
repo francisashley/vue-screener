@@ -1,4 +1,4 @@
-import { NeueField, NeueItem } from '@/interfaces/screener'
+import { Field, Item } from '@/interfaces/screener'
 import { escapeRegExp } from './regex.utils'
 
 /**
@@ -97,20 +97,20 @@ const parseSearchQuery = (searchQuery: string) => {
  * Search for items based on specified criteria.
  *
  * @param {Object} options - The search options.
- * @param {NeueItem[]} options.items - The data to search.
+ * @param {Item[]} options.items - The data to search.
  * @param {string} options.searchQuery - The search query string.
  * @param {boolean} options.useRegExp - Whether to use regular expressions for the search.
  * @param {boolean} options.matchCase - Whether to match the case.
  * @param {boolean} options.matchWord - Whether to match whole words.
- * @returns {NeueItem[]} - The matched data.
+ * @returns {Item[]} - The matched data.
  */
 export function search(options: {
-  items: NeueItem[]
+  items: Item[]
   searchQuery: string
   useRegExp: boolean
   matchCase: boolean
   matchWord: boolean
-}): NeueItem[] {
+}): Item[] {
   const { searchQuery = '' } = options
 
   if (!searchQuery) return options.items
@@ -122,7 +122,7 @@ export function search(options: {
   const { items, useRegExp = false, matchCase = false, matchWord = false } = options
 
   // Check if any of the filters match the item.
-  const testExcludeFilters = (filters: [string, string][], itemMap: Record<string, NeueField>): boolean => {
+  const testExcludeFilters = (filters: [string, string][], itemMap: Record<string, Field>): boolean => {
     return filters.some(([field, value]) => {
       if (itemMap[field]) {
         return testCriteria(itemMap[field].value as string, value, {
@@ -134,7 +134,7 @@ export function search(options: {
     })
   }
 
-  const testIncludeFilters = (filters: [string, string][], itemMap: Record<string, NeueField>): boolean => {
+  const testIncludeFilters = (filters: [string, string][], itemMap: Record<string, Field>): boolean => {
     return filters.every(([field, value]) => {
       if (itemMap[field]) {
         return testCriteria(itemMap[field].value as string, value, {
@@ -149,7 +149,7 @@ export function search(options: {
   // Filter the items.
   return items.filter((item): boolean => {
     // Create a map of the item fields for easy look up.
-    const itemMap: Record<string, NeueField> = item.fields
+    const itemMap: Record<string, Field> = item.fields
 
     let shouldExclude = false
     let shouldInclude = true

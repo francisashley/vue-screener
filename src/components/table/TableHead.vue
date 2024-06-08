@@ -21,12 +21,12 @@
 </template>
 
 <script lang="ts" setup>
-import { NeueColumn } from '@/interfaces/screener'
+import { Column } from '@/interfaces/screener'
 import SortSelector from '../stuff/SortSelector.vue'
 import TableCell from './TableCell.vue'
 
 const props = defineProps<{
-  column: NeueColumn
+  column: Column
   sortDirection?: null | 'asc' | 'desc'
 }>()
 
