@@ -1,10 +1,11 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { Columns, NeueColumn, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
+import { Cell, Columns, NeueColumn, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
 import { getPaginated, isValidInput, normaliseInput, omitFields, pickFields } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
 import { getFields } from '../utils/data.utils'
+import { highlightText } from '../utils/text.utils'
 
 type ScreenerOptions = {
   title?: string
@@ -130,6 +131,36 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
   ///
 
+  const rows = computed(() => {
+    return paginatedData.value.map((row) => {
+      const cells: Cell[] = row?.map((col, i) => {
+        return {
+          field: col.key,
+          value: col.hasValue ? col.value : '',
+          highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : '', highlightQuery.value) : '',
+          isFirst: i === 0,
+          isLast: i === row.length - 1,
+          type: col.type,
+          row,
+        }
+      })
+
+      if (includePinned.value && row) {
+        cells.push({
+          field: '',
+          value: '',
+          highlightedValue: '',
+          isLast: true,
+          isPinned: true,
+          type: 'string',
+          row,
+        })
+      }
+
+      return cells
+    })
+  })
+
   return {
     title,
     includePinned,
@@ -146,6 +177,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldMatchWord,
     columns,
     data,
+    rows,
     normalisedData,
     searchedData,
     sortedData,

@@ -25,6 +25,7 @@ export type Screener = {
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>
   neueColumns: ComputedRef<NeueColumn[]>
+  rows: ComputedRef<Cell[][]>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void
