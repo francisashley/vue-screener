@@ -39,7 +39,7 @@ export type Column = {
 export type ColumnConfig = Record<string | number, Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'label'>>>
 
 export type Item = {
-  data: unknown // The original data for the item.
+  data: Record<string | number, any> // The original data for the item.
   fields: Record<string, Field> // The processed data for each field in the item, used for rendering.
 }
 

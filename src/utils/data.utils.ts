@@ -56,7 +56,7 @@ export function normaliseInput(data: UnknownObject[]): Item[] {
  * @param {string[]} pickColumns - Fields to pick.
  * @returns {Column[]} Rows with picked fields.
  */
-export function pickColumns(columns: Column[], pickColumns: string[]): Column[] {
+export function pickColumns(columns: Column[], pickColumns: (string | number)[]): Column[] {
   return columns.filter((column) => pickColumns.includes(column.field))
 }
 
@@ -66,7 +66,7 @@ export function pickColumns(columns: Column[], pickColumns: string[]): Column[] 
  * @param {string[]} omitColumns - Fields to omit.
  * @returns {Column[]} Rows without omitted fields.
  */
-export function omitColumns(columns: Column[], omitColumns: string[]): Column[] {
+export function omitColumns(columns: Column[], omitColumns: (string | number)[]): Column[] {
   const omitFieldsSet = new Set(omitColumns)
   return columns.filter((column) => !omitFieldsSet.has(column.field))
 }

@@ -32,7 +32,7 @@ const rowStyle = computed(() => {
   }
 })
 
-const getSortDirection = (field: string): 'asc' | 'desc' | null => {
+const getSortDirection = (field: string | number): 'asc' | 'desc' | null => {
   if (props.screener.sortField.value === field) {
     return props.screener.sortDirection.value
   }

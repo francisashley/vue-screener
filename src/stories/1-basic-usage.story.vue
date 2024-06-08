@@ -13,7 +13,7 @@
       <VueScreener :data="[]" />
     </Variant>
     <Variant title="Bad data">
-      <VueScreener data="bad data" />
+      <VueScreener :data="badData" />
     </Variant>
     <Variant title="Custom title">
       <VueScreener title="Custom title" :data="baseData" />
@@ -29,4 +29,5 @@ import { VueScreener } from '../index'
 import baseData from '../fixtures/data.json'
 import primitivesData from '../fixtures/primitives-data.json'
 import mixedObjectsData from '../fixtures/mix-objects-data.json'
+const badData: any = 'bad data'
 </script>
