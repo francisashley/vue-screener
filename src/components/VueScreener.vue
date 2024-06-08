@@ -8,7 +8,7 @@
       </header>
       <main
         class="vs-main"
-        :class="{ 'vs-main--is-x-scrollable': isScrollable, 'vs-main--is-x-scrolled-end': isScrolledEnd }"
+        :class="{ 'vs-main--is-scrollable': isScrollable, 'vs-main--is-scrolled-end': isScrolledEnd }"
         ref="mainRef"
       >
         <TableView
