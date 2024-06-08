@@ -1,6 +1,6 @@
 <template>
   <TableCell
-    :value="item.fields[column.field].value"
+    :value="item.fields[column.field].htmlValue"
     :is-first="column.isFirst"
     :is-last="column.isLast"
     :has-value="item.fields[column.field].hasValue"

@@ -241,6 +241,25 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
   })
 
+  const preparedItems = computed(() => {
+    return paginatedDataNeue.value.map((item) => {
+      if (!item) return null
+      return {
+        ...item,
+        fields: Object.keys(item.fields).reduce((acc, key) => {
+          const field = item.fields[key]
+          return {
+            ...acc,
+            [key]: {
+              ...field,
+              htmlValue: highlightText(field.value ? String(field.value) : '', highlightQuery.value),
+            },
+          }
+        }, {}),
+      }
+    })
+  })
+
   return {
     title,
     includePinned,
@@ -266,7 +285,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     hasError,
     hasData,
     neueColumns,
-    items: paginatedDataNeue,
+    items: preparedItems,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query
