@@ -30,7 +30,7 @@
     "lint": "eslint src --ext .ts,.vue"
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "vue": "^3.4.27"
   },
   "devDependencies": {
     "@histoire/plugin-vue": "^0.17.17",
