@@ -1,5 +1,5 @@
+import { NormalisedField, NormalisedRow } from '@/interfaces/screener'
 import { escapeRegExp } from './regex.utils'
-import { NormalisedField, NormalisedRow } from './data.utils'
 
 /**
  * Check if a subject string meets the search criteria.

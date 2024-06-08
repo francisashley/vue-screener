@@ -1,14 +1,6 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { Columns, Screener } from '@/interfaces/screener'
-import {
-  NormalisedRow,
-  UnknownObject,
-  getPaginated,
-  isValidInput,
-  normaliseInput,
-  omitFields,
-  pickFields,
-} from '../utils/data.utils'
+import { Columns, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
+import { getPaginated, isValidInput, normaliseInput, omitFields, pickFields } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
@@ -25,6 +17,7 @@ type ScreenerOptions = {
   omit?: string[]
 }
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
+  // State
   const title = ref<string>('Results')
   const includePinned = ref<boolean>(false)
   const searchQuery = ref<string>('')
@@ -38,16 +31,13 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const data = ref<unknown[]>([])
   const columns = ref<Columns>({})
 
+  // Set default state
   title.value = options.title ?? title.value
   columns.value = options.columns ?? columns.value
   includePinned.value = options.includePinned ?? includePinned.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
   data.value = options.defaultData ?? data.value
-
-  const shouldUseRegEx = computed((): boolean => searchOptions.value.includes('use-regex'))
-  const shouldMatchCase = computed((): boolean => searchOptions.value.includes('match-case'))
-  const shouldMatchWord = computed((): boolean => searchOptions.value.includes('match-word'))
 
   const normalisedData = computed((): NormalisedRow[] => {
     let normalisedData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
@@ -62,6 +52,10 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
 
     return normalisedData
   })
+
+  const shouldUseRegEx = computed((): boolean => searchOptions.value.includes('use-regex'))
+  const shouldMatchCase = computed((): boolean => searchOptions.value.includes('match-case'))
+  const shouldMatchWord = computed((): boolean => searchOptions.value.includes('match-word'))
 
   const searchedData = computed((): NormalisedRow[] => {
     return search({

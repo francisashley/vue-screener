@@ -1,35 +1,21 @@
+import { DataType, NormalisedField, NormalisedRow, UnknownObject } from '@/interfaces/screener'
+
 export function isValidInput(data: unknown): boolean {
   const isObject = (val: unknown) => typeof val === 'object' && val !== null
   return Array.isArray(data) && data.every((row: unknown) => Array.isArray(row) || isObject(row))
 }
 
-export interface NormalisedField {
-  key: string
-  value: unknown
-  hasValue: boolean
-  type:
-    | 'string'
-    | 'number'
-    | 'boolean'
-    // | "bigint"
-    | 'array'
-    | 'object'
-    | 'null'
-    | 'undefined'
-    | 'symbol'
-}
-
-export type NormalisedRow = NormalisedField[]
-
-export interface UnknownObject {
-  [key: string | number]: unknown
-}
-
+/**
+ * Normalises the input data into a consistent format.
+ *
+ * @param {UnknownObject[]} data - The input data to be normalised. This can be an array of objects or an array of arrays.
+ * @returns {NormalisedRow[]} The normalised data. Each row is an array of objects, where each object represents a field with its key, value, type, and a flag indicating if it has a value.
+ */
 export function normaliseInput(data: UnknownObject[]): NormalisedRow[] {
-  // in the case that an array (data) of arrays (rows) has been provided [[],[],[]], convert to [{},{},{}]
-  data = data.map((row) => (Array.isArray(row) ? { ...row } : row))
+  // If the input data is an array of arrays, convert it to an array of objects.
+  const transformedData = data.map((row) => (Array.isArray(row) ? { ...row } : row))
 
-  // Normalise each field
+  // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
   const normaliseField = (field: string, value: unknown): NormalisedField => ({
     key: field,
     value,
@@ -37,19 +23,19 @@ export function normaliseInput(data: UnknownObject[]): NormalisedRow[] {
     hasValue: value !== null || value !== undefined,
   })
 
-  let normalisedData = data.map((row: UnknownObject): NormalisedRow => {
+  // Normalise each row into an array of normalised fields.
+  const normalisedData = transformedData.map((row: UnknownObject): NormalisedRow => {
     return Object.keys(row).map((key): NormalisedField => normaliseField(key, row[key]))
   })
 
-  // In the case that an array of objects has been passed in with different fields, ensure that all rows include all fields and in the same order.
+  // If the input data is an array of objects with different fields, ensure that all rows include all fields and in the same order.
   const fields = getFields(normalisedData)
-  normalisedData = normalisedData.map((row) => {
+  return normalisedData.map((row) => {
     return fields.map((field) => {
-      return row.find((_field: NormalisedField) => _field.key === field) || normaliseField(field, undefined)
+      const foundField = row.find((_field: NormalisedField) => _field.key === field)
+      return foundField || normaliseField(field, undefined)
     })
   })
-
-  return normalisedData
 }
 
 export function getFields(rows: NormalisedRow[]): string[] {
@@ -105,8 +91,6 @@ export function getPaginated(options: {
 
   return rows
 }
-
-export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'
 
 export function getTypeOf(value: unknown): DataType {
   if (typeof value === 'string') {

@@ -1,14 +1,5 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { NormalisedRow } from '@/utils/data.utils'
 import { ComputedRef, Ref } from 'vue'
-import { DataType } from '../utils/data.utils'
-
-export type Column = {
-  field: string
-  width: string // defaults to `1fr`
-}
-
-export type Columns = Record<string, Column>
 
 export type Screener = {
   title: Ref<string>
@@ -40,6 +31,13 @@ export type Screener = {
   }
 }
 
+export type Column = {
+  field: string
+  width: string // defaults to `1fr`
+}
+
+export type Columns = Record<string, Column>
+
 export type Cell = {
   field: string
   value: unknown
@@ -51,3 +49,18 @@ export type Cell = {
   isPinned?: boolean
   row?: unknown
 }
+
+export interface NormalisedField {
+  key: string
+  value: unknown
+  hasValue: boolean
+  type: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'null' | 'undefined' | 'symbol'
+}
+
+export type NormalisedRow = NormalisedField[]
+
+export interface UnknownObject {
+  [key: string | number]: unknown
+}
+
+export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'
