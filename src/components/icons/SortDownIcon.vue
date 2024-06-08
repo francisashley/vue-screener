@@ -7,7 +7,7 @@
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 320 512"
-    style="height: 0.75rem; width: 0.75rem"
+    style="height: 0.75rem"
   >
     <path
       fill="currentColor"
