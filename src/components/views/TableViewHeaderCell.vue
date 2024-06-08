@@ -3,7 +3,7 @@
     :class="[
       'vs-table-view__cell--is-header',
       isSortable && 'vs-table-view__cell--is-sortable',
-      cell.isStickyAction && 'vs-table-view__cell--is-sticky',
+      cell.isPinned && 'vs-table-view__cell--is-pinned',
     ]"
     :cell="cell"
     @click="handleClickHeader"

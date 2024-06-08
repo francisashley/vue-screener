@@ -39,12 +39,12 @@
         }"
       />
     </Variant>
-    <Variant title="Sticky Actions" width="100">
-      <VueScreener :data="baseData" include-sticky-actions>
-        <template #sticky-actions-head="props">
+    <Variant title="Pin to the side" width="100">
+      <VueScreener :data="baseData" include-pinned>
+        <template #pinned-head="props">
           <HeaderCell v-bind="props">Actions</HeaderCell>
         </template>
-        <template #sticky-actions-value="props">
+        <template #pinned-value="props">
           <ValueCell v-bind="props">
             <div :style="{ display: 'flex', gap: '4px' }">
               <button @click="handleClickEdit(props.cell)">Edit</button>

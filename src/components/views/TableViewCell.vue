@@ -5,7 +5,7 @@
       cell.isFirst && 'vs-table-view__cell--is-first',
       cell.isLast && 'vs-table-view__cell--is-last',
       cell.hasValue && 'vs-table-view__cell--hasValue',
-      cell.isStickyAction && 'vs-table-view__cell--is-sticky-action',
+      cell.isPinned && 'vs-table-view__cell--is-pinned',
       cell.type === 'string' && 'vs-table-view__cell--string',
       cell.type === 'number' && 'vs-table-view__cell--number',
       cell.type === 'boolean' && 'vs-table-view__cell--boolean',
@@ -42,7 +42,7 @@ defineProps<{
     border-right: unset;
   }
 
-  &__cell--is-sticky-action {
+  &__cell--is-pinned {
     position: sticky;
     background: white;
     right: 0;
@@ -51,12 +51,12 @@ defineProps<{
   }
 }
 
-.vs-main--is-scrollable .vs-table-view__cell--is-sticky-action {
+.vs-main--is-scrollable .vs-table-view__cell--is-pinned {
   box-shadow: -3px 0px 2px rgba(0, 0, 0, 0.11);
   transition: box-shadow 300ms ease-out;
 }
 
-.vs-main--is-scrolled-end .vs-table-view__cell--is-sticky-action {
+.vs-main--is-scrolled-end .vs-table-view__cell--is-pinned {
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0) !important;
 }
 </style>

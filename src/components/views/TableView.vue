@@ -4,7 +4,7 @@
       <slot
         v-for="(cell, i) in getFields"
         :key="i"
-        :name="cell.isStickyAction ? 'sticky-actions-head' : 'header-cell'"
+        :name="cell.isPinned ? 'pinned-head' : 'header-cell'"
         :cell="cell"
         :sort-direction="getSortDirection(cell.field)"
         @on-sort="screener.actions.sort"
@@ -12,7 +12,7 @@
         <HeaderCell
           :cell="cell"
           :sort-direction="getSortDirection(cell.field)"
-          :is-sortable="!cell.isStickyAction"
+          :is-sortable="!cell.isPinned"
           @on-sort="screener.actions.sort"
         />
       </slot>
@@ -20,7 +20,7 @@
 
     <div :style="rowStyle" v-for="(row, i) in getRows" :key="i" class="vs-table-view__row vs-table-view__row--record">
       <slot
-        :name="cell.isStickyAction ? 'sticky-actions-value' : 'value-cell'"
+        :name="cell.isPinned ? 'pinned-value' : 'value-cell'"
         :cell="cell"
         v-for="(cell, j) in row"
         :key="j"
@@ -58,13 +58,13 @@ const getFields = computed(() => {
     }
   })
 
-  if (props.screener.includeStickyActions.value) {
+  if (props.screener.includePinned.value) {
     fields.push({
       field: '',
       value: '',
       highlightedValue: '',
       isLast: true,
-      isStickyAction: true,
+      isPinned: true,
       type: 'string',
     })
   }
@@ -88,13 +88,13 @@ const getRows = computed(() => {
       }
     })
 
-    if (props.screener.includeStickyActions.value && row) {
+    if (props.screener.includePinned.value && row) {
       cells.push({
         field: '',
         value: '',
         highlightedValue: '',
         isLast: true,
-        isStickyAction: true,
+        isPinned: true,
         type: 'string',
         row,
       })
@@ -112,7 +112,7 @@ const tableStyle = computed(() => {
     return acc + ' ' + width
   }, '')
 
-  if (props.screener.includeStickyActions.value) cols += ' min-content'
+  if (props.screener.includePinned.value) cols += ' min-content'
 
   return {
     display: 'grid',
@@ -123,7 +123,7 @@ const tableStyle = computed(() => {
 const rowStyle = computed(() => {
   let colCount = props.screener.fields.value.length
 
-  if (props.screener.includeStickyActions.value) colCount++
+  if (props.screener.includePinned.value) colCount++
 
   return {
     display: 'grid',

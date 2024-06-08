@@ -16,7 +16,7 @@ import { getFields } from '../utils/data.utils'
 
 type ScreenerOptions = {
   title?: string
-  includeStickyActions?: boolean
+  includePinned?: boolean
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultData?: unknown[]
@@ -26,7 +26,7 @@ type ScreenerOptions = {
 }
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const title = ref<string>('Results')
-  const includeStickyActions = ref<boolean>(false)
+  const includePinned = ref<boolean>(false)
   const searchQuery = ref<string>('')
   const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
@@ -40,7 +40,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
 
   title.value = options.title ?? title.value
   columns.value = options.columns ?? columns.value
-  includeStickyActions.value = options.includeStickyActions ?? includeStickyActions.value
+  includePinned.value = options.includePinned ?? includePinned.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
   data.value = options.defaultData ?? data.value
@@ -115,7 +115,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
 
   return {
     title,
-    includeStickyActions,
+    includePinned,
     searchQuery,
     highlightQuery,
     currentPage,

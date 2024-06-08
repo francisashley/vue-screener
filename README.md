@@ -73,24 +73,24 @@ Omit fields:
 </template>
 ```
 
-Add a sticky column at the end to put stuff in.
+Add a pinned column on the right to put stuff in.
 
 ```vue
 <template>
   <vue-screener :data="data" include-actions>
-    <template #sticky-actions-head="props">
-      <StickyHeaderCell v-bind="props">Actions</StickyHeaderCell>
+    <template #pinned-head="props">
+      <PinnedHeaderCell v-bind="props">Actions</PinnedHeaderCell>
     </template>
-    <template #sticky-actions-value="props">
-      <StickyValueCell v-bind="props">
+    <template #pinned-value="props">
+      <PinnedValueCell v-bind="props">
         <button @click="handleClickEdit(props.cell)">Edit</button>
         <button @click="handleClickDelete(props.cell)">Delete</button>
-      </StickyValueCell>
+      </PinnedValueCell>
     </template>
   </vue-screener>
 </template>
 <script setup>
-import VueScreener, { StickyValueHead, StickyValueCell } from 'vue-screener'
+import VueScreener, { PinnedValueHead, PinnedValueCell } from 'vue-screener'
 </script>
 ```
 
@@ -172,7 +172,7 @@ Style using classes:
     .vs-table-view__row--record
     .vs-table-view__cell
     .vs-table-view__cell--is-sortable
-    .vs-table-view__cell--is-sticky
+    .vs-table-view__cell--is-pinned
     .vs-table-view__cell--is-header
     .vs-table-view__cell--is-value
     .vs-table-view__cell--is-first

@@ -15,11 +15,11 @@
         <template #value-cell="cellProps">
           <slot name="value-cell" v-bind="cellProps" />
         </template>
-        <template #sticky-actions-head="cellProps">
-          <slot name="sticky-actions-head" v-bind="cellProps" />
+        <template #pinned-head="cellProps">
+          <slot name="pinned-head" v-bind="cellProps" />
         </template>
-        <template #sticky-actions-value="cellProps">
-          <slot name="sticky-actions-value" v-bind="cellProps" />
+        <template #pinned-value="cellProps">
+          <slot name="pinned-value" v-bind="cellProps" />
         </template>
       </TableView>
     </ScreenerMain>
@@ -54,7 +54,7 @@ type Props = {
   // The current page number in the table
   currentPage?: number
   // A flag to determine if an extra pinned column should be displayed on the right
-  includeStickyActions?: boolean
+  includePinned?: boolean
   // A flag to toggle the visibility of the header
   includeHeader?: boolean
 }
@@ -67,13 +67,13 @@ const {
   omit = [],
   perPage = 15,
   currentPage = 1,
-  includeStickyActions = false,
+  includePinned = false,
   includeHeader = true,
 } = defineProps<Props>()
 
 const screener = useScreener({
   title,
-  includeStickyActions,
+  includePinned,
   defaultCurrentPage: currentPage,
   defaultPerPage: perPage,
   defaultData: data,

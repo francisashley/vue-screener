@@ -1,8 +1,5 @@
 <template>
-  <TableCell
-    :cell="cell"
-    :class="['vs-table-view__cell--is-value', cell.isStickyAction && 'vs-table-view__cell--is-sticky']"
-  >
+  <TableCell :cell="cell" :class="['vs-table-view__cell--is-value', cell.isPinned && 'vs-table-view__cell--is-pinned']">
     <slot />
   </TableCell>
 </template>

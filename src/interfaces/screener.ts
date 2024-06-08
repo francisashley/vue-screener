@@ -12,7 +12,7 @@ export type Columns = Record<string, Column>
 
 export type Screener = {
   title: Ref<string>
-  includeStickyActions: Ref<boolean>
+  includePinned: Ref<boolean>
   searchQuery: Ref<string>
   highlightQuery: Ref<string>
   currentPage: Ref<number>
@@ -48,6 +48,6 @@ export type Cell = {
   isFirst?: boolean
   isLast?: boolean
   hasValue?: boolean
-  isStickyAction?: boolean
+  isPinned?: boolean
   row?: unknown
 }
