@@ -28,7 +28,7 @@ export type Screener = {
 }
 
 export type Column = {
-  field: string // The unique identifier for the column. This must match a field in the data for values to show.
+  field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
   label: string // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
   isFirst: boolean // Flag indicating if it is the first column. TODO: is this needed?
@@ -38,7 +38,7 @@ export type Column = {
 }
 
 export type InputColumn = Partial<Pick<Column, 'field' | 'width'>>
-export type InputColumns = Record<string, InputColumn>
+export type InputColumns = Record<string | number, InputColumn>
 
 export type Item = {
   data: unknown // The original data for the item.
