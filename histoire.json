@@ -27,10 +27,14 @@
         },
         {
           "id": "src-stories-1-basic-usage-story-vue-4",
-          "title": "Custom title"
+          "title": "Bad data"
         },
         {
           "id": "src-stories-1-basic-usage-story-vue-5",
+          "title": "Custom title"
+        },
+        {
+          "id": "src-stories-1-basic-usage-story-vue-6",
           "title": "Hide header"
         }
       ],
@@ -43,8 +47,8 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-2-sticky-actions-story-vue",
-      "title": "2) Sticky Actions",
+      "id": "src-stories-2-configure-columns-story-vue",
+      "title": "2) Configure columns",
       "layout": {
         "type": "single",
         "iframe": true
@@ -52,14 +56,30 @@
       "docsOnly": false,
       "variants": [
         {
-          "id": "src-stories-2-sticky-actions-story-vue-0",
-          "title": "default"
+          "id": "src-stories-2-configure-columns-story-vue-0",
+          "title": "Control widths"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-1",
+          "title": "Sticky Actions"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-2",
+          "title": "Pick fields"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-3",
+          "title": "Omit fields"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-4",
+          "title": "Pick + omit fields"
         }
       ],
-      "relativePath": "src/stories/2-sticky-actions.story.vue",
+      "relativePath": "src/stories/2-configure-columns.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "2) Sticky Actions"
+        "2) Configure columns"
       ],
       "virtual": false,
       "markdownFile": null
