@@ -22,19 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DataType } from '../../utils/data.utils'
-
-export type Cell = {
-  field: string
-  value: unknown
-  highlightedValue: unknown
-  type?: DataType
-  isFirst?: boolean
-  isLast?: boolean
-  hasValue?: boolean
-  isStickyAction?: boolean
-  row?: unknown
-}
+import { Cell } from '@/interfaces/screener'
 
 defineProps<{
   cell: Cell

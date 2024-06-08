@@ -16,8 +16,9 @@
 </template>
 
 <script lang="ts" setup>
+import { Cell } from '@/interfaces/screener'
 import SortSelector from '../stuff/SortSelector.vue'
-import TableCell, { Cell } from './TableViewCell.vue'
+import TableCell from './TableViewCell.vue'
 
 const props = defineProps<{
   cell: Cell

@@ -1,6 +1,7 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
 import { NormalisedRow } from '@/utils/data.utils'
 import { ComputedRef, Ref } from 'vue'
+import { DataType } from '../utils/data.utils'
 
 export type Column = {
   field: string
@@ -37,4 +38,16 @@ export type Screener = {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void
   }
+}
+
+export type Cell = {
+  field: string
+  value: unknown
+  highlightedValue: unknown
+  type?: DataType
+  isFirst?: boolean
+  isLast?: boolean
+  hasValue?: boolean
+  isStickyAction?: boolean
+  row?: unknown
 }

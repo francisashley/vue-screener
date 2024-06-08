@@ -8,7 +8,8 @@
 </template>
 
 <script lang="ts" setup>
-import TableCell, { Cell } from './TableViewCell.vue'
+import { Cell } from '@/interfaces/screener'
+import TableCell from './TableViewCell.vue'
 
 defineProps<{ cell: Cell }>()
 </script>

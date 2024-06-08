@@ -40,8 +40,7 @@ import { computed } from 'vue'
 import { highlightText } from '../../utils/text.utils'
 import HeaderCell from './TableViewHeaderCell.vue'
 import ValueCell from './TableViewValueCell.vue'
-import { Cell } from './TableViewCell.vue'
-import { Screener } from '@/interfaces/screener'
+import { Cell, Screener } from '@/interfaces/screener'
 
 const props = defineProps<{
   screener: Screener
