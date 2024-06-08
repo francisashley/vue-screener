@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { InputColumns, Column, Item, Screener, UnknownObject } from '@/interfaces/screener'
+import { ColumnConfig, Column, Item, Screener, UnknownObject } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -11,7 +11,7 @@ type ScreenerOptions = {
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultData?: unknown[]
-  inputColumns?: InputColumns
+  columnConfig?: ColumnConfig
   pick?: string[]
   omit?: string[]
 }
@@ -27,11 +27,11 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const sortField = ref<string | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
   const data = ref<unknown[]>([])
-  const inputColumns = ref<InputColumns>({})
+  const columnConfig = ref<ColumnConfig>({})
 
   // Set default state
   title.value = options.title ?? title.value
-  inputColumns.value = options.inputColumns ?? inputColumns.value
+  columnConfig.value = options.columnConfig ?? columnConfig.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
   data.value = options.defaultData ?? data.value
@@ -115,7 +115,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     const fields = options.pick?.length ? options.pick : getFields(normalisedData.value)
 
     let columns: Column[] = fields.map((field, i) => {
-      const inputColumn = inputColumns.value[field] ?? {}
+      const inputColumn = columnConfig.value[field] ?? {}
       let width = inputColumn.width ?? '1fr'
       if (!isNaN(Number(width))) width = width + 'px'
       return {

@@ -30,7 +30,7 @@ import Table from './table/Table.vue'
 import NoDataView from './views/NoDataView.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
 import { useScreener } from '../hooks/use-screener'
-import { InputColumns } from '@/interfaces/screener'
+import { ColumnConfig } from '@/interfaces/screener'
 
 type Props = {
   // The title to be displayed in the header
@@ -38,7 +38,7 @@ type Props = {
   // The data to be displayed in the table
   data?: unknown[]
   // Configure each column
-  columns?: InputColumns
+  columnConfig?: ColumnConfig
   // The specific fields to be displayed in the table
   pick?: string[]
   // The fields to be excluded from the table
@@ -54,7 +54,7 @@ type Props = {
 const {
   title = 'Results',
   data = [],
-  columns = {},
+  columnConfig = {},
   pick = [],
   omit = [],
   perPage = 15,
@@ -67,7 +67,7 @@ const screener = useScreener({
   defaultCurrentPage: currentPage,
   defaultPerPage: perPage,
   defaultData: data,
-  inputColumns: columns,
+  columnConfig,
   pick: pick,
   omit: omit,
 })

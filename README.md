@@ -78,11 +78,11 @@ Add a pinned column on the right to put stuff in.
 ```vue
 <template>
   <VueScreener
-    :columns="[
+    :data="[
       { category: 'Technology', product: 'Laptop', price: '£799', inStock: true },
       { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true }
     ]"
-    :columns="{
+    :column-config="{
       action: { field: 'action', isPinned: true }
     }"
     :pick=""
