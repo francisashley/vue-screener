@@ -70,5 +70,11 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     normalisedData,
     searchedData,
     totalItems: computed(() => searchedData.value.length),
+    actions: {
+      search: (query: string) => {
+        searchQuery.value = query
+        highlightQuery.value = query
+      },
+    },
   }
 }

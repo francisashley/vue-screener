@@ -21,8 +21,6 @@ const { isValidQuery = true, screener } = defineProps<{
   screener: Screener
 }>()
 
-const emit = defineEmits(['search', 'update-options'])
-
 const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
@@ -38,7 +36,7 @@ const onKeydown = (event: KeyboardEvent) => {
   const searchQuery = (event.target as HTMLInputElement).value
 
   if (isEnter) {
-    search(searchQuery)
+    screener.actions.search(searchQuery)
     if (searchQuery) {
       history.value.push(searchQuery)
       historyIndex.value = history.value.length - 1
@@ -58,16 +56,12 @@ const onKeydown = (event: KeyboardEvent) => {
     historyIndex.value++
   }
 
-  search(history.value[historyIndex.value])
+  screener.actions.search(history.value[historyIndex.value])
 }
 
 const onInput = (event: Event) => {
   const query = (event.target as HTMLInputElement).value
   screener.highlightQuery.value = query
-}
-
-const search = (searchQuery: string): void => {
-  emit('search', searchQuery)
 }
 </script>
 

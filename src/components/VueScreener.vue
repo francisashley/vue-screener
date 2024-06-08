@@ -5,12 +5,7 @@
         <div class="vs-title">
           {{ props.title }}
         </div>
-        <ScreenerSearch
-          :screener="screener"
-          :is-valid-query="isRegExFriendlySearchQuery"
-          @search="onSearch"
-          class="vs-search"
-        />
+        <ScreenerSearch :screener="screener" :is-valid-query="isRegExFriendlySearchQuery" class="vs-search" />
         <Settings :screener="screener" @change-search-options="onChangeSearchOptions" />
       </header>
       <main
@@ -150,14 +145,9 @@ const hasData = computed((): boolean => {
   return getPaginatedData.value.filter((row) => row !== null).length > 0
 })
 
-const onSearch = (query: string) => {
-  screener.searchQuery.value = query
-  screener.highlightQuery.value = query
-}
-
 const onChangeSearchOptions = (options: SearchQueryOption[]) => {
   screener.searchOptions.value = options
-  onSearch(screener.highlightQuery.value)
+  screener.actions.search(screener.highlightQuery.value)
 }
 
 const handleSort = (updatedSortField: string) => {
