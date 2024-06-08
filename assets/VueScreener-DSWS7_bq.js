@@ -1312,17 +1312,15 @@ const useScreener = (options = {}) => {
   });
   const sortedData = computed(() => {
     const sortedItems = searchQuery.value ? searchedData.value : normalisedData.value;
-    if (sortField.value && sortDirection.value) {
+    const _sortField = sortField.value;
+    if (_sortField && sortDirection.value) {
       const nullItems = sortedItems.filter(
-        (item) => item.data[sortField.value] === null || item.data[sortField.value] === void 0
+        (item) => item.data[_sortField] === null || item.data[_sortField] === void 0
       );
       const nonNullItems = sortedItems.filter(
-        (item) => item.data[sortField.value] !== null && item.data[sortField.value] !== void 0
+        (item) => item.data[_sortField] !== null && item.data[_sortField] !== void 0
       );
-      return [
-        ...orderBy(nonNullItems, [(item) => item.data[sortField.value]], [sortDirection.value]),
-        ...nullItems
-      ];
+      return [...orderBy(nonNullItems, [(item) => item.data[_sortField]], [sortDirection.value]), ...nullItems];
     } else {
       return sortedItems;
     }

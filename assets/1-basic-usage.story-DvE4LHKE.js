@@ -1,12 +1,13 @@
 import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode } from "./vendor-DC0MkHh5.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-Zb5Ngo-L.js";
+import { _ as _export_sfc, V as VueScreener } from "./VueScreener-DSWS7_bq.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-D5HdiZTi.js";
+const badData = "bad data";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "1-basic-usage.story",
   setup(__props, { expose: __expose }) {
     __expose();
-    const __returned__ = { get VueScreener() {
+    const __returned__ = { badData, get VueScreener() {
       return VueScreener;
     }, get baseData() {
       return baseData;
@@ -54,7 +55,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }),
       createVNode(_component_Variant, { title: "Bad data" }, {
         default: withCtx(() => [
-          createVNode($setup["VueScreener"], { data: "bad data" })
+          createVNode($setup["VueScreener"], { data: $setup.badData })
         ]),
         _: 1
         /* STABLE */
