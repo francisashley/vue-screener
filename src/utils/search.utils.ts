@@ -1,4 +1,4 @@
-import { NormalisedField, NormalisedRow } from '@/interfaces/screener'
+import { NeueField, NeueItem, NormalisedField, NormalisedRow } from '@/interfaces/screener'
 import { escapeRegExp } from './regex.utils'
 
 /**
@@ -164,6 +164,92 @@ export function search(options: {
     }
 
     meetsSearchCriteria = row.some((field) => {
+      if (
+        testCriteria(String(field.value ?? ''), parsedSearchQuery, {
+          matchCase,
+          matchWord,
+          useRegExp,
+        })
+      ) {
+        return true
+      }
+    })
+
+    return !shouldExclude && shouldInclude && meetsSearchCriteria
+  })
+}
+
+/**
+ * Search for items based on specified criteria.
+ *
+ * @param {Object} options - The search options.
+ * @param {NeueItem[]} options.items - The data to search.
+ * @param {string} options.searchQuery - The search query string.
+ * @param {boolean} options.useRegExp - Whether to use regular expressions for the search.
+ * @param {boolean} options.matchCase - Whether to match the case.
+ * @param {boolean} options.matchWord - Whether to match whole words.
+ * @returns {NeueItem[]} - The matched data.
+ */
+export function searchNeue(options: {
+  items: NeueItem[]
+  searchQuery: string
+  useRegExp: boolean
+  matchCase: boolean
+  matchWord: boolean
+}): NeueItem[] {
+  const { searchQuery = '' } = options
+
+  if (!searchQuery) return options.items
+
+  // Parse search query and extract filters.
+  const { searchQuery: parsedSearchQuery, excludeFilters, includeFilters } = parseSearchQuery(searchQuery)
+
+  // Get the search options.
+  const { items, useRegExp = false, matchCase = false, matchWord = false } = options
+
+  // Check if any of the filters match the row.
+  const testExcludeFilters = (filters: [string, string][], itemMap: Record<string, NeueField>): boolean => {
+    return filters.some(([field, value]) => {
+      if (itemMap[field]) {
+        return testCriteria(itemMap[field].value as string, value, {
+          matchCase,
+          matchWord: true,
+          useRegExp,
+        })
+      }
+    })
+  }
+
+  const testIncludeFilters = (filters: [string, string][], itemMap: Record<string, NeueField>): boolean => {
+    return filters.every(([field, value]) => {
+      if (itemMap[field]) {
+        return testCriteria(itemMap[field].value as string, value, {
+          matchCase,
+          matchWord: true,
+          useRegExp,
+        })
+      }
+    })
+  }
+
+  // Filter the items.
+  return items.filter((item): boolean => {
+    // Create a map of the item fields for easy look up.
+    const itemMap: Record<string, NeueField> = item.fields
+
+    let shouldExclude = false
+    let shouldInclude = true
+    let meetsSearchCriteria = true
+
+    if (excludeFilters.length && testExcludeFilters(excludeFilters, itemMap)) {
+      shouldExclude = true
+    }
+
+    if (includeFilters.length && !testIncludeFilters(includeFilters, itemMap)) {
+      shouldInclude = false
+    }
+
+    meetsSearchCriteria = Object.values(item.fields).some((field) => {
       if (
         testCriteria(String(field.value ?? ''), parsedSearchQuery, {
           matchCase,

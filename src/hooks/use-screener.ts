@@ -1,8 +1,18 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { Cell, Columns, NeueColumn, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
-import { getPaginated, isValidInput, normaliseInput, omitFields, pickFields } from '../utils/data.utils'
+import { Cell, Columns, NeueColumn, NeueItem, NormalisedRow, Screener, UnknownObject } from '@/interfaces/screener'
+import {
+  getPaginated,
+  getPaginatedNeue,
+  isValidInput,
+  normaliseInput,
+  normaliseInputNeue,
+  omitColumns,
+  omitFields,
+  pickColumns,
+  pickFields,
+} from '../utils/data.utils'
 import { computed, ref } from 'vue'
-import { search } from '../utils/search.utils'
+import { search, searchNeue } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
 import { getFields } from '../utils/data.utils'
 import { highlightText } from '../utils/text.utils'
@@ -110,12 +120,11 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return paginatedData.value.filter((row) => row !== null).length > 0
   })
 
-  /// columns
   const neueColumns = computed<NeueColumn[]>(() => {
     const _fields = fields.value
     if (includePinned.value) _fields.push('pinned')
 
-    const columns = _fields.map((field, i) => {
+    let columns = _fields.map((field, i) => {
       return {
         field: field,
         label: field,
@@ -127,9 +136,16 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
       }
     })
 
+    if (options.pick && options.pick.length > 0) {
+      columns = pickColumns(columns, options.pick)
+    }
+
+    if (options.omit && options.omit.length > 0) {
+      columns = omitColumns(columns, options.omit)
+    }
+
     return columns
   })
-  ///
 
   const rows = computed(() => {
     return paginatedData.value.map((row) => {
@@ -161,6 +177,70 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
   })
 
+  const neueData = computed((): NeueItem[] => {
+    let neueData = isValidInput(data.value) ? normaliseInputNeue(data.value as UnknownObject[]) : []
+
+    if (includePinned.value) {
+      neueData = neueData.map((item) => {
+        return {
+          ...item,
+          fields: {
+            ...item.fields,
+            pinned: {
+              field: 'pinned',
+              type: 'string',
+              value: '',
+              htmlValue: '',
+              hasValue: false,
+            },
+          },
+        }
+      })
+    }
+
+    return neueData
+  })
+
+  const neueSearchedData = computed((): NeueItem[] => {
+    return searchNeue({
+      items: neueData.value,
+      searchQuery: searchQuery.value,
+      useRegExp: shouldUseRegEx.value,
+      matchCase: shouldMatchCase.value,
+      matchWord: shouldMatchWord.value,
+    })
+  })
+
+  const sortedDataNeue = computed((): NeueItem[] => {
+    const sortedItems = searchQuery.value ? neueSearchedData.value : neueData.value
+
+    if (sortField.value && sortDirection.value) {
+      const nullItems = sortedItems.filter(
+        (item) => item.data[sortField.value] === null || item.data[sortField.value] === undefined,
+      )
+
+      const nonNullItems = sortedItems.filter(
+        (item) => item.data[sortField.value] !== null && item.data[sortField.value] !== undefined,
+      )
+
+      return [
+        ...orderBy(nonNullItems, [(item: NeueItem | null) => item.data[sortField.value]], [sortDirection.value]),
+        ...nullItems,
+      ]
+    } else {
+      return sortedItems
+    }
+  })
+
+  const paginatedDataNeue = computed((): NeueItem[] => {
+    return getPaginatedNeue({
+      items: sortedDataNeue.value,
+      page: currentPage.value - 1,
+      perPage: perPage.value,
+      withPlaceholders: true,
+    })
+  })
+
   return {
     title,
     includePinned,
@@ -186,6 +266,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     hasError,
     hasData,
     neueColumns,
+    items: paginatedDataNeue,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query

@@ -2,17 +2,17 @@
   <Story title="3) Custom Cells">
     <Variant title="default">
       <VueScreener :data="baseData">
-        <template #header-cell="props">
-          <HeaderCell v-bind="props" :style="{ background: 'red' }">
-            <span v-html="props.cell.value" />
+        <template #head="props">
+          <Head v-bind="props" :style="{ background: 'red' }">
+            <span v-html="props.column.label" />
             [stuff]
-          </HeaderCell>
+          </Head>
         </template>
         <template #value-cell="props">
-          <ValueCell v-bind="props" :style="{ background: 'blue' }">
-            <span v-html="props.highlight(String(props.cell.value), props.highlightValue)" />
+          <Data v-bind="props" :style="{ background: 'blue' }">
+            <span v-html="props.highlight(String(props.item.fields[props.column.field].value), props.highlightValue)" />
             [stuff]
-          </ValueCell>
+          </Data>
         </template>
       </VueScreener>
     </Variant>
@@ -20,6 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { HeaderCell, ValueCell, VueScreener } from '../index'
+import { Head, Data, VueScreener } from '../index'
 import baseData from '../fixtures/data.json'
 </script>
