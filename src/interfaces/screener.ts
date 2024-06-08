@@ -63,6 +63,7 @@ export type Column = {
 
 export type Columns = Record<string, Column>
 
+// TODO: Get rid of this fist. Replace it with NeueItem
 export type Cell = {
   field: string
   value: unknown

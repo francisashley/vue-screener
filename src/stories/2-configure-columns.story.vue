@@ -86,8 +86,8 @@ import { VueScreener } from '../index'
 import baseData from '../fixtures/data.json'
 import primitivesData from '../fixtures/primitives-data.json'
 import mixedObjectsData from '../fixtures/mix-objects-data.json'
-import HeaderCell from '../components/views/TableViewHeaderCell.vue'
-import ValueCell from '../components/views/TableViewValueCell.vue'
+import HeaderCell from '../components/table/TableHeaderCell.vue'
+import ValueCell from '../components/table/TableValueCell.vue'
 
 const handleClickEdit = (cell: unknown) => console.log('edit', cell)
 const handleClickDelete = (cell: unknown) => console.log('delete', cell)

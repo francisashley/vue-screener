@@ -1,6 +1,6 @@
 <template>
-  <div :style="tableStyle" class="vs-table-view">
-    <div :style="rowStyle" class="vs-table-view__row vs-table-view__row--header">
+  <div :style="tableStyle" class="vs-table">
+    <div :style="rowStyle" class="vs-table__row vs-table__row--header">
       <slot
         v-for="(cell, i) in getFields"
         :key="i"
@@ -18,7 +18,7 @@
       </slot>
     </div>
 
-    <div :style="rowStyle" v-for="(row, i) in getRows" :key="i" class="vs-table-view__row vs-table-view__row--record">
+    <div :style="rowStyle" v-for="(row, i) in getRows" :key="i" class="vs-table__row vs-table__row--record">
       <slot
         :name="cell.isPinned ? 'pinned-value' : 'value-cell'"
         :cell="cell"
@@ -38,8 +38,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { highlightText } from '../../utils/text.utils'
-import HeaderCell from './TableViewHeaderCell.vue'
-import ValueCell from './TableViewValueCell.vue'
+import HeaderCell from './TableHeaderCell.vue'
+import ValueCell from './TableValueCell.vue'
 import { Cell, Screener } from '@/interfaces/screener'
 
 const props = defineProps<{
@@ -141,7 +141,7 @@ const getSortDirection = (field: string): 'asc' | 'desc' | null => {
 </script>
 
 <style lang="scss">
-.vs-table-view {
+.vs-table {
   color: black;
 
   &__row {

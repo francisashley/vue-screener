@@ -1,9 +1,9 @@
 <template>
   <TableCell
     :class="[
-      'vs-table-view__cell--is-header',
-      isSortable && 'vs-table-view__cell--is-sortable',
-      cell.isPinned && 'vs-table-view__cell--is-pinned',
+      'vs-table__cell--is-header',
+      isSortable && 'vs-table__cell--is-sortable',
+      cell.isPinned && 'vs-table__cell--is-pinned',
     ]"
     :cell="cell"
     @click="handleClickHeader"
@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { Cell } from '@/interfaces/screener'
 import SortSelector from '../stuff/SortSelector.vue'
-import TableCell from './TableViewCell.vue'
+import TableCell from './TableCell.vue'
 
 const props = defineProps<{
   cell: Cell
@@ -34,7 +34,7 @@ const handleClickHeader = () => {
 </script>
 
 <style lang="scss">
-.vs-table-view__cell {
+.vs-table__cell {
   &--is-header {
     font-weight: bold;
     white-space: nowrap;

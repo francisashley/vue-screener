@@ -166,25 +166,25 @@ Style using classes:
   .vs-main
   .vs-main--is-scrollable
   .vs-main--is-scrolled-end
-    .vs-table-view
-    .vs-table-view__row
-    .vs-table-view__row--header
-    .vs-table-view__row--record
-    .vs-table-view__cell
-    .vs-table-view__cell--is-sortable
-    .vs-table-view__cell--is-pinned
-    .vs-table-view__cell--is-header
-    .vs-table-view__cell--is-value
-    .vs-table-view__cell--is-first
-    .vs-table-view__cell--is-last
-    .vs-table-view__cell--hasValue
-    .vs-table-view__cell--string
-    .vs-table-view__cell--number
-    .vs-table-view__cell--boolean
-    .vs-table-view__cell--symbol
-    .vs-table-view__cell--undefined
-    .vs-table-view__cell--object
-    .vs-table-view__cell--null
+    .vs-table
+    .vs-table__row
+    .vs-table__row--header
+    .vs-table__row--record
+    .vs-table__cell
+    .vs-table__cell--is-sortable
+    .vs-table__cell--is-pinned
+    .vs-table__cell--is-header
+    .vs-table__cell--is-value
+    .vs-table__cell--is-first
+    .vs-table__cell--is-last
+    .vs-table__cell--hasValue
+    .vs-table__cell--string
+    .vs-table__cell--number
+    .vs-table__cell--boolean
+    .vs-table__cell--symbol
+    .vs-table__cell--undefined
+    .vs-table__cell--object
+    .vs-table__cell--null
       .vs-sort-selector
       .vs-sort-selector__icon
       .vs-sort-selector__icon--none

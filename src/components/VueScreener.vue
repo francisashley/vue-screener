@@ -8,7 +8,7 @@
       />
       <NoDataView v-else-if="!screener.hasData.value" />
       <JsonView v-else-if="screener.renderFormat.value === 'raw'" :data="screener.paginatedData.value" />
-      <TableView v-else :screener="screener">
+      <Table v-else :screener="screener">
         <template #header-cell="cellProps">
           <slot name="header-cell" v-bind="cellProps" />
         </template>
@@ -21,7 +21,7 @@
         <template #pinned-value="cellProps">
           <slot name="pinned-value" v-bind="cellProps" />
         </template>
-      </TableView>
+      </Table>
     </ScreenerMain>
     <ScreenerFooter v-if="!screener.hasError.value" :screener="screener" />
   </section>
@@ -32,7 +32,7 @@ import ScreenerHeader from './ScreenerHeader.vue'
 import ScreenerMain from './ScreenerMain.vue'
 import ScreenerFooter from './ScreenerFooter.vue'
 import JsonView from './views/JsonView.vue'
-import TableView from './views/TableView.vue'
+import Table from './table/Table.vue'
 import NoDataView from './views/NoDataView.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
 import { useScreener } from '../hooks/use-screener'
