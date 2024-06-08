@@ -20,7 +20,7 @@ export function normaliseInput(data: UnknownObject[]): Item[] {
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
-  const normaliseFieldNeue = (field: string, value: unknown): Field => ({
+  const normaliseField = (field: string, value: unknown): Field => ({
     field,
     type: getTypeOf(value),
     value: value as any,
@@ -32,7 +32,7 @@ export function normaliseInput(data: UnknownObject[]): Item[] {
   const normalisedData = transformedData.map((item: UnknownObject): Item => {
     const fields: Record<string, Field> = {}
     Object.keys(item).forEach((key) => {
-      fields[key] = normaliseFieldNeue(key, item[key])
+      fields[key] = normaliseField(key, item[key])
     })
 
     return { data: item, fields }
@@ -43,7 +43,7 @@ export function normaliseInput(data: UnknownObject[]): Item[] {
   return normalisedData.map((item) => {
     fields.forEach((field) => {
       if (!item.fields[field]) {
-        item.fields[field] = normaliseFieldNeue(field, undefined)
+        item.fields[field] = normaliseField(field, undefined)
       }
     })
     return item

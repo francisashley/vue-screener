@@ -2,7 +2,7 @@
   <div :style="rowStyle" v-for="(item, i) in screener.items.value" :key="i" class="vs-table__row vs-table__row--record">
     <template v-if="item">
       <slot
-        v-for="(column, j) in screener.neueColumns.value"
+        v-for="(column, j) in screener.columns.value"
         name="data"
         :column="column"
         :item="item"
@@ -31,7 +31,7 @@ const rowStyle = computed(() => {
   return {
     display: 'grid',
     'grid-template-columns': 'subgrid',
-    'grid-column': `1 / ${props.screener.neueColumns.value.length + 1}`,
+    'grid-column': `1 / ${props.screener.columns.value.length + 1}`,
   }
 })
 </script>

@@ -47,11 +47,11 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return !isValidInput(data.value)
   })
 
-  const neueData = computed((): Item[] => {
-    let neueData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
+  const normalisedData = computed((): Item[] => {
+    let normalisedData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
 
     if (includePinned.value) {
-      neueData = neueData.map((item) => {
+      normalisedData = normalisedData.map((item) => {
         return {
           ...item,
           fields: {
@@ -68,12 +68,12 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
       })
     }
 
-    return neueData
+    return normalisedData
   })
 
-  const neueSearchedData = computed((): Item[] => {
+  const searchedData = computed((): Item[] => {
     return search({
-      items: neueData.value,
+      items: normalisedData.value,
       searchQuery: searchQuery.value,
       useRegExp: shouldUseRegEx.value,
       matchCase: shouldMatchCase.value,
@@ -81,8 +81,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
   })
 
-  const sortedDataNeue = computed((): Item[] => {
-    const sortedItems = searchQuery.value ? neueSearchedData.value : neueData.value
+  const sortedData = computed((): Item[] => {
+    const sortedItems = searchQuery.value ? searchedData.value : normalisedData.value
 
     if (sortField.value && sortDirection.value) {
       const nullItems = sortedItems.filter(
@@ -102,9 +102,9 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     }
   })
 
-  const paginatedDataNeue = computed((): Item[] => {
+  const paginatedData = computed((): Item[] => {
     return getPaginated({
-      items: sortedDataNeue.value,
+      items: sortedData.value,
       page: currentPage.value - 1,
       perPage: perPage.value,
       withPlaceholders: true,
@@ -112,11 +112,11 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const hasData = computed((): boolean => {
-    return paginatedDataNeue.value.filter((item) => item !== null).length > 0
+    return paginatedData.value.filter((item) => item !== null).length > 0
   })
 
-  const preparedItems = computed(() => {
-    return paginatedDataNeue.value.map((item) => {
+  const items = computed(() => {
+    return paginatedData.value.map((item) => {
       if (!item) return null
       return {
         ...item,
@@ -134,8 +134,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     })
   })
 
-  const neueColumns = computed<Column[]>(() => {
-    const fields = getFields(neueData.value)
+  const columns = computed<Column[]>(() => {
+    const fields = getFields(normalisedData.value)
 
     let _columns = fields.map((field, i) => {
       let width = inputColumns.value[field]?.width ?? '1fr'
@@ -177,11 +177,11 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldMatchCase,
     shouldMatchWord,
     data,
-    items: preparedItems,
-    totalItems: computed(() => neueSearchedData.value.length),
+    items,
+    totalItems: computed(() => searchedData.value.length),
     hasError,
     hasData,
-    neueColumns,
+    columns,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query

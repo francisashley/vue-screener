@@ -19,7 +19,7 @@ export type Screener = {
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>
-  neueColumns: ComputedRef<Column[]>
+  columns: ComputedRef<Column[]>
   items: ComputedRef<(Item | null)[]>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void

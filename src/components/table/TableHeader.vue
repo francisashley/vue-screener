@@ -1,7 +1,7 @@
 <template>
   <div :style="rowStyle" class="vs-table__row vs-table__row--header">
     <slot
-      v-for="(column, i) in props.screener.neueColumns.value"
+      v-for="(column, i) in props.screener.columns.value"
       :key="i"
       name="head"
       :column="column"
@@ -23,7 +23,7 @@ const props = defineProps<{
 }>()
 
 const rowStyle = computed(() => {
-  let colCount = props.screener.neueColumns.value.length
+  let colCount = props.screener.columns.value.length
 
   if (props.screener.includePinned.value) colCount++
 

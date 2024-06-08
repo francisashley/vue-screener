@@ -26,7 +26,7 @@ const props = defineProps<{
 const tableStyle = computed(() => {
   return {
     display: 'grid',
-    'grid-template-columns': props.screener.neueColumns.value.map((item) => item.width).join(' '),
+    'grid-template-columns': props.screener.columns.value.map((item) => item.width).join(' '),
   }
 })
 </script>
