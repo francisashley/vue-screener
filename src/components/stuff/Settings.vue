@@ -43,8 +43,6 @@ const props = defineProps<{
   screener: Screener
 }>()
 
-const emit = defineEmits(['change-search-options'])
-
 type SearchQueryInternalOption = {
   id: SearchQueryOption
   title: string
@@ -67,12 +65,12 @@ const getOptions = computed<SearchQueryInternalOption[]>(() => {
 
 const toggleOption = (option: SearchQueryOption) => {
   if (props.screener.searchOptions.value.includes(option)) {
-    emit(
-      'change-search-options',
+    props.screener.actions.search(
+      props.screener.highlightQuery.value,
       props.screener.searchOptions.value.filter((activeOption) => activeOption !== option),
     )
   } else {
-    emit('change-search-options', [...props.screener.searchOptions.value, option])
+    props.screener.actions.search(props.screener.highlightQuery.value, [...props.screener.searchOptions.value, option])
   }
 }
 

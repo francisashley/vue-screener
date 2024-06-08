@@ -71,9 +71,12 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     searchedData,
     totalItems: computed(() => searchedData.value.length),
     actions: {
-      search: (query: string) => {
+      search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query
         highlightQuery.value = query
+        if (options) {
+          searchOptions.value = options
+        }
       },
     },
   }

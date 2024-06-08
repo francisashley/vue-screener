@@ -4,7 +4,7 @@
       <header class="vs-header" v-if="includeHeader">
         <div class="vs-title" v-text="props.title" />
         <ScreenerSearch :screener="screener" :is-valid-query="isRegExFriendlySearchQuery" class="vs-search" />
-        <Settings :screener="screener" @change-search-options="onChangeSearchOptions" />
+        <Settings :screener="screener" />
       </header>
       <main
         class="vs-main"
@@ -51,7 +51,7 @@
 import JsonView from './views/JsonView.vue'
 import TableView from './views/TableView.vue'
 import NoDataView from './views/NoDataView.vue'
-import ScreenerSearch, { SearchQueryOption } from './stuff/ScreenerSearch.vue'
+import ScreenerSearch from './stuff/ScreenerSearch.vue'
 import Pagination from './stuff/Pagination.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
 import Settings from './stuff/Settings.vue'
@@ -142,11 +142,6 @@ const getPaginatedData = computed((): NormalisedRow[] => {
 const hasData = computed((): boolean => {
   return getPaginatedData.value.filter((row) => row !== null).length > 0
 })
-
-const onChangeSearchOptions = (options: SearchQueryOption[]) => {
-  screener.searchOptions.value = options
-  screener.actions.search(screener.highlightQuery.value)
-}
 
 const handleSort = (updatedSortField: string) => {
   if (screener.sortField.value === updatedSortField) {
