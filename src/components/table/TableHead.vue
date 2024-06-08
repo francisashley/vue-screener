@@ -14,7 +14,7 @@
     @click="handleClickHeader"
   >
     <slot>
-      <span v-html="column.field" />
+      <span v-html="column.label" />
     </slot>
     <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
   </TableCell>

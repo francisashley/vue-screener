@@ -39,6 +39,44 @@
         }"
       />
     </Variant>
+    <Variant title="Control labels" width="100">
+      <VueScreener
+        :data="baseData"
+        :columns="{
+          id: { field: 'id', label: 'ID' },
+          first_name: { field: 'first_name', label: 'First name' },
+          last_name: { field: 'last_name', label: 'Last name' },
+          full_name: { field: 'full_name', label: 'Full name' },
+          email: { field: 'email', label: 'Email' },
+          gender: { field: 'gender', label: 'Gender' },
+          ip_address: { field: 'ip_address', label: 'IP address' },
+        }"
+      />
+      <br />
+      <VueScreener
+        :data="primitivesData"
+        :columns="{
+          0: { field: 0, label: 'ID' },
+          1: { field: 1, label: 'First name' },
+          2: { field: 2, label: 'Last name' },
+          3: { field: 3, label: 'Email' },
+          4: { field: 4, label: 'Gender' },
+          5: { field: 5, label: 'IP address' },
+        }"
+      />
+      <br />
+      <VueScreener
+        :data="mixedObjectsData"
+        :pick="['id', 'name', 'address', 'country', 'flag_colours']"
+        :columns="{
+          id: { field: 'id', label: 'ID' },
+          name: { field: 'name', label: 'Name' },
+          address: { field: 'address', label: 'Address' },
+          country: { field: 'country', label: 'Country' },
+          flag_colours: { field: 'flag_colours', label: 'Flag colours' },
+        }"
+      />
+    </Variant>
     <Variant title="Extra columns" width="100">
       <VueScreener
         :data="baseData"
