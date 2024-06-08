@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { Columns, NeueColumn, NeueItem, Screener, UnknownObject } from '@/interfaces/screener'
+import { InputColumns, NeueColumn, NeueItem, Screener, UnknownObject } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -12,7 +12,7 @@ type ScreenerOptions = {
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultData?: unknown[]
-  columns?: Columns
+  inputColumns?: InputColumns
   pick?: string[]
   omit?: string[]
 }
@@ -29,11 +29,11 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const sortField = ref<string | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
   const data = ref<unknown[]>([])
-  const columns = ref<Columns>({})
+  const inputColumns = ref<InputColumns>({})
 
   // Set default state
   title.value = options.title ?? title.value
-  columns.value = options.columns ?? columns.value
+  inputColumns.value = options.inputColumns ?? inputColumns.value
   includePinned.value = options.includePinned ?? includePinned.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
@@ -138,7 +138,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     const fields = getFields(neueData.value)
 
     let _columns = fields.map((field, i) => {
-      let width = columns.value[field]?.width ?? '1fr'
+      let width = inputColumns.value[field]?.width ?? '1fr'
       if (!isNaN(Number(width))) width = width + 'px'
       return {
         field: field,
@@ -176,7 +176,6 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldUseRegEx,
     shouldMatchCase,
     shouldMatchWord,
-    columns,
     data,
     items: preparedItems,
     totalItems: computed(() => neueSearchedData.value.length),

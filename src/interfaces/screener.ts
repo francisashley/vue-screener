@@ -15,7 +15,6 @@ export type Screener = {
   shouldUseRegEx: ComputedRef<boolean>
   shouldMatchCase: ComputedRef<boolean>
   shouldMatchWord: ComputedRef<boolean>
-  columns: Ref<Columns>
   data: Ref<unknown[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
@@ -40,6 +39,9 @@ export type NeueColumn = {
   isSortable: boolean // Flag indicating if the field is sortable. TODO: is this needed?
 }
 
+export type InputColumn = Partial<Pick<NeueColumn, 'field' | 'width'>>
+export type InputColumns = Record<string, InputColumn>
+
 export type NeueItem = {
   data: unknown // The original data for the item.
   fields: Record<string, NeueField> // The processed data for each field in the item, used for rendering.
@@ -54,13 +56,6 @@ export type NeueField = {
 }
 
 //////////// End New types ////////
-
-export type Column = {
-  field: string
-  width: string // defaults to `1fr`
-}
-
-export type Columns = Record<string, Column>
 
 export interface UnknownObject {
   [key: string | number]: unknown
