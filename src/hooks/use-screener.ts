@@ -112,7 +112,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const hasData = computed((): boolean => {
-    return paginatedDataNeue.value.filter((row) => row !== null).length > 0
+    return paginatedDataNeue.value.filter((item) => item !== null).length > 0
   })
 
   const preparedItems = computed(() => {

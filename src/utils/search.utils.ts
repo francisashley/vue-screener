@@ -121,7 +121,7 @@ export function search(options: {
   // Get the search options.
   const { items, useRegExp = false, matchCase = false, matchWord = false } = options
 
-  // Check if any of the filters match the row.
+  // Check if any of the filters match the item.
   const testExcludeFilters = (filters: [string, string][], itemMap: Record<string, NeueField>): boolean => {
     return filters.some(([field, value]) => {
       if (itemMap[field]) {

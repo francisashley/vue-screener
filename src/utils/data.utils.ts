@@ -7,7 +7,7 @@ import { DataType, NeueColumn, NeueField, NeueItem, UnknownObject } from '@/inte
  */
 export function isValidInput(data: unknown): boolean {
   const isObject = (val: unknown) => typeof val === 'object' && val !== null
-  return Array.isArray(data) && data.every((row: unknown) => Array.isArray(row) || isObject(row))
+  return Array.isArray(data) && data.every((item: unknown) => Array.isArray(item) || isObject(item))
 }
 
 /**
@@ -17,7 +17,7 @@ export function isValidInput(data: unknown): boolean {
  */
 export function normaliseInput(data: UnknownObject[]): NeueItem[] {
   // If the input data is an array of arrays, convert it to an array of objects.
-  const transformedData = data.map((row) => (Array.isArray(row) ? { ...row } : row))
+  const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
   const normaliseFieldNeue = (field: string, value: unknown): NeueField => ({
@@ -28,7 +28,7 @@ export function normaliseInput(data: UnknownObject[]): NeueItem[] {
     hasValue: value !== null || value !== undefined,
   })
 
-  // Normalise each row into an array of normalised fields.
+  // Normalise each item into an array of normalised fields.
   const normalisedData = transformedData.map((item: UnknownObject): NeueItem => {
     const fields: Record<string, NeueField> = {}
     Object.keys(item).forEach((key) => {
