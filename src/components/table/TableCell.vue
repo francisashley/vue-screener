@@ -2,30 +2,35 @@
   <div
     :class="[
       'vs-table__cell',
-      cell.isFirst && 'vs-table__cell--is-first',
-      cell.isLast && 'vs-table__cell--is-last',
-      cell.hasValue && 'vs-table__cell--hasValue',
-      cell.isPinned && 'vs-table__cell--is-pinned',
-      cell.type === 'string' && 'vs-table__cell--string',
-      cell.type === 'number' && 'vs-table__cell--number',
-      cell.type === 'boolean' && 'vs-table__cell--boolean',
-      cell.type === 'symbol' && 'vs-table__cell--symbol',
-      cell.type === 'undefined' && 'vs-table__cell--undefined',
-      cell.type === 'object' && 'vs-table__cell--object',
-      cell.type === 'null' && 'vs-table__cell--null',
+      isFirst && 'vs-table__cell--is-first',
+      isLast && 'vs-table__cell--is-last',
+      hasValue && 'vs-table__cell--hasValue',
+      isPinned && 'vs-table__cell--is-pinned',
+      type === 'string' && 'vs-table__cell--string',
+      type === 'number' && 'vs-table__cell--number',
+      type === 'boolean' && 'vs-table__cell--boolean',
+      type === 'symbol' && 'vs-table__cell--symbol',
+      type === 'undefined' && 'vs-table__cell--undefined',
+      type === 'object' && 'vs-table__cell--object',
+      type === 'null' && 'vs-table__cell--null',
     ]"
   >
     <slot>
-      <span v-html="cell.highlightedValue" />
+      <span v-html="value" />
     </slot>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { Cell } from '@/interfaces/screener'
+import { DataType } from '@/interfaces/screener'
 
 defineProps<{
-  cell: Cell
+  value: unknown
+  type?: DataType
+  isFirst?: boolean
+  isLast?: boolean
+  hasValue?: boolean
+  isPinned?: boolean
 }>()
 </script>
 

@@ -1,5 +1,13 @@
 <template>
-  <TableCell :cell="cell" :class="['vs-table__cell--is-value', cell.isPinned && 'vs-table__cell--is-pinned']">
+  <TableCell
+    :value="cell.value"
+    :is-first="cell.isFirst"
+    :is-last="cell.isLast"
+    :has-value="cell.hasValue"
+    :is-pinned="cell.isPinned"
+    :type="cell.type"
+    :class="['vs-table__cell--is-value', cell.isPinned && 'vs-table__cell--is-pinned']"
+  >
     <slot />
   </TableCell>
 </template>

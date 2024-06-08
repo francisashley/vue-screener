@@ -1,11 +1,16 @@
 <template>
   <TableCell
+    :value="cell.highlightedValue"
+    :is-first="cell.isFirst"
+    :is-last="cell.isLast"
+    :has-value="cell.hasValue"
+    :is-pinned="cell.isPinned"
+    :type="cell.type"
     :class="[
       'vs-table__cell--is-header',
       isSortable && 'vs-table__cell--is-sortable',
       cell.isPinned && 'vs-table__cell--is-pinned',
     ]"
-    :cell="cell"
     @click="handleClickHeader"
   >
     <slot>
