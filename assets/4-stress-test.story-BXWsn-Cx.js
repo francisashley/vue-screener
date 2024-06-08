@@ -1,5 +1,5 @@
-import { aq as defineComponent, at as resolveComponent, au as openBlock, av as createBlock, aw as withCtx, ax as createVNode } from "./vendor-c986319e.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-c8a96240.js";
+import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode } from "./vendor-iGRY5S0P.js";
+import { _ as _export_sfc, V as VueScreener } from "./VueScreener-BYUygs3F.js";
 const baseData = [
   {
     id: 1,
@@ -80003,7 +80003,7 @@ const baseData = [
   }
 ];
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "4 stress-test.story",
+  __name: "4-stress-test.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const __returned__ = { get VueScreener() {
@@ -80018,7 +80018,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Variant = resolveComponent("Variant");
   const _component_Story = resolveComponent("Story");
-  return openBlock(), createBlock(_component_Story, null, {
+  return openBlock(), createBlock(_component_Story, { title: "4) Stress Test" }, {
     default: withCtx(() => [
       createVNode(_component_Variant, { title: "default" }, {
         default: withCtx(() => [
@@ -80032,8 +80032,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/4 stress-test.story.vue";
-const _4_stressTest_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/4 stress-test.story.vue"]]);
+_sfc_main.__file = "src/stories/4-stress-test.story.vue";
+const _4StressTest_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/4-stress-test.story.vue"]]);
 export {
-  _4_stressTest_story as default
+  _4StressTest_story as default
 };

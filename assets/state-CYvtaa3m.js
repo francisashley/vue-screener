@@ -1,5 +1,5 @@
-import { d as clientSupportPlugins, h as histoireConfig } from "./GenericMountStory.vue2-ec927661.js";
-import { d as defineComponent, r as ref, Y as watchEffect, X as markRaw, o as openBlock, q as createBlock, Z as mergeProps, _ as resolveDynamicComponent, h as createCommentVNode, E as reactive, v as isRef, g as unref } from "./vendor-c986319e.js";
+import { d as clientSupportPlugins, h as histoireConfig } from "./GenericMountStory.vue2-DKd9Xftq.js";
+import { d as defineComponent, r as ref, Y as watchEffect, X as markRaw, o as openBlock, q as createBlock, Z as mergeProps, _ as resolveDynamicComponent, h as createCommentVNode, E as reactive, v as isRef, g as unref } from "./vendor-iGRY5S0P.js";
 const __default__ = {
   inheritAttrs: false
 };
@@ -80,14 +80,14 @@ function toRawDeep(val, clean = false, seen = /* @__PURE__ */ new WeakMap()) {
     return result;
   }
 }
-const toRawObject = (obj, target, clean = false, seen = /* @__PURE__ */ new WeakMap()) => {
+function toRawObject(obj, target, clean = false, seen = /* @__PURE__ */ new WeakMap()) {
   Object.keys(obj).forEach((key) => {
     if (clean && typeof obj[key] === "function") {
       return;
     }
     target[key] = toRawDeep(obj[key], clean, seen);
   });
-};
+}
 export {
   EVENT_SEND as E,
   PREVIEW_SETTINGS_SYNC as P,

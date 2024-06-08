@@ -1,5 +1,4 @@
-import { aq as defineComponent, au as openBlock, aD as createElementBlock, aE as toDisplayString, aB as createBaseVNode, av as createBlock, aF as createCommentVNode, aG as renderSlot, aH as normalizeClass, aw as withCtx, aI as computed, aJ as Fragment, aK as renderList, aL as normalizeStyle, ax as createVNode, aA as createTextVNode, aM as ref, aN as onMounted, as as watch, aO as directive, aP as withDirectives, aQ as Transition, aR as withModifiers, aS as debounce, aT as orderBy, ay as normalizeProps, az as guardReactiveProps } from "./vendor-c986319e.js";
-const JsonView_vue_vue_type_style_index_0_lang = "";
+import { aq as defineComponent, as as openBlock, aB as createElementBlock, aC as toDisplayString, az as createBaseVNode, at as createBlock, aD as createCommentVNode, aE as renderSlot, aF as normalizeClass, au as withCtx, aG as computed, aH as Fragment, aI as renderList, aJ as normalizeStyle, av as createVNode, ay as createTextVNode, aK as ref, aL as onMounted, aM as watch, aN as directive, aO as withDirectives, aP as Transition, aQ as withModifiers, aR as debounce, aS as orderBy, aw as normalizeProps, ax as guardReactiveProps } from "./vendor-iGRY5S0P.js";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -141,7 +140,6 @@ function _sfc_render$e(_ctx, _cache) {
 }
 _sfc_main$e.__file = "src/components/icons/SortDownIcon.vue";
 const SortDownIcon = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$e], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/SortDownIcon.vue"]]);
-const SortSelector_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$d = /* @__PURE__ */ defineComponent({
   __name: "SortSelector",
   props: {
@@ -171,7 +169,6 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$d.__file = "src/components/stuff/SortSelector.vue";
 const SortSelector = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$d], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/SortSelector.vue"]]);
-const TableViewCell_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$c = /* @__PURE__ */ defineComponent({
   __name: "TableViewCell",
   props: {
@@ -217,7 +214,6 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$c.__file = "src/components/views/TableViewCell.vue";
 const TableCell = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$c], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/TableViewCell.vue"]]);
-const TableViewHeaderCell_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
   __name: "TableViewHeaderCell",
   props: {
@@ -280,10 +276,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock($setup["TableCell"], {
     cell: $props.cell,
-    class: normalizeClass([
-      "vs-table-view__cell--is-value",
-      $props.cell.isStickyAction && "vs-table-view__cell--is-sticky"
-    ])
+    class: normalizeClass(["vs-table-view__cell--is-value", $props.cell.isStickyAction && "vs-table-view__cell--is-sticky"])
   }, {
     default: withCtx(() => [
       renderSlot(_ctx.$slots, "default")
@@ -294,15 +287,12 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$a.__file = "src/components/views/TableViewValueCell.vue";
 const ValueCell = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$a], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/TableViewValueCell.vue"]]);
-const TableView_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "TableView",
   props: {
+    screener: { type: Object, required: true },
     fields: { type: Array, required: true },
     rows: { type: Array, required: true },
-    highlight: { type: String, required: true },
-    sortField: { type: [null, String], required: true },
-    sortDirection: { type: [null, String], required: true },
     includeStickyActions: { type: Boolean, required: false }
   },
   emits: ["on-sort"],
@@ -338,7 +328,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           return {
             field: col.key,
             value: col.hasValue ? col.value : "",
-            highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : "", props.highlight) : "",
+            highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : "", props.screener.highlightQuery.value) : "",
             isFirst: i === 0,
             isLast: i === row.length - 1,
             type: col.type,
@@ -379,8 +369,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
       };
     });
     const getSortDirection = (field) => {
-      if (props.sortField === field) {
-        return props.sortDirection;
+      if (props.screener.sortField.value === field) {
+        return props.screener.sortDirection.value;
       }
       return null;
     };
@@ -451,7 +441,7 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
                     cell,
                     key: j,
                     highlight: $setup.highlightText,
-                    highlightValue: $props.highlight
+                    highlightValue: $props.screener.highlightQuery.value
                   }, () => [
                     createVNode($setup["ValueCell"], { cell }, null, 8, ["cell"])
                   ]);
@@ -484,7 +474,6 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$9.__file = "src/components/views/TableView.vue";
 const TableView = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$9], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/TableView.vue"]]);
-const NoDataView_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$8 = {};
 const _hoisted_1$8 = { class: "vs-no-data-view" };
 function _sfc_render$8(_ctx, _cache) {
@@ -492,36 +481,29 @@ function _sfc_render$8(_ctx, _cache) {
 }
 _sfc_main$8.__file = "src/components/views/NoDataView.vue";
 const NoDataView = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$8], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/NoDataView.vue"]]);
-const VueScreenerSearch_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
-  __name: "VueScreenerSearch",
+  __name: "ScreenerSearch",
   props: {
-    query: { type: String, required: true },
     isValidQuery: { type: Boolean, required: true },
-    searchOptions: { type: Array, required: true }
+    screener: { type: Object, required: true }
   },
-  emits: ["input", "search", "update-options"],
-  setup(__props, { expose: __expose, emit }) {
+  setup(__props, { expose: __expose }) {
     __expose();
-    const {
-      query = "",
-      isValidQuery = true,
-      searchOptions = []
-    } = __props;
+    const { isValidQuery = true, screener } = __props;
     const history = ref([]);
     const historyIndex = ref(null);
     const useRegEx = computed(() => {
-      return searchOptions.some((activeOption) => activeOption === "use-regex");
+      return screener.searchOptions.value.some((activeOption) => activeOption === "use-regex");
     });
     const onKeydown = (event) => {
       const isPressingUp = event.key === "ArrowUp";
       const isPressingDown = event.key === "ArrowDown";
       const isEnter = event.key === "Enter";
-      const searchQuery = event.target.value;
+      const searchQuery2 = event.target.value;
       if (isEnter) {
-        search2(searchQuery);
-        if (searchQuery) {
-          history.value.push(searchQuery);
+        screener.actions.search(searchQuery2);
+        if (searchQuery2) {
+          history.value.push(searchQuery2);
           historyIndex.value = history.value.length - 1;
         }
       }
@@ -534,16 +516,13 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
       } else if (isPressingDown && historyIndex.value < history.value.length - 1) {
         historyIndex.value++;
       }
-      search2(history.value[historyIndex.value]);
+      screener.actions.search(history.value[historyIndex.value]);
     };
     const onInput = (event) => {
-      const query2 = event.target.value;
-      emit("input", query2);
+      const query = event.target.value;
+      screener.highlightQuery.value = query;
     };
-    const search2 = (searchQuery) => {
-      emit("search", searchQuery);
-    };
-    const __returned__ = { emit, history, historyIndex, useRegEx, onKeydown, onInput, search: search2 };
+    const __returned__ = { history, historyIndex, useRegEx, onKeydown, onInput };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -551,7 +530,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
 const _hoisted_1$7 = ["value"];
 function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("input", {
-    value: $props.query,
+    value: $props.screener.searchQuery.value,
     onKeydown: $setup.onKeydown,
     onInput: $setup.onInput,
     type: "text",
@@ -559,25 +538,25 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Search..."
   }, null, 42, _hoisted_1$7);
 }
-_sfc_main$7.__file = "src/components/stuff/VueScreenerSearch.vue";
-const VueScreenerSearch = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/VueScreenerSearch.vue"]]);
-const Pagination_vue_vue_type_style_index_0_lang = "";
+_sfc_main$7.__file = "src/components/stuff/ScreenerSearch.vue";
+const ScreenerSearch = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$7], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/ScreenerSearch.vue"]]);
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "Pagination",
   props: {
-    currentPage: { type: Number, required: false, default: 1 },
-    totalItems: { type: Number, required: false, default: 0 },
-    perPage: { type: Number, required: false, default: 25 }
+    screener: { type: Object, required: true }
   },
-  emits: ["change-page", "change-per-page"],
-  setup(__props, { expose: __expose, emit }) {
+  setup(__props, { expose: __expose }) {
     __expose();
     const props = __props;
     const totalPages = computed(() => {
-      return Math.ceil(props.totalItems / props.perPage) || 0;
+      return Math.ceil(props.screener.totalItems.value / props.screener.perPage.value) || 0;
     });
     const getPages = computed(() => {
-      let pages = [props.currentPage - 1, props.currentPage, props.currentPage + 1];
+      let pages = [
+        props.screener.currentPage.value - 1,
+        props.screener.currentPage.value,
+        props.screener.currentPage.value + 1
+      ];
       pages = pages.filter((page) => page > 0);
       if (pages.length < 3) {
         pages.push(pages[pages.length - 1] + 1);
@@ -589,37 +568,37 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       return pages;
     });
     const canNavigateFirst = computed(() => {
-      return props.currentPage > 1;
+      return props.screener.currentPage.value > 1;
     });
     const canNavigatePrev = computed(() => {
-      return props.currentPage > 1;
+      return props.screener.currentPage.value > 1;
     });
     const canNavigateNext = computed(() => {
-      return props.currentPage < totalPages.value;
+      return props.screener.currentPage.value < totalPages.value;
     });
     const canNavigateLast = computed(() => {
-      return props.currentPage < totalPages.value;
+      return props.screener.currentPage.value < totalPages.value;
     });
     const firstIndexOfCurrentPage = computed(() => {
-      return props.currentPage * props.perPage - props.perPage + 1;
+      return props.screener.currentPage.value * props.screener.perPage.value - props.screener.perPage.value + 1;
     });
     const lastIndexOfCurrentPage = computed(() => {
-      return props.currentPage * props.perPage > props.totalItems ? props.totalItems : props.currentPage * props.perPage;
+      return props.screener.currentPage.value * props.screener.perPage.value > props.screener.totalItems.value ? props.screener.totalItems.value : props.screener.currentPage.value * props.screener.perPage.value;
     });
     const currentPageIsInRange = computed(() => {
-      return totalPages.value >= props.currentPage;
+      return totalPages.value >= props.screener.currentPage.value;
     });
     onMounted(() => {
       ensureCurrentPageIsValid();
     });
     watch(
-      () => props.totalItems,
+      () => props.screener.totalItems.value,
       () => {
         ensureCurrentPageIsValid();
       }
     );
     const isActive = (page) => {
-      return page === props.currentPage;
+      return page === props.screener.currentPage.value;
     };
     const ensureCurrentPageIsValid = () => {
       if (!currentPageIsInRange.value) {
@@ -627,28 +606,25 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       }
     };
     const handleClickFirst = () => {
-      emit("change-page", 1);
+      props.screener.currentPage.value = 1;
     };
     const handleClickPrev = () => {
-      emit("change-page", canNavigatePrev.value ? props.currentPage - 1 : 1);
+      props.screener.currentPage.value = canNavigatePrev.value ? props.screener.currentPage.value - 1 : 1;
     };
     const handleClickNext = () => {
-      emit(
-        "change-page",
-        canNavigateNext.value ? props.currentPage + 1 : totalPages.value
-      );
+      props.screener.currentPage.value = canNavigateNext.value ? props.screener.currentPage.value + 1 : totalPages.value;
     };
     const handleClickLast = () => {
-      emit("change-page", totalPages.value);
+      props.screener.currentPage.value = totalPages.value;
     };
     const handleSelectPage = (targetPage) => {
-      emit("change-page", targetPage);
+      props.screener.currentPage.value = targetPage;
     };
     const handleChangePerPage = (event) => {
-      const perPage = Number(event.target.value);
-      emit("change-per-page", perPage);
+      const perPage2 = Number(event.target.value);
+      props.screener.perPage.value = perPage2;
     };
-    const __returned__ = { props, emit, totalPages, getPages, canNavigateFirst, canNavigatePrev, canNavigateNext, canNavigateLast, firstIndexOfCurrentPage, lastIndexOfCurrentPage, currentPageIsInRange, isActive, ensureCurrentPageIsValid, handleClickFirst, handleClickPrev, handleClickNext, handleClickLast, handleSelectPage, handleChangePerPage };
+    const __returned__ = { props, totalPages, getPages, canNavigateFirst, canNavigatePrev, canNavigateNext, canNavigateLast, firstIndexOfCurrentPage, lastIndexOfCurrentPage, currentPageIsInRange, isActive, ensureCurrentPageIsValid, handleClickFirst, handleClickPrev, handleClickNext, handleClickLast, handleSelectPage, handleChangePerPage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -666,7 +642,7 @@ const _hoisted_10 = ["value"];
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", _hoisted_1$6, [
     createBaseVNode("div", _hoisted_2$4, [
-      !$props.totalItems ? (openBlock(), createElementBlock(
+      !$props.screener.totalItems.value ? (openBlock(), createElementBlock(
         Fragment,
         { key: 0 },
         [
@@ -679,7 +655,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
         { key: 1 },
         [
           createTextVNode(
-            " Showing " + toDisplayString($setup.firstIndexOfCurrentPage) + "-" + toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.totalItems),
+            " Showing " + toDisplayString($setup.firstIndexOfCurrentPage) + "-" + toDisplayString($setup.lastIndexOfCurrentPage) + " of " + toDisplayString($props.screener.totalItems.value),
             1
             /* TEXT */
           )
@@ -746,7 +722,7 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     createBaseVNode("div", _hoisted_9, [
       createBaseVNode("input", {
         type: "number",
-        value: $props.perPage,
+        value: $props.screener.perPage.value,
         min: "1",
         step: "1",
         onInput: $setup.handleChangePerPage,
@@ -757,7 +733,6 @@ function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$6.__file = "src/components/stuff/Pagination.vue";
 const Pagination = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$6], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/Pagination.vue"]]);
-const ErrorMessage_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "ErrorMessage",
   props: {
@@ -782,7 +757,6 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$5.__file = "src/components/stuff/ErrorMessage.vue";
 const ErrorMessage = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$5], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/ErrorMessage.vue"]]);
-const Dropdown_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   __name: "Dropdown",
   setup(__props, { expose: __expose }) {
@@ -823,7 +797,6 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$4.__file = "src/components/stuff/Dropdown.vue";
 const Dropdown = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$4], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/Dropdown.vue"]]);
-const ViewSelector_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
   __name: "ViewSelector",
   props: {
@@ -846,10 +819,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
       {
         href: "#",
         onClick: _cache[0] || (_cache[0] = withModifiers(($event) => $setup.onSelectFormat("table"), ["prevent"])),
-        class: normalizeClass([
-          "vs-view-selector__link",
-          $props.activeFormat === "table" && "vs-view-selector__link--is-active"
-        ]),
+        class: normalizeClass(["vs-view-selector__link", $props.activeFormat === "table" && "vs-view-selector__link--is-active"]),
         textContent: "Table"
       },
       null,
@@ -861,10 +831,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
       {
         href: "#",
         onClick: _cache[1] || (_cache[1] = withModifiers(($event) => $setup.onSelectFormat("raw"), ["prevent"])),
-        class: normalizeClass([
-          "vs-view-selector__link",
-          $props.activeFormat === "raw" && "vs-view-selector__link--is-active"
-        ]),
+        class: normalizeClass(["vs-view-selector__link", $props.activeFormat === "raw" && "vs-view-selector__link--is-active"]),
         textContent: "Raw"
       },
       null,
@@ -900,14 +867,12 @@ function _sfc_render$2(_ctx, _cache) {
 }
 _sfc_main$2.__file = "src/components/icons/CogIcon.vue";
 const CogIcon = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$2], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/CogIcon.vue"]]);
-const Settings_vue_vue_type_style_index_0_lang = "";
 const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "Settings",
   props: {
-    activeFormat: { type: String, required: true },
-    searchOptions: { type: Array, required: true }
+    screener: { type: Object, required: true }
   },
-  emits: ["select-format", "change-search-options"],
+  emits: ["change-search-options"],
   setup(__props, { expose: __expose, emit }) {
     __expose();
     const props = __props;
@@ -919,20 +884,23 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     const getOptions = computed(() => {
       return options.value.map((option) => ({
         ...option,
-        isActive: props.searchOptions.includes(option.id)
+        isActive: props.screener.searchOptions.value.includes(option.id)
       }));
     });
     const toggleOption = (option) => {
-      if (props.searchOptions.includes(option)) {
+      if (props.screener.searchOptions.value.includes(option)) {
         emit(
           "change-search-options",
-          props.searchOptions.filter((activeOption) => activeOption !== option)
+          props.screener.searchOptions.value.filter((activeOption) => activeOption !== option)
         );
       } else {
-        emit("change-search-options", [...props.searchOptions, option]);
+        emit("change-search-options", [...props.screener.searchOptions.value, option]);
       }
     };
-    const __returned__ = { props, emit, options, getOptions, toggleOption, Dropdown, ViewSelector, CogIcon };
+    const handleSelectFormat = (format) => {
+      props.screener.renderFormat.value = format;
+    };
+    const __returned__ = { props, emit, options, getOptions, toggleOption, handleSelectFormat, Dropdown, ViewSelector, CogIcon };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -989,8 +957,8 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
       ]),
       _hoisted_5,
       createVNode($setup["ViewSelector"], {
-        "active-format": $props.activeFormat,
-        onSelectFormat: _cache[0] || (_cache[0] = ($event) => $setup.emit("select-format", $event))
+        "active-format": $props.screener.renderFormat.value,
+        onSelectFormat: _cache[0] || (_cache[0] = ($event) => $setup.handleSelectFormat($event))
       }, null, 8, ["active-format"])
     ]),
     _: 1
@@ -999,22 +967,20 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
 }
 _sfc_main$1.__file = "src/components/stuff/Settings.vue";
 const Settings = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/stuff/Settings.vue"]]);
-function isValidInput(data) {
+function isValidInput(data2) {
   const isObject = (val) => typeof val === "object" && val !== null;
-  return Array.isArray(data) && data.every((row) => Array.isArray(row) || isObject(row));
+  return Array.isArray(data2) && data2.every((row) => Array.isArray(row) || isObject(row));
 }
-function normaliseInput(data) {
-  data = data.map((row) => Array.isArray(row) ? { ...row } : row);
+function normaliseInput(data2) {
+  data2 = data2.map((row) => Array.isArray(row) ? { ...row } : row);
   const normaliseField = (field, value) => ({
     key: field,
     value,
     type: getTypeOf(value),
     hasValue: value !== null || value !== void 0
   });
-  let normalisedData = data.map((row) => {
-    return Object.keys(row).map(
-      (key) => normaliseField(key, row[key])
-    );
+  let normalisedData = data2.map((row) => {
+    return Object.keys(row).map((key) => normaliseField(key, row[key]));
   });
   const fields = getFields(normalisedData);
   normalisedData = normalisedData.map((row) => {
@@ -1045,19 +1011,19 @@ function pickFields(rows, pickFields2) {
     return pickedRow;
   });
 }
-function excludeFields(rows, excludeFields2) {
+function omitFields(rows, omitFields2) {
   return rows.map((row) => {
-    return row.filter((field) => !excludeFields2.includes(field.key));
+    return row.filter((field) => !omitFields2.includes(field.key));
   });
 }
 function getPaginated(options) {
   let { rows = [] } = options;
-  const { page = 1, perPage = 25, withPlaceholders = false } = options;
-  const start = perPage * page;
-  const end = start + perPage;
+  const { page = 1, perPage: perPage2 = 25, withPlaceholders = false } = options;
+  const start = perPage2 * page;
+  const end = start + perPage2;
   rows = rows.slice(start, end);
-  if (withPlaceholders && rows.length !== perPage) {
-    const emptyRows = Array(perPage).fill(null);
+  if (withPlaceholders && rows.length !== perPage2) {
+    const emptyRows = Array(perPage2).fill(null);
     return Object.assign(emptyRows, rows);
   }
   return rows;
@@ -1094,44 +1060,40 @@ const testCriteria = (subject, pattern, options) => {
   const flags = matchCase ? "g" : "gi";
   return new RegExp(pattern, flags).test(subject);
 };
-const parseSearchQuery = (searchQuery) => {
+const parseSearchQuery = (searchQuery2) => {
   const excludeFilters = [];
-  searchQuery = searchQuery.replace(new RegExp("(?<!\\w)-\\w+:\\w+", "g"), (match) => {
+  searchQuery2 = searchQuery2.replace(new RegExp("(?<!\\w)-\\w+:\\w+", "g"), (match) => {
     const [field, value] = match.replace("-", "").split(":");
     excludeFilters.push([field, value]);
     return "";
   });
-  searchQuery = searchQuery.replace(new RegExp('(?<!\\w)-\\w+:"[^"]*"$', "g"), (match) => {
+  searchQuery2 = searchQuery2.replace(new RegExp('(?<!\\w)-\\w+:"[^"]*"$', "g"), (match) => {
     const [field, value] = match.replace("-", "").split(":");
     excludeFilters.push([field, value.slice(1, -1)]);
     return "";
   }).trim();
   const includeFilters = [];
-  searchQuery = searchQuery.replace(/\b\w+:\w+\b/g, (match) => {
+  searchQuery2 = searchQuery2.replace(/\b\w+:\w+\b/g, (match) => {
     const [field, value] = match.split(":");
     includeFilters.push([field, value]);
     return "";
   }).trim();
-  searchQuery = searchQuery.replace(/\b\w+:"[^"]*"$/g, (match) => {
+  searchQuery2 = searchQuery2.replace(/\b\w+:"[^"]*"$/g, (match) => {
     const [field, value] = match.split(":");
     includeFilters.push([field, value.slice(1, -1)]);
     return "";
   }).trim();
   return {
-    searchQuery,
+    searchQuery: searchQuery2,
     excludeFilters,
     includeFilters
   };
 };
 function search(options) {
-  let { searchQuery = "" } = options;
-  if (!searchQuery)
+  const { searchQuery: searchQuery2 = "" } = options;
+  if (!searchQuery2)
     return options.rows;
-  let {
-    searchQuery: parsedSearchQuery,
-    excludeFilters,
-    includeFilters
-  } = parseSearchQuery(searchQuery);
+  const { searchQuery: parsedSearchQuery, excludeFilters, includeFilters } = parseSearchQuery(searchQuery2);
   const { rows, useRegExp = false, matchCase = false, matchWord = false } = options;
   const testExcludeFilters = (filters, rowMap) => {
     return filters.some(([field, value]) => {
@@ -1156,10 +1118,7 @@ function search(options) {
     });
   };
   return rows.filter((row) => {
-    const rowMap = row.reduce(
-      (acc, field) => ({ ...acc, [field.key]: field }),
-      {}
-    );
+    const rowMap = row.reduce((acc, field) => ({ ...acc, [field.key]: field }), {});
     let shouldExclude = false;
     let shouldInclude = true;
     let meetsSearchCriteria = true;
@@ -1181,6 +1140,65 @@ function search(options) {
     return !shouldExclude && shouldInclude && meetsSearchCriteria;
   });
 }
+const searchQuery = ref("");
+const highlightQuery = ref("");
+const currentPage = ref(1);
+const perPage = ref(15);
+const renderFormat = ref("table");
+const searchOptions = ref([]);
+const sortField = ref(null);
+const sortDirection = ref("desc");
+const data = ref([]);
+const useScreener = (options = {}) => {
+  currentPage.value = options.defaultCurrentPage ?? currentPage.value;
+  perPage.value = options.defaultPerPage ?? perPage.value;
+  data.value = options.defaultData ?? data.value;
+  const shouldUseRegEx = computed(() => searchOptions.value.includes("use-regex"));
+  const shouldMatchCase = computed(() => searchOptions.value.includes("match-case"));
+  const shouldMatchWord = computed(() => searchOptions.value.includes("match-word"));
+  const normalisedData = computed(() => {
+    let normalisedData2 = isValidInput(data.value) ? normaliseInput(data.value) : [];
+    if (options.pick && options.pick.length > 0) {
+      normalisedData2 = pickFields(normalisedData2, options.pick);
+    }
+    if (options.omit && options.omit.length > 0) {
+      normalisedData2 = omitFields(normalisedData2, options.omit);
+    }
+    return normalisedData2;
+  });
+  const searchedData = computed(() => {
+    return search({
+      rows: normalisedData.value,
+      searchQuery: searchQuery.value,
+      useRegExp: shouldUseRegEx.value,
+      matchCase: shouldMatchCase.value,
+      matchWord: shouldMatchWord.value
+    });
+  });
+  return {
+    searchQuery,
+    highlightQuery,
+    currentPage,
+    perPage,
+    renderFormat,
+    searchOptions,
+    sortField,
+    sortDirection,
+    shouldUseRegEx,
+    shouldMatchCase,
+    shouldMatchWord,
+    data,
+    normalisedData,
+    searchedData,
+    totalItems: computed(() => searchedData.value.length),
+    actions: {
+      search: (query) => {
+        searchQuery.value = query;
+        highlightQuery.value = query;
+      }
+    }
+  };
+};
 function isHorizontallyScrollable(element) {
   return element.scrollWidth > element.clientWidth;
 }
@@ -1210,14 +1228,31 @@ function observeHorizontalScrollability(element, callback, debounceTime = 20) {
     }
   };
 }
-const VueScreener_vue_vue_type_style_index_0_lang = "";
+const useScrollable = () => {
+  const elRef = ref();
+  const isScrollable = ref(false);
+  const isScrolledEnd = ref(false);
+  onMounted(() => {
+    if (elRef.value) {
+      observeHorizontalScrollability(elRef.value, (state) => {
+        isScrollable.value = state.isXScrollable;
+        isScrolledEnd.value = state.isXScrolledEnd;
+      });
+    }
+  });
+  return {
+    ref: elRef,
+    isScrollable,
+    isScrolledEnd
+  };
+};
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "VueScreener",
   props: {
     data: { type: Array, required: false, default: () => [] },
     title: { type: String, required: false, default: "Results" },
     pick: { type: Array, required: false, default: () => [] },
-    exclude: { type: Array, required: false, default: () => [] },
+    omit: { type: Array, required: false, default: () => [] },
     perPage: { type: Number, required: false, default: 15 },
     currentPage: { type: Number, required: false, default: 1 },
     includeStickyActions: { type: Boolean, required: false, default: false },
@@ -1226,82 +1261,35 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose }) {
     __expose();
     const props = __props;
-    const mainEl = ref();
-    const isXScrollable = ref(false);
-    const isXScrolledEnd = ref(false);
-    onMounted(() => {
-      if (mainEl.value) {
-        observeHorizontalScrollability(mainEl.value, (state) => {
-          isXScrollable.value = state.isXScrollable;
-          isXScrolledEnd.value = state.isXScrolledEnd;
-        });
-      }
+    const screener = useScreener({
+      defaultCurrentPage: props.currentPage,
+      defaultPerPage: props.perPage,
+      defaultData: props.data,
+      pick: props.pick,
+      omit: props.omit
     });
-    const searchQuery = ref("");
-    const highlightQuery = ref("");
-    const stagedCurrentPage = ref(props.currentPage);
-    const stagedPerPage = ref(props.perPage);
-    const renderFormat = ref("table");
-    const searchOptions = ref([]);
-    const sortField = ref(null);
-    const sortDirection = ref("desc");
+    const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable();
     const isValidInput$1 = computed(() => {
-      return isValidInput(props.data);
+      return isValidInput(screener.data.value);
     });
     const isRegExFriendlySearchQuery = computed(() => {
-      return isValidRegExp(searchQuery.value);
-    });
-    const getNormalisedData = computed(() => {
-      let normalisedData = isValidInput(props.data) ? normaliseInput(props.data) : [];
-      if (props.pick.length > 0) {
-        normalisedData = pickFields(normalisedData, props.pick);
-      }
-      if (props.exclude.length > 0) {
-        normalisedData = excludeFields(normalisedData, props.exclude);
-      }
-      return normalisedData;
+      return isValidRegExp(screener.searchQuery.value);
     });
     const getFields$1 = computed(() => {
-      return getFields(getNormalisedData.value);
-    });
-    const shouldUseRegEx = computed(() => {
-      return searchOptions.value.includes("use-regex");
-    });
-    const shouldMatchCase = computed(() => {
-      return searchOptions.value.includes("match-case");
-    });
-    const shouldMatchWord = computed(() => {
-      return searchOptions.value.includes("match-word");
-    });
-    const getSearchedData = computed(() => {
-      return search({
-        rows: getNormalisedData.value,
-        searchQuery: searchQuery.value,
-        useRegExp: shouldUseRegEx.value,
-        matchCase: shouldMatchCase.value,
-        matchWord: shouldMatchWord.value
-      });
+      return getFields(screener.normalisedData.value);
     });
     const getSortedData = computed(() => {
       var _a;
-      const sortedRows = searchQuery.value ? getSearchedData.value : getNormalisedData.value;
-      const sortIndex = ((_a = sortedRows[0]) == null ? void 0 : _a.findIndex((column) => column.key === sortField.value)) ?? null;
-      if (sortField.value && sortDirection.value) {
-        const nullRows = sortedRows.filter(
-          (row) => (row == null ? void 0 : row[sortIndex]) === null || (row == null ? void 0 : row[sortIndex]) === void 0
-        );
-        const nonNullRows = sortedRows.filter(
-          (row) => (row == null ? void 0 : row[sortIndex]) !== null && (row == null ? void 0 : row[sortIndex]) !== void 0
-        );
+      const sortedRows = screener.searchQuery.value ? screener.searchedData.value : screener.normalisedData.value;
+      const sortIndex = ((_a = sortedRows[0]) == null ? void 0 : _a.findIndex((column) => column.key === screener.sortField.value)) ?? null;
+      if (screener.sortField.value && screener.sortDirection.value) {
+        const nullRows = sortedRows.filter((row) => (row == null ? void 0 : row[sortIndex]) === null || (row == null ? void 0 : row[sortIndex]) === void 0);
+        const nonNullRows = sortedRows.filter((row) => (row == null ? void 0 : row[sortIndex]) !== null && (row == null ? void 0 : row[sortIndex]) !== void 0);
         return [
-          ...orderBy(
-            nonNullRows,
-            [(row) => {
-              var _a2;
-              return (_a2 = row == null ? void 0 : row[sortIndex]) == null ? void 0 : _a2.value;
-            }],
-            [sortDirection.value]
-          ),
+          ...orderBy(nonNullRows, [(row) => {
+            var _a2;
+            return (_a2 = row == null ? void 0 : row[sortIndex]) == null ? void 0 : _a2.value;
+          }], [screener.sortDirection.value]),
           ...nullRows
         ];
       } else {
@@ -1311,41 +1299,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const getPaginatedData = computed(() => {
       return getPaginated({
         rows: getSortedData.value,
-        page: stagedCurrentPage.value - 1,
-        perPage: stagedPerPage.value,
+        page: screener.currentPage.value - 1,
+        perPage: screener.perPage.value,
         withPlaceholders: true
       });
     });
     const hasData = computed(() => {
       return getPaginatedData.value.filter((row) => row !== null).length > 0;
     });
-    const onInputSearch = (query) => {
-      highlightQuery.value = query;
-    };
-    const onSearch = (query) => {
-      searchQuery.value = query;
-      highlightQuery.value = query;
-    };
     const onChangeSearchOptions = (options) => {
-      searchOptions.value = options;
-      onSearch(highlightQuery.value);
-    };
-    const onSelectFormat = (format) => {
-      renderFormat.value = format;
-    };
-    const onChangePage = (page) => {
-      stagedCurrentPage.value = page;
-    };
-    const onChangePerPage = (perPage) => {
-      stagedPerPage.value = perPage;
+      screener.searchOptions.value = options;
+      screener.actions.search(screener.highlightQuery.value);
     };
     const handleSort = (updatedSortField) => {
-      if (sortField.value === updatedSortField) {
-        sortDirection.value = sortDirection.value === "desc" ? "asc" : "desc";
+      if (screener.sortField.value === updatedSortField) {
+        screener.sortDirection.value = screener.sortDirection.value === "desc" ? "asc" : "desc";
       }
-      sortField.value = updatedSortField;
+      screener.sortField.value = updatedSortField;
     };
-    const __returned__ = { props, mainEl, isXScrollable, isXScrolledEnd, searchQuery, highlightQuery, stagedCurrentPage, stagedPerPage, renderFormat, searchOptions, sortField, sortDirection, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getNormalisedData, getFields: getFields$1, shouldUseRegEx, shouldMatchCase, shouldMatchWord, getSearchedData, getSortedData, getPaginatedData, hasData, onInputSearch, onSearch, onChangeSearchOptions, onSelectFormat, onChangePage, onChangePerPage, handleSort, JsonView, TableView, NoDataView, VueScreenerSearch, Pagination, ErrorMessage, Settings };
+    const __returned__ = { props, screener, mainRef, isScrollable, isScrolledEnd, isValidInput: isValidInput$1, isRegExFriendlySearchQuery, getFields: getFields$1, getSortedData, getPaginatedData, hasData, onChangeSearchOptions, handleSort, JsonView, TableView, NoDataView, ScreenerSearch, Pagination, ErrorMessage, Settings };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
   }
@@ -1355,7 +1327,7 @@ const _hoisted_2 = {
   key: 0,
   class: "vs-header"
 };
-const _hoisted_3 = { class: "vs-title" };
+const _hoisted_3 = ["textContent"];
 const _hoisted_4 = { class: "vs-footer" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("section", _hoisted_1, [
@@ -1364,45 +1336,32 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       { key: 0 },
       [
         $props.includeHeader ? (openBlock(), createElementBlock("header", _hoisted_2, [
-          createBaseVNode(
-            "div",
-            _hoisted_3,
-            toDisplayString($setup.props.title),
-            1
-            /* TEXT */
-          ),
-          createVNode($setup["VueScreenerSearch"], {
-            query: $setup.searchQuery,
+          createBaseVNode("div", {
+            class: "vs-title",
+            textContent: toDisplayString($setup.props.title)
+          }, null, 8, _hoisted_3),
+          createVNode($setup["ScreenerSearch"], {
+            screener: $setup.screener,
             "is-valid-query": $setup.isRegExFriendlySearchQuery,
-            "search-options": $setup.searchOptions,
-            onInput: $setup.onInputSearch,
-            onSearch: $setup.onSearch,
             class: "vs-search"
-          }, null, 8, ["query", "is-valid-query", "search-options"]),
+          }, null, 8, ["screener", "is-valid-query"]),
           createVNode($setup["Settings"], {
-            "active-format": $setup.renderFormat,
-            onSelectFormat: $setup.onSelectFormat,
-            "search-options": $setup.searchOptions,
+            screener: $setup.screener,
             onChangeSearchOptions: $setup.onChangeSearchOptions
-          }, null, 8, ["active-format", "search-options"])
+          }, null, 8, ["screener"])
         ])) : createCommentVNode("v-if", true),
         createBaseVNode(
           "main",
           {
-            class: normalizeClass(["vs-main", {
-              "vs-main--is-x-scrollable": $setup.isXScrollable,
-              "vs-main--is-x-scrolled-end": $setup.isXScrolledEnd
-            }]),
-            ref: "mainEl"
+            class: normalizeClass(["vs-main", { "vs-main--is-scrollable": $setup.isScrollable, "vs-main--is-scrolled-end": $setup.isScrolledEnd }]),
+            ref: "mainRef"
           },
           [
-            $setup.hasData && $setup.renderFormat === "table" ? (openBlock(), createBlock($setup["TableView"], {
+            $setup.hasData && $setup.screener.renderFormat.value === "table" ? (openBlock(), createBlock($setup["TableView"], {
               key: 0,
+              screener: $setup.screener,
               fields: $setup.getFields,
               rows: $setup.getPaginatedData,
-              highlight: $setup.highlightQuery,
-              "sort-direction": $setup.sortDirection,
-              "sort-field": $setup.sortField,
               "include-sticky-actions": $props.includeStickyActions,
               onOnSort: $setup.handleSort
             }, {
@@ -1420,7 +1379,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               ]),
               _: 3
               /* FORWARDED */
-            }, 8, ["fields", "rows", "highlight", "sort-direction", "sort-field", "include-sticky-actions"])) : $setup.hasData ? (openBlock(), createBlock($setup["JsonView"], {
+            }, 8, ["screener", "fields", "rows", "include-sticky-actions"])) : $setup.hasData ? (openBlock(), createBlock($setup["JsonView"], {
               key: 1,
               data: $setup.getPaginatedData
             }, null, 8, ["data"])) : (openBlock(), createBlock($setup["NoDataView"], { key: 2 }))
@@ -1429,20 +1388,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           /* CLASS */
         ),
         createBaseVNode("footer", _hoisted_4, [
-          createVNode($setup["Pagination"], {
-            "total-items": $setup.getSearchedData.length,
-            "per-page": $setup.stagedPerPage,
-            "current-page": $setup.stagedCurrentPage,
-            onChangePage: $setup.onChangePage,
-            onChangePerPage: $setup.onChangePerPage
-          }, null, 8, ["total-items", "per-page", "current-page"])
+          createVNode($setup["Pagination"], { screener: $setup.screener }, null, 8, ["screener"])
         ])
       ],
       64
       /* STABLE_FRAGMENT */
     )) : (openBlock(), createBlock($setup["ErrorMessage"], {
       key: 1,
-      message: "Invalid data was provided. Please provide an\n      array of objects or an array of arrays.",
+      message: "Invalid data was provided. Please provide an array of objects or an array of arrays.",
       class: "vs-error-message"
     }))
   ]);

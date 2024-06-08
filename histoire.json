@@ -2,7 +2,7 @@
   "stories": [
     {
       "id": "src-stories-1-basic-usage-story-vue",
-      "title": "1 basic-usage",
+      "title": "1) Basic Usage",
       "layout": {
         "type": "single",
         "iframe": true
@@ -11,20 +11,40 @@
       "variants": [
         {
           "id": "src-stories-1-basic-usage-story-vue-0",
-          "title": "default"
+          "title": "Array of objects"
+        },
+        {
+          "id": "src-stories-1-basic-usage-story-vue-1",
+          "title": "Array of primitives"
+        },
+        {
+          "id": "src-stories-1-basic-usage-story-vue-2",
+          "title": "Array of mixed objects"
+        },
+        {
+          "id": "src-stories-1-basic-usage-story-vue-3",
+          "title": "No data"
+        },
+        {
+          "id": "src-stories-1-basic-usage-story-vue-4",
+          "title": "Custom title"
+        },
+        {
+          "id": "src-stories-1-basic-usage-story-vue-5",
+          "title": "Hide header"
         }
       ],
-      "relativePath": "src/stories/1 basic-usage.story.vue",
+      "relativePath": "src/stories/1-basic-usage.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "1 basic-usage"
+        "1) Basic Usage"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
       "id": "src-stories-2-sticky-actions-story-vue",
-      "title": "2 sticky-actions",
+      "title": "2) Sticky Actions",
       "layout": {
         "type": "single",
         "iframe": true
@@ -36,17 +56,17 @@
           "title": "default"
         }
       ],
-      "relativePath": "src/stories/2 sticky-actions.story.vue",
+      "relativePath": "src/stories/2-sticky-actions.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "2 sticky-actions"
+        "2) Sticky Actions"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
       "id": "src-stories-3-custom-cells-story-vue",
-      "title": "3 custom-cells",
+      "title": "3) Custom Cells",
       "layout": {
         "type": "single",
         "iframe": true
@@ -58,17 +78,17 @@
           "title": "default"
         }
       ],
-      "relativePath": "src/stories/3 custom-cells.story.vue",
+      "relativePath": "src/stories/3-custom-cells.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "3 custom-cells"
+        "3) Custom Cells"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
       "id": "src-stories-4-stress-test-story-vue",
-      "title": "4 stress-test",
+      "title": "4) Stress Test",
       "layout": {
         "type": "single",
         "iframe": true
@@ -80,54 +100,10 @@
           "title": "default"
         }
       ],
-      "relativePath": "src/stories/4 stress-test.story.vue",
+      "relativePath": "src/stories/4-stress-test.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "4 stress-test"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-5-no-data-story-vue",
-      "title": "5 no-data",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "src-stories-5-no-data-story-vue-0",
-          "title": "default"
-        }
-      ],
-      "relativePath": "src/stories/5 no-data.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "5 no-data"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-6-hide-header-story-vue",
-      "title": "6 hide-header",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "src-stories-6-hide-header-story-vue-0",
-          "title": "default"
-        }
-      ],
-      "relativePath": "src/stories/6 hide-header.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "6 hide-header"
+        "4) Stress Test"
       ],
       "virtual": false,
       "markdownFile": null
