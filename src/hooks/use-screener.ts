@@ -1,15 +1,8 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
 import { Columns, NeueColumn, NeueItem, Screener, UnknownObject } from '@/interfaces/screener'
-import {
-  getFieldsNeue,
-  getPaginatedNeue,
-  isValidInput,
-  normaliseInputNeue,
-  omitColumns,
-  pickColumns,
-} from '../utils/data.utils'
+import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
-import { searchNeue } from '../utils/search.utils'
+import { search } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
 import { highlightText } from '../utils/text.utils'
 
@@ -55,7 +48,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const neueData = computed((): NeueItem[] => {
-    let neueData = isValidInput(data.value) ? normaliseInputNeue(data.value as UnknownObject[]) : []
+    let neueData = isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
 
     if (includePinned.value) {
       neueData = neueData.map((item) => {
@@ -79,7 +72,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const neueSearchedData = computed((): NeueItem[] => {
-    return searchNeue({
+    return search({
       items: neueData.value,
       searchQuery: searchQuery.value,
       useRegExp: shouldUseRegEx.value,
@@ -110,7 +103,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const paginatedDataNeue = computed((): NeueItem[] => {
-    return getPaginatedNeue({
+    return getPaginated({
       items: sortedDataNeue.value,
       page: currentPage.value - 1,
       perPage: perPage.value,
@@ -142,7 +135,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const neueColumns = computed<NeueColumn[]>(() => {
-    const fields = getFieldsNeue(neueData.value)
+    const fields = getFields(neueData.value)
     if (includePinned.value) fields.push('pinned')
 
     let columns = fields.map((field, i) => {

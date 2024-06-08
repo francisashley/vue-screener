@@ -1,4 +1,4 @@
-import { NeueField, NeueItem, NormalisedField, NormalisedRow } from '@/interfaces/screener'
+import { NeueField, NeueItem } from '@/interfaces/screener'
 import { escapeRegExp } from './regex.utils'
 
 /**
@@ -94,92 +94,6 @@ const parseSearchQuery = (searchQuery: string) => {
 }
 
 /**
- * Search for rows based on specified criteria.
- *
- * @param {Object} options - The search options.
- * @param {NormalisedRow[]} options.rows - The data to search.
- * @param {string} options.searchQuery - The search query string.
- * @param {boolean} options.useRegExp - Whether to use regular expressions for the search.
- * @param {boolean} options.matchCase - Whether to match the case.
- * @param {boolean} options.matchWord - Whether to match whole words.
- * @returns {NormalisedRow[]} - The matched data.
- */
-export function search(options: {
-  rows: NormalisedRow[]
-  searchQuery: string
-  useRegExp: boolean
-  matchCase: boolean
-  matchWord: boolean
-}): NormalisedRow[] {
-  const { searchQuery = '' } = options
-
-  if (!searchQuery) return options.rows
-
-  // Parse search query and extract filters.
-  const { searchQuery: parsedSearchQuery, excludeFilters, includeFilters } = parseSearchQuery(searchQuery)
-
-  // Get the search options.
-  const { rows, useRegExp = false, matchCase = false, matchWord = false } = options
-
-  // Check if any of the filters match the row.
-  const testExcludeFilters = (filters: [string, string][], rowMap: Record<string, NormalisedField>): boolean => {
-    return filters.some(([field, value]) => {
-      if (rowMap[field]) {
-        return testCriteria(rowMap[field].value as string, value, {
-          matchCase,
-          matchWord: true,
-          useRegExp,
-        })
-      }
-    })
-  }
-
-  const testIncludeFilters = (filters: [string, string][], rowMap: Record<string, NormalisedField>): boolean => {
-    return filters.every(([field, value]) => {
-      if (rowMap[field]) {
-        return testCriteria(rowMap[field].value as string, value, {
-          matchCase,
-          matchWord: true,
-          useRegExp,
-        })
-      }
-    })
-  }
-
-  // Filter the rows.
-  return rows.filter((row): boolean => {
-    // Create a map of the row fields for easy look up.
-    const rowMap: Record<string, NormalisedField> = row.reduce((acc, field) => ({ ...acc, [field.key]: field }), {})
-
-    let shouldExclude = false
-    let shouldInclude = true
-    let meetsSearchCriteria = true
-
-    if (excludeFilters.length && testExcludeFilters(excludeFilters, rowMap)) {
-      shouldExclude = true
-    }
-
-    if (includeFilters.length && !testIncludeFilters(includeFilters, rowMap)) {
-      shouldInclude = false
-    }
-
-    meetsSearchCriteria = row.some((field) => {
-      if (
-        testCriteria(String(field.value ?? ''), parsedSearchQuery, {
-          matchCase,
-          matchWord,
-          useRegExp,
-        })
-      ) {
-        return true
-      }
-    })
-
-    return !shouldExclude && shouldInclude && meetsSearchCriteria
-  })
-}
-
-/**
  * Search for items based on specified criteria.
  *
  * @param {Object} options - The search options.
@@ -190,7 +104,7 @@ export function search(options: {
  * @param {boolean} options.matchWord - Whether to match whole words.
  * @returns {NeueItem[]} - The matched data.
  */
-export function searchNeue(options: {
+export function search(options: {
   items: NeueItem[]
   searchQuery: string
   useRegExp: boolean

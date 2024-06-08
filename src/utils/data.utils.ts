@@ -1,12 +1,4 @@
-import {
-  DataType,
-  NeueColumn,
-  NeueField,
-  NeueItem,
-  NormalisedField,
-  NormalisedRow,
-  UnknownObject,
-} from '@/interfaces/screener'
+import { DataType, NeueColumn, NeueField, NeueItem, UnknownObject } from '@/interfaces/screener'
 
 /**
  * Checks if data is an array of arrays or objects.
@@ -21,41 +13,9 @@ export function isValidInput(data: unknown): boolean {
 /**
  * Transforms input data into a consistent format.
  * @param {UnknownObject[]} data - The input data.
- * @returns {NormalisedRow[]} The normalised data.
- */
-export function normaliseInput(data: UnknownObject[]): NormalisedRow[] {
-  // If the input data is an array of arrays, convert it to an array of objects.
-  const transformedData = data.map((row) => (Array.isArray(row) ? { ...row } : row))
-
-  // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
-  const normaliseField = (field: string, value: unknown): NormalisedField => ({
-    key: field,
-    value,
-    type: getTypeOf(value),
-    hasValue: value !== null || value !== undefined,
-  })
-
-  // Normalise each row into an array of normalised fields.
-  const normalisedData = transformedData.map((row: UnknownObject): NormalisedRow => {
-    return Object.keys(row).map((key): NormalisedField => normaliseField(key, row[key]))
-  })
-
-  // If the input data is an array of objects with different fields, ensure that all rows include all fields and in the same order.
-  const fields = getFields(normalisedData)
-  return normalisedData.map((row) => {
-    return fields.map((field) => {
-      const foundField = row.find((_field: NormalisedField) => _field.key === field)
-      return foundField || normaliseField(field, undefined)
-    })
-  })
-}
-
-/**
- * Transforms input data into a consistent format.
- * @param {UnknownObject[]} data - The input data.
  * @returns {NeueItem[]} The normalised data.
  */
-export function normaliseInputNeue(data: UnknownObject[]): NeueItem[] {
+export function normaliseInput(data: UnknownObject[]): NeueItem[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((row) => (Array.isArray(row) ? { ...row } : row))
 
@@ -79,7 +39,7 @@ export function normaliseInputNeue(data: UnknownObject[]): NeueItem[] {
   })
 
   // If the input data is an array of objects with different fields, ensure that all rows include all fields and in the same order.
-  const fields = getFieldsNeue(normalisedData)
+  const fields = getFields(normalisedData)
   return normalisedData.map((item) => {
     fields.forEach((field) => {
       if (!item.fields[field]) {
@@ -93,21 +53,21 @@ export function normaliseInputNeue(data: UnknownObject[]): NeueItem[] {
 /**
  * Picks specified fields from normalised columns.
  * @param {NeueColumn[]} columns - The columns.
- * @param {string[]} pickFields - Fields to pick.
+ * @param {string[]} pickColumns - Fields to pick.
  * @returns {NeueColumn[]} Rows with picked fields.
  */
-export function pickColumns(columns: NeueColumn[], pickFields: string[]): NeueColumn[] {
-  return columns.filter((column) => pickFields.includes(column.field))
+export function pickColumns(columns: NeueColumn[], pickColumns: string[]): NeueColumn[] {
+  return columns.filter((column) => pickColumns.includes(column.field))
 }
 
 /**
  * Omits specified fields from normalised columns.
  * @param {NeueColumn[]} columns - The columns.
- * @param {string[]} omitFields - Fields to omit.
+ * @param {string[]} omitColumns - Fields to omit.
  * @returns {NeueColumn[]} Rows without omitted fields.
  */
-export function omitColumns(columns: NeueColumn[], omitFields: string[]): NeueColumn[] {
-  const omitFieldsSet = new Set(omitFields)
+export function omitColumns(columns: NeueColumn[], omitColumns: string[]): NeueColumn[] {
+  const omitFieldsSet = new Set(omitColumns)
   return columns.filter((column) => !omitFieldsSet.has(column.field))
 }
 
@@ -116,70 +76,9 @@ export function omitColumns(columns: NeueColumn[], omitFields: string[]): NeueCo
  * @param {NormalisedRow[]} rows - The normalised rows.
  * @returns {string[]} Unique field keys.
  */
-export function getFields(rows: NormalisedRow[]): string[] {
-  const fields = new Set<string>(rows.flatMap((row) => row.map((field) => field.key)))
-  return Array.from(fields)
-}
-
-/**
- * Extracts unique field keys from normalised rows.
- * @param {NormalisedRow[]} rows - The normalised rows.
- * @returns {string[]} Unique field keys.
- */
-export function getFieldsNeue(items: NeueItem[]): string[] {
+export function getFields(items: NeueItem[]): string[] {
   const fields = new Set<string>(items.flatMap((item) => Object.values(item.fields).map((field) => field.field)))
   return Array.from(fields)
-}
-
-/**
- * Picks specified fields from normalised rows.
- * @param {NormalisedRow[]} rows - The normalised rows.
- * @param {string[]} pickFields - Fields to pick.
- * @returns {NormalisedRow[]} Rows with picked fields.
- */
-export function pickFields(rows: NormalisedRow[], pickFields: string[]): NormalisedRow[] {
-  return rows.map((row) => row.filter((field) => pickFields.includes(field.key)))
-}
-
-/**
- * Omits specified fields from normalised rows.
- * @param {NormalisedRow[]} rows - The normalised rows.
- * @param {string[]} omitFields - Fields to omit.
- * @returns {NormalisedRow[]} Rows without omitted fields.
- */
-export function omitFields(rows: NormalisedRow[], omitFields: string[]): NormalisedRow[] {
-  const omitFieldsSet = new Set(omitFields)
-  return rows.map((row) => row.filter((field) => !omitFieldsSet.has(field.key)))
-}
-
-/**
- * Returns a paginated subset of normalised rows.
- * @param {Object} options - The options for pagination.
- * @returns {NormalisedRow[]} Paginated rows.
- */
-export function getPaginated({
-  rows = [],
-  page = 1,
-  perPage = 25,
-  withPlaceholders = false,
-}: {
-  rows: NormalisedRow[]
-  page: number
-  perPage: number
-  withPlaceholders: boolean
-}): NormalisedRow[] {
-  const start = perPage * page
-  const end = start + perPage
-
-  rows = rows.slice(start, end)
-
-  // provide placeholders when page does not meet perPage threshold
-  if (withPlaceholders && rows.length !== perPage) {
-    const emptyRows = Array(perPage).fill(null)
-    return Object.assign(emptyRows, rows)
-  }
-
-  return rows
 }
 
 /**
@@ -187,7 +86,7 @@ export function getPaginated({
  * @param {Object} options - The options for pagination.
  * @returns {NeueItem[]} Paginated rows.
  */
-export function getPaginatedNeue({
+export function getPaginated({
   items = [],
   page = 1,
   perPage = 25,
