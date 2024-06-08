@@ -38,7 +38,7 @@ export function normaliseInput(data: UnknownObject[]): NeueItem[] {
     return { data: item, fields }
   })
 
-  // If the input data is an array of objects with different fields, ensure that all rows include all fields and in the same order.
+  // If the input data is an array of objects with different fields, ensure that all items include all fields and in the same order.
   const fields = getFields(normalisedData)
   return normalisedData.map((item) => {
     fields.forEach((field) => {
@@ -72,8 +72,8 @@ export function omitColumns(columns: NeueColumn[], omitColumns: string[]): NeueC
 }
 
 /**
- * Extracts unique field keys from normalised rows.
- * @param {NormalisedRow[]} rows - The normalised rows.
+ * Extracts unique field keys from normalised items.
+ * @param {NeueItem[]} items - The normalised items.
  * @returns {string[]} Unique field keys.
  */
 export function getFields(items: NeueItem[]): string[] {
@@ -82,9 +82,9 @@ export function getFields(items: NeueItem[]): string[] {
 }
 
 /**
- * Returns a paginated subset of normalised rows.
+ * Returns a paginated subset of normalised items.
  * @param {Object} options - The options for pagination.
- * @returns {NeueItem[]} Paginated rows.
+ * @returns {NeueItem[]} Paginated items.
  */
 export function getPaginated({
   items = [],

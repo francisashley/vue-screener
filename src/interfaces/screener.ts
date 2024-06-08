@@ -62,28 +62,6 @@ export type Column = {
 
 export type Columns = Record<string, Column>
 
-// TODO: Get rid of this fist. Replace it with NeueItem
-export type Cell = {
-  field: string
-  value: unknown
-  highlightedValue: unknown
-  type?: DataType
-  isFirst?: boolean
-  isLast?: boolean
-  hasValue?: boolean
-  isPinned?: boolean
-  row?: unknown
-}
-
-export interface NormalisedField {
-  key: string
-  value: unknown
-  hasValue: boolean
-  type: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'null' | 'undefined' | 'symbol'
-}
-
-export type NormalisedRow = NormalisedField[]
-
 export interface UnknownObject {
   [key: string | number]: unknown
 }
