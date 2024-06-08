@@ -25,7 +25,7 @@
         </button>
       </div>
       <h3 class="vs-settings__heading">Presentation</h3>
-      <ViewSelector :active-format="activeFormat" @select-format="emit('select-format', $event)" />
+      <ViewSelector :active-format="screener.renderFormat.value" @select-format="handleSelectFormat($event)" />
     </template>
   </Dropdown>
 </template>
@@ -35,15 +35,15 @@ import { computed, ref } from 'vue'
 import Dropdown from './Dropdown.vue'
 import ViewSelector from './ViewSelector.vue'
 import CogIcon from '../icons/CogIcon.vue'
+import { Screener } from '@/interfaces/screener'
 
 export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
 
 const props = defineProps<{
-  activeFormat: 'table' | 'raw'
-  searchOptions: SearchQueryOption[]
+  screener: Screener
 }>()
 
-const emit = defineEmits(['select-format', 'change-search-options'])
+const emit = defineEmits(['change-search-options'])
 
 type SearchQueryInternalOption = {
   id: SearchQueryOption
@@ -61,19 +61,23 @@ const options = ref<SearchQueryInternalOption[]>([
 const getOptions = computed<SearchQueryInternalOption[]>(() => {
   return options.value.map((option: SearchQueryInternalOption) => ({
     ...option,
-    isActive: props.searchOptions.includes(option.id),
+    isActive: props.screener.searchOptions.value.includes(option.id),
   }))
 })
 
 const toggleOption = (option: SearchQueryOption) => {
-  if (props.searchOptions.includes(option)) {
+  if (props.screener.searchOptions.value.includes(option)) {
     emit(
       'change-search-options',
-      props.searchOptions.filter((activeOption) => activeOption !== option),
+      props.screener.searchOptions.value.filter((activeOption) => activeOption !== option),
     )
   } else {
-    emit('change-search-options', [...props.searchOptions, option])
+    emit('change-search-options', [...props.screener.searchOptions.value, option])
   }
+}
+
+const handleSelectFormat = (format: 'table' | 'raw') => {
+  props.screener.renderFormat.value = format
 }
 </script>
 

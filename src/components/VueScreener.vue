@@ -6,19 +6,12 @@
           {{ props.title }}
         </div>
         <ScreenerSearch
-          :query="screener.searchQuery.value"
+          :screener="screener"
           :is-valid-query="isRegExFriendlySearchQuery"
-          :search-options="screener.searchOptions.value"
-          @input="onInputSearch"
           @search="onSearch"
           class="vs-search"
         />
-        <Settings
-          :active-format="screener.renderFormat.value"
-          @select-format="onSelectFormat"
-          :search-options="screener.searchOptions.value"
-          @change-search-options="onChangeSearchOptions"
-        />
+        <Settings :screener="screener" @change-search-options="onChangeSearchOptions" />
       </header>
       <main
         class="vs-main"
@@ -27,11 +20,9 @@
       >
         <TableView
           v-if="hasData && screener.renderFormat.value === 'table'"
+          :screener="screener"
           :fields="getFields"
           :rows="getPaginatedData"
-          :highlight="screener.highlightQuery.value"
-          :sort-direction="screener.sortDirection.value"
-          :sort-field="screener.sortField.value"
           :include-sticky-actions="includeStickyActions"
           @on-sort="handleSort"
         >
@@ -159,10 +150,6 @@ const hasData = computed((): boolean => {
   return getPaginatedData.value.filter((row) => row !== null).length > 0
 })
 
-const onInputSearch = (query: string) => {
-  screener.highlightQuery.value = query
-}
-
 const onSearch = (query: string) => {
   screener.searchQuery.value = query
   screener.highlightQuery.value = query
@@ -171,10 +158,6 @@ const onSearch = (query: string) => {
 const onChangeSearchOptions = (options: SearchQueryOption[]) => {
   screener.searchOptions.value = options
   onSearch(screener.highlightQuery.value)
-}
-
-const onSelectFormat = (format: 'table' | 'raw') => {
-  screener.renderFormat.value = format
 }
 
 const handleSort = (updatedSortField: string) => {

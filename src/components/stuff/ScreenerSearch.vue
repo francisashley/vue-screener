@@ -1,6 +1,6 @@
 <template>
   <input
-    :value="query"
+    :value="screener.searchQuery.value"
     @keydown="onKeydown"
     @input="onInput"
     type="text"
@@ -11,27 +11,23 @@
 </template>
 
 <script lang="ts" setup>
+import { Screener } from '@/interfaces/screener'
 import { computed, ref } from 'vue'
 
 export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
 
-const {
-  query = '',
-  isValidQuery = true,
-  searchOptions = [],
-} = defineProps<{
-  query: string
+const { isValidQuery = true, screener } = defineProps<{
   isValidQuery: boolean
-  searchOptions: SearchQueryOption[]
+  screener: Screener
 }>()
 
-const emit = defineEmits(['input', 'search', 'update-options'])
+const emit = defineEmits(['search', 'update-options'])
 
 const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
 const useRegEx = computed<boolean>(() => {
-  return searchOptions.some((activeOption) => activeOption === 'use-regex')
+  return screener.searchOptions.value.some((activeOption) => activeOption === 'use-regex')
 })
 
 const onKeydown = (event: KeyboardEvent) => {
@@ -67,8 +63,7 @@ const onKeydown = (event: KeyboardEvent) => {
 
 const onInput = (event: Event) => {
   const query = (event.target as HTMLInputElement).value
-
-  emit('input', query)
+  screener.highlightQuery.value = query
 }
 
 const search = (searchQuery: string): void => {

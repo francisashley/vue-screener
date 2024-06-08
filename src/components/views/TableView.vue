@@ -25,7 +25,7 @@
         v-for="(cell, j) in row"
         :key="j"
         :highlight="highlightText"
-        :highlight-value="highlight"
+        :highlight-value="screener.highlightQuery.value"
       >
         <ValueCell :cell="cell" />
       </slot>
@@ -42,13 +42,12 @@ import { NormalisedRow } from '../../utils/data.utils'
 import HeaderCell from './TableViewHeaderCell.vue'
 import ValueCell from './TableViewValueCell.vue'
 import { Cell } from './TableViewCell.vue'
+import { Screener } from '@/interfaces/screener'
 
 const props = defineProps<{
+  screener: Screener
   fields: string[]
   rows: NormalisedRow[]
-  highlight: string
-  sortField: null | string
-  sortDirection: null | 'asc' | 'desc'
   includeStickyActions?: boolean
 }>()
 
@@ -86,7 +85,9 @@ const getRows = computed(() => {
       return {
         field: col.key,
         value: col.hasValue ? col.value : '',
-        highlightedValue: col.hasValue ? highlightText(col.value ? String(col.value) : '', props.highlight) : '',
+        highlightedValue: col.hasValue
+          ? highlightText(col.value ? String(col.value) : '', props.screener.highlightQuery.value)
+          : '',
         isFirst: i === 0,
         isLast: i === row.length - 1,
         type: col.type,
@@ -134,8 +135,8 @@ const rowStyle = computed(() => {
 })
 
 const getSortDirection = (field: string): 'asc' | 'desc' | null => {
-  if (props.sortField === field) {
-    return props.sortDirection
+  if (props.screener.sortField.value === field) {
+    return props.screener.sortDirection.value
   }
   return null
 }
