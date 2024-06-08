@@ -12,6 +12,9 @@
     <Variant title="No data">
       <VueScreener :data="[]" />
     </Variant>
+    <Variant title="Bad data">
+      <VueScreener data="bad data" />
+    </Variant>
     <Variant title="Custom title">
       <VueScreener title="Custom title" :data="baseData" />
     </Variant>
