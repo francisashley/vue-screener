@@ -44,7 +44,6 @@ defineProps<{
 <style lang="scss">
 .vs-table-view {
   color: black;
-  white-space: nowrap;
 
   &__cell {
     border-right: thin solid black;

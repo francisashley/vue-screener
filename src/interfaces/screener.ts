@@ -2,6 +2,13 @@ import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
 import { NormalisedRow } from '@/utils/data.utils'
 import { ComputedRef, Ref } from 'vue'
 
+export type Column = {
+  field: string
+  width: string // defaults to `1fr`
+}
+
+export type Columns = Record<string, Column>
+
 export type Screener = {
   title: Ref<string>
   includeStickyActions: Ref<boolean>
@@ -16,6 +23,7 @@ export type Screener = {
   shouldUseRegEx: ComputedRef<boolean>
   shouldMatchCase: ComputedRef<boolean>
   shouldMatchWord: ComputedRef<boolean>
+  columns: Ref<Columns>
   data: Ref<unknown[]>
   normalisedData: ComputedRef<NormalisedRow[]>
   searchedData: ComputedRef<NormalisedRow[]>

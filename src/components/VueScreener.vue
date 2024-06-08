@@ -22,12 +22,15 @@ import ScreenerHeader from './ScreenerHeader.vue'
 import ScreenerMain from './ScreenerMain.vue'
 import ScreenerFooter from './ScreenerFooter.vue'
 import { useScreener } from '../hooks/use-screener'
+import { Columns } from '@/interfaces/screener'
 
 type Props = {
   // The title to be displayed in the header
   title?: string
   // The data to be displayed in the table
   data?: unknown[]
+  // Configure each column
+  columns?: Columns
   // The specific fields to be displayed in the table
   pick?: string[]
   // The fields to be excluded from the table
@@ -45,6 +48,7 @@ type Props = {
 const {
   title = 'Results',
   data = [],
+  columns = {},
   pick = [],
   omit = [],
   perPage = 15,
@@ -59,6 +63,7 @@ const screener = useScreener({
   defaultCurrentPage: currentPage,
   defaultPerPage: perPage,
   defaultData: data,
+  columns: columns,
   pick: pick,
   omit: omit,
 })

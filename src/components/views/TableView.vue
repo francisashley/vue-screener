@@ -110,7 +110,12 @@ const getRows = computed(() => {
 })
 
 const tableStyle = computed(() => {
-  let cols = props.fields.reduce((acc) => acc + ' 1fr', '')
+  let cols = props.fields.reduce((acc, field) => {
+    const column = props.screener.columns.value[field as any]
+    let width = column?.width ?? '1fr'
+    if (!isNaN(Number(width))) width = width + 'px'
+    return acc + ' ' + width
+  }, '')
 
   if (props.includeStickyActions) cols += ' min-content'
 

@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
-import { Screener } from '@/interfaces/screener'
+import { Columns, Screener } from '@/interfaces/screener'
 import {
   NormalisedRow,
   UnknownObject,
@@ -13,29 +13,32 @@ import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
 
-const title = ref<string>('Results')
-const includeStickyActions = ref<boolean>(false)
-const searchQuery = ref<string>('')
-const highlightQuery = ref<string>('')
-const currentPage = ref<number>(1)
-const perPage = ref<number>(15)
-const renderFormat = ref<'table' | 'raw'>('table')
-const searchOptions = ref<SearchQueryOption[]>([])
-const sortField = ref<string | null>(null)
-const sortDirection = ref<'asc' | 'desc'>('desc')
-const data = ref<unknown[]>([])
-
 type ScreenerOptions = {
   title?: string
   includeStickyActions?: boolean
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultData?: unknown[]
+  columns?: Columns
   pick?: string[]
   omit?: string[]
 }
 export const useScreener = (options: ScreenerOptions = {}): Screener => {
+  const title = ref<string>('Results')
+  const includeStickyActions = ref<boolean>(false)
+  const searchQuery = ref<string>('')
+  const highlightQuery = ref<string>('')
+  const currentPage = ref<number>(1)
+  const perPage = ref<number>(15)
+  const renderFormat = ref<'table' | 'raw'>('table')
+  const searchOptions = ref<SearchQueryOption[]>([])
+  const sortField = ref<string | null>(null)
+  const sortDirection = ref<'asc' | 'desc'>('desc')
+  const data = ref<unknown[]>([])
+  const columns = ref<Columns>({})
+
   title.value = options.title ?? title.value
+  columns.value = options.columns ?? columns.value
   includeStickyActions.value = options.includeStickyActions ?? includeStickyActions.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
@@ -115,6 +118,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     shouldUseRegEx,
     shouldMatchCase,
     shouldMatchWord,
+    columns,
     data,
     normalisedData,
     searchedData,
