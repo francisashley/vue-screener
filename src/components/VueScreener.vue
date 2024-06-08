@@ -34,25 +34,25 @@ type Props = {
   includeHeader?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  title: 'Results',
-  data: () => [],
-  pick: () => [],
-  omit: () => [],
-  perPage: 15,
-  currentPage: 1,
-  includeStickyActions: false,
-  includeHeader: true,
-})
+const {
+  title = 'Results',
+  data = [],
+  pick = [],
+  omit = [],
+  perPage = 15,
+  currentPage = 1,
+  includeStickyActions = false,
+  includeHeader = true,
+} = defineProps<Props>()
 
 const screener = useScreener({
-  title: props.title,
-  includeStickyActions: props.includeStickyActions,
-  defaultCurrentPage: props.currentPage,
-  defaultPerPage: props.perPage,
-  defaultData: props.data,
-  pick: props.pick,
-  omit: props.omit,
+  title,
+  includeStickyActions,
+  defaultCurrentPage: currentPage,
+  defaultPerPage: perPage,
+  defaultData: data,
+  pick: pick,
+  omit: omit,
 })
 </script>
 
