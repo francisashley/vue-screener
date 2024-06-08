@@ -57,15 +57,15 @@
     <Variant title="Pin to the side" width="100">
       <VueScreener :data="baseData" include-pinned>
         <template #pinned-head="props">
-          <HeaderCell v-bind="props">Actions</HeaderCell>
+          <TableHead v-bind="props">Actions</TableHead>
         </template>
         <template #pinned-value="props">
-          <ValueCell v-bind="props">
+          <TableData v-bind="props">
             <div :style="{ display: 'flex', gap: '4px' }">
               <button @click="handleClickEdit(props.cell)">Edit</button>
               <button @click="handleClickDelete(props.cell)">Delete</button>
             </div>
-          </ValueCell>
+          </TableData>
         </template>
       </VueScreener>
     </Variant>
@@ -86,8 +86,8 @@ import { VueScreener } from '../index'
 import baseData from '../fixtures/data.json'
 import primitivesData from '../fixtures/primitives-data.json'
 import mixedObjectsData from '../fixtures/mix-objects-data.json'
-import HeaderCell from '../components/table/TableHeaderCell.vue'
-import ValueCell from '../components/table/TableValueCell.vue'
+import TableHead from '../components/table/TableHead.vue'
+import TableData from '../components/table/TableData.vue'
 
 const handleClickEdit = (cell: unknown) => console.log('edit', cell)
 const handleClickDelete = (cell: unknown) => console.log('delete', cell)

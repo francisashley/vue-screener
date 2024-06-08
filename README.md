@@ -77,20 +77,20 @@ Add a pinned column on the right to put stuff in.
 
 ```vue
 <template>
-  <vue-screener :data="data" include-actions>
+  <VueScreener :data="data" include-actions>
     <template #pinned-head="props">
-      <PinnedHeaderCell v-bind="props">Actions</PinnedHeaderCell>
+      <Head v-bind="props">Actions</Head>
     </template>
     <template #pinned-value="props">
-      <PinnedValueCell v-bind="props">
+      <Data v-bind="props">
         <button @click="handleClickEdit(props.cell)">Edit</button>
         <button @click="handleClickDelete(props.cell)">Delete</button>
-      </PinnedValueCell>
+      </Data>
     </template>
-  </vue-screener>
+  </VueScreener>
 </template>
 <script setup>
-import VueScreener, { PinnedValueHead, PinnedValueCell } from 'vue-screener'
+import VueScreener, { Head, Data } from 'vue-screener'
 </script>
 ```
 
