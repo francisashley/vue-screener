@@ -45,6 +45,7 @@ const handleClickHeader = () => {
     height: 24px;
     display: inline-flex;
     align-items: center;
+    gap: 5px;
   }
   &--is-sortable {
     cursor: pointer;
