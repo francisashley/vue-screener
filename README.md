@@ -143,7 +143,7 @@ import { formatPrice } from './utils/currency'
 Style using classes:
 
 ```
-.vs-vue-screener ✅
+.vs-app
   .vs-header 
     .vs-title
     .vs-search

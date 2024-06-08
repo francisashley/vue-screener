@@ -1,5 +1,5 @@
 <template>
-  <section class="vs-vue-screener">
+  <section class="vs-app">
     <template v-if="isValidInput">
       <header class="vs-header" v-if="includeHeader">
         <div class="vs-title" v-text="props.title" />
@@ -111,7 +111,7 @@ const hasData = computed((): boolean => {
 
 <style lang="scss">
 .vs {
-  &-vue-screener {
+  &-app {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     font-size: 14px;
