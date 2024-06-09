@@ -31,6 +31,7 @@ import NoDataView from './views/NoDataView.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
 import { useScreener } from '../hooks/use-screener'
 import { ColumnConfig } from '@/interfaces/screener'
+import { watchEffect } from 'vue'
 
 type Props = {
   // The title to be displayed in the header
@@ -71,6 +72,14 @@ const screener = useScreener({
   pick: pick,
   omit: omit,
 })
+
+watchEffect(() => (screener.title.value = title))
+watchEffect(() => (screener.data.value = data))
+watchEffect(() => (screener.columnConfig.value = columnConfig))
+watchEffect(() => (screener.pick.value = pick))
+watchEffect(() => (screener.omit.value = omit))
+watchEffect(() => (screener.perPage.value = perPage))
+watchEffect(() => (screener.currentPage.value = currentPage))
 </script>
 
 <style lang="scss">

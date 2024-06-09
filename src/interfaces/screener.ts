@@ -20,6 +20,9 @@ export type Screener = {
   hasData: ComputedRef<boolean>
   columns: ComputedRef<Column[]>
   items: ComputedRef<(Item | null)[]>
+  columnConfig: Ref<ColumnConfig>
+  pick: Ref<string[]>
+  omit: Ref<string[]>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void

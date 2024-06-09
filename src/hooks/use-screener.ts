@@ -28,6 +28,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const sortDirection = ref<'asc' | 'desc'>('desc')
   const data = ref<unknown[]>([])
   const columnConfig = ref<ColumnConfig>({})
+  const pick = ref<string[]>([])
+  const omit = ref<string[]>([])
 
   // Set default state
   title.value = options.title ?? title.value
@@ -35,6 +37,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
   data.value = options.defaultData ?? data.value
+  pick.value = options.pick ?? pick.value
+  omit.value = options.omit ?? omit.value
 
   const shouldUseRegEx = computed((): boolean => searchOptions.value.includes('use-regex'))
   const shouldMatchCase = computed((): boolean => searchOptions.value.includes('match-case'))
@@ -111,7 +115,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const columns = computed<Column[]>(() => {
-    const fields = options.pick?.length ? options.pick : getFields(normalisedData.value)
+    const fields = pick.value?.length ? pick.value : getFields(normalisedData.value)
 
     let columns: Column[] = fields.map((field, i) => {
       const inputColumn = columnConfig.value[field] ?? {}
@@ -133,8 +137,8 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
       columns = pickColumns(columns, options.pick)
     }
 
-    if (options.omit && options.omit.length > 0) {
-      columns = omitColumns(columns, options.omit)
+    if (omit.value && omit.value.length > 0) {
+      columns = omitColumns(columns, omit.value)
     }
 
     return columns
@@ -158,6 +162,9 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     totalItems: computed(() => searchedData.value.length),
     hasError,
     hasData,
+    columnConfig,
+    pick,
+    omit,
     columns,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
