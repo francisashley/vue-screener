@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import VueScreener from "./components/VueScreener.vue";
+import VueScreener from './components/VueScreener.vue'
 </script>
 
 <style scoped></style>

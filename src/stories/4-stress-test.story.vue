@@ -1,5 +1,5 @@
 <template>
-  <Story>
+  <Story title="4) Stress Test">
     <Variant title="default">
       <template #default>
         <VueScreener :data="baseData" />
@@ -9,6 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from "../index";
-import baseData from "../fixtures/stress-data.json";
+import { VueScreener } from '../index'
+import baseData from '../fixtures/stress-data.json'
 </script>

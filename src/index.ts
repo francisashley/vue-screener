@@ -1,6 +1,5 @@
-import VueScreener from "./components/VueScreener.vue";
-import Cell from "./components/views/TableViewCell.vue";
-import HeaderCell from "./components/views/TableViewHeaderCell.vue";
-import ValueCell from "./components/views/TableViewValueCell.vue";
+import VueScreener from './components/VueScreener.vue'
+import Head from './components/table/TableHead.vue'
+import Data from './components/table/TableData.vue'
 
-export { VueScreener, Cell, HeaderCell, ValueCell };
+export { VueScreener, Head, Data }

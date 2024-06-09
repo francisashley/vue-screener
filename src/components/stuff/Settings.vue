@@ -1,11 +1,7 @@
 <template>
   <Dropdown class="vs-settings">
     <template #dropdown-button="{ show, toggle }">
-      <button
-        class="vs-settings__button"
-        :class="[show && 'vs-settings__button--active']"
-        @click="toggle"
-      >
+      <button class="vs-settings__button" :class="[show && 'vs-settings__button--active']" @click="toggle">
         <CogIcon class="vs-settings__button-icon" />
       </button>
     </template>
@@ -29,59 +25,58 @@
         </button>
       </div>
       <h3 class="vs-settings__heading">Presentation</h3>
-      <ViewSelector
-        :active-format="activeFormat"
-        @select-format="emit('select-format', $event)"
-      />
+      <ViewSelector :active-format="screener.renderFormat.value" @select-format="handleSelectFormat($event)" />
     </template>
   </Dropdown>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
-import Dropdown from "./Dropdown.vue";
-import ViewSelector from "./ViewSelector.vue";
-import CogIcon from "../icons/CogIcon.vue";
+import { computed, ref } from 'vue'
+import Dropdown from './Dropdown.vue'
+import ViewSelector from './ViewSelector.vue'
+import CogIcon from '../icons/CogIcon.vue'
+import { Screener } from '@/interfaces/screener'
 
-export type SearchQueryOption = "match-case" | "match-word" | "use-regex";
+export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
 
 const props = defineProps<{
-  activeFormat: "table" | "raw";
-  searchOptions: SearchQueryOption[];
-}>();
-
-const emit = defineEmits(["select-format", "change-search-options"]);
+  screener: Screener
+}>()
 
 type SearchQueryInternalOption = {
-  id: SearchQueryOption;
-  title: string;
-  text: string;
-  isActive?: boolean;
-};
+  id: SearchQueryOption
+  title: string
+  text: string
+  isActive?: boolean
+}
 
 const options = ref<SearchQueryInternalOption[]>([
-  { id: "match-case", title: "Match case", text: "Aa" },
-  { id: "match-word", title: "Match word", text: "ab" },
-  { id: "use-regex", title: "Use regular expression", text: ".*" },
-]);
+  { id: 'match-case', title: 'Match case', text: 'Aa' },
+  { id: 'match-word', title: 'Match word', text: 'ab' },
+  { id: 'use-regex', title: 'Use regular expression', text: '.*' },
+])
 
 const getOptions = computed<SearchQueryInternalOption[]>(() => {
   return options.value.map((option: SearchQueryInternalOption) => ({
     ...option,
-    isActive: props.searchOptions.includes(option.id),
-  }));
-});
+    isActive: props.screener.searchOptions.value.includes(option.id),
+  }))
+})
 
 const toggleOption = (option: SearchQueryOption) => {
-  if (props.searchOptions.includes(option)) {
-    emit(
-      "change-search-options",
-      props.searchOptions.filter((activeOption) => activeOption !== option),
-    );
+  if (props.screener.searchOptions.value.includes(option)) {
+    props.screener.actions.search(
+      props.screener.highlightQuery.value,
+      props.screener.searchOptions.value.filter((activeOption) => activeOption !== option),
+    )
   } else {
-    emit("change-search-options", [...props.searchOptions, option]);
+    props.screener.actions.search(props.screener.highlightQuery.value, [...props.screener.searchOptions.value, option])
   }
-};
+}
+
+const handleSelectFormat = (format: 'table' | 'raw') => {
+  props.screener.renderFormat.value = format
+}
 </script>
 
 <style lang="scss">

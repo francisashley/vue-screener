@@ -62,35 +62,44 @@ Pick fields (in order) to show:
 </template>
 ```
 
-Exclude fields:
+Omit fields:
 
 ```vue
 <template>
   <vue-screener
     :data="data"
-    :exclude="['price', 'product', 'technology']"
+    :omit="['price', 'product', 'technology']"
   />
 </template>
 ```
 
-Add a sticky column at the end to put stuff in.
+Add a pinned column on the right to put stuff in.
 
 ```vue
 <template>
-  <vue-screener :data="data" include-actions>
-    <template #sticky-actions-head="props">
-      <StickyHeaderCell v-bind="props">Actions</StickyHeaderCell>
+  <VueScreener
+    :data="[
+      { category: 'Technology', product: 'Laptop', price: '£799', inStock: true },
+      { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true }
+    ]"
+    :column-config="{
+      action: { field: 'action', isPinned: true }
+    }"
+    :pick=""
+  >
+    <template #head="props">
+      <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
     </template>
-    <template #sticky-actions-value="props">
-      <StickyValueCell v-bind="props">
-        <button @click="handleClickEdit(props.cell)">Edit</button>
-        <button @click="handleClickDelete(props.cell)">Delete</button>
-      </StickyValueCell>
+    <template #data="props">
+      <Data v-if="props.column.field === 'action'" v-bind="props">
+        <button @click="handleClickEdit(props.item)">Edit</button>
+        <button @click="handleClickDelete(props.item)">Delete</button>
+      </Data>
     </template>
-  </vue-screener>
+  </VueScreener>
 </template>
 <script setup>
-import VueScreener, { StickyValueHead, StickyValueCell } from 'vue-screener'
+import VueScreener, { Head, Data } from 'vue-screener'
 </script>
 ```
 
@@ -120,20 +129,20 @@ Custom value cell renderer:
 ```vue
 <template>
   <vue-screener :data="data">
-    <template #value-cell="props">
-      <ValueCell v-bind="props">
+    <template #data="props">
+      <Data v-bind="props">
         <span v-if="props.field === 'price'">
           {{ formatPrice(props.value) }}
         </span>
         <template v-else>
           {{ props.value }}
         </template>
-      </ValueCell>
+      </Data>
     </template>
   </vue-screener>
 </template>
 <script>
-import VueScreener, { ValueCell } from 'vue-screener'
+import VueScreener, { Data } from 'vue-screener'
 import { formatPrice } from './utils/currency'
 </script>
 ```
@@ -143,7 +152,7 @@ import { formatPrice } from './utils/currency'
 Style using classes:
 
 ```
-.vs-vue-screener ✅
+.vs-app
   .vs-header 
     .vs-title
     .vs-search
@@ -164,27 +173,27 @@ Style using classes:
     .vs-dropdown
     .vs-dropdown__content
   .vs-main
-  .vs-main--is-x-scrollable
-  .vs-main--is-x-scrolled-end
-    .vs-table-view
-    .vs-table-view__row
-    .vs-table-view__row--header
-    .vs-table-view__row--record
-    .vs-table-view__cell
-    .vs-table-view__cell--is-sortable
-    .vs-table-view__cell--is-sticky
-    .vs-table-view__cell--is-header
-    .vs-table-view__cell--is-value
-    .vs-table-view__cell--is-first
-    .vs-table-view__cell--is-last
-    .vs-table-view__cell--hasValue
-    .vs-table-view__cell--string
-    .vs-table-view__cell--number
-    .vs-table-view__cell--boolean
-    .vs-table-view__cell--symbol
-    .vs-table-view__cell--undefined
-    .vs-table-view__cell--object
-    .vs-table-view__cell--null
+  .vs-main--is-scrollable
+  .vs-main--is-scrolled-end
+    .vs-table
+    .vs-table__row
+    .vs-table__row--header
+    .vs-table__row--record
+    .vs-table__cell
+    .vs-table__cell--is-sortable
+    .vs-table__cell--is-pinned
+    .vs-table__cell--is-header
+    .vs-table__cell--is-value
+    .vs-table__cell--is-first
+    .vs-table__cell--is-last
+    .vs-table__cell--hasValue
+    .vs-table__cell--string
+    .vs-table__cell--number
+    .vs-table__cell--boolean
+    .vs-table__cell--symbol
+    .vs-table__cell--undefined
+    .vs-table__cell--object
+    .vs-table__cell--null
       .vs-sort-selector
       .vs-sort-selector__icon
       .vs-sort-selector__icon--none

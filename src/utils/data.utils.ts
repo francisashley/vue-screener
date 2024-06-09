@@ -1,155 +1,142 @@
+import { DataType, Column, Field, Item, UnknownObject } from '@/interfaces/screener'
+
+/**
+ * Checks if data is an array of arrays or objects.
+ * @param {unknown} data - The data to check.
+ * @returns {boolean} True if valid, false otherwise.
+ */
 export function isValidInput(data: unknown): boolean {
-  const isObject = (val: unknown) => typeof val === "object" && val !== null;
-  return (
-    Array.isArray(data) &&
-    data.every((row: unknown) => Array.isArray(row) || isObject(row))
-  );
+  const isObject = (val: unknown) => typeof val === 'object' && val !== null
+  return Array.isArray(data) && data.every((item: unknown) => Array.isArray(item) || isObject(item))
 }
 
-export interface NormalisedField {
-  key: string;
-  value: unknown;
-  hasValue: boolean;
-  type:
-    | "string"
-    | "number"
-    | "boolean"
-    // | "bigint"
-    | "array"
-    | "object"
-    | "null"
-    | "undefined"
-    | "symbol";
-}
+/**
+ * Transforms input data into a consistent format.
+ * @param {UnknownObject[]} data - The input data.
+ * @returns {Item[]} The normalised data.
+ */
+export function normaliseInput(data: UnknownObject[]): Item[] {
+  // If the input data is an array of arrays, convert it to an array of objects.
+  const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
-export type NormalisedRow = NormalisedField[];
-
-export interface UnknownObject {
-  [key: string | number]: unknown;
-}
-
-export function normaliseInput(data: UnknownObject[]): NormalisedRow[] {
-  // in the case that an array (data) of arrays (rows) has been provided [[],[],[]], convert to [{},{},{}]
-  data = data.map((row) => (Array.isArray(row) ? { ...row } : row));
-
-  // Normalise each field
-  const normaliseField = (field: string, value: unknown): NormalisedField => ({
-    key: field,
-    value,
+  // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
+  const normaliseField = (field: string, value: unknown): Field => ({
+    field,
     type: getTypeOf(value),
+    value: value as any,
+    htmlValue: String(value),
     hasValue: value !== null || value !== undefined,
-  });
+  })
 
-  let normalisedData = data.map((row: UnknownObject): NormalisedRow => {
-    return Object.keys(row).map(
-      (key): NormalisedField => normaliseField(key, row[key]),
-    );
-  });
+  // Normalise each item into an array of normalised fields.
+  const normalisedData = transformedData.map((item: UnknownObject): Item => {
+    const fields: Record<string, Field> = {}
+    Object.keys(item).forEach((key) => {
+      fields[key] = normaliseField(key, item[key])
+    })
 
-  // In the case that an array of objects has been passed in with different fields, ensure that all rows include all fields and in the same order.
-  const fields = getFields(normalisedData);
-  normalisedData = normalisedData.map((row) => {
-    return fields.map((field) => {
-      return (
-        row.find((_field: NormalisedField) => _field.key === field) ||
-        normaliseField(field, undefined)
-      );
-    });
-  });
+    return { data: item, fields }
+  })
 
-  return normalisedData;
-}
-
-export function getFields(rows: NormalisedRow[]): string[] {
-  const fields = new Set<string>();
-
-  for (const row of rows) {
-    for (const field of row) {
-      fields.add(field.key);
-    }
-  }
-
-  return Array.from(fields);
-}
-
-export function pickFields(
-  rows: NormalisedRow[],
-  pickFields: string[],
-): NormalisedRow[] {
-  return rows.map((row) => {
-    const pickedRow: NormalisedRow = [];
-    pickFields.forEach((pickField) => {
-      const pickedField = row.find((field) => field.key === pickField);
-      if (pickedField) {
-        pickedRow.push(pickedField);
+  // If the input data is an array of objects with different fields, ensure that all items include all fields and in the same order.
+  const fields = getFields(normalisedData)
+  return normalisedData.map((item) => {
+    fields.forEach((field) => {
+      if (!item.fields[field]) {
+        item.fields[field] = normaliseField(field, undefined)
       }
-    });
-    return pickedRow;
-  });
+    })
+    return item
+  })
 }
 
-export function excludeFields(
-  rows: NormalisedRow[],
-  excludeFields: string[],
-): NormalisedRow[] {
-  return rows.map((row) => {
-    return row.filter((field) => !excludeFields.includes(field.key));
-  });
+/**
+ * Picks specified fields from normalised columns.
+ * @param {Column[]} columns - The columns.
+ * @param {string[]} pickColumns - Fields to pick.
+ * @returns {Column[]} Rows with picked fields.
+ */
+export function pickColumns(columns: Column[], pickColumns: (string | number)[]): Column[] {
+  return columns.filter((column) => pickColumns.includes(column.field))
 }
 
-export function getPaginated(options: {
-  rows: NormalisedRow[];
-  page: number;
-  perPage: number;
-  withPlaceholders: boolean;
-}): NormalisedRow[] {
-  let { rows = [] } = options;
-  const { page = 1, perPage = 25, withPlaceholders = false } = options;
+/**
+ * Omits specified fields from normalised columns.
+ * @param {Column[]} columns - The columns.
+ * @param {string[]} omitColumns - Fields to omit.
+ * @returns {Column[]} Rows without omitted fields.
+ */
+export function omitColumns(columns: Column[], omitColumns: (string | number)[]): Column[] {
+  const omitFieldsSet = new Set(omitColumns)
+  return columns.filter((column) => !omitFieldsSet.has(column.field))
+}
 
-  const start = perPage * page;
-  const end = start + perPage;
+/**
+ * Extracts unique field keys from normalised items.
+ * @param {Item[]} items - The normalised items.
+ * @returns {string[]} Unique field keys.
+ */
+export function getFields(items: Item[]): string[] {
+  const fields = new Set<string>(items.flatMap((item) => Object.values(item.fields).map((field) => field.field)))
+  return Array.from(fields)
+}
 
-  rows = rows.slice(start, end);
+/**
+ * Returns a paginated subset of normalised items.
+ * @param {Object} options - The options for pagination.
+ * @returns {Item[]} Paginated items.
+ */
+export function getPaginated({
+  items = [],
+  page = 1,
+  perPage = 25,
+  withPlaceholders = false,
+}: {
+  items: Item[]
+  page: number
+  perPage: number
+  withPlaceholders: boolean
+}): Item[] {
+  const start = perPage * page
+  const end = start + perPage
+
+  items = items.slice(start, end)
 
   // provide placeholders when page does not meet perPage threshold
-  if (withPlaceholders && rows.length !== perPage) {
-    const emptyRows = Array(perPage).fill(null);
-    return Object.assign(emptyRows, rows);
+  if (withPlaceholders && items.length !== perPage) {
+    const emptyRows = Array(perPage).fill(null)
+    return Object.assign(emptyRows, items)
   }
 
-  return rows;
+  return items
 }
 
-export type DataType =
-  | "string"
-  | "number"
-  | "boolean"
-  | "symbol"
-  | "undefined"
-  | "object"
-  | "null"
-  | "array"
-  | "object";
-
+/**
+ * Returns the data type of the value.
+ * @param {unknown} value - The value to check.
+ * @returns {DataType} Data type of the value.
+ * @throws If type of value cannot be established.
+ */
 export function getTypeOf(value: unknown): DataType {
-  if (typeof value === "string") {
-    return "string";
-  } else if (typeof value === "number") {
-    return "number";
-  } else if (typeof value === "boolean") {
-    return "boolean";
-  } else if (typeof value === "symbol") {
-    return "symbol";
-  } else if (typeof value === "undefined") {
-    return "undefined";
-  } else if (typeof value === "object") {
-    if (value === null) {
-      return "null";
-    } else if (Array.isArray(value)) {
-      return "array";
-    }
-    return "object";
+  switch (typeof value) {
+    case 'string':
+      return 'string'
+    case 'number':
+      return 'number'
+    case 'boolean':
+      return 'boolean'
+    case 'symbol':
+      return 'symbol'
+    case 'undefined':
+      return 'undefined'
+    case 'object':
+      if (value === null) {
+        return 'null'
+      } else if (Array.isArray(value)) {
+        return 'array'
+      }
+      return 'object'
+    default:
+      throw `Could not establish type of \`${value}\``
   }
-
-  throw `Could not establish type of \`${value}\``;
 }

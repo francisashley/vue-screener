@@ -3,33 +3,26 @@
     <a
       href="#"
       @click.prevent="onSelectFormat('table')"
-      :class="[
-        'vs-view-selector__link',
-        activeFormat === 'table' && 'vs-view-selector__link--is-active',
-      ]"
+      :class="['vs-view-selector__link', activeFormat === 'table' && 'vs-view-selector__link--is-active']"
       v-text="'Table'"
     />
     <a
       href="#"
       @click.prevent="onSelectFormat('raw')"
-      :class="[
-        'vs-view-selector__link',
-        activeFormat === 'raw' && 'vs-view-selector__link--is-active',
-      ]"
+      :class="['vs-view-selector__link', activeFormat === 'raw' && 'vs-view-selector__link--is-active']"
       v-text="'Raw'"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-const { activeFormat = "table" } = defineProps<{
-  activeFormat: "table" | "raw";
-}>();
+const { activeFormat = 'table' } = defineProps<{
+  activeFormat: 'table' | 'raw'
+}>()
 
-const emit = defineEmits(["select-format"]);
+const emit = defineEmits(['select-format'])
 
-const onSelectFormat = (format: "table" | "raw") =>
-  emit("select-format", format);
+const onSelectFormat = (format: 'table' | 'raw') => emit('select-format', format)
 </script>
 
 <style lang="scss">
