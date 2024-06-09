@@ -1,6 +1,6 @@
 <template>
   <section class="vs-app">
-    <ScreenerHeader v-if="!screener.hasError.value && includeHeader" :screener="screener" />
+    <ScreenerHeader v-if="!screener.hasError.value && hideHeader !== true" :screener="screener" />
     <ScreenerMain :screener="screener">
       <ErrorMessage
         v-if="screener.hasError.value"
@@ -48,7 +48,7 @@ type Props = {
   // The current page number in the table
   currentPage?: number
   // A flag to toggle the visibility of the header
-  includeHeader?: boolean
+  hideHeader?: boolean
 }
 
 const {
@@ -59,7 +59,7 @@ const {
   omit = [],
   perPage = 15,
   currentPage = 1,
-  includeHeader = true,
+  hideHeader = false,
 } = defineProps<Props>()
 
 const screener = useScreener({
