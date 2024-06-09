@@ -2381,7 +2381,7 @@ function queueEffectWithSuspense$1(fn2, suspense) {
     queuePostFlushCb$1(fn2);
   }
 }
-function watchEffect(effect2, options) {
+function watchEffect$1(effect2, options) {
   return doWatch$1(effect2, null, options);
 }
 function watchPostEffect(effect2, options) {
@@ -15672,6 +15672,9 @@ const useSSRContext = () => {
     return ctx;
   }
 };
+function watchEffect(effect2, options) {
+  return doWatch(effect2, null, options);
+}
 const INITIAL_WATCHER_VALUE = {};
 function watch(source, cb, options) {
   if (!isFunction$2(cb)) {
@@ -22032,7 +22035,7 @@ function useMediaQuery(query, options = {}) {
     else
       mediaQuery.addListener(update);
   };
-  watchEffect(update);
+  watchEffect$1(update);
   tryOnScopeDispose(() => cleanup());
   return matches2;
 }
@@ -25734,7 +25737,7 @@ function useLink(props) {
       };
       instance.__vrl_devtools = instance.__vrl_devtools || [];
       instance.__vrl_devtools.push(linkContextDevtools);
-      watchEffect(() => {
+      watchEffect$1(() => {
         linkContextDevtools.route = route.value;
         linkContextDevtools.isActive = isActive.value;
         linkContextDevtools.isExactActive = isExactActive.value;
@@ -43162,7 +43165,7 @@ const rm = {
         doc: JSON.stringify(e2.modelValue, null, 2),
         extensions: c2,
         parent: l.value
-      }), watchEffect(() => {
+      }), watchEffect$1(() => {
         s.dispatch({
           effects: [
             a2.reconfigure(h2[ga.value ? "dark" : "light"])
@@ -50043,7 +50046,7 @@ export {
   useDark as V,
   useToggle as W,
   markRaw$1 as X,
-  watchEffect as Y,
+  watchEffect$1 as Y,
   mergeProps$1 as Z,
   resolveDynamicComponent as _,
   useRoute as a,
@@ -50076,11 +50079,12 @@ export {
   normalizeStyle as aQ,
   guardReactiveProps as aR,
   orderBy as aS,
-  useFocus as aT,
-  refDebounced as aU,
-  flexsearch_bundleExports as aV,
-  client$1 as aW,
-  client as aX,
+  watchEffect as aT,
+  useFocus as aU,
+  refDebounced as aV,
+  flexsearch_bundleExports as aW,
+  client$1 as aX,
+  client as aY,
   ym as aa,
   wm as ab,
   toRefs as ac,

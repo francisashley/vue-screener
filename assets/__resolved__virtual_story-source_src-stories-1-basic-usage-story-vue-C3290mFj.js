@@ -19,7 +19,7 @@ const __resolved__virtual_storySource_srcStories1BasicUsageStoryVue = `<template
       <VueScreener title="Custom title" :data="baseData" />
     </Variant>
     <Variant title="Hide header">
-      <VueScreener :data="baseData" :include-header="false" />
+      <VueScreener :data="baseData" hide-header />
     </Variant>
   </Story>
 </template>

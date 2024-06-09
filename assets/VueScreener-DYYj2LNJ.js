@@ -1,4 +1,4 @@
-import { aq as defineComponent, aB as ref, aC as computed, as as openBlock, aD as createElementBlock, aE as normalizeClass, aF as directive, aG as withDirectives, aH as renderSlot, av as createVNode, au as withCtx, az as createCommentVNode, aI as Transition, aA as createBaseVNode, aJ as withModifiers, at as createBlock, aK as Fragment, aL as renderList, aM as toDisplayString, aN as debounce, aO as onMounted, aP as watch, ay as createTextVNode, aQ as normalizeStyle, aw as normalizeProps, aR as guardReactiveProps, aS as orderBy } from "./vendor-DC0MkHh5.js";
+import { aq as defineComponent, aB as ref, aC as computed, as as openBlock, aD as createElementBlock, aE as normalizeClass, aF as directive, aG as withDirectives, aH as renderSlot, av as createVNode, au as withCtx, az as createCommentVNode, aI as Transition, aA as createBaseVNode, aJ as withModifiers, at as createBlock, aK as Fragment, aL as renderList, aM as toDisplayString, aN as debounce, aO as onMounted, aP as watch, ay as createTextVNode, aQ as normalizeStyle, aw as normalizeProps, aR as guardReactiveProps, aS as orderBy, aT as watchEffect } from "./vendor-DadODwuJ.js";
 const _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
@@ -1287,11 +1287,15 @@ const useScreener = (options = {}) => {
   const sortDirection = ref("desc");
   const data = ref([]);
   const columnConfig = ref({});
+  const pick = ref([]);
+  const omit = ref([]);
   title.value = options.title ?? title.value;
   columnConfig.value = options.columnConfig ?? columnConfig.value;
   currentPage.value = options.defaultCurrentPage ?? currentPage.value;
   perPage.value = options.defaultPerPage ?? perPage.value;
   data.value = options.defaultData ?? data.value;
+  pick.value = options.pick ?? pick.value;
+  omit.value = options.omit ?? omit.value;
   const shouldUseRegEx = computed(() => searchOptions.value.includes("use-regex"));
   const shouldMatchCase = computed(() => searchOptions.value.includes("match-case"));
   const shouldMatchWord = computed(() => searchOptions.value.includes("match-word"));
@@ -1357,7 +1361,7 @@ const useScreener = (options = {}) => {
   });
   const columns = computed(() => {
     var _a;
-    const fields = ((_a = options.pick) == null ? void 0 : _a.length) ? options.pick : getFields(normalisedData.value);
+    const fields = ((_a = pick.value) == null ? void 0 : _a.length) ? pick.value : getFields(normalisedData.value);
     let columns2 = fields.map((field, i) => {
       const inputColumn = columnConfig.value[field] ?? {};
       let width = inputColumn.width ?? "1fr";
@@ -1377,8 +1381,8 @@ const useScreener = (options = {}) => {
     if (options.pick && options.pick.length > 0) {
       columns2 = pickColumns(columns2, options.pick);
     }
-    if (options.omit && options.omit.length > 0) {
-      columns2 = omitColumns(columns2, options.omit);
+    if (omit.value && omit.value.length > 0) {
+      columns2 = omitColumns(columns2, omit.value);
     }
     return columns2;
   });
@@ -1400,6 +1404,9 @@ const useScreener = (options = {}) => {
     totalItems: computed(() => searchedData.value.length),
     hasError,
     hasData,
+    columnConfig,
+    pick,
+    omit,
     columns,
     actions: {
       search: (query, options2) => {
@@ -1428,7 +1435,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     omit: { type: Array, required: false, default: () => [] },
     perPage: { type: Number, required: false, default: 15 },
     currentPage: { type: Number, required: false, default: 1 },
-    includeHeader: { type: Boolean, required: false, default: true }
+    hideHeader: { type: Boolean, required: false, default: false }
   },
   setup(__props, { expose: __expose }) {
     __expose();
@@ -1441,6 +1448,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       pick: __props.pick,
       omit: __props.omit
     });
+    watchEffect(() => screener.title.value = __props.title);
+    watchEffect(() => screener.data.value = __props.data);
+    watchEffect(() => screener.columnConfig.value = __props.columnConfig);
+    watchEffect(() => screener.pick.value = __props.pick);
+    watchEffect(() => screener.omit.value = __props.omit);
+    watchEffect(() => screener.perPage.value = __props.perPage);
+    watchEffect(() => screener.currentPage.value = __props.currentPage);
     const __returned__ = { screener, ScreenerHeader, ScreenerMain, ScreenerFooter, JsonView, Table, NoDataView, ErrorMessage };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
@@ -1449,7 +1463,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 const _hoisted_1 = { class: "vs-app" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("section", _hoisted_1, [
-    !$setup.screener.hasError.value && $props.includeHeader ? (openBlock(), createBlock($setup["ScreenerHeader"], {
+    !$setup.screener.hasError.value && $props.hideHeader !== true ? (openBlock(), createBlock($setup["ScreenerHeader"], {
       key: 0,
       screener: $setup.screener
     }, null, 8, ["screener"])) : createCommentVNode("v-if", true),

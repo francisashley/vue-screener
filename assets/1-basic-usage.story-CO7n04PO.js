@@ -1,5 +1,5 @@
-import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode } from "./vendor-DC0MkHh5.js";
-import { _ as _export_sfc, V as VueScreener } from "./VueScreener-DSWS7_bq.js";
+import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode } from "./vendor-DadODwuJ.js";
+import { _ as _export_sfc, V as VueScreener } from "./VueScreener-DYYj2LNJ.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-D5HdiZTi.js";
 const badData = "bad data";
@@ -74,7 +74,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         default: withCtx(() => [
           createVNode($setup["VueScreener"], {
             data: $setup.baseData,
-            "include-header": false
+            "hide-header": ""
           }, null, 8, ["data"])
         ]),
         _: 1
