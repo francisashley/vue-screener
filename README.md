@@ -159,12 +159,12 @@ Style using classes:
     .vs-search--error
     .vs-settings
     .vs-settings__heading
-    .vs-settings__options
-    .vs-settings__options-button
-    .vs-settings__options-button--active
-    .vs-settings__options-button--match-case
-    .vs-settings__options-button--use-regex
-    .vs-settings__options-button-icon
+    .vs-search-options
+    .vs-checkable
+    .vs-checkable--active
+    .vs-checkable--match-case
+    .vs-checkable--use-regex
+    .vs-checkable-icon
     .vs-switch
     .vs-switch__option
     .vs-switch__option--active

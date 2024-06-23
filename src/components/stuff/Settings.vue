@@ -5,7 +5,7 @@
     </template>
     <template #default>
       <FormHeading>Search</FormHeading>
-      <div class="vs-settings__options">
+      <div class="vs-search-options">
         <Checkable
           v-for="(option, i) in getOptions"
           :key="i"
@@ -87,14 +87,9 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
 
 <style lang="scss">
 .vs-settings {
-  &__options {
-    display: var(--vs-settings__options__display);
-    gap: var(--vs-settings__options__gap);
-  }
-
-  &__options-button-icon {
-    height: var(--vs-settings__options-button-icon__height);
-    width: var(--vs-settings__options-button-icon__width);
+  .vs-search-options {
+    display: var(--vs-search-options__display);
+    gap: var(--vs-search-options__gap);
   }
 }
 </style>

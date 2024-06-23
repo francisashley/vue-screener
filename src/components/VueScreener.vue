@@ -161,33 +161,27 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-form-heading__text-transform: uppercase;
   --vs-form-heading__opacity: 0.8;
 
+  // Vue screener checkable
+  --vs-checkable__border: none;
+  --vs-checkable__padding: 0 3px;
+  --vs-checkable__font-weight: 600;
+  --vs-checkable__color: rgba(0, 0, 0, 0.5);
+  --vs-checkable__cursor: pointer;
+  --vs-checkable__border-radius: 4px;
+  --vs-checkable__height: 20px;
+  --vs-checkable__width: 26px;
+  --vs-checkable__background: white;
+  --vs-checkable__margin-bottom: 8px;
+  --vs-checkable--active__color: #fff;
+  --vs-checkable--active__background: #3e51b5;
+  --vs-checkable--hover__color: #fff;
+  --vs-checkable--hover__background: #3e51b5;
+
   // Vue screener settings
-  --vs-settings__options__display: flex;
-  --vs-settings__options__gap: 4px;
-  --vs-settings__options-button__border: none;
-  --vs-settings__options-button__background: none;
-  --vs-settings__options-button__padding: 0 3px;
-  --vs-settings__options-button__font-weight: 600;
-  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
-  --vs-settings__options-button__cursor: pointer;
-  --vs-settings__options-button__border: none;
-  --vs-settings__options-button__background: none;
-  --vs-settings__options-button__padding: 0 3px;
-  --vs-settings__options-button__font-weight: 600;
-  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
-  --vs-settings__options-button__cursor: pointer;
-  --vs-settings__options-button__border-radius: 4px;
-  --vs-settings__options-button__height: 20px;
-  --vs-settings__options-button__width: 26px;
-  --vs-settings__options-button__background: white;
-  --vs-settings__options-button__margin-bottom: 8px;
-  --vs-settings__options-button--match-word__text-decoration: underline;
-  --vs-settings__options-button--active__color: #fff;
-  --vs-settings__options-button--active__background: #3e51b5;
-  --vs-settings__options-button--hover__color: #fff;
-  --vs-settings__options-button--hover__background: #3e51b5;
-  --vs-settings__options-button-icon__height: 20px;
-  --vs-settings__options-button-icon__width: 20px;
+  --vs-search-options__display: flex;
+  --vs-search-options__gap: 4px;
+  --vs-search-options-button-icon__height: 20px;
+  --vs-search-options-button-icon__width: 20px;
 
   // Vue screener switch input
   --vs-switch__font-size: 12px;
