@@ -162,9 +162,9 @@ Style using classes:
     .vs-settings__options
     .vs-settings__options-button
     .vs-settings__options-button--active
-    .vs-settings__options-button--match-word
     .vs-settings__options-button--match-case
     .vs-settings__options-button--use-regex
+    .vs-settings__options-button-icon
     .vs-switch
     .vs-switch__option
     .vs-switch__option--active

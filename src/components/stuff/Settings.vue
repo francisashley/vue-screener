@@ -17,7 +17,9 @@
           :title="option.title"
           @click="toggleOption(option.id)"
         >
-          {{ option.text }}
+          <MatchCaseIcon class="vs-settings__options-button-icon" v-if="option.id === 'match-case'" />
+          <MatchWordIcon class="vs-settings__options-button-icon" v-if="option.id === 'match-word'" />
+          <RegularExpressionIcon class="vs-settings__options-button-icon" v-if="option.id === 'use-regex'" />
         </button>
       </div>
       <FormHeading>Presentation</FormHeading>
@@ -38,6 +40,9 @@ import { computed, ref } from 'vue'
 import Dropdown from './Dropdown.vue'
 import Switch from '../form/Switch.vue'
 import FormHeading from '../form/Heading.vue'
+import MatchCaseIcon from '../icons/MaterialDesignMatchCase.vue'
+import MatchWordIcon from '../icons/MaterialDesignMatchWord.vue'
+import RegularExpressionIcon from '../icons/MaterialDesignRegularExpression.vue'
 import RemixSettings3FillIcon from '../icons/RemixSettings3FillIcon.vue'
 import { Screener } from '@/interfaces/screener'
 
@@ -92,13 +97,6 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
 
   &__options-button {
     border: var(--vs-settings__options-button__border);
-    background: var(--vs-settings__options-button__background);
-    padding: var(--vs-settings__options-button__padding);
-    font-weight: var(--vs-settings__options-button__font-weight);
-    color: var(--vs-settings__options-button__color);
-    cursor: var(--vs-settings__options-button__cursor);
-    border: var(--vs-settings__options-button__border);
-    background: var(--vs-settings__options-button__background);
     padding: var(--vs-settings__options-button__padding);
     font-weight: var(--vs-settings__options-button__font-weight);
     color: var(--vs-settings__options-button__color);
@@ -109,8 +107,9 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
     background: var(--vs-settings__options-button__background);
     margin-bottom: var(--vs-settings__options-button__margin-bottom);
 
-    &--match-word {
-      text-decoration: var(--vs-settings__options-button--match-word__text-decoration);
+    &-icon {
+      height: 20px;
+      width: 20px;
     }
 
     &--active {
