@@ -22,8 +22,8 @@ const { sortDirection = null } = defineProps<{
 
 <style lang="scss">
 .vs-sort-selector {
-  height: 15px;
-  width: 15px;
+  height: 1em;
+  width: 1em;
   display: inline-flex;
   align-items: center;
   float: right;
