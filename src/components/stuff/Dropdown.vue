@@ -21,19 +21,19 @@ const handleClickOutside = () => (show.value = false)
 
 <style lang="scss">
 .vs-dropdown {
-  position: relative;
+  position: var(--vs-dropdown__position);
 
   &__content {
-    transform-origin: top right;
-    position: absolute;
-    right: 0;
-    margin-top: 4px;
-    width: 100px;
-    background: #333333;
-    border-radius: 4px;
-    padding: 8px;
-    color: white;
-    z-index: 1;
+    transform-origin: var(--vs-dropdown__content__transform-origin);
+    position: var(--vs-dropdown__content__position);
+    right: var(--vs-dropdown__content__right);
+    margin-top: var(--vs-dropdown__content__margin-top);
+    width: var(--vs-dropdown__content__width);
+    background: var(--vs-dropdown__content__background);
+    border-radius: var(--vs-dropdown__content__border-radius);
+    padding: var(--vs-dropdown__content__padding);
+    color: var(--vs-dropdown__content__color);
+    z-index: var(--vs-dropdown__content__z-index);
   }
 
   &__content-enter-active,

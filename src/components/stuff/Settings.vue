@@ -2,7 +2,7 @@
   <Dropdown class="vs-settings">
     <template #dropdown-button="{ show, toggle }">
       <button class="vs-settings__button" :class="[show && 'vs-settings__button--active']" @click="toggle">
-        <CogIcon class="vs-settings__button-icon" />
+        <RemixSettings3FillIcon class="vs-settings__button-icon" />
       </button>
     </template>
     <template #default>
@@ -34,7 +34,7 @@
 import { computed, ref } from 'vue'
 import Dropdown from './Dropdown.vue'
 import ViewSelector from './ViewSelector.vue'
-import CogIcon from '../icons/CogIcon.vue'
+import RemixSettings3FillIcon from '../icons/RemixSettings3FillIcon.vue'
 import { Screener } from '@/interfaces/screener'
 
 export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'

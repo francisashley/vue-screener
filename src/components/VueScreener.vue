@@ -141,6 +141,19 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   // Vue screener footer
   --table-footer__padding: 8px;
 
+  // Vue screener dropdown
+  --vs-dropdown__position: relative;
+  --vs-dropdown__content__transform-origin: top right;
+  --vs-dropdown__content__position: absolute;
+  --vs-dropdown__content__right: 0;
+  --vs-dropdown__content__margin-top: 4px;
+  --vs-dropdown__content__width: 100px;
+  --vs-dropdown__content__background: #333333;
+  --vs-dropdown__content__border-radius: 4px;
+  --vs-dropdown__content__padding: 8px;
+  --vs-dropdown__content__color: white;
+  --vs-dropdown__content__z-index: 1;
+
   // Vue screener pagination
   --vs-pagination__display: flex;
   --vs-pagination__justify-content: space-between;
