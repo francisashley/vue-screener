@@ -42,13 +42,6 @@ const handleClickHeader = () => {
 
 <style lang="scss">
 .vs-table__cell {
-  --vs-table-cell--is-header__font-weight: bold;
-  --vs-table-cell--is-header__white-space: nowrap;
-  --vs-table-cell--is-header__height: 24px;
-  --vs-table-cell--is-header__display: inline-flex;
-  --vs-table-cell--is-header__align-items: center;
-  --vs-table-cell--is-header__gap: 4px;
-
   &--is-header {
     font-weight: var(--vs-table-cell--is-header__font-weight);
     white-space: var(--vs-table-cell--is-header__white-space);
@@ -57,12 +50,6 @@ const handleClickHeader = () => {
     align-items: var(--vs-table-cell--is-header__align-items);
     gap: var(--vs-table-cell--is-header__gap);
   }
-
-  --vs-table-cell--is-sortable__div__height: 24px;
-  --vs-table-cell--is-sortable__div__display: inline-flex;
-  --vs-table-cell--is-sortable__div__align-items: center;
-  --vs-table-cell--is-sortable__div__gap: 4px;
-  --vs-table-cell--is-sortable__div__cursor: pointer;
 
   &--is-sortable > div {
     height: var(--vs-table-cell--is-header__height);

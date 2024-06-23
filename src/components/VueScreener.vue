@@ -122,6 +122,92 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-header-search--error__border: 2px solid red;
   --vs-header-search--error__outline-color: red;
 
+  // Vue screener dropdown
+  --vs-dropdown__position: relative;
+  --vs-dropdown__content__transform-origin: top right;
+  --vs-dropdown__content__position: absolute;
+  --vs-dropdown__content__right: 0;
+  --vs-dropdown__content__margin-top: 4px;
+  --vs-dropdown__content__width: 100px;
+  --vs-dropdown__content__background: #333333;
+  --vs-dropdown__content__border-radius: 4px;
+  --vs-dropdown__content__padding: 8px;
+  --vs-dropdown__content__color: white;
+  --vs-dropdown__content__z-index: 1;
+
+  // Vue screener settings
+  --vs-settings__button__display: inline-flex;
+  --vs-settings__button__align-items: center;
+  --vs-settings__button__justify-content: center;
+  --vs-settings__button__background: transparent;
+  --vs-settings__button__border: 0;
+  --vs-settings__button__background: transparent;
+  --vs-settings__button__padding: 6px;
+  --vs-settings__button__margin-left: 4px;
+  --vs-settings__button__cursor: pointer;
+  --vs-settings__button__border-radius: 4px;
+  --vs-settings__button--active__background-color: rgba(255, 255, 255, 0.2);
+  --vs-settings__button--hover__background-color: rgba(255, 255, 255, 0.2);
+  --vs-settings__button-icon__width: 16px;
+  --vs-settings__button-icon__height: 16px;
+  --vs-settings__button-icon__display: inline-flex;
+  --vs-settings__button-icon__align-items: center;
+  --vs-settings__button-icon__justify-content: center;
+  --vs-settings__button-icon__color: white;
+  --vs-settings__heading__font-weight: 400;
+  --vs-settings__heading__margin: 0 0 6px 0;
+  --vs-settings__heading__font-size: 9px;
+  --vs-settings__heading__text-transform: uppercase;
+  --vs-settings__heading__opacity: 0.8;
+  --vs-settings__options__display: flex;
+  --vs-settings__options__gap: 4px;
+  --vs-settings__options-button__border: none;
+  --vs-settings__options-button__background: none;
+  --vs-settings__options-button__padding: 0 3px;
+  --vs-settings__options-button__font-weight: 600;
+  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
+  --vs-settings__options-button__cursor: pointer;
+  --vs-settings__options-button__border: none;
+  --vs-settings__options-button__background: none;
+  --vs-settings__options-button__padding: 0 3px;
+  --vs-settings__options-button__font-weight: 600;
+  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
+  --vs-settings__options-button__cursor: pointer;
+  --vs-settings__options-button__border-radius: 4px;
+  --vs-settings__options-button__height: 20px;
+  --vs-settings__options-button__width: 26px;
+  --vs-settings__options-button__background: white;
+  --vs-settings__options-button__margin-bottom: 8px;
+  --vs-settings__options-button--match-word__text-decoration: underline;
+  --vs-settings__options-button--active__color: #fff;
+  --vs-settings__options-button--active__background: #3e51b5;
+  --vs-settings__options-button--hover__color: #fff;
+  --vs-settings__options-button--hover__background: #3e51b5;
+
+  // Vue screener view selector
+  --vs-view-selector__font-size: 12px;
+  --vs-view-selector__height: 20px;
+  --vs-view-selector__display: flex;
+  --vs-view-selector__overflow: hidden;
+  --vs-view-selector__align-items: center;
+  --vs-view-selector__border-radius: 2px;
+  --vs-view-selector__link__text-decoration: none;
+  --vs-view-selector__link__font-weight: 500;
+  --vs-view-selector__link__height: 100%;
+  --vs-view-selector__link__display: flex;
+  --vs-view-selector__link__align-items: center;
+  --vs-view-selector__link__padding: 0 8px;
+  --vs-view-selector__link__color: #000;
+  --vs-view-selector__link__width: 32px;
+  --vs-view-selector__link__text-align: center;
+  --vs-view-selector__link__justify-content: center;
+  --vs-view-selector__link__background: #fff;
+  --vs-view-selector__link--last-child__border-radius: 0 4px 4px 0;
+  --vs-view-selector__link--is-active__background: #3f51b5;
+  --vs-view-selector__link--is-active__color: #fff;
+  --vs-view-selector__link--is-hover__background: #3f51b5;
+  --vs-view-selector__link--is-hover__color: #fff;
+
   // Vue screener table
   --vs-table__color: black;
 
@@ -137,22 +223,31 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-table-cell--is-pinned__right: 0;
   --vs-table-cell--is-pinned__border-left: thin solid black;
   --vs-table-cell--is-pinned__margin-left: -1px;
+  --vs-table-cell--is-header__font-weight: bold;
+  --vs-table-cell--is-header__white-space: nowrap;
+  --vs-table-cell--is-header__height: 24px;
+  --vs-table-cell--is-header__display: inline-flex;
+  --vs-table-cell--is-header__align-items: center;
+  --vs-table-cell--is-header__gap: 4px;
+  --vs-table-cell--is-sortable__div__height: 24px;
+  --vs-table-cell--is-sortable__div__display: inline-flex;
+  --vs-table-cell--is-sortable__div__align-items: center;
+  --vs-table-cell--is-sortable__div__gap: 4px;
+  --vs-table-cell--is-sortable__div__cursor: pointer;
+
+  // Vue screener sort selector
+  --vs-sort-selector__height: 1em;
+  --vs-sort-selector__width: 1em;
+  --vs-sort-selector__display: inline-flex;
+  --vs-sort-selector__align-items: center;
+  --vs-sort-selector__float: right;
+  --vs-sort-selector__cursor: pointer;
+  --vs-sort-selector__transform: rotate(0deg);
+  --vs-sort-selector__transition: ease-out 100ms;
+  --vs-sort-selector__icon--asc__transform: rotate(-180deg);
 
   // Vue screener footer
   --vs-table-footer__padding: 8px;
-
-  // Vue screener dropdown
-  --vs-dropdown__position: relative;
-  --vs-dropdown__content__transform-origin: top right;
-  --vs-dropdown__content__position: absolute;
-  --vs-dropdown__content__right: 0;
-  --vs-dropdown__content__margin-top: 4px;
-  --vs-dropdown__content__width: 100px;
-  --vs-dropdown__content__background: #333333;
-  --vs-dropdown__content__border-radius: 4px;
-  --vs-dropdown__content__padding: 8px;
-  --vs-dropdown__content__color: white;
-  --vs-dropdown__content__z-index: 1;
 
   // Vue screener pagination
   --vs-pagination__display: flex;
@@ -172,6 +267,10 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-pagination__per-page__display: inline-flex;
   --vs-pagination__per-page__justify-content: flex-end;
   --vs-pagination__per-page-input__width: 60px;
+
+  // Vue screener error message
+  --vs-error-message__border: thin solid red;
+  --vs-error-message__color: red;
 }
 
 .vs-app {

@@ -22,15 +22,6 @@ const { sortDirection = null } = defineProps<{
 
 <style lang="scss">
 .vs-sort-selector {
-  --vs-sort-selector__height: 1em;
-  --vs-sort-selector__width: 1em;
-  --vs-sort-selector__display: inline-flex;
-  --vs-sort-selector__align-items: center;
-  --vs-sort-selector__float: right;
-  --vs-sort-selector__cursor: pointer;
-  --vs-sort-selector__transform: rotate(0deg);
-  --vs-sort-selector__transition: ease-out 100ms;
-
   height: var(--vs-sort-selector__height);
   width: var(--vs-sort-selector__width);
   display: var(--vs-sort-selector__display);
@@ -39,8 +30,6 @@ const { sortDirection = null } = defineProps<{
   cursor: var(--vs-sort-selector__cursor);
   transform: var(--vs-sort-selector__transform);
   transition: var(--vs-sort-selector__transition);
-
-  --vs-sort-selector__icon--asc__transform: rotate(-180deg);
 
   &__icon--asc {
     transform: var(--vs-sort-selector__icon--asc__transform);

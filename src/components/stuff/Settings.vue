@@ -81,19 +81,6 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
 
 <style lang="scss">
 .vs-settings {
-  --vs-settings__button__display: inline-flex;
-  --vs-settings__button__align-items: center;
-  --vs-settings__button__justify-content: center;
-  --vs-settings__button__background: transparent;
-  --vs-settings__button__border: 0;
-  --vs-settings__button__background: transparent;
-  --vs-settings__button__padding: 6px;
-  --vs-settings__button__margin-left: 4px;
-  --vs-settings__button__cursor: pointer;
-  --vs-settings__button__border-radius: 4px;
-  --vs-settings__button--active__background-color: rgba(255, 255, 255, 0.2);
-  --vs-settings__button--hover__background-color: rgba(255, 255, 255, 0.2);
-
   &__button {
     display: var(--vs-settings__button__display);
     align-items: var(--vs-settings__button__align-items);
@@ -115,13 +102,6 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
     }
   }
 
-  --vs-settings__button-icon__width: 16px;
-  --vs-settings__button-icon__height: 16px;
-  --vs-settings__button-icon__display: inline-flex;
-  --vs-settings__button-icon__align-items: center;
-  --vs-settings__button-icon__justify-content: center;
-  --vs-settings__button-icon__color: white;
-
   &__button-icon {
     width: var(--vs-settings__button-icon__width);
     height: var(--vs-settings__button-icon__height);
@@ -131,12 +111,6 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
     color: var(--vs-settings__button-icon__color);
   }
 
-  --vs-settings__heading__font-weight: 400;
-  --vs-settings__heading__margin: 0 0 6px 0;
-  --vs-settings__heading__font-size: 9px;
-  --vs-settings__heading__text-transform: uppercase;
-  --vs-settings__heading__opacity: 0.8;
-
   &__heading {
     font-weight: var(--vs-settings__heading__font-weight);
     margin: var(--vs-settings__heading__margin);
@@ -145,38 +119,10 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
     opacity: var(--vs-settings__heading__opacity);
   }
 
-  --vs-settings__options__display: flex;
-  --vs-settings__options__gap: 4px;
-
   &__options {
     display: var(--vs-settings__options__display);
     gap: var(--vs-settings__options__gap);
   }
-
-  --vs-settings__options-button__border: none;
-  --vs-settings__options-button__background: none;
-  --vs-settings__options-button__padding: 0 3px;
-  --vs-settings__options-button__font-weight: 600;
-  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
-  --vs-settings__options-button__cursor: pointer;
-  --vs-settings__options-button__border: none;
-  --vs-settings__options-button__background: none;
-  --vs-settings__options-button__padding: 0 3px;
-  --vs-settings__options-button__font-weight: 600;
-  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
-  --vs-settings__options-button__cursor: pointer;
-  --vs-settings__options-button__border-radius: 4px;
-  --vs-settings__options-button__height: 20px;
-  --vs-settings__options-button__width: 26px;
-  --vs-settings__options-button__background: white;
-  --vs-settings__options-button__margin-bottom: 8px;
-
-  --vs-settings__options-button--match-word__text-decoration: underline;
-
-  --vs-settings__options-button--active__color: #fff;
-  --vs-settings__options-button--active__background: #3e51b5;
-  --vs-settings__options-button--hover__color: #fff;
-  --vs-settings__options-button--hover__background: #3e51b5;
 
   &__options-button {
     border: var(--vs-settings__options-button__border);
