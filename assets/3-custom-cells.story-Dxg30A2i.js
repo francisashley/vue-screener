@@ -1,5 +1,5 @@
 import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode, ax as mergeProps, aA as createBaseVNode, ay as createTextVNode } from "./vendor-DadODwuJ.js";
-import { _ as _export_sfc, H as Head, D as Data, V as VueScreener } from "./VueScreener-DYYj2LNJ.js";
+import { _ as _export_sfc, H as Head, D as Data, V as VueScreener } from "./VueScreener-rsBCvTNF.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "3-custom-cells.story",

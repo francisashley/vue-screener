@@ -1286,11 +1286,11 @@ const useScreener = (options = {}) => {
   const sortField = ref(null);
   const sortDirection = ref("desc");
   const data = ref([]);
-  const columnConfig = ref({});
+  const config = ref({});
   const pick = ref([]);
   const omit = ref([]);
   title.value = options.title ?? title.value;
-  columnConfig.value = options.columnConfig ?? columnConfig.value;
+  config.value = options.config ?? config.value;
   currentPage.value = options.defaultCurrentPage ?? currentPage.value;
   perPage.value = options.defaultPerPage ?? perPage.value;
   data.value = options.defaultData ?? data.value;
@@ -1363,7 +1363,7 @@ const useScreener = (options = {}) => {
     var _a;
     const fields = ((_a = pick.value) == null ? void 0 : _a.length) ? pick.value : getFields(normalisedData.value);
     let columns2 = fields.map((field, i) => {
-      const inputColumn = columnConfig.value[field] ?? {};
+      const inputColumn = config.value[field] ?? {};
       let width = inputColumn.width ?? "1fr";
       if (!isNaN(Number(width)))
         width = width + "px";
@@ -1404,7 +1404,7 @@ const useScreener = (options = {}) => {
     totalItems: computed(() => searchedData.value.length),
     hasError,
     hasData,
-    columnConfig,
+    config,
     pick,
     omit,
     columns,
@@ -1430,7 +1430,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: {
     title: { type: String, required: false, default: "Results" },
     data: { type: Array, required: false, default: () => [] },
-    columnConfig: { type: Object, required: false, default: () => ({}) },
+    config: { type: Object, required: false, default: () => ({}) },
     pick: { type: Array, required: false, default: () => [] },
     omit: { type: Array, required: false, default: () => [] },
     perPage: { type: Number, required: false, default: 15 },
@@ -1444,13 +1444,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       defaultCurrentPage: __props.currentPage,
       defaultPerPage: __props.perPage,
       defaultData: __props.data,
-      columnConfig: __props.columnConfig,
+      config: __props.config,
       pick: __props.pick,
       omit: __props.omit
     });
     watchEffect(() => screener.title.value = __props.title);
     watchEffect(() => screener.data.value = __props.data);
-    watchEffect(() => screener.columnConfig.value = __props.columnConfig);
+    watchEffect(() => screener.config.value = __props.config);
     watchEffect(() => screener.pick.value = __props.pick);
     watchEffect(() => screener.omit.value = __props.omit);
     watchEffect(() => screener.perPage.value = __props.perPage);
