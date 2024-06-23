@@ -30,7 +30,7 @@ import Table from './table/Table.vue'
 import NoDataView from './views/NoDataView.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
 import { useScreener } from '../hooks/use-screener'
-import { ColumnConfig } from '@/interfaces/screener'
+import { Config } from '@/interfaces/screener'
 import { watchEffect } from 'vue'
 
 type Props = {
@@ -39,7 +39,7 @@ type Props = {
   // The data to be displayed in the table
   data?: unknown[]
   // Configure each column
-  columnConfig?: ColumnConfig
+  config?: Config
   // The specific fields to be displayed in the table
   pick?: string[]
   // The fields to be excluded from the table
@@ -55,7 +55,7 @@ type Props = {
 const {
   title = 'Results',
   data = [],
-  columnConfig = {},
+  config = {},
   pick = [],
   omit = [],
   perPage = 15,
@@ -68,14 +68,14 @@ const screener = useScreener({
   defaultCurrentPage: currentPage,
   defaultPerPage: perPage,
   defaultData: data,
-  columnConfig,
+  config,
   pick: pick,
   omit: omit,
 })
 
 watchEffect(() => (screener.title.value = title))
 watchEffect(() => (screener.data.value = data))
-watchEffect(() => (screener.columnConfig.value = columnConfig))
+watchEffect(() => (screener.config.value = config))
 watchEffect(() => (screener.pick.value = pick))
 watchEffect(() => (screener.omit.value = omit))
 watchEffect(() => (screener.perPage.value = perPage))

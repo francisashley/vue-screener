@@ -20,7 +20,7 @@ export type Screener = {
   hasData: ComputedRef<boolean>
   columns: ComputedRef<Column[]>
   items: ComputedRef<(Item | null)[]>
-  columnConfig: Ref<ColumnConfig>
+  config: Ref<Config>
   pick: Ref<string[]>
   omit: Ref<string[]>
   actions: {
@@ -39,7 +39,7 @@ export type Column = {
   isSortable: boolean // Flag indicating if the field is sortable. TODO: is this needed?
 }
 
-export type ColumnConfig = Record<string | number, Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'label'>>>
+export type Config = Record<string | number, Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'label'>>>
 
 export type Item = {
   data: Record<string | number, any> // The original data for the item.
