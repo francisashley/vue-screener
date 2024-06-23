@@ -86,6 +86,10 @@
         {
           "id": "src-stories-2-configure-columns-story-vue-7",
           "title": "Disable sort"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-8",
+          "title": "Format column"
         }
       ],
       "relativePath": "src/stories/2-configure-columns.story.vue",

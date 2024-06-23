@@ -1042,15 +1042,20 @@ function isValidInput(data) {
   const isObject = (val) => typeof val === "object" && val !== null;
   return Array.isArray(data) && data.every((item) => Array.isArray(item) || isObject(item));
 }
-function normaliseInput(data) {
+function normaliseInput(data, config) {
   const transformedData = data.map((item) => Array.isArray(item) ? { ...item } : item);
-  const normaliseField = (field, value) => ({
-    field,
-    type: getTypeOf(value),
-    value,
-    htmlValue: String(value),
-    hasValue: value !== null || value !== void 0
-  });
+  const normaliseField = (field, value) => {
+    var _a;
+    const format = (_a = config[field]) == null ? void 0 : _a.format;
+    const _value = (format == null ? void 0 : format(value)) ?? value;
+    return {
+      field,
+      type: getTypeOf(value),
+      value: String(_value),
+      htmlValue: String(_value),
+      hasValue: value !== null || value !== void 0
+    };
+  };
   const normalisedData = transformedData.map((item) => {
     const fields2 = {};
     Object.keys(item).forEach((key) => {
@@ -1236,7 +1241,7 @@ const useScreener = (options = {}) => {
     return !isValidInput(data.value);
   });
   const normalisedData = computed(() => {
-    return isValidInput(data.value) ? normaliseInput(data.value) : [];
+    return isValidInput(data.value) ? normaliseInput(data.value, config.value) : [];
   });
   const searchedData = computed(() => {
     return search({

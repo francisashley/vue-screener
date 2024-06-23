@@ -135,6 +135,23 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
         }"
       />
     </Variant>
+    <Variant title="Format column" width="100">
+      <VueScreener
+        :data="baseData"
+        :pick="['id', 'first_name', 'last_name', 'ip_address']"
+        :config="{
+          id: { field: 'id', width: '50px' },
+          first_name: { field: 'first_name', width: '150px', format: (value) => '😎' + value + '😎' },
+          last_name: { field: 'last_name', width: '150px', format: (value) => '😎' + value + '😎' },
+          ip_address: {
+            field: 'ip_address',
+            width: 'minmax(150px, 1fr)',
+            isSortable: false,
+            format: (value) => '😎' + value + '😎',
+          },
+        }"
+      />
+    </Variant>
   </Story>
 </template>
 
