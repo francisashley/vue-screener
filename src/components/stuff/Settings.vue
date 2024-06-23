@@ -81,73 +81,134 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
 
 <style lang="scss">
 .vs-settings {
-  &__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: 0;
-    background: transparent;
-    padding: 6px;
-    margin-left: 4px;
-    cursor: pointer;
-    border-radius: 4px;
+  --vs-settings__button__display: inline-flex;
+  --vs-settings__button__align-items: center;
+  --vs-settings__button__justify-content: center;
+  --vs-settings__button__background: transparent;
+  --vs-settings__button__border: 0;
+  --vs-settings__button__background: transparent;
+  --vs-settings__button__padding: 6px;
+  --vs-settings__button__margin-left: 4px;
+  --vs-settings__button__cursor: pointer;
+  --vs-settings__button__border-radius: 4px;
+  --vs-settings__button--active__background-color: rgba(255, 255, 255, 0.2);
+  --vs-settings__button--hover__background-color: rgba(255, 255, 255, 0.2);
 
-    &--active,
+  &__button {
+    display: var(--vs-settings__button__display);
+    align-items: var(--vs-settings__button__align-items);
+    justify-content: var(--vs-settings__button__justify-content);
+    background: var(--vs-settings__button__background);
+    border: var(--vs-settings__button__border);
+    background: var(--vs-settings__button__background);
+    padding: var(--vs-settings__button__padding);
+    margin-left: var(--vs-settings__button__margin-left);
+    cursor: var(--vs-settings__button__cursor);
+    border-radius: var(--vs-settings__button__border-radius);
+
+    &--active {
+      background-color: var(--vs-settings__button--active__background-color);
+    }
+
     &:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: var(--vs-settings__button--hover__background-color);
     }
   }
+
+  --vs-settings__button-icon__width: 16px;
+  --vs-settings__button-icon__height: 16px;
+  --vs-settings__button-icon__display: inline-flex;
+  --vs-settings__button-icon__align-items: center;
+  --vs-settings__button-icon__justify-content: center;
+  --vs-settings__button-icon__color: white;
 
   &__button-icon {
-    width: 16px;
-    height: 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+    width: var(--vs-settings__button-icon__width);
+    height: var(--vs-settings__button-icon__height);
+    display: var(--vs-settings__button-icon__display);
+    align-items: var(--vs-settings__button-icon__align-items);
+    justify-content: var(--vs-settings__button-icon__justify-content);
+    color: var(--vs-settings__button-icon__color);
   }
+
+  --vs-settings__heading__font-weight: 400;
+  --vs-settings__heading__margin: 0 0 6px 0;
+  --vs-settings__heading__font-size: 9px;
+  --vs-settings__heading__text-transform: uppercase;
+  --vs-settings__heading__opacity: 0.8;
 
   &__heading {
-    font-weight: 400;
-    margin: 0 0 6px 0;
-    font-size: 9px;
-    text-transform: uppercase;
-    opacity: 0.8;
+    font-weight: var(--vs-settings__heading__font-weight);
+    margin: var(--vs-settings__heading__margin);
+    font-size: var(--vs-settings__heading__font-size);
+    text-transform: var(--vs-settings__heading__text-transform);
+    opacity: var(--vs-settings__heading__opacity);
   }
+
+  --vs-settings__options__display: flex;
+  --vs-settings__options__gap: 4px;
 
   &__options {
-    display: flex;
-    gap: 4px;
+    display: var(--vs-settings__options__display);
+    gap: var(--vs-settings__options__gap);
   }
 
+  --vs-settings__options-button__border: none;
+  --vs-settings__options-button__background: none;
+  --vs-settings__options-button__padding: 0 3px;
+  --vs-settings__options-button__font-weight: 600;
+  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
+  --vs-settings__options-button__cursor: pointer;
+  --vs-settings__options-button__border: none;
+  --vs-settings__options-button__background: none;
+  --vs-settings__options-button__padding: 0 3px;
+  --vs-settings__options-button__font-weight: 600;
+  --vs-settings__options-button__color: rgba(0, 0, 0, 0.5);
+  --vs-settings__options-button__cursor: pointer;
+  --vs-settings__options-button__border-radius: 4px;
+  --vs-settings__options-button__height: 20px;
+  --vs-settings__options-button__width: 26px;
+  --vs-settings__options-button__background: white;
+  --vs-settings__options-button__margin-bottom: 8px;
+
+  --vs-settings__options-button--match-word__text-decoration: underline;
+
+  --vs-settings__options-button--active__color: #fff;
+  --vs-settings__options-button--active__background: #3e51b5;
+  --vs-settings__options-button--hover__color: #fff;
+  --vs-settings__options-button--hover__background: #3e51b5;
+
   &__options-button {
-    border: none;
-    background: none;
-    padding: 0 3px;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0 3px;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    border-radius: 4px;
-    height: 20px;
-    width: 26px;
-    background: white;
-    margin-bottom: 8px;
+    border: var(--vs-settings__options-button__border);
+    background: var(--vs-settings__options-button__background);
+    padding: var(--vs-settings__options-button__padding);
+    font-weight: var(--vs-settings__options-button__font-weight);
+    color: var(--vs-settings__options-button__color);
+    cursor: var(--vs-settings__options-button__cursor);
+    border: var(--vs-settings__options-button__border);
+    background: var(--vs-settings__options-button__background);
+    padding: var(--vs-settings__options-button__padding);
+    font-weight: var(--vs-settings__options-button__font-weight);
+    color: var(--vs-settings__options-button__color);
+    cursor: var(--vs-settings__options-button__cursor);
+    border-radius: var(--vs-settings__options-button__border-radius);
+    height: var(--vs-settings__options-button__height);
+    width: var(--vs-settings__options-button__width);
+    background: var(--vs-settings__options-button__background);
+    margin-bottom: var(--vs-settings__options-button__margin-bottom);
 
     &--match-word {
-      text-decoration: underline;
+      text-decoration: var(--vs-settings__options-button--match-word__text-decoration);
     }
 
-    &--active,
+    &--active {
+      color: var(--vs-settings__options-button--active__color);
+      background: var(--vs-settings__options-button--active__background);
+    }
+
     &:hover {
-      color: #fff;
-      background: #3e51b5;
+      color: var(--vs-settings__options-button--hover__color);
+      background: var(--vs-settings__options-button--hover__background);
     }
   }
 }
