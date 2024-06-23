@@ -35,24 +35,20 @@ defineProps<{
 </script>
 
 <style lang="scss">
-.vs-table {
-  color: black;
+.vs-table__cell {
+  border-right: var(--table-cell__border-right);
+  padding: var(--table-cell__padding);
 
-  &__cell {
-    border-right: thin solid black;
-    padding: 2px 5px;
+  &--is-last {
+    border-right: var(--table-cell--is-last__border-right);
   }
 
-  &__cell--is-last {
-    border-right: unset;
-  }
-
-  &__cell--is-pinned {
-    position: sticky;
-    background: white;
-    right: 0;
-    border-left: thin solid black;
-    margin-left: -1px;
+  &--is-pinned {
+    position: var(--table-cell--is-pinned__position);
+    background: var(--table-cell--is-pinned__background);
+    right: var(--table-cell--is-pinned__right);
+    border-left: var(--table-cell--is-pinned__border-left);
+    margin-left: var(--table-cell--is-pinned__margin-left);
   }
 }
 

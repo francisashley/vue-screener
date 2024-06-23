@@ -191,40 +191,40 @@ const handleChangePerPage = (event: Event): void => {
 
 <style lang="scss">
 .vs-pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  white-space: nowrap;
-  color: #000;
+  display: var(--vs-pagination__display);
+  justify-content: var(--vs-pagination__justify-content);
+  align-items: var(--vs-pagination__align-items);
+  white-space: var(--vs-pagination__white-space);
+  color: var(--vs-pagination__color);
 
   &__info {
-    white-space: nowrap;
-    width: 150px;
+    white-space: var(--vs-pagination__info__white-space);
+    width: var(--vs-pagination__info__width);
   }
 
   &__nav {
-    display: flex;
-    padding: 0 8px !important;
-    margin: 0 !important;
-    list-style-type: none;
+    display: var(--vs-pagination__nav__display);
+    padding: var(--vs-pagination__nav__padding);
+    margin: var(--vs-pagination__nav__margin);
+    list-style-type: var(--vs-pagination__nav__list-style-type);
   }
 
   &__button {
-    margin: 0 10px 0 0 !important;
+    margin: var(--vs-pagination__button__margin);
   }
 
   &__button--active {
-    color: blue;
+    color: var(--vs-pagination__button--active__color);
   }
 
   &__per-page {
-    width: 150px;
-    display: inline-flex;
-    justify-content: flex-end;
+    width: var(--vs-pagination__per-page__width);
+    display: var(--vs-pagination__per-page__display);
+    justify-content: var(--vs-pagination__per-page__justify-content);
   }
 
   &__per-page-input {
-    width: 60px;
+    width: var(--vs-pagination__per-page-input__width);
   }
 }
 </style>

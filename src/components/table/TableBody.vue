@@ -38,6 +38,6 @@ const rowStyle = computed(() => {
 
 <style lang="scss">
 .vs-table__row {
-  border-bottom: thin solid black;
+  border-bottom: var(--table-row__border);
 }
 </style>

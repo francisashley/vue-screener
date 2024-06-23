@@ -42,20 +42,34 @@ const handleClickHeader = () => {
 
 <style lang="scss">
 .vs-table__cell {
+  --table-cell--is-header__font-weight: bold;
+  --table-cell--is-header__white-space: nowrap;
+  --table-cell--is-header__height: 24px;
+  --table-cell--is-header__display: inline-flex;
+  --table-cell--is-header__align-items: center;
+  --table-cell--is-header__gap: 4px;
+
   &--is-header {
-    font-weight: bold;
-    white-space: nowrap;
-    height: 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    font-weight: var(--table-cell--is-header__font-weight);
+    white-space: var(--table-cell--is-header__white-space);
+    height: var(--table-cell--is-header__height);
+    display: var(--table-cell--is-header__display);
+    align-items: var(--table-cell--is-header__align-items);
+    gap: var(--table-cell--is-header__gap);
   }
+
+  --table-cell--is-sortable__div__height: 24px;
+  --table-cell--is-sortable__div__display: inline-flex;
+  --table-cell--is-sortable__div__align-items: center;
+  --table-cell--is-sortable__div__gap: 4px;
+  --table-cell--is-sortable__div__cursor: pointer;
+
   &--is-sortable > div {
-    height: 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
+    height: var(--table-cell--is-header__height);
+    display: var(--table-cell--is-header__display);
+    align-items: var(--table-cell--is-header__align-items);
+    gap: var(--table-cell--is-header__gap);
+    cursor: var(--table-cell--is-header__cursor);
   }
 }
 </style>

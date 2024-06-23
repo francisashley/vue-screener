@@ -67,21 +67,21 @@ const onInput = (event: Event) => {
 
 <style lang="scss">
 .vs-search {
-  width: 200px;
-  padding: 0 4px;
-  box-sizing: border-box;
-  font-size: 14px !important;
-  font-weight: normal !important;
-  height: 26px;
-  border: none;
-  border-left: thin solid;
-  border-radius: 4px;
-  border: 2px solid #fff;
-  color: black;
+  width: var(--table-header-search__width);
+  padding: var(--table-header-search__padding);
+  box-sizing: var(--table-header-search__box-sizing);
+  font-size: var(--table-header-search__font-size);
+  font-weight: var(--table-header-search__font-weight);
+  height: var(--table-header-search__height);
+  border: var(--table-header-search__border);
+  border-left: var(--table-header-search__border-left);
+  border-radius: var(--table-header-search__border-radius);
+  border: var(--table-header-search__border);
+  color: var(--table-header-search__color);
 
   &--error {
-    border: 2px solid red;
-    outline-color: red;
+    border: var(--table-header-search--error__border);
+    outline-color: var(--table-header-search--error__border);
   }
 }
 </style>

@@ -27,22 +27,22 @@ const isRegExFriendlySearchQuery = computed((): boolean => {
 <style lang="scss">
 .vs {
   &-header {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-    background: black;
-    font-weight: 400;
-    padding: 4px 4px 4px 8px;
+    display: var(--table-header__display);
+    align-items: var(--table-header__align-items);
+    font-size: var(--table-header__font-size);
+    color: var(--table-header__color);
+    background: var(--table-header__bg);
+    font-weight: var(--table-header__font-weight);
+    padding: var(--table-header__padding);
   }
 
   &-title {
-    font-weight: 500;
-    margin-right: auto;
+    font-weight: var(--table-header-title__font-weight);
+    margin-right: var(--table-header-title__margin-right);
   }
 
   &-search {
-    margin-left: 8px;
+    margin-left: var(--table-header-search__margin-left);
   }
 }
 </style>
