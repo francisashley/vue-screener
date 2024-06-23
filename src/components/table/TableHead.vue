@@ -33,7 +33,9 @@ const props = defineProps<{
 const emit = defineEmits(['on-sort'])
 
 const handleClickHeader = () => {
-  emit('on-sort', props.column.field)
+  if (props.column.isSortable) {
+    emit('on-sort', props.column.field)
+  }
 }
 </script>
 
