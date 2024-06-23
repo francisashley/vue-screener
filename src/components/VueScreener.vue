@@ -186,6 +186,8 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-settings__options-button--active__background: #3e51b5;
   --vs-settings__options-button--hover__color: #fff;
   --vs-settings__options-button--hover__background: #3e51b5;
+  --vs-settings__options-button-icon__height: 20px;
+  --vs-settings__options-button-icon__width: 20px;
 
   // Vue screener switch input
   --vs-switch__font-size: 12px;

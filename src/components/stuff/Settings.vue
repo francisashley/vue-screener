@@ -6,21 +6,17 @@
     <template #default>
       <FormHeading>Search</FormHeading>
       <div class="vs-settings__options">
-        <button
+        <Checkable
           v-for="(option, i) in getOptions"
           :key="i"
-          class="vs-settings__options-button"
-          :class="[
-            { 'vs-settings__options-button--active': option.isActive },
-            'vs-settings__options-button--' + option.id,
-          ]"
           :title="option.title"
           @click="toggleOption(option.id)"
+          :checked="option.isActive"
         >
-          <MatchCaseIcon class="vs-settings__options-button-icon" v-if="option.id === 'match-case'" />
-          <MatchWordIcon class="vs-settings__options-button-icon" v-if="option.id === 'match-word'" />
-          <RegularExpressionIcon class="vs-settings__options-button-icon" v-if="option.id === 'use-regex'" />
-        </button>
+          <MatchCaseIcon v-if="option.id === 'match-case'" />
+          <MatchWordIcon v-else-if="option.id === 'match-word'" />
+          <RegularExpressionIcon v-else-if="option.id === 'use-regex'" />
+        </Checkable>
       </div>
       <FormHeading>Presentation</FormHeading>
       <Switch
@@ -39,6 +35,7 @@
 import { computed, ref } from 'vue'
 import Dropdown from './Dropdown.vue'
 import Switch from '../form/Switch.vue'
+import Checkable from '../form/Checkable.vue'
 import FormHeading from '../form/Heading.vue'
 import MatchCaseIcon from '../icons/MaterialDesignMatchCase.vue'
 import MatchWordIcon from '../icons/MaterialDesignMatchWord.vue'
@@ -95,32 +92,9 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
     gap: var(--vs-settings__options__gap);
   }
 
-  &__options-button {
-    border: var(--vs-settings__options-button__border);
-    padding: var(--vs-settings__options-button__padding);
-    font-weight: var(--vs-settings__options-button__font-weight);
-    color: var(--vs-settings__options-button__color);
-    cursor: var(--vs-settings__options-button__cursor);
-    border-radius: var(--vs-settings__options-button__border-radius);
-    height: var(--vs-settings__options-button__height);
-    width: var(--vs-settings__options-button__width);
-    background: var(--vs-settings__options-button__background);
-    margin-bottom: var(--vs-settings__options-button__margin-bottom);
-
-    &-icon {
-      height: 20px;
-      width: 20px;
-    }
-
-    &--active {
-      color: var(--vs-settings__options-button--active__color);
-      background: var(--vs-settings__options-button--active__background);
-    }
-
-    &:hover {
-      color: var(--vs-settings__options-button--hover__color);
-      background: var(--vs-settings__options-button--hover__background);
-    }
+  &__options-button-icon {
+    height: var(--vs-settings__options-button-icon__height);
+    width: var(--vs-settings__options-button-icon__width);
   }
 }
 </style>
