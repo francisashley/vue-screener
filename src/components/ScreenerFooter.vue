@@ -17,6 +17,6 @@ defineProps<Props>()
 
 <style lang="scss">
 .vs-footer {
-  padding: var(--table-footer__padding);
+  padding: var(--vs-table-footer__padding);
 }
 </style>

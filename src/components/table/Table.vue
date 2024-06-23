@@ -33,6 +33,6 @@ const tableStyle = computed(() => {
 
 <style lang="scss">
 .vs-table {
-  color: var(--table__color);
+  color: var(--vs-table__color);
 }
 </style>

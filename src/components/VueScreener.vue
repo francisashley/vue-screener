@@ -85,61 +85,61 @@ watchEffect(() => (screener.currentPage.value = currentPage))
 <style lang="scss">
 .vs-app {
   // Vue screener
-  --table__bg: #fff;
-  --table__overflow: hidden;
-  --table__border: thin solid black;
-  --table__border-radius: 8px;
-  --table__font-size: 14px;
-  --table__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+  --vs__bg: #fff;
+  --vs__overflow: hidden;
+  --vs__border: thin solid black;
+  --vs__border-radius: 8px;
+  --vs__font-size: 14px;
+  --vs__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
   // Vue screener header
-  --table-header__display: flex;
-  --table-header__align-items: center;
-  --table-header__font-size: 16px;
-  --table-header__color: white;
-  --table-header__bg: black;
-  --table-header__font-weight: 400;
-  --table-header__padding: 4px 4px 4px 8px;
+  --vs-header__display: flex;
+  --vs-header__align-items: center;
+  --vs-header__font-size: 16px;
+  --vs-header__color: white;
+  --vs-header__bg: black;
+  --vs-header__font-weight: 400;
+  --vs-header__padding: 4px 4px 4px 8px;
 
   // Vue screener header title
-  --table-header-title__font-weight: 500;
-  --table-header-title__margin-right: auto;
+  --vs-header-title__font-weight: 500;
+  --vs-header-title__margin-right: auto;
 
   // Vue screener header search
-  --table-header-search__margin-left: 8px;
-  --table-header-search__width: 200px;
-  --table-header-search__padding: 0 4px;
-  --table-header-search__box-sizing: border-box;
-  --table-header-search__font-size: 14px !important;
-  --table-header-search__font-weight: normal !important;
-  --table-header-search__height: 26px;
-  --table-header-search__border: none;
-  --table-header-search__border-left: thin solid;
-  --table-header-search__border-radius: 4px;
-  --table-header-search__border: 2px solid #fff;
-  --table-header-search__color: black;
-  --table-header-search--error__border: 2px solid red;
-  --table-header-search--error__outline-color: red;
+  --vs-header-search__margin-left: 8px;
+  --vs-header-search__width: 200px;
+  --vs-header-search__padding: 0 4px;
+  --vs-header-search__box-sizing: border-box;
+  --vs-header-search__font-size: 14px !important;
+  --vs-header-search__font-weight: normal !important;
+  --vs-header-search__height: 26px;
+  --vs-header-search__border: none;
+  --vs-header-search__border-left: thin solid;
+  --vs-header-search__border-radius: 4px;
+  --vs-header-search__border: 2px solid #fff;
+  --vs-header-search__color: black;
+  --vs-header-search--error__border: 2px solid red;
+  --vs-header-search--error__outline-color: red;
 
   // Vue screener table
-  --table__color: black;
+  --vs-table__color: black;
 
   // Vue screener table row
-  --table-row__border: thin solid black;
+  --vs-table-row__border: thin solid black;
 
   // Vue screener table cell
-  --table-cell__border-right: thin solid black;
-  --table-cell__padding: 2px 5px;
-  --table-cell--is-last__border-right: unset;
-  --table-cell--is-pinned__position: sticky;
-  --table-cell--is-pinned__background: white;
-  --table-cell--is-pinned__right: 0;
-  --table-cell--is-pinned__border-left: thin solid black;
-  --table-cell--is-pinned__margin-left: -1px;
+  --vs-table-cell__border-right: thin solid black;
+  --vs-table-cell__padding: 2px 5px;
+  --vs-table-cell--is-last__border-right: unset;
+  --vs-table-cell--is-pinned__position: sticky;
+  --vs-table-cell--is-pinned__background: white;
+  --vs-table-cell--is-pinned__right: 0;
+  --vs-table-cell--is-pinned__border-left: thin solid black;
+  --vs-table-cell--is-pinned__margin-left: -1px;
 
   // Vue screener footer
-  --table-footer__padding: 8px;
+  --vs-table-footer__padding: 8px;
 
   // Vue screener dropdown
   --vs-dropdown__position: relative;
@@ -175,11 +175,11 @@ watchEffect(() => (screener.currentPage.value = currentPage))
 }
 
 .vs-app {
-  overflow: var(--table__overflow);
-  font-family: var(--table__font-family);
-  font-size: var(--table__font-size);
-  border-radius: var(--table__border-radius);
-  border: var(--table__border);
-  background: var(--table__bg);
+  overflow: var(--vs__overflow);
+  font-family: var(--vs__font-family);
+  font-size: var(--vs__font-size);
+  border-radius: var(--vs__border-radius);
+  border: var(--vs__border);
+  background: var(--vs__bg);
 }
 </style>
