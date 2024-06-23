@@ -13,10 +13,10 @@
     ]"
     @click="handleClickHeader"
   >
+    <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
     <slot>
       <span v-html="column.label" />
     </slot>
-    <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
   </TableCell>
 </template>
 
@@ -45,7 +45,7 @@ const handleClickHeader = () => {
     height: 24px;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
   }
   &--is-sortable {
     cursor: pointer;
