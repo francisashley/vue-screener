@@ -13,9 +13,7 @@
           :key="i"
           class="vs-settings__options-button"
           :class="[
-            {
-              'vs-settings__options-button--active': option.isActive,
-            },
+            { 'vs-settings__options-button--active': option.isActive },
             'vs-settings__options-button--' + option.id,
           ]"
           :title="option.title"
@@ -25,7 +23,14 @@
         </button>
       </div>
       <h3 class="vs-settings__heading">Presentation</h3>
-      <ViewSelector :active-format="screener.renderFormat.value" @select-format="handleSelectFormat($event)" />
+      <Switch
+        :value="screener.renderFormat.value"
+        :options="[
+          { label: 'Table', value: 'table' },
+          { label: 'Raw', value: 'raw' },
+        ]"
+        @select="handleSelectFormat($event)"
+      />
     </template>
   </Dropdown>
 </template>
@@ -33,7 +38,7 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import Dropdown from './Dropdown.vue'
-import ViewSelector from './ViewSelector.vue'
+import Switch from '../form/Switch.vue'
 import RemixSettings3FillIcon from '../icons/RemixSettings3FillIcon.vue'
 import { Screener } from '@/interfaces/screener'
 

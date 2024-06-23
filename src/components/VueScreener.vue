@@ -184,29 +184,29 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-settings__options-button--hover__color: #fff;
   --vs-settings__options-button--hover__background: #3e51b5;
 
-  // Vue screener view selector
-  --vs-view-selector__font-size: 12px;
-  --vs-view-selector__height: 20px;
-  --vs-view-selector__display: flex;
-  --vs-view-selector__overflow: hidden;
-  --vs-view-selector__align-items: center;
-  --vs-view-selector__border-radius: 2px;
-  --vs-view-selector__link__text-decoration: none;
-  --vs-view-selector__link__font-weight: 500;
-  --vs-view-selector__link__height: 100%;
-  --vs-view-selector__link__display: flex;
-  --vs-view-selector__link__align-items: center;
-  --vs-view-selector__link__padding: 0 8px;
-  --vs-view-selector__link__color: #000;
-  --vs-view-selector__link__width: 32px;
-  --vs-view-selector__link__text-align: center;
-  --vs-view-selector__link__justify-content: center;
-  --vs-view-selector__link__background: #fff;
-  --vs-view-selector__link--last-child__border-radius: 0 4px 4px 0;
-  --vs-view-selector__link--is-active__background: #3f51b5;
-  --vs-view-selector__link--is-active__color: #fff;
-  --vs-view-selector__link--is-hover__background: #3f51b5;
-  --vs-view-selector__link--is-hover__color: #fff;
+  // Vue screener switch input
+  --vs-switch__font-size: 12px;
+  --vs-switch__height: 20px;
+  --vs-switch__display: flex;
+  --vs-switch__overflow: hidden;
+  --vs-switch__align-items: center;
+  --vs-switch__border-radius: 2px;
+  --vs-switch-option__text-decoration: none;
+  --vs-switch-option__font-weight: 500;
+  --vs-switch-option__height: 100%;
+  --vs-switch-option__display: flex;
+  --vs-switch-option__align-items: center;
+  --vs-switch-option__padding: 0 8px;
+  --vs-switch-option__color: #000;
+  --vs-switch-option__width: 32px;
+  --vs-switch-option__text-align: center;
+  --vs-switch-option__justify-content: center;
+  --vs-switch-option__background: #fff;
+  --vs-switch-option--last-child__border-radius: 0 4px 4px 0;
+  --vs-switch-option--is-active__background: #3f51b5;
+  --vs-switch-option--is-active__color: #fff;
+  --vs-switch-option--is-hover__background: #3f51b5;
+  --vs-switch-option--is-hover__color: #fff;
 
   // Vue screener table
   --vs-table__color: black;

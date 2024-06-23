@@ -167,9 +167,9 @@ Style using classes:
     .vs-settings__options-button--match-word
     .vs-settings__options-button--match-case
     .vs-settings__options-button--use-regex
-    .vs-view-selector
-    .vs-view-selector__link
-    .vs-view-selector__link--is-active
+    .vs-switch
+    .vs-switch__option
+    .vs-switch__option--is-active
     .vs-dropdown
     .vs-dropdown__content
   .vs-main
