@@ -203,10 +203,10 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-switch-option__justify-content: center;
   --vs-switch-option__background: #fff;
   --vs-switch-option--last-child__border-radius: 0 4px 4px 0;
-  --vs-switch-option--is-active__background: #3f51b5;
-  --vs-switch-option--is-active__color: #fff;
-  --vs-switch-option--is-hover__background: #3f51b5;
-  --vs-switch-option--is-hover__color: #fff;
+  --vs-switch-option--active__background: #3f51b5;
+  --vs-switch-option--active__color: #fff;
+  --vs-switch-option--hover__background: #3f51b5;
+  --vs-switch-option--hover__color: #fff;
 
   // Vue screener table
   --vs-table__color: black;
@@ -217,23 +217,23 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   // Vue screener table cell
   --vs-table-cell__border-right: thin solid black;
   --vs-table-cell__padding: 2px 5px;
-  --vs-table-cell--is-last__border-right: unset;
-  --vs-table-cell--is-pinned__position: sticky;
-  --vs-table-cell--is-pinned__background: white;
-  --vs-table-cell--is-pinned__right: 0;
-  --vs-table-cell--is-pinned__border-left: thin solid black;
-  --vs-table-cell--is-pinned__margin-left: -1px;
-  --vs-table-cell--is-header__font-weight: bold;
-  --vs-table-cell--is-header__white-space: nowrap;
-  --vs-table-cell--is-header__height: 24px;
-  --vs-table-cell--is-header__display: inline-flex;
-  --vs-table-cell--is-header__align-items: center;
-  --vs-table-cell--is-header__gap: 4px;
-  --vs-table-cell--is-sortable__div__height: 24px;
-  --vs-table-cell--is-sortable__div__display: inline-flex;
-  --vs-table-cell--is-sortable__div__align-items: center;
-  --vs-table-cell--is-sortable__div__gap: 4px;
-  --vs-table-cell--is-sortable__div__cursor: pointer;
+  --vs-table-cell--last__border-right: unset;
+  --vs-table-cell--pinned__position: sticky;
+  --vs-table-cell--pinned__background: white;
+  --vs-table-cell--pinned__right: 0;
+  --vs-table-cell--pinned__border-left: thin solid black;
+  --vs-table-cell--pinned__margin-left: -1px;
+  --vs-table-cell--header__font-weight: bold;
+  --vs-table-cell--header__white-space: nowrap;
+  --vs-table-cell--header__height: 24px;
+  --vs-table-cell--header__display: inline-flex;
+  --vs-table-cell--header__align-items: center;
+  --vs-table-cell--header__gap: 4px;
+  --vs-table-cell--sortable__div__height: 24px;
+  --vs-table-cell--sortable__div__display: inline-flex;
+  --vs-table-cell--sortable__div__align-items: center;
+  --vs-table-cell--sortable__div__gap: 4px;
+  --vs-table-cell--sortable__div__cursor: pointer;
 
   // Vue screener sort selector
   --vs-sort-selector__height: 1em;

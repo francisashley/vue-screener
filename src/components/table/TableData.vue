@@ -6,7 +6,7 @@
     :has-value="item.fields[column.field]?.hasValue"
     :is-pinned="column.isPinned"
     :type="item.fields[column.field]?.type"
-    :class="['vs-table__cell--is-value', column.isPinned && 'vs-table__cell--is-pinned']"
+    :class="['vs-table__cell--value', column.isPinned && 'vs-table__cell--pinned']"
   >
     <slot />
   </TableCell>

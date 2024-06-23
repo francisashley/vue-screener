@@ -5,7 +5,7 @@
       :key="option.value"
       href="#"
       @click.prevent="onSelectFormat(option.value)"
-      :class="['vs-switch-option', option.value === value && 'vs-switch-option--is-active']"
+      :class="['vs-switch-option', option.value === value && 'vs-switch-option--active']"
       v-text="option.label"
     />
   </div>
@@ -48,14 +48,14 @@ const onSelectFormat = (format: string) => emit('select', format)
       border-radius: var(--vs-switch-option--last-child__border-radius);
     }
 
-    &--is-active {
-      background: var(--vs-switch-option--is-active__background);
-      color: var(--vs-switch-option--is-active__color);
+    &--active {
+      background: var(--vs-switch-option--active__background);
+      color: var(--vs-switch-option--active__color);
     }
 
     &:hover {
-      background: var(--vs-switch-option--is-hover__background);
-      color: var(--vs-switch-option--is-hover__color);
+      background: var(--vs-switch-option--hover__background);
+      color: var(--vs-switch-option--hover__color);
     }
   }
 }

@@ -169,23 +169,23 @@ Style using classes:
     .vs-settings__options-button--use-regex
     .vs-switch
     .vs-switch__option
-    .vs-switch__option--is-active
+    .vs-switch__option--active
     .vs-dropdown
     .vs-dropdown__content
   .vs-main
-  .vs-main--is-scrollable
-  .vs-main--is-scrolled-end
+  .vs-main--scrollable
+  .vs-main--scrolled-end
     .vs-table
     .vs-table__row
     .vs-table__row--header
     .vs-table__row--record
     .vs-table__cell
-    .vs-table__cell--is-sortable
-    .vs-table__cell--is-pinned
-    .vs-table__cell--is-header
-    .vs-table__cell--is-value
-    .vs-table__cell--is-first
-    .vs-table__cell--is-last
+    .vs-table__cell--sortable
+    .vs-table__cell--pinned
+    .vs-table__cell--header
+    .vs-table__cell--value
+    .vs-table__cell--first
+    .vs-table__cell--last
     .vs-table__cell--hasValue
     .vs-table__cell--string
     .vs-table__cell--number

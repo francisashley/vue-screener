@@ -1,7 +1,7 @@
 <template>
   <main
     class="vs-main"
-    :class="{ 'vs-main--is-scrollable': isScrollable, 'vs-main--is-scrolled-end': isScrolledEnd }"
+    :class="{ 'vs-main--scrollable': isScrollable, 'vs-main--scrolled-end': isScrolledEnd }"
     ref="mainRef"
   >
     <slot />

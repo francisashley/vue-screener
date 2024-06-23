@@ -7,9 +7,9 @@
     :is-pinned="column.isPinned"
     type="string"
     :class="[
-      'vs-table__cell--is-header',
-      column.isSortable && 'vs-table__cell--is-sortable',
-      column.isPinned && 'vs-table__cell--is-pinned',
+      'vs-table__cell--header',
+      column.isSortable && 'vs-table__cell--sortable',
+      column.isPinned && 'vs-table__cell--pinned',
     ]"
   >
     <div @click="handleClickHeader">
@@ -42,21 +42,21 @@ const handleClickHeader = () => {
 
 <style lang="scss">
 .vs-table__cell {
-  &--is-header {
-    font-weight: var(--vs-table-cell--is-header__font-weight);
-    white-space: var(--vs-table-cell--is-header__white-space);
-    height: var(--vs-table-cell--is-header__height);
-    display: var(--vs-table-cell--is-header__display);
-    align-items: var(--vs-table-cell--is-header__align-items);
-    gap: var(--vs-table-cell--is-header__gap);
+  &--header {
+    font-weight: var(--vs-table-cell--header__font-weight);
+    white-space: var(--vs-table-cell--header__white-space);
+    height: var(--vs-table-cell--header__height);
+    display: var(--vs-table-cell--header__display);
+    align-items: var(--vs-table-cell--header__align-items);
+    gap: var(--vs-table-cell--header__gap);
   }
 
-  &--is-sortable > div {
-    height: var(--vs-table-cell--is-header__height);
-    display: var(--vs-table-cell--is-header__display);
-    align-items: var(--vs-table-cell--is-header__align-items);
-    gap: var(--vs-table-cell--is-header__gap);
-    cursor: var(--vs-table-cell--is-header__cursor);
+  &--sortable > div {
+    height: var(--vs-table-cell--header__height);
+    display: var(--vs-table-cell--header__display);
+    align-items: var(--vs-table-cell--header__align-items);
+    gap: var(--vs-table-cell--header__gap);
+    cursor: var(--vs-table-cell--header__cursor);
   }
 }
 </style>
