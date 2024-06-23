@@ -1,6 +1,8 @@
 <template>
   <div v-on-clickaway="handleClickOutside" class="vs-dropdown">
-    <slot name="dropdown-button" :show="show" :toggle="toggleDropdown" />
+    <button class="vs-dropdown__button" :class="[show && 'vs-dropdown__button--active']" @click="toggleDropdown">
+      <slot name="icon" />
+    </button>
     <transition name="vs-dropdown__content">
       <div v-if="show" class="vs-dropdown__content">
         <slot />
@@ -22,6 +24,33 @@ const handleClickOutside = () => (show.value = false)
 <style lang="scss">
 .vs-dropdown {
   position: var(--vs-dropdown__position);
+
+  &__button {
+    display: var(--vs-dropdown-button__display);
+    align-items: var(--vs-dropdown-button__align-items);
+    justify-content: var(--vs-dropdown-button__justify-content);
+    background: var(--vs-dropdown-button__background);
+    border: var(--vs-dropdown-button__border);
+    background: var(--vs-dropdown-button__background);
+    padding: var(--vs-dropdown-button__padding);
+    margin-left: var(--vs-dropdown-button__margin-left);
+    cursor: var(--vs-dropdown-button__cursor);
+    border-radius: var(--vs-dropdown-button__border-radius);
+    color: var(--vs-dropdown-button__color);
+
+    & > svg {
+      width: var(--vs-dropdown-button-icon__width);
+      height: var(--vs-dropdown-button-icon__height);
+    }
+
+    &--active {
+      background-color: var(--vs-dropdown-button--active__background-color);
+    }
+
+    &:hover {
+      background-color: var(--vs-dropdown-button--hover__background-color);
+    }
+  }
 
   &__content {
     transform-origin: var(--vs-dropdown-content__transform-origin);

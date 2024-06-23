@@ -158,8 +158,6 @@ Style using classes:
     .vs-search
     .vs-search--error
     .vs-settings
-    .vs-settings__button
-    .vs-settings__button--active
     .vs-settings__heading
     .vs-settings__options
     .vs-settings__options-button
@@ -171,6 +169,8 @@ Style using classes:
     .vs-switch__option
     .vs-switch__option--active
     .vs-dropdown
+    .vs-dropdown-button
+    .vs-dropdown-button--active
     .vs-dropdown__content
   .vs-main
   .vs-main--scrollable

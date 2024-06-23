@@ -124,6 +124,25 @@ watchEffect(() => (screener.currentPage.value = currentPage))
 
   // Vue screener dropdown
   --vs-dropdown__position: relative;
+
+  // Vue screener dropdown button
+  --vs-dropdown-button__display: inline-flex;
+  --vs-dropdown-button__align-items: center;
+  --vs-dropdown-button__justify-content: center;
+  --vs-dropdown-button__background: transparent;
+  --vs-dropdown-button__border: 0;
+  --vs-dropdown-button__background: transparent;
+  --vs-dropdown-button__padding: 6px;
+  --vs-dropdown-button__margin-left: 4px;
+  --vs-dropdown-button__cursor: pointer;
+  --vs-dropdown-button__border-radius: 4px;
+  --vs-dropdown-button__color: white;
+  --vs-dropdown-button--active__background-color: rgba(255, 255, 255, 0.2);
+  --vs-dropdown-button--hover__background-color: rgba(255, 255, 255, 0.2);
+  --vs-dropdown-button-icon__width: 16px;
+  --vs-dropdown-button-icon__height: 16px;
+
+  // Vue screener dropdown content
   --vs-dropdown-content__transform-origin: top right;
   --vs-dropdown-content__position: absolute;
   --vs-dropdown-content__right: 0;
@@ -135,30 +154,14 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-dropdown-content__color: white;
   --vs-dropdown-content__z-index: 1;
 
+  // Vue screener form heading
+  --vs-form-heading__font-weight: 400;
+  --vs-form-heading__margin: 0 0 6px 0;
+  --vs-form-heading__font-size: 9px;
+  --vs-form-heading__text-transform: uppercase;
+  --vs-form-heading__opacity: 0.8;
+
   // Vue screener settings
-  --vs-settings__button__display: inline-flex;
-  --vs-settings__button__align-items: center;
-  --vs-settings__button__justify-content: center;
-  --vs-settings__button__background: transparent;
-  --vs-settings__button__border: 0;
-  --vs-settings__button__background: transparent;
-  --vs-settings__button__padding: 6px;
-  --vs-settings__button__margin-left: 4px;
-  --vs-settings__button__cursor: pointer;
-  --vs-settings__button__border-radius: 4px;
-  --vs-settings__button--active__background-color: rgba(255, 255, 255, 0.2);
-  --vs-settings__button--hover__background-color: rgba(255, 255, 255, 0.2);
-  --vs-settings__button-icon__width: 16px;
-  --vs-settings__button-icon__height: 16px;
-  --vs-settings__button-icon__display: inline-flex;
-  --vs-settings__button-icon__align-items: center;
-  --vs-settings__button-icon__justify-content: center;
-  --vs-settings__button-icon__color: white;
-  --vs-settings__heading__font-weight: 400;
-  --vs-settings__heading__margin: 0 0 6px 0;
-  --vs-settings__heading__font-size: 9px;
-  --vs-settings__heading__text-transform: uppercase;
-  --vs-settings__heading__opacity: 0.8;
   --vs-settings__options__display: flex;
   --vs-settings__options__gap: 4px;
   --vs-settings__options-button__border: none;

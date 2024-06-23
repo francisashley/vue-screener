@@ -1,12 +1,10 @@
 <template>
   <Dropdown class="vs-settings">
-    <template #dropdown-button="{ show, toggle }">
-      <button class="vs-settings__button" :class="[show && 'vs-settings__button--active']" @click="toggle">
-        <RemixSettings3FillIcon class="vs-settings__button-icon" />
-      </button>
+    <template #icon>
+      <RemixSettings3FillIcon />
     </template>
     <template #default>
-      <h3 class="vs-settings__heading">Search</h3>
+      <FormHeading>Search</FormHeading>
       <div class="vs-settings__options">
         <button
           v-for="(option, i) in getOptions"
@@ -22,7 +20,7 @@
           {{ option.text }}
         </button>
       </div>
-      <h3 class="vs-settings__heading">Presentation</h3>
+      <FormHeading>Presentation</FormHeading>
       <Switch
         :value="screener.renderFormat.value"
         :options="[
@@ -39,6 +37,7 @@
 import { computed, ref } from 'vue'
 import Dropdown from './Dropdown.vue'
 import Switch from '../form/Switch.vue'
+import FormHeading from '../form/Heading.vue'
 import RemixSettings3FillIcon from '../icons/RemixSettings3FillIcon.vue'
 import { Screener } from '@/interfaces/screener'
 
@@ -86,44 +85,6 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
 
 <style lang="scss">
 .vs-settings {
-  &__button {
-    display: var(--vs-settings__button__display);
-    align-items: var(--vs-settings__button__align-items);
-    justify-content: var(--vs-settings__button__justify-content);
-    background: var(--vs-settings__button__background);
-    border: var(--vs-settings__button__border);
-    background: var(--vs-settings__button__background);
-    padding: var(--vs-settings__button__padding);
-    margin-left: var(--vs-settings__button__margin-left);
-    cursor: var(--vs-settings__button__cursor);
-    border-radius: var(--vs-settings__button__border-radius);
-
-    &--active {
-      background-color: var(--vs-settings__button--active__background-color);
-    }
-
-    &:hover {
-      background-color: var(--vs-settings__button--hover__background-color);
-    }
-  }
-
-  &__button-icon {
-    width: var(--vs-settings__button-icon__width);
-    height: var(--vs-settings__button-icon__height);
-    display: var(--vs-settings__button-icon__display);
-    align-items: var(--vs-settings__button-icon__align-items);
-    justify-content: var(--vs-settings__button-icon__justify-content);
-    color: var(--vs-settings__button-icon__color);
-  }
-
-  &__heading {
-    font-weight: var(--vs-settings__heading__font-weight);
-    margin: var(--vs-settings__heading__margin);
-    font-size: var(--vs-settings__heading__font-size);
-    text-transform: var(--vs-settings__heading__text-transform);
-    opacity: var(--vs-settings__heading__opacity);
-  }
-
   &__options {
     display: var(--vs-settings__options__display);
     gap: var(--vs-settings__options__gap);
