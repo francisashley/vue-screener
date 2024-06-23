@@ -105,21 +105,21 @@ import VueScreener, { Head, Data } from 'vue-screener'
 
 ## Slots
 
-Custom header cell renderer:
+Custom head cell renderer:
 
 ```vue
 <template>
   <vue-screener :data="data">
-    <template #header-cell="props">
-      <HeaderCell v-bind="props">
+    <template #head-cell="props">
+      <HeadCell v-bind="props">
         {{ props.field }}
         <CurrencyPicker  v-if="props.field === 'price'" />
-      </HeaderCell>
+      </HeadCell>
     </template>
   </vue-screener>
 </template>
 <script>
-import VueScreener, { HeaderCell } from 'vue-screener'
+import VueScreener, { HeadCell } from 'vue-screener'
 import CurrencyPicker from './components/currency-picker'
 </script>
 ```
@@ -182,7 +182,7 @@ Style using classes:
     .vs-table__cell
     .vs-table__cell--sortable
     .vs-table__cell--pinned
-    .vs-table__cell--header
+    .vs-table__cell--head
     .vs-table__cell--value
     .vs-table__cell--first
     .vs-table__cell--last

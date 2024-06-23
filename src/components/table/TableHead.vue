@@ -7,12 +7,12 @@
     :is-pinned="column.isPinned"
     type="string"
     :class="[
-      'vs-table__cell--header',
+      'vs-table__cell--head',
       column.isSortable && 'vs-table__cell--sortable',
       column.isPinned && 'vs-table__cell--pinned',
     ]"
   >
-    <div @click="handleClickHeader">
+    <div @click="handleClick">
       <SortIcon :direction="sortDirection" v-if="column.isSortable && sortDirection" />
       <slot>
         <span v-html="column.label" />
@@ -33,7 +33,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['on-sort'])
 
-const handleClickHeader = () => {
+const handleClick = () => {
   if (props.column.isSortable) {
     emit('on-sort', props.column.field)
   }
@@ -42,13 +42,13 @@ const handleClickHeader = () => {
 
 <style lang="scss">
 .vs-table__cell {
-  &--header {
-    font-weight: var(--vs-table-cell--header__font-weight);
-    white-space: var(--vs-table-cell--header__white-space);
-    height: var(--vs-table-cell--header__height);
-    display: var(--vs-table-cell--header__display);
-    align-items: var(--vs-table-cell--header__align-items);
-    gap: var(--vs-table-cell--header__gap);
+  &--head {
+    font-weight: var(--vs-table-cell--head__font-weight);
+    white-space: var(--vs-table-cell--head__white-space);
+    height: var(--vs-table-cell--head__height);
+    display: var(--vs-table-cell--head__display);
+    align-items: var(--vs-table-cell--head__align-items);
+    gap: var(--vs-table-cell--head__gap);
   }
 
   &--sortable > div {

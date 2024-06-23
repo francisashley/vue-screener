@@ -222,12 +222,12 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-table-cell--pinned__right: 0;
   --vs-table-cell--pinned__border-left: thin solid black;
   --vs-table-cell--pinned__margin-left: -1px;
-  --vs-table-cell--header__font-weight: bold;
-  --vs-table-cell--header__white-space: nowrap;
-  --vs-table-cell--header__height: 24px;
-  --vs-table-cell--header__display: inline-flex;
-  --vs-table-cell--header__align-items: center;
-  --vs-table-cell--header__gap: 4px;
+  --vs-table-cell--head__font-weight: bold;
+  --vs-table-cell--head__white-space: nowrap;
+  --vs-table-cell--head__height: 24px;
+  --vs-table-cell--head__display: inline-flex;
+  --vs-table-cell--head__align-items: center;
+  --vs-table-cell--head__gap: 4px;
   --vs-table-cell--sortable__div__height: 24px;
   --vs-table-cell--sortable__div__display: inline-flex;
   --vs-table-cell--sortable__div__align-items: center;
