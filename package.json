@@ -1,6 +1,6 @@
 {
   "name": "vue-screener",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "type": "module",
   "description": "Easily search and filter data in Vue3.",
   "author": "Francis Ashley",

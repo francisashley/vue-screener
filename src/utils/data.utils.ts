@@ -21,8 +21,8 @@ export function normaliseInput(data: UnknownObject[], config: Config): Item[] {
 
   // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
   const normaliseField = (field: string, value: unknown): Field => {
-    const format = config.value[field]?.format
-    const _value = format?.(value) ?? value
+    const format = config[field]?.format
+    const _value = format?.(value as string | number) ?? value
     return {
       field,
       type: getTypeOf(value),
