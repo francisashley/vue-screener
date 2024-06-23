@@ -235,15 +235,15 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-table-cell--sortable__div__cursor: pointer;
 
   // Vue screener sort selector
-  --vs-sort-selector__height: 1em;
-  --vs-sort-selector__width: 1em;
-  --vs-sort-selector__display: inline-flex;
-  --vs-sort-selector__align-items: center;
-  --vs-sort-selector__float: right;
-  --vs-sort-selector__cursor: pointer;
-  --vs-sort-selector__transform: rotate(0deg);
-  --vs-sort-selector__transition: ease-out 100ms;
-  --vs-sort-selector__icon--asc__transform: rotate(-180deg);
+  --vs-sort-icon__height: 1em;
+  --vs-sort-icon__width: 1em;
+  --vs-sort-icon__display: inline-flex;
+  --vs-sort-icon__align-items: center;
+  --vs-sort-icon__float: right;
+  --vs-sort-icon__cursor: pointer;
+  --vs-sort-icon__transform: rotate(0deg);
+  --vs-sort-icon__transition: ease-out 100ms;
+  --vs-sort-icon__icon--asc__transform: rotate(-180deg);
 
   // Vue screener footer
   --vs-table-footer__padding: 8px;

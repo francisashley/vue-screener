@@ -194,11 +194,11 @@ Style using classes:
     .vs-table__cell--undefined
     .vs-table__cell--object
     .vs-table__cell--null
-      .vs-sort-selector
-      .vs-sort-selector__icon
-      .vs-sort-selector__icon--none
-      .vs-sort-selector__icon--asc
-      .vs-sort-selector__icon--desc
+      .vs-sort-icon
+      .vs-sort-icon__icon
+      .vs-sort-icon__icon--none
+      .vs-sort-icon__icon--asc
+      .vs-sort-icon__icon--desc
     .vs-json-view
     .vs-no-data-view
   .vs-footer

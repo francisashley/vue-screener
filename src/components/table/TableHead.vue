@@ -13,7 +13,7 @@
     ]"
   >
     <div @click="handleClickHeader">
-      <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
+      <SortIcon :direction="sortDirection" v-if="column.isSortable && sortDirection" />
       <slot>
         <span v-html="column.label" />
       </slot>
@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import { Column } from '@/interfaces/screener'
-import SortSelector from '../stuff/SortSelector.vue'
+import SortIcon from '../stuff/SortIcon.vue'
 import TableCell from './TableCell.vue'
 
 const props = defineProps<{
