@@ -39,7 +39,10 @@ export type Column = {
   isSortable: boolean // Flag indicating if the field is sortable. TODO: is this needed?
 }
 
-export type Config = Record<string | number, Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'label'>>>
+export type Config = Record<
+  string | number,
+  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'label'>>
+>
 
 export type Item = {
   data: Record<string | number, any> // The original data for the item.

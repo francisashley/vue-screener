@@ -1,15 +1,17 @@
 <template>
-  <div class="vs-sort-selector">
-    <sort-icon class="vs-sort-selector__icon vs-sort-selector__icon--none" v-if="sortDirection === null" />
-    <sort-up-icon class="vs-sort-selector__icon vs-sort-selector__icon--asc" v-else-if="sortDirection === 'asc'" />
-    <sort-down-icon class="vs-sort-selector__icon vs-sort-selector__icon--desc" v-else-if="sortDirection === 'desc'" />
+  <div class="vs-sort-selector" v-if="sortDirection">
+    <remix-sort-desc-icon
+      class="vs-sort-selector"
+      :class="{
+        'vs-sort-selector__icon--desc': sortDirection === 'desc',
+        'vs-sort-selector__icon--asc': sortDirection === 'asc',
+      }"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import SortIcon from '../icons/SortIcon.vue'
-import SortUpIcon from '../icons/SortUpIcon.vue'
-import SortDownIcon from '../icons/SortDownIcon.vue'
+import RemixSortDescIcon from '../icons/RemixSortDescIcon.vue'
 
 type SortDirection = null | 'asc' | 'desc'
 
@@ -20,11 +22,17 @@ const { sortDirection = null } = defineProps<{
 
 <style lang="scss">
 .vs-sort-selector {
-  margin-left: auto;
-  height: 24px;
+  height: 1em;
+  width: 1em;
   display: inline-flex;
   align-items: center;
   float: right;
   cursor: pointer;
+  transform: rotate(0deg);
+  transition: ease-out 100ms;
+
+  &__icon--asc {
+    transform: rotate(-180deg);
+  }
 }
 </style>

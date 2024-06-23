@@ -11,12 +11,13 @@
       column.isSortable && 'vs-table__cell--is-sortable',
       column.isPinned && 'vs-table__cell--is-pinned',
     ]"
-    @click="handleClickHeader"
   >
-    <slot>
-      <span v-html="column.label" />
-    </slot>
-    <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
+    <div @click="handleClickHeader">
+      <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
+      <slot>
+        <span v-html="column.label" />
+      </slot>
+    </div>
   </TableCell>
 </template>
 
@@ -33,7 +34,9 @@ const props = defineProps<{
 const emit = defineEmits(['on-sort'])
 
 const handleClickHeader = () => {
-  emit('on-sort', props.column.field)
+  if (props.column.isSortable) {
+    emit('on-sort', props.column.field)
+  }
 }
 </script>
 
@@ -45,9 +48,13 @@ const handleClickHeader = () => {
     height: 24px;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
   }
-  &--is-sortable {
+  &--is-sortable > div {
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     cursor: pointer;
   }
 }
