@@ -103,37 +103,37 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-header__padding: 4px 4px 4px 8px;
 
   // Vue screener header title
-  --vs-header-title__font-weight: 500;
-  --vs-header-title__margin-right: auto;
+  --vs-title__font-weight: 500;
+  --vs-title__margin-right: auto;
 
   // Vue screener header search
-  --vs-header-search__margin-left: 8px;
-  --vs-header-search__width: 200px;
-  --vs-header-search__padding: 0 4px;
-  --vs-header-search__box-sizing: border-box;
-  --vs-header-search__font-size: 14px !important;
-  --vs-header-search__font-weight: normal !important;
-  --vs-header-search__height: 26px;
-  --vs-header-search__border: none;
-  --vs-header-search__border-left: thin solid;
-  --vs-header-search__border-radius: 4px;
-  --vs-header-search__border: 2px solid #fff;
-  --vs-header-search__color: black;
-  --vs-header-search--error__border: 2px solid red;
-  --vs-header-search--error__outline-color: red;
+  --vs-search__margin-left: 8px;
+  --vs-search__width: 200px;
+  --vs-search__padding: 0 4px;
+  --vs-search__box-sizing: border-box;
+  --vs-search__font-size: 14px !important;
+  --vs-search__font-weight: normal !important;
+  --vs-search__height: 26px;
+  --vs-search__border: none;
+  --vs-search__border-left: thin solid;
+  --vs-search__border-radius: 4px;
+  --vs-search__border: 2px solid #fff;
+  --vs-search__color: black;
+  --vs-search--error__border: 2px solid red;
+  --vs-search--error__outline-color: red;
 
   // Vue screener dropdown
   --vs-dropdown__position: relative;
-  --vs-dropdown__content__transform-origin: top right;
-  --vs-dropdown__content__position: absolute;
-  --vs-dropdown__content__right: 0;
-  --vs-dropdown__content__margin-top: 4px;
-  --vs-dropdown__content__width: 100px;
-  --vs-dropdown__content__background: #333333;
-  --vs-dropdown__content__border-radius: 4px;
-  --vs-dropdown__content__padding: 8px;
-  --vs-dropdown__content__color: white;
-  --vs-dropdown__content__z-index: 1;
+  --vs-dropdown-content__transform-origin: top right;
+  --vs-dropdown-content__position: absolute;
+  --vs-dropdown-content__right: 0;
+  --vs-dropdown-content__margin-top: 4px;
+  --vs-dropdown-content__width: 100px;
+  --vs-dropdown-content__background: #333333;
+  --vs-dropdown-content__border-radius: 4px;
+  --vs-dropdown-content__padding: 8px;
+  --vs-dropdown-content__color: white;
+  --vs-dropdown-content__z-index: 1;
 
   // Vue screener settings
   --vs-settings__button__display: inline-flex;

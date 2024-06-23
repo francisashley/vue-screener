@@ -24,16 +24,16 @@ const handleClickOutside = () => (show.value = false)
   position: var(--vs-dropdown__position);
 
   &__content {
-    transform-origin: var(--vs-dropdown__content__transform-origin);
-    position: var(--vs-dropdown__content__position);
-    right: var(--vs-dropdown__content__right);
-    margin-top: var(--vs-dropdown__content__margin-top);
-    width: var(--vs-dropdown__content__width);
-    background: var(--vs-dropdown__content__background);
-    border-radius: var(--vs-dropdown__content__border-radius);
-    padding: var(--vs-dropdown__content__padding);
-    color: var(--vs-dropdown__content__color);
-    z-index: var(--vs-dropdown__content__z-index);
+    transform-origin: var(--vs-dropdown-content__transform-origin);
+    position: var(--vs-dropdown-content__position);
+    right: var(--vs-dropdown-content__right);
+    margin-top: var(--vs-dropdown-content__margin-top);
+    width: var(--vs-dropdown-content__width);
+    background: var(--vs-dropdown-content__background);
+    border-radius: var(--vs-dropdown-content__border-radius);
+    padding: var(--vs-dropdown-content__padding);
+    color: var(--vs-dropdown-content__color);
+    z-index: var(--vs-dropdown-content__z-index);
   }
 
   &__content-enter-active,

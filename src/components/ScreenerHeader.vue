@@ -37,12 +37,12 @@ const isRegExFriendlySearchQuery = computed((): boolean => {
   }
 
   &-title {
-    font-weight: var(--vs-header-title__font-weight);
-    margin-right: var(--vs-header-title__margin-right);
+    font-weight: var(--vs-title__font-weight);
+    margin-right: var(--vs-title__margin-right);
   }
 
   &-search {
-    margin-left: var(--vs-header-search__margin-left);
+    margin-left: var(--vs-search__margin-left);
   }
 }
 </style>
