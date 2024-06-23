@@ -195,7 +195,6 @@ const handleChangePerPage = (event: Event): void => {
   justify-content: var(--vs-pagination__justify-content);
   align-items: var(--vs-pagination__align-items);
   white-space: var(--vs-pagination__white-space);
-  color: var(--vs-pagination__color);
 
   &__info {
     white-space: var(--vs-pagination-info__white-space);

@@ -49,6 +49,7 @@ const handleClick = () => {
     display: var(--vs-table-cell--head__display);
     align-items: var(--vs-table-cell--head__align-items);
     gap: var(--vs-table-cell--head__gap);
+    background: var(--vs-table-cell--head__bg);
   }
 
   &--sortable > div {

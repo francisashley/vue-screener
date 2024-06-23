@@ -1,0 +1,46 @@
+<template>
+  <Story title="3) Theming">
+    <Variant title="Theming">
+      <div :style="{ 'background-color': '#101827', padding: '8px' }">
+        <VueScreener
+          :data="baseData"
+          :style="{
+            '--vs-app__border': 'none',
+            '--vs-app__bg': 'transparent',
+            '--vs-header__bg': 'transparent',
+            '--vs-header__color': 'white',
+            '--vs-footer__color': 'white',
+            '--vs-header__padding': '1rem 0',
+            '--vs-title__font-size': '18px',
+            '--vs-table__color': 'white',
+            '--vs-table__border-radius': '8px',
+            '--vs-table__border': '1px solid #4b5563',
+            '--vs-table-cell__border-right': '1px solid #4b5563',
+            '--vs-table-cell--pinned__border-left': '1px solid #4b5563',
+            '--vs-table-row__border': '1px solid #4b5563',
+            '--vs-table-cell__padding': '4px 8px',
+            '--vs-table-cell--head__bg': '#1f2937',
+          }"
+        >
+          <template #head="props">
+            <HeadCell v-bind="props">
+              <span v-html="props.column.label" />
+            </HeadCell>
+          </template>
+          <template #data="props">
+            <DataCell v-bind="props">
+              <span
+                v-html="props.highlight(String(props.item.fields[props.column.field].value), props.highlightValue)"
+              />
+            </DataCell>
+          </template>
+        </VueScreener>
+      </div>
+    </Variant>
+  </Story>
+</template>
+
+<script lang="ts" setup>
+import { HeadCell, DataCell, VueScreener } from '../index'
+import baseData from '../fixtures/data.json'
+</script>

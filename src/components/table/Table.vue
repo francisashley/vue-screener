@@ -34,5 +34,7 @@ const tableStyle = computed(() => {
 <style lang="scss">
 .vs-table {
   color: var(--vs-table__color);
+  border: var(--vs-table__border);
+  border-radius: var(--vs-table__border-radius);
 }
 </style>

@@ -84,13 +84,22 @@ watchEffect(() => (screener.currentPage.value = currentPage))
 
 <style lang="scss">
 .vs-app {
+  // Friendly vars
+  // --app-border: none;
+  // --header-bg: transparent;
+  // --header-color: black;
+  // --header-padding: 1rem 0;
+  // --title-font-size: 18px;
+  // --table-border-radius: 8px;
+  // --table-border: 1px solid #4b5563;
+
   // Vue screener
-  --vs__bg: #fff;
-  --vs__overflow: hidden;
-  --vs__border: thin solid black;
-  --vs__border-radius: 8px;
-  --vs__font-size: 14px;
-  --vs__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+  --vs-app__bg: #fff;
+  --vs-app__overflow: hidden;
+  --vs-app__border: thin solid black;
+  --vs-app__border-radius: 8px;
+  --vs-app__font-size: 14px;
+  --vs-app__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
   // Vue screener header
@@ -205,6 +214,7 @@ watchEffect(() => (screener.currentPage.value = currentPage))
 
   // Vue screener table
   --vs-table__color: black;
+  --vs-table__border: none;
 
   // Vue screener table row
   --vs-table-row__border: thin solid black;
@@ -224,6 +234,7 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-table-cell--head__display: inline-flex;
   --vs-table-cell--head__align-items: center;
   --vs-table-cell--head__gap: 4px;
+  --vs-table-cell--head__bg: transparent;
   --vs-table-cell--sortable__div__height: 24px;
   --vs-table-cell--sortable__div__display: inline-flex;
   --vs-table-cell--sortable__div__align-items: center;
@@ -242,14 +253,14 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-sort-icon__icon--asc__transform: rotate(-180deg);
 
   // Vue screener footer
-  --vs-table-footer__padding: 8px;
+  --vs-footer__padding: 8px;
+  --vs-footer__color: black;
 
   // Vue screener pagination
   --vs-pagination__display: flex;
   --vs-pagination__justify-content: space-between;
   --vs-pagination__align-items: center;
   --vs-pagination__white-space: nowrap;
-  --vs-pagination__color: #000;
   --vs-pagination-info__white-space: nowrap;
   --vs-pagination-info__width: 150px;
   --vs-pagination-nav__display: flex;
@@ -269,11 +280,11 @@ watchEffect(() => (screener.currentPage.value = currentPage))
 }
 
 .vs-app {
-  overflow: var(--vs__overflow);
-  font-family: var(--vs__font-family);
-  font-size: var(--vs__font-size);
-  border-radius: var(--vs__border-radius);
-  border: var(--vs__border);
-  background: var(--vs__bg);
+  overflow: var(--vs-app__overflow);
+  font-family: var(--vs-app__font-family);
+  font-size: var(--vs-app__font-size);
+  border-radius: var(--vs-app__border-radius);
+  border: var(--vs-app__border);
+  background: var(--vs-app__bg);
 }
 </style>
