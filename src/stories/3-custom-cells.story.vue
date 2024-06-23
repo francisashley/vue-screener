@@ -3,16 +3,16 @@
     <Variant title="default">
       <VueScreener :data="baseData">
         <template #head="props">
-          <Head v-bind="props" :style="{ background: 'red' }">
+          <HeadCell v-bind="props" :style="{ background: 'red' }">
             <span v-html="props.column.label" />
             [stuff]
-          </Head>
+          </HeadCell>
         </template>
         <template #data="props">
-          <Data v-bind="props" :style="{ background: 'blue' }">
+          <DataCell v-bind="props" :style="{ background: 'blue' }">
             <span v-html="props.highlight(String(props.item.fields[props.column.field].value), props.highlightValue)" />
             [stuff]
-          </Data>
+          </DataCell>
         </template>
       </VueScreener>
     </Variant>
@@ -20,6 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { Head, Data, VueScreener } from '../index'
+import { HeadCell, DataCell, VueScreener } from '../index'
 import baseData from '../fixtures/data.json'
 </script>
