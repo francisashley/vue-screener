@@ -52,11 +52,11 @@ const handleClickHeader = () => {
   }
 
   &--sortable > div {
-    height: var(--vs-table-cell--header__height);
-    display: var(--vs-table-cell--header__display);
-    align-items: var(--vs-table-cell--header__align-items);
-    gap: var(--vs-table-cell--header__gap);
-    cursor: var(--vs-table-cell--header__cursor);
+    height: var(--vs-table-cell--sortable__div__height);
+    display: var(--vs-table-cell--sortable__div__display);
+    align-items: var(--vs-table-cell--sortable__div__align-items);
+    gap: var(--vs-table-cell--sortable__div__gap);
+    cursor: var(--vs-table-cell--sortable__div__cursor);
   }
 }
 </style>
