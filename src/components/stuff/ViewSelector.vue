@@ -27,34 +27,63 @@ const onSelectFormat = (format: 'table' | 'raw') => emit('select-format', format
 
 <style lang="scss">
 .vs-view-selector {
-  font-size: 12px;
-  height: 20px;
-  display: flex;
-  overflow: hidden;
-  align-items: center;
-  border-radius: 2px;
+  --vs-view-selector__font-size: 12px;
+  --vs-view-selector__height: 20px;
+  --vs-view-selector__display: flex;
+  --vs-view-selector__overflow: hidden;
+  --vs-view-selector__align-items: center;
+  --vs-view-selector__border-radius: 2px;
+
+  font-size: var(--vs-view-selector__font-size);
+  height: var(--vs-view-selector__height);
+  display: var(--vs-view-selector__display);
+  overflow: var(--vs-view-selector__overflow);
+  align-items: var(--vs-view-selector__align-items);
+  border-radius: var(--vs-view-selector__border-radius);
+
+  --vs-view-selector__link__text-decoration: none;
+  --vs-view-selector__link__font-weight: 500;
+  --vs-view-selector__link__height: 100%;
+  --vs-view-selector__link__display: flex;
+  --vs-view-selector__link__align-items: center;
+  --vs-view-selector__link__padding: 0 8px;
+  --vs-view-selector__link__color: #000;
+  --vs-view-selector__link__width: 32px;
+  --vs-view-selector__link__text-align: center;
+  --vs-view-selector__link__justify-content: center;
+  --vs-view-selector__link__background: #fff;
+  --vs-view-selector__link--last-child__border-radius: 0 4px 4px 0;
+
+  --vs-view-selector__link--is-active__background: #3f51b5;
+  --vs-view-selector__link--is-active__color: #fff;
+  --vs-view-selector__link--is-hover__background: #3f51b5;
+  --vs-view-selector__link--is-hover__color: #fff;
 
   &__link {
-    text-decoration: none;
-    font-weight: 500;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 8px;
-    color: #000;
-    width: 32px;
-    text-align: center;
-    justify-content: center;
-    background: #fff;
+    text-decoration: var(--vs-view-selector__link__text-decoration);
+    font-weight: var(--vs-view-selector__link__font-weight);
+    height: var(--vs-view-selector__link__height);
+    display: var(--vs-view-selector__link__display);
+    align-items: var(--vs-view-selector__link__align-items);
+    padding: var(--vs-view-selector__link__padding);
+    color: var(--vs-view-selector__link__color);
+    width: var(--vs-view-selector__link__width);
+    text-align: var(--vs-view-selector__link__text-align);
+    justify-content: var(--vs-view-selector__link__justify-content);
+    background: var(--vs-view-selector__link__background);
 
     &:last-child {
-      border-radius: 0 4px 4px 0;
+      border-radius: var(--vs-view-selector__link--last-child__border-radius);
     }
 
-    &--is-active,
+    &--is-active {
+      background: var(--vs-view-selector__link--is-active__background);
+      color: var(--vs-view-selector__link--is-active__color);
+    }
+
     &:hover {
-      background: #3f51b5;
-      color: #fff;
+      background: var(--vs-view-selector__link--is-hover__background);
+      color: var(--vs-view-selector__link--is-hover__color);
     }
   }
 }
