@@ -250,18 +250,18 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-pagination__align-items: center;
   --vs-pagination__white-space: nowrap;
   --vs-pagination__color: #000;
-  --vs-pagination__info__white-space: nowrap;
-  --vs-pagination__info__width: 150px;
-  --vs-pagination__nav__display: flex;
-  --vs-pagination__nav__padding: 0 8px !important;
-  --vs-pagination__nav__margin: 0 !important;
-  --vs-pagination__nav__list-style-type: none;
-  --vs-pagination__button__margin: 0 10px 0 0 !important;
-  --vs-pagination__button--active__color: blue;
-  --vs-pagination__per-page__width: 150px;
-  --vs-pagination__per-page__display: inline-flex;
-  --vs-pagination__per-page__justify-content: flex-end;
-  --vs-pagination__per-page-input__width: 60px;
+  --vs-pagination-info__white-space: nowrap;
+  --vs-pagination-info__width: 150px;
+  --vs-pagination-nav__display: flex;
+  --vs-pagination-nav__padding: 0 8px !important;
+  --vs-pagination-nav__margin: 0 !important;
+  --vs-pagination-nav__list-style-type: none;
+  --vs-pagination-button__margin: 0 10px 0 0 !important;
+  --vs-pagination-button--active__color: blue;
+  --vs-pagination-per-page__width: 150px;
+  --vs-pagination-per-page__display: inline-flex;
+  --vs-pagination-per-page__justify-content: flex-end;
+  --vs-pagination-per-page-input__width: 60px;
 
   // Vue screener error message
   --vs-error-message__border: thin solid red;

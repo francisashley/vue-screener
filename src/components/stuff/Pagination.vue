@@ -198,33 +198,33 @@ const handleChangePerPage = (event: Event): void => {
   color: var(--vs-pagination__color);
 
   &__info {
-    white-space: var(--vs-pagination__info__white-space);
-    width: var(--vs-pagination__info__width);
+    white-space: var(--vs-pagination-info__white-space);
+    width: var(--vs-pagination-info__width);
   }
 
   &__nav {
-    display: var(--vs-pagination__nav__display);
-    padding: var(--vs-pagination__nav__padding);
-    margin: var(--vs-pagination__nav__margin);
-    list-style-type: var(--vs-pagination__nav__list-style-type);
+    display: var(--vs-pagination-nav__display);
+    padding: var(--vs-pagination-nav__padding);
+    margin: var(--vs-pagination-nav__margin);
+    list-style-type: var(--vs-pagination-nav__list-style-type);
   }
 
   &__button {
-    margin: var(--vs-pagination__button__margin);
+    margin: var(--vs-pagination-button__margin);
   }
 
   &__button--active {
-    color: var(--vs-pagination__button--active__color);
+    color: var(--vs-pagination-button--active__color);
   }
 
   &__per-page {
-    width: var(--vs-pagination__per-page__width);
-    display: var(--vs-pagination__per-page__display);
-    justify-content: var(--vs-pagination__per-page__justify-content);
+    width: var(--vs-pagination-per-page__width);
+    display: var(--vs-pagination-per-page__display);
+    justify-content: var(--vs-pagination-per-page__justify-content);
   }
 
   &__per-page-input {
-    width: var(--vs-pagination__per-page-input__width);
+    width: var(--vs-pagination-per-page-input__width);
   }
 }
 </style>
