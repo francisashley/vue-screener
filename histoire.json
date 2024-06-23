@@ -82,6 +82,10 @@
         {
           "id": "src-stories-2-configure-columns-story-vue-6",
           "title": "Pick + omit fields"
+        },
+        {
+          "id": "src-stories-2-configure-columns-story-vue-7",
+          "title": "Disable sort"
         }
       ],
       "relativePath": "src/stories/2-configure-columns.story.vue",

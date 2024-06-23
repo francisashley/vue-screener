@@ -1,5 +1,5 @@
 import { aq as defineComponent, ar as resolveComponent, as as openBlock, at as createBlock, au as withCtx, av as createVNode, aw as normalizeProps, ax as mergeProps, ay as createTextVNode, az as createCommentVNode, aA as createBaseVNode } from "./vendor-DadODwuJ.js";
-import { _ as _export_sfc, V as VueScreener, H as Head, D as Data } from "./VueScreener-rsBCvTNF.js";
+import { _ as _export_sfc, V as VueScreener, H as Head, D as Data } from "./VueScreener-UaaD7M7T.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-D5HdiZTi.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
@@ -262,6 +262,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             data: $setup.baseData,
             pick: ["id", "first_name", "last_name"],
             omit: ["id"]
+          }, null, 8, ["data"])
+        ]),
+        _: 1
+        /* STABLE */
+      }),
+      createVNode(_component_Variant, {
+        title: "Disable sort",
+        width: "100"
+      }, {
+        default: withCtx(() => [
+          createVNode($setup["VueScreener"], {
+            data: $setup.baseData,
+            pick: ["id", "first_name", "last_name", "ip_address"],
+            config: {
+              id: { field: "id", width: "50px" },
+              first_name: { field: "first_name", width: "150px" },
+              last_name: { field: "last_name", width: "150px" },
+              ip_address: { field: "ip_address", width: "minmax(150px, 1fr)", isSortable: false }
+            }
           }, null, 8, ["data"])
         ]),
         _: 1

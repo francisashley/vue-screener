@@ -123,6 +123,18 @@ const __resolved__virtual_storySource_srcStories2ConfigureColumnsStoryVue = `<te
     <Variant title="Pick + omit fields" width="100">
       <VueScreener :data="baseData" :pick="['id', 'first_name', 'last_name']" :omit="['id']" />
     </Variant>
+    <Variant title="Disable sort" width="100">
+      <VueScreener
+        :data="baseData"
+        :pick="['id', 'first_name', 'last_name', 'ip_address']"
+        :config="{
+          id: { field: 'id', width: '50px' },
+          first_name: { field: 'first_name', width: '150px' },
+          last_name: { field: 'last_name', width: '150px' },
+          ip_address: { field: 'ip_address', width: 'minmax(150px, 1fr)', isSortable: false },
+        }"
+      />
+    </Variant>
   </Story>
 </template>
 

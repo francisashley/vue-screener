@@ -3154,12 +3154,17 @@ body {
   border: thin solid;
 }
 .vs-sort-selector {
-  margin-left: auto;
-  height: 24px;
+  height: 1em;
+  width: 1em;
   display: inline-flex;
   align-items: center;
   float: right;
   cursor: pointer;
+  transform: rotate(0deg);
+  transition: ease-out 100ms;
+}
+.vs-sort-selector__icon--asc {
+  transform: rotate(-180deg);
 }.vs-table {
   color: black;
 }
@@ -3189,9 +3194,13 @@ body {
   height: 24px;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
-.vs-table__cell--is-sortable {
+.vs-table__cell--is-sortable > div {
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   cursor: pointer;
 }.vs-table__row {
   border-bottom: thin solid black;
