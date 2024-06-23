@@ -33,15 +33,16 @@ export type Column = {
   field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
   label: string // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
-  isFirst: boolean // Flag indicating if it is the first column. TODO: is this needed?
-  isLast: boolean // Flag indicating if it is the last column. TODO: is this needed?
-  isPinned: boolean // Flag indicating if the field is pinned. TODO: is this needed?
-  isSortable: boolean // Flag indicating if the field is sortable. TODO: is this needed?
+  isFirst: boolean // Flag indicating if it is the first column.
+  isLast: boolean // Flag indicating if it is the last column.
+  isPinned: boolean // Flag indicating if the field is pinned.
+  isSortable: boolean // Flag indicating if the field is sortable.
+  format?: (item: string | number) => string // Format the value of the field.
 }
 
 export type Config = Record<
   string | number,
-  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'label'>>
+  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'label' | 'format'>>
 >
 
 export type Item = {

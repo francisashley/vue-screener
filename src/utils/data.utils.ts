@@ -1,4 +1,4 @@
-import { DataType, Column, Field, Item, UnknownObject } from '@/interfaces/screener'
+import { DataType, Column, Field, Item, UnknownObject, Config } from '@/interfaces/screener'
 
 /**
  * Checks if data is an array of arrays or objects.
@@ -15,18 +15,22 @@ export function isValidInput(data: unknown): boolean {
  * @param {UnknownObject[]} data - The input data.
  * @returns {Item[]} The normalised data.
  */
-export function normaliseInput(data: UnknownObject[]): Item[] {
+export function normaliseInput(data: UnknownObject[], config: Config): Item[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
-  const normaliseField = (field: string, value: unknown): Field => ({
-    field,
-    type: getTypeOf(value),
-    value: value as any,
-    htmlValue: String(value),
-    hasValue: value !== null || value !== undefined,
-  })
+  const normaliseField = (field: string, value: unknown): Field => {
+    const format = config.value[field]?.format
+    const _value = format?.(value) ?? value
+    return {
+      field,
+      type: getTypeOf(value),
+      value: String(_value),
+      htmlValue: String(_value),
+      hasValue: value !== null || value !== undefined,
+    }
+  }
 
   // Normalise each item into an array of normalised fields.
   const normalisedData = transformedData.map((item: UnknownObject): Item => {

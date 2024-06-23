@@ -49,7 +49,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   const normalisedData = computed((): Item[] => {
-    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
+    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[], config) : []
   })
 
   const searchedData = computed((): Item[] => {
