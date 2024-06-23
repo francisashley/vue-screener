@@ -102,11 +102,11 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-header__font-weight: 400;
   --vs-header__padding: 4px 4px 4px 8px;
 
-  // Vue screener header title
+  // Vue screener title
   --vs-title__font-weight: 500;
   --vs-title__margin-right: auto;
 
-  // Vue screener header search
+  // Vue screener search
   --vs-search__margin-left: 8px;
   --vs-search__width: 200px;
   --vs-search__padding: 0 4px;
@@ -125,7 +125,7 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   // Vue screener dropdown
   --vs-dropdown__position: relative;
 
-  // Vue screener dropdown button
+  // Vue screener dropdown
   --vs-dropdown-button__display: inline-flex;
   --vs-dropdown-button__align-items: center;
   --vs-dropdown-button__justify-content: center;
@@ -141,8 +141,6 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-dropdown-button--hover__background-color: rgba(255, 255, 255, 0.2);
   --vs-dropdown-button-icon__width: 16px;
   --vs-dropdown-button-icon__height: 16px;
-
-  // Vue screener dropdown content
   --vs-dropdown-content__transform-origin: top right;
   --vs-dropdown-content__position: absolute;
   --vs-dropdown-content__right: 0;
@@ -161,7 +159,7 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-form-heading__text-transform: uppercase;
   --vs-form-heading__opacity: 0.8;
 
-  // Vue screener checkable
+  // Vue screener form checkable
   --vs-checkable__border: none;
   --vs-checkable__padding: 0 3px;
   --vs-checkable__font-weight: 600;
@@ -177,13 +175,11 @@ watchEffect(() => (screener.currentPage.value = currentPage))
   --vs-checkable--hover__color: #fff;
   --vs-checkable--hover__background: #3e51b5;
 
-  // Vue screener settings
-  --vs-search-options__display: flex;
-  --vs-search-options__gap: 4px;
-  --vs-search-options-button-icon__height: 20px;
-  --vs-search-options-button-icon__width: 20px;
+  // Vue screener form checkable group
+  --vs-checkable-group__display: flex;
+  --vs-checkable-group__gap: 4px;
 
-  // Vue screener switch input
+  // Vue screener form switch
   --vs-switch__font-size: 12px;
   --vs-switch__height: 20px;
   --vs-switch__display: flex;

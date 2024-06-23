@@ -5,19 +5,7 @@
     </template>
     <template #default>
       <FormHeading>Search</FormHeading>
-      <div class="vs-search-options">
-        <Checkable
-          v-for="(option, i) in getOptions"
-          :key="i"
-          :title="option.title"
-          @click="toggleOption(option.id)"
-          :checked="option.isActive"
-        >
-          <MatchCaseIcon v-if="option.id === 'match-case'" />
-          <MatchWordIcon v-else-if="option.id === 'match-word'" />
-          <RegularExpressionIcon v-else-if="option.id === 'use-regex'" />
-        </Checkable>
-      </div>
+      <CheckableGroup :options="getOptions" @toggle="toggleOption($event)" />
       <FormHeading>Presentation</FormHeading>
       <Switch
         :value="screener.renderFormat.value"
@@ -35,11 +23,8 @@
 import { computed, ref } from 'vue'
 import Dropdown from './Dropdown.vue'
 import Switch from '../form/Switch.vue'
-import Checkable from '../form/Checkable.vue'
+import CheckableGroup from '../form/CheckableGroup.vue'
 import FormHeading from '../form/Heading.vue'
-import MatchCaseIcon from '../icons/MaterialDesignMatchCase.vue'
-import MatchWordIcon from '../icons/MaterialDesignMatchWord.vue'
-import RegularExpressionIcon from '../icons/MaterialDesignRegularExpression.vue'
 import RemixSettings3FillIcon from '../icons/RemixSettings3FillIcon.vue'
 import { Screener } from '@/interfaces/screener'
 
@@ -52,14 +37,13 @@ const props = defineProps<{
 type SearchQueryInternalOption = {
   id: SearchQueryOption
   title: string
-  text: string
   isActive?: boolean
 }
 
 const options = ref<SearchQueryInternalOption[]>([
-  { id: 'match-case', title: 'Match case', text: 'Aa' },
-  { id: 'match-word', title: 'Match word', text: 'ab' },
-  { id: 'use-regex', title: 'Use regular expression', text: '.*' },
+  { id: 'match-case', title: 'Match case' },
+  { id: 'match-word', title: 'Match word' },
+  { id: 'use-regex', title: 'Use regular expression' },
 ])
 
 const getOptions = computed<SearchQueryInternalOption[]>(() => {
@@ -85,11 +69,4 @@ const handleSelectFormat = (format: 'table' | 'raw') => {
 }
 </script>
 
-<style lang="scss">
-.vs-settings {
-  .vs-search-options {
-    display: var(--vs-search-options__display);
-    gap: var(--vs-search-options__gap);
-  }
-}
-</style>
+<style lang="scss"></style>

@@ -154,12 +154,12 @@ Style using classes:
 ```
 .vs-app
   .vs-header 
+    .vs-heading
     .vs-title
     .vs-search
     .vs-search--error
     .vs-settings
-    .vs-settings__heading
-    .vs-search-options
+    .vs-checkable-group
     .vs-checkable
     .vs-checkable--active
     .vs-checkable--match-case
