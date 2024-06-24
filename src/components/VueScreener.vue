@@ -66,10 +66,7 @@ const { screener } = defineProps<Props>()
   // --table-border: 1px solid #4b5563;
 
   // Vue screener
-  --vs-app__bg: #fff;
   --vs-app__overflow: hidden;
-  --vs-app__border: thin solid black;
-  --vs-app__border-radius: 8px;
   --vs-app__font-size: 14px;
   --vs-app__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -78,13 +75,12 @@ const { screener } = defineProps<Props>()
   --vs-header__display: flex;
   --vs-header__align-items: center;
   --vs-header__font-size: 16px;
-  --vs-header__color: white;
-  --vs-header__bg: black;
   --vs-header__font-weight: 400;
-  --vs-header__padding: 4px 4px 4px 8px;
+  --vs-header__height: 40px;
+  --vs-header__padding: 0;
 
   // Vue screener title
-  --vs-title__font-weight: 500;
+  --vs-title__font-weight: 600;
   --vs-title__margin-right: auto;
 
   // Vue screener search
@@ -95,10 +91,9 @@ const { screener } = defineProps<Props>()
   --vs-search__font-size: 14px !important;
   --vs-search__font-weight: normal !important;
   --vs-search__height: 26px;
-  --vs-search__border: none;
-  --vs-search__border-left: thin solid;
+  --vs-search__border: thin solid black;
   --vs-search__border-radius: 4px;
-  --vs-search__border: 2px solid #fff;
+  --vs-search__border: 1px solid black;
   --vs-search__color: black;
   --vs-search--error__border: 2px solid red;
   --vs-search--error__outline-color: red;
@@ -110,16 +105,17 @@ const { screener } = defineProps<Props>()
   --vs-dropdown-button__display: inline-flex;
   --vs-dropdown-button__align-items: center;
   --vs-dropdown-button__justify-content: center;
-  --vs-dropdown-button__background: transparent;
-  --vs-dropdown-button__border: 0;
-  --vs-dropdown-button__background: transparent;
-  --vs-dropdown-button__padding: 6px;
+  --vs-dropdown-button__padding: 4px;
   --vs-dropdown-button__margin-left: 4px;
   --vs-dropdown-button__cursor: pointer;
   --vs-dropdown-button__border-radius: 4px;
-  --vs-dropdown-button__color: white;
-  --vs-dropdown-button--active__background-color: rgba(255, 255, 255, 0.2);
-  --vs-dropdown-button--hover__background-color: rgba(255, 255, 255, 0.2);
+  --vs-dropdown-button__color: black;
+  --vs-dropdown-button__background: #efefef;
+  --vs-dropdown-button__border: thin solid #767676;
+  --vs-dropdown-button--hover__background-color: #e5e5e5;
+  --vs-dropdown-button--hover__border: thin solid #4f4f4f;
+  --vs-dropdown-button--active__background-color: #f5f5f5;
+  --vs-dropdown-button--active__border: thin solid #8c8c8c;
   --vs-dropdown-button-icon__width: 16px;
   --vs-dropdown-button-icon__height: 16px;
   --vs-dropdown-content__transform-origin: top right;
@@ -186,7 +182,8 @@ const { screener } = defineProps<Props>()
 
   // Vue screener table
   --vs-table__color: black;
-  --vs-table__border: none;
+  --vs-table__border: 1px solid black;
+  --vs-table__border-radius: 8px;
 
   // Vue screener table row
   --vs-table-row__border: thin solid black;
@@ -225,14 +222,19 @@ const { screener } = defineProps<Props>()
   --vs-sort-icon__icon--asc__transform: rotate(-180deg);
 
   // Vue screener footer
-  --vs-footer__padding: 8px;
+  --vs-footer__padding: 0;
   --vs-footer__color: black;
+  --vs-footer__height: 40px;
+  --vs-footer__display: flex;
+  --vs-footer__align-items: center;
+  --vs-footer__justify-content: space-between;
 
   // Vue screener pagination
   --vs-pagination__display: flex;
   --vs-pagination__justify-content: space-between;
   --vs-pagination__align-items: center;
   --vs-pagination__white-space: nowrap;
+  --vs-pagination__width: 100%;
   --vs-pagination-info__white-space: nowrap;
   --vs-pagination-info__width: 150px;
   --vs-pagination-nav__display: flex;
@@ -240,11 +242,20 @@ const { screener } = defineProps<Props>()
   --vs-pagination-nav__margin: 0 !important;
   --vs-pagination-nav__list-style-type: none;
   --vs-pagination-button__margin: 0 10px 0 0 !important;
+  --vs-pagination-button__height: 26px;
+  --vs-pagination-button__padding: 0 8px;
+  --vs-pagination-button__background: #efefef;
+  --vs-pagination-button__border: thin solid #767676;
+  --vs-pagination-button--hover__background-color: #e5e5e5;
+  --vs-pagination-button--hover__border: thin solid #4f4f4f;
+  --vs-pagination-button--active__background-color: #f5f5f5;
+  --vs-pagination-button--active__border: thin solid #8c8c8c;
   --vs-pagination-button--active__color: blue;
   --vs-pagination-per-page__width: 150px;
   --vs-pagination-per-page__display: inline-flex;
   --vs-pagination-per-page__justify-content: flex-end;
   --vs-pagination-per-page-input__width: 60px;
+  --vs-pagination-per-page-input__height: 20px;
 
   // Vue screener error message
   --vs-error-message__border: thin solid red;
@@ -255,8 +266,5 @@ const { screener } = defineProps<Props>()
   overflow: var(--vs-app__overflow);
   font-family: var(--vs-app__font-family);
   font-size: var(--vs-app__font-size);
-  border-radius: var(--vs-app__border-radius);
-  border: var(--vs-app__border);
-  background: var(--vs-app__bg);
 }
 </style>

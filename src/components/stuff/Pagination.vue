@@ -195,6 +195,7 @@ const handleChangePerPage = (event: Event): void => {
   justify-content: var(--vs-pagination__justify-content);
   align-items: var(--vs-pagination__align-items);
   white-space: var(--vs-pagination__white-space);
+  width: var(--vs-pagination__width);
 
   &__info {
     white-space: var(--vs-pagination-info__white-space);
@@ -210,6 +211,8 @@ const handleChangePerPage = (event: Event): void => {
 
   &__button {
     margin: var(--vs-pagination-button__margin);
+    height: var(--vs-pagination-button__height);
+    padding: var(--vs-pagination-button__padding);
   }
 
   &__button--active {
@@ -224,6 +227,7 @@ const handleChangePerPage = (event: Event): void => {
 
   &__per-page-input {
     width: var(--vs-pagination-per-page-input__width);
+    height: var(--vs-pagination-per-page-input__height);
   }
 }
 </style>

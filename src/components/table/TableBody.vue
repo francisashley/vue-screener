@@ -1,5 +1,5 @@
 <template>
-  <div :style="rowStyle" v-for="(item, i) in screener.items.value" :key="i" class="vs-table__row vs-table__row--record">
+  <div :style="rowStyle" v-for="(item, i) in screener.items.value" :key="i" class="vs-table__row vs-table__row--item">
     <template v-if="item">
       <slot
         v-for="(column, j) in screener.columns.value"
@@ -37,7 +37,7 @@ const rowStyle = computed(() => {
 </script>
 
 <style lang="scss">
-.vs-table__row {
-  border-bottom: var(--vs-table-row__border);
+.vs-table__row.vs-table__row--item {
+  border-top: var(--vs-table-row__border);
 }
 </style>

@@ -40,8 +40,4 @@ const getSortDirection = (field: string | number): 'asc' | 'desc' | null => {
 }
 </script>
 
-<style lang="scss">
-.vs-table__row {
-  border-bottom: var(--vs-table-row__border);
-}
-</style>
+<style lang="scss"></style>

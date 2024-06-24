@@ -8,6 +8,7 @@
 .vs-no-data-view {
   text-align: center;
   padding: 150px 0;
-  border-bottom: thin solid;
+  border: thin solid;
+  border-radius: 8px;
 }
 </style>

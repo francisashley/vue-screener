@@ -30,9 +30,8 @@ const isRegExFriendlySearchQuery = computed((): boolean => {
     display: var(--vs-header__display);
     align-items: var(--vs-header__align-items);
     font-size: var(--vs-header__font-size);
-    color: var(--vs-header__color);
-    background: var(--vs-header__bg);
     font-weight: var(--vs-header__font-weight);
+    height: var(--vs-header__height);
     padding: var(--vs-header__padding);
   }
 

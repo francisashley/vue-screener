@@ -43,12 +43,15 @@ const handleClickOutside = () => (show.value = false)
       height: var(--vs-dropdown-button-icon__height);
     }
 
-    &--active {
-      background-color: var(--vs-dropdown-button--active__background-color);
+    &:hover:not(#{&}--active) {
+      background-color: var(--vs-dropdown-button--hover__background-color);
+      border: var(--vs-dropdown-button--hover__border);
     }
 
-    &:hover {
-      background-color: var(--vs-dropdown-button--hover__background-color);
+    &:active,
+    &--active {
+      background-color: var(--vs-dropdown-button--active__background-color);
+      border: var(--vs-dropdown-button--active__border);
     }
   }
 

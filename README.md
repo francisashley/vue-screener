@@ -178,7 +178,7 @@ Style using classes:
     .vs-table
     .vs-table__row
     .vs-table__row--header
-    .vs-table__row--record
+    .vs-table__row--item
     .vs-table__cell
     .vs-table__cell--sortable
     .vs-table__cell--pinned

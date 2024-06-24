@@ -7,8 +7,6 @@
           :style="{
             '--vs-app__border': 'none',
             '--vs-app__bg': 'transparent',
-            '--vs-header__bg': 'transparent',
-            '--vs-header__color': 'white',
             '--vs-footer__color': 'white',
             '--vs-header__padding': '1rem 0',
             '--vs-title__font-size': '18px',

@@ -19,5 +19,9 @@ defineProps<Props>()
 .vs-footer {
   padding: var(--vs-footer__padding);
   color: var(--vs-footer__color);
+  height: var(--vs-footer__height);
+  display: var(--vs-footer__display);
+  align-items: var(--vs-footer__align-items);
+  justify-content: var(--vs-footer__justify-content);
 }
 </style>
