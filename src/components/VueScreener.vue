@@ -1,6 +1,6 @@
 <template>
   <section class="vs-app">
-    <ScreenerHeader v-if="!screener.hasError.value && hideHeader !== true" :screener="screener" />
+    <ScreenerHeader v-if="!screener.hasError.value && screener.hideHeader.value !== true" :screener="screener" />
     <ScreenerMain :screener="screener">
       <ErrorMessage
         v-if="screener.hasError.value"
@@ -29,15 +29,12 @@ import JsonView from './views/JsonView.vue'
 import Table from './table/Table.vue'
 import NoDataView from './views/NoDataView.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
-import { useScreener } from '../hooks/use-screener'
 import { Config } from '@/interfaces/screener'
-import { watchEffect } from 'vue'
+import type { Screener } from '../interfaces/screener'
 
 type Props = {
   // The title to be displayed in the header
   title?: string
-  // The data to be displayed in the table
-  data?: unknown[]
   // Configure each column
   config?: Config
   // The specific fields to be displayed in the table
@@ -50,36 +47,11 @@ type Props = {
   currentPage?: number
   // A flag to toggle the visibility of the header
   hideHeader?: boolean
+  // Screener hook
+  screener: Screener
 }
 
-const {
-  title = 'Results',
-  data = [],
-  config = {},
-  pick = [],
-  omit = [],
-  perPage = 15,
-  currentPage = 1,
-  hideHeader = false,
-} = defineProps<Props>()
-
-const screener = useScreener({
-  title,
-  defaultCurrentPage: currentPage,
-  defaultPerPage: perPage,
-  defaultData: data,
-  config,
-  pick: pick,
-  omit: omit,
-})
-
-watchEffect(() => (screener.title.value = title))
-watchEffect(() => (screener.data.value = data))
-watchEffect(() => (screener.config.value = config))
-watchEffect(() => (screener.pick.value = pick))
-watchEffect(() => (screener.omit.value = omit))
-watchEffect(() => (screener.perPage.value = perPage))
-watchEffect(() => (screener.currentPage.value = currentPage))
+const { screener } = defineProps<Props>()
 </script>
 
 <style lang="scss">

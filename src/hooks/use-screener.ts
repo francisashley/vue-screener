@@ -10,12 +10,12 @@ type ScreenerOptions = {
   title?: string
   defaultCurrentPage?: number
   defaultPerPage?: number
-  defaultData?: unknown[]
   config?: Config
   pick?: string[]
   omit?: string[]
+  hideHeader?: boolean
 }
-export const useScreener = (options: ScreenerOptions = {}): Screener => {
+export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
   // State
   const title = ref<string>('Results')
   const searchQuery = ref<string>('')
@@ -30,15 +30,17 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const config = ref<Config>({})
   const pick = ref<string[]>([])
   const omit = ref<string[]>([])
+  const hideHeader = ref<boolean>(false)
 
   // Set default state
   title.value = options.title ?? title.value
   config.value = options.config ?? config.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
-  data.value = options.defaultData ?? data.value
+  data.value = defaultData ?? data.value
   pick.value = options.pick ?? pick.value
   omit.value = options.omit ?? omit.value
+  hideHeader.value = options.hideHeader ?? hideHeader.value
 
   const shouldUseRegEx = computed((): boolean => searchOptions.value.includes('use-regex'))
   const shouldMatchCase = computed((): boolean => searchOptions.value.includes('match-case'))
@@ -166,6 +168,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     pick,
     omit,
     columns,
+    hideHeader,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query

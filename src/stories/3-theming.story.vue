@@ -3,7 +3,7 @@
     <Variant title="Theming">
       <div :style="{ 'background-color': '#101827', padding: '8px' }">
         <VueScreener
-          :data="baseData"
+          :screener="screener"
           :style="{
             '--vs-app__border': 'none',
             '--vs-app__bg': 'transparent',
@@ -43,4 +43,9 @@
 <script lang="ts" setup>
 import { HeadCell, DataCell, VueScreener } from '../index'
 import baseData from '../fixtures/data.json'
+import { useScreener } from '../hooks/use-screener'
+
+const screener = useScreener(baseData, {
+  title: 'Results',
+})
 </script>
