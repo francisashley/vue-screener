@@ -75,7 +75,12 @@ const onInput = (event: Event) => {
   height: var(--vs-search__height);
   border: var(--vs-search__border);
   border-radius: var(--vs-search__border-radius);
+  outline: var(--vs-search__outline);
   color: var(--vs-search__color);
+
+  &:focus {
+    border: var(--vs-search--focus__border);
+  }
 
   &--error {
     border: var(--vs-search--error__border);

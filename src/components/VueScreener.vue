@@ -91,9 +91,10 @@ const { screener } = defineProps<Props>()
   --vs-search__font-size: 14px !important;
   --vs-search__font-weight: normal !important;
   --vs-search__height: 26px;
-  --vs-search__border: thin solid black;
   --vs-search__border-radius: 4px;
-  --vs-search__border: 1px solid black;
+  --vs-search__outline: none;
+  --vs-search__border: 1px solid #767676;
+  --vs-search--focus__border: 1px solid #4f4f4f;
   --vs-search__color: black;
   --vs-search--error__border: 2px solid red;
   --vs-search--error__outline-color: red;
@@ -256,6 +257,11 @@ const { screener } = defineProps<Props>()
   --vs-pagination-per-page__justify-content: flex-end;
   --vs-pagination-per-page-input__width: 60px;
   --vs-pagination-per-page-input__height: 20px;
+
+  --vs-pagination-per-page-input__border-radius: 4px;
+  --vs-pagination-per-page-input__border: thin solid #767676;
+  --vs-pagination-per-page-input--focus__border: thin solid #4f4f4f;
+  --vs-pagination-per-page-input__outline: none;
 
   // Vue screener error message
   --vs-error-message__border: thin solid red;

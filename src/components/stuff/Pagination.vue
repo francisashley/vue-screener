@@ -228,6 +228,13 @@ const handleChangePerPage = (event: Event): void => {
   &__per-page-input {
     width: var(--vs-pagination-per-page-input__width);
     height: var(--vs-pagination-per-page-input__height);
+    border: var(--vs-pagination-per-page-input__border);
+    border-radius: var(--vs-pagination-per-page-input__border-radius);
+    outline: var(--vs-pagination-per-page-input__outline);
+
+    &:focus {
+      border: var(--vs-pagination-per-page-input--focus__border);
+    }
   }
 }
 </style>
