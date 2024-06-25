@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener, ScreenerSearch, ScreenerSearchOptions } from '../../index'
+import { Screener, useScreener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination } from '../../index'
 const badData: any = 'bad data'
 const screener = useScreener(badData)
 </script>

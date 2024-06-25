@@ -1,5 +1,5 @@
 <template>
-  <TableCell
+  <ScreenerCell
     :value="item.fields[column.field]?.htmlValue"
     :is-first="column.isFirst"
     :is-last="column.isLast"
@@ -9,12 +9,12 @@
     :class="['vs-table__cell--value', column.isPinned && 'vs-table__cell--pinned']"
   >
     <slot />
-  </TableCell>
+  </ScreenerCell>
 </template>
 
 <script lang="ts" setup>
 import { Column, Item } from '@/interfaces/screener'
-import TableCell from './TableCell.vue'
+import ScreenerCell from './ScreenerCell.vue'
 
 defineProps<{ column: Column; item: Item }>()
 </script>

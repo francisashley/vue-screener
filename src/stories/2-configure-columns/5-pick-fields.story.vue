@@ -17,7 +17,6 @@ import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, us
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {
-  title: 'Results',
   pick: ['id', 'first_name', 'last_name'],
 })
 </script>

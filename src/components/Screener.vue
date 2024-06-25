@@ -16,16 +16,16 @@
     <p v-if="view === 'no-data'">No data provided</p>
 
     <div v-if="view === 'table'" :style="tableStyle">
-      <TableHeader :screener="screener">
+      <ScreenerHeader :screener="screener">
         <template #head="headProps">
           <slot name="head" v-bind="headProps" />
         </template>
-      </TableHeader>
-      <TableBody :screener="screener">
+      </ScreenerHeader>
+      <ScreenerBody :screener="screener">
         <template #data="dataProps">
           <slot name="data" v-bind="dataProps" />
         </template>
-      </TableBody>
+      </ScreenerBody>
     </div>
   </section>
 </template>
@@ -35,8 +35,8 @@ import { Config } from '@/interfaces/screener'
 import type { Screener } from '../interfaces/screener'
 import { useScrollable } from '../hooks/use-scrollable'
 import { computed } from 'vue'
-import TableHeader from './table/TableHeader.vue'
-import TableBody from './table/TableBody.vue'
+import ScreenerHeader from './ScreenerHeader.vue'
+import ScreenerBody from './ScreenerBody.vue'
 
 type Props = {
   // The title to be displayed in the header
@@ -132,7 +132,6 @@ const tableStyle = computed(() => {
   border: var(--vs-screener-border);
   border-radius: var(--vs-screener-border-radius);
   overflow: var(--vs-screener-overflow);
-  min-height: 400px;
 
   &--bad-data,
   &--no-data {
@@ -148,6 +147,7 @@ const tableStyle = computed(() => {
 
   &--bad-data {
     color: var(--vs-screener-color--error);
+    padding: 96px 0;
   }
 }
 

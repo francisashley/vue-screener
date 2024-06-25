@@ -8,7 +8,7 @@
       :sort-direction="getSortDirection(column.field)"
       @on-sort="screener.actions.sort"
     >
-      <TableHeadCell
+      <ScreenerHeaderCell
         :column="column"
         :sort-direction="getSortDirection(column.field)"
         @on-sort="screener.actions.sort"
@@ -19,8 +19,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { Screener } from '../../interfaces/screener'
-import TableHeadCell from './TableHeadCell.vue'
+import { Screener } from '../interfaces/screener'
+import ScreenerHeaderCell from './ScreenerHeaderCell.vue'
 
 const props = defineProps<{
   screener: Screener

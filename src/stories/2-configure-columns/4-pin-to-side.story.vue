@@ -9,15 +9,15 @@
     </div>
     <Screener :screener="screener" :style="{ marginBottom: '16px' }">
       <template #head="props">
-        <HeadCell v-if="props.column.isPinned" v-bind="props">Actions</HeadCell>
+        <ScreenerHeaderCell v-if="props.column.isPinned" v-bind="props">Actions</ScreenerHeaderCell>
       </template>
       <template #data="props">
-        <DataCell v-if="props.column.isPinned" v-bind="props">
+        <ScreenerBodyCell v-if="props.column.isPinned" v-bind="props">
           <div :style="{ display: 'flex', gap: '4px' }">
             <button @click="handleClickEdit(props.item)">Edit</button>
             <button @click="handleClickDelete(props.column)">Delete</button>
           </div>
-        </DataCell>
+        </ScreenerBodyCell>
       </template>
     </Screener>
     <ScreenerPagination :screener="screener" />
@@ -27,8 +27,8 @@
 <script lang="ts" setup>
 import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
-import HeadCell from '../../components/table/TableHeadCell.vue'
-import DataCell from '../../components/table/TableDataCell.vue'
+import ScreenerHeaderCell from '../../components/ScreenerHeaderCell.vue'
+import ScreenerBodyCell from '../../components/ScreenerBodyCell.vue'
 
 const handleClickEdit = (item: unknown) => console.log('edit', item)
 const handleClickDelete = (item: unknown) => console.log('delete', item)

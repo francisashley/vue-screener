@@ -1,5 +1,5 @@
 <template>
-  <TableCell
+  <ScreenerCell
     :value="column.field"
     :is-first="column.isFirst"
     :is-last="column.isLast"
@@ -18,13 +18,13 @@
         <span v-html="column.label" />
       </slot>
     </div>
-  </TableCell>
+  </ScreenerCell>
 </template>
 
 <script lang="ts" setup>
 import { Column } from '@/interfaces/screener'
-import SortIcon from '../stuff/SortIcon.vue'
-import TableCell from './TableCell.vue'
+import SortIcon from './stuff/SortIcon.vue'
+import ScreenerCell from './ScreenerCell.vue'
 
 const props = defineProps<{
   column: Column
