@@ -1,7 +1,7 @@
 <template>
   <Story title="1. Theming" source="-">
     <div :style="{ 'background-color': '#101827', padding: '8px' }">
-      <ScreenerHeader
+      <VueScreenerHeader
         v-if="!screener.hasError.value"
         :screener="screener"
         :style="{
@@ -50,7 +50,7 @@
           </DataCell>
         </template>
       </VueScreener>
-      <ScreenerFooter
+      <VueScreenerFooter
         v-if="!screener.hasError.value"
         :screener="screener"
         :style="{
@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts" setup>
-import { HeadCell, DataCell, VueScreener, Header as ScreenerHeader, Footer as ScreenerFooter } from '../../index'
+import { HeadCell, DataCell, VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
 import baseData from '../../fixtures/data.json'
 import { useScreener } from '../../hooks/use-screener'
 

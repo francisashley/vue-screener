@@ -1,13 +1,13 @@
 <template>
   <Story title="9. Format column"  source="-">
-    <ScreenerHeader :screener="screener" />
+    <VueScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
-    <ScreenerFooter :screener="screener" />
+    <VueScreenerFooter :screener="screener" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, Header as ScreenerHeader, Footer as ScreenerFooter } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
 import baseData from '../../fixtures/data.json'
 import { useScreener } from '../../hooks/use-screener'
 

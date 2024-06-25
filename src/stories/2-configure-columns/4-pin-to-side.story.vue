@@ -1,6 +1,6 @@
 <template>
   <Story title="4. Pin to the side"  source="-">
-    <ScreenerHeader :screener="screener" />
+    <VueScreenerHeader :screener="screener" />
     <VueScreener :screener="screener">
       <template #head="props">
         <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
@@ -14,12 +14,12 @@
         </Data>
       </template>
     </VueScreener>
-    <ScreenerFooter :screener="screener" />
+    <VueScreenerFooter :screener="screener" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, Header as ScreenerHeader, Footer as ScreenerFooter } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
 import baseData from '../../fixtures/data.json'
 import Head from '../../components/table/TableHead.vue'
 import Data from '../../components/table/TableData.vue'

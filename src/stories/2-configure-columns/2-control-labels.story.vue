@@ -1,21 +1,21 @@
 <template>
   <Story title="2. Control labels"  source="-">
-    <ScreenerHeader :screener="screener1" />
+    <VueScreenerHeader :screener="screener1" />
     <VueScreener :screener="screener1" />
-    <ScreenerFooter :screener="screener1" />
+    <VueScreenerFooter :screener="screener1" />
     <br />
-    <ScreenerHeader :screener="screener2" />
+    <VueScreenerHeader :screener="screener2" />
     <VueScreener :screener="screener2" />
-    <ScreenerFooter :screener="screener2" />
+    <VueScreenerFooter :screener="screener2" />
     <br />
-    <ScreenerHeader :screener="screener3" />
+    <VueScreenerHeader :screener="screener3" />
     <VueScreener :screener="screener3" />
-    <ScreenerFooter :screener="screener3" />
+    <VueScreenerFooter :screener="screener3" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, Header as ScreenerHeader, Footer as ScreenerFooter } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
