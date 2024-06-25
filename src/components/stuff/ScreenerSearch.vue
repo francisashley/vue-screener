@@ -13,19 +13,21 @@
 <script lang="ts" setup>
 import { Screener } from '@/interfaces/screener'
 import { computed, ref } from 'vue'
+import { isValidRegExp } from '../../utils/regex.utils'
 
 export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
 
-const { isValidQuery = true, screener } = defineProps<{
-  isValidQuery: boolean
-  screener: Screener
-}>()
+const { screener } = defineProps<{ screener: Screener }>()
 
 const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
 const useRegEx = computed<boolean>(() => {
   return screener.searchOptions.value.some((activeOption) => activeOption === 'use-regex')
+})
+
+const isValidQuery = computed((): boolean => {
+  return isValidRegExp(screener.searchQuery.value)
 })
 
 const onKeydown = (event: KeyboardEvent) => {

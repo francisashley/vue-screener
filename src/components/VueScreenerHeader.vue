@@ -1,7 +1,7 @@
 <template>
   <header class="vs-header">
     <div class="vs-title" v-text="screener.title.value" />
-    <ScreenerSearch :screener="screener" :is-valid-query="isRegExFriendlySearchQuery" class="vs-search" />
+    <ScreenerSearch :screener="screener" />
     <Settings :screener="screener" />
   </header>
 </template>
@@ -9,19 +9,11 @@
 <script lang="ts" setup>
 import ScreenerSearch from './stuff/ScreenerSearch.vue'
 import Settings from './stuff/Settings.vue'
-import { isValidRegExp } from '../utils/regex.utils'
-import { computed } from 'vue'
 import { Screener } from '../interfaces/screener'
 
-type Props = {
+defineProps<{
   screener: Screener
-}
-
-const props = defineProps<Props>()
-
-const isRegExFriendlySearchQuery = computed((): boolean => {
-  return isValidRegExp(props.screener.searchQuery.value)
-})
+}>()
 </script>
 
 <style lang="scss">
