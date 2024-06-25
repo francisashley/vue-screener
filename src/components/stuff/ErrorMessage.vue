@@ -1,5 +1,5 @@
 <template>
-  <div class="vs-error-message">[VueScreenerError]: {{ message }}</div>
+  <div class="vs-error-message">[ScreenerError]: {{ message }}</div>
 </template>
 
 <script lang="ts" setup>

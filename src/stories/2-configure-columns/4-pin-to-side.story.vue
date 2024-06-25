@@ -7,7 +7,7 @@
         <ScreenerSearchOptions :screener="screener" />
       </div>
     </div>
-    <VueScreener :screener="screener" :style="{ marginBottom: '16px' }">
+    <Screener :screener="screener" :style="{ marginBottom: '16px' }">
       <template #head="props">
         <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
       </template>
@@ -19,13 +19,13 @@
           </div>
         </Data>
       </template>
-    </VueScreener>
-    <VueScreenerPagination :screener="screener" />
+    </Screener>
+    <ScreenerPagination :screener="screener" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, ScreenerSearch, ScreenerSearchOptions, VueScreenerPagination, useScreener } from '../../index'
+import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import Head from '../../components/table/TableHead.vue'
 import Data from '../../components/table/TableData.vue'

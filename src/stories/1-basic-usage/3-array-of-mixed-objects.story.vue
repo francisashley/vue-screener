@@ -7,13 +7,13 @@
         <ScreenerSearchOptions :screener="screener" />
       </div>
     </div>
-    <VueScreener :screener="screener" :style="{ marginBottom: '16px' }" />
-    <VueScreenerPagination :screener="screener" />
+    <Screener :screener="screener" :style="{ marginBottom: '16px' }" />
+    <ScreenerPagination :screener="screener" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerPagination, ScreenerSearch, ScreenerSearchOptions, useScreener } from '../../index'
+import { Screener, ScreenerPagination, ScreenerSearch, ScreenerSearchOptions, useScreener } from '../../index'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 const screener = useScreener(mixedObjectsData, { title: 'Array of mixed objects' })
 </script>

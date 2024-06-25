@@ -7,12 +7,12 @@
         <ScreenerSearchOptions :screener="screener" />
       </div>
     </div>
-    <VueScreener :screener="screener" :style="{ marginBottom: '16px' }" />
-    <VueScreenerPagination :screener="screener" />
+    <Screener :screener="screener" :style="{ marginBottom: '16px' }" />
+    <ScreenerPagination :screener="screener" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, ScreenerSearch, ScreenerSearchOptions, VueScreenerPagination, useScreener } from '../../index'
+import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 const screener = useScreener(null, { title: 'No data' })
 </script>

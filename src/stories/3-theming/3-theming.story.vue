@@ -16,7 +16,7 @@
           <ScreenerSearchOptions :screener="screener" />
         </div>
       </div>
-      <VueScreener
+      <Screener
         :screener="screener"
         class="vue-screener"
         :style="{
@@ -36,7 +36,7 @@
           marginBottom: '16px',
         }"
       />
-      <VueScreenerPagination
+      <ScreenerPagination
         v-if="!screener.hasError.value"
         :screener="screener"
         :style="{
@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, ScreenerSearch, ScreenerSearchOptions, VueScreenerPagination, useScreener } from '../../index'
+import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {

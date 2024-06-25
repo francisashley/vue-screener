@@ -7,8 +7,8 @@
         <ScreenerSearchOptions :screener="screener1" />
       </div>
     </div>
-    <VueScreener :screener="screener1" :style="{ marginBottom: '16px' }" />
-    <VueScreenerPagination :screener="screener1" />
+    <Screener :screener="screener1" :style="{ marginBottom: '16px' }" />
+    <ScreenerPagination :screener="screener1" />
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
       <h3 v-text="screener2.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
@@ -17,8 +17,8 @@
         <ScreenerSearchOptions :screener="screener2" />
       </div>
     </div>
-    <VueScreener :screener="screener2" :style="{ marginBottom: '16px' }" />
-    <VueScreenerPagination :screener="screener2" />
+    <Screener :screener="screener2" :style="{ marginBottom: '16px' }" />
+    <ScreenerPagination :screener="screener2" />
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
       <h3 v-text="screener3.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
@@ -27,13 +27,13 @@
         <ScreenerSearchOptions :screener="screener3" />
       </div>
     </div>
-    <VueScreener :screener="screener3" :style="{ marginBottom: '16px' }" />
-    <VueScreenerPagination :screener="screener3" />
+    <Screener :screener="screener3" :style="{ marginBottom: '16px' }" />
+    <ScreenerPagination :screener="screener3" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, ScreenerSearch, ScreenerSearchOptions, VueScreenerPagination, useScreener } from '../../index'
+import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
