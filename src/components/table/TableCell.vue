@@ -52,12 +52,12 @@ defineProps<{
   }
 }
 
-.vs-main--scrollable .vs-table__cell--pinned {
+.vs-app--scrollable .vs-table__cell--pinned {
   box-shadow: -3px 0px 2px rgba(0, 0, 0, 0.11);
   transition: box-shadow 300ms ease-out;
 }
 
-.vs-main--scrolled-end .vs-table__cell--pinned {
+.vs-app--scrolled-end .vs-table__cell--pinned {
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0) !important;
 }
 </style>

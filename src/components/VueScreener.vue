@@ -1,32 +1,34 @@
 <template>
-  <section class="vs-app">
-    <ScreenerMain :screener="screener">
-      <ErrorMessage
-        v-if="screener.hasError.value"
-        message="Invalid data was provided. Please provide an array of objects or an array of arrays."
-      />
-      <NoDataView v-else-if="!screener.hasData.value" />
-      <JsonView v-else-if="screener.renderFormat.value === 'raw'" :data="screener.data.value" />
-      <Table v-else :screener="screener">
-        <template #head="headProps">
-          <slot name="head" v-bind="headProps" />
-        </template>
-        <template #data="dataProps">
-          <slot name="data" v-bind="dataProps" />
-        </template>
-      </Table>
-    </ScreenerMain>
+  <section
+    class="vs-app"
+    :class="{ 'vs-app--scrollable': isScrollable, 'vs-app--scrolled-end': isScrolledEnd }"
+    ref="mainRef"
+  >
+    <ErrorMessage
+      v-if="screener.hasError.value"
+      message="Invalid data was provided. Please provide an array of objects or an array of arrays."
+    />
+    <NoDataView v-else-if="!screener.hasData.value" />
+    <JsonView v-else-if="screener.renderFormat.value === 'raw'" :data="screener.data.value" />
+    <Table v-else :screener="screener">
+      <template #head="headProps">
+        <slot name="head" v-bind="headProps" />
+      </template>
+      <template #data="dataProps">
+        <slot name="data" v-bind="dataProps" />
+      </template>
+    </Table>
   </section>
 </template>
 
 <script lang="ts" setup>
-import ScreenerMain from './ScreenerMain.vue'
 import JsonView from './views/JsonView.vue'
 import Table from './table/Table.vue'
 import NoDataView from './views/NoDataView.vue'
 import ErrorMessage from './stuff/ErrorMessage.vue'
 import { Config } from '@/interfaces/screener'
 import type { Screener } from '../interfaces/screener'
+import { useScrollable } from '../hooks/use-scrollable'
 
 type Props = {
   // The title to be displayed in the header
@@ -46,6 +48,7 @@ type Props = {
 }
 
 const { screener } = defineProps<Props>()
+const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
 </script>
 
 <style lang="scss">
@@ -105,5 +108,6 @@ const { screener } = defineProps<Props>()
   overflow: var(--vs-app__overflow);
   font-family: var(--vs-app__font-family);
   font-size: var(--vs-app__font-size);
+  overflow-x: auto;
 }
 </style>

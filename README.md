@@ -172,9 +172,9 @@ Style using classes:
     .vs-dropdown-button
     .vs-dropdown-button--active
     .vs-dropdown__content
-  .vs-main
-  .vs-main--scrollable
-  .vs-main--scrolled-end
+  .vs-app
+  .vs-app--scrollable
+  .vs-app--scrolled-end
     .vs-table
     .vs-table__row
     .vs-table__row--header
