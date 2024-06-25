@@ -57,10 +57,6 @@ defineProps<Props>()
   --vs-pagination-per-page-input--focus__border: thin solid #4f4f4f;
   --vs-pagination-per-page-input__outline: none;
 
-  // Vue screener error message
-  --vs-error-message__border: thin solid red;
-  --vs-error-message__color: red;
-
   padding: var(--vs-footer__padding);
   color: var(--vs-footer__color);
   height: var(--vs-footer__height);
