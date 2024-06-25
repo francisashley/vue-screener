@@ -1,7 +1,7 @@
 <template>
   <section
-    class="vs-app"
-    :class="{ 'vs-app--scrollable': isScrollable, 'vs-app--scrolled-end': isScrolledEnd }"
+    class="vs-screener"
+    :class="{ 'vs-screener--scrollable': isScrollable, 'vs-screener--scrolled-end': isScrolledEnd }"
     ref="mainRef"
   >
     <ErrorMessage
@@ -52,16 +52,17 @@ const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
 </script>
 
 <style lang="scss">
-.vs-app {
-  --vs-app__overflow: hidden;
-  --vs-app__font-size: 14px;
-  --vs-app__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+.vs-screener {
+  --vs-screener__overflow: hidden;
+  --vs-screener__font-size: 14px;
+  --vs-screener__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
   // Vue screener table
   --vs-table__color: black;
   --vs-table__border: 1px solid black;
   --vs-table__border-radius: 8px;
+  --vs-table__overflow: auto;
 
   // Vue screener table row
   --vs-table-row__border: thin solid black;
@@ -104,10 +105,9 @@ const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
   --vs-error-message__color: red;
 }
 
-.vs-app {
-  overflow: var(--vs-app__overflow);
-  font-family: var(--vs-app__font-family);
-  font-size: var(--vs-app__font-size);
-  overflow-x: auto;
+.vs-screener {
+  overflow: var(--vs-screener__overflow);
+  font-family: var(--vs-screener__font-family);
+  font-size: var(--vs-screener__font-size);
 }
 </style>

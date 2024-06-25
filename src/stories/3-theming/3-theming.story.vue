@@ -5,8 +5,8 @@
         v-if="!screener.hasError.value"
         :screener="screener"
         :style="{
-          '--vs-app__border': 'none',
-          '--vs-app__bg': 'transparent',
+          '--vs-screener__border': 'none',
+          '--vs-screener__bg': 'transparent',
           '--vs-header__color': 'white',
           '--vs-footer__color': 'white',
           '--vs-header__padding': '1rem 0',
@@ -24,8 +24,8 @@
       <VueScreener
         :screener="screener"
         :style="{
-          '--vs-app__border': 'none',
-          '--vs-app__bg': 'transparent',
+          '--vs-screener__border': 'none',
+          '--vs-screener__bg': 'transparent',
           '--vs-footer__color': 'white',
           '--vs-header__padding': '1rem 0',
           '--vs-title__font-size': '18px',
@@ -54,8 +54,8 @@
         v-if="!screener.hasError.value"
         :screener="screener"
         :style="{
-          '--vs-app__border': 'none',
-          '--vs-app__bg': 'transparent',
+          '--vs-screener__border': 'none',
+          '--vs-screener__bg': 'transparent',
           '--vs-header__color': 'white',
           '--vs-footer__color': 'white',
           '--vs-header__padding': '1rem 0',

@@ -152,7 +152,7 @@ import { formatPrice } from './utils/currency'
 Style using classes:
 
 ```
-.vs-app
+.vs-screener
   .vs-header 
     .vs-heading
     .vs-title
@@ -172,9 +172,9 @@ Style using classes:
     .vs-dropdown-button
     .vs-dropdown-button--active
     .vs-dropdown__content
-  .vs-app
-  .vs-app--scrollable
-  .vs-app--scrolled-end
+  .vs-screener
+  .vs-screener--scrollable
+  .vs-screener--scrolled-end
     .vs-table
     .vs-table__row
     .vs-table__row--header

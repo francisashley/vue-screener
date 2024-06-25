@@ -36,5 +36,6 @@ const tableStyle = computed(() => {
   color: var(--vs-table__color);
   border: var(--vs-table__border);
   border-radius: var(--vs-table__border-radius);
+  overflow: var(--vs-table__overflow);
 }
 </style>
