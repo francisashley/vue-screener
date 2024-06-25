@@ -12,7 +12,15 @@
       >
         <h3 v-text="screener.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
         <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
-          <ScreenerSearch :screener="screener" />
+          <ScreenerSearch
+            :screener="screener"
+            :style="{
+              '--vs-search-input-border': 'thin solid #374151',
+              '--vs-search-input-bg-color': '#1f2937',
+              '--vs-search-input-color': 'white',
+              '--vs-search-input-bg-color--focus': 'var(--vs-search-input-bg-color)',
+            }"
+          />
           <ScreenerSearchOptions :screener="screener" />
         </div>
       </div>
