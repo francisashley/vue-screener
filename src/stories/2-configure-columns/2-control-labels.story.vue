@@ -1,5 +1,5 @@
 <template>
-  <Story title="2. Control labels"  source="-">
+  <Story title="2. Control labels" source="-">
     <VueScreenerHeader :screener="screener1" />
     <VueScreener :screener="screener1" />
     <VueScreenerFooter :screener="screener1" />
@@ -15,11 +15,10 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
-import { useScreener } from '../../hooks/use-screener'
 
 const screener1 = useScreener(baseData, {
   title: 'Results',

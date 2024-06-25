@@ -1,12 +1,11 @@
 <template>
-  <Story title="5. Bad data"  source="-">
+  <Story title="5. Bad data" source="-">
     <VueScreener :screener="screener" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from '../../index'
-import { useScreener } from '../../hooks/use-screener'
+import { VueScreener, useScreener } from '../../index'
 const badData: any = 'bad data'
 const screener = useScreener(badData, { title: 'Bad data' })
 </script>

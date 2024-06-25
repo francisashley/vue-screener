@@ -1,5 +1,5 @@
 <template>
-  <Story title="4. Pin to the side"  source="-">
+  <Story title="4. Pin to the side" source="-">
     <VueScreenerHeader :screener="screener" />
     <VueScreener :screener="screener">
       <template #head="props">
@@ -19,11 +19,10 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import Head from '../../components/table/TableHead.vue'
 import Data from '../../components/table/TableData.vue'
-import { useScreener } from '../../hooks/use-screener'
 
 const handleClickEdit = (item: unknown) => console.log('edit', item)
 const handleClickDelete = (item: unknown) => console.log('delete', item)

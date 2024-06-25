@@ -7,8 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
-import { useScreener } from '../../hooks/use-screener'
 const screener = useScreener(baseData, { title: 'Array of objects' })
 </script>

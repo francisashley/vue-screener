@@ -1,5 +1,5 @@
 <template>
-  <Story title="4. No data"  source="-">
+  <Story title="4. No data" source="-">
     <VueScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <VueScreenerFooter :screener="screener" />
@@ -7,7 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerFooter } from '../../index'
-import { useScreener } from '../../hooks/use-screener'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter, useScreener } from '../../index'
 const screener = useScreener(null, { title: 'No data' })
 </script>
