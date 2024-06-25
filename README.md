@@ -155,7 +155,6 @@ Style using classes:
 .vs-screener
   .vs-header 
     .vs-heading
-    .vs-title
     .vs-search
     .vs-search--error
     .vs-settings

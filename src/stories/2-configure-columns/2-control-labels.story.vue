@@ -1,7 +1,7 @@
 <template>
   <Story title="2. Control labels" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
-      <h3 v-text="screener1.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener1" />
         <ScreenerSearchOptions :screener="screener1" />
@@ -11,7 +11,7 @@
     <ScreenerPagination :screener="screener1" />
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
-      <h3 v-text="screener2.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener2" />
         <ScreenerSearchOptions :screener="screener2" />
@@ -21,7 +21,7 @@
     <ScreenerPagination :screener="screener2" />
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
-      <h3 v-text="screener3.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener3" />
         <ScreenerSearchOptions :screener="screener3" />
@@ -39,7 +39,6 @@ import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 
 const screener1 = useScreener(baseData, {
-  title: 'Results',
   config: {
     id: { field: 'id', label: 'ID' },
     first_name: { field: 'first_name', label: 'First name' },
@@ -52,7 +51,6 @@ const screener1 = useScreener(baseData, {
 })
 
 const screener2 = useScreener(primitivesData, {
-  title: 'Results',
   config: {
     0: { field: 0, label: 'ID' },
     1: { field: 1, label: 'First name' },
@@ -64,7 +62,6 @@ const screener2 = useScreener(primitivesData, {
 })
 
 const screener3 = useScreener(mixedObjectsData, {
-  title: 'Results',
   pick: ['id', 'name', 'address', 'country', 'flag_colours'],
   config: {
     id: { field: 'id', label: 'ID' },

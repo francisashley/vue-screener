@@ -2,7 +2,6 @@ import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
-  title: Ref<string>
   searchQuery: Ref<string>
   highlightQuery: Ref<string>
   currentPage: Ref<number>

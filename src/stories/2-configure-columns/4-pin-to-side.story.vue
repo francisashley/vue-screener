@@ -1,7 +1,7 @@
 <template>
   <Story title="4. Pin to the side" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
-      <h3 v-text="screener.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener" />
         <ScreenerSearchOptions :screener="screener" />
@@ -34,7 +34,6 @@ const handleClickEdit = (item: unknown) => console.log('edit', item)
 const handleClickDelete = (item: unknown) => console.log('delete', item)
 
 const screener = useScreener(baseData, {
-  title: 'Results',
   pick: ['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'actions'],
   config: {
     actions: { field: 'actions', isPinned: true },

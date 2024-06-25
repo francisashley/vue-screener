@@ -7,7 +7,6 @@ import { orderBy } from 'natural-orderby'
 import { highlightText } from '../utils/text.utils'
 
 type ScreenerOptions = {
-  title?: string
   defaultCurrentPage?: number
   defaultPerPage?: number
   config?: Config
@@ -16,7 +15,6 @@ type ScreenerOptions = {
 }
 export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
   // State
-  const title = ref<string>('Results')
   const searchQuery = ref<string>('')
   const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
@@ -30,7 +28,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const omit = ref<string[]>([])
 
   // Set default state
-  title.value = options.title ?? title.value
   config.value = options.config ?? config.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
@@ -139,7 +136,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   return {
-    title,
     searchQuery,
     highlightQuery,
     currentPage,

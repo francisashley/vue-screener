@@ -1,7 +1,7 @@
 <template>
   <Story title="1. Stress Test" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
-      <h3 v-text="screener.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener" />
         <ScreenerSearchOptions :screener="screener" />
@@ -16,7 +16,5 @@
 import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/stress-data.json'
 
-const screener = useScreener(baseData, {
-  title: 'Results',
-})
+const screener = useScreener(baseData)
 </script>
