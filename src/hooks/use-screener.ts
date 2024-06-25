@@ -1,4 +1,4 @@
-import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
+import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { Config, Column, Item, Screener, UnknownObject } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
@@ -39,10 +39,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   pick.value = options.pick ?? pick.value
   omit.value = options.omit ?? omit.value
 
-  const shouldUseRegEx = computed((): boolean => searchOptions.value.includes('use-regex'))
-  const shouldMatchCase = computed((): boolean => searchOptions.value.includes('match-case'))
-  const shouldMatchWord = computed((): boolean => searchOptions.value.includes('match-word'))
-
   const hasError = computed((): boolean => {
     return !isValidInput(data.value)
   })
@@ -55,9 +51,9 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return search({
       items: normalisedData.value,
       searchQuery: searchQuery.value,
-      useRegExp: shouldUseRegEx.value,
-      matchCase: shouldMatchCase.value,
-      matchWord: shouldMatchWord.value,
+      useRegExp: searchOptions.value.includes('use-regex'),
+      matchCase: searchOptions.value.includes('match-case'),
+      matchWord: searchOptions.value.includes('match-word'),
     })
   })
 
@@ -153,9 +149,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     searchOptions,
     sortField,
     sortDirection,
-    shouldUseRegEx,
-    shouldMatchCase,
-    shouldMatchWord,
     data,
     items,
     totalItems: computed(() => searchedData.value.length),

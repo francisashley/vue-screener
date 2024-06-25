@@ -63,7 +63,7 @@ const onKeydown = (event: KeyboardEvent) => {
 
 const onInput = (event: Event) => {
   const query = (event.target as HTMLInputElement).value
-  screener.highlightQuery.value = query
+  screener.actions.search(query)
 }
 </script>
 
