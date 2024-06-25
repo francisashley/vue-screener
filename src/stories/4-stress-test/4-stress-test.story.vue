@@ -2,7 +2,7 @@
   <Story title="1. Stress Test" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
       <h3 v-text="screener.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
-      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener" />
         <ScreenerSearchOptions :screener="screener" />
       </div>

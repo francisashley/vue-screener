@@ -11,7 +11,7 @@
         }"
       >
         <h3 v-text="screener.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
-        <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+        <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
           <ScreenerSearch
             :screener="screener"
             :style="{
@@ -21,7 +21,26 @@
               '--vs-search-input-bg-color--focus': 'var(--vs-search-input-bg-color)',
             }"
           />
-          <ScreenerSearchOptions :screener="screener" />
+          <ScreenerSearchOptions
+            :screener="screener"
+            :style="{
+              '--vs-search-options-container-border': 'thin solid #374151',
+              '--vs-search-options-container-bg-color': '#1f2937',
+
+              '--vs-search-option-background': '#1f2937',
+              '--vs-search-option-background--hover': '#374151',
+              '--vs-search-option-background--active': '#3e51b5',
+
+              '--vs-search-option-color': 'white',
+              '--vs-search-option-cursor': 'pointer',
+              '--vs-search-option-border-radius': '4px',
+              '--vs-search-option-height': '20px',
+              '--vs-search-option-width': '20px',
+              '--vs-search-option-margin-bottom': '8px',
+              '--vs-search-option-color--active': '#fff',
+              '--vs-search-option-color--hover': '#fff',
+            }"
+          />
         </div>
       </div>
       <Screener

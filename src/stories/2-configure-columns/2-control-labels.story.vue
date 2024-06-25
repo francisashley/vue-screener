@@ -2,7 +2,7 @@
   <Story title="2. Control labels" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
       <h3 v-text="screener1.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
-      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener1" />
         <ScreenerSearchOptions :screener="screener1" />
       </div>
@@ -12,7 +12,7 @@
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
       <h3 v-text="screener2.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
-      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener2" />
         <ScreenerSearchOptions :screener="screener2" />
       </div>
@@ -22,7 +22,7 @@
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
       <h3 v-text="screener3.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
-      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener3" />
         <ScreenerSearchOptions :screener="screener3" />
       </div>

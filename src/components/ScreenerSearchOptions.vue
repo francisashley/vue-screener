@@ -52,38 +52,42 @@ const toggleOption = (option: SearchQueryOption) => {
 
 <style lang="scss">
 .vs-search-options {
+  --vs-search-options-container-border: thin solid #767676;
+  --vs-search-options-container-border-radius: 4px;
+  --vs-search-options-container-bg-color: white;
+
   display: flex;
-  border: thin solid #767676;
-  border-radius: 4px;
+  align-items: center;
+  border: var(--vs-search-options-container-border);
+  border-radius: var(--vs-search-options-container-border-radius);
+  background-color: var(--vs-search-options-container-bg-color);
   gap: 1px;
   height: 24px;
-  align-items: center;
   padding: 1px;
   box-sizing: border-box;
-  background-color: white;
 
-  --vs-search-option__border: none;
-  --vs-search-option__color: rgba(0, 0, 0, 0.5);
-  --vs-search-option__cursor: pointer;
-  --vs-search-option__border-radius: 4px;
-  --vs-search-option__height: 20px;
-  --vs-search-option__width: 20px;
-  --vs-search-option__background: white;
-  --vs-search-option__margin-bottom: 8px;
-  --vs-search-option--active__color: #fff;
-  --vs-search-option--active__background: #3e51b5;
-  --vs-search-option--hover__color: #fff;
-  --vs-search-option--hover__background: #3e51b5;
+  --vs-search-option-border: none;
+  --vs-search-option-color: rgba(0, 0, 0, 0.5);
+  --vs-search-option-cursor: pointer;
+  --vs-search-option-border-radius: 4px;
+  --vs-search-option-height: 20px;
+  --vs-search-option-width: 20px;
+  --vs-search-option-background: white;
+  --vs-search-option-background--hover: #3e51b5;
+  --vs-search-option-background--active: #3e51b5;
+  --vs-search-option-margin-bottom: 8px;
+  --vs-search-option-color--active: #fff;
+  --vs-search-option-color--hover: #fff;
 }
 
 .vs-search-option {
   border: transparent;
-  color: var(--vs-search-option__color);
-  cursor: var(--vs-search-option__cursor);
-  border-radius: var(--vs-search-option__border-radius);
-  height: var(--vs-search-option__height);
-  width: var(--vs-search-option__width);
-  background: var(--vs-search-option__background);
+  color: var(--vs-search-option-color);
+  cursor: var(--vs-search-option-cursor);
+  border-radius: var(--vs-search-option-border-radius);
+  height: var(--vs-search-option-height);
+  width: var(--vs-search-option-width);
+  background: var(--vs-search-option-background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,14 +98,17 @@ const toggleOption = (option: SearchQueryOption) => {
     width: 16px;
   }
 
-  &--active {
-    color: var(--vs-search-option--active__color);
-    background: var(--vs-search-option--active__background);
+  &:hover {
+    color: var(--vs-search-option-color--hover);
   }
 
-  &:hover {
-    color: var(--vs-search-option--hover__color);
-    background: var(--vs-search-option--hover__background);
+  &:not(#{&}--active):hover {
+    background: var(--vs-search-option-background--hover);
+  }
+
+  &--active {
+    color: var(--vs-search-option-color--active);
+    background: var(--vs-search-option-background--active);
   }
 }
 </style>

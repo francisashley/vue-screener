@@ -219,6 +219,7 @@ const handleChangePerPage = (event: Event): void => {
   justify-content: space-between;
   white-space: nowrap;
   color: var(--vs-text-color);
+  gap: var(--vs-nav-gap);
 
   &__side {
     display: inline-flex;
