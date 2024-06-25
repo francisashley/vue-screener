@@ -23,7 +23,6 @@ export type Screener = {
   config: Ref<Config>
   pick: Ref<string[]>
   omit: Ref<string[]>
-  hideHeader: Ref<boolean>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void
