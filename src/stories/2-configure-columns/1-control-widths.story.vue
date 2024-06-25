@@ -2,20 +2,20 @@
   <Story title="1. Control widths" source="-">
     <VueScreenerHeader :screener="screener1" />
     <VueScreener :screener="screener1" />
-    <VueScreenerFooter :screener="screener1" />
+    <VueScreenerPagination :screener="screener1" />
     <br />
     <VueScreenerHeader :screener="screener2" />
     <VueScreener :screener="screener2" />
-    <VueScreenerFooter :screener="screener2" />
+    <VueScreenerPagination :screener="screener2" />
     <br />
     <VueScreenerHeader :screener="screener3" />
     <VueScreener :screener="screener3" />
-    <VueScreenerFooter :screener="screener3" />
+    <VueScreenerPagination :screener="screener3" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerFooter, useScreener } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
