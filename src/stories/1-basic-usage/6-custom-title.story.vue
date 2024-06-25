@@ -1,5 +1,5 @@
 <template>
-  <Story title="6. Custom title" group="basic-usage" source="-">
+  <Story title="6. Custom title"  source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <ScreenerFooter :screener="screener" />

@@ -1,5 +1,5 @@
 <template>
-  <Story title="5. Pick fields" group="configure-columns" source="-">
+  <Story title="5. Pick fields"  source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <ScreenerFooter :screener="screener" />

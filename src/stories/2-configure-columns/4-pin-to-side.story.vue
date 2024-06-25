@@ -1,5 +1,5 @@
 <template>
-  <Story title="4. Pin to the side" group="configure-columns" source="-">
+  <Story title="4. Pin to the side"  source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener">
       <template #head="props">

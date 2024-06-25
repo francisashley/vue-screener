@@ -11,9 +11,9 @@ export default defineConfig({
   tree: {
     groups: [
       { title: 'Basic usage', include: (file) => file.path.startsWith('src/stories/1-basic-usage') },
-      { id: 'configure-columns', title: 'Configure columns' },
-      { id: 'theming', title: 'Theming' },
-      { id: 'stress-test', title: 'Stress test' },
+      { title: 'Configure columns', include: (file) => file.path.startsWith('src/stories/2-configure-columns') },
+      { title: 'Theming', include: (file) => file.path.startsWith('src/stories/3-theming') },
+      { title: 'Stress test', include: (file) => file.path.startsWith('src/stories/4-stress-test') },
     ],
   },
   defaultStoryProps: {

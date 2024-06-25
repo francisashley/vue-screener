@@ -1,5 +1,5 @@
 <template>
-  <Story title="1. Theming" group="theming" source="-">
+  <Story title="1. Theming" source="-">
     <div :style="{ 'background-color': '#101827', padding: '8px' }">
       <ScreenerHeader
         v-if="!screener.hasError.value"

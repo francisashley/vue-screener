@@ -1,5 +1,5 @@
 <template>
-  <Story title="2. Control labels" group="configure-columns" source="-">
+  <Story title="2. Control labels"  source="-">
     <ScreenerHeader :screener="screener1" />
     <VueScreener :screener="screener1" />
     <ScreenerFooter :screener="screener1" />

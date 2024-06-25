@@ -1,5 +1,5 @@
 <template>
-  <Story title="3. Extra columns" group="configure-columns" source="-">
+  <Story title="3. Extra columns"  source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <ScreenerFooter :screener="screener" />

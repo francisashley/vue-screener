@@ -1,5 +1,5 @@
 <template>
-  <Story title="8. Disable sort" group="configure-columns" source="-">
+  <Story title="8. Disable sort"  source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <ScreenerFooter :screener="screener" />

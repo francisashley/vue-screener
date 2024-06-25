@@ -1,5 +1,5 @@
 <template>
-  <Story title="1. Stress Test" group="stress-test" source="-">
+  <Story title="1. Stress Test" source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <ScreenerFooter :screener="screener" />

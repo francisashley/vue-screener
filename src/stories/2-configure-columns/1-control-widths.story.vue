@@ -1,5 +1,5 @@
 <template>
-  <Story title="1. Control widths" group="configure-columns" source="-">
+  <Story title="1. Control widths" source="-">
     <ScreenerHeader :screener="screener1" />
     <VueScreener :screener="screener1" />
     <ScreenerFooter :screener="screener1" />

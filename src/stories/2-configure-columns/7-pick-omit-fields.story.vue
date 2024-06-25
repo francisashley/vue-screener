@@ -1,5 +1,5 @@
 <template>
-  <Story title="7. Pick + omit fields" group="configure-columns" source="-">
+  <Story title="7. Pick + omit fields"  source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <ScreenerFooter :screener="screener" />

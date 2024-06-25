@@ -1,5 +1,5 @@
 <template>
-  <Story title="5. Bad data" group="basic-usage" source="-">
+  <Story title="5. Bad data"  source="-">
     <VueScreener :screener="screener" />
   </Story>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <Story title="2. Array of primitives" group="basic-usage" source="-">
+  <Story title="2. Array of primitives"  source="-">
     <ScreenerHeader :screener="screener" />
     <VueScreener :screener="screener" />
     <ScreenerFooter :screener="screener" />
