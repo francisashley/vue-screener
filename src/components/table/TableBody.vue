@@ -10,7 +10,7 @@
         :highlight="highlightText"
         :highlight-value="screener.highlightQuery.value"
       >
-        <TableData :column="column" :item="item" />
+        <TableDataCell :column="column" :item="item" />
       </slot>
     </template>
     <template v-else>&nbsp;</template>
@@ -21,7 +21,7 @@
 import { computed } from 'vue'
 import { highlightText } from '../../utils/text.utils'
 import { Screener } from '../../interfaces/screener'
-import TableData from './TableData.vue'
+import TableDataCell from './TableDataCell.vue'
 
 const props = defineProps<{
   screener: Screener

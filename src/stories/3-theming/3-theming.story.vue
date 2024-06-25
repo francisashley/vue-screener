@@ -26,11 +26,9 @@
             :style="{
               '--vs-search-options-container-border': 'thin solid #374151',
               '--vs-search-options-container-bg-color': '#1f2937',
-
               '--vs-search-option-background': '#1f2937',
               '--vs-search-option-background--hover': '#374151',
               '--vs-search-option-background--active': '#3e51b5',
-
               '--vs-search-option-color': 'white',
               '--vs-search-option-cursor': 'pointer',
               '--vs-search-option-border-radius': '4px',

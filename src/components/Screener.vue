@@ -1,32 +1,42 @@
 <template>
   <section
     class="vs-screener"
-    :class="{ 'vs-screener--scrollable': isScrollable, 'vs-screener--scrolled-end': isScrolledEnd }"
+    :class="{
+      'vs-screener--scrollable': isScrollable,
+      'vs-screener--scrolled-end': isScrolledEnd,
+      'vs-screener--bad-data': view === 'bad-data',
+      'vs-screener--no-data': view === 'no-data',
+    }"
     ref="mainRef"
   >
-    <ErrorMessage
-      v-if="screener.hasError.value"
-      message="Invalid data was provided. Please provide an array of objects or an array of arrays."
-    />
-    <NoDataView v-else-if="!screener.hasData.value" />
-    <Table v-else :screener="screener">
-      <template #head="headProps">
-        <slot name="head" v-bind="headProps" />
-      </template>
-      <template #data="dataProps">
-        <slot name="data" v-bind="dataProps" />
-      </template>
-    </Table>
+    <div v-if="view === 'bad-data'">
+      Invalid data provided. Please provide an array of objects or an array of arrays.
+    </div>
+
+    <p v-if="view === 'no-data'">No data provided</p>
+
+    <div v-if="view === 'table'" :style="tableStyle">
+      <TableHeader :screener="screener">
+        <template #head="headProps">
+          <slot name="head" v-bind="headProps" />
+        </template>
+      </TableHeader>
+      <TableBody :screener="screener">
+        <template #data="dataProps">
+          <slot name="data" v-bind="dataProps" />
+        </template>
+      </TableBody>
+    </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import Table from './table/Table.vue'
-import NoDataView from './views/NoDataView.vue'
-import ErrorMessage from './stuff/ErrorMessage.vue'
 import { Config } from '@/interfaces/screener'
 import type { Screener } from '../interfaces/screener'
 import { useScrollable } from '../hooks/use-scrollable'
+import { computed } from 'vue'
+import TableHeader from './table/TableHeader.vue'
+import TableBody from './table/TableBody.vue'
 
 type Props = {
   // The title to be displayed in the header
@@ -47,20 +57,36 @@ type Props = {
 
 const { screener } = defineProps<Props>()
 const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
+
+const view = computed<'bad-data' | 'no-data' | 'table'>(() => {
+  if (screener.hasError.value) return 'bad-data'
+  if (!screener.hasData.value) return 'no-data'
+  return 'table'
+})
+
+const tableStyle = computed(() => {
+  return {
+    display: 'grid',
+    'grid-template-columns': screener.columns.value.map((item) => item.width).join(' '),
+  }
+})
 </script>
 
 <style lang="scss">
 .vs-screener {
-  --vs-screener__overflow: hidden;
-  --vs-screener__font-size: 14px;
-  --vs-screener__font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+  --vs-screener-font-size: 14px;
+  --vs-screener-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
+  // Vue screener border
+  --vs-screener-border: thin solid black;
+  --vs-screener-border--error: thin solid red;
+  --vs-screener-color: black;
+  --vs-screener-color--error: red;
+  --vs-screener-border-radius: 8px;
+  --vs-screener-overflow: auto;
+
   // Vue screener table
-  --vs-table__color: black;
-  --vs-table__border: 1px solid black;
-  --vs-table__border-radius: 8px;
-  --vs-table__overflow: auto;
 
   // Vue screener table row
   --vs-table-row__border: thin solid black;
@@ -87,7 +113,7 @@ const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
   --vs-table-cell--sortable__div__gap: 4px;
   --vs-table-cell--sortable__div__cursor: pointer;
 
-  // Vue screener sort selector
+  // Vue screener sort icon
   --vs-sort-icon__height: 1em;
   --vs-sort-icon__width: 1em;
   --vs-sort-icon__display: inline-flex;
@@ -97,15 +123,38 @@ const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
   --vs-sort-icon__transform: rotate(0deg);
   --vs-sort-icon__transition: ease-out 100ms;
   --vs-sort-icon__icon--asc__transform: rotate(-180deg);
-
-  // Vue screener error message
-  --vs-error-message__border: thin solid red;
-  --vs-error-message__color: red;
 }
 
 .vs-screener {
-  overflow: var(--vs-screener__overflow);
-  font-family: var(--vs-screener__font-family);
-  font-size: var(--vs-screener__font-size);
+  overflow: hidden;
+  font-family: var(--vs-screener-font-family);
+  font-size: var(--vs-screener-font-size);
+  border: var(--vs-screener-border);
+  border-radius: var(--vs-screener-border-radius);
+  overflow: var(--vs-screener-overflow);
+  min-height: 400px;
+
+  &--bad-data,
+  &--no-data {
+    border: var(--vs-screener-border--error);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &--bad-data {
+    color: var(--vs-screener-color--error);
+  }
+}
+
+.vs-no-data-view {
+  text-align: center;
+  padding: 150px 0;
+  border: thin solid;
+  border-radius: 8px;
 }
 </style>

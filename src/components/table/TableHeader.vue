@@ -8,7 +8,11 @@
       :sort-direction="getSortDirection(column.field)"
       @on-sort="screener.actions.sort"
     >
-      <TableHead :column="column" :sort-direction="getSortDirection(column.field)" @on-sort="screener.actions.sort" />
+      <TableHeadCell
+        :column="column"
+        :sort-direction="getSortDirection(column.field)"
+        @on-sort="screener.actions.sort"
+      />
     </slot>
   </div>
 </template>
@@ -16,7 +20,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { Screener } from '../../interfaces/screener'
-import TableHead from './TableHead.vue'
+import TableHeadCell from './TableHeadCell.vue'
 
 const props = defineProps<{
   screener: Screener
