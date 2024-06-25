@@ -12,5 +12,8 @@ defineProps<{
 .vs-error-message {
   border: var(--vs-error-message__border);
   color: var(--vs-error-message__color);
+  border-radius: 8px;
+  min-height: 400px;
+  padding: 4px;
 }
 </style>
