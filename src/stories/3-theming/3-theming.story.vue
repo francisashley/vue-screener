@@ -1,6 +1,6 @@
 <template>
   <Story title="1. Theming" source="-">
-    <div :style="{ 'background-color': '#101827', padding: '8px', minHeight: 'calc(100vh - 16px)' }">
+    <div :style="{ 'background-color': '#101827', padding: '16px', minHeight: 'calc(100vh - 16px)' }">
       <VueScreenerHeader
         v-if="!screener.hasError.value"
         :screener="screener"
@@ -12,6 +12,7 @@
       />
       <VueScreener
         :screener="screener"
+        class="vue-screener"
         :style="{
           '--vs-screener__border': 'none',
           '--vs-screener__bg': 'transparent',
@@ -26,13 +27,25 @@
           '--vs-table-row__border': '1px solid #4b5563',
           '--vs-table-cell__padding': '8px',
           '--vs-table-cell--head__bg': '#1f2937',
+          marginBottom: '16px',
         }"
       />
       <VueScreenerPagination
         v-if="!screener.hasError.value"
         :screener="screener"
         :style="{
-          '--vs-pagination__color': 'white',
+          '--vs-text-color': 'white',
+          '--vs-button-padding': '4px 20px',
+          '--vs-button-color': 'white',
+          '--vs-button-color--active': '#2463eb',
+          '--vs-button-bg-color': '#1f2937',
+          '--vs-button-bg-color--hover': '#374151',
+          '--vs-button-border': 'thin solid #374151',
+          '--vs-button-border--hover': 'thin solid #374151',
+          '--vs-button-border--active': 'thin solid #374151',
+          '--vs-text-input-border': 'thin solid #374151',
+          '--vs-text-input-bg-color': '#1f2937',
+          '--vs-text-input-color': 'white',
         }"
       />
     </div>
