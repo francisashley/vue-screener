@@ -38,18 +38,7 @@
           '--vs-table-cell__padding': '4px 8px',
           '--vs-table-cell--head__bg': '#1f2937',
         }"
-      >
-        <template #head="props">
-          <HeadCell v-bind="props">
-            <span v-html="props.column.label" />
-          </HeadCell>
-        </template>
-        <template #data="props">
-          <DataCell v-bind="props">
-            <span v-html="props.highlight(String(props.item.fields[props.column.field].value), props.highlightValue)" />
-          </DataCell>
-        </template>
-      </VueScreener>
+      />
       <VueScreenerFooter
         v-if="!screener.hasError.value"
         :screener="screener"
@@ -75,7 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { HeadCell, DataCell, VueScreener, VueScreenerHeader, VueScreenerFooter, useScreener } from '../../index'
+import { VueScreener, VueScreenerHeader, VueScreenerFooter, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {
