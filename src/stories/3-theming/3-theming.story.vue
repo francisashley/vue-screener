@@ -1,15 +1,21 @@
 <template>
   <Story title="1. Theming" source="-">
     <div :style="{ 'background-color': '#101827', padding: '16px', minHeight: 'calc(100vh - 16px)' }">
-      <VueScreenerHeader
-        v-if="!screener.hasError.value"
-        :screener="screener"
+      <div
         :style="{
-          '--vs-header__color': 'white',
-          '--vs-header__padding': '1rem 0',
-          '--vs-title__font-size': '18px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '16px',
+          color: 'white',
         }"
-      />
+      >
+        <h3 v-text="screener.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+        <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+          <ScreenerSearch :screener="screener" />
+          <ScreenerSearchOptions :screener="screener" />
+        </div>
+      </div>
       <VueScreener
         :screener="screener"
         class="vue-screener"
@@ -53,7 +59,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerPagination, useScreener } from '../../index'
+import { VueScreener, ScreenerSearch, ScreenerSearchOptions, VueScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {

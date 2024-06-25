@@ -29,9 +29,9 @@
 
 <script lang="ts" setup>
 import { Screener } from '@/interfaces/screener'
-import MatchCaseIcon from '../icons/MaterialDesignMatchCase.vue'
-import MatchWordIcon from '../icons/MaterialDesignMatchWord.vue'
-import RegularExpressionIcon from '../icons/MaterialDesignRegularExpression.vue'
+import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
+import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
+import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
 import { SearchQueryOption } from './ScreenerSearch.vue'
 
 const props = defineProps<{
@@ -61,6 +61,19 @@ const toggleOption = (option: SearchQueryOption) => {
   padding: 1px;
   box-sizing: border-box;
   background-color: white;
+
+  --vs-search-option__border: none;
+  --vs-search-option__color: rgba(0, 0, 0, 0.5);
+  --vs-search-option__cursor: pointer;
+  --vs-search-option__border-radius: 4px;
+  --vs-search-option__height: 20px;
+  --vs-search-option__width: 20px;
+  --vs-search-option__background: white;
+  --vs-search-option__margin-bottom: 8px;
+  --vs-search-option--active__color: #fff;
+  --vs-search-option--active__background: #3e51b5;
+  --vs-search-option--hover__color: #fff;
+  --vs-search-option--hover__background: #3e51b5;
 }
 
 .vs-search-option {

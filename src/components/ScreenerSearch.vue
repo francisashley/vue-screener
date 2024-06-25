@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { Screener } from '@/interfaces/screener'
 import { computed, ref } from 'vue'
-import { isValidRegExp } from '../../utils/regex.utils'
+import { isValidRegExp } from '../utils/regex.utils'
 
 export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
 
@@ -69,6 +69,21 @@ const onInput = (event: Event) => {
 
 <style lang="scss">
 .vs-search {
+  --vs-search__margin-left: 8px;
+  --vs-search__width: 200px;
+  --vs-search__padding: 0 4px;
+  --vs-search__box-sizing: border-box;
+  --vs-search__font-size: 14px !important;
+  --vs-search__font-weight: normal !important;
+  --vs-search__height: 24px;
+  --vs-search__border-radius: 4px;
+  --vs-search__outline: none;
+  --vs-search__border: 1px solid #767676;
+  --vs-search--focus__border: 1px solid #4f4f4f;
+  --vs-search__color: black;
+  --vs-search--error__border: 2px solid red;
+  --vs-search--error__outline-color: red;
+
   width: var(--vs-search__width);
   padding: var(--vs-search__padding);
   box-sizing: var(--vs-search__box-sizing);

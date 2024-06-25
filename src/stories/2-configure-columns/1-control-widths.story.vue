@@ -1,21 +1,39 @@
 <template>
   <Story title="1. Control widths" source="-">
-    <VueScreenerHeader :screener="screener1" />
-    <VueScreener :screener="screener1" />
+    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
+      <h3 v-text="screener1.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+        <ScreenerSearch :screener="screener1" />
+        <ScreenerSearchOptions :screener="screener1" />
+      </div>
+    </div>
+    <VueScreener :screener="screener1" :style="{ marginBottom: '16px' }" />
     <VueScreenerPagination :screener="screener1" />
     <br />
-    <VueScreenerHeader :screener="screener2" />
-    <VueScreener :screener="screener2" />
+    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
+      <h3 v-text="screener2.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+        <ScreenerSearch :screener="screener2" />
+        <ScreenerSearchOptions :screener="screener2" />
+      </div>
+    </div>
+    <VueScreener :screener="screener2" :style="{ marginBottom: '16px' }" />
     <VueScreenerPagination :screener="screener2" />
     <br />
-    <VueScreenerHeader :screener="screener3" />
-    <VueScreener :screener="screener3" />
+    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
+      <h3 v-text="screener3.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+        <ScreenerSearch :screener="screener3" />
+        <ScreenerSearchOptions :screener="screener3" />
+      </div>
+    </div>
+    <VueScreener :screener="screener3" :style="{ marginBottom: '16px' }" />
     <VueScreenerPagination :screener="screener3" />
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerPagination, useScreener } from '../../index'
+import { VueScreener, ScreenerSearch, ScreenerSearchOptions, VueScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'

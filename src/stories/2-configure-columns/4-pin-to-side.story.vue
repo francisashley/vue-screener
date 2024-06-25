@@ -1,7 +1,13 @@
 <template>
   <Story title="4. Pin to the side" source="-">
-    <VueScreenerHeader :screener="screener" />
-    <VueScreener :screener="screener">
+    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
+      <h3 v-text="screener.title.value" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <div :style="{ display: 'flex', alignItems: 'center', gap: '4px' }">
+        <ScreenerSearch :screener="screener" />
+        <ScreenerSearchOptions :screener="screener" />
+      </div>
+    </div>
+    <VueScreener :screener="screener" :style="{ marginBottom: '16px' }">
       <template #head="props">
         <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
       </template>
@@ -19,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, VueScreenerHeader, VueScreenerPagination, useScreener } from '../../index'
+import { VueScreener, ScreenerSearch, ScreenerSearchOptions, VueScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import Head from '../../components/table/TableHead.vue'
 import Data from '../../components/table/TableData.vue'
