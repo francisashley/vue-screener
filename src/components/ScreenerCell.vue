@@ -40,15 +40,15 @@ defineProps<{
   padding: var(--vs-table-cell__padding);
 
   &--last {
-    border-right: var(--vs-table-cell--last__border-right);
+    border-right: var(--vs-table-cell__border-right--last);
   }
 
   &--pinned {
-    position: var(--vs-table-cell--pinned__position);
-    background: var(--vs-table-cell--pinned__background);
-    right: var(--vs-table-cell--pinned__right);
-    border-left: var(--vs-table-cell--pinned__border-left);
-    margin-left: var(--vs-table-cell--pinned__margin-left);
+    position: var(--vs-table-cell__position--pinned);
+    background: var(--vs-table-cell__background--pinned);
+    right: var(--vs-table-cell__right--pinned);
+    border-left: var(--vs-table-cell__border-left--pinned);
+    margin-left: var(--vs-table-cell__margin-left--pinned);
   }
 }
 

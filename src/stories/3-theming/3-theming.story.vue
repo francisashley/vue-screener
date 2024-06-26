@@ -51,10 +51,10 @@
           '--vs-screener-border-radius': '8px',
           '--vs-screener-border': '1px solid #4b5563',
           '--vs-table-cell__border-right': '1px solid #4b5563',
-          '--vs-table-cell--pinned__border-left': '1px solid #4b5563',
+          '--vs-table-cell__border-left--pinned': '1px solid #4b5563',
           '--vs-table-row__border': '1px solid #4b5563',
           '--vs-table-cell__padding': '8px',
-          '--vs-table-cell--head__bg': '#1f2937',
+          '--vs-table-cell__bg--head': '#1f2937',
           marginBottom: '16px',
         }"
       />

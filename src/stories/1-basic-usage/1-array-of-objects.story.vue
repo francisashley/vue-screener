@@ -15,5 +15,6 @@
 <script lang="ts" setup>
 import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
+
 const screener = useScreener(baseData)
 </script>

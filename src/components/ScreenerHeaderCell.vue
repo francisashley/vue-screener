@@ -43,21 +43,21 @@ const handleClick = () => {
 <style lang="scss">
 .vs-table__cell {
   &--head {
-    font-weight: var(--vs-table-cell--head__font-weight);
-    white-space: var(--vs-table-cell--head__white-space);
-    height: var(--vs-table-cell--head__height);
-    display: var(--vs-table-cell--head__display);
-    align-items: var(--vs-table-cell--head__align-items);
-    gap: var(--vs-table-cell--head__gap);
-    background: var(--vs-table-cell--head__bg);
+    display: inline-flex;
+    align-items: center;
+    font-weight: var(--vs-table-cell__font-weight--head);
+    white-space: var(--vs-table-cell__white-space--head);
+    height: var(--vs-table-cell__height--head);
+    gap: var(--vs-table-cell__gap--head);
+    background: var(--vs-table-cell__bg--head);
   }
 
   &--sortable > div {
-    height: var(--vs-table-cell--sortable__div__height);
-    display: var(--vs-table-cell--sortable__div__display);
-    align-items: var(--vs-table-cell--sortable__div__align-items);
-    gap: var(--vs-table-cell--sortable__div__gap);
-    cursor: var(--vs-table-cell--sortable__div__cursor);
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vs-table-cell__gap--head);
+    cursor: pointer;
   }
 }
 </style>

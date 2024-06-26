@@ -28,7 +28,7 @@ const { direction = null } = defineProps<{
   transition: var(--vs-sort-icon__transition);
 
   &__icon--asc {
-    transform: var(--vs-sort-icon__icon--asc__transform);
+    transform: var(--vs-sort-icon__icon__transform--asc);
   }
 }
 </style>

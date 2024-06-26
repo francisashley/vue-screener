@@ -98,24 +98,17 @@ const tableStyle = computed(() => {
 
   // Vue screener table cell
   --vs-table-cell__border-right: thin solid black;
-  --vs-table-cell--last__border-right: unset;
-  --vs-table-cell--pinned__position: sticky;
-  --vs-table-cell--pinned__background: white;
-  --vs-table-cell--pinned__right: 0;
-  --vs-table-cell--pinned__border-left: thin solid black;
-  --vs-table-cell--pinned__margin-left: -1px;
-  --vs-table-cell--head__font-weight: bold;
-  --vs-table-cell--head__white-space: nowrap;
-  --vs-table-cell--head__height: 24px;
-  --vs-table-cell--head__display: inline-flex;
-  --vs-table-cell--head__align-items: center;
-  --vs-table-cell--head__gap: 4px;
-  --vs-table-cell--head__bg: transparent;
-  --vs-table-cell--sortable__div__height: 24px;
-  --vs-table-cell--sortable__div__display: inline-flex;
-  --vs-table-cell--sortable__div__align-items: center;
-  --vs-table-cell--sortable__div__gap: 4px;
-  --vs-table-cell--sortable__div__cursor: pointer;
+  --vs-table-cell__border-right--last: unset;
+  --vs-table-cell__position--pinned: sticky;
+  --vs-table-cell__background--pinned: white;
+  --vs-table-cell__right--pinned: 0;
+  --vs-table-cell__border-left--pinned: thin solid black;
+  --vs-table-cell__margin-left--pinned: -1px;
+  --vs-table-cell__font-weight--head: bold;
+  --vs-table-cell__white-space--head: nowrap;
+  --vs-table-cell__height--head: 24px;
+  --vs-table-cell__gap--head: 4px;
+  --vs-table-cell__bg--head: transparent;
 
   // Vue screener sort icon
   --vs-sort-icon__height: 1em;
@@ -126,7 +119,7 @@ const tableStyle = computed(() => {
   --vs-sort-icon__cursor: pointer;
   --vs-sort-icon__transform: rotate(0deg);
   --vs-sort-icon__transition: ease-out 100ms;
-  --vs-sort-icon__icon--asc__transform: rotate(-180deg);
+  --vs-sort-icon__icon__transform--asc: rotate(-180deg);
 }
 
 .vs-screener {
