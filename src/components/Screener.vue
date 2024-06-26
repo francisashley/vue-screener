@@ -85,13 +85,11 @@ const tableStyle = computed(() => {
   --vs-screener-color--error: red;
   --vs-screener-border-radius: 8px;
   --vs-screener-overflow: auto;
-
+  --vs-sort-icon-size: 1em;
   --vs-head-color: var(--vs-screener-color);
   --vs-head-bg-color: white;
   --vs-head-padding: 2px 5px;
   --vs-table-cell__padding: 2px 5px;
-
-  // Vue screener table
 
   // Vue screener table row
   --vs-table-row__border: thin solid black;
@@ -99,7 +97,6 @@ const tableStyle = computed(() => {
   // Vue screener table cell
   --vs-table-cell__border-right: thin solid black;
   --vs-table-cell__border-right--last: unset;
-  --vs-table-cell__position--pinned: sticky;
   --vs-table-cell__background--pinned: white;
   --vs-table-cell__right--pinned: 0;
   --vs-table-cell__border-left--pinned: thin solid black;
@@ -109,17 +106,6 @@ const tableStyle = computed(() => {
   --vs-table-cell__height--head: 24px;
   --vs-table-cell__gap--head: 4px;
   --vs-table-cell__bg--head: transparent;
-
-  // Vue screener sort icon
-  --vs-sort-icon__height: 1em;
-  --vs-sort-icon__width: 1em;
-  --vs-sort-icon__display: inline-flex;
-  --vs-sort-icon__align-items: center;
-  --vs-sort-icon__float: right;
-  --vs-sort-icon__cursor: pointer;
-  --vs-sort-icon__transform: rotate(0deg);
-  --vs-sort-icon__transition: ease-out 100ms;
-  --vs-sort-icon__icon__transform--asc: rotate(-180deg);
 }
 
 .vs-screener {

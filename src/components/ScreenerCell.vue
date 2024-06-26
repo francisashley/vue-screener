@@ -44,7 +44,7 @@ defineProps<{
   }
 
   &--pinned {
-    position: var(--vs-table-cell__position--pinned);
+    position: sticky;
     background: var(--vs-table-cell__background--pinned);
     right: var(--vs-table-cell__right--pinned);
     border-left: var(--vs-table-cell__border-left--pinned);

@@ -18,17 +18,16 @@ const { direction = null } = defineProps<{
 
 <style lang="scss">
 .vs-sort-icon {
-  height: var(--vs-sort-icon__height);
-  width: var(--vs-sort-icon__width);
-  display: var(--vs-sort-icon__display);
-  align-items: var(--vs-sort-icon__align-items);
-  float: var(--vs-sort-icon__float);
-  cursor: var(--vs-sort-icon__cursor);
-  transform: var(--vs-sort-icon__transform);
-  transition: var(--vs-sort-icon__transition);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  height: var(--vs-sort-icon-size);
+  width: var(--vs-sort-icon-size);
+  transform: rotate(0deg);
+  transition: ease-out 100ms;
 
   &__icon--asc {
-    transform: var(--vs-sort-icon__icon__transform--asc);
+    transform: rotate(-180deg);
   }
 }
 </style>
