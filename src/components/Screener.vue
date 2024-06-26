@@ -86,6 +86,11 @@ const tableStyle = computed(() => {
   --vs-screener-border-radius: 8px;
   --vs-screener-overflow: auto;
 
+  --vs-head-color: var(--vs-screener-color);
+  --vs-head-bg-color: white;
+  --vs-head-padding: 2px 5px;
+  --vs-table-cell__padding: 2px 5px;
+
   // Vue screener table
 
   // Vue screener table row
@@ -93,7 +98,6 @@ const tableStyle = computed(() => {
 
   // Vue screener table cell
   --vs-table-cell__border-right: thin solid black;
-  --vs-table-cell__padding: 2px 5px;
   --vs-table-cell--last__border-right: unset;
   --vs-table-cell--pinned__position: sticky;
   --vs-table-cell--pinned__background: white;
@@ -132,13 +136,14 @@ const tableStyle = computed(() => {
   border: var(--vs-screener-border);
   border-radius: var(--vs-screener-border-radius);
   overflow: var(--vs-screener-overflow);
+  color: var(--vs-screener-color);
 
   &--bad-data,
   &--no-data {
-    border: var(--vs-screener-border--error);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 96px 0;
 
     p {
       margin: 0;
@@ -146,8 +151,8 @@ const tableStyle = computed(() => {
   }
 
   &--bad-data {
+    border: var(--vs-screener-border--error);
     color: var(--vs-screener-color--error);
-    padding: 96px 0;
   }
 }
 

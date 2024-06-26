@@ -45,14 +45,11 @@
         :screener="screener"
         class="vue-screener"
         :style="{
-          '--vs-screener__border': 'none',
-          '--vs-screener__bg': 'transparent',
-          '--vs-footer__color': 'white',
-          '--vs-header__padding': '1rem 0',
-          '--vs-title__font-size': '18px',
-          '--vs-table__color': 'white',
-          '--vs-table__border-radius': '8px',
-          '--vs-table__border': '1px solid #4b5563',
+          '--vs-screener--border': 'none',
+          '--vs-screener--bg-color': 'transparent',
+          '--vs-screener-color': 'white',
+          '--vs-screener-border-radius': '8px',
+          '--vs-screener-border': '1px solid #4b5563',
           '--vs-table-cell__border-right': '1px solid #4b5563',
           '--vs-table-cell--pinned__border-left': '1px solid #4b5563',
           '--vs-table-row__border': '1px solid #4b5563',
