@@ -45,18 +45,18 @@ const handleClick = () => {
   &--head {
     display: inline-flex;
     align-items: center;
-    font-weight: var(--vs-table-cell__font-weight--head);
-    white-space: var(--vs-table-cell__white-space--head);
-    height: var(--vs-table-cell__height--head);
-    gap: var(--vs-table-cell__gap--head);
-    background: var(--vs-table-cell__bg--head);
+    font-weight: var(--vs-head-font-weight);
+    white-space: var(--vs-head-white-space);
+    height: var(--vs-head-height);
+    gap: var(--vs-head-gap);
+    background: var(--vs-head-bg-color);
   }
 
   &--sortable > div {
     height: 100%;
     display: inline-flex;
     align-items: center;
-    gap: var(--vs-table-cell__gap--head);
+    gap: var(--vs-head-gap);
     cursor: pointer;
   }
 }

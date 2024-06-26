@@ -38,6 +38,6 @@ const rowStyle = computed(() => {
 
 <style lang="scss">
 .vs-table__row.vs-table__row--item {
-  border-top: var(--vs-table-row__border);
+  border-top: var(--vs-row-top-border);
 }
 </style>

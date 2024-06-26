@@ -36,19 +36,19 @@ defineProps<{
 
 <style lang="scss">
 .vs-table__cell {
-  border-right: var(--vs-table-cell__border-right);
-  padding: var(--vs-table-cell__padding);
+  border-right: var(--vs-cell-border-right);
+  padding: var(--vs-cell-padding);
 
   &--last {
-    border-right: var(--vs-table-cell__border-right--last);
+    border-right: unset;
   }
 
   &--pinned {
     position: sticky;
-    background: var(--vs-table-cell__background--pinned);
-    right: var(--vs-table-cell__right--pinned);
+    background: var(--vs-cell-bg-color--pinned);
+    right: 0;
     border-left: var(--vs-table-cell__border-left--pinned);
-    margin-left: var(--vs-table-cell__margin-left--pinned);
+    margin-left: -1px;
   }
 }
 
