@@ -39,6 +39,7 @@ defineProps<{
   border-right: var(--vs-cell-border-right);
   padding: var(--vs-cell-padding);
   background: var(--vs-cell-bg-color);
+  white-space: var(--vs-cell-white-space);
 
   &--last {
     border-right: unset;

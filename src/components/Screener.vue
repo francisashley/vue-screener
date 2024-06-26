@@ -93,6 +93,7 @@ const tableStyle = computed(() => {
   --vs-cell-padding: 2px 5px;
   --vs-cell-border-right: thin solid var(--vs-border-color);
   --vs-cell-border-left--pinned: thin solid var(--vs-border-color);
+  --vs-cell-white-space: inherit;
 
   // Header Cell
   --vs-header-cell-color: var(--vs-cell-color);
@@ -101,12 +102,15 @@ const tableStyle = computed(() => {
   --vs-header-cell-gap: 4px;
   --vs-header-cell-white-space: nowrap;
   --vs-header-cell-font-weight: bold;
+  --vs-header-cell-font-size: inherit;
+  --vs-header-cell-text-transform: inherit;
   --vs-header-cell-height: 24px;
-  --vs-header-cell-bg-color: var(--vs-bg-color);
   --vs-sort-icon-size: 1em;
 
   // Row
   --vs-row-top-border: thin solid var(--vs-border-color);
+  --vs-row-background: transparent;
+  --vs-row-background--hover: transparent;
 }
 
 .vs-screener {

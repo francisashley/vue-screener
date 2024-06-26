@@ -1,5 +1,5 @@
 <template>
-  <Story title="1. Theming" source="-">
+  <Story title="1. Space" source="-">
     <div :style="{ 'background-color': '#101827', padding: '16px', minHeight: 'calc(100vh - 16px)' }">
       <div
         :style="{
@@ -10,7 +10,7 @@
           color: 'white',
         }"
       >
-        <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+        <h3 v-text="'Space theme'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
         <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
           <ScreenerSearch
             :screener="screener"
@@ -18,7 +18,6 @@
               '--vs-search-input-border': 'thin solid #374151',
               '--vs-search-input-bg-color': '#1f2937',
               '--vs-search-input-color': 'white',
-              '--vs-search-input-bg-color--focus': 'var(--vs-search-input-bg-color)',
             }"
           />
           <ScreenerSearchOptions

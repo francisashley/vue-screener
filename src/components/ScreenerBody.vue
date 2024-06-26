@@ -1,7 +1,9 @@
 <template>
   <component
     :is="props.screener.rowConfig.value.link ? resolveComponent('router-link') : 'div'"
-    :href="props.screener.rowConfig.value.link ? props.screener.rowConfig.value.getLink?.(item) ?? '#' : undefined"
+    :to="props.screener.rowConfig.value.getLink?.(item)"
+    :href="props.screener.rowConfig.value.getLink?.(item)"
+    :external="true"
     :style="rowStyle"
     v-for="(item, i) in screener.items.value"
     :key="i"
@@ -44,7 +46,17 @@ const rowStyle = computed(() => {
 </script>
 
 <style lang="scss">
-.vs-table__row.vs-table__row--item {
-  border-top: var(--vs-row-top-border);
+.vs-table__row {
+  background: var(--vs-row-background);
+  color: var(--vs-text-color);
+  text-decoration: unset;
+
+  &--item {
+    border-top: var(--vs-row-top-border);
+  }
+
+  &--item:hover {
+    background: var(--vs-row-background--hover);
+  }
 }
 </style>

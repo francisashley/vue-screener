@@ -192,6 +192,7 @@ const handleChangePerPage = (event: Event): void => {
   --vs-text-color: black;
   --vs-side-width: 150px;
   --vs-nav-gap: 8px;
+  --vs-font-size: inherit;
 
   --vs-button-padding: 3px 8px;
   --vs-button-color: black;
@@ -220,6 +221,7 @@ const handleChangePerPage = (event: Event): void => {
   white-space: nowrap;
   color: var(--vs-text-color);
   gap: var(--vs-nav-gap);
+  font-size: var(--vs-font-size);
 
   &__side {
     display: inline-flex;

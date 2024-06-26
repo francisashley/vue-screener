@@ -46,10 +46,13 @@ const handleClick = () => {
     display: inline-flex;
     align-items: center;
     font-weight: var(--vs-header-cell-font-weight);
+    font-size: var(--vs-header-cell-font-size);
+    text-transform: var(--vs-header-cell-text-transform);
     white-space: var(--vs-header-cell-white-space);
     height: var(--vs-header-cell-height);
     gap: var(--vs-header-cell-gap);
     background: var(--vs-header-cell-bg-color);
+    padding: var(--vs-header-cell-padding);
   }
 
   &--sortable > div {

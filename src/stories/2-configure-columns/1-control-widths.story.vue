@@ -1,7 +1,7 @@
 <template>
   <Story title="1. Control widths" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
-      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener1" />
         <ScreenerSearchOptions :screener="screener1" />
@@ -11,7 +11,7 @@
     <ScreenerPagination :screener="screener1" />
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
-      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener2" />
         <ScreenerSearchOptions :screener="screener2" />
@@ -21,7 +21,7 @@
     <ScreenerPagination :screener="screener2" />
     <br />
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
-      <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
+      <h3 v-text="'Results'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener3" />
         <ScreenerSearchOptions :screener="screener3" />

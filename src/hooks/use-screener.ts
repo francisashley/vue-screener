@@ -12,7 +12,7 @@ type ScreenerOptions = {
   config?: Config
   pick?: string[]
   omit?: string[]
-  rows?: {
+  rowConfig?: {
     link?: boolean
     getLink?: (item: Item) => string
   }
@@ -34,8 +34,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     link?: boolean
     getLink?: (item: Item) => string
   }>({
-    link: options.rows?.link ?? false,
-    getLink: options.rows?.getLink,
+    link: options.rowConfig?.link ?? false,
+    getLink: options.rowConfig?.getLink,
   })
 
   // Set default state

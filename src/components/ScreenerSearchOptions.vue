@@ -55,6 +55,8 @@ const toggleOption = (option: SearchQueryOption) => {
   --vs-search-options-container-border: thin solid #767676;
   --vs-search-options-container-border-radius: 4px;
   --vs-search-options-container-bg-color: white;
+  --vs-search-options-container-height: 24px;
+  --vs-search-option-svg-size: 16px;
 
   display: flex;
   align-items: center;
@@ -62,7 +64,7 @@ const toggleOption = (option: SearchQueryOption) => {
   border-radius: var(--vs-search-options-container-border-radius);
   background-color: var(--vs-search-options-container-bg-color);
   gap: 1px;
-  height: 24px;
+  height: var(--vs-search-options-container-height);
   padding: 1px;
   box-sizing: border-box;
 
@@ -94,8 +96,8 @@ const toggleOption = (option: SearchQueryOption) => {
   padding: 0;
 
   & > svg {
-    height: 16px;
-    width: 16px;
+    height: var(--vs-search-option-svg-size);
+    width: var(--vs-search-option-svg-size);
   }
 
   &:hover {
