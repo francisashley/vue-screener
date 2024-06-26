@@ -1,5 +1,5 @@
 <template>
-  <TableCell
+  <ScreenerCell
     :value="column.field"
     :is-first="column.isFirst"
     :is-last="column.isLast"
@@ -7,24 +7,24 @@
     :is-pinned="column.isPinned"
     type="string"
     :class="[
-      'vs-table__cell--is-header',
-      column.isSortable && 'vs-table__cell--is-sortable',
-      column.isPinned && 'vs-table__cell--is-pinned',
+      'vs-table__cell--head',
+      column.isSortable && 'vs-table__cell--sortable',
+      column.isPinned && 'vs-table__cell--pinned',
     ]"
   >
-    <div @click="handleClickHeader">
-      <SortSelector :sort-direction="sortDirection" v-if="column.isSortable" />
+    <div @click="handleClick">
+      <SortIcon :direction="sortDirection" v-if="column.isSortable && sortDirection" />
       <slot>
         <span v-html="column.label" />
       </slot>
     </div>
-  </TableCell>
+  </ScreenerCell>
 </template>
 
 <script lang="ts" setup>
 import { Column } from '@/interfaces/screener'
-import SortSelector from '../stuff/SortSelector.vue'
-import TableCell from './TableCell.vue'
+import SortIcon from './icons/SortIcon.vue'
+import ScreenerCell from './ScreenerCell.vue'
 
 const props = defineProps<{
   column: Column
@@ -33,7 +33,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['on-sort'])
 
-const handleClickHeader = () => {
+const handleClick = () => {
   if (props.column.isSortable) {
     emit('on-sort', props.column.field)
   }
@@ -42,19 +42,21 @@ const handleClickHeader = () => {
 
 <style lang="scss">
 .vs-table__cell {
-  &--is-header {
-    font-weight: bold;
-    white-space: nowrap;
-    height: 24px;
+  &--head {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    font-weight: var(--vs-header-cell-font-weight);
+    white-space: var(--vs-header-cell-white-space);
+    height: var(--vs-header-cell-height);
+    gap: var(--vs-header-cell-gap);
+    background: var(--vs-header-cell-bg-color);
   }
-  &--is-sortable > div {
-    height: 24px;
+
+  &--sortable > div {
+    height: 100%;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: var(--vs-header-cell-gap);
     cursor: pointer;
   }
 }

@@ -1,15 +1,13 @@
 <template>
   <div class="vs-pagination">
-    <div class="vs-pagination__info">
+    <div class="vs-pagination__side vs-pagination__side--left">
       <template v-if="!screener.totalItems.value">Showing 0 results</template>
       <template v-else>
-        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }}
-        of
-        {{ screener.totalItems.value }}
+        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.totalItems.value }}
       </template>
     </div>
 
-    <ul class="vs-pagination__nav">
+    <div class="vs-pagination__nav">
       <button
         :disabled="!canNavigateFirst"
         @click="handleClickFirst"
@@ -66,9 +64,9 @@
       >
         Last
       </button>
-    </ul>
+    </div>
 
-    <div class="vs-pagination__per-page">
+    <div class="vs-pagination__side vs-pagination__side--right">
       <input
         type="number"
         :value="screener.perPage.value"
@@ -191,40 +189,89 @@ const handleChangePerPage = (event: Event): void => {
 
 <style lang="scss">
 .vs-pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  white-space: nowrap;
-  color: #000;
+  --vs-text-color: black;
+  --vs-side-width: 150px;
+  --vs-nav-gap: 8px;
 
-  &__info {
-    white-space: nowrap;
-    width: 150px;
+  --vs-button-padding: 3px 8px;
+  --vs-button-color: black;
+  --vs-button-color--active: blue;
+  --vs-button-bg-color: #efefef;
+  --vs-button-bg-color--hover: #e5e5e5;
+  --vs-button-bg-color--active: var(--vs-button-bg-color);
+  --vs-button-border: thin solid #767676;
+  --vs-button-border--hover: thin solid #4f4f4f;
+  --vs-button-border--active: thin solid #8c8c8c;
+  --vs-button-border-radius: 4px;
+
+  --vs-text-input-width: 100px;
+  --vs-text-input-height: 20px;
+  --vs-text-input-border-radius: 4px;
+  --vs-text-input-border: thin solid #767676;
+  --vs-text-input-border--focus: var(--vs-text-input-border);
+  --vs-text-input-color: black;
+  --vs-text-input-color--focus: var(--vs-text-input-color);
+  --vs-text-input-bg-color: white;
+  --vs-text-input-bg-color--focus: var(--vs-text-input-bg-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  color: var(--vs-text-color);
+  gap: var(--vs-nav-gap);
+
+  &__side {
+    display: inline-flex;
+    width: var(--vs-side-width);
+
+    &--right {
+      justify-content: flex-end;
+    }
   }
 
   &__nav {
     display: flex;
-    padding: 0 8px !important;
-    margin: 0 !important;
-    list-style-type: none;
+    gap: var(--vs-nav-gap);
   }
 
   &__button {
-    margin: 0 10px 0 0 !important;
-  }
+    padding: var(--vs-button-padding);
+    color: var(--vs-button-color);
+    background: var(--vs-button-bg-color);
+    border: var(--vs-button-border);
+    border-radius: var(--vs-button-border-radius);
 
-  &__button--active {
-    color: blue;
-  }
+    &--active {
+      color: var(--vs-button-color--active);
+      background: var(--vs-button-bg-color--active);
+      border: var(--vs-button-border--active);
+    }
 
-  &__per-page {
-    width: 150px;
-    display: inline-flex;
-    justify-content: flex-end;
+    &:not(#{&}--disabled):hover {
+      background: var(--vs-button-bg-color--hover);
+      border: var(--vs-button-border--hover);
+    }
+
+    &--disabled {
+      opacity: 0.5;
+    }
   }
 
   &__per-page-input {
-    width: 60px;
+    outline: none;
+    width: var(--vs-text-input-width);
+    height: var(--vs-text-input-height);
+    border: var(--vs-text-input-border);
+    border-radius: var(--vs-text-input-border-radius);
+    color: var(--vs-text-input-color);
+    background: var(--vs-text-input-bg-color);
+
+    &:focus {
+      border: var(--vs-text-input-border--focus);
+      color: var(--vs-text-input-color--focus);
+      background: var(--vs-text-input-bg-color--focus);
+    }
   }
 }
 </style>

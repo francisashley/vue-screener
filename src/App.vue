@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <VueScreener />
+    <Screener />
   </div>
 </template>
 
 <script setup lang="ts">
-import VueScreener from './components/VueScreener.vue'
+import Screener from './components/Screener.vue'
 </script>
 
 <style scoped></style>

@@ -1,19 +1,14 @@
-import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
+import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
-  title: Ref<string>
   searchQuery: Ref<string>
   highlightQuery: Ref<string>
   currentPage: Ref<number>
   perPage: Ref<number>
-  renderFormat: Ref<'table' | 'raw'>
   searchOptions: Ref<SearchQueryOption[]>
   sortField: Ref<string | null>
   sortDirection: Ref<'asc' | 'desc'>
-  shouldUseRegEx: ComputedRef<boolean>
-  shouldMatchCase: ComputedRef<boolean>
-  shouldMatchWord: ComputedRef<boolean>
   data: Ref<unknown[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
@@ -23,6 +18,10 @@ export type Screener = {
   config: Ref<Config>
   pick: Ref<string[]>
   omit: Ref<string[]>
+  rowConfig: Ref<{
+    link?: boolean
+    getLink?: (item: any) => string
+  }>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void

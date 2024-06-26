@@ -2,10 +2,10 @@
   <div
     :class="[
       'vs-table__cell',
-      isFirst && 'vs-table__cell--is-first',
-      isLast && 'vs-table__cell--is-last',
+      isFirst && 'vs-table__cell--first',
+      isLast && 'vs-table__cell--last',
       hasValue && 'vs-table__cell--hasValue',
-      isPinned && 'vs-table__cell--is-pinned',
+      isPinned && 'vs-table__cell--pinned',
       type === 'string' && 'vs-table__cell--string',
       type === 'number' && 'vs-table__cell--number',
       type === 'boolean' && 'vs-table__cell--boolean',
@@ -35,33 +35,30 @@ defineProps<{
 </script>
 
 <style lang="scss">
-.vs-table {
-  color: black;
+.vs-table__cell {
+  border-right: var(--vs-cell-border-right);
+  padding: var(--vs-cell-padding);
+  background: var(--vs-cell-bg-color);
 
-  &__cell {
-    border-right: thin solid black;
-    padding: 2px 5px;
-  }
-
-  &__cell--is-last {
+  &--last {
     border-right: unset;
   }
 
-  &__cell--is-pinned {
+  &--pinned {
     position: sticky;
-    background: white;
+    background: var(--vs-cell-bg-color--pinned);
     right: 0;
-    border-left: thin solid black;
+    border-left: var(--vs-cell-border-left--pinned);
     margin-left: -1px;
   }
 }
 
-.vs-main--is-scrollable .vs-table__cell--is-pinned {
+.vs-screener--scrollable .vs-table__cell--pinned {
   box-shadow: -3px 0px 2px rgba(0, 0, 0, 0.11);
   transition: box-shadow 300ms ease-out;
 }
 
-.vs-main--is-scrolled-end .vs-table__cell--is-pinned {
+.vs-screener--scrolled-end .vs-table__cell--pinned {
   box-shadow: 0 0px 0px rgba(0, 0, 0, 0) !important;
 }
 </style>
