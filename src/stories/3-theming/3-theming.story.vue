@@ -45,16 +45,12 @@
         :screener="screener"
         class="vue-screener"
         :style="{
-          '--vs-container--border': 'none',
-          '--vs-container--bg-color': 'transparent',
-          '--vs-container-color': 'white',
-          '--vs-container-border-radius': '8px',
-          '--vs-container-border': '1px solid #4b5563',
-          '--vs-cell-border-right': '1px solid #4b5563',
-          '--vs-cell-border-left--pinned': '1px solid #4b5563',
-          '--vs-row-top-border': '1px solid #4b5563',
-          '--vs-table-cell__padding': '8px',
-          '--vs-head-bg-color': '#1f2937',
+          '--vs-bg-color': 'transparent',
+          '--vs-border-color': '#4b5563',
+          '--vs-text-color': 'white',
+          '--vs-border-radius': '8px',
+          '--vs-cell-padding': '4px 8px',
+          '--vs-header-cell-bg-color': '#1f2937',
           marginBottom: '16px',
         }"
       />

@@ -1,6 +1,6 @@
 <template>
   <Story title="2. Control labels" source="-">
-    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
+    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
       <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener1" />
@@ -10,7 +10,7 @@
     <Screener :screener="screener1" :style="{ marginBottom: '16px' }" />
     <ScreenerPagination :screener="screener1" />
     <br />
-    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
+    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
       <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener2" />
@@ -20,7 +20,7 @@
     <Screener :screener="screener2" :style="{ marginBottom: '16px' }" />
     <ScreenerPagination :screener="screener2" />
     <br />
-    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
+    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
       <h3 v-text="'Results'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
         <ScreenerSearch :screener="screener3" />

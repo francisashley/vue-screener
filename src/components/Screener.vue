@@ -74,49 +74,49 @@ const tableStyle = computed(() => {
 
 <style lang="scss">
 .vs-screener {
-  // Container
-  --vs-container-font-size: 14px;
-  --vs-container-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+  --vs-text-color: black;
+  --vs-text-color--error: red;
+  --vs-bg-color: white;
+  --vs-border-color: #767676;
+  --vs-border-radius: 4px;
+  --vs-font-size: 14px;
+  --vs-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  --vs-container-border: thin solid black;
-  --vs-container-border--error: thin solid red;
-  --vs-container-color: black;
-  --vs-container-bg-color: white;
-  --vs-container-color--error: red;
-  --vs-container-border-radius: 8px;
-  --vs-container-overflow: auto;
+  --vs-border: thin solid var(--vs-border-color);
+  --vs-border--error: thin solid red;
+  --vs-overflow: auto;
 
   // Base Cell styles
-  --vs-cell-color: var(--vs-container-color);
-  --vs-cell-bg-color: var(--vs-container-bg-color);
-  --vs-cell-bg-color--pinned: var(--vs-container-bg-color);
+  --vs-cell-color: var(--vs-text-color);
+  --vs-cell-bg-color: var(--vs-bg-color);
+  --vs-cell-bg-color--pinned: var(--vs-bg-color);
   --vs-cell-padding: 2px 5px;
-  --vs-cell-border-right: thin solid black;
-  --vs-cell-border-left--pinned: thin solid black;
+  --vs-cell-border-right: thin solid var(--vs-border-color);
+  --vs-cell-border-left--pinned: thin solid var(--vs-border-color);
 
   // Header Cell
+  --vs-header-cell-color: var(--vs-cell-color);
+  --vs-header-cell-bg-color: var(--vs-bg-color);
+  --vs-header-cell-padding: var(--vs-cell-padding);
+  --vs-header-cell-gap: 4px;
+  --vs-header-cell-white-space: nowrap;
+  --vs-header-cell-font-weight: bold;
+  --vs-header-cell-height: 24px;
+  --vs-header-cell-bg-color: var(--vs-bg-color);
   --vs-sort-icon-size: 1em;
-  --vs-head-color: var(--vs-cell-color);
-  --vs-head-bg-color: var(--vs-cell-bg-color);
-  --vs-head-padding: var(--vs-cell-padding);
-  --vs-head-gap: 4px;
-  --vs-head-white-space: nowrap;
-  --vs-head-font-weight: bold;
-  --vs-head-height: 24px;
-  --vs-head-bg-color: transparent;
 
   // Row
-  --vs-row-top-border: thin solid black;
+  --vs-row-top-border: thin solid var(--vs-border-color);
 }
 
 .vs-screener {
   overflow: hidden;
-  font-family: var(--vs-container-font-family);
-  font-size: var(--vs-container-font-size);
-  border: var(--vs-container-border);
-  border-radius: var(--vs-container-border-radius);
-  overflow: var(--vs-container-overflow);
-  color: var(--vs-container-color);
+  font-family: var(--vs-font-family);
+  font-size: var(--vs-font-size);
+  border: var(--vs-border);
+  border-radius: var(--vs-border-radius);
+  overflow: var(--vs-overflow);
+  color: var(--vs-text-color);
 
   &--bad-data,
   &--no-data {
@@ -131,8 +131,8 @@ const tableStyle = computed(() => {
   }
 
   &--bad-data {
-    border: var(--vs-container-border--error);
-    color: var(--vs-container-color--error);
+    border: var(--vs-border--error);
+    color: var(--vs-text-color--error);
   }
 }
 

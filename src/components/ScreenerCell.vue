@@ -38,6 +38,7 @@ defineProps<{
 .vs-table__cell {
   border-right: var(--vs-cell-border-right);
   padding: var(--vs-cell-padding);
+  background: var(--vs-cell-bg-color);
 
   &--last {
     border-right: unset;
@@ -47,7 +48,7 @@ defineProps<{
     position: sticky;
     background: var(--vs-cell-bg-color--pinned);
     right: 0;
-    border-left: var(--vs-table-cell__border-left--pinned);
+    border-left: var(--vs-cell-border-left--pinned);
     margin-left: -1px;
   }
 }
