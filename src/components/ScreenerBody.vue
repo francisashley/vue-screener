@@ -1,5 +1,12 @@
 <template>
-  <div :style="rowStyle" v-for="(item, i) in screener.items.value" :key="i" class="vs-table__row vs-table__row--item">
+  <component
+    :is="props.screener.rowConfig.value.link ? resolveComponent('router-link') : 'div'"
+    :href="props.screener.rowConfig.value.link ? props.screener.rowConfig.value.getLink?.(item) ?? '#' : undefined"
+    :style="rowStyle"
+    v-for="(item, i) in screener.items.value"
+    :key="i"
+    class="vs-table__row vs-table__row--item"
+  >
     <template v-if="item">
       <slot
         v-for="(column, j) in screener.columns.value"
@@ -14,11 +21,11 @@
       </slot>
     </template>
     <template v-else>&nbsp;</template>
-  </div>
+  </component>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, resolveComponent } from 'vue'
 import { highlightText } from '../utils/text.utils'
 import { Screener } from '../interfaces/screener'
 import ScreenerBodyCell from './ScreenerBodyCell.vue'

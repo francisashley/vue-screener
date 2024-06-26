@@ -18,6 +18,10 @@ export type Screener = {
   config: Ref<Config>
   pick: Ref<string[]>
   omit: Ref<string[]>
+  rowConfig: Ref<{
+    link?: boolean
+    getLink?: (item: any) => string
+  }>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void

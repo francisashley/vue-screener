@@ -1,5 +1,5 @@
 <template>
-  <Story title="6. Custom title" source="-">
+  <Story title="6. Link rows" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }">
       <h3 v-text="'Custom title'" :style="{ fontWeight: 600, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
@@ -15,5 +15,11 @@
 <script lang="ts" setup>
 import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
-const screener = useScreener(baseData)
+
+const screener = useScreener(baseData, {
+  rows: {
+    link: true,
+    getLink: () => '#',
+  },
+})
 </script>

@@ -12,6 +12,10 @@ type ScreenerOptions = {
   config?: Config
   pick?: string[]
   omit?: string[]
+  rows?: {
+    link?: boolean
+    getLink?: (item: Item) => string
+  }
 }
 export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
   // State
@@ -26,6 +30,13 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const config = ref<Config>({})
   const pick = ref<string[]>([])
   const omit = ref<string[]>([])
+  const rowConfig = ref<{
+    link?: boolean
+    getLink?: (item: Item) => string
+  }>({
+    link: options.rows?.link ?? false,
+    getLink: options.rows?.getLink,
+  })
 
   // Set default state
   config.value = options.config ?? config.value
@@ -152,7 +163,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     pick,
     omit,
     columns,
-
+    rowConfig,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query
