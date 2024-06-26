@@ -1,5 +1,5 @@
 <template>
-  <Story title="1. Space" source="-">
+  <Story title="1. Space theme" source="-">
     <div :style="{ 'background-color': '#101827', padding: '16px', minHeight: 'calc(100vh - 16px)' }">
       <div
         :style="{
@@ -15,27 +15,27 @@
           <ScreenerSearch
             :screener="screener"
             :style="{
-              '--vs-search-input-border': 'thin solid #374151',
-              '--vs-search-input-bg-color': '#1f2937',
-              '--vs-search-input-color': 'white',
+              '--vs-border': 'thin solid #374151',
+              '--vs-bg-color': '#1f2937',
+              '--vs-color': 'white',
             }"
           />
           <ScreenerSearchOptions
             :screener="screener"
             :style="{
-              '--vs-search-options-container-border': 'thin solid #374151',
-              '--vs-search-options-container-bg-color': '#1f2937',
-              '--vs-search-option-background': '#1f2937',
-              '--vs-search-option-background--hover': '#374151',
-              '--vs-search-option-background--active': '#3e51b5',
-              '--vs-search-option-color': 'white',
-              '--vs-search-option-cursor': 'pointer',
-              '--vs-search-option-border-radius': '4px',
-              '--vs-search-option-height': '20px',
-              '--vs-search-option-width': '20px',
-              '--vs-search-option-margin-bottom': '8px',
-              '--vs-search-option-color--active': '#fff',
-              '--vs-search-option-color--hover': '#fff',
+              '--vs-border': 'thin solid #374151',
+              '--vs-bg-color': '#1f2937',
+              '--vs-option-bg': '#1f2937',
+              '--vs-option-bg--hover': '#374151',
+              '--vs-option-bg--active': '#3e51b5',
+              '--vs-option-color': 'white',
+              '--vs-option-cursor': 'pointer',
+              '--vs-option-border-radius': '4px',
+              '--vs-option-height': '20px',
+              '--vs-option-width': '20px',
+              '--vs-option-margin-bottom': '8px',
+              '--vs-option-color--active': '#fff',
+              '--vs-option-color--hover': '#fff',
             }"
           />
         </div>

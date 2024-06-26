@@ -69,42 +69,42 @@ const onInput = (event: Event) => {
 
 <style lang="scss">
 .vs-search {
-  --vs-search-input-padding: 0 4px;
-  --vs-search-input-font-size: 14px !important;
-  --vs-search-input-font-weight: normal !important;
-  --vs-search-input-outline: none;
-  --vs-search-input-width: 200px;
-  --vs-search-input-height: 24px;
-  --vs-search-input-border-radius: 4px;
-  --vs-search-input-border: thin solid #767676;
-  --vs-search-input-border--focus: var(--vs-search-input-border);
-  --vs-search-input-border--error: 1px solid red;
-  --vs-search-input-color: black;
-  --vs-search-input-color--focus: var(--vs-search-input-color);
-  --vs-search-input-color--error: red;
-  --vs-search-input-bg-color: white;
-  --vs-search-input-bg-color--focus: var(--vs-search-input-bg-color);
+  --vs-padding: 0 4px;
+  --vs-font-size: 14px !important;
+  --vs-font-weight: normal !important;
+  --vs-outline: none;
+  --vs-width: 200px;
+  --vs-height: 24px;
+  --vs-border-radius: 4px;
+  --vs-border: thin solid #767676;
+  --vs-border--focus: var(--vs-border);
+  --vs-border--error: 1px solid red;
+  --vs-color: black;
+  --vs-color--focus: var(--vs-color);
+  --vs-color--error: red;
+  --vs-bg-color: white;
+  --vs-bg-color--focus: var(--vs-bg-color);
 
   box-sizing: border-box;
-  width: var(--vs-search-input-width);
-  padding: var(--vs-search-input-padding);
-  font-size: var(--vs-search-input-font-size);
-  font-weight: var(--vs-search-input-font-weight);
-  height: var(--vs-search-input-height);
-  border: var(--vs-search-input-border);
-  border-radius: var(--vs-search-input-border-radius);
-  outline: var(--vs-search-input-outline);
-  color: var(--vs-search-input-color);
-  background: var(--vs-search-input-bg-color);
+  width: var(--vs-width);
+  padding: var(--vs-padding);
+  font-size: var(--vs-font-size);
+  font-weight: var(--vs-font-weight);
+  height: var(--vs-height);
+  border: var(--vs-border);
+  border-radius: var(--vs-border-radius);
+  outline: var(--vs-outline);
+  color: var(--vs-color);
+  background: var(--vs-bg-color);
 
   &:focus {
-    border: var(--vs-search-input-border--focus);
-    background: var(--vs-search-input-bg-color--focus);
+    border: var(--vs-border--focus);
+    background: var(--vs-bg-color--focus);
   }
 
   &--error {
-    border: var(--vs-search-input-border--error);
-    outline-color: var(--vs-search-input-outline-color--error);
+    border: var(--vs-border--error);
+    outline-color: var(--vs-outline-color--error);
   }
 }
 </style>

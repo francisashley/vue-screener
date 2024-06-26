@@ -1,5 +1,5 @@
 <template>
-  <Story title="2. Cavern" source="-">
+  <Story title="2. Cavern theme" source="-">
     <div :style="{ 'background-color': '#171717', minHeight: 'calc(100vh - 16px)' }">
       <div
         :style="{
@@ -15,32 +15,31 @@
           <ScreenerSearch
             :screener="screener"
             :style="{
-              '--vs-search-input-border': 'thin solid #2a2b2b',
-              '--vs-search-input-bg-color': '#171717',
-              '--vs-search-input-color': 'white',
-              '--vs-search-input-bg-color--focus': 'var(--vs-search-input-bg-color)',
-              '--vs-search-input-height': '30px',
+              '--vs-border': 'thin solid #2a2b2b',
+              '--vs-bg-color': '#171717',
+              '--vs-color': 'white',
+              '--vs-height': '30px',
             }"
           />
           <ScreenerSearchOptions
             :screener="screener"
             :style="{
-              '--vs-search-options-container-border': 'thin solid #2a2b2b',
-              '--vs-search-options-container-bg-color': '#171717',
-              '--vs-search-option-background': 'transparent',
-              '--vs-search-option-background--hover': '#2a2b2b',
-              '--vs-search-option-background--active': '#3e51b5',
-              '--vs-search-option-color': 'white',
-              '--vs-search-option-cursor': 'pointer',
-              '--vs-search-option-border-radius': '4px',
-              '--vs-search-option-height': '26px',
-              '--vs-search-option-width': '26px',
-              '--vs-search-options-container-height': '30px',
-              '--vs-search-options-container-width': '30px',
-              '--vs-search-option-margin-bottom': '8px',
-              '--vs-search-option-color--active': '#fff',
-              '--vs-search-option-color--hover': '#fff',
-              '--vs-search-option-svg-size': '18px',
+              '--vs-border': 'thin solid #2a2b2b',
+              '--vs-bg-color': '#171717',
+              '--vs-height': '30px',
+              '--vs-width': '30px',
+              '--vs-icon-size': '18px',
+              '--vs-option-bg': 'transparent',
+              '--vs-option-bg--hover': '#2a2b2b',
+              '--vs-option-bg--active': '#3e51b5',
+              '--vs-option-color': 'white',
+              '--vs-option-cursor': 'pointer',
+              '--vs-option-border-radius': '4px',
+              '--vs-option-height': '26px',
+              '--vs-option-width': '26px',
+              '--vs-option-margin-bottom': '8px',
+              '--vs-option-color--active': '#fff',
+              '--vs-option-color--hover': '#fff',
             }"
           />
         </div>
