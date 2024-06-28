@@ -9,6 +9,7 @@ import { highlightText } from '../utils/text.utils'
 type ScreenerOptions = {
   defaultCurrentPage?: number
   defaultPerPage?: number
+  defaultSort?: { field: string; direction: 'asc' | 'desc' }
   config?: Config
   pick?: string[]
   omit?: string[]
@@ -42,6 +43,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   config.value = options.config ?? config.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
+  sortField.value = options.defaultSort?.field ?? sortField.value
+  sortDirection.value = options.defaultSort?.direction ?? sortDirection.value
   data.value = defaultData ?? data.value
   pick.value = options.pick ?? pick.value
   omit.value = options.omit ?? omit.value
@@ -130,6 +133,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
         isLast: i === fields.length - 1,
         isPinned: false,
         isSortable: true,
+        defaultSortDirection: inputColumn?.defaultSortDirection ?? 'desc',
         ...inputColumn,
         width,
       }
@@ -173,9 +177,15 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
         }
       },
       sort: (field: string) => {
-        if (sortField.value === field) {
-          sortDirection.value = sortDirection.value === 'desc' ? 'asc' : 'desc'
-        }
+        const fieldConfig = columns.value.find((column) => column.field === field)
+
+        sortDirection.value =
+          sortField.value === field
+            ? sortDirection.value === 'desc'
+              ? 'asc'
+              : 'desc'
+            : fieldConfig?.defaultSortDirection || sortDirection.value
+
         sortField.value = field
       },
     },

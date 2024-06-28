@@ -1,5 +1,5 @@
 <template>
-  <Story title="6. Link rows" source="-">
+  <Story title="7. Sorting / Default sort" source="-">
     <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
       <h3 v-text="'Custom title'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
       <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
@@ -17,9 +17,6 @@ import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, us
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {
-  rowConfig: {
-    link: true,
-    getLink: () => '#',
-  },
+  defaultSort: { field: 'first_name', direction: 'desc' },
 })
 </script>

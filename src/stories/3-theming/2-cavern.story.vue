@@ -101,5 +101,9 @@ const screener = useScreener(baseData, {
     link: true,
     getLink: () => '#',
   },
+  config: {
+    id: { width: 'min-content' },
+    first_name: { width: 'min-content' },
+  },
 })
 </script>

@@ -36,12 +36,13 @@ export type Column = {
   isLast: boolean // Flag indicating if it is the last column.
   isPinned: boolean // Flag indicating if the field is pinned.
   isSortable: boolean // Flag indicating if the field is sortable.
+  defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
   format?: (item: string | number) => string // Format the value of the field.
 }
 
 export type Config = Record<
   string | number,
-  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'label' | 'format'>>
+  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'defaultSortDirection' | 'label' | 'format'>>
 >
 
 export type Item = {
