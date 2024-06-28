@@ -105,6 +105,8 @@ const tableStyle = computed(() => {
   --vs-header-cell-font-size: inherit;
   --vs-header-cell-text-transform: inherit;
   --vs-header-cell-height: 24px;
+  --vs-header-cell-color: inherit;
+  --vs-header-cell-color--sorting: inherit;
   --vs-sort-icon-size: 1em;
 
   // Row

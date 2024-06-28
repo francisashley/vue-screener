@@ -10,6 +10,7 @@
       'vs-table__cell--head',
       column.isSortable && 'vs-table__cell--sortable',
       column.isPinned && 'vs-table__cell--pinned',
+      column.isSortable && sortDirection && 'vs-table__cell--sorting',
     ]"
   >
     <div @click="handleClick">
@@ -53,6 +54,11 @@ const handleClick = () => {
     gap: var(--vs-header-cell-gap);
     background: var(--vs-header-cell-bg-color);
     padding: var(--vs-header-cell-padding);
+    color: var(--vs-header-cell-color);
+  }
+
+  &--head#{&}--sorting {
+    color: var(--vs-header-cell-color--sorting);
   }
 
   &--sortable > div {

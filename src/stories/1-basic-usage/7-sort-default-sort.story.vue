@@ -7,7 +7,14 @@
         <ScreenerSearchOptions :screener="screener" />
       </div>
     </div>
-    <Screener :screener="screener" :style="{ marginBottom: '12px' }" />
+    <Screener
+      :screener="screener"
+      :style="{
+        marginBottom: '12px',
+        '--vs-header-cell-color': 'blue',
+        '--vs-header-cell-color--sorting': 'black',
+      }"
+    />
     <ScreenerPagination :screener="screener" />
   </Story>
 </template>
