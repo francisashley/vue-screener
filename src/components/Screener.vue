@@ -10,10 +10,12 @@
     ref="mainRef"
   >
     <div v-if="view === 'bad-data'">
-      Invalid data provided. Please provide an array of objects or an array of arrays.
+      <slot name="bad-data">Invalid data provided. Please provide an array of objects or an array of arrays.</slot>
     </div>
 
-    <p v-if="view === 'no-data'">No data provided</p>
+    <p v-if="view === 'no-data'">
+      <slot name="no-data">No data provided</slot>
+    </p>
 
     <div v-if="view === 'table'" :style="tableStyle">
       <ScreenerHeader :screener="screener">
@@ -31,7 +33,6 @@
 </template>
 
 <script lang="ts" setup>
-import { Config } from '@/interfaces/screener'
 import type { Screener } from '../interfaces/screener'
 import { useScrollable } from '../hooks/use-scrollable'
 import { computed } from 'vue'
@@ -39,19 +40,6 @@ import ScreenerHeader from './ScreenerHeader.vue'
 import ScreenerBody from './ScreenerBody.vue'
 
 type Props = {
-  // The title to be displayed in the header
-  title?: string
-  // Configure each column
-  config?: Config
-  // The specific fields to be displayed in the table
-  pick?: string[]
-  // The fields to be excluded from the table
-  omit?: string[]
-  // The number of items to be displayed per page in the table
-  perPage?: number
-  // The current page number in the table
-  currentPage?: number
-  // Screener hook
   screener: Screener
 }
 
