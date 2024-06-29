@@ -17,6 +17,8 @@ type ScreenerOptions = {
     link?: boolean
     getLink?: (item: Item) => string
   }
+  disablePadPageLength?: boolean
+  disableSearchHighlight?: boolean
 }
 export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
   // State
@@ -31,6 +33,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const config = ref<Config>({})
   const pick = ref<string[]>([])
   const omit = ref<string[]>([])
+  const disablePadPageLength = ref<boolean>(false)
+  const disableSearchHighlight = ref<boolean>(false)
   const rowConfig = ref<{
     link?: boolean
     getLink?: (item: Item) => string
@@ -48,6 +52,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   data.value = defaultData ?? data.value
   pick.value = options.pick ?? pick.value
   omit.value = options.omit ?? omit.value
+  disablePadPageLength.value = options.disablePadPageLength ?? disablePadPageLength.value
+  disableSearchHighlight.value = options.disableSearchHighlight ?? disableSearchHighlight.value
 
   const hasError = computed((): boolean => {
     return !isValidInput(data.value)
@@ -92,7 +98,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
       items: sortedData.value,
       page: currentPage.value - 1,
       perPage: perPage.value,
-      withPlaceholders: true,
+      padPageLength: !disablePadPageLength.value,
     })
   })
 
@@ -111,7 +117,9 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
             ...acc,
             [key]: {
               ...field,
-              htmlValue: highlightText(field.value ? String(field.value) : '', highlightQuery.value),
+              htmlValue: disableSearchHighlight.value
+                ? field.value
+                : highlightText(field.value ? String(field.value) : '', highlightQuery.value),
             },
           }
         }, {}),
@@ -168,6 +176,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     omit,
     columns,
     rowConfig,
+    disablePadPageLength,
+    disableSearchHighlight,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query
