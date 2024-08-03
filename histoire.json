@@ -139,6 +139,100 @@
       "markdownFile": null
     },
     {
+      "id": "src-stories-1-basic-usage-7-sort-default-sort-directions-story-vue",
+      "title": " Default sort directions",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/1-basic-usage/7-sort-default-sort-directions.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "7. Sorting ",
+        " Default sort directions"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-1-basic-usage-7-sort-default-sort-story-vue",
+      "title": " Default sort",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/1-basic-usage/7-sort-default-sort.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "7. Sorting ",
+        " Default sort"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-1-basic-usage-8-disable-pad-page-length-story-vue",
+      "title": "8. Disable pad page length",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/1-basic-usage/8-disable-pad-page-length.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "8. Disable pad page length"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-1-basic-usage-9-disable-search-highlight-story-vue",
+      "title": "9. Disable search highlight",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/1-basic-usage/9-disable-search highlight.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "9. Disable search highlight"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-stories-2-configure-columns-1-control-widths-story-vue",
       "title": "1. Control widths",
       "layout": {
@@ -346,8 +440,8 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-3-theming-3-theming-story-vue",
-      "title": "1. Theming",
+      "id": "src-stories-3-theming-1-space-story-vue",
+      "title": "1. Space theme",
       "layout": {
         "type": "single",
         "iframe": true
@@ -360,16 +454,62 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/3-theming/3-theming.story.vue",
+      "relativePath": "src/stories/3-theming/1-space.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "1. Theming"
+        "1. Space theme"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-4-stress-test-4-stress-test-story-vue",
+      "id": "src-stories-3-theming-2-cavern-story-vue",
+      "title": "2. Cavern theme",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/3-theming/2-cavern.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "2. Cavern theme"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-4-recipes-4-pinned-menu-story-vue",
+      "title": "1. Pinned menu",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/4-recipes/4-pinned-menu.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "1. Pinned menu"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-5-stress-test-1-stress-test-story-vue",
       "title": "1. Stress Test",
       "layout": {
         "type": "single",
@@ -383,7 +523,7 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/4-stress-test/4-stress-test.story.vue",
+      "relativePath": "src/stories/5-stress-test/1-stress-test.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
         "1. Stress Test"
