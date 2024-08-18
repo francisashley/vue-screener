@@ -233,6 +233,52 @@
       "markdownFile": null
     },
     {
+      "id": "src-stories-3-theming-1-space-story-vue",
+      "title": "1. Space theme",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/3-theming/1-space.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "1. Space theme"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-3-theming-2-cavern-story-vue",
+      "title": "2. Cavern theme",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/3-theming/2-cavern.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "2. Cavern theme"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-stories-2-configure-columns-1-control-widths-story-vue",
       "title": "1. Control widths",
       "layout": {
@@ -435,52 +481,6 @@
       "supportPluginId": "vue3",
       "treePath": [
         "9. Format column"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-3-theming-1-space-story-vue",
-      "title": "1. Space theme",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/3-theming/1-space.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "1. Space theme"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-3-theming-2-cavern-story-vue",
-      "title": "2. Cavern theme",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/3-theming/2-cavern.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "2. Cavern theme"
       ],
       "virtual": false,
       "markdownFile": null
