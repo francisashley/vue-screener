@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Column, Item } from '@/interfaces/screener'
+import { Column, Item } from '../interfaces/screener'
 import ScreenerCell from './ScreenerCell.vue'
 
 defineProps<{ column: Column; item: Item }>()

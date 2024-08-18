@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Column } from '@/interfaces/screener'
+import { Column } from '../interfaces/screener'
 import SortIcon from './icons/SortIcon.vue'
 import ScreenerCell from './ScreenerCell.vue'
 

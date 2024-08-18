@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { DataType } from '@/interfaces/screener'
+import { DataType } from '../interfaces/screener'
 
 defineProps<{
   value: unknown
