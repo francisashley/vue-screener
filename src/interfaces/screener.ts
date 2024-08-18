@@ -1,19 +1,14 @@
-import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
+import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
-  title: Ref<string>
   searchQuery: Ref<string>
   highlightQuery: Ref<string>
   currentPage: Ref<number>
   perPage: Ref<number>
-  renderFormat: Ref<'table' | 'raw'>
   searchOptions: Ref<SearchQueryOption[]>
   sortField: Ref<string | null>
   sortDirection: Ref<'asc' | 'desc'>
-  shouldUseRegEx: ComputedRef<boolean>
-  shouldMatchCase: ComputedRef<boolean>
-  shouldMatchWord: ComputedRef<boolean>
   data: Ref<unknown[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
@@ -23,6 +18,12 @@ export type Screener = {
   config: Ref<Config>
   pick: Ref<string[]>
   omit: Ref<string[]>
+  disablePadPageLength: Ref<boolean>
+  disableSearchHighlight: Ref<boolean>
+  rowConfig: Ref<{
+    link?: boolean
+    getLink?: (item: any) => string
+  }>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string) => void
@@ -37,12 +38,13 @@ export type Column = {
   isLast: boolean // Flag indicating if it is the last column.
   isPinned: boolean // Flag indicating if the field is pinned.
   isSortable: boolean // Flag indicating if the field is sortable.
+  defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
   format?: (item: string | number) => string // Format the value of the field.
 }
 
 export type Config = Record<
   string | number,
-  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'label' | 'format'>>
+  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'defaultSortDirection' | 'label' | 'format'>>
 >
 
 export type Item = {

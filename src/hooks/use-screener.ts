@@ -1,4 +1,4 @@
-import { SearchQueryOption } from '@/components/stuff/ScreenerSearch.vue'
+import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { Config, Column, Item, Screener, UnknownObject } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
@@ -7,22 +7,25 @@ import { orderBy } from 'natural-orderby'
 import { highlightText } from '../utils/text.utils'
 
 type ScreenerOptions = {
-  title?: string
   defaultCurrentPage?: number
   defaultPerPage?: number
-  defaultData?: unknown[]
+  defaultSort?: { field: string; direction: 'asc' | 'desc' }
   config?: Config
   pick?: string[]
   omit?: string[]
+  rowConfig?: {
+    link?: boolean
+    getLink?: (item: Item) => string
+  }
+  disablePadPageLength?: boolean
+  disableSearchHighlight?: boolean
 }
-export const useScreener = (options: ScreenerOptions = {}): Screener => {
+export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
   // State
-  const title = ref<string>('Results')
   const searchQuery = ref<string>('')
   const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
   const perPage = ref<number>(15)
-  const renderFormat = ref<'table' | 'raw'>('table')
   const searchOptions = ref<SearchQueryOption[]>([])
   const sortField = ref<string | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
@@ -30,19 +33,27 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   const config = ref<Config>({})
   const pick = ref<string[]>([])
   const omit = ref<string[]>([])
+  const disablePadPageLength = ref<boolean>(false)
+  const disableSearchHighlight = ref<boolean>(false)
+  const rowConfig = ref<{
+    link?: boolean
+    getLink?: (item: Item) => string
+  }>({
+    link: options.rowConfig?.link ?? false,
+    getLink: options.rowConfig?.getLink,
+  })
 
   // Set default state
-  title.value = options.title ?? title.value
   config.value = options.config ?? config.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
-  data.value = options.defaultData ?? data.value
+  sortField.value = options.defaultSort?.field ?? sortField.value
+  sortDirection.value = options.defaultSort?.direction ?? sortDirection.value
+  data.value = defaultData ?? data.value
   pick.value = options.pick ?? pick.value
   omit.value = options.omit ?? omit.value
-
-  const shouldUseRegEx = computed((): boolean => searchOptions.value.includes('use-regex'))
-  const shouldMatchCase = computed((): boolean => searchOptions.value.includes('match-case'))
-  const shouldMatchWord = computed((): boolean => searchOptions.value.includes('match-word'))
+  disablePadPageLength.value = options.disablePadPageLength ?? disablePadPageLength.value
+  disableSearchHighlight.value = options.disableSearchHighlight ?? disableSearchHighlight.value
 
   const hasError = computed((): boolean => {
     return !isValidInput(data.value)
@@ -56,9 +67,9 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     return search({
       items: normalisedData.value,
       searchQuery: searchQuery.value,
-      useRegExp: shouldUseRegEx.value,
-      matchCase: shouldMatchCase.value,
-      matchWord: shouldMatchWord.value,
+      useRegExp: searchOptions.value.includes('use-regex'),
+      matchCase: searchOptions.value.includes('match-case'),
+      matchWord: searchOptions.value.includes('match-word'),
     })
   })
 
@@ -87,7 +98,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
       items: sortedData.value,
       page: currentPage.value - 1,
       perPage: perPage.value,
-      withPlaceholders: true,
+      padPageLength: !disablePadPageLength.value,
     })
   })
 
@@ -106,7 +117,9 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
             ...acc,
             [key]: {
               ...field,
-              htmlValue: highlightText(field.value ? String(field.value) : '', highlightQuery.value),
+              htmlValue: disableSearchHighlight.value
+                ? field.value
+                : highlightText(field.value ? String(field.value) : '', highlightQuery.value),
             },
           }
         }, {}),
@@ -128,6 +141,7 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
         isLast: i === fields.length - 1,
         isPinned: false,
         isSortable: true,
+        defaultSortDirection: inputColumn?.defaultSortDirection ?? 'desc',
         ...inputColumn,
         width,
       }
@@ -145,18 +159,13 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
   })
 
   return {
-    title,
     searchQuery,
     highlightQuery,
     currentPage,
     perPage,
-    renderFormat,
     searchOptions,
     sortField,
     sortDirection,
-    shouldUseRegEx,
-    shouldMatchCase,
-    shouldMatchWord,
     data,
     items,
     totalItems: computed(() => searchedData.value.length),
@@ -166,6 +175,9 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
     pick,
     omit,
     columns,
+    rowConfig,
+    disablePadPageLength,
+    disableSearchHighlight,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query
@@ -175,9 +187,15 @@ export const useScreener = (options: ScreenerOptions = {}): Screener => {
         }
       },
       sort: (field: string) => {
-        if (sortField.value === field) {
-          sortDirection.value = sortDirection.value === 'desc' ? 'asc' : 'desc'
-        }
+        const fieldConfig = columns.value.find((column) => column.field === field)
+
+        sortDirection.value =
+          sortField.value === field
+            ? sortDirection.value === 'desc'
+              ? 'asc'
+              : 'desc'
+            : fieldConfig?.defaultSortDirection || sortDirection.value
+
         sortField.value = field
       },
     },

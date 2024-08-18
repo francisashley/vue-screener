@@ -36,7 +36,7 @@ yarn add vue-screener
 </template>
 
 <script lang="ts">
-import { VueScreener } from 'vue-screener'
+import { Screener } from 'vue-screener'
 import 'vue-screener/style.css'
 </script>
 ```
@@ -77,7 +77,7 @@ Add a pinned column on the right to put stuff in.
 
 ```vue
 <template>
-  <VueScreener
+  <Screener
     :data="[
       { category: 'Technology', product: 'Laptop', price: '£799', inStock: true },
       { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true }
@@ -96,30 +96,30 @@ Add a pinned column on the right to put stuff in.
         <button @click="handleClickDelete(props.item)">Delete</button>
       </Data>
     </template>
-  </VueScreener>
+  </Screener>
 </template>
 <script setup>
-import VueScreener, { Head, Data } from 'vue-screener'
+import Screener, { Head, Data } from 'vue-screener'
 </script>
 ```
 
 ## Slots
 
-Custom header cell renderer:
+Custom head cell renderer:
 
 ```vue
 <template>
   <vue-screener :data="data">
-    <template #header-cell="props">
-      <HeaderCell v-bind="props">
+    <template #head-cell="props">
+      <HeadCell v-bind="props">
         {{ props.field }}
         <CurrencyPicker  v-if="props.field === 'price'" />
-      </HeaderCell>
+      </HeadCell>
     </template>
   </vue-screener>
 </template>
 <script>
-import VueScreener, { HeaderCell } from 'vue-screener'
+import Screener, { HeadCell } from 'vue-screener'
 import CurrencyPicker from './components/currency-picker'
 </script>
 ```
@@ -142,7 +142,7 @@ Custom value cell renderer:
   </vue-screener>
 </template>
 <script>
-import VueScreener, { Data } from 'vue-screener'
+import Screener, { Data } from 'vue-screener'
 import { formatPrice } from './utils/currency'
 </script>
 ```
@@ -152,40 +152,39 @@ import { formatPrice } from './utils/currency'
 Style using classes:
 
 ```
-.vs-app
+.vs-screener
   .vs-header 
-    .vs-title
+    .vs-heading
     .vs-search
     .vs-search--error
     .vs-settings
-    .vs-settings__button
-    .vs-settings__button--active
-    .vs-settings__heading
-    .vs-settings__options
-    .vs-settings__options-button
-    .vs-settings__options-button--active
-    .vs-settings__options-button--match-word
-    .vs-settings__options-button--match-case
-    .vs-settings__options-button--use-regex
-    .vs-view-selector
-    .vs-view-selector__link
-    .vs-view-selector__link--is-active
+    .vs-checkable-group
+    .vs-checkable
+    .vs-checkable--active
+    .vs-checkable--match-case
+    .vs-checkable--use-regex
+    .vs-checkable-icon
+    .vs-switch
+    .vs-switch__option
+    .vs-switch__option--active
     .vs-dropdown
+    .vs-dropdown-button
+    .vs-dropdown-button--active
     .vs-dropdown__content
-  .vs-main
-  .vs-main--is-scrollable
-  .vs-main--is-scrolled-end
+  .vs-screener
+  .vs-screener--scrollable
+  .vs-screener--scrolled-end
     .vs-table
     .vs-table__row
     .vs-table__row--header
-    .vs-table__row--record
+    .vs-table__row--item
     .vs-table__cell
-    .vs-table__cell--is-sortable
-    .vs-table__cell--is-pinned
-    .vs-table__cell--is-header
-    .vs-table__cell--is-value
-    .vs-table__cell--is-first
-    .vs-table__cell--is-last
+    .vs-table__cell--sortable
+    .vs-table__cell--pinned
+    .vs-table__cell--head
+    .vs-table__cell--value
+    .vs-table__cell--first
+    .vs-table__cell--last
     .vs-table__cell--hasValue
     .vs-table__cell--string
     .vs-table__cell--number
@@ -194,11 +193,11 @@ Style using classes:
     .vs-table__cell--undefined
     .vs-table__cell--object
     .vs-table__cell--null
-      .vs-sort-selector
-      .vs-sort-selector__icon
-      .vs-sort-selector__icon--none
-      .vs-sort-selector__icon--asc
-      .vs-sort-selector__icon--desc
+      .vs-sort-icon
+      .vs-sort-icon__icon
+      .vs-sort-icon__icon--none
+      .vs-sort-icon__icon--asc
+      .vs-sort-icon__icon--desc
     .vs-json-view
     .vs-no-data-view
   .vs-footer
