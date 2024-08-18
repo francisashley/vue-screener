@@ -18,7 +18,7 @@ export type Screener = {
   config: Ref<Config>
   pick: Ref<string[]>
   omit: Ref<string[]>
-  disablePadPageLength: Ref<boolean>
+  fixedPageSize: Ref<boolean>
   disableSearchHighlight: Ref<boolean>
   rowConfig: Ref<{
     link?: boolean
