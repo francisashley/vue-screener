@@ -25,7 +25,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const searchQuery = ref<string>('')
   const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
-  const perPage = ref<number>(15)
+  const perPage = ref<number>(10)
   const searchOptions = ref<SearchQueryOption[]>([])
   const sortField = ref<string | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
@@ -132,7 +132,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
 
     let columns: Column[] = fields.map((field, i) => {
       const inputColumn = config.value[field] ?? {}
-      let width = inputColumn.width ?? '1fr'
+      let width = inputColumn.width ?? 'auto'
       if (!isNaN(Number(width))) width = width + 'px'
       return {
         field,
