@@ -149,71 +149,85 @@ import { formatPrice } from './utils/currency'
 
 ## Theming
 
-Style using classes:
+You can style components and their subcomponents by passing an object to the ui prop. The object reflects the hierarchical structure of the components, allowing you to apply TailwindCSS classes at different levels. Subcomponents inherit styles from higher levels unless explicitly overridden.
 
-```
-.vs-screener
-  .vs-header 
-    .vs-heading
-    .vs-search
-    .vs-search--error
-    .vs-settings
-    .vs-checkable-group
-    .vs-checkable
-    .vs-checkable--active
-    .vs-checkable--match-case
-    .vs-checkable--use-regex
-    .vs-checkable-icon
-    .vs-switch
-    .vs-switch__option
-    .vs-switch__option--active
-    .vs-dropdown
-    .vs-dropdown-button
-    .vs-dropdown-button--active
-    .vs-dropdown__content
-  .vs-screener
-  .vs-screener--scrollable
-  .vs-screener--scrolled-end
-    .vs-table
-    .vs-table__row
-    .vs-table__row--header
-    .vs-table__row--item
-    .vs-table__cell
-    .vs-table__cell--sortable
-    .vs-table__cell--sticky
-    .vs-table__cell--head
-    .vs-table__cell--value
-    .vs-table__cell--first
-    .vs-table__cell--last
-    .vs-table__cell--hasValue
-    .vs-table__cell--string
-    .vs-table__cell--number
-    .vs-table__cell--boolean
-    .vs-table__cell--symbol
-    .vs-table__cell--undefined
-    .vs-table__cell--object
-    .vs-table__cell--null
-      .vs-sort-icon
-      .vs-sort-icon__icon
-      .vs-sort-icon__icon--none
-      .vs-sort-icon__icon--asc
-      .vs-sort-icon__icon--desc
-    .vs-json-view
-    .vs-no-data-view
-  .vs-footer
-    .vs-pagination__nav
-    .vs-pagination__button
-    .vs-pagination__button--first
-    .vs-pagination__button--prev
-    .vs-pagination__button--page
-    .vs-pagination__button--next
-    .vs-pagination__button--last
-    .vs-pagination__button--active
-    .vs-pagination__button--disabled
-    .vs-pagination__info
-    .vs-pagination__per-page
-    .vs-pagination__per-page-input
-  .vs-error-message
+```ts
+{ // VueScreener
+  class?: string
+  tableView?: { // TableView
+    table?: { // Table
+      class?: string
+      header?: { // TableHead
+        class?: string
+        cell?: { // TableCell
+          class?: string
+          isFirstClass?: string
+          isLastClass?: string
+          hasValueClass?: string
+          isStickyClass?: string
+          isStickyOverlappingClass?: string
+          sortableClass?: string
+          sortingClass?: string
+          sortIcon?: { // SortIcon
+            class?: string
+            ascClass?: string
+          }
+        }
+      }
+      row?: { // TableRow
+        class?: string
+        cell?: { // TableCell
+          class?: string
+          isFirstClass?: string
+          isLastClass?: string
+          hasValueClass?: string
+          isStickyClass?: string
+          isStickyOverlappingClass?: string
+        }
+      }
+    }
+  }
+  noDataView?: { // NoDataView
+    class?: string
+  }
+  badDataView?: { // BadDataView
+    class?: string
+  }
+}
+
+
+{ // ScreenerPagination
+  class?: string
+  leftSide?: {
+    class?: string
+  }
+  rightSide?: {
+    class?: string
+    perPageInput?: { // Input
+      class?: string
+      errorClass?: string
+    }
+  }
+  nav?: {
+    class?: string
+    button?: { // Button
+      class?: string
+      activeClass?: string
+      disabledClass?: string
+    }
+  }
+}
+
+{ // ScreenerSearchOptions
+  class?: string
+  toggleButton?: { // ToggleButton
+    class?: string
+    activeClass?: string
+    icon?: {
+      class?: string
+    }
+  }
+}
 ```
 
 ## Roadmap
