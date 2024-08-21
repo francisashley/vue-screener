@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <Screener />
+    <Screener :screener="screener" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Screener from './components/Screener.vue'
-</script>
+import { useScreener } from './hooks/use-screener'
 
-<style scoped></style>
+const screener = useScreener([])
+</script>

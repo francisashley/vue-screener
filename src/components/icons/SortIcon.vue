@@ -1,33 +1,34 @@
 <template>
   <remix-sort-desc-icon
-    class="vs-sort-icon"
     :class="{
-      'vs-sort-icon__icon--asc': direction !== 'desc',
-      'vs-sort-icon__icon--desc': direction === 'desc',
+      [ui.class]: true,
+      [ui.ascClass]: direction === 'asc',
     }"
   />
 </template>
 
 <script lang="ts" setup>
+import { computed, defineProps } from 'vue'
 import RemixSortDescIcon from '../icons/RemixSortDescIcon.vue'
+import { twMerge } from '../../utils/tailwind-merge.utils'
 
-const { direction = null } = defineProps<{
-  direction?: 'asc' | 'desc'
-}>()
-</script>
-
-<style lang="scss">
-.vs-sort-icon {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  height: var(--vs-sort-icon-size);
-  width: var(--vs-sort-icon-size);
-  transform: rotate(0deg);
-  transition: ease-out 100ms;
-
-  &__icon--asc {
-    transform: rotate(-180deg);
-  }
+export type SortIconUI = {
+  class?: string
+  ascClass?: string
 }
-</style>
+
+const props = defineProps<{
+  direction?: null | 'asc' | 'desc'
+  ui?: SortIconUI
+}>()
+
+const uiDefaults = {
+  class: 'vsc-inline-flex vsc-items-center vsc-cursor-pointer vsc-h-[14px] vsc-w-[14px] vsc-rotate-0 vsc-transition vsc-ease-out vsc-duration-100', // eslint-disable-line
+  ascClass: 'vsc-rotate-[-180deg]',
+}
+
+const ui = computed(() => ({
+  class: twMerge(uiDefaults.class, props.ui?.class),
+  ascClass: twMerge(uiDefaults.ascClass, props.ui?.ascClass),
+}))
+</script>

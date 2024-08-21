@@ -7,17 +7,18 @@ export type Screener = {
   currentPage: Ref<number>
   perPage: Ref<number>
   searchOptions: Ref<SearchQueryOption[]>
-  sortField: Ref<string | null>
+  sortField: Ref<string | number | null>
   sortDirection: Ref<'asc' | 'desc'>
   data: Ref<unknown[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>
-  columns: ComputedRef<Column[]>
   items: ComputedRef<(Item | null)[]>
   config: Ref<Config>
   pick: Ref<string[]>
   omit: Ref<string[]>
+  columns: ComputedRef<Column[]>
+  // schema: ComputedRef<Schema>
   fixedPageSize: Ref<boolean>
   disableSearchHighlight: Ref<boolean>
   rowConfig: Ref<{
@@ -26,8 +27,21 @@ export type Screener = {
   }>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
-    sort: (field: string) => void
+    sort: (field: string | number) => void
   }
+}
+
+// export type Schema = {
+//   columns: string[]
+//   fields: Record<string, DataType | DataType[]>
+// }
+
+export type Schema = {
+  fields: {
+    field: string | number
+    width?: string
+    type: DataType | DataType[]
+  }[]
 }
 
 export type Column = {
@@ -36,7 +50,7 @@ export type Column = {
   width: string // The width of the column. Defaults to '1fr' if not provided.
   isFirst: boolean // Flag indicating if it is the first column.
   isLast: boolean // Flag indicating if it is the last column.
-  isPinned: boolean // Flag indicating if the field is pinned.
+  isSticky: boolean // Flag indicating if the field is sticky.
   isSortable: boolean // Flag indicating if the field is sortable.
   defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
   format?: (item: string | number) => string // Format the value of the field.
@@ -44,7 +58,7 @@ export type Column = {
 
 export type Config = Record<
   string | number,
-  Partial<Pick<Column, 'field' | 'width' | 'isPinned' | 'isSortable' | 'defaultSortDirection' | 'label' | 'format'>>
+  Partial<Pick<Column, 'field' | 'width' | 'isSticky' | 'isSortable' | 'defaultSortDirection' | 'label' | 'format'>>
 >
 
 export type Item = {
