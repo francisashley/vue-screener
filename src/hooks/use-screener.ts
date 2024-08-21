@@ -27,7 +27,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const currentPage = ref<number>(1)
   const perPage = ref<number>(10)
   const searchOptions = ref<SearchQueryOption[]>([])
-  const sortField = ref<string | null>(null)
+  const sortField = ref<string | number | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
   const data = ref<unknown[]>([])
   const config = ref<Config>({})
@@ -139,7 +139,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
         label: field,
         isFirst: i === 0,
         isLast: i === fields.length - 1,
-        isPinned: false,
+        isSticky: false,
         isSortable: true,
         defaultSortDirection: inputColumn?.defaultSortDirection ?? 'desc',
         ...inputColumn,
@@ -186,7 +186,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
           searchOptions.value = options
         }
       },
-      sort: (field: string) => {
+      sort: (field: string | number) => {
         const fieldConfig = columns.value.find((column) => column.field === field)
 
         sortDirection.value =

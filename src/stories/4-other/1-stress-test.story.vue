@@ -1,5 +1,5 @@
 <template>
-  <Story title="7. Pick + omit fields" source="-">
+  <Story title="1. Stress Test" source="-">
     <DevSandbox title="Results" :screener="screener">
       <Screener :screener="screener" />
     </DevSandbox>
@@ -8,11 +8,8 @@
 
 <script lang="ts" setup>
 import { Screener, useScreener } from '../../index'
-import baseData from '../../fixtures/data.json'
+import baseData from '../../fixtures/stress-data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const screener = useScreener(baseData, {
-  pick: ['id', 'first_name', 'last_name'],
-  omit: ['id'],
-})
+const screener = useScreener(baseData)
 </script>

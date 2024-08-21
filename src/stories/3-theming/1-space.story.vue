@@ -1,48 +1,49 @@
 <template>
   <Story title="1. Space theme" source="-">
-    <div :style="{ 'background-color': '#101827', padding: '16px', minHeight: 'calc(100vh - 16px)' }">
-      <div
-        :style="{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '16px',
-          color: 'white',
-        }"
-      >
-        <h3 v-text="'Space theme'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
-        <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
+    <div class="vsc-bg-[#101827] vsc-p-4 vsc-min-h-[calc(100vh_-_16px)]">
+      <div class="vsc-flex vsc-justify-between vsc-items-center vsc-mb-4 vsc-text-white">
+        <h3 v-text="'Space theme'" class="vsc-text-base vsc-mb-0" />
+        <div class="vsc-flex vsc-items-center vsc-gap-2">
           <ScreenerSearch
             :screener="screener"
-            :style="{
-              '--vs-border': 'thin solid #374151',
-              '--vs-bg-color': '#1f2937',
-              '--vs-color': 'white',
+            :ui="{
+              class: 'vsc-border-[#374151] vsc-bg-[#1f2937] vsc-text-white',
             }"
           />
           <ScreenerSearchOptions
             :screener="screener"
-            :style="{
-              '--vs-border': 'thin solid #374151',
-              '--vs-bg-color': '#1f2937',
-              '--vs-option-bg': '#1f2937',
-              '--vs-option-bg--hover': '#374151',
-              '--vs-option-bg--active': '#3e51b5',
-              '--vs-option-color': 'white',
-              '--vs-option-cursor': 'pointer',
-              '--vs-option-border-radius': '4px',
-              '--vs-option-height': '20px',
-              '--vs-option-width': '20px',
-              '--vs-option-margin-bottom': '8px',
-              '--vs-option-color--active': '#fff',
-              '--vs-option-color--hover': '#fff',
+            :ui="{
+              class: 'vsc-border-[#374151] vsc-bg-[#1f2937]',
+              toggleButton: {
+                class:
+                  'vsc-bg-[#1f2937] hover:vsc-bg-[#374151] vsc-text-white vsc-rounded-sm vsc-w-[25px] vsc-h-[25px]',
+                activeClass: '!vsc-bg-[#3e51b5]',
+              },
             }"
           />
         </div>
       </div>
       <Screener
         :screener="screener"
-        class="vue-screener"
+        class="vsc-mb-4"
+        :ui="{
+          tableView: {
+            table: {
+              class: 'vsc-border-gray-700',
+              header: {
+                cell: {
+                  class: 'vsc-bg-gray-800 vsc-border-gray-700',
+                },
+              },
+              row: {
+                class: 'vsc-border-gray-700',
+                cell: {
+                  class: 'vsc-bg-gray-900 vsc-border-gray-700',
+                },
+              },
+            },
+          },
+        }"
         :style="{
           '--vs-bg-color': 'transparent',
           '--vs-border-color': '#4b5563',
@@ -50,25 +51,26 @@
           '--vs-border-radius': '8px',
           '--vs-cell-padding': '4px 8px',
           '--vs-header-cell-bg-color': '#1f2937',
-          marginBottom: '16px',
         }"
       />
       <ScreenerPagination
         v-if="!screener.hasError.value"
         :screener="screener"
-        :style="{
-          '--vs-text-color': 'white',
-          '--vs-button-padding': '4px 20px',
-          '--vs-button-color': 'white',
-          '--vs-button-color--active': '#2463eb',
-          '--vs-button-bg-color': '#1f2937',
-          '--vs-button-bg-color--hover': '#374151',
-          '--vs-button-border': 'thin solid #374151',
-          '--vs-button-border--hover': 'thin solid #374151',
-          '--vs-button-border--active': 'thin solid #374151',
-          '--vs-text-input-border': 'thin solid #374151',
-          '--vs-text-input-bg-color': '#1f2937',
-          '--vs-text-input-color': 'white',
+        :ui="{
+          nav: {
+            button: {
+              class: 'vsc-text-white vsc-py-1 vsc-px-5 vsc-bg-[#1f2937] hover:vsc-bg-[#374151] vsc-border-[#374151] hover:vsc-border-[#374151]', // eslint-disable-line
+              activeClass: 'vsc-border-[#374151] vsc-text-[#2463eb]',
+            },
+          },
+          leftSide: {
+            class: 'vsc-min-w-[150px]',
+          },
+          rightSide: {
+            perPageInput: {
+              class: 'vsc-bg-[#1f2937] vsc-border-[#374151] vsc-text-white',
+            },
+          },
         }"
       />
     </div>

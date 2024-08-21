@@ -1,42 +1,76 @@
 <template>
-  <div class="vs-search-options">
-    <button
-      class="vs-search-option"
+  <ToggleButtonGroup :ui="ui">
+    <ToggleButton
       title="Match case"
-      :class="[{ 'vs-search-option--active': props.screener.searchOptions.value.includes('match-case') }]"
+      :active="props.screener.searchOptions.value.includes('match-case')"
+      :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
     >
-      <MatchCaseIcon />
-    </button>
-    <button
-      class="vs-search-option"
+      <MatchCaseIcon :class="ui.toggleButton.icon.class" />
+    </ToggleButton>
+    <ToggleButton
       title="Match word"
-      :class="[{ 'vs-search-option--active': props.screener.searchOptions.value.includes('match-word') }]"
+      :active="props.screener.searchOptions.value.includes('match-word')"
+      :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
     >
-      <MatchWordIcon />
-    </button>
-    <button
-      class="vs-search-option"
+      <MatchWordIcon :class="ui.toggleButton.icon.class" />
+    </ToggleButton>
+    <ToggleButton
       title="Use regular expression"
-      :class="[{ 'vs-search-option--active': props.screener.searchOptions.value.includes('use-regex') }]"
+      :active="props.screener.searchOptions.value.includes('use-regex')"
+      :ui="ui?.toggleButton"
       @click="toggleOption('use-regex')"
     >
-      <RegularExpressionIcon />
-    </button>
-  </div>
+      <RegularExpressionIcon :class="ui.toggleButton.icon.class" />
+    </ToggleButton>
+  </ToggleButtonGroup>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
 import { Screener } from '@/interfaces/screener'
 import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
 import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
 import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
 import { SearchQueryOption } from './ScreenerSearch.vue'
+import ToggleButtonGroup from './ui/toggle-button/ToggleButtonGroup.vue'
+import ToggleButton, { ToggleButtonUI } from './ui/toggle-button/ToggleButton.vue'
+import { twMerge } from '../utils/tailwind-merge.utils'
+
+export type ScreenerSearchOptionsUI = {
+  class?: string
+  toggleButton?: ToggleButtonUI & {
+    icon?: {
+      class?: string
+    }
+  }
+}
 
 const props = defineProps<{
   screener: Screener
+  ui?: ScreenerSearchOptionsUI
 }>()
+
+const uiDefaults = {
+  toggleButton: {
+    icon: {
+      class: 'vsc-w-4 vsc-h-4',
+    },
+  },
+}
+
+const ui = computed(() => {
+  return {
+    class: props.ui?.class,
+    toggleButton: {
+      ...props.ui?.toggleButton,
+      icon: {
+        class: twMerge(uiDefaults.toggleButton.icon.class, props.ui?.toggleButton?.icon?.class),
+      },
+    },
+  }
+})
 
 const toggleOption = (option: SearchQueryOption) => {
   if (props.screener.searchOptions.value.includes(option)) {
@@ -49,68 +83,3 @@ const toggleOption = (option: SearchQueryOption) => {
   }
 }
 </script>
-
-<style lang="scss">
-.vs-search-options {
-  --vs-border: thin solid #767676;
-  --vs-border-radius: 4px;
-  --vs-bg-color: white;
-  --vs-height: 24px;
-  --vs-icon-size: 16px;
-
-  display: flex;
-  align-items: center;
-  border: var(--vs-border);
-  border-radius: var(--vs-border-radius);
-  background-color: var(--vs-bg-color);
-  gap: 1px;
-  height: var(--vs-height);
-  padding: 1px;
-  box-sizing: border-box;
-
-  --vs-option-border: none;
-  --vs-option-color: rgba(0, 0, 0, 0.5);
-  --vs-option-cursor: pointer;
-  --vs-option-border-radius: 4px;
-  --vs-option-height: 20px;
-  --vs-option-width: 20px;
-  --vs-option-bg: white;
-  --vs-option-bg--hover: #3e51b5;
-  --vs-option-bg--active: #3e51b5;
-  --vs-option-margin-bottom: 8px;
-  --vs-option-color--active: #fff;
-  --vs-option-color--hover: #fff;
-}
-
-.vs-search-option {
-  border: transparent;
-  color: var(--vs-option-color);
-  cursor: var(--vs-option-cursor);
-  border-radius: var(--vs-option-border-radius);
-  height: var(--vs-option-height);
-  width: var(--vs-option-width);
-  background: var(--vs-option-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-
-  & > svg {
-    height: var(--vs-icon-size);
-    width: var(--vs-icon-size);
-  }
-
-  &:hover {
-    color: var(--vs-option-color--hover);
-  }
-
-  &:not(#{&}--active):hover {
-    background: var(--vs-option-bg--hover);
-  }
-
-  &--active {
-    color: var(--vs-option-color--active);
-    background: var(--vs-option-bg--active);
-  }
-}
-</style>

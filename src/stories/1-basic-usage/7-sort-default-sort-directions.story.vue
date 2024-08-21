@@ -1,26 +1,23 @@
 <template>
   <Story title="7. Sorting / Default sort directions" source="-">
-    <div :style="{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }">
-      <h3 v-text="'Custom title'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
-      <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
-        <ScreenerSearch :screener="screener" />
-        <ScreenerSearchOptions :screener="screener" />
-      </div>
-    </div>
-    <Screener
-      :screener="screener"
-      :style="{
-        marginBottom: '12px',
-        '--vs-header-cell-color': 'blue',
-        '--vs-header-cell-color--sorting': 'black',
-      }"
-    />
-    <ScreenerPagination :screener="screener" />
+    <DevSandbox title="Sorting / Default sort directions" :screener="screener">
+      <Screener
+        :screener="screener"
+        :ui="{
+          tableView: {
+            header: {
+              cell: { class: 'vsc-text-blue-500', sortingClass: '!vsc-text-[gold]' },
+            },
+          },
+        }"
+      />
+    </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
+import { Screener, useScreener } from '../../index'
+import DevSandbox from '../../components/dev/Sandbox.vue'
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {

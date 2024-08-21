@@ -1,79 +1,44 @@
 <template>
-  <div class="vs-pagination">
-    <div class="vs-pagination__side vs-pagination__side--left">
+  <div :class="{ [ui.class]: true }">
+    <div
+      :class="{
+        [ui.leftSide.class]: true,
+      }"
+    >
       <template v-if="!screener.totalItems.value">Showing 0 results</template>
       <template v-else>
         Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.totalItems.value }}
       </template>
     </div>
 
-    <div class="vs-pagination__nav">
-      <button
-        :disabled="!canNavigateFirst"
-        @click="handleClickFirst"
-        :class="[
-          'vs-pagination__button',
-          'vs-pagination__button--first',
-          !canNavigateFirst && 'vs-pagination__button--disabled',
-        ]"
-      >
-        First
-      </button>
-      <button
-        :disabled="!canNavigatePrev"
-        @click="handleClickPrev"
-        :class="[
-          'vs-pagination__button',
-          'vs-pagination__button--prev',
-          !canNavigatePrev && 'vs-pagination__button--disabled',
-        ]"
-      >
-        Prev
-      </button>
-      <button
+    <div :class="{ [ui.nav.class]: true }">
+      <UiButton :disabled="!canNavigateFirst" @click="handleClickFirst" :ui="ui.nav.button">First</UiButton>
+      <UiButton :disabled="!canNavigatePrev" @click="handleClickPrev" :ui="ui.nav.button">Prev</UiButton>
+      <UiButton
         v-for="page in getPages"
         :key="page"
+        :active="isActive(page)"
         @click="handleSelectPage(page)"
-        :class="[
-          'vs-pagination__button',
-          'vs-pagination__button--page',
-          isActive(page) && 'vs-pagination__button--active',
-        ]"
+        :ui="ui.nav.button"
       >
         {{ page }}
-      </button>
-      <button
-        :disabled="!canNavigateNext"
-        @click="handleClickNext"
-        :class="[
-          'vs-pagination__button',
-          'vs-pagination__button--next',
-          !canNavigateNext && 'vs-pagination__button--disabled',
-        ]"
-      >
-        Next
-      </button>
-      <button
-        :disabled="!canNavigateLast"
-        @click="handleClickLast"
-        :class="[
-          'vs-pagination__button',
-          'vs-pagination__button--last',
-          !canNavigateLast && 'vs-pagination__button--disabled',
-        ]"
-      >
-        Last
-      </button>
+      </UiButton>
+      <UiButton :disabled="!canNavigateNext" @click="handleClickNext" :ui="ui.nav.button">Next</UiButton>
+      <UiButton :disabled="!canNavigateLast" @click="handleClickLast" :ui="ui.nav.button">Last</UiButton>
     </div>
 
-    <div class="vs-pagination__side vs-pagination__side--right">
-      <input
+    <div
+      :class="{
+        [ui.rightSide.class]: true,
+      }"
+    >
+      <UiInput
         type="number"
         :value="screener.perPage.value"
         min="1"
         step="1"
         @input="handleChangePerPage"
-        class="vs-pagination__per-page-input"
+        :ui="ui.rightSide.perPageInput"
       />
     </div>
   </div>
@@ -82,8 +47,54 @@
 <script lang="ts" setup>
 import { Screener } from '@/interfaces/screener'
 import { computed, onMounted, watch } from 'vue'
+import UiButton, { ButtonUI } from './ui/button/Button.vue'
+import UiInput, { InputUI } from './ui/input/Input.vue'
+import { twMerge } from '../utils/tailwind-merge.utils'
 
-const props = defineProps<{ screener: Screener }>()
+export type ScreenerPaginationUI = {
+  class?: string
+  leftSide?: {
+    class?: string
+  }
+  rightSide?: {
+    class?: string
+    perPageInput?: InputUI
+  }
+  nav?: {
+    class?: string
+    button?: ButtonUI
+  }
+}
+
+const props = defineProps<{
+  screener: Screener
+  ui?: ScreenerPaginationUI
+}>()
+
+const uiDefaults = {
+  class: 'vsc-flex vsc-items-center vsc-justify-between vsc-text-zinc-300 vsc-text-sm vsc-gap-2 vsc-whitespace-nowrap',
+  sideClass: 'vsc-inline-flex vsc-w-[150px]',
+  leftSideClass: '',
+  rightSideClass: 'vsc-justify-end',
+  navClass: 'vsc-flex vsc-gap-2',
+}
+
+const ui = computed(() => {
+  return {
+    class: twMerge(uiDefaults.class, props.ui?.class),
+    leftSide: {
+      class: twMerge(uiDefaults.leftSideClass, props.ui?.leftSide?.class),
+    },
+    rightSide: {
+      class: twMerge(uiDefaults.rightSideClass, props.ui?.rightSide?.class),
+      perPageInput: props.ui?.rightSide?.perPageInput,
+    },
+    nav: {
+      class: twMerge(uiDefaults.navClass, props.ui?.nav?.class),
+      button: props.ui?.nav?.button,
+    },
+  }
+})
 
 const totalPages = computed((): number => {
   return Math.ceil(props.screener.totalItems.value / props.screener.perPage.value) || 0
@@ -186,94 +197,3 @@ const handleChangePerPage = (event: Event): void => {
   props.screener.perPage.value = perPage
 }
 </script>
-
-<style lang="scss">
-.vs-pagination {
-  --vs-text-color: black;
-  --vs-side-width: 150px;
-  --vs-nav-gap: 8px;
-  --vs-font-size: inherit;
-
-  --vs-button-padding: 3px 8px;
-  --vs-button-color: black;
-  --vs-button-color--active: blue;
-  --vs-button-bg-color: #efefef;
-  --vs-button-bg-color--hover: #e5e5e5;
-  --vs-button-bg-color--active: var(--vs-button-bg-color);
-  --vs-button-border: thin solid #767676;
-  --vs-button-border--hover: thin solid #4f4f4f;
-  --vs-button-border--active: thin solid #8c8c8c;
-  --vs-button-border-radius: 4px;
-
-  --vs-text-input-width: 100px;
-  --vs-text-input-height: 20px;
-  --vs-text-input-border-radius: 4px;
-  --vs-text-input-border: thin solid #767676;
-  --vs-text-input-border--focus: var(--vs-text-input-border);
-  --vs-text-input-color: black;
-  --vs-text-input-color--focus: var(--vs-text-input-color);
-  --vs-text-input-bg-color: white;
-  --vs-text-input-bg-color--focus: var(--vs-text-input-bg-color);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  white-space: nowrap;
-  color: var(--vs-text-color);
-  gap: var(--vs-nav-gap);
-  font-size: var(--vs-font-size);
-
-  &__side {
-    display: inline-flex;
-    width: var(--vs-side-width);
-
-    &--right {
-      justify-content: flex-end;
-    }
-  }
-
-  &__nav {
-    display: flex;
-    gap: var(--vs-nav-gap);
-  }
-
-  &__button {
-    padding: var(--vs-button-padding);
-    color: var(--vs-button-color);
-    background: var(--vs-button-bg-color);
-    border: var(--vs-button-border);
-    border-radius: var(--vs-button-border-radius);
-
-    &--active {
-      color: var(--vs-button-color--active);
-      background: var(--vs-button-bg-color--active);
-      border: var(--vs-button-border--active);
-    }
-
-    &:not(#{&}--disabled):hover {
-      background: var(--vs-button-bg-color--hover);
-      border: var(--vs-button-border--hover);
-    }
-
-    &--disabled {
-      opacity: 0.5;
-    }
-  }
-
-  &__per-page-input {
-    outline: none;
-    width: var(--vs-text-input-width);
-    height: var(--vs-text-input-height);
-    border: var(--vs-text-input-border);
-    border-radius: var(--vs-text-input-border-radius);
-    color: var(--vs-text-input-color);
-    background: var(--vs-text-input-bg-color);
-
-    &:focus {
-      border: var(--vs-text-input-border--focus);
-      color: var(--vs-text-input-color--focus);
-      background: var(--vs-text-input-bg-color--focus);
-    }
-  }
-}
-</style>

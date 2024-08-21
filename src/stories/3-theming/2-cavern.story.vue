@@ -1,92 +1,73 @@
 <template>
   <Story title="2. Cavern theme" source="-">
-    <div :style="{ 'background-color': '#171717', minHeight: 'calc(100vh - 16px)' }">
-      <div
-        :style="{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '16px',
-          color: 'white',
-        }"
-      >
-        <h3 v-text="'Cavern theme'" :style="{ fontWeight: 400, fontSize: '16px', margin: 0 }" />
-        <div :style="{ display: 'flex', alignItems: 'center', gap: '8px' }">
+    <div class="vsc-bg-[#171717] vsc-min-h-[calc(100vh_-_16px)]">
+      <div class="vsc-flex vsc-p-4 vsc-justify-between vsc-items-center vsc-text-white">
+        <h3 v-text="'Cavern theme'" class="vsc-text-base vsc-mb-0" />
+        <div class="vsc-flex vsc-items-center vsc-gap-2">
           <ScreenerSearch
             :screener="screener"
-            :style="{
-              '--vs-border': 'thin solid #2a2b2b',
-              '--vs-bg-color': '#171717',
-              '--vs-color': 'white',
-              '--vs-height': '30px',
+            :ui="{
+              class: 'vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-text-white vsc-h-[30px]',
             }"
           />
           <ScreenerSearchOptions
             :screener="screener"
-            :style="{
-              '--vs-border': 'thin solid #2a2b2b',
-              '--vs-bg-color': '#171717',
-              '--vs-height': '30px',
-              '--vs-width': '30px',
-              '--vs-icon-size': '18px',
-              '--vs-option-bg': 'transparent',
-              '--vs-option-bg--hover': '#2a2b2b',
-              '--vs-option-bg--active': '#3e51b5',
-              '--vs-option-color': 'white',
-              '--vs-option-cursor': 'pointer',
-              '--vs-option-border-radius': '4px',
-              '--vs-option-height': '26px',
-              '--vs-option-width': '26px',
-              '--vs-option-margin-bottom': '8px',
-              '--vs-option-color--active': '#fff',
-              '--vs-option-color--hover': '#fff',
+            :ui="{
+              class: 'vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-p-px vsc-h-[30px]',
+              toggleButton: {
+                class:
+                  'vsc-bg-transparent hover:vsc-bg-[#2a2b2b] vsc-text-white vsc-rounded-sm vsc-w-[26px] vsc-h-[26px]',
+                activeClass: '!vsc-bg-[#3e51b5]',
+              },
             }"
           />
         </div>
       </div>
       <Screener
         :screener="screener"
-        class="vue-screener"
-        :style="{
-          // base styles
-          '--vs-bg-color': 'transparent',
-          '--vs-border-color': '#2a2b2b',
-          '--vs-border': 'none',
-          '--vs-text-color': 'white',
-          '--vs-border-radius': '0',
-          '--vs-font-size': '11px',
-          // cell styles
-          '--vs-cell-padding': '20px 8px',
-          '--vs-cell-border-right': 'none',
-          '--vs-cell-white-space': 'nowrap',
-          // header cell styles
-          '--vs-header-cell-font-weight': '500',
-          '--vs-header-cell-font-size': '10px',
-          '--vs-header-cell-text-transform': 'uppercase',
-          '--vs-header-cell-padding': '8px',
-          '--vs-row-background--hover': '#242424',
+        :ui="{
+          tableView: {
+            table: {
+              class: 'vsc-border-transparent',
+              header: {
+                cell: {
+                  class: 'vsc-bg-transparent vsc-border-transparent vsc-uppercase vsc-text-[10px] vsc-h-6 vsc-py-0',
+                },
+              },
+              row: {
+                class:
+                  'vsc-border-gray-700 vsc-font-medium vsc-text-[10px] vsc-text-uppercase vsc-p-2 hover:vsc-bg-[#242424] vsc-border-[#2a2b2b]',
+
+                cell: {
+                  class: 'vsc-bg-transparent vsc-border-transparent vsc-text-[11px]',
+                },
+              },
+            },
+          },
         }"
       />
-      <ScreenerPagination
-        v-if="!screener.hasError.value"
-        :screener="screener"
-        :style="{
-          '--vs-text-color': 'white',
-          '--vs-button-padding': '4px 20px',
-          '--vs-button-color': 'white',
-          '--vs-button-color--active': '#2463eb',
-          '--vs-button-bg-color': '#171717',
-          '--vs-button-bg-color--hover': '#2a2b2b',
-          '--vs-button-border': 'thin solid #2a2b2b',
-          '--vs-button-border--hover': 'thin solid #2a2b2b',
-          '--vs-button-border--active': 'thin solid #2a2b2b',
-          '--vs-text-input-border': 'thin solid #2a2b2b',
-          '--vs-text-input-bg-color': '#171717',
-          '--vs-text-input-color': 'white',
-          '--vs-font-size': '12px',
-          padding: '16px',
-        }"
-      />
+      <div class="vsc-p-4">
+        <ScreenerPagination
+          v-if="!screener.hasError.value"
+          :screener="screener"
+          :ui="{
+            nav: {
+              button: {
+                class: 'vsc-text-white vsc-h-7 vsc-py-0 vsc-px-5 vsc-bg-[#171717] hover:vsc-bg-[#2a2b2b] vsc-border-[#2a2b2b] hover:vsc-border-[#2a2b2b]', // eslint-disable-line
+                activeClass: '!vsc-border-[#2a2b2b] vsc-text-[#2463eb]',
+              },
+            },
+            leftSide: {
+              class: 'vsc-text-xs vsc-min-w-[150px]',
+            },
+            rightSide: {
+              perPageInput: {
+                class: 'vsc-bg-[#171717] vsc-border-[#2a2b2b] vsc-text-white vsc-h-7',
+              },
+            },
+          }"
+        />
+      </div>
     </div>
   </Story>
 </template>
@@ -104,6 +85,12 @@ const screener = useScreener(baseData, {
   config: {
     id: { width: 'min-content' },
     first_name: { width: 'min-content' },
+    last_name: { width: '1fr' },
+    full_name: { width: '1fr' },
+    email: { width: '1fr' },
+    gender: { width: '1fr' },
+    ip_address: { width: '1fr' },
+    '': { width: '1fr' },
   },
 })
 </script>
