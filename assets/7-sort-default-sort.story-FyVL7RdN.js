@@ -3,20 +3,11 @@ import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screene
 import { D as DevSandbox } from "./Sandbox-C3d35XFv.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "7-sort-default-sort-directions.story",
+  __name: "7-sort-default-sort.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const screener = useScreener(baseData, {
-      defaultSort: { field: "first_name", direction: "desc" },
-      config: {
-        id: { defaultSortDirection: "asc" },
-        first_name: { defaultSortDirection: "desc" },
-        last_name: { defaultSortDirection: "asc" },
-        full_name: { defaultSortDirection: "desc" },
-        email: { defaultSortDirection: "asc" },
-        gender: { defaultSortDirection: "desc" },
-        ip_address: { defaultSortDirection: "asc" }
-      }
+      defaultSort: { field: "first_name", direction: "desc" }
     });
     const __returned__ = { screener, get Screener() {
       return Screener;
@@ -28,12 +19,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "7. Sorting / Default sort directions",
+    title: "7. Sorting / Default sort",
     source: "-"
   }, {
     default: withCtx(() => [
       createVNode($setup["DevSandbox"], {
-        title: "Sorting / Default sort directions",
+        title: "Custom title",
         screener: $setup.screener
       }, {
         default: withCtx(() => [
@@ -41,8 +32,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             screener: $setup.screener,
             ui: {
               tableView: {
-                header: {
-                  cell: { class: "vsc-text-blue-500", sortingClass: "!vsc-text-[gold]" }
+                table: {
+                  header: {
+                    cell: { class: "vsc-text-blue-500", sortingClass: "!vsc-text-[gold]" }
+                  }
                 }
               }
             }
@@ -56,8 +49,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/1-basic-usage/7-sort-default-sort-directions.story.vue";
-const _7SortDefaultSortDirections_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/7-sort-default-sort-directions.story.vue"]]);
+_sfc_main.__file = "src/stories/1-basic-usage/7-sort-default-sort.story.vue";
+const _7SortDefaultSort_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/7-sort-default-sort.story.vue"]]);
 export {
-  _7SortDefaultSortDirections_story as default
+  _7SortDefaultSort_story as default
 };

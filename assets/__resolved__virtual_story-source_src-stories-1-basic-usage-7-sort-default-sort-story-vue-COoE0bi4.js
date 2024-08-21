@@ -5,8 +5,10 @@ const __resolved__virtual_storySource_srcStories1BasicUsage7SortDefaultSortStory
         :screener="screener"
         :ui="{
           tableView: {
-            header: {
-              cell: { class: 'vsc-text-blue-500', sortingClass: '!vsc-text-[gold]' },
+            table: {
+              header: {
+                cell: { class: 'vsc-text-blue-500', sortingClass: '!vsc-text-[gold]' },
+              },
             },
           },
         }"
