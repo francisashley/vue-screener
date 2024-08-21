@@ -303,7 +303,7 @@
     },
     {
       "id": "src-stories-2-configure-columns-4-pin-to-side-story-vue",
-      "title": "4. Pin to the side",
+      "title": "4. Stick to the side",
       "layout": {
         "type": "single",
         "iframe": true
@@ -319,7 +319,7 @@
       "relativePath": "src/stories/2-configure-columns/4-pin-to-side.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "4. Pin to the side"
+        "4. Stick to the side"
       ],
       "virtual": false,
       "markdownFile": null
@@ -486,30 +486,7 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-4-recipes-4-pinned-menu-story-vue",
-      "title": "1. Pinned menu",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/4-recipes/4-pinned-menu.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "1. Pinned menu"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-5-stress-test-1-stress-test-story-vue",
+      "id": "src-stories-4-other-1-stress-test-story-vue",
       "title": "1. Stress Test",
       "layout": {
         "type": "single",
@@ -523,10 +500,111 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/5-stress-test/1-stress-test.story.vue",
+      "relativePath": "src/stories/4-other/1-stress-test.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
         "1. Stress Test"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "tailwind",
+      "title": "Tailwind",
+      "group": "design-system",
+      "layout": {
+        "type": "single",
+        "iframe": false
+      },
+      "icon": "mdi:tailwind",
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "background-color",
+          "title": "Background Color",
+          "icon": "carbon:color-palette"
+        },
+        {
+          "id": "text-color",
+          "title": "Text Color",
+          "icon": "carbon:text-color"
+        },
+        {
+          "id": "border-color",
+          "title": "Border Color",
+          "icon": "carbon:color-palette"
+        },
+        {
+          "id": "padding",
+          "title": "Padding",
+          "icon": "carbon:area"
+        },
+        {
+          "id": "margin",
+          "title": "Margin",
+          "icon": "carbon:area"
+        },
+        {
+          "id": "font-size",
+          "title": "Font Size",
+          "icon": "carbon:text-font"
+        },
+        {
+          "id": "font-weight",
+          "title": "Font Weight",
+          "icon": "carbon:text-font"
+        },
+        {
+          "id": "font-family",
+          "title": "Font Family",
+          "icon": "carbon:text-font"
+        },
+        {
+          "id": "letter-spacing",
+          "title": "Letter Spacing",
+          "icon": "carbon:text-font"
+        },
+        {
+          "id": "line-height",
+          "title": "Line Height",
+          "icon": "carbon:text-font"
+        },
+        {
+          "id": "drop-shadow",
+          "title": "Drop Shadow",
+          "icon": "carbon:shape-except"
+        },
+        {
+          "id": "border-radius",
+          "title": "Border Radius",
+          "icon": "carbon:condition-wait-point"
+        },
+        {
+          "id": "border-width",
+          "title": "Border Width",
+          "icon": "carbon:checkbox"
+        },
+        {
+          "id": "width",
+          "title": "Width",
+          "icon": "carbon:pan-horizontal"
+        },
+        {
+          "id": "height",
+          "title": "Height",
+          "icon": "carbon:pan-vertical"
+        },
+        {
+          "id": "full-config",
+          "title": "Full Config",
+          "icon": "carbon:code"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "/home/runner/work/vue-screener/vue-screener/node_modules/.histoire/plugins/builtin_tailwind-tokens/Tailwind.story.js",
+      "supportPluginId": "vanilla",
+      "treePath": [
+        "Tailwind"
       ],
       "virtual": false,
       "markdownFile": null
