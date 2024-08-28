@@ -62,7 +62,7 @@
                 :item="item"
                 :ui="ui.table.row?.cell"
                 :highlight-matches="highlightMatches"
-                :highlight-value="screener.highlightQuery.value"
+                :search-query="screener.highlightQuery.value"
               >
                 <TableCell
                   :column="column"
@@ -75,7 +75,7 @@
                   :item="item"
                   :ui="ui.table.row?.cell"
                   :highlight-matches="highlightMatches"
-                  :highlight-value="screener.highlightQuery.value"
+                  :search-query="screener.highlightQuery.value"
                 >
                   <slot>
                     <span v-html="item.fields[column.field]?.htmlValue" />
