@@ -5,7 +5,7 @@ import { DataType, Column, Field, Item, UnknownObject, Config } from '@/interfac
  * @param {unknown} data - The data to check.
  * @returns {boolean} True if valid, false otherwise.
  */
-export function isValidInput(data: unknown): boolean {
+export function isValidInput(data: unknown): data is UnknownObject[] {
   const isObject = (val: unknown) => typeof val === 'object' && val !== null
   return Array.isArray(data) && data.every((item: unknown) => Array.isArray(item) || isObject(item))
 }
