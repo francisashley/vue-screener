@@ -62,6 +62,7 @@ export type Config = Record<
 >
 
 export type Item = {
+  id: string // A unique identifier for internal tracking and updating of the item.
   data: Record<string | number, any> // The original data for the item.
   fields: Record<string, Field> // The processed data for each field in the item, used for rendering.
 }

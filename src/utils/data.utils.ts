@@ -1,4 +1,5 @@
 import { DataType, Column, Field, Item, UnknownObject, Config } from '@/interfaces/screener'
+import { v4 as uuidv4 } from 'uuid'
 
 /**
  * Checks if data is an array of arrays or objects.
@@ -39,7 +40,7 @@ export function normaliseInput(data: UnknownObject[], config: Config): Item[] {
       fields[key] = normaliseField(key, item[key])
     })
 
-    return { data: item, fields }
+    return { id: uuidv4(), data: item, fields }
   })
 
   // If the input data is an array of objects with different fields, ensure that all items include all fields and in the same order.
