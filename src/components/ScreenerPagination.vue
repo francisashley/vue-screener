@@ -34,10 +34,10 @@
     >
       <UiInput
         type="number"
-        :value="screener.perPage.value"
+        :value="screener.itemsPerPage.value"
         min="1"
         step="1"
-        @input="handleChangePerPage"
+        @input="handleChangeItemsPerPage"
         :ui="ui.rightSide.perPageInput"
       />
     </div>
@@ -97,7 +97,7 @@ const ui = computed(() => {
 })
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.screener.totalItems.value / props.screener.perPage.value) || 0
+  return Math.ceil(props.screener.totalItems.value / props.screener.itemsPerPage.value) || 0
 })
 
 const getPages = computed(() => {
@@ -138,13 +138,13 @@ const canNavigateLast = computed(() => {
 })
 
 const firstIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.perPage.value - props.screener.perPage.value + 1
+  return props.screener.currentPage.value * props.screener.itemsPerPage.value - props.screener.itemsPerPage.value + 1
 })
 
 const lastIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.perPage.value > props.screener.totalItems.value
+  return props.screener.currentPage.value * props.screener.itemsPerPage.value > props.screener.totalItems.value
     ? props.screener.totalItems.value
-    : props.screener.currentPage.value * props.screener.perPage.value
+    : props.screener.currentPage.value * props.screener.itemsPerPage.value
 })
 
 const currentPageIsInRange = computed((): boolean => {
@@ -192,8 +192,8 @@ const handleSelectPage = (targetPage: number) => {
   props.screener.currentPage.value = targetPage
 }
 
-const handleChangePerPage = (event: Event): void => {
-  const perPage = Number((event.target as HTMLInputElement).value)
-  props.screener.perPage.value = perPage
+const handleChangeItemsPerPage = (event: Event): void => {
+  const itemsPerPage = Number((event.target as HTMLInputElement).value)
+  props.screener.itemsPerPage.value = itemsPerPage
 }
 </script>

@@ -94,14 +94,14 @@ export function getFields(items: Item[]): string[] {
 export function getPaginated({
   items = [],
   page = 1,
-  perPage = 25,
+  itemsPerPage = 25,
 }: {
   items: Item[]
   page: number
-  perPage: number
+  itemsPerPage: number
 }): Item[] {
-  const start = perPage * page
-  const end = start + perPage
+  const start = itemsPerPage * page
+  const end = start + itemsPerPage
 
   items = items.slice(start, end)
 

@@ -6,7 +6,7 @@ export type Screener = {
   searchQuery: Ref<string>
   highlightQuery: Ref<string>
   currentPage: Ref<number>
-  perPage: Ref<number>
+  itemsPerPage: Ref<number>
   searchOptions: Ref<SearchQueryOption[]>
   sortField: Ref<string | number | null>
   sortDirection: Ref<'asc' | 'desc'>

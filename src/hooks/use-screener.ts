@@ -21,7 +21,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const searchQuery = ref<string>('')
   const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
-  const perPage = ref<number>(25)
+  const itemsPerPage = ref<number>(25)
   const searchOptions = ref<SearchQueryOption[]>([])
   const sortField = ref<string | number | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
@@ -35,7 +35,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   // Set default state
   columnDefs.value = options.columnDefs ?? columnDefs.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
-  perPage.value = options.defaultPerPage ?? perPage.value
+  itemsPerPage.value = options.defaultPerPage ?? itemsPerPage.value
   sortField.value = options.defaultSort?.field ?? sortField.value
   sortDirection.value = options.defaultSort?.direction ?? sortDirection.value
   data.value = defaultData ?? data.value
@@ -86,7 +86,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return getPaginated({
       items: sortedData.value,
       page: currentPage.value - 1,
-      perPage: perPage.value,
+      itemsPerPage: itemsPerPage.value,
     })
   })
 
@@ -151,7 +151,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     searchQuery,
     highlightQuery,
     currentPage,
-    perPage,
+    itemsPerPage: itemsPerPage,
     searchOptions,
     sortField,
     sortDirection,
