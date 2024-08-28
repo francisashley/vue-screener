@@ -98,7 +98,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import type { Screener, Schema, Column } from '../../interfaces/screener'
+import type { Screener, Schema, ColDef } from '../../interfaces/screener'
 import TableRow, { TableRowUI } from '../ui/table/TableRow.vue'
 import TableCell, { TableCellUI } from '../ui/table/TableCell.vue'
 import Table, { TableUI } from '../ui/table/Table.vue'
@@ -180,7 +180,7 @@ const getSortDirection = (field: string | number): 'asc' | 'desc' | null => {
   return null
 }
 
-const handleClickColumnHeader = (column: Column) => {
+const handleClickColumnHeader = (column: ColDef) => {
   if (column.isSortable) {
     props.screener.actions.sort(column.field)
   }

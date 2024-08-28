@@ -14,10 +14,10 @@ export type Screener = {
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>
   items: ComputedRef<(Item | null)[]>
-  config: Ref<Config>
+  columnDefs: Ref<ColDefs>
   pick: Ref<string[]>
   omit: Ref<string[]>
-  columns: ComputedRef<Column[]>
+  columns: ComputedRef<ColDef[]>
   // schema: ComputedRef<Schema>
   fixedPageSize: Ref<boolean>
   disableSearchHighlight: Ref<boolean>
@@ -44,7 +44,7 @@ export type Schema = {
   }[]
 }
 
-export type Column = {
+export type ColDef = {
   field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
   label: string // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
@@ -56,10 +56,7 @@ export type Column = {
   format?: (item: string | number) => string // Format the value of the field.
 }
 
-export type Config = Record<
-  string | number,
-  Partial<Pick<Column, 'field' | 'width' | 'isSticky' | 'isSortable' | 'defaultSortDirection' | 'label' | 'format'>>
->
+export type ColDefs = Record<string | number, Partial<ColDef>>
 
 export type Item = {
   id: string // A unique identifier for internal tracking and updating of the item.

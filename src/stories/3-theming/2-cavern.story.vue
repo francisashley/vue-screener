@@ -82,7 +82,7 @@ const screener = useScreener(baseData, {
     link: true,
     getLink: () => '#',
   },
-  config: {
+  columnDefs: {
     id: { width: 'min-content' },
     first_name: { width: 'min-content' },
     last_name: { width: '1fr' },

@@ -1,4 +1,4 @@
-import { DataType, Column, Field, Item, UnknownObject, Config } from '@/interfaces/screener'
+import { DataType, ColDef, Field, Item, UnknownObject, ColDefs } from '@/interfaces/screener'
 import { v4 as uuidv4 } from 'uuid'
 
 /**
@@ -16,13 +16,13 @@ export function isValidInput(data: unknown): data is UnknownObject[] {
  * @param {UnknownObject[]} data - The input data.
  * @returns {Item[]} The normalised data.
  */
-export function normaliseInput(data: UnknownObject[], config: Config): Item[] {
+export function normaliseInput(data: UnknownObject[], columnDefs: ColDefs): Item[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
   const normaliseField = (field: string, value: unknown): Field => {
-    const format = config[field]?.format
+    const format = columnDefs[field]?.format
     const _value = format?.(value as string | number) ?? value
     return {
       field,
@@ -57,21 +57,21 @@ export function normaliseInput(data: UnknownObject[], config: Config): Item[] {
 
 /**
  * Picks specified fields from normalised columns.
- * @param {Column[]} columns - The columns.
+ * @param {ColDef[]} columns - The columns.
  * @param {string[]} pickColumns - Fields to pick.
- * @returns {Column[]} Rows with picked fields.
+ * @returns {ColDef[]} Rows with picked fields.
  */
-export function pickColumns(columns: Column[], pickColumns: (string | number)[]): Column[] {
+export function pickColumns(columns: ColDef[], pickColumns: (string | number)[]): ColDef[] {
   return columns.filter((column) => pickColumns.includes(column.field))
 }
 
 /**
  * Omits specified fields from normalised columns.
- * @param {Column[]} columns - The columns.
+ * @param {ColDef[]} columns - The columns.
  * @param {string[]} omitColumns - Fields to omit.
- * @returns {Column[]} Rows without omitted fields.
+ * @returns {ColDef[]} Rows without omitted fields.
  */
-export function omitColumns(columns: Column[], omitColumns: (string | number)[]): Column[] {
+export function omitColumns(columns: ColDef[], omitColumns: (string | number)[]): ColDef[] {
   const omitFieldsSet = new Set(omitColumns)
   return columns.filter((column) => !omitFieldsSet.has(column.field))
 }

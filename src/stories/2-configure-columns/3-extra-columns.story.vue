@@ -13,7 +13,7 @@ import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener = useScreener(baseData, {
   pick: ['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'extra_column'],
-  config: {
+  columnDefs: {
     id: { field: 'id', width: '50px' },
     first_name: { field: 'first_name', width: '150px' },
     last_name: { field: 'last_name', width: '150px' },

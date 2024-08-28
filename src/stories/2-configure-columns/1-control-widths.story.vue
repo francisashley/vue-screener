@@ -22,7 +22,7 @@ import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener1 = useScreener(baseData, {
-  config: {
+  columnDefs: {
     id: { field: 'id', width: '50px' },
     first_name: { field: 'first_name', width: '150px' },
     last_name: { field: 'last_name', width: '150px' },
@@ -34,7 +34,7 @@ const screener1 = useScreener(baseData, {
 })
 
 const screener2 = useScreener(primitivesData, {
-  config: {
+  columnDefs: {
     0: { field: 0, width: '50px' },
     1: { field: 1, width: '100px' },
     2: { field: 2, width: '100px' },
@@ -46,7 +46,7 @@ const screener2 = useScreener(primitivesData, {
 
 const screener3 = useScreener(mixedObjectsData, {
   pick: ['id', 'type', 'name', 'address', 'country', 'flag_colours'],
-  config: {
+  columnDefs: {
     type: { field: 'type', width: '75px' },
     name: { field: 'name', width: '100px' },
     id: { field: 'id', width: '50px' },

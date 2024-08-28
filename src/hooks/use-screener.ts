@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
-import { Config, Column, Item, Screener, UnknownObject } from '@/interfaces/screener'
+import { ColDefs, ColDef, Item, Screener, UnknownObject } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -10,7 +10,7 @@ type ScreenerOptions = {
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultSort?: { field: string; direction: 'asc' | 'desc' }
-  config?: Config
+  columnDefs?: ColDefs
   pick?: string[]
   omit?: string[]
   rowConfig?: {
@@ -30,7 +30,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const sortField = ref<string | number | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
   const data = ref<unknown[]>([])
-  const config = ref<Config>({})
+  const columnDefs = ref<ColDefs>({})
   const pick = ref<string[]>([])
   const omit = ref<string[]>([])
   const fixedPageSize = ref<boolean>(false)
@@ -44,7 +44,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   // Set default state
-  config.value = options.config ?? config.value
+  columnDefs.value = options.columnDefs ?? columnDefs.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   perPage.value = options.defaultPerPage ?? perPage.value
   sortField.value = options.defaultSort?.field ?? sortField.value
@@ -60,7 +60,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   const normalisedData = computed((): Item[] => {
-    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[], config.value) : []
+    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[], columnDefs.value) : []
   })
 
   const searchedData = computed((): Item[] => {
@@ -127,11 +127,11 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     })
   })
 
-  const columns = computed<Column[]>(() => {
+  const columns = computed<ColDef[]>(() => {
     const fields = pick.value?.length ? pick.value : getFields(normalisedData.value)
 
-    let columns: Column[] = fields.map((field, i) => {
-      const inputColumn = config.value[field] ?? {}
+    let columns: ColDef[] = fields.map((field, i) => {
+      const inputColumn = columnDefs.value[field] ?? {}
       let width = inputColumn.width ?? 'auto'
       if (!isNaN(Number(width))) width = width + 'px'
       return {
@@ -171,7 +171,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     totalItems: computed(() => searchedData.value.length),
     hasError,
     hasData,
-    config,
+    columnDefs,
     pick,
     omit,
     columns,
