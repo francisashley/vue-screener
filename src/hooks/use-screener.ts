@@ -14,7 +14,6 @@ type ScreenerOptions = {
   columnDefs?: ColDefs
   pick?: string[]
   omit?: string[]
-  fixedPageSize?: boolean
   disableSearchHighlight?: boolean
 }
 export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
@@ -30,7 +29,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const columnDefs = ref<ColDefs>({})
   const pick = ref<string[]>([])
   const omit = ref<string[]>([])
-  const fixedPageSize = ref<boolean>(false)
   const disableSearchHighlight = ref<boolean>(false)
   const height = ref<string>('400px')
 
@@ -43,7 +41,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   data.value = defaultData ?? data.value
   pick.value = options.pick ?? pick.value
   omit.value = options.omit ?? omit.value
-  fixedPageSize.value = options.fixedPageSize ?? fixedPageSize.value
   disableSearchHighlight.value = options.disableSearchHighlight ?? disableSearchHighlight.value
   height.value = options.height ?? height.value
 
@@ -90,7 +87,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
       items: sortedData.value,
       page: currentPage.value - 1,
       perPage: perPage.value,
-      padPageLength: fixedPageSize.value,
     })
   })
 
@@ -168,7 +164,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     pick,
     omit,
     columns,
-    fixedPageSize,
     disableSearchHighlight,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {

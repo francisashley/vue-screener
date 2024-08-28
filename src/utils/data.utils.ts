@@ -95,23 +95,15 @@ export function getPaginated({
   items = [],
   page = 1,
   perPage = 25,
-  padPageLength = false,
 }: {
   items: Item[]
   page: number
   perPage: number
-  padPageLength: boolean
 }): Item[] {
   const start = perPage * page
   const end = start + perPage
 
   items = items.slice(start, end)
-
-  // provide placeholders when page does not meet perPage threshold
-  if (padPageLength && items.length !== perPage) {
-    const emptyRows = Array(perPage).fill(null)
-    return Object.assign(emptyRows, items)
-  }
 
   return items
 }

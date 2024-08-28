@@ -20,7 +20,6 @@ export type Screener = {
   omit: Ref<string[]>
   columns: ComputedRef<ColDef[]>
   // schema: ComputedRef<Schema>
-  fixedPageSize: Ref<boolean>
   disableSearchHighlight: Ref<boolean>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
