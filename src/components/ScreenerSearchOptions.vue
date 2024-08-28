@@ -18,9 +18,9 @@
     </ToggleButton>
     <ToggleButton
       title="Use regular expression"
-      :active="props.screener.searchOptions.value.includes('use-regex')"
+      :active="props.screener.searchOptions.value.includes('match-regex')"
       :ui="ui?.toggleButton"
-      @click="toggleOption('use-regex')"
+      @click="toggleOption('match-regex')"
     >
       <RegularExpressionIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>

@@ -9,7 +9,7 @@ import { escapeRegExp } from './regex.utils'
  * @param {string} options - The search options.
  * @param {boolean} options.matchCase - Whether to match the case.
  * @param {boolean} options.matchWord - Whether to match whole words.
- * @param {boolean} options.useRegExp - Whether to use regular expressions for the search.
+ * @param {boolean} options.matchRegex - Whether to use regular expressions for the search.
  * @returns {boolean}
  */
 const testCriteria = (
@@ -18,12 +18,12 @@ const testCriteria = (
   options: {
     matchCase: boolean
     matchWord: boolean
-    useRegExp: boolean
+    matchRegex: boolean
   },
 ): boolean => {
-  const { matchCase = false, matchWord = false, useRegExp = false } = options
+  const { matchCase = false, matchWord = false, matchRegex = false } = options
 
-  if (!useRegExp) {
+  if (!matchRegex) {
     pattern = escapeRegExp(pattern)
   }
 
@@ -99,7 +99,7 @@ const parseSearchQuery = (searchQuery: string) => {
  * @param {Object} options - The search options.
  * @param {Item[]} options.items - The data to search.
  * @param {string} options.searchQuery - The search query string.
- * @param {boolean} options.useRegExp - Whether to use regular expressions for the search.
+ * @param {boolean} options.matchRegex - Whether to use regular expressions for the search.
  * @param {boolean} options.matchCase - Whether to match the case.
  * @param {boolean} options.matchWord - Whether to match whole words.
  * @returns {Item[]} - The matched data.
@@ -107,7 +107,7 @@ const parseSearchQuery = (searchQuery: string) => {
 export function search(options: {
   items: Item[]
   searchQuery: string
-  useRegExp: boolean
+  matchRegex: boolean
   matchCase: boolean
   matchWord: boolean
 }): Item[] {
@@ -119,7 +119,7 @@ export function search(options: {
   const { searchQuery: parsedSearchQuery, excludeFilters, includeFilters } = parseSearchQuery(searchQuery)
 
   // Get the search options.
-  const { items, useRegExp = false, matchCase = false, matchWord = false } = options
+  const { items, matchRegex = false, matchCase = false, matchWord = false } = options
 
   // Check if any of the filters match the item.
   const testExcludeFilters = (filters: [string, string][], itemMap: Record<string, Field>): boolean => {
@@ -128,7 +128,7 @@ export function search(options: {
         return testCriteria(itemMap[field].value as string, value, {
           matchCase,
           matchWord: true,
-          useRegExp,
+          matchRegex,
         })
       }
     })
@@ -140,7 +140,7 @@ export function search(options: {
         return testCriteria(itemMap[field].value as string, value, {
           matchCase,
           matchWord: true,
-          useRegExp,
+          matchRegex,
         })
       }
     })
@@ -168,7 +168,7 @@ export function search(options: {
         testCriteria(String(field.value ?? ''), parsedSearchQuery, {
           matchCase,
           matchWord,
-          useRegExp,
+          matchRegex,
         })
       ) {
         return true

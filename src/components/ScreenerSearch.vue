@@ -3,7 +3,7 @@
     type="text"
     :ui="ui"
     :value="screener.searchQuery.value"
-    :error="useRegEx && !isValidQuery"
+    :error="matchRegex && !isValidQuery"
     placeholder="Search..."
     @keydown="onKeydown"
     @input="onInput"
@@ -16,7 +16,7 @@ import { computed, ref } from 'vue'
 import { isValidRegExp } from '../utils/regex.utils'
 import UiInput, { InputUI } from './ui/input/Input.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
-export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
+export type SearchQueryOption = 'match-case' | 'match-word' | 'match-regex'
 
 export type ScreenerSearchUI = InputUI
 
@@ -38,8 +38,8 @@ const ui = computed(() => {
 const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
-const useRegEx = computed<boolean>(() => {
-  return props.screener.searchOptions.value.some((activeOption) => activeOption === 'use-regex')
+const matchRegex = computed<boolean>(() => {
+  return props.screener.searchOptions.value.some((activeOption) => activeOption === 'match-regex')
 })
 
 const isValidQuery = computed((): boolean => {

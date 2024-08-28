@@ -67,7 +67,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return search({
       items: normalisedData.value,
       searchQuery: searchQuery.value,
-      useRegExp: searchOptions.value.includes('use-regex'),
+      matchRegex: searchOptions.value.includes('match-regex'),
       matchCase: searchOptions.value.includes('match-case'),
       matchWord: searchOptions.value.includes('match-word'),
     })
