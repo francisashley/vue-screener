@@ -19,7 +19,10 @@
     </NoDataView>
 
     <BadDataView v-else-if="view === 'bad-data'" :ui="props.ui?.badDataView">
-      <slot name="bad-data">Invalid data provided.<br />Please provide an array of objects or an array of arrays.</slot>
+      <slot name="bad-data">
+        <h4 class="vsc-font-medium vsc-mb-1">Invalid data provided.</h4>
+        <p>Please provide an array of objects or an array of arrays.</p>
+      </slot>
     </BadDataView>
   </section>
 </template>

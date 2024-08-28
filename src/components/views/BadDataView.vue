@@ -17,7 +17,7 @@ const props = defineProps<{
 }>()
 
 const uiDefaults = {
-  class: 'vsc-overflow-hidden vsc-flex vsc-text-center vsc-justify-center vsc-items-center vsc-py-24 vsc-border vsc-border-red-500 vsc-text-red-500 vsc-rounded', // eslint-disable-line
+  class: 'vsc-overflow-hidden vsc-flex vsc-flex-col vsc-text-center vsc-justify-center vsc-items-center vsc-py-24 vsc-border vsc-border-red-500 vsc-text-red-500 vsc-rounded', // eslint-disable-line
 }
 
 const ui = computed(() => {
