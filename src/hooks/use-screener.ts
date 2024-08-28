@@ -4,7 +4,7 @@ import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pic
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 import { orderBy } from 'natural-orderby'
-import { highlightText } from '../utils/text.utils'
+import { highlightMatches } from '../utils/text.utils'
 
 type ScreenerOptions = {
   height?: string // a css height
@@ -107,7 +107,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
               ...field,
               htmlValue: disableSearchHighlight.value
                 ? field.value
-                : highlightText(field.value ? String(field.value) : '', highlightQuery.value),
+                : highlightMatches(field.value ? String(field.value) : '', highlightQuery.value),
             },
           }
         }, {}),

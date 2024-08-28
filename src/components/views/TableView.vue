@@ -61,7 +61,7 @@
                 :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
                 :item="item"
                 :ui="ui.table.row?.cell"
-                :highlight="highlightText"
+                :highlight-matches="highlightMatches"
                 :highlight-value="screener.highlightQuery.value"
               >
                 <TableCell
@@ -74,7 +74,7 @@
                   :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
                   :item="item"
                   :ui="ui.table.row?.cell"
-                  :highlight="highlightText"
+                  :highlight-matches="highlightMatches"
                   :highlight-value="screener.highlightQuery.value"
                 >
                   <slot>
@@ -99,7 +99,7 @@ import TableCell, { TableCellUI } from '../ui/table/TableCell.vue'
 import Table, { TableUI } from '../ui/table/Table.vue'
 import TableHead, { TableHeadUI } from '../ui/table/TableHead.vue'
 import SortIcon, { SortIconUI } from '../icons/SortIcon.vue'
-import { highlightText } from '../../utils/text.utils'
+import { highlightMatches } from '../../utils/text.utils'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 
 export type TableViewUI = {
