@@ -17,7 +17,7 @@ const props = defineProps<{
 }>()
 
 const uiDefaults = {
-  class: 'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-border-t vsc-border-zinc-700', // eslint-disable-line
+  class: 'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-border-b vsc-border-zinc-700 vsc-h-fit', // eslint-disable-line
 }
 
 const ui = computed(() => {

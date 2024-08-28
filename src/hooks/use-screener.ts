@@ -7,6 +7,7 @@ import { orderBy } from 'natural-orderby'
 import { highlightText } from '../utils/text.utils'
 
 type ScreenerOptions = {
+  height?: string // a css height
   defaultCurrentPage?: number
   defaultPerPage?: number
   defaultSort?: { field: string; direction: 'asc' | 'desc' }
@@ -21,7 +22,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const searchQuery = ref<string>('')
   const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
-  const perPage = ref<number>(10)
+  const perPage = ref<number>(25)
   const searchOptions = ref<SearchQueryOption[]>([])
   const sortField = ref<string | number | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
@@ -31,6 +32,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const omit = ref<string[]>([])
   const fixedPageSize = ref<boolean>(false)
   const disableSearchHighlight = ref<boolean>(false)
+  const height = ref<string>('400px')
 
   // Set default state
   columnDefs.value = options.columnDefs ?? columnDefs.value
@@ -43,6 +45,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   omit.value = options.omit ?? omit.value
   fixedPageSize.value = options.fixedPageSize ?? fixedPageSize.value
   disableSearchHighlight.value = options.disableSearchHighlight ?? disableSearchHighlight.value
+  height.value = options.height ?? height.value
 
   const hasError = computed((): boolean => {
     return !isValidInput(data.value)
@@ -148,6 +151,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   return {
+    height,
     searchQuery,
     highlightQuery,
     currentPage,

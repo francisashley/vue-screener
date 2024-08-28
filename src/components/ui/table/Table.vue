@@ -20,7 +20,7 @@ const props = defineProps<{
 }>()
 
 const uiDefaults = {
-  class: 'vsc-grid vsc-rounded vsc-border vsc-overflow-auto vsc-border-zinc-700 vsc-text-zinc-200',
+  class: 'vsc-grid vsc-rounded vsc-border vsc-overflow-auto vsc-border-zinc-700 vsc-text-zinc-200 vsc-auto-rows-min',
 }
 
 const ui = computed(() => {

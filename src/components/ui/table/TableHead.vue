@@ -17,7 +17,8 @@ const props = defineProps<{
 }>()
 
 const uiDefaults = {
-  class: 'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-font-bold',
+  class:
+    'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-font-bold vsc-border-b vsc-border-zinc-700 vsc-sticky vsc-top-0 vsc-h-fit',
 }
 
 const ui = computed(() => {
