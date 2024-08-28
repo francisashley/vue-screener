@@ -13,10 +13,6 @@ type ScreenerOptions = {
   columnDefs?: ColDefs
   pick?: string[]
   omit?: string[]
-  rowConfig?: {
-    link?: boolean
-    getLink?: (item: Item) => string
-  }
   fixedPageSize?: boolean
   disableSearchHighlight?: boolean
 }
@@ -35,13 +31,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const omit = ref<string[]>([])
   const fixedPageSize = ref<boolean>(false)
   const disableSearchHighlight = ref<boolean>(false)
-  const rowConfig = ref<{
-    link?: boolean
-    getLink?: (item: Item) => string
-  }>({
-    link: options.rowConfig?.link ?? false,
-    getLink: options.rowConfig?.getLink,
-  })
 
   // Set default state
   columnDefs.value = options.columnDefs ?? columnDefs.value
@@ -175,7 +164,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     pick,
     omit,
     columns,
-    rowConfig,
     fixedPageSize,
     disableSearchHighlight,
     actions: {

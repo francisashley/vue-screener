@@ -21,10 +21,6 @@ export type Screener = {
   // schema: ComputedRef<Schema>
   fixedPageSize: Ref<boolean>
   disableSearchHighlight: Ref<boolean>
-  rowConfig: Ref<{
-    link?: boolean
-    getLink?: (item: any) => string
-  }>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string | number) => void

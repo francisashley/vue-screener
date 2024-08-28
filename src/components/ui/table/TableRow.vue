@@ -1,17 +1,11 @@
 <template>
-  <component
-    :is="type === 'router-link' ? resolveComponent('router-link') : 'div'"
-    :to="to"
-    :href="to"
-    :external="external"
-    :class="{ [ui.class]: true }"
-  >
+  <div :class="{ [ui.class]: true }">
     <slot />
-  </component>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, resolveComponent } from 'vue'
+import { computed } from 'vue'
 import { twMerge } from '../../../utils/tailwind-merge.utils'
 
 export type TableRowUI = {
@@ -19,9 +13,6 @@ export type TableRowUI = {
 }
 
 const props = defineProps<{
-  type?: 'div' | 'router-link'
-  to?: string
-  external?: boolean
   ui?: TableRowUI
 }>()
 

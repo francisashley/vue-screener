@@ -47,12 +47,7 @@
         </template>
       </TableHead>
       <template v-for="(item, _i) in screener.items.value" :key="_i">
-        <TableRow
-          :type="screener.rowConfig.value.link ? 'router-link' : 'div'"
-          :to="screener.rowConfig.value.getLink?.(item)"
-          :ui="ui.table.row"
-          external
-        >
+        <TableRow :ui="ui.table.row">
           <template v-if="item">
             <template v-for="(column, _j) in screener.columns.value" :key="_j">
               <slot

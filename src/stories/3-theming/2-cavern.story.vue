@@ -78,10 +78,6 @@ import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {
   pick: ['', 'id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', ''],
-  rowConfig: {
-    link: true,
-    getLink: () => '#',
-  },
   columnDefs: {
     id: { width: 'min-content' },
     first_name: { width: 'min-content' },
