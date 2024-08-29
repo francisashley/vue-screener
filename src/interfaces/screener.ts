@@ -18,25 +18,11 @@ export type Screener = {
   pick: Ref<string[]>
   omit: Ref<string[]>
   columns: ComputedRef<ColDef[]>
-  // schema: ComputedRef<Schema>
   disableSearchHighlight: Ref<boolean>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string | number) => void
   }
-}
-
-// export type Schema = {
-//   columns: string[]
-//   fields: Record<string, DataType | DataType[]>
-// }
-
-export type Schema = {
-  fields: {
-    field: string | number
-    width?: string
-    type: DataType | DataType[]
-  }[]
 }
 
 export type ColDef = {

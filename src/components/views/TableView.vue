@@ -1,5 +1,5 @@
 <template>
-  <Table :schema="schema" :ui="ui.table">
+  <Table :column-defs="screener.columns.value" :ui="ui.table">
     <template #default="{ isScrollable, isScrolledEnd }">
       <TableHead :ui="ui.table.header">
         <!-- @ts-ignore -->
@@ -91,7 +91,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import type { Screener, Schema, ColDef } from '../../interfaces/screener'
+import type { Screener, ColDef } from '../../interfaces/screener'
 import TableRow, { TableRowUI } from '../ui/table/TableRow.vue'
 import TableCell, { TableCellUI } from '../ui/table/TableCell.vue'
 import Table, { TableUI } from '../ui/table/Table.vue'
@@ -119,16 +119,6 @@ const props = defineProps<{
   screener: Screener
   ui?: TableViewUI
 }>()
-
-const schema = computed(
-  (): Schema => ({
-    fields: props.screener.columns.value.map((column) => ({
-      field: column.field,
-      width: column.width,
-      type: 'string',
-    })),
-  }),
-)
 
 const uiDefaults = {
   table: {
