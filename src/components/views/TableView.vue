@@ -76,7 +76,7 @@
                   :search-query="screener.searchQuery.value"
                 >
                   <slot>
-                    <span v-html="item.fields[column.field]?.htmlValue" />
+                    <span v-html="handleHighlightMatches(String(item.fields[column.field]?.value))" />
                   </slot>
                 </TableCell>
               </slot>
@@ -177,5 +177,11 @@ const handleClickColumnHeader = (column: ColDef) => {
   if (column.isSortable) {
     props.screener.actions.sort(column.field)
   }
+}
+
+const handleHighlightMatches = (text: string): string => {
+  const disableSearchHighlight = props.screener.disableSearchHighlight.value
+  const searchQuery = props.screener.searchQuery.value
+  return !disableSearchHighlight ? highlightMatches(text, searchQuery) : text
 }
 </script>
