@@ -82,7 +82,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const columnDefs = computed<ColDef[]>(() => {
     const fields = pick.value?.length ? pick.value : getFields(normalisedData.value)
 
-    let columnDefs: ColDef[] = fields.map((field, i) => {
+    let columns: ColDef[] = fields.map((field, i) => {
       const inputColumn = options.columnDefs?.[field] ?? {}
       let width = inputColumn.width ?? 'auto'
       if (!isNaN(Number(width))) width = width + 'px'
@@ -100,14 +100,14 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     })
 
     if (options.pick && options.pick.length > 0) {
-      columnDefs = pickColumns(columnDefs, options.pick)
+      columns = pickColumns(columns, options.pick)
     }
 
     if (omit.value && omit.value.length > 0) {
-      columnDefs = omitColumns(columnDefs, omit.value)
+      columns = omitColumns(columns, omit.value)
     }
 
-    return columnDefs
+    return columns
   })
 
   return {
