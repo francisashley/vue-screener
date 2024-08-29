@@ -1,4 +1,4 @@
-import { DataType, ColDef, Field, Item, UnknownObject, ColDefs } from '@/interfaces/screener'
+import { DataType, ColDef, Field, Item, UnknownObject } from '@/interfaces/screener'
 import { v4 as uuidv4 } from 'uuid'
 
 /**
@@ -16,18 +16,15 @@ export function isValidInput(data: unknown): data is UnknownObject[] {
  * @param {UnknownObject[]} data - The input data.
  * @returns {Item[]} The normalised data.
  */
-export function normaliseInput(data: UnknownObject[], columnDefs: ColDefs): Item[] {
+export function normaliseInput(data: UnknownObject[]): Item[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
   const normaliseField = (field: string, value: unknown): Field => {
-    const format = columnDefs[field]?.format
-    const _value = format?.(value as string | number) ?? value
     return {
       field,
       type: getTypeOf(value),
-      value: String(_value),
     }
   }
 

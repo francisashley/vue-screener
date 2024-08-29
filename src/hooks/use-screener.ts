@@ -47,7 +47,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   const normalisedData = computed((): Item[] => {
-    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[], columnDefs.value) : []
+    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
   })
 
   const searchedData = computed((): Item[] => {

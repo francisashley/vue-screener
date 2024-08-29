@@ -62,7 +62,6 @@ export type Item = {
 export type Field = {
   field: string // The field name.
   type: DataType // Data type of the value.
-  value?: number | string | null // Value of the field.
 }
 
 export interface UnknownObject {
