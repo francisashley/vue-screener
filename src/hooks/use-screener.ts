@@ -19,7 +19,6 @@ type ScreenerOptions = {
 export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
   // State
   const searchQuery = ref<string>('')
-  const highlightQuery = ref<string>('')
   const currentPage = ref<number>(1)
   const itemsPerPage = ref<number>(25)
   const searchOptions = ref<SearchQueryOption[]>([])
@@ -107,7 +106,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
               ...field,
               htmlValue: disableSearchHighlight.value
                 ? field.value
-                : highlightMatches(field.value ? String(field.value) : '', highlightQuery.value),
+                : highlightMatches(field.value ? String(field.value) : '', searchQuery.value),
             },
           }
         }, {}),
@@ -149,7 +148,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   return {
     height,
     searchQuery,
-    highlightQuery,
     currentPage,
     itemsPerPage: itemsPerPage,
     searchOptions,
@@ -168,7 +166,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query
-        highlightQuery.value = query
         if (options) {
           searchOptions.value = options
         }

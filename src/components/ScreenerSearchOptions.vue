@@ -75,11 +75,11 @@ const ui = computed(() => {
 const toggleOption = (option: SearchQueryOption) => {
   if (props.screener.searchOptions.value.includes(option)) {
     props.screener.actions.search(
-      props.screener.highlightQuery.value,
+      props.screener.searchQuery.value,
       props.screener.searchOptions.value.filter((activeOption) => activeOption !== option),
     )
   } else {
-    props.screener.actions.search(props.screener.highlightQuery.value, [...props.screener.searchOptions.value, option])
+    props.screener.actions.search(props.screener.searchQuery.value, [...props.screener.searchOptions.value, option])
   }
 }
 </script>
