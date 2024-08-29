@@ -13,7 +13,7 @@ export type Screener = {
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>
-  items: ComputedRef<(Item | null)[]>
+  items: ComputedRef<Item[]>
   pick: Ref<string[]>
   omit: Ref<string[]>
   columnDefs: ComputedRef<ColDef[]>

@@ -65,15 +65,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     const _sortField = sortField.value
 
     if (_sortField && sortDirection.value) {
-      const nullItems = sortedItems.filter(
-        (item) => item.data[_sortField] === null || item.data[_sortField] === undefined,
-      )
-
-      const nonNullItems = sortedItems.filter(
-        (item) => item.data[_sortField] !== null && item.data[_sortField] !== undefined,
-      )
-
-      return [...orderBy(nonNullItems, [(item: Item) => item.data[_sortField]], [sortDirection.value]), ...nullItems]
+      return [...orderBy(sortedItems, [(item: Item) => item.data[_sortField]], [sortDirection.value])]
     } else {
       return sortedItems
     }
@@ -88,12 +80,11 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   const hasData = computed((): boolean => {
-    return paginatedData.value.filter((item) => item !== null).length > 0
+    return paginatedData.value.length > 0
   })
 
   const items = computed(() => {
     return paginatedData.value.map((item) => {
-      if (!item) return null
       return {
         ...item,
         fields: Object.keys(item.fields).reduce((acc, key) => {
