@@ -121,6 +121,31 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return columns
   })
 
+  const actions = {
+    search: (query: string, options?: SearchQueryOption[]) => {
+      searchQuery.value = query
+      if (options) {
+        searchOptions.value = options
+      }
+    },
+    sort: (field: string | number) => {
+      const fieldConfig = columnDefs.value.find((columnDefs) => columnDefs.field === field)
+      sortDirection.value =
+        sortField.value === field
+          ? sortDirection.value === 'desc'
+            ? 'asc'
+            : 'desc'
+          : fieldConfig?.defaultSortDirection || sortDirection.value
+
+      sortField.value = field
+    },
+    navToFirstPage: () => (currentPage.value = 1),
+    navToPrevPage: () => (currentPage.value = currentPage.value - 1),
+    navToPage: (page: number) => (currentPage.value = page),
+    navToNextPage: () => (currentPage.value = currentPage.value + 1),
+    navToLastPage: () => (currentPage.value = Math.ceil(searchedData.value.length / itemsPerPage.value) || 0),
+  }
+
   return {
     preferences,
     searchQuery,
@@ -134,25 +159,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     totalItems: computed(() => searchedData.value.length),
     hasError,
     columnDefs,
-    actions: {
-      search: (query: string, options?: SearchQueryOption[]) => {
-        searchQuery.value = query
-        if (options) {
-          searchOptions.value = options
-        }
-      },
-      sort: (field: string | number) => {
-        const fieldConfig = columnDefs.value.find((columnDefs) => columnDefs.field === field)
-
-        sortDirection.value =
-          sortField.value === field
-            ? sortDirection.value === 'desc'
-              ? 'asc'
-              : 'desc'
-            : fieldConfig?.defaultSortDirection || sortDirection.value
-
-        sortField.value = field
-      },
-    },
+    actions,
   }
 }

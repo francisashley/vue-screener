@@ -12,19 +12,13 @@
     </div>
 
     <div :class="{ [ui.nav.class]: true }">
-      <UiButton :disabled="!canNavigateFirst" @click="handleClickFirst" :ui="ui.nav.button">First</UiButton>
-      <UiButton :disabled="!canNavigatePrev" @click="handleClickPrev" :ui="ui.nav.button">Prev</UiButton>
-      <UiButton
-        v-for="page in getPages"
-        :key="page"
-        :active="isActive(page)"
-        @click="handleSelectPage(page)"
-        :ui="ui.nav.button"
-      >
+      <UiButton :disabled="!canNavigateFirst" @click="screener.actions.navToFirstPage" :ui="ui.nav.button">First</UiButton> <!-- eslint-disable-line -->
+      <UiButton :disabled="!canNavigatePrev" @click="screener.actions.navToPrevPage" :ui="ui.nav.button">Prev</UiButton>
+      <UiButton v-for="page in getPages" :key="page" :active="isActive(page)" @click="screener.actions.navToPage(page)" :ui="ui.nav.button"> <!-- eslint-disable-line -->
         {{ page }}
       </UiButton>
-      <UiButton :disabled="!canNavigateNext" @click="handleClickNext" :ui="ui.nav.button">Next</UiButton>
-      <UiButton :disabled="!canNavigateLast" @click="handleClickLast" :ui="ui.nav.button">Last</UiButton>
+      <UiButton :disabled="!canNavigateNext" @click="screener.actions.navToNextPage" :ui="ui.nav.button">Next</UiButton>
+      <UiButton :disabled="!canNavigateLast" @click="screener.actions.navToLastPage" :ui="ui.nav.button">Last</UiButton>
     </div>
 
     <div
@@ -168,28 +162,8 @@ const isActive = (page: number): boolean => {
 
 const ensureCurrentPageIsValid = (): void => {
   if (!currentPageIsInRange.value) {
-    handleSelectPage(totalPages.value ? totalPages.value : 1)
+    props.screener.actions.navToPage(totalPages.value ? totalPages.value : 1)
   }
-}
-
-const handleClickFirst = () => {
-  props.screener.currentPage.value = 1
-}
-
-const handleClickPrev = () => {
-  props.screener.currentPage.value = canNavigatePrev.value ? props.screener.currentPage.value - 1 : 1
-}
-
-const handleClickNext = () => {
-  props.screener.currentPage.value = canNavigateNext.value ? props.screener.currentPage.value + 1 : totalPages.value
-}
-
-const handleClickLast = () => {
-  props.screener.currentPage.value = totalPages.value
-}
-
-const handleSelectPage = (targetPage: number) => {
-  props.screener.currentPage.value = targetPage
 }
 
 const handleChangeItemsPerPage = (event: Event): void => {

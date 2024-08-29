@@ -17,6 +17,11 @@ export type Screener = {
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string | number) => void
+    navToFirstPage: () => void
+    navToPrevPage: () => void
+    navToPage: (page: number) => void
+    navToNextPage: () => void
+    navToLastPage: () => void
   }
 }
 
