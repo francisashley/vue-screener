@@ -64,7 +64,6 @@ export type Field = {
   type: DataType // Data type of the value.
   value?: number | string | null // Value of the field.
   htmlValue: string // HTML representation of the value, used for rendering.
-  hasValue: boolean // Flag indicating if the field has a value.
 }
 
 export interface UnknownObject {

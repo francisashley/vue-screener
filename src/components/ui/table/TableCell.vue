@@ -4,7 +4,6 @@
       [ui.class]: true,
       [ui.isFirstClass]: isFirst,
       [ui.isLastClass]: isLast,
-      [ui.hasValueClass]: hasValue,
       [ui.isStickyClass]: isSticky,
       [ui.isStickyOverlappingClass]: isStickyOverlapping,
     }"
@@ -21,7 +20,6 @@ export type TableCellUI = {
   class?: string
   isFirstClass?: string
   isLastClass?: string
-  hasValueClass?: string
   isStickyClass?: string
   isStickyOverlappingClass?: string
 }
@@ -29,7 +27,6 @@ export type TableCellUI = {
 const props = defineProps<{
   isFirst?: boolean
   isLast?: boolean
-  hasValue?: boolean
   isSticky?: boolean
   isStickyOverlapping?: boolean
   ui?: TableCellUI
@@ -47,7 +44,6 @@ const ui = computed(() => {
     class: twMerge(uiDefaults.class, props.ui?.class), // eslint-disable-line
     isFirstClass: twMerge(props.ui?.isFirstClass),
     isLastClass: twMerge(props.ui?.isLastClass, uiDefaults.isLastClass),
-    hasValueClass: twMerge(props.ui?.hasValueClass),
     isStickyClass: twMerge(props.ui?.isStickyClass, uiDefaults.isStickyClass),
     isStickyOverlappingClass: twMerge(props.ui?.isStickyOverlappingClass, uiDefaults.isStickyOverlappingClass),
   }

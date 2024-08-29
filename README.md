@@ -163,7 +163,6 @@ You can style components and their subcomponents by passing an object to the ui 
           class?: string
           isFirstClass?: string
           isLastClass?: string
-          hasValueClass?: string
           isStickyClass?: string
           isStickyOverlappingClass?: string
           sortableClass?: string
@@ -180,7 +179,6 @@ You can style components and their subcomponents by passing an object to the ui 
           class?: string
           isFirstClass?: string
           isLastClass?: string
-          hasValueClass?: string
           isStickyClass?: string
           isStickyOverlappingClass?: string
         }

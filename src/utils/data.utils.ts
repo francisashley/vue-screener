@@ -29,7 +29,6 @@ export function normaliseInput(data: UnknownObject[], columnDefs: ColDefs): Item
       type: getTypeOf(value),
       value: String(_value),
       htmlValue: String(_value),
-      hasValue: value !== null || value !== undefined,
     }
   }
 
