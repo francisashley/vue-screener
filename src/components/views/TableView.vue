@@ -48,10 +48,21 @@
       </TableHead>
       <template v-for="(item, _i) in screener.items.value" :key="_i">
         <TableRow :ui="ui.table.row">
-          <template v-if="item">
-            <template v-for="(column, _j) in screener.columnDefs.value" :key="_j">
-              <slot
-                name="data"
+          <template v-for="(column, _j) in screener.columnDefs.value" :key="_j">
+            <slot
+              name="data"
+              :column="column"
+              :value="column.field"
+              :is-first="column.isFirst"
+              :is-last="column.isLast"
+              :is-sticky="column.isSticky"
+              :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
+              :item="item"
+              :ui="ui.table.row?.cell"
+              :highlight-matches="highlightMatches"
+              :search-query="screener.searchQuery.value"
+            >
+              <TableCell
                 :column="column"
                 :value="column.field"
                 :is-first="column.isFirst"
@@ -63,26 +74,12 @@
                 :highlight-matches="highlightMatches"
                 :search-query="screener.searchQuery.value"
               >
-                <TableCell
-                  :column="column"
-                  :value="column.field"
-                  :is-first="column.isFirst"
-                  :is-last="column.isLast"
-                  :is-sticky="column.isSticky"
-                  :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
-                  :item="item"
-                  :ui="ui.table.row?.cell"
-                  :highlight-matches="highlightMatches"
-                  :search-query="screener.searchQuery.value"
-                >
-                  <slot>
-                    <span v-html="processValue(item.data[column.field], column)" />
-                  </slot>
-                </TableCell>
-              </slot>
-            </template>
+                <slot>
+                  <span v-html="processValue(item.data[column.field], column)" />
+                </slot>
+              </TableCell>
+            </slot>
           </template>
-          <template v-else>&nbsp;</template>
         </TableRow>
       </template>
     </template>
