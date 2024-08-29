@@ -16,7 +16,8 @@ type ScreenerOptions = {
   height?: string // a css height
   defaultCurrentPage?: number
   defaultItemsPerPage?: number
-  defaultSort?: { field: string; direction: 'asc' | 'desc' }
+  defaultSortField?: string
+  defaultSortDirection?: 'asc' | 'desc'
   columnDefs?: ColDefs
   pick?: string[]
   omit?: string[]
@@ -43,8 +44,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   // Set default state
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   itemsPerPage.value = options.defaultItemsPerPage ?? itemsPerPage.value
-  sortField.value = options.defaultSort?.field ?? sortField.value
-  sortDirection.value = options.defaultSort?.direction ?? sortDirection.value
+  sortField.value = options.defaultSortField ?? sortField.value
+  sortDirection.value = options.defaultSortDirection ?? sortDirection.value
   data.value = defaultData ?? data.value
 
   const hasError = computed((): boolean => {

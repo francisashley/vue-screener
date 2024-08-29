@@ -23,7 +23,8 @@ import DevSandbox from '../../components/dev/Sandbox.vue'
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {
-  defaultSort: { field: 'first_name', direction: 'desc' },
+  defaultSortField: 'first_name',
+  defaultSortDirection: 'desc',
   columnDefs: {
     id: { defaultSortDirection: 'asc' },
     first_name: { defaultSortDirection: 'desc' },
