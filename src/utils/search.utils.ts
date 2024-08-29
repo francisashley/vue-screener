@@ -1,4 +1,4 @@
-import { Field, Item } from '@/interfaces/screener'
+import { Item, ColDef } from '@/interfaces/screener'
 import { escapeRegExp } from './regex.utils'
 
 /**
@@ -106,6 +106,7 @@ const parseSearchQuery = (searchQuery: string) => {
  */
 export function search(options: {
   items: Item[]
+  columnDefs: ColDef[]
   searchQuery: string
   matchRegex: boolean
   matchCase: boolean
@@ -122,10 +123,10 @@ export function search(options: {
   const { items, matchRegex = false, matchCase = false, matchWord = false } = options
 
   // Check if any of the filters match the item.
-  const testExcludeFilters = (filters: [string, string][], itemMap: Record<string, Field>): boolean => {
+  const testExcludeFilters = (filters: [string, string][], item: Item): boolean => {
     return filters.some(([field, value]) => {
-      if (itemMap[field]) {
-        return testCriteria(itemMap[field].value as string, value, {
+      if (item.data[field]) {
+        return testCriteria(item.data[field].value as string, value, {
           matchCase,
           matchWord: true,
           matchRegex,
@@ -134,10 +135,10 @@ export function search(options: {
     })
   }
 
-  const testIncludeFilters = (filters: [string, string][], itemMap: Record<string, Field>): boolean => {
+  const testIncludeFilters = (filters: [string, string][], item: Item): boolean => {
     return filters.every(([field, value]) => {
-      if (itemMap[field]) {
-        return testCriteria(itemMap[field].value as string, value, {
+      if (item.data[field]) {
+        return testCriteria(item.data[field].value as string, value, {
           matchCase,
           matchWord: true,
           matchRegex,
@@ -148,24 +149,21 @@ export function search(options: {
 
   // Filter the items.
   return items.filter((item): boolean => {
-    // Create a map of the item fields for easy look up.
-    const itemMap: Record<string, Field> = item.fields
-
     let shouldExclude = false
     let shouldInclude = true
     let meetsSearchCriteria = true
 
-    if (excludeFilters.length && testExcludeFilters(excludeFilters, itemMap)) {
+    if (excludeFilters.length && testExcludeFilters(excludeFilters, item)) {
       shouldExclude = true
     }
 
-    if (includeFilters.length && !testIncludeFilters(includeFilters, itemMap)) {
+    if (includeFilters.length && !testIncludeFilters(includeFilters, item)) {
       shouldInclude = false
     }
 
-    meetsSearchCriteria = Object.values(item.fields).some((field) => {
+    meetsSearchCriteria = options.columnDefs.some((columnDef) => {
       if (
-        testCriteria(String(field.value ?? ''), parsedSearchQuery, {
+        testCriteria(String(columnDef.field ? item.data[columnDef.field] : ''), parsedSearchQuery, {
           matchCase,
           matchWord,
           matchRegex,

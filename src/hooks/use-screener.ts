@@ -51,6 +51,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const searchedData = computed((): Item[] => {
     return search({
       items: normalisedData.value,
+      columnDefs: columnDefs.value,
       searchQuery: searchQuery.value,
       matchRegex: searchOptions.value.includes('match-regex'),
       matchCase: searchOptions.value.includes('match-case'),
