@@ -1,4 +1,4 @@
-import { DataType, ColDef, Field, Item, UnknownObject } from '@/interfaces/screener'
+import { DataType, ColDef, Item, UnknownObject } from '@/interfaces/screener'
 import { v4 as uuidv4 } from 'uuid'
 
 /**
@@ -20,34 +20,12 @@ export function normaliseInput(data: UnknownObject[]): Item[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
-  // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
-  const normaliseField = (field: string, value: unknown): Field => {
-    return {
-      field,
-      type: getTypeOf(value),
-    }
-  }
-
   // Normalise each item into an array of normalised fields.
   const normalisedData = transformedData.map((item: UnknownObject): Item => {
-    const fields: Record<string, Field> = {}
-    Object.keys(item).forEach((key) => {
-      fields[key] = normaliseField(key, item[key])
-    })
-
-    return { id: uuidv4(), data: item, fields }
+    return { id: uuidv4(), data: item }
   })
 
-  // If the input data is an array of objects with different fields, ensure that all items include all fields and in the same order.
-  const fields = getFields(normalisedData)
-  return normalisedData.map((item) => {
-    fields.forEach((field) => {
-      if (!item.fields[field]) {
-        item.fields[field] = normaliseField(field, undefined)
-      }
-    })
-    return item
-  })
+  return normalisedData
 }
 
 /**
@@ -77,7 +55,7 @@ export function omitColumns(columns: ColDef[], omitColumns: (string | number)[])
  * @returns {string[]} Unique field keys.
  */
 export function getFields(items: Item[]): string[] {
-  const fields = new Set<string>(items.flatMap((item) => Object.values(item.fields).map((field) => field.field)))
+  const fields = new Set<string>(items.flatMap((item) => Object.keys(item.data)))
   return Array.from(fields)
 }
 

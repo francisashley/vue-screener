@@ -40,12 +40,6 @@ export type ColDefs = Record<string | number, Partial<ColDef>>
 export type Item = {
   id: string // A unique identifier for internal tracking and updating of the item.
   data: Record<string | number, any> // The original data for the item.
-  fields: Record<string, Field> // The processed data for each field in the item, used for rendering.
-}
-
-export type Field = {
-  field: string // The field name.
-  type: DataType // Data type of the value.
 }
 
 export interface UnknownObject {

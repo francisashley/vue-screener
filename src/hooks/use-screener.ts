@@ -79,17 +79,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     })
   })
 
-  const items = computed(() => {
-    return paginatedData.value.map((item) => {
-      return {
-        ...item,
-        fields: Object.keys(item.fields).reduce((acc, key) => {
-          return { ...acc, [key]: item.fields[key] }
-        }, {}),
-      }
-    })
-  })
-
   const columnDefs = computed<ColDef[]>(() => {
     const fields = pick.value?.length ? pick.value : getFields(normalisedData.value)
 
@@ -130,7 +119,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     sortField,
     sortDirection,
     data,
-    items,
+    items: paginatedData,
     totalItems: computed(() => searchedData.value.length),
     hasError,
     columnDefs,
