@@ -52,13 +52,13 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return !isValidInput(data.value)
   })
 
-  const normalisedData = computed((): Item[] => {
+  const allItems = computed((): Item[] => {
     return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
   })
 
-  const searchedData = computed((): Item[] => {
+  const filteredItems = computed((): Item[] => {
     return search({
-      items: normalisedData.value,
+      items: allItems.value,
       columnDefs: columnDefs.value,
       searchQuery: searchQuery.value,
       matchRegex: searchOptions.value.includes('match-regex'),
@@ -67,8 +67,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     })
   })
 
-  const sortedData = computed((): Item[] => {
-    const sortedItems = searchQuery.value ? searchedData.value : normalisedData.value
+  const sortedItems = computed((): Item[] => {
+    const sortedItems = searchQuery.value ? filteredItems.value : allItems.value
 
     const _sortField = sortField.value
 
@@ -84,14 +84,14 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
 
   const paginatedItems = computed((): Item[] => {
     return getPaginated({
-      items: sortedData.value,
+      items: sortedItems.value,
       page: currentPage.value - 1,
       itemsPerPage: itemsPerPage.value,
     })
   })
 
   const columnDefs = computed<ColDef[]>(() => {
-    const fields = preferences.value.pick.length ? preferences.value.pick : getFields(normalisedData.value)
+    const fields = preferences.value.pick.length ? preferences.value.pick : getFields(allItems.value)
 
     let columns: ColDef[] = fields.map((field, i) => {
       const inputColumn = options.columnDefs?.[field] ?? {}
@@ -143,20 +143,21 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     navToPrevPage: () => (currentPage.value = currentPage.value - 1),
     navToPage: (page: number) => (currentPage.value = page),
     navToNextPage: () => (currentPage.value = currentPage.value + 1),
-    navToLastPage: () => (currentPage.value = Math.ceil(searchedData.value.length / itemsPerPage.value) || 0),
+    navToLastPage: () => (currentPage.value = Math.ceil(filteredItems.value.length / itemsPerPage.value) || 0),
   }
 
   return {
     preferences,
     searchQuery,
     currentPage,
-    itemsPerPage: itemsPerPage,
+    itemsPerPage,
     searchOptions,
     sortField,
     sortDirection,
-    data,
+    allItems,
+    filteredItems,
     paginatedItems,
-    totalItems: computed(() => searchedData.value.length),
+    totalItems: computed(() => filteredItems.value.length),
     hasError,
     columnDefs,
     actions,

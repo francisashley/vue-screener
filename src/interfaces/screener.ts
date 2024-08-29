@@ -9,9 +9,10 @@ export type Screener = {
   searchOptions: Ref<SearchQueryOption[]>
   sortField: Ref<string | number | null>
   sortDirection: Ref<'asc' | 'desc'>
-  data: Ref<unknown[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
+  allItems: ComputedRef<Item[]>
+  filteredItems: ComputedRef<Item[]>
   paginatedItems: ComputedRef<Item[]>
   columnDefs: ComputedRef<ColDef[]>
   actions: {

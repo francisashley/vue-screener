@@ -22,11 +22,9 @@ export function normaliseInput(data: UnknownObject[]): Item[] {
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each item into an array of normalised fields.
-  const normalisedData = transformedData.map((item: UnknownObject): Item => {
+  return transformedData.map((item: UnknownObject): Item => {
     return { id: uuidv4(), data: item }
   })
-
-  return normalisedData
 }
 
 /**
