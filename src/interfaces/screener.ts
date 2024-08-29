@@ -11,7 +11,7 @@ export type Screener = {
   sortDirection: Ref<'asc' | 'desc'>
   hasError: ComputedRef<boolean>
   allItems: ComputedRef<Item[]>
-  filteredItems: ComputedRef<Item[]>
+  queriedItems: ComputedRef<Item[]>
   paginatedItems: ComputedRef<Item[]>
   columnDefs: ComputedRef<ColDef[]>
   visibleColumnDefs: ComputedRef<ColDef[]>

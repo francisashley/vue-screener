@@ -49,7 +49,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
   })
 
-  const filteredItems = computed((): Item[] => {
+  const queriedItems = computed((): Item[] => {
     return search({
       items: allItems.value,
       columnDefs: columnDefs.value,
@@ -61,7 +61,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   const sortedItems = computed((): Item[] => {
-    const sortedItems = searchQuery.value ? filteredItems.value : allItems.value
+    const sortedItems = searchQuery.value ? queriedItems.value : allItems.value
 
     const _sortField = sortField.value
 
@@ -142,7 +142,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     navToPrevPage: () => (currentPage.value = currentPage.value - 1),
     navToPage: (page: number) => (currentPage.value = page),
     navToNextPage: () => (currentPage.value = currentPage.value + 1),
-    navToLastPage: () => (currentPage.value = Math.ceil(filteredItems.value.length / itemsPerPage.value) || 0),
+    navToLastPage: () => (currentPage.value = Math.ceil(queriedItems.value.length / itemsPerPage.value) || 0),
   }
 
   return {
@@ -154,7 +154,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     sortField,
     sortDirection,
     allItems,
-    filteredItems,
+    queriedItems,
     paginatedItems,
     hasError,
     columnDefs,

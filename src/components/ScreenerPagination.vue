@@ -5,9 +5,9 @@
         [ui.leftSide.class]: true,
       }"
     >
-      <template v-if="!screener.filteredItems.value.length">Showing 0 results</template>
+      <template v-if="!screener.queriedItems.value.length">Showing 0 results</template>
       <template v-else>
-        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.filteredItems.value.length }}
+        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.queriedItems.value.length }}
       </template>
     </div>
 
@@ -91,7 +91,7 @@ const ui = computed(() => {
 })
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.screener.filteredItems.value.length / props.screener.itemsPerPage.value) || 0
+  return Math.ceil(props.screener.queriedItems.value.length / props.screener.itemsPerPage.value) || 0
 })
 
 const getPages = computed(() => {
@@ -136,9 +136,8 @@ const firstIndexOfCurrentPage = computed(() => {
 })
 
 const lastIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.itemsPerPage.value >
-    props.screener.filteredItems.value.length
-    ? props.screener.filteredItems.value.length
+  return props.screener.currentPage.value * props.screener.itemsPerPage.value > props.screener.queriedItems.value.length
+    ? props.screener.queriedItems.value.length
     : props.screener.currentPage.value * props.screener.itemsPerPage.value
 })
 
@@ -151,7 +150,7 @@ onMounted(() => {
 })
 
 watch(
-  () => props.screener.filteredItems.value.length,
+  () => props.screener.queriedItems.value.length,
   () => {
     ensureCurrentPageIsValid()
   },
