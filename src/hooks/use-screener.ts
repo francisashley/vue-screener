@@ -24,14 +24,12 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const sortField = ref<string | number | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
   const data = ref<unknown[]>([])
-  const columnDefs = ref<ColDefs>({})
   const pick = ref<string[]>([])
   const omit = ref<string[]>([])
   const disableSearchHighlight = ref<boolean>(false)
   const height = ref<string>('400px')
 
   // Set default state
-  columnDefs.value = options.columnDefs ?? columnDefs.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
   itemsPerPage.value = options.defaultItemsPerPage ?? itemsPerPage.value
   sortField.value = options.defaultSort?.field ?? sortField.value
@@ -104,11 +102,11 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     })
   })
 
-  const columns = computed<ColDef[]>(() => {
+  const columnDefs = computed<ColDef[]>(() => {
     const fields = pick.value?.length ? pick.value : getFields(normalisedData.value)
 
-    let columns: ColDef[] = fields.map((field, i) => {
-      const inputColumn = columnDefs.value[field] ?? {}
+    let columnDefs: ColDef[] = fields.map((field, i) => {
+      const inputColumn = options.columnDefs?.[field] ?? {}
       let width = inputColumn.width ?? 'auto'
       if (!isNaN(Number(width))) width = width + 'px'
       return {
@@ -125,14 +123,14 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     })
 
     if (options.pick && options.pick.length > 0) {
-      columns = pickColumns(columns, options.pick)
+      columnDefs = pickColumns(columnDefs, options.pick)
     }
 
     if (omit.value && omit.value.length > 0) {
-      columns = omitColumns(columns, omit.value)
+      columnDefs = omitColumns(columnDefs, omit.value)
     }
 
-    return columns
+    return columnDefs
   })
 
   return {
@@ -151,7 +149,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     columnDefs,
     pick,
     omit,
-    columns,
     disableSearchHighlight,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
@@ -161,7 +158,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
         }
       },
       sort: (field: string | number) => {
-        const fieldConfig = columns.value.find((column) => column.field === field)
+        const fieldConfig = columnDefs.value.find((columnDefs) => columnDefs.field === field)
 
         sortDirection.value =
           sortField.value === field

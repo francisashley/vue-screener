@@ -1,9 +1,9 @@
 <template>
-  <Table :column-defs="screener.columns.value" :ui="ui.table">
+  <Table :column-defs="screener.columnDefs.value" :ui="ui.table">
     <template #default="{ isScrollable, isScrolledEnd }">
       <TableHead :ui="ui.table.header">
         <!-- @ts-ignore -->
-        <template v-for="(column, _i) in screener.columns.value" :key="_i">
+        <template v-for="(column, _i) in screener.columnDefs.value" :key="_i">
           <slot
             name="head"
             :column="column"
@@ -49,7 +49,7 @@
       <template v-for="(item, _i) in screener.items.value" :key="_i">
         <TableRow :ui="ui.table.row">
           <template v-if="item">
-            <template v-for="(column, _j) in screener.columns.value" :key="_j">
+            <template v-for="(column, _j) in screener.columnDefs.value" :key="_j">
               <slot
                 name="data"
                 :column="column"

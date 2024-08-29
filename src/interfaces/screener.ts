@@ -14,10 +14,9 @@ export type Screener = {
   hasError: ComputedRef<boolean>
   hasData: ComputedRef<boolean>
   items: ComputedRef<(Item | null)[]>
-  columnDefs: Ref<ColDefs>
   pick: Ref<string[]>
   omit: Ref<string[]>
-  columns: ComputedRef<ColDef[]>
+  columnDefs: ComputedRef<ColDef[]>
   disableSearchHighlight: Ref<boolean>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
