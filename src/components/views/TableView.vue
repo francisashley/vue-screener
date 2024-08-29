@@ -60,7 +60,7 @@
               :item="item"
               :ui="ui.table.row?.cell"
               :highlight-matches="highlightMatches"
-              :search-query="screener.searchQuery.value"
+              :search-text="screener.searchText.value"
             >
               <TableCell
                 :column="column"
@@ -72,7 +72,7 @@
                 :item="item"
                 :ui="ui.table.row?.cell"
                 :highlight-matches="highlightMatches"
-                :search-query="screener.searchQuery.value"
+                :search-text="screener.searchText.value"
               >
                 <slot>
                   <span v-html="processValue(item.data[column.field], column)" />
@@ -173,9 +173,9 @@ const processValue = (value: any, colDef: ColDef): string => {
   }
   // highlight search matches
   const disableSearchHighlight = props.screener.preferences.value.disableSearchHighlight
-  const searchQuery = props.screener.searchQuery.value
-  if (!disableSearchHighlight && searchQuery && value !== undefined) {
-    value = highlightMatches(String(value), searchQuery)
+  const searchText = props.screener.searchText.value
+  if (!disableSearchHighlight && searchText && value !== undefined) {
+    value = highlightMatches(String(value), searchText)
   }
   return value
 }

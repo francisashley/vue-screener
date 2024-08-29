@@ -2,7 +2,7 @@
   <UiInput
     type="text"
     :ui="ui"
-    :value="screener.searchQuery.value"
+    :value="screener.searchText.value"
     :error="matchRegex && !isValidQuery"
     placeholder="Search..."
     @keydown="onKeydown"
@@ -16,7 +16,7 @@ import { computed, ref } from 'vue'
 import { isValidRegExp } from '../utils/regex.utils'
 import UiInput, { InputUI } from './ui/input/Input.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
-export type SearchQueryOption = 'match-case' | 'match-word' | 'match-regex'
+export type SearchTextOption = 'match-case' | 'match-word' | 'match-regex'
 
 export type ScreenerSearchUI = InputUI
 
@@ -39,11 +39,11 @@ const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
 const matchRegex = computed<boolean>(() => {
-  return props.screener.searchOptions.value.some((activeOption) => activeOption === 'match-regex')
+  return props.screener.searchTextOptions.value.some((activeOption) => activeOption === 'match-regex')
 })
 
 const isValidQuery = computed((): boolean => {
-  return isValidRegExp(props.screener.searchQuery.value)
+  return isValidRegExp(props.screener.searchText.value)
 })
 
 const onKeydown = (event: KeyboardEvent) => {
@@ -51,12 +51,12 @@ const onKeydown = (event: KeyboardEvent) => {
   const isPressingDown = event.key === 'ArrowDown'
   const isEnter = event.key === 'Enter'
 
-  const searchQuery = (event.target as HTMLInputElement).value
+  const searchText = (event.target as HTMLInputElement).value
 
   if (isEnter) {
-    props.screener.actions.search(searchQuery)
-    if (searchQuery) {
-      history.value.push(searchQuery)
+    props.screener.actions.search(searchText)
+    if (searchText) {
+      history.value.push(searchText)
       historyIndex.value = history.value.length - 1
     }
   }

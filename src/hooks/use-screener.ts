@@ -1,4 +1,4 @@
-import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
+import { SearchTextOption } from '@/components/ScreenerSearch.vue'
 import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences } from '@/interfaces/screener'
 import {
   getFields,
@@ -33,10 +33,10 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   // State
-  const searchQuery = ref<string>('')
+  const searchText = ref<string>('')
   const currentPage = ref<number>(options.defaultCurrentPage ?? 1)
   const itemsPerPage = ref<number>(options.defaultItemsPerPage ?? 25)
-  const searchOptions = ref<SearchQueryOption[]>([])
+  const searchTextOptions = ref<SearchTextOption[]>([])
   const sortField = ref<string | number | null>(options.defaultSortField ?? null)
   const sortDirection = ref<'asc' | 'desc'>(options.defaultSortDirection ?? 'desc')
   const data = ref<unknown[]>(defaultData ?? [])
@@ -53,15 +53,15 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return search({
       items: allItems.value,
       columnDefs: columnDefs.value,
-      searchQuery: searchQuery.value,
-      matchRegex: searchOptions.value.includes('match-regex'),
-      matchCase: searchOptions.value.includes('match-case'),
-      matchWord: searchOptions.value.includes('match-word'),
+      searchText: searchText.value,
+      matchRegex: searchTextOptions.value.includes('match-regex'),
+      matchCase: searchTextOptions.value.includes('match-case'),
+      matchWord: searchTextOptions.value.includes('match-word'),
     })
   })
 
   const sortedItems = computed((): Item[] => {
-    const sortedItems = searchQuery.value ? queriedItems.value : allItems.value
+    const sortedItems = searchText.value ? queriedItems.value : allItems.value
 
     const _sortField = sortField.value
 
@@ -121,10 +121,10 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   const actions = {
-    search: (query: string, options?: SearchQueryOption[]) => {
-      searchQuery.value = query
+    search: (query: string, options?: SearchTextOption[]) => {
+      searchText.value = query
       if (options) {
-        searchOptions.value = options
+        searchTextOptions.value = options
       }
     },
     sort: (field: string | number) => {
@@ -147,10 +147,10 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
 
   return {
     preferences,
-    searchQuery,
+    searchText: searchText,
     currentPage,
     itemsPerPage,
-    searchOptions,
+    searchTextOptions: searchTextOptions,
     sortField,
     sortDirection,
     allItems,

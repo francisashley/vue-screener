@@ -2,7 +2,7 @@
   <ToggleButtonGroup :ui="ui">
     <ToggleButton
       title="Match case"
-      :active="props.screener.searchOptions.value.includes('match-case')"
+      :active="props.screener.searchTextOptions.value.includes('match-case')"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
     >
@@ -10,7 +10,7 @@
     </ToggleButton>
     <ToggleButton
       title="Match word"
-      :active="props.screener.searchOptions.value.includes('match-word')"
+      :active="props.screener.searchTextOptions.value.includes('match-word')"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
     >
@@ -18,7 +18,7 @@
     </ToggleButton>
     <ToggleButton
       title="Use regular expression"
-      :active="props.screener.searchOptions.value.includes('match-regex')"
+      :active="props.screener.searchTextOptions.value.includes('match-regex')"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-regex')"
     >
@@ -33,7 +33,7 @@ import { Screener } from '@/interfaces/screener'
 import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
 import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
 import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
-import { SearchQueryOption } from './ScreenerSearch.vue'
+import { SearchTextOption } from './ScreenerSearch.vue'
 import ToggleButtonGroup from './ui/toggle-button/ToggleButtonGroup.vue'
 import ToggleButton, { ToggleButtonUI } from './ui/toggle-button/ToggleButton.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
@@ -72,14 +72,14 @@ const ui = computed(() => {
   }
 })
 
-const toggleOption = (option: SearchQueryOption) => {
-  if (props.screener.searchOptions.value.includes(option)) {
+const toggleOption = (option: SearchTextOption) => {
+  if (props.screener.searchTextOptions.value.includes(option)) {
     props.screener.actions.search(
-      props.screener.searchQuery.value,
-      props.screener.searchOptions.value.filter((activeOption) => activeOption !== option),
+      props.screener.searchText.value,
+      props.screener.searchTextOptions.value.filter((activeOption) => activeOption !== option),
     )
   } else {
-    props.screener.actions.search(props.screener.searchQuery.value, [...props.screener.searchOptions.value, option])
+    props.screener.actions.search(props.screener.searchText.value, [...props.screener.searchTextOptions.value, option])
   }
 }
 </script>

@@ -1,12 +1,12 @@
-import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
+import { SearchTextOption } from '@/components/ScreenerSearch.vue'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
   preferences: Ref<UserPreferences>
-  searchQuery: Ref<string>
+  searchText: Ref<string>
+  searchTextOptions: Ref<SearchTextOption[]>
   currentPage: Ref<number>
   itemsPerPage: Ref<number>
-  searchOptions: Ref<SearchQueryOption[]>
   sortField: Ref<string | number | null>
   sortDirection: Ref<'asc' | 'desc'>
   hasError: ComputedRef<boolean>
@@ -16,7 +16,7 @@ export type Screener = {
   columnDefs: ComputedRef<ColDef[]>
   visibleColumnDefs: ComputedRef<ColDef[]>
   actions: {
-    search: (query: string, options?: SearchQueryOption[]) => void
+    search: (query: string, options?: SearchTextOption[]) => void
     sort: (field: string | number) => void
     navToFirstPage: () => void
     navToPrevPage: () => void

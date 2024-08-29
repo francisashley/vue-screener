@@ -42,24 +42,24 @@ const testCriteria = (
  * - Include filters use the pattern: `field:value`.
  * - Exclude filters use the pattern: `-field:value`.
  *
- * @param {string} searchQuery - The search query to parse.
+ * @param {string} searchText - The search query to parse.
  * @returns {{
- *   searchQuery: string,
+ *   searchText: string,
  *   includeFilters: [field: string, value: string][],
  *   excludeFilters: [field: string, value: string][]
  * }} - Parsed search query, include filters, and exclude filters.
  */
-const parseSearchQuery = (searchQuery: string) => {
+const parseSearchText = (searchText: string) => {
   const excludeFilters: [field: string, value: string][] = []
   // get exclude filters that look like: field:value
-  searchQuery = searchQuery.replace(/(?<!\w)-\w+:\w+/g, (match) => {
+  searchText = searchText.replace(/(?<!\w)-\w+:\w+/g, (match) => {
     const [field, value] = match.replace('-', '').split(':')
     excludeFilters.push([field, value])
     return ''
   })
 
   // get exclude filters that look like: -field:"value" or -field:"some value"
-  searchQuery = searchQuery
+  searchText = searchText
     .replace(/(?<!\w)-\w+:"[^"]*"$/g, (match) => {
       const [field, value] = match.replace('-', '').split(':')
       excludeFilters.push([field, value.slice(1, -1)])
@@ -69,7 +69,7 @@ const parseSearchQuery = (searchQuery: string) => {
 
   const includeFilters: [field: string, value: string][] = []
   // get include filters that look like: field:value
-  searchQuery = searchQuery
+  searchText = searchText
     .replace(/\b\w+:\w+\b/g, (match) => {
       const [field, value] = match.split(':')
       includeFilters.push([field, value])
@@ -78,7 +78,7 @@ const parseSearchQuery = (searchQuery: string) => {
     .trim()
 
   // get include filters that look like: field:"value" or field:"some value"
-  searchQuery = searchQuery
+  searchText = searchText
     .replace(/\b\w+:"[^"]*"$/g, (match) => {
       const [field, value] = match.split(':')
       includeFilters.push([field, value.slice(1, -1)])
@@ -87,7 +87,7 @@ const parseSearchQuery = (searchQuery: string) => {
     .trim()
 
   return {
-    searchQuery,
+    searchText,
     excludeFilters,
     includeFilters,
   }
@@ -98,7 +98,7 @@ const parseSearchQuery = (searchQuery: string) => {
  *
  * @param {Object} options - The search options.
  * @param {Item[]} options.items - The data to search.
- * @param {string} options.searchQuery - The search query string.
+ * @param {string} options.searchText - The search query string.
  * @param {boolean} options.matchRegex - Whether to use regular expressions for the search.
  * @param {boolean} options.matchCase - Whether to match the case.
  * @param {boolean} options.matchWord - Whether to match whole words.
@@ -107,17 +107,17 @@ const parseSearchQuery = (searchQuery: string) => {
 export function search(options: {
   items: Item[]
   columnDefs: ColDef[]
-  searchQuery: string
+  searchText: string
   matchRegex: boolean
   matchCase: boolean
   matchWord: boolean
 }): Item[] {
-  const { searchQuery = '' } = options
+  const { searchText = '' } = options
 
-  if (!searchQuery) return options.items
+  if (!searchText) return options.items
 
   // Parse search query and extract filters.
-  const { searchQuery: parsedSearchQuery, excludeFilters, includeFilters } = parseSearchQuery(searchQuery)
+  const { searchText: parsedSearchText, excludeFilters, includeFilters } = parseSearchText(searchText)
 
   // Get the search options.
   const { items, matchRegex = false, matchCase = false, matchWord = false } = options
@@ -163,7 +163,7 @@ export function search(options: {
 
     meetsSearchCriteria = options.columnDefs.some((columnDef) => {
       if (
-        testCriteria(String(columnDef.field ? item.data[columnDef.field] : ''), parsedSearchQuery, {
+        testCriteria(String(columnDef.field ? item.data[columnDef.field] : ''), parsedSearchText, {
           matchCase,
           matchWord,
           matchRegex,
