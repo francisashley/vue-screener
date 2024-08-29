@@ -157,7 +157,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     allItems,
     filteredItems,
     paginatedItems,
-    totalItems: computed(() => filteredItems.value.length),
     hasError,
     columnDefs,
     actions,
