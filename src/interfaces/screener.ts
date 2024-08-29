@@ -2,7 +2,7 @@ import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
-  height: Ref<string>
+  preferences: Ref<UserPreferences>
   searchQuery: Ref<string>
   currentPage: Ref<number>
   itemsPerPage: Ref<number>
@@ -13,19 +13,23 @@ export type Screener = {
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
   items: ComputedRef<Item[]>
-  pick: Ref<string[]>
-  omit: Ref<string[]>
   columnDefs: ComputedRef<ColDef[]>
-  disableSearchHighlight: Ref<boolean>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string | number) => void
   }
 }
 
+export type UserPreferences = {
+  height: string
+  disableSearchHighlight: boolean
+  pick: (string | number)[]
+  omit: (string | number)[]
+}
+
 export type ColDef = {
   field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
-  label: string // The label to display in the header of the column. Will default to the key.
+  label: string | number // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
   isFirst: boolean // Flag indicating if it is the first column.
   isLast: boolean // Flag indicating if it is the last column.

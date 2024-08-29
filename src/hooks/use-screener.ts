@@ -1,5 +1,5 @@
 import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
-import { ColDefs, ColDef, Item, Screener, UnknownObject } from '@/interfaces/screener'
+import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -16,6 +16,14 @@ type ScreenerOptions = {
   disableSearchHighlight?: boolean
 }
 export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
+  // User preferences
+  const preferences = ref<UserPreferences>({
+    height: options.height ?? '400px',
+    disableSearchHighlight: options.disableSearchHighlight ?? false,
+    pick: options.pick ?? [],
+    omit: options.omit ?? [],
+  })
+
   // State
   const searchQuery = ref<string>('')
   const currentPage = ref<number>(1)
@@ -24,10 +32,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const sortField = ref<string | number | null>(null)
   const sortDirection = ref<'asc' | 'desc'>('desc')
   const data = ref<unknown[]>([])
-  const pick = ref<string[]>([])
-  const omit = ref<string[]>([])
-  const disableSearchHighlight = ref<boolean>(false)
-  const height = ref<string>('400px')
 
   // Set default state
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
@@ -35,10 +39,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   sortField.value = options.defaultSort?.field ?? sortField.value
   sortDirection.value = options.defaultSort?.direction ?? sortDirection.value
   data.value = defaultData ?? data.value
-  pick.value = options.pick ?? pick.value
-  omit.value = options.omit ?? omit.value
-  disableSearchHighlight.value = options.disableSearchHighlight ?? disableSearchHighlight.value
-  height.value = options.height ?? height.value
 
   const hasError = computed((): boolean => {
     return !isValidInput(data.value)
@@ -80,7 +80,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   const columnDefs = computed<ColDef[]>(() => {
-    const fields = pick.value?.length ? pick.value : getFields(normalisedData.value)
+    const fields = preferences.value.pick.length ? preferences.value.pick : getFields(normalisedData.value)
 
     let columns: ColDef[] = fields.map((field, i) => {
       const inputColumn = options.columnDefs?.[field] ?? {}
@@ -103,15 +103,15 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
       columns = pickColumns(columns, options.pick)
     }
 
-    if (omit.value && omit.value.length > 0) {
-      columns = omitColumns(columns, omit.value)
+    if (preferences.value.omit && preferences.value.omit.length > 0) {
+      columns = omitColumns(columns, preferences.value.omit)
     }
 
     return columns
   })
 
   return {
-    height,
+    preferences,
     searchQuery,
     currentPage,
     itemsPerPage: itemsPerPage,
@@ -123,9 +123,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     totalItems: computed(() => searchedData.value.length),
     hasError,
     columnDefs,
-    pick,
-    omit,
-    disableSearchHighlight,
     actions: {
       search: (query: string, options?: SearchQueryOption[]) => {
         searchQuery.value = query

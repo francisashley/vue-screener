@@ -172,7 +172,7 @@ const processValue = (value: any, colDef: ColDef): string => {
     value = colDef.format(value)
   }
   // highlight search matches
-  const disableSearchHighlight = props.screener.disableSearchHighlight.value
+  const disableSearchHighlight = props.screener.preferences.value.disableSearchHighlight
   const searchQuery = props.screener.searchQuery.value
   if (!disableSearchHighlight && searchQuery && value !== undefined) {
     value = highlightMatches(String(value), searchQuery)

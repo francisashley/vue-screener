@@ -9,7 +9,7 @@
       v-if="view === 'table'"
       :screener="screener"
       :ui="ui.tableView"
-      :style="{ height: screener.height.value }"
+      :style="{ height: screener.preferences.value.height }"
     >
       <template #head="headProps">
         <slot name="head" v-bind="headProps" />
@@ -19,11 +19,11 @@
       </template>
     </TableView>
 
-    <NoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: screener.height.value }">
+    <NoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="no-data">No data provided</slot>
     </NoDataView>
 
-    <BadDataView v-else-if="view === 'bad-data'" :ui="ui?.badDataView" :style="{ height: screener.height.value }">
+    <BadDataView v-else-if="view === 'bad-data'" :ui="ui?.badDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="bad-data">
         <h4 class="vsc-font-medium vsc-mb-1">Invalid data provided.</h4>
         <p>Please provide an array of objects or an array of arrays.</p>
