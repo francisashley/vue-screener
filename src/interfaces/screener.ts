@@ -12,7 +12,6 @@ export type Screener = {
   data: Ref<unknown[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
-  hasData: ComputedRef<boolean>
   items: ComputedRef<Item[]>
   pick: Ref<string[]>
   omit: Ref<string[]>

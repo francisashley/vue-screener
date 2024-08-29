@@ -79,10 +79,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     })
   })
 
-  const hasData = computed((): boolean => {
-    return paginatedData.value.length > 0
-  })
-
   const items = computed(() => {
     return paginatedData.value.map((item) => {
       return {
@@ -137,7 +133,6 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     items,
     totalItems: computed(() => searchedData.value.length),
     hasError,
-    hasData,
     columnDefs,
     pick,
     omit,

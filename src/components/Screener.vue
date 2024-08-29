@@ -55,7 +55,7 @@ const props = defineProps<{
 
 const view = computed<'bad-data' | 'no-data' | 'table'>(() => {
   if (props.screener.hasError.value) return 'bad-data'
-  if (!props.screener.hasData.value) return 'no-data'
+  if (!props.screener.items.value) return 'no-data'
   return 'table'
 })
 
