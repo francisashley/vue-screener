@@ -1,9 +1,16 @@
 import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences } from '@/interfaces/screener'
-import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
+import {
+  getFields,
+  getPaginated,
+  isValidInput,
+  normaliseInput,
+  omitColumns,
+  pickColumns,
+  sortItems,
+} from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
-import { orderBy } from 'natural-orderby'
 
 type ScreenerOptions = {
   height?: string // a css height
@@ -65,7 +72,10 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     const _sortField = sortField.value
 
     if (_sortField && sortDirection.value) {
-      return [...orderBy(sortedItems, [(item: Item) => item.data[_sortField]], [sortDirection.value])]
+      return sortItems(sortedItems, {
+        sortField: _sortField,
+        sortDirection: sortDirection.value,
+      })
     } else {
       return sortedItems
     }

@@ -1,4 +1,5 @@
 import { DataType, ColDef, Item, UnknownObject } from '@/interfaces/screener'
+import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
 /**
@@ -75,10 +76,21 @@ export function getPaginated({
 }): Item[] {
   const start = itemsPerPage * page
   const end = start + itemsPerPage
+  return items.slice(start, end)
+}
 
-  items = items.slice(start, end)
+export const sortItems = (
+  data: Item[],
+  options: { sortField: string | number | null; sortDirection: 'asc' | 'desc' },
+): Item[] => {
+  const sortField = options.sortField
+  const sortDirection = options.sortDirection
 
-  return items
+  if (sortField && sortDirection) {
+    return [...orderBy(data, [(item: Item) => item.data[sortField]], [sortDirection])]
+  } else {
+    return data
+  }
 }
 
 /**
