@@ -34,19 +34,12 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
 
   // State
   const searchQuery = ref<string>('')
-  const currentPage = ref<number>(1)
-  const itemsPerPage = ref<number>(25)
+  const currentPage = ref<number>(options.defaultCurrentPage ?? 1)
+  const itemsPerPage = ref<number>(options.defaultItemsPerPage ?? 25)
   const searchOptions = ref<SearchQueryOption[]>([])
-  const sortField = ref<string | number | null>(null)
-  const sortDirection = ref<'asc' | 'desc'>('desc')
-  const data = ref<unknown[]>([])
-
-  // Set default state
-  currentPage.value = options.defaultCurrentPage ?? currentPage.value
-  itemsPerPage.value = options.defaultItemsPerPage ?? itemsPerPage.value
-  sortField.value = options.defaultSortField ?? sortField.value
-  sortDirection.value = options.defaultSortDirection ?? sortDirection.value
-  data.value = defaultData ?? data.value
+  const sortField = ref<string | number | null>(options.defaultSortField ?? null)
+  const sortDirection = ref<'asc' | 'desc'>(options.defaultSortDirection ?? 'desc')
+  const data = ref<unknown[]>(defaultData ?? [])
 
   const hasError = computed((): boolean => {
     return !isValidInput(data.value)
