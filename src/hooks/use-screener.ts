@@ -9,7 +9,7 @@ import { highlightMatches } from '../utils/text.utils'
 type ScreenerOptions = {
   height?: string // a css height
   defaultCurrentPage?: number
-  defaultPerPage?: number
+  defaultItemsPerPage?: number
   defaultSort?: { field: string; direction: 'asc' | 'desc' }
   columnDefs?: ColDefs
   pick?: string[]
@@ -34,7 +34,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   // Set default state
   columnDefs.value = options.columnDefs ?? columnDefs.value
   currentPage.value = options.defaultCurrentPage ?? currentPage.value
-  itemsPerPage.value = options.defaultPerPage ?? itemsPerPage.value
+  itemsPerPage.value = options.defaultItemsPerPage ?? itemsPerPage.value
   sortField.value = options.defaultSort?.field ?? sortField.value
   sortDirection.value = options.defaultSort?.direction ?? sortDirection.value
   data.value = defaultData ?? data.value
