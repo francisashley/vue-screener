@@ -46,7 +46,7 @@
           </slot>
         </template>
       </TableHead>
-      <template v-for="(item, _i) in screener.items.value" :key="_i">
+      <template v-for="(item, _i) in screener.paginatedItems.value" :key="_i">
         <TableRow :ui="ui.table.row">
           <template v-for="(column, _j) in screener.columnDefs.value" :key="_j">
             <slot

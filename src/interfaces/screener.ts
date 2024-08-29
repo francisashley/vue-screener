@@ -12,7 +12,7 @@ export type Screener = {
   data: Ref<unknown[]>
   totalItems: ComputedRef<number>
   hasError: ComputedRef<boolean>
-  items: ComputedRef<Item[]>
+  paginatedItems: ComputedRef<Item[]>
   columnDefs: ComputedRef<ColDef[]>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void

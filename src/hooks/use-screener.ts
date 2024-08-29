@@ -82,7 +82,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     }
   })
 
-  const paginatedData = computed((): Item[] => {
+  const paginatedItems = computed((): Item[] => {
     return getPaginated({
       items: sortedData.value,
       page: currentPage.value - 1,
@@ -155,7 +155,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     sortField,
     sortDirection,
     data,
-    items: paginatedData,
+    paginatedItems,
     totalItems: computed(() => searchedData.value.length),
     hasError,
     columnDefs,
