@@ -14,6 +14,7 @@ export type Screener = {
   filteredItems: ComputedRef<Item[]>
   paginatedItems: ComputedRef<Item[]>
   columnDefs: ComputedRef<ColDef[]>
+  visibleColumnDefs: ComputedRef<ColDef[]>
   actions: {
     search: (query: string, options?: SearchQueryOption[]) => void
     sort: (field: string | number) => void

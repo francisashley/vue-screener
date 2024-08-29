@@ -93,7 +93,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const columnDefs = computed<ColDef[]>(() => {
     const fields = preferences.value.pick.length ? preferences.value.pick : getFields(allItems.value)
 
-    let columns: ColDef[] = fields.map((field, i) => {
+    const columns: ColDef[] = fields.map((field, i) => {
       const inputColumn = options.columnDefs?.[field] ?? {}
       let width = inputColumn.width ?? 'auto'
       if (!isNaN(Number(width))) width = width + 'px'
@@ -109,6 +109,12 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
         width,
       }
     })
+
+    return columns
+  })
+
+  const visibleColumnDefs = computed<ColDef[]>(() => {
+    let columns: ColDef[] = columnDefs.value
 
     if (options.pick && options.pick.length > 0) {
       columns = pickColumns(columns, options.pick)
@@ -159,6 +165,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     paginatedItems,
     hasError,
     columnDefs,
+    visibleColumnDefs,
     actions,
   }
 }
