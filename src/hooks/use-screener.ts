@@ -31,17 +31,17 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     omit: options.omit ?? [],
   })
 
-  // Data
+  // Data storage
   const data = ref<unknown[]>(inputData ?? [])
 
   // Search query config
   const searchQuery = ref<SearchQuery>({
     searchText: '', // Search text
     searchTextOptions: {
-      matchCase: false,
-      matchRegex: false,
-      matchWord: false,
-    }, // Search text options
+      matchRegex: false, // Whether to match regex in search
+      matchCase: false, // Whether to match case in search
+      matchWord: false, // Whether to match whole word in search
+    },
     page: options.defaultCurrentPage ?? 1, // Current page number
     itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of items per page
     sortField: options.defaultSortField ?? null, // Field to sort by
