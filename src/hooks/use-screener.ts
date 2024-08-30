@@ -1,13 +1,5 @@
 import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences, SearchQuery } from '@/interfaces/screener'
-import {
-  getFields,
-  getPaginated,
-  isValidInput,
-  normaliseInput,
-  omitColumns,
-  pickColumns,
-  sortItems,
-} from '../utils/data.utils'
+import { getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 
@@ -117,13 +109,14 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
 
   const visibleColumnDefs = computed<ColDef[]>(() => {
     let columns: ColDef[] = columnDefs.value
+    const { pick, omit } = preferences.value
 
     if (options.pick && options.pick.length > 0) {
-      columns = pickColumns(columns, options.pick)
+      columns = columns.filter((column) => pick.includes(column.field))
     }
 
     if (preferences.value.omit && preferences.value.omit.length > 0) {
-      columns = omitColumns(columns, preferences.value.omit)
+      columns = columns.filter((column) => !omit.includes(column.field))
     }
 
     return columns

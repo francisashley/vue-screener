@@ -1,4 +1,4 @@
-import { DataType, ColDef, Item, UnknownObject } from '@/interfaces/screener'
+import { DataType, Item, UnknownObject } from '@/interfaces/screener'
 import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -25,27 +25,6 @@ export function normaliseInput(data: UnknownObject[]): Item[] {
   return transformedData.map((item: UnknownObject): Item => {
     return { id: uuidv4(), data: item }
   })
-}
-
-/**
- * Picks specified fields from normalised columns.
- * @param {ColDef[]} columns - The columns.
- * @param {string[]} pickColumns - Fields to pick.
- * @returns {ColDef[]} Rows with picked fields.
- */
-export function pickColumns(columns: ColDef[], pickColumns: (string | number)[]): ColDef[] {
-  return columns.filter((column) => pickColumns.includes(column.field))
-}
-
-/**
- * Omits specified fields from normalised columns.
- * @param {ColDef[]} columns - The columns.
- * @param {string[]} omitColumns - Fields to omit.
- * @returns {ColDef[]} Rows without omitted fields.
- */
-export function omitColumns(columns: ColDef[], omitColumns: (string | number)[]): ColDef[] {
-  const omitFieldsSet = new Set(omitColumns)
-  return columns.filter((column) => !omitFieldsSet.has(column.field))
 }
 
 /**
