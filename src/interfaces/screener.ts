@@ -1,4 +1,3 @@
-import { SearchTextOption } from '@/components/ScreenerSearch.vue'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
@@ -27,6 +26,8 @@ export type UserPreferences = {
   pick: (string | number)[]
   omit: (string | number)[]
 }
+
+export type SearchTextOption = 'match-case' | 'match-word' | 'match-regex'
 
 export type SearchQuery = {
   // query

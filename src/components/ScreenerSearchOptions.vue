@@ -29,11 +29,10 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { Screener } from '@/interfaces/screener'
+import { Screener, SearchTextOption } from '@/interfaces/screener'
 import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
 import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
 import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
-import { SearchTextOption } from './ScreenerSearch.vue'
 import ToggleButtonGroup from './ui/toggle-button/ToggleButtonGroup.vue'
 import ToggleButton, { ToggleButtonUI } from './ui/toggle-button/ToggleButton.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'

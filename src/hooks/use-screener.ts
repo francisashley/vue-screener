@@ -1,5 +1,13 @@
-import { SearchTextOption } from '@/components/ScreenerSearch.vue'
-import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences, SearchQuery } from '@/interfaces/screener'
+import {
+  ColDefs,
+  ColDef,
+  Item,
+  Screener,
+  UnknownObject,
+  UserPreferences,
+  SearchQuery,
+  SearchTextOption,
+} from '@/interfaces/screener'
 import {
   getFields,
   getPaginated,

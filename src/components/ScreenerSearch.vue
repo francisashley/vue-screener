@@ -16,7 +16,6 @@ import { computed, ref } from 'vue'
 import { isValidRegExp } from '../utils/regex.utils'
 import UiInput, { InputUI } from './ui/input/Input.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
-export type SearchTextOption = 'match-case' | 'match-word' | 'match-regex'
 
 export type ScreenerSearchUI = InputUI
 
