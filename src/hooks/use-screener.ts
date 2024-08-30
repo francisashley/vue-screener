@@ -1,13 +1,4 @@
-import {
-  ColDefs,
-  ColDef,
-  Item,
-  Screener,
-  UnknownObject,
-  UserPreferences,
-  SearchQuery,
-  SearchTextOptions,
-} from '@/interfaces/screener'
+import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences, SearchQuery } from '@/interfaces/screener'
 import {
   getFields,
   getPaginated,
@@ -139,10 +130,10 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   })
 
   const actions = {
-    search: (query: string, options?: SearchTextOptions) => {
-      searchQuery.value.searchText = query
-      if (options) {
-        searchQuery.value.searchTextOptions = options
+    search: (_searchQuery: Partial<SearchQuery>) => {
+      searchQuery.value = {
+        ...searchQuery.value,
+        ..._searchQuery,
       }
     },
     sort: (field: string | number) => {

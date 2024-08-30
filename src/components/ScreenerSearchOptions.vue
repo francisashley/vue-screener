@@ -82,6 +82,6 @@ const toggleOption = (searchTextOption: 'match-case' | 'match-word' | 'match-reg
     updatedSearchTextOptions.matchRegex = !updatedSearchTextOptions.matchRegex
   }
 
-  props.screener.actions.search(props.screener.searchQuery.value.searchText, updatedSearchTextOptions)
+  props.screener.actions.search({ searchTextOptions: updatedSearchTextOptions })
 }
 </script>

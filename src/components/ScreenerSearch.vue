@@ -53,7 +53,7 @@ const onKeydown = (event: KeyboardEvent) => {
   const searchText = (event.target as HTMLInputElement).value
 
   if (isEnter) {
-    props.screener.actions.search(searchText)
+    props.screener.actions.search({ searchText })
     if (searchText) {
       history.value.push(searchText)
       historyIndex.value = history.value.length - 1
@@ -73,11 +73,11 @@ const onKeydown = (event: KeyboardEvent) => {
     historyIndex.value++
   }
 
-  props.screener.actions.search(history.value[historyIndex.value])
+  props.screener.actions.search({ searchText: history.value[historyIndex.value] })
 }
 
 const onInput = (event: Event) => {
-  const query = (event.target as HTMLInputElement).value
-  props.screener.actions.search(query)
+  const searchText = (event.target as HTMLInputElement).value
+  props.screener.actions.search({ searchText })
 }
 </script>

@@ -10,7 +10,7 @@ export type Screener = {
   columnDefs: ComputedRef<ColDef[]>
   visibleColumnDefs: ComputedRef<ColDef[]>
   actions: {
-    search: (query: string, options?: SearchTextOptions) => void
+    search: (searchQuery: Partial<SearchQuery>) => void
     sort: (field: string | number) => void
     navToFirstPage: () => void
     navToPrevPage: () => void
