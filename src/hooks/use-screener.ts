@@ -164,14 +164,14 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   }
 
   return {
-    preferences,
-    searchQuery,
-    allItems,
-    queriedItems,
-    paginatedItems,
-    hasError,
-    columnDefs,
-    visibleColumnDefs,
-    actions,
+    preferences, // user preferences
+    searchQuery, // search options (searchText, pagination, sort)
+    allItems, // all data
+    queriedItems, // filtered data (after search query)
+    paginatedItems, // paginated data (cut from queriedItems)
+    hasError, // boolean indicating if the data is valid
+    columnDefs, // columnDefs (field, label, width, isFirst, isLast, isSticky, isSortable, defaultSortDirection)
+    visibleColumnDefs, // the visible columnDefs
+    actions, // actions
   }
 }
