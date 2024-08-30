@@ -31,7 +31,7 @@ type ScreenerOptions = {
   omit?: string[]
   disableSearchHighlight?: boolean
 }
-export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
+export const useScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
   // User preferences
   const preferences = ref<UserPreferences>({
     height: options.height ?? '400px',
@@ -41,7 +41,7 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   })
 
   // Data
-  const data = ref<unknown[]>(defaultData ?? [])
+  const data = ref<unknown[]>(inputData ?? [])
 
   // Search query config
   const searchQuery = ref<SearchQuery>({
