@@ -24,10 +24,8 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   })
 
   // Data storage
-  const data = ref<unknown[]>(inputData ?? [])
-  const hasError = computed((): boolean => {
-    return !isValidInput(inputData)
-  })
+  const allItems = ref<Item[]>(isValidInput(inputData) ? normaliseInput(inputData) : [])
+  const hasError = computed((): boolean => !isValidInput(inputData))
 
   // Search query config
   const searchQuery = ref<SearchQuery>({
@@ -41,10 +39,6 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of items per page
     sortField: options.defaultSortField ?? null, // Field to sort by
     sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
-  })
-
-  const allItems = computed((): Item[] => {
-    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
   })
 
   const queriedItems = computed((): Item[] => {
@@ -123,20 +117,15 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   })
 
   const actions = {
-    search: (_searchQuery: Partial<SearchQuery>) => {
-      searchQuery.value = {
-        ...searchQuery.value,
-        ..._searchQuery,
-      }
-    },
+    search: (_searchQuery?: Partial<SearchQuery>) => (searchQuery.value = { ...searchQuery.value, ..._searchQuery }),
     sort: (field: string | number) => {
-      const fieldConfig = columnDefs.value.find((columnDefs) => columnDefs.field === field)
+      const columnDef = columnDefs.value.find((columnDefs) => columnDefs.field === field)
       searchQuery.value.sortDirection =
         searchQuery.value.sortField === field
           ? searchQuery.value.sortDirection === 'desc'
             ? 'asc'
             : 'desc'
-          : fieldConfig?.defaultSortDirection || searchQuery.value.sortDirection
+          : columnDef?.defaultSortDirection || searchQuery.value.sortDirection
 
       searchQuery.value.sortField = field
     },

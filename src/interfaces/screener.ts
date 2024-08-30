@@ -4,7 +4,7 @@ export type Screener = {
   preferences: Ref<UserPreferences>
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
-  allItems: ComputedRef<Item[]>
+  allItems: Ref<Item[]>
   queriedItems: ComputedRef<Item[]>
   paginatedItems: ComputedRef<Item[]>
   columnDefs: ComputedRef<ColDef[]>
@@ -37,7 +37,7 @@ export type SearchQuery = {
   // query
   searchText: string
   searchTextOptions: SearchTextOptions
-  // scope ()
+  // scope
   page: number
   itemsPerPage: number
   // sort
