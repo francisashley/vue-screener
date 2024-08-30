@@ -9,6 +9,7 @@ export type Screener = {
   paginatedItems: ComputedRef<Item[]>
   columnDefs: ComputedRef<ColDef[]>
   visibleColumnDefs: ComputedRef<ColDef[]>
+  dimensions: Ref<{ width: number; height: number } | null>
   actions: {
     search: (searchQuery: Partial<SearchQuery>) => void
     sort: (field: string | number) => void
@@ -17,6 +18,7 @@ export type Screener = {
     navToPage: (page: number) => void
     navToNextPage: () => void
     navToLastPage: () => void
+    setDimensions: (dimensions: { height: number; width: number } | null) => void
   }
 }
 

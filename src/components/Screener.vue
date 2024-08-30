@@ -4,6 +4,7 @@
     :class="{
       [ui.class]: true,
     }"
+    ref="screenerRef"
   >
     <TableView
       v-if="view === 'table'"
@@ -34,8 +35,8 @@
 
 <script lang="ts" setup>
 import type { Screener } from '../interfaces/screener'
-
-import { computed } from 'vue'
+import { useElementSize } from '../hooks/use-element-size'
+import { computed, ref } from 'vue'
 import TableView, { TableViewUI } from './views/TableView.vue'
 import BadDataView, { BadDataViewUI } from './views/BadDataView.vue'
 import NoDataView, { NoDataViewUI } from './views/NoDataView.vue'
@@ -94,4 +95,8 @@ const ui = computed(() => {
     },
   }
 })
+
+const screenerRef = ref()
+
+useElementSize(screenerRef, props.screener.actions.setDimensions)
 </script>

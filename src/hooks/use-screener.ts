@@ -23,6 +23,9 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     omit: options.omit ?? [],
   })
 
+  // Screener dimensions (width and height)
+  const dimensions = ref<{ width: number; height: number } | null>(null)
+
   // Data storage
   const allItems = ref<Item[]>(isValidInput(inputData) ? normaliseInput(inputData) : [])
   const hasError = computed((): boolean => !isValidInput(inputData))
@@ -134,6 +137,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     navToPage: (page: number) => actions.search({ page }),
     navToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
     navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
+    setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
   }
 
   return {
@@ -145,6 +149,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     hasError, // boolean indicating if the data is valid
     columnDefs, // columnDefs (field, label, width, isFirst, isLast, isSticky, isSortable, defaultSortDirection)
     visibleColumnDefs, // the visible columnDefs
+    dimensions, // screener dimensions
     actions, // actions
   }
 }
