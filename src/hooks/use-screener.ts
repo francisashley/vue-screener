@@ -13,11 +13,13 @@ type ScreenerOptions = {
   pick?: string[]
   omit?: string[]
   disableSearchHighlight?: boolean
+  editable?: boolean
 }
 export const useScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
   // User preferences
   const preferences = ref<UserPreferences>({
     height: options.height ?? '400px',
+    editable: options.editable ?? false,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
     pick: options.pick ?? [],
     omit: options.omit ?? [],

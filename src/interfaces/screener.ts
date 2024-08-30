@@ -27,6 +27,7 @@ export type UserPreferences = {
   disableSearchHighlight: boolean
   pick: (string | number)[]
   omit: (string | number)[]
+  editable: boolean
 }
 
 export type SearchTextOptions = {
