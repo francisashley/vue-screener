@@ -25,6 +25,9 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
 
   // Data storage
   const data = ref<unknown[]>(inputData ?? [])
+  const hasError = computed((): boolean => {
+    return !isValidInput(inputData)
+  })
 
   // Search query config
   const searchQuery = ref<SearchQuery>({
@@ -40,9 +43,6 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
   })
 
-  const hasError = computed((): boolean => {
-    return !isValidInput(data.value)
-  })
 
   const allItems = computed((): Item[] => {
     return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
