@@ -43,7 +43,6 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
   })
 
-
   const allItems = computed((): Item[] => {
     return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
   })
@@ -83,7 +82,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   })
 
   const columnDefs = computed<ColDef[]>(() => {
-    const fields = preferences.value.pick.length ? preferences.value.pick : getFields(allItems.value)
+    const fields = getFields(allItems.value)
 
     const columns: ColDef[] = fields.map((field, i) => {
       const inputColumn = options.columnDefs?.[field] ?? {}
@@ -107,15 +106,16 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     return columns
   })
 
+  // Columns to display
   const visibleColumnDefs = computed<ColDef[]>(() => {
     let columns: ColDef[] = columnDefs.value
     const { pick, omit } = preferences.value
 
-    if (options.pick && options.pick.length > 0) {
+    if (pick.length > 0) {
       columns = columns.filter((column) => pick.includes(column.field))
     }
 
-    if (preferences.value.omit && preferences.value.omit.length > 0) {
+    if (omit.length > 0) {
       columns = columns.filter((column) => !omit.includes(column.field))
     }
 
