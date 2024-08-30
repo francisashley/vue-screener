@@ -147,11 +147,11 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
 
       searchQuery.value.sortField = field
     },
-    navToFirstPage: () => (searchQuery.value.page = 1),
-    navToPrevPage: () => (searchQuery.value.page = searchQuery.value.page - 1),
-    navToPage: (page: number) => (searchQuery.value.page = page),
-    navToNextPage: () => (searchQuery.value.page = searchQuery.value.page + 1),
-    navToLastPage: () => (searchQuery.value.page = Math.ceil(queriedItems.value.length / searchQuery.value.itemsPerPage) || 0), // eslint-disable-line
+    navToFirstPage: () => actions.search({ page: 1 }),
+    navToPrevPage: () => actions.search({ page: Math.max(searchQuery.value.page - 1, 1) }),
+    navToPage: (page: number) => actions.search({ page }),
+    navToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
+    navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
   }
 
   return {
