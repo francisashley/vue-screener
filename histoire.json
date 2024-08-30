@@ -116,29 +116,6 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-6-link-rows-story-vue",
-      "title": "6. Link rows",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/6-link-rows.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "6. Link rows"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
       "id": "src-stories-1-basic-usage-7-sort-default-sort-directions-story-vue",
       "title": " Default sort directions",
       "layout": {
@@ -182,29 +159,6 @@
       "treePath": [
         "7. Sorting ",
         " Default sort"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-1-basic-usage-8-disable-pad-page-length-story-vue",
-      "title": "8. Fixed page size",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/8-disable-pad-page-length.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "8. Fixed page size"
       ],
       "virtual": false,
       "markdownFile": null
