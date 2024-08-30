@@ -1,11 +1,13 @@
-import { DataType, Column, Field, Item, UnknownObject, Config } from '@/interfaces/screener'
+import { DataType, Item, UnknownObject } from '@/interfaces/screener'
+import { orderBy } from 'natural-orderby'
+import { v4 as uuidv4 } from 'uuid'
 
 /**
  * Checks if data is an array of arrays or objects.
  * @param {unknown} data - The data to check.
  * @returns {boolean} True if valid, false otherwise.
  */
-export function isValidInput(data: unknown): boolean {
+export function isValidInput(data: unknown): data is UnknownObject[] {
   const isObject = (val: unknown) => typeof val === 'object' && val !== null
   return Array.isArray(data) && data.every((item: unknown) => Array.isArray(item) || isObject(item))
 }
@@ -15,64 +17,14 @@ export function isValidInput(data: unknown): boolean {
  * @param {UnknownObject[]} data - The input data.
  * @returns {Item[]} The normalised data.
  */
-export function normaliseInput(data: UnknownObject[], config: Config): Item[] {
+export function normaliseInput(data: UnknownObject[]): Item[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
-  // Normalise each field into an object with its key, value, type, and a flag indicating if it has a value.
-  const normaliseField = (field: string, value: unknown): Field => {
-    const format = config[field]?.format
-    const _value = format?.(value as string | number) ?? value
-    return {
-      field,
-      type: getTypeOf(value),
-      value: String(_value),
-      htmlValue: String(_value),
-      hasValue: value !== null || value !== undefined,
-    }
-  }
-
   // Normalise each item into an array of normalised fields.
-  const normalisedData = transformedData.map((item: UnknownObject): Item => {
-    const fields: Record<string, Field> = {}
-    Object.keys(item).forEach((key) => {
-      fields[key] = normaliseField(key, item[key])
-    })
-
-    return { data: item, fields }
+  return transformedData.map((item: UnknownObject): Item => {
+    return { id: uuidv4(), data: item }
   })
-
-  // If the input data is an array of objects with different fields, ensure that all items include all fields and in the same order.
-  const fields = getFields(normalisedData)
-  return normalisedData.map((item) => {
-    fields.forEach((field) => {
-      if (!item.fields[field]) {
-        item.fields[field] = normaliseField(field, undefined)
-      }
-    })
-    return item
-  })
-}
-
-/**
- * Picks specified fields from normalised columns.
- * @param {Column[]} columns - The columns.
- * @param {string[]} pickColumns - Fields to pick.
- * @returns {Column[]} Rows with picked fields.
- */
-export function pickColumns(columns: Column[], pickColumns: (string | number)[]): Column[] {
-  return columns.filter((column) => pickColumns.includes(column.field))
-}
-
-/**
- * Omits specified fields from normalised columns.
- * @param {Column[]} columns - The columns.
- * @param {string[]} omitColumns - Fields to omit.
- * @returns {Column[]} Rows without omitted fields.
- */
-export function omitColumns(columns: Column[], omitColumns: (string | number)[]): Column[] {
-  const omitFieldsSet = new Set(omitColumns)
-  return columns.filter((column) => !omitFieldsSet.has(column.field))
 }
 
 /**
@@ -81,7 +33,7 @@ export function omitColumns(columns: Column[], omitColumns: (string | number)[])
  * @returns {string[]} Unique field keys.
  */
 export function getFields(items: Item[]): string[] {
-  const fields = new Set<string>(items.flatMap((item) => Object.values(item.fields).map((field) => field.field)))
+  const fields = new Set<string>(items.flatMap((item) => Object.keys(item.data)))
   return Array.from(fields)
 }
 
@@ -93,26 +45,29 @@ export function getFields(items: Item[]): string[] {
 export function getPaginated({
   items = [],
   page = 1,
-  perPage = 25,
-  padPageLength = false,
+  itemsPerPage = 25,
 }: {
   items: Item[]
   page: number
-  perPage: number
-  padPageLength: boolean
+  itemsPerPage: number
 }): Item[] {
-  const start = perPage * page
-  const end = start + perPage
+  const start = itemsPerPage * page
+  const end = start + itemsPerPage
+  return items.slice(start, end)
+}
 
-  items = items.slice(start, end)
+export const sortItems = (
+  data: Item[],
+  options: { sortField: string | number | null; sortDirection: 'asc' | 'desc' },
+): Item[] => {
+  const sortField = options.sortField
+  const sortDirection = options.sortDirection
 
-  // provide placeholders when page does not meet perPage threshold
-  if (padPageLength && items.length !== perPage) {
-    const emptyRows = Array(perPage).fill(null)
-    return Object.assign(emptyRows, items)
+  if (sortField && sortDirection) {
+    return [...orderBy(data, [(item: Item) => item.data[sortField]], [sortDirection])]
+  } else {
+    return data
   }
-
-  return items
 }
 
 /**

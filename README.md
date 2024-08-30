@@ -82,7 +82,7 @@ Add a sticky column on the right to put stuff in.
       { category: 'Technology', product: 'Laptop', price: '£799', inStock: true },
       { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true }
     ]"
-    :config="{
+    :columnDefs="{
       action: { field: 'action', isSticky: true }
     }"
     :pick=""
@@ -163,7 +163,6 @@ You can style components and their subcomponents by passing an object to the ui 
           class?: string
           isFirstClass?: string
           isLastClass?: string
-          hasValueClass?: string
           isStickyClass?: string
           isStickyOverlappingClass?: string
           sortableClass?: string
@@ -180,7 +179,6 @@ You can style components and their subcomponents by passing an object to the ui 
           class?: string
           isFirstClass?: string
           isLastClass?: string
-          hasValueClass?: string
           isStickyClass?: string
           isStickyOverlappingClass?: string
         }

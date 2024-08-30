@@ -5,26 +5,20 @@
         [ui.leftSide.class]: true,
       }"
     >
-      <template v-if="!screener.totalItems.value">Showing 0 results</template>
+      <template v-if="!screener.queriedItems.value.length">Showing 0 results</template>
       <template v-else>
-        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.totalItems.value }}
+        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.queriedItems.value.length }}
       </template>
     </div>
 
     <div :class="{ [ui.nav.class]: true }">
-      <UiButton :disabled="!canNavigateFirst" @click="handleClickFirst" :ui="ui.nav.button">First</UiButton>
-      <UiButton :disabled="!canNavigatePrev" @click="handleClickPrev" :ui="ui.nav.button">Prev</UiButton>
-      <UiButton
-        v-for="page in getPages"
-        :key="page"
-        :active="isActive(page)"
-        @click="handleSelectPage(page)"
-        :ui="ui.nav.button"
-      >
+      <UiButton :disabled="!canNavigateFirst" @click="screener.actions.navToFirstPage" :ui="ui.nav.button">First</UiButton> <!-- eslint-disable-line -->
+      <UiButton :disabled="!canNavigatePrev" @click="screener.actions.navToPrevPage" :ui="ui.nav.button">Prev</UiButton>
+      <UiButton v-for="page in getPages" :key="page" :active="isActive(page)" @click="screener.actions.navToPage(page)" :ui="ui.nav.button"> <!-- eslint-disable-line -->
         {{ page }}
       </UiButton>
-      <UiButton :disabled="!canNavigateNext" @click="handleClickNext" :ui="ui.nav.button">Next</UiButton>
-      <UiButton :disabled="!canNavigateLast" @click="handleClickLast" :ui="ui.nav.button">Last</UiButton>
+      <UiButton :disabled="!canNavigateNext" @click="screener.actions.navToNextPage" :ui="ui.nav.button">Next</UiButton>
+      <UiButton :disabled="!canNavigateLast" @click="screener.actions.navToLastPage" :ui="ui.nav.button">Last</UiButton>
     </div>
 
     <div
@@ -34,10 +28,10 @@
     >
       <UiInput
         type="number"
-        :value="screener.perPage.value"
+        :value="screener.searchQuery.value.itemsPerPage"
         min="1"
         step="1"
-        @input="handleChangePerPage"
+        @input="handleChangeItemsPerPage"
         :ui="ui.rightSide.perPageInput"
       />
     </div>
@@ -97,14 +91,14 @@ const ui = computed(() => {
 })
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.screener.totalItems.value / props.screener.perPage.value) || 0
+  return Math.ceil(props.screener.queriedItems.value.length / props.screener.searchQuery.value.itemsPerPage) || 0
 })
 
 const getPages = computed(() => {
   let pages = [
-    props.screener.currentPage.value - 1,
-    props.screener.currentPage.value,
-    props.screener.currentPage.value + 1,
+    props.screener.searchQuery.value.page - 1,
+    props.screener.searchQuery.value.page,
+    props.screener.searchQuery.value.page + 1,
   ]
   pages = pages.filter((page) => page > 0)
 
@@ -122,33 +116,37 @@ const getPages = computed(() => {
 })
 
 const canNavigateFirst = computed(() => {
-  return props.screener.currentPage.value > 1
+  return props.screener.searchQuery.value.page > 1
 })
 
 const canNavigatePrev = computed(() => {
-  return props.screener.currentPage.value > 1
+  return props.screener.searchQuery.value.page > 1
 })
 
 const canNavigateNext = computed(() => {
-  return props.screener.currentPage.value < totalPages.value
+  return props.screener.searchQuery.value.page < totalPages.value
 })
 
 const canNavigateLast = computed(() => {
-  return props.screener.currentPage.value < totalPages.value
+  return props.screener.searchQuery.value.page < totalPages.value
 })
 
 const firstIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.perPage.value - props.screener.perPage.value + 1
+  return (
+    props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage -
+    props.screener.searchQuery.value.itemsPerPage +
+    1
+  )
 })
 
 const lastIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.perPage.value > props.screener.totalItems.value
-    ? props.screener.totalItems.value
-    : props.screener.currentPage.value * props.screener.perPage.value
+  return props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage > props.screener.queriedItems.value.length // eslint-disable-line
+    ? props.screener.queriedItems.value.length
+    : props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage
 })
 
 const currentPageIsInRange = computed((): boolean => {
-  return totalPages.value >= props.screener.currentPage.value
+  return totalPages.value >= props.screener.searchQuery.value.page
 })
 
 onMounted(() => {
@@ -156,44 +154,22 @@ onMounted(() => {
 })
 
 watch(
-  () => props.screener.totalItems.value,
-  () => {
-    ensureCurrentPageIsValid()
-  },
+  () => props.screener.queriedItems.value.length,
+  () => ensureCurrentPageIsValid(),
 )
 
 const isActive = (page: number): boolean => {
-  return page === props.screener.currentPage.value
+  return page === props.screener.searchQuery.value.page
 }
 
 const ensureCurrentPageIsValid = (): void => {
   if (!currentPageIsInRange.value) {
-    handleSelectPage(totalPages.value ? totalPages.value : 1)
+    props.screener.actions.navToPage(totalPages.value ? totalPages.value : 1)
   }
 }
 
-const handleClickFirst = () => {
-  props.screener.currentPage.value = 1
-}
-
-const handleClickPrev = () => {
-  props.screener.currentPage.value = canNavigatePrev.value ? props.screener.currentPage.value - 1 : 1
-}
-
-const handleClickNext = () => {
-  props.screener.currentPage.value = canNavigateNext.value ? props.screener.currentPage.value + 1 : totalPages.value
-}
-
-const handleClickLast = () => {
-  props.screener.currentPage.value = totalPages.value
-}
-
-const handleSelectPage = (targetPage: number) => {
-  props.screener.currentPage.value = targetPage
-}
-
-const handleChangePerPage = (event: Event): void => {
-  const perPage = Number((event.target as HTMLInputElement).value)
-  props.screener.perPage.value = perPage
+const handleChangeItemsPerPage = (event: Event): void => {
+  const itemsPerPage = Number((event.target as HTMLInputElement).value)
+  props.screener.searchQuery.value.itemsPerPage = itemsPerPage
 }
 </script>

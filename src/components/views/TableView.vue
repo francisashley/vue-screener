@@ -1,9 +1,9 @@
 <template>
-  <Table :schema="schema" :ui="ui.table">
+  <Table :column-defs="screener.columnDefs.value" :ui="ui.table">
     <template #default="{ isScrollable, isScrolledEnd }">
       <TableHead :ui="ui.table.header">
         <!-- @ts-ignore -->
-        <template v-for="(column, _i) in screener.columns.value" :key="_i">
+        <template v-for="(column, _i) in screener.visibleColumnDefs.value" :key="_i">
           <slot
             name="head"
             :column="column"
@@ -46,50 +46,40 @@
           </slot>
         </template>
       </TableHead>
-      <template v-for="(item, _i) in screener.items.value" :key="_i">
-        <TableRow
-          :type="screener.rowConfig.value.link ? 'router-link' : 'div'"
-          :to="screener.rowConfig.value.getLink?.(item)"
-          :ui="ui.table.row"
-          external
-        >
-          <template v-if="item">
-            <template v-for="(column, _j) in screener.columns.value" :key="_j">
-              <slot
-                name="data"
+      <template v-for="(item, _i) in screener.paginatedItems.value" :key="_i">
+        <TableRow :ui="ui.table.row">
+          <template v-for="(column, _j) in screener.visibleColumnDefs.value" :key="_j">
+            <slot
+              name="data"
+              :column="column"
+              :value="column.field"
+              :is-first="column.isFirst"
+              :is-last="column.isLast"
+              :is-sticky="column.isSticky"
+              :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
+              :item="item"
+              :ui="ui.table.row?.cell"
+              :highlight-matches="highlightMatches"
+              :search-text="screener.searchQuery.value.searchText"
+            >
+              <TableCell
                 :column="column"
                 :value="column.field"
                 :is-first="column.isFirst"
                 :is-last="column.isLast"
-                :has-value="item.fields[column.field]?.hasValue"
                 :is-sticky="column.isSticky"
                 :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
                 :item="item"
                 :ui="ui.table.row?.cell"
-                :highlight="highlightText"
-                :highlight-value="screener.highlightQuery.value"
+                :highlight-matches="highlightMatches"
+                :search-text="screener.searchQuery.value.searchText"
               >
-                <TableCell
-                  :column="column"
-                  :value="column.field"
-                  :is-first="column.isFirst"
-                  :is-last="column.isLast"
-                  :has-value="item.fields[column.field]?.hasValue"
-                  :is-sticky="column.isSticky"
-                  :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
-                  :item="item"
-                  :ui="ui.table.row?.cell"
-                  :highlight="highlightText"
-                  :highlight-value="screener.highlightQuery.value"
-                >
-                  <slot>
-                    <span v-html="item.fields[column.field]?.htmlValue" />
-                  </slot>
-                </TableCell>
-              </slot>
-            </template>
+                <slot>
+                  <span v-html="processValue(item.data[column.field], column)" />
+                </slot>
+              </TableCell>
+            </slot>
           </template>
-          <template v-else>&nbsp;</template>
         </TableRow>
       </template>
     </template>
@@ -98,13 +88,13 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import type { Screener, Schema, Column } from '../../interfaces/screener'
+import type { Screener, ColDef } from '../../interfaces/screener'
 import TableRow, { TableRowUI } from '../ui/table/TableRow.vue'
 import TableCell, { TableCellUI } from '../ui/table/TableCell.vue'
 import Table, { TableUI } from '../ui/table/Table.vue'
 import TableHead, { TableHeadUI } from '../ui/table/TableHead.vue'
 import SortIcon, { SortIconUI } from '../icons/SortIcon.vue'
-import { highlightText } from '../../utils/text.utils'
+import { highlightMatches } from '../../utils/text.utils'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 
 export type TableViewUI = {
@@ -126,16 +116,6 @@ const props = defineProps<{
   screener: Screener
   ui?: TableViewUI
 }>()
-
-const schema = computed(
-  (): Schema => ({
-    fields: props.screener.columns.value.map((column) => ({
-      field: column.field,
-      width: column.width,
-      type: 'string',
-    })),
-  }),
-)
 
 const uiDefaults = {
   table: {
@@ -174,15 +154,29 @@ const ui = computed(() => {
 })
 
 const getSortDirection = (field: string | number): 'asc' | 'desc' | null => {
-  if (props.screener.sortField.value === field) {
-    return props.screener.sortDirection.value
+  if (props.screener.searchQuery.value.sortField === field) {
+    return props.screener.searchQuery.value.sortDirection
   }
   return null
 }
 
-const handleClickColumnHeader = (column: Column) => {
+const handleClickColumnHeader = (column: ColDef) => {
   if (column.isSortable) {
     props.screener.actions.sort(column.field)
   }
+}
+
+const processValue = (value: any, colDef: ColDef): string => {
+  // allow the user to format the value
+  if (colDef.format) {
+    value = colDef.format(value)
+  }
+  // highlight search matches
+  const disableSearchHighlight = props.screener.preferences.value.disableSearchHighlight
+  const searchText = props.screener.searchQuery.value.searchText
+  if (!disableSearchHighlight && searchText && value !== undefined) {
+    value = highlightMatches(String(value), searchText)
+  }
+  return value
 }
 </script>

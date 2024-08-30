@@ -1,139 +1,95 @@
-import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
-import { Config, Column, Item, Screener, UnknownObject } from '@/interfaces/screener'
-import { getFields, getPaginated, isValidInput, normaliseInput, omitColumns, pickColumns } from '../utils/data.utils'
+import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences, SearchQuery } from '@/interfaces/screener'
+import { getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
-import { orderBy } from 'natural-orderby'
-import { highlightText } from '../utils/text.utils'
 
 type ScreenerOptions = {
+  height?: string // a css height
   defaultCurrentPage?: number
-  defaultPerPage?: number
-  defaultSort?: { field: string; direction: 'asc' | 'desc' }
-  config?: Config
+  defaultItemsPerPage?: number
+  defaultSortField?: string
+  defaultSortDirection?: 'asc' | 'desc'
+  columnDefs?: ColDefs
   pick?: string[]
   omit?: string[]
-  rowConfig?: {
-    link?: boolean
-    getLink?: (item: Item) => string
-  }
-  fixedPageSize?: boolean
   disableSearchHighlight?: boolean
 }
-export const useScreener = (defaultData: undefined | null | unknown[], options: ScreenerOptions = {}): Screener => {
-  // State
-  const searchQuery = ref<string>('')
-  const highlightQuery = ref<string>('')
-  const currentPage = ref<number>(1)
-  const perPage = ref<number>(10)
-  const searchOptions = ref<SearchQueryOption[]>([])
-  const sortField = ref<string | number | null>(null)
-  const sortDirection = ref<'asc' | 'desc'>('desc')
-  const data = ref<unknown[]>([])
-  const config = ref<Config>({})
-  const pick = ref<string[]>([])
-  const omit = ref<string[]>([])
-  const fixedPageSize = ref<boolean>(false)
-  const disableSearchHighlight = ref<boolean>(false)
-  const rowConfig = ref<{
-    link?: boolean
-    getLink?: (item: Item) => string
-  }>({
-    link: options.rowConfig?.link ?? false,
-    getLink: options.rowConfig?.getLink,
+export const useScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
+  // User preferences
+  const preferences = ref<UserPreferences>({
+    height: options.height ?? '400px',
+    disableSearchHighlight: options.disableSearchHighlight ?? false,
+    pick: options.pick ?? [],
+    omit: options.omit ?? [],
   })
 
-  // Set default state
-  config.value = options.config ?? config.value
-  currentPage.value = options.defaultCurrentPage ?? currentPage.value
-  perPage.value = options.defaultPerPage ?? perPage.value
-  sortField.value = options.defaultSort?.field ?? sortField.value
-  sortDirection.value = options.defaultSort?.direction ?? sortDirection.value
-  data.value = defaultData ?? data.value
-  pick.value = options.pick ?? pick.value
-  omit.value = options.omit ?? omit.value
-  fixedPageSize.value = options.fixedPageSize ?? fixedPageSize.value
-  disableSearchHighlight.value = options.disableSearchHighlight ?? disableSearchHighlight.value
-
+  // Data storage
+  const data = ref<unknown[]>(inputData ?? [])
   const hasError = computed((): boolean => {
-    return !isValidInput(data.value)
+    return !isValidInput(inputData)
   })
 
-  const normalisedData = computed((): Item[] => {
-    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[], config.value) : []
+  // Search query config
+  const searchQuery = ref<SearchQuery>({
+    searchText: '', // Search text
+    searchTextOptions: {
+      matchRegex: false, // Whether to match regex in search
+      matchCase: false, // Whether to match case in search
+      matchWord: false, // Whether to match whole word in search
+    },
+    page: options.defaultCurrentPage ?? 1, // Current page number
+    itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of items per page
+    sortField: options.defaultSortField ?? null, // Field to sort by
+    sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
   })
 
-  const searchedData = computed((): Item[] => {
+  const allItems = computed((): Item[] => {
+    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
+  })
+
+  const queriedItems = computed((): Item[] => {
     return search({
-      items: normalisedData.value,
-      searchQuery: searchQuery.value,
-      useRegExp: searchOptions.value.includes('use-regex'),
-      matchCase: searchOptions.value.includes('match-case'),
-      matchWord: searchOptions.value.includes('match-word'),
+      items: allItems.value,
+      columnDefs: columnDefs.value,
+      searchText: searchQuery.value.searchText,
+      matchRegex: searchQuery.value.searchTextOptions.matchRegex,
+      matchCase: searchQuery.value.searchTextOptions.matchCase,
+      matchWord: searchQuery.value.searchTextOptions.matchWord,
     })
   })
 
-  const sortedData = computed((): Item[] => {
-    const sortedItems = searchQuery.value ? searchedData.value : normalisedData.value
+  const sortedItems = computed((): Item[] => {
+    const sortedItems = searchQuery.value.searchText ? queriedItems.value : allItems.value
 
-    const _sortField = sortField.value
+    const _sortField = searchQuery.value.sortField
 
-    if (_sortField && sortDirection.value) {
-      const nullItems = sortedItems.filter(
-        (item) => item.data[_sortField] === null || item.data[_sortField] === undefined,
-      )
-
-      const nonNullItems = sortedItems.filter(
-        (item) => item.data[_sortField] !== null && item.data[_sortField] !== undefined,
-      )
-
-      return [...orderBy(nonNullItems, [(item: Item) => item.data[_sortField]], [sortDirection.value]), ...nullItems]
+    if (_sortField && searchQuery.value.sortDirection) {
+      return sortItems(sortedItems, {
+        sortField: _sortField,
+        sortDirection: searchQuery.value.sortDirection,
+      })
     } else {
       return sortedItems
     }
   })
 
-  const paginatedData = computed((): Item[] => {
+  const paginatedItems = computed((): Item[] => {
     return getPaginated({
-      items: sortedData.value,
-      page: currentPage.value - 1,
-      perPage: perPage.value,
-      padPageLength: fixedPageSize.value,
+      items: sortedItems.value,
+      page: searchQuery.value.page - 1,
+      itemsPerPage: searchQuery.value.itemsPerPage,
     })
   })
 
-  const hasData = computed((): boolean => {
-    return paginatedData.value.filter((item) => item !== null).length > 0
-  })
+  const columnDefs = computed<ColDef[]>(() => {
+    const fields = getFields(allItems.value)
 
-  const items = computed(() => {
-    return paginatedData.value.map((item) => {
-      if (!item) return null
-      return {
-        ...item,
-        fields: Object.keys(item.fields).reduce((acc, key) => {
-          const field = item.fields[key]
-          return {
-            ...acc,
-            [key]: {
-              ...field,
-              htmlValue: disableSearchHighlight.value
-                ? field.value
-                : highlightText(field.value ? String(field.value) : '', highlightQuery.value),
-            },
-          }
-        }, {}),
-      }
-    })
-  })
-
-  const columns = computed<Column[]>(() => {
-    const fields = pick.value?.length ? pick.value : getFields(normalisedData.value)
-
-    let columns: Column[] = fields.map((field, i) => {
-      const inputColumn = config.value[field] ?? {}
+    const columns: ColDef[] = fields.map((field, i) => {
+      const inputColumn = options.columnDefs?.[field] ?? {}
       let width = inputColumn.width ?? 'auto'
+
       if (!isNaN(Number(width))) width = width + 'px'
+
       return {
         field,
         label: field,
@@ -147,57 +103,59 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
       }
     })
 
-    if (options.pick && options.pick.length > 0) {
-      columns = pickColumns(columns, options.pick)
+    return columns
+  })
+
+  // Columns to display
+  const visibleColumnDefs = computed<ColDef[]>(() => {
+    let columns: ColDef[] = columnDefs.value
+    const { pick, omit } = preferences.value
+
+    if (pick.length > 0) {
+      columns = columns.filter((column) => pick.includes(column.field))
     }
 
-    if (omit.value && omit.value.length > 0) {
-      columns = omitColumns(columns, omit.value)
+    if (omit.length > 0) {
+      columns = columns.filter((column) => !omit.includes(column.field))
     }
 
     return columns
   })
 
-  return {
-    searchQuery,
-    highlightQuery,
-    currentPage,
-    perPage,
-    searchOptions,
-    sortField,
-    sortDirection,
-    data,
-    items,
-    totalItems: computed(() => searchedData.value.length),
-    hasError,
-    hasData,
-    config,
-    pick,
-    omit,
-    columns,
-    rowConfig,
-    fixedPageSize,
-    disableSearchHighlight,
-    actions: {
-      search: (query: string, options?: SearchQueryOption[]) => {
-        searchQuery.value = query
-        highlightQuery.value = query
-        if (options) {
-          searchOptions.value = options
-        }
-      },
-      sort: (field: string | number) => {
-        const fieldConfig = columns.value.find((column) => column.field === field)
-
-        sortDirection.value =
-          sortField.value === field
-            ? sortDirection.value === 'desc'
-              ? 'asc'
-              : 'desc'
-            : fieldConfig?.defaultSortDirection || sortDirection.value
-
-        sortField.value = field
-      },
+  const actions = {
+    search: (_searchQuery: Partial<SearchQuery>) => {
+      searchQuery.value = {
+        ...searchQuery.value,
+        ..._searchQuery,
+      }
     },
+    sort: (field: string | number) => {
+      const fieldConfig = columnDefs.value.find((columnDefs) => columnDefs.field === field)
+      searchQuery.value.sortDirection =
+        searchQuery.value.sortField === field
+          ? searchQuery.value.sortDirection === 'desc'
+            ? 'asc'
+            : 'desc'
+          : fieldConfig?.defaultSortDirection || searchQuery.value.sortDirection
+
+      searchQuery.value.sortField = field
+    },
+    navToFirstPage: () => actions.search({ page: 1 }),
+    navToPrevPage: () => actions.search({ page: Math.max(searchQuery.value.page - 1, 1) }),
+    navToPage: (page: number) => actions.search({ page }),
+    navToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
+    navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
+  }
+
+  return {
+    preferences, // user preferences
+    searchQuery, // search options (searchText, pagination, sort)
+    allItems, // all data
+    queriedItems, // filtered data (after search query)
+    paginatedItems, // paginated data (cut from queriedItems)
+    hasError, // boolean indicating if the data is valid
+    columnDefs, // columnDefs (field, label, width, isFirst, isLast, isSticky, isSortable, defaultSortDirection)
+    visibleColumnDefs, // the visible columnDefs
+    actions, // actions
   }
 }

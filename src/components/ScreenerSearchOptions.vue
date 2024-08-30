@@ -2,7 +2,7 @@
   <ToggleButtonGroup :ui="ui">
     <ToggleButton
       title="Match case"
-      :active="props.screener.searchOptions.value.includes('match-case')"
+      :active="props.screener.searchQuery.value.searchTextOptions.matchCase"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
     >
@@ -10,7 +10,7 @@
     </ToggleButton>
     <ToggleButton
       title="Match word"
-      :active="props.screener.searchOptions.value.includes('match-word')"
+      :active="props.screener.searchQuery.value.searchTextOptions.matchWord"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
     >
@@ -18,9 +18,9 @@
     </ToggleButton>
     <ToggleButton
       title="Use regular expression"
-      :active="props.screener.searchOptions.value.includes('use-regex')"
+      :active="props.screener.searchQuery.value.searchTextOptions.matchRegex"
       :ui="ui?.toggleButton"
-      @click="toggleOption('use-regex')"
+      @click="toggleOption('match-regex')"
     >
       <RegularExpressionIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
@@ -33,7 +33,6 @@ import { Screener } from '@/interfaces/screener'
 import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
 import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
 import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
-import { SearchQueryOption } from './ScreenerSearch.vue'
 import ToggleButtonGroup from './ui/toggle-button/ToggleButtonGroup.vue'
 import ToggleButton, { ToggleButtonUI } from './ui/toggle-button/ToggleButton.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
@@ -72,14 +71,17 @@ const ui = computed(() => {
   }
 })
 
-const toggleOption = (option: SearchQueryOption) => {
-  if (props.screener.searchOptions.value.includes(option)) {
-    props.screener.actions.search(
-      props.screener.highlightQuery.value,
-      props.screener.searchOptions.value.filter((activeOption) => activeOption !== option),
-    )
-  } else {
-    props.screener.actions.search(props.screener.highlightQuery.value, [...props.screener.searchOptions.value, option])
+const toggleOption = (searchTextOption: 'match-case' | 'match-word' | 'match-regex') => {
+  const updatedSearchTextOptions = { ...props.screener.searchQuery.value.searchTextOptions }
+
+  if (searchTextOption === 'match-case') {
+    updatedSearchTextOptions.matchCase = !updatedSearchTextOptions.matchCase
+  } else if (searchTextOption === 'match-word') {
+    updatedSearchTextOptions.matchWord = !updatedSearchTextOptions.matchWord
+  } else if (searchTextOption === 'match-regex') {
+    updatedSearchTextOptions.matchRegex = !updatedSearchTextOptions.matchRegex
   }
+
+  props.screener.actions.search({ searchTextOptions: updatedSearchTextOptions })
 }
 </script>

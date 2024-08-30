@@ -2,8 +2,8 @@
   <UiInput
     type="text"
     :ui="ui"
-    :value="screener.searchQuery.value"
-    :error="useRegEx && !isValidQuery"
+    :value="screener.searchQuery.value.searchText"
+    :error="matchRegex && !isValidQuery"
     placeholder="Search..."
     @keydown="onKeydown"
     @input="onInput"
@@ -16,7 +16,6 @@ import { computed, ref } from 'vue'
 import { isValidRegExp } from '../utils/regex.utils'
 import UiInput, { InputUI } from './ui/input/Input.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
-export type SearchQueryOption = 'match-case' | 'match-word' | 'use-regex'
 
 export type ScreenerSearchUI = InputUI
 
@@ -38,12 +37,12 @@ const ui = computed(() => {
 const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
-const useRegEx = computed<boolean>(() => {
-  return props.screener.searchOptions.value.some((activeOption) => activeOption === 'use-regex')
+const matchRegex = computed<boolean>(() => {
+  return props.screener.searchQuery.value.searchTextOptions.matchRegex
 })
 
 const isValidQuery = computed((): boolean => {
-  return isValidRegExp(props.screener.searchQuery.value)
+  return isValidRegExp(props.screener.searchQuery.value.searchText)
 })
 
 const onKeydown = (event: KeyboardEvent) => {
@@ -51,12 +50,12 @@ const onKeydown = (event: KeyboardEvent) => {
   const isPressingDown = event.key === 'ArrowDown'
   const isEnter = event.key === 'Enter'
 
-  const searchQuery = (event.target as HTMLInputElement).value
+  const searchText = (event.target as HTMLInputElement).value
 
   if (isEnter) {
-    props.screener.actions.search(searchQuery)
-    if (searchQuery) {
-      history.value.push(searchQuery)
+    props.screener.actions.search({ searchText })
+    if (searchText) {
+      history.value.push(searchText)
       historyIndex.value = history.value.length - 1
     }
   }
@@ -74,11 +73,11 @@ const onKeydown = (event: KeyboardEvent) => {
     historyIndex.value++
   }
 
-  props.screener.actions.search(history.value[historyIndex.value])
+  props.screener.actions.search({ searchText: history.value[historyIndex.value] })
 }
 
 const onInput = (event: Event) => {
-  const query = (event.target as HTMLInputElement).value
-  props.screener.actions.search(query)
+  const searchText = (event.target as HTMLInputElement).value
+  props.screener.actions.search({ searchText })
 }
 </script>

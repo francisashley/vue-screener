@@ -1,52 +1,53 @@
-import { SearchQueryOption } from '@/components/ScreenerSearch.vue'
 import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
-  searchQuery: Ref<string>
-  highlightQuery: Ref<string>
-  currentPage: Ref<number>
-  perPage: Ref<number>
-  searchOptions: Ref<SearchQueryOption[]>
-  sortField: Ref<string | number | null>
-  sortDirection: Ref<'asc' | 'desc'>
-  data: Ref<unknown[]>
-  totalItems: ComputedRef<number>
+  preferences: Ref<UserPreferences>
+  searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
-  hasData: ComputedRef<boolean>
-  items: ComputedRef<(Item | null)[]>
-  config: Ref<Config>
-  pick: Ref<string[]>
-  omit: Ref<string[]>
-  columns: ComputedRef<Column[]>
-  // schema: ComputedRef<Schema>
-  fixedPageSize: Ref<boolean>
-  disableSearchHighlight: Ref<boolean>
-  rowConfig: Ref<{
-    link?: boolean
-    getLink?: (item: any) => string
-  }>
+  allItems: ComputedRef<Item[]>
+  queriedItems: ComputedRef<Item[]>
+  paginatedItems: ComputedRef<Item[]>
+  columnDefs: ComputedRef<ColDef[]>
+  visibleColumnDefs: ComputedRef<ColDef[]>
   actions: {
-    search: (query: string, options?: SearchQueryOption[]) => void
+    search: (searchQuery: Partial<SearchQuery>) => void
     sort: (field: string | number) => void
+    navToFirstPage: () => void
+    navToPrevPage: () => void
+    navToPage: (page: number) => void
+    navToNextPage: () => void
+    navToLastPage: () => void
   }
 }
 
-// export type Schema = {
-//   columns: string[]
-//   fields: Record<string, DataType | DataType[]>
-// }
-
-export type Schema = {
-  fields: {
-    field: string | number
-    width?: string
-    type: DataType | DataType[]
-  }[]
+export type UserPreferences = {
+  height: string
+  disableSearchHighlight: boolean
+  pick: (string | number)[]
+  omit: (string | number)[]
 }
 
-export type Column = {
+export type SearchTextOptions = {
+  matchCase: boolean
+  matchWord: boolean
+  matchRegex: boolean
+}
+
+export type SearchQuery = {
+  // query
+  searchText: string
+  searchTextOptions: SearchTextOptions
+  // scope ()
+  page: number
+  itemsPerPage: number
+  // sort
+  sortField: string | number | null
+  sortDirection: 'asc' | 'desc'
+}
+
+export type ColDef = {
   field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
-  label: string // The label to display in the header of the column. Will default to the key.
+  label: string | number // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
   isFirst: boolean // Flag indicating if it is the first column.
   isLast: boolean // Flag indicating if it is the last column.
@@ -56,22 +57,11 @@ export type Column = {
   format?: (item: string | number) => string // Format the value of the field.
 }
 
-export type Config = Record<
-  string | number,
-  Partial<Pick<Column, 'field' | 'width' | 'isSticky' | 'isSortable' | 'defaultSortDirection' | 'label' | 'format'>>
->
+export type ColDefs = Record<string | number, Partial<ColDef>>
 
 export type Item = {
+  id: string // A unique identifier for internal tracking and updating of the item.
   data: Record<string | number, any> // The original data for the item.
-  fields: Record<string, Field> // The processed data for each field in the item, used for rendering.
-}
-
-export type Field = {
-  field: string // The field name.
-  type: DataType // Data type of the value.
-  value?: number | string | null // Value of the field.
-  htmlValue: string // HTML representation of the value, used for rendering.
-  hasValue: boolean // Flag indicating if the field has a value.
 }
 
 export interface UnknownObject {
