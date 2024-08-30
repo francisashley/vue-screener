@@ -3,12 +3,7 @@ import { ComputedRef, Ref } from 'vue'
 
 export type Screener = {
   preferences: Ref<UserPreferences>
-  searchText: Ref<string>
-  searchTextOptions: Ref<SearchTextOption[]>
-  currentPage: Ref<number>
-  itemsPerPage: Ref<number>
-  sortField: Ref<string | number | null>
-  sortDirection: Ref<'asc' | 'desc'>
+  searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
   allItems: ComputedRef<Item[]>
   queriedItems: ComputedRef<Item[]>
@@ -31,6 +26,18 @@ export type UserPreferences = {
   disableSearchHighlight: boolean
   pick: (string | number)[]
   omit: (string | number)[]
+}
+
+export type SearchQuery = {
+  // query
+  searchText: string
+  searchTextOptions: SearchTextOption[]
+  // scope ()
+  page: number
+  itemsPerPage: number
+  // sort
+  sortField: string | number | null
+  sortDirection: 'asc' | 'desc'
 }
 
 export type ColDef = {

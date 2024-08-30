@@ -28,7 +28,7 @@
     >
       <UiInput
         type="number"
-        :value="screener.itemsPerPage.value"
+        :value="screener.searchQuery.value.itemsPerPage"
         min="1"
         step="1"
         @input="handleChangeItemsPerPage"
@@ -91,14 +91,14 @@ const ui = computed(() => {
 })
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.screener.queriedItems.value.length / props.screener.itemsPerPage.value) || 0
+  return Math.ceil(props.screener.queriedItems.value.length / props.screener.searchQuery.value.itemsPerPage) || 0
 })
 
 const getPages = computed(() => {
   let pages = [
-    props.screener.currentPage.value - 1,
-    props.screener.currentPage.value,
-    props.screener.currentPage.value + 1,
+    props.screener.searchQuery.value.page - 1,
+    props.screener.searchQuery.value.page,
+    props.screener.searchQuery.value.page + 1,
   ]
   pages = pages.filter((page) => page > 0)
 
@@ -116,33 +116,37 @@ const getPages = computed(() => {
 })
 
 const canNavigateFirst = computed(() => {
-  return props.screener.currentPage.value > 1
+  return props.screener.searchQuery.value.page > 1
 })
 
 const canNavigatePrev = computed(() => {
-  return props.screener.currentPage.value > 1
+  return props.screener.searchQuery.value.page > 1
 })
 
 const canNavigateNext = computed(() => {
-  return props.screener.currentPage.value < totalPages.value
+  return props.screener.searchQuery.value.page < totalPages.value
 })
 
 const canNavigateLast = computed(() => {
-  return props.screener.currentPage.value < totalPages.value
+  return props.screener.searchQuery.value.page < totalPages.value
 })
 
 const firstIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.itemsPerPage.value - props.screener.itemsPerPage.value + 1
+  return (
+    props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage -
+    props.screener.searchQuery.value.itemsPerPage +
+    1
+  )
 })
 
 const lastIndexOfCurrentPage = computed(() => {
-  return props.screener.currentPage.value * props.screener.itemsPerPage.value > props.screener.queriedItems.value.length
+  return props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage > props.screener.queriedItems.value.length // eslint-disable-line
     ? props.screener.queriedItems.value.length
-    : props.screener.currentPage.value * props.screener.itemsPerPage.value
+    : props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage
 })
 
 const currentPageIsInRange = computed((): boolean => {
-  return totalPages.value >= props.screener.currentPage.value
+  return totalPages.value >= props.screener.searchQuery.value.page
 })
 
 onMounted(() => {
@@ -151,13 +155,11 @@ onMounted(() => {
 
 watch(
   () => props.screener.queriedItems.value.length,
-  () => {
-    ensureCurrentPageIsValid()
-  },
+  () => ensureCurrentPageIsValid(),
 )
 
 const isActive = (page: number): boolean => {
-  return page === props.screener.currentPage.value
+  return page === props.screener.searchQuery.value.page
 }
 
 const ensureCurrentPageIsValid = (): void => {
@@ -168,6 +170,6 @@ const ensureCurrentPageIsValid = (): void => {
 
 const handleChangeItemsPerPage = (event: Event): void => {
   const itemsPerPage = Number((event.target as HTMLInputElement).value)
-  props.screener.itemsPerPage.value = itemsPerPage
+  props.screener.searchQuery.value.itemsPerPage = itemsPerPage
 }
 </script>

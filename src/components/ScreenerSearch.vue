@@ -2,7 +2,7 @@
   <UiInput
     type="text"
     :ui="ui"
-    :value="screener.searchText.value"
+    :value="screener.searchQuery.value.searchText"
     :error="matchRegex && !isValidQuery"
     placeholder="Search..."
     @keydown="onKeydown"
@@ -39,11 +39,11 @@ const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
 const matchRegex = computed<boolean>(() => {
-  return props.screener.searchTextOptions.value.some((activeOption) => activeOption === 'match-regex')
+  return props.screener.searchQuery.value.searchTextOptions.some((activeOption) => activeOption === 'match-regex')
 })
 
 const isValidQuery = computed((): boolean => {
-  return isValidRegExp(props.screener.searchText.value)
+  return isValidRegExp(props.screener.searchQuery.value.searchText)
 })
 
 const onKeydown = (event: KeyboardEvent) => {

@@ -1,5 +1,5 @@
 import { SearchTextOption } from '@/components/ScreenerSearch.vue'
-import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences } from '@/interfaces/screener'
+import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences, SearchQuery } from '@/interfaces/screener'
 import {
   getFields,
   getPaginated,
@@ -32,14 +32,18 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     omit: options.omit ?? [],
   })
 
-  // State
-  const searchText = ref<string>('')
-  const currentPage = ref<number>(options.defaultCurrentPage ?? 1)
-  const itemsPerPage = ref<number>(options.defaultItemsPerPage ?? 25)
-  const searchTextOptions = ref<SearchTextOption[]>([])
-  const sortField = ref<string | number | null>(options.defaultSortField ?? null)
-  const sortDirection = ref<'asc' | 'desc'>(options.defaultSortDirection ?? 'desc')
+  // Data
   const data = ref<unknown[]>(defaultData ?? [])
+
+  // Search query config
+  const searchQuery = ref<SearchQuery>({
+    searchText: '', // Search text
+    searchTextOptions: [], // Search text options
+    page: options.defaultCurrentPage ?? 1, // Current page number
+    itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of items per page
+    sortField: options.defaultSortField ?? null, // Field to sort by
+    sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
+  })
 
   const hasError = computed((): boolean => {
     return !isValidInput(data.value)
@@ -53,22 +57,22 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     return search({
       items: allItems.value,
       columnDefs: columnDefs.value,
-      searchText: searchText.value,
-      matchRegex: searchTextOptions.value.includes('match-regex'),
-      matchCase: searchTextOptions.value.includes('match-case'),
-      matchWord: searchTextOptions.value.includes('match-word'),
+      searchText: searchQuery.value.searchText,
+      matchRegex: searchQuery.value.searchTextOptions.includes('match-regex'),
+      matchCase: searchQuery.value.searchTextOptions.includes('match-case'),
+      matchWord: searchQuery.value.searchTextOptions.includes('match-word'),
     })
   })
 
   const sortedItems = computed((): Item[] => {
-    const sortedItems = searchText.value ? queriedItems.value : allItems.value
+    const sortedItems = searchQuery.value.searchText ? queriedItems.value : allItems.value
 
-    const _sortField = sortField.value
+    const _sortField = searchQuery.value.sortField
 
-    if (_sortField && sortDirection.value) {
+    if (_sortField && searchQuery.value.sortDirection) {
       return sortItems(sortedItems, {
         sortField: _sortField,
-        sortDirection: sortDirection.value,
+        sortDirection: searchQuery.value.sortDirection,
       })
     } else {
       return sortedItems
@@ -78,8 +82,8 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
   const paginatedItems = computed((): Item[] => {
     return getPaginated({
       items: sortedItems.value,
-      page: currentPage.value - 1,
-      itemsPerPage: itemsPerPage.value,
+      page: searchQuery.value.page - 1,
+      itemsPerPage: searchQuery.value.itemsPerPage,
     })
   })
 
@@ -89,7 +93,9 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
     const columns: ColDef[] = fields.map((field, i) => {
       const inputColumn = options.columnDefs?.[field] ?? {}
       let width = inputColumn.width ?? 'auto'
+
       if (!isNaN(Number(width))) width = width + 'px'
+
       return {
         field,
         label: field,
@@ -122,37 +128,32 @@ export const useScreener = (defaultData: undefined | null | unknown[], options: 
 
   const actions = {
     search: (query: string, options?: SearchTextOption[]) => {
-      searchText.value = query
+      searchQuery.value.searchText = query
       if (options) {
-        searchTextOptions.value = options
+        searchQuery.value.searchTextOptions = options
       }
     },
     sort: (field: string | number) => {
       const fieldConfig = columnDefs.value.find((columnDefs) => columnDefs.field === field)
-      sortDirection.value =
-        sortField.value === field
-          ? sortDirection.value === 'desc'
+      searchQuery.value.sortDirection =
+        searchQuery.value.sortField === field
+          ? searchQuery.value.sortDirection === 'desc'
             ? 'asc'
             : 'desc'
-          : fieldConfig?.defaultSortDirection || sortDirection.value
+          : fieldConfig?.defaultSortDirection || searchQuery.value.sortDirection
 
-      sortField.value = field
+      searchQuery.value.sortField = field
     },
-    navToFirstPage: () => (currentPage.value = 1),
-    navToPrevPage: () => (currentPage.value = currentPage.value - 1),
-    navToPage: (page: number) => (currentPage.value = page),
-    navToNextPage: () => (currentPage.value = currentPage.value + 1),
-    navToLastPage: () => (currentPage.value = Math.ceil(queriedItems.value.length / itemsPerPage.value) || 0),
+    navToFirstPage: () => (searchQuery.value.page = 1),
+    navToPrevPage: () => (searchQuery.value.page = searchQuery.value.page - 1),
+    navToPage: (page: number) => (searchQuery.value.page = page),
+    navToNextPage: () => (searchQuery.value.page = searchQuery.value.page + 1),
+    navToLastPage: () => (searchQuery.value.page = Math.ceil(queriedItems.value.length / searchQuery.value.itemsPerPage) || 0), // eslint-disable-line
   }
 
   return {
     preferences,
-    searchText: searchText,
-    currentPage,
-    itemsPerPage,
-    searchTextOptions: searchTextOptions,
-    sortField,
-    sortDirection,
+    searchQuery,
     allItems,
     queriedItems,
     paginatedItems,

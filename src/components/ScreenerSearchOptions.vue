@@ -2,7 +2,7 @@
   <ToggleButtonGroup :ui="ui">
     <ToggleButton
       title="Match case"
-      :active="props.screener.searchTextOptions.value.includes('match-case')"
+      :active="props.screener.searchQuery.value.searchTextOptions.includes('match-case')"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
     >
@@ -10,7 +10,7 @@
     </ToggleButton>
     <ToggleButton
       title="Match word"
-      :active="props.screener.searchTextOptions.value.includes('match-word')"
+      :active="props.screener.searchQuery.value.searchTextOptions.includes('match-word')"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
     >
@@ -18,7 +18,7 @@
     </ToggleButton>
     <ToggleButton
       title="Use regular expression"
-      :active="props.screener.searchTextOptions.value.includes('match-regex')"
+      :active="props.screener.searchQuery.value.searchTextOptions.includes('match-regex')"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-regex')"
     >
@@ -73,13 +73,16 @@ const ui = computed(() => {
 })
 
 const toggleOption = (option: SearchTextOption) => {
-  if (props.screener.searchTextOptions.value.includes(option)) {
+  if (props.screener.searchQuery.value.searchTextOptions.includes(option)) {
     props.screener.actions.search(
-      props.screener.searchText.value,
-      props.screener.searchTextOptions.value.filter((activeOption) => activeOption !== option),
+      props.screener.searchQuery.value.searchText,
+      props.screener.searchQuery.value.searchTextOptions.filter((activeOption) => activeOption !== option),
     )
   } else {
-    props.screener.actions.search(props.screener.searchText.value, [...props.screener.searchTextOptions.value, option])
+    props.screener.actions.search(props.screener.searchQuery.value.searchText, [
+      ...props.screener.searchQuery.value.searchTextOptions,
+      option,
+    ])
   }
 }
 </script>

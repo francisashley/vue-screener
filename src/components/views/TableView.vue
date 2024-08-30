@@ -60,7 +60,7 @@
               :item="item"
               :ui="ui.table.row?.cell"
               :highlight-matches="highlightMatches"
-              :search-text="screener.searchText.value"
+              :search-text="screener.searchQuery.value.searchText"
             >
               <TableCell
                 :column="column"
@@ -72,7 +72,7 @@
                 :item="item"
                 :ui="ui.table.row?.cell"
                 :highlight-matches="highlightMatches"
-                :search-text="screener.searchText.value"
+                :search-text="screener.searchQuery.value.searchText"
               >
                 <slot>
                   <span v-html="processValue(item.data[column.field], column)" />
@@ -154,8 +154,8 @@ const ui = computed(() => {
 })
 
 const getSortDirection = (field: string | number): 'asc' | 'desc' | null => {
-  if (props.screener.sortField.value === field) {
-    return props.screener.sortDirection.value
+  if (props.screener.searchQuery.value.sortField === field) {
+    return props.screener.searchQuery.value.sortDirection
   }
   return null
 }
@@ -173,7 +173,7 @@ const processValue = (value: any, colDef: ColDef): string => {
   }
   // highlight search matches
   const disableSearchHighlight = props.screener.preferences.value.disableSearchHighlight
-  const searchText = props.screener.searchText.value
+  const searchText = props.screener.searchQuery.value.searchText
   if (!disableSearchHighlight && searchText && value !== undefined) {
     value = highlightMatches(String(value), searchText)
   }
