@@ -2,7 +2,7 @@
   <ToggleButtonGroup :ui="ui">
     <ToggleButton
       title="Match case"
-      :active="props.screener.searchQuery.value.searchTextOptions.includes('match-case')"
+      :active="props.screener.searchQuery.value.searchTextOptions.matchCase"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
     >
@@ -10,7 +10,7 @@
     </ToggleButton>
     <ToggleButton
       title="Match word"
-      :active="props.screener.searchQuery.value.searchTextOptions.includes('match-word')"
+      :active="props.screener.searchQuery.value.searchTextOptions.matchWord"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
     >
@@ -18,7 +18,7 @@
     </ToggleButton>
     <ToggleButton
       title="Use regular expression"
-      :active="props.screener.searchQuery.value.searchTextOptions.includes('match-regex')"
+      :active="props.screener.searchQuery.value.searchTextOptions.matchRegex"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-regex')"
     >
@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { Screener, SearchTextOption } from '@/interfaces/screener'
+import { Screener } from '@/interfaces/screener'
 import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
 import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
 import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
@@ -71,17 +71,17 @@ const ui = computed(() => {
   }
 })
 
-const toggleOption = (option: SearchTextOption) => {
-  if (props.screener.searchQuery.value.searchTextOptions.includes(option)) {
-    props.screener.actions.search(
-      props.screener.searchQuery.value.searchText,
-      props.screener.searchQuery.value.searchTextOptions.filter((activeOption) => activeOption !== option),
-    )
-  } else {
-    props.screener.actions.search(props.screener.searchQuery.value.searchText, [
-      ...props.screener.searchQuery.value.searchTextOptions,
-      option,
-    ])
+const toggleOption = (searchTextOption: 'match-case' | 'match-word' | 'match-regex') => {
+  const updatedSearchTextOptions = { ...props.screener.searchQuery.value.searchTextOptions }
+
+  if (searchTextOption === 'match-case') {
+    updatedSearchTextOptions.matchCase = !updatedSearchTextOptions.matchCase
+  } else if (searchTextOption === 'match-word') {
+    updatedSearchTextOptions.matchWord = !updatedSearchTextOptions.matchWord
+  } else if (searchTextOption === 'match-regex') {
+    updatedSearchTextOptions.matchRegex = !updatedSearchTextOptions.matchRegex
   }
+
+  props.screener.actions.search(props.screener.searchQuery.value.searchText, updatedSearchTextOptions)
 }
 </script>

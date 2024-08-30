@@ -10,7 +10,7 @@ export type Screener = {
   columnDefs: ComputedRef<ColDef[]>
   visibleColumnDefs: ComputedRef<ColDef[]>
   actions: {
-    search: (query: string, options?: SearchTextOption[]) => void
+    search: (query: string, options?: SearchTextOptions) => void
     sort: (field: string | number) => void
     navToFirstPage: () => void
     navToPrevPage: () => void
@@ -27,12 +27,16 @@ export type UserPreferences = {
   omit: (string | number)[]
 }
 
-export type SearchTextOption = 'match-case' | 'match-word' | 'match-regex'
+export type SearchTextOptions = {
+  matchCase: boolean
+  matchWord: boolean
+  matchRegex: boolean
+}
 
 export type SearchQuery = {
   // query
   searchText: string
-  searchTextOptions: SearchTextOption[]
+  searchTextOptions: SearchTextOptions
   // scope ()
   page: number
   itemsPerPage: number

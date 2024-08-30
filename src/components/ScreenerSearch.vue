@@ -38,7 +38,7 @@ const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
 const matchRegex = computed<boolean>(() => {
-  return props.screener.searchQuery.value.searchTextOptions.some((activeOption) => activeOption === 'match-regex')
+  return props.screener.searchQuery.value.searchTextOptions.matchRegex
 })
 
 const isValidQuery = computed((): boolean => {

@@ -6,7 +6,7 @@ import {
   UnknownObject,
   UserPreferences,
   SearchQuery,
-  SearchTextOption,
+  SearchTextOptions,
 } from '@/interfaces/screener'
 import {
   getFields,
@@ -46,7 +46,11 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   // Search query config
   const searchQuery = ref<SearchQuery>({
     searchText: '', // Search text
-    searchTextOptions: [], // Search text options
+    searchTextOptions: {
+      matchCase: false,
+      matchRegex: false,
+      matchWord: false,
+    }, // Search text options
     page: options.defaultCurrentPage ?? 1, // Current page number
     itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of items per page
     sortField: options.defaultSortField ?? null, // Field to sort by
@@ -66,9 +70,9 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
       items: allItems.value,
       columnDefs: columnDefs.value,
       searchText: searchQuery.value.searchText,
-      matchRegex: searchQuery.value.searchTextOptions.includes('match-regex'),
-      matchCase: searchQuery.value.searchTextOptions.includes('match-case'),
-      matchWord: searchQuery.value.searchTextOptions.includes('match-word'),
+      matchRegex: searchQuery.value.searchTextOptions.matchRegex,
+      matchCase: searchQuery.value.searchTextOptions.matchCase,
+      matchWord: searchQuery.value.searchTextOptions.matchWord,
     })
   })
 
@@ -135,7 +139,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   })
 
   const actions = {
-    search: (query: string, options?: SearchTextOption[]) => {
+    search: (query: string, options?: SearchTextOptions) => {
       searchQuery.value.searchText = query
       if (options) {
         searchQuery.value.searchTextOptions = options
