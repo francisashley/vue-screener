@@ -101,12 +101,20 @@ const actions = {
       activeCell.value = [point[0], point[1] - 1]
     }
   },
+  deleteCell: (point: Point) => {
+    const selectedItem = props.screener.paginatedItems.value[point[0]]
+    const selectedField = props.screener.columnDefs.value[point[1]].field
+    props.screener.actions.updateItem({ ...selectedItem, data: { ...selectedItem.data, [selectedField]: null } })
+  },
 }
 
 const handleKeydown = (event: KeyboardEvent) => {
   if (!activeCell.value) return
 
   switch (event.code) {
+    case 'Backspace':
+      actions.deleteCell(activeCell.value)
+      break
     case 'Tab':
       if (event.shiftKey) {
         actions.moveSelectionPrev(activeCell.value)
