@@ -12,7 +12,13 @@
       <SpreadsheetCell is-header :point="[ri, -1]">
         {{ ri }}
       </SpreadsheetCell>
-      <SpreadsheetCell :point="[ri, ci]" v-for="(columnDef, ci) in props.screener.columnDefs.value" :key="ci">
+      <SpreadsheetCell
+        :point="[ri, ci]"
+        v-for="(columnDef, ci) in props.screener.columnDefs.value"
+        :key="ci"
+        :is-active="activeCell ? activeCell[0] === ri && activeCell[1] === ci : false"
+        @click="actions.selectCell([ri, ci])"
+      >
         {{ item?.data[columnDef.field] }}
       </SpreadsheetCell>
     </SpreadsheetRow>
@@ -20,7 +26,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onUnmounted, ref } from 'vue'
 import type { Screener } from '../../interfaces/screener'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import SpreadsheetCell from '../ui/spreadsheet/SpreadsheetCell.vue'
@@ -31,6 +37,8 @@ export type SpreadsheetViewUI = {
     class: string
   }
 }
+
+type Point = [rowIndex: number, colIndex: number]
 
 const props = defineProps<{
   screener: Screener
@@ -47,5 +55,87 @@ const ui = computed(() => {
   return {
     spreadsheetView: twMerge(uiDefaults.spreadsheetView?.class, props.ui?.spreadsheetView?.class),
   }
+})
+
+const activeCell = ref<null | Point>(null)
+
+const actions = {
+  selectCell: (point: Point) => {
+    activeCell.value = point
+  },
+  moveSelectionPrev: (point: Point) => {
+    let nextPoint = point
+    if (point[1] > 0) {
+      nextPoint = [point[0], point[1] - 1]
+    } else {
+      nextPoint = [point[0] - 1, props.screener.columnDefs.value.length - 1]
+    }
+    activeCell.value = nextPoint
+  },
+  moveSelectionNext: (point: Point) => {
+    let nextPoint = point as Point
+    if (point[1] < props.screener.columnDefs.value.length - 1) {
+      nextPoint = [point[0], point[1] + 1]
+    } else {
+      nextPoint = [point[0] + 1, 0]
+    }
+    activeCell.value = nextPoint
+  },
+  moveSelectionUp: (point: Point) => {
+    if (point[0] > 0) {
+      activeCell.value = [point[0] - 1, point[1]]
+    }
+  },
+  moveSelectionRight: (point: Point) => {
+    if (point[1] < props.screener.columnDefs.value.length - 1) {
+      activeCell.value = [point[0], point[1] + 1]
+    }
+  },
+  moveSelectionDown: (point: Point) => {
+    if (point[0] < props.screener.paginatedItems.value.length - 1) {
+      activeCell.value = [point[0] + 1, point[1]]
+    }
+  },
+  moveSelectionLeft: (point: Point) => {
+    if (point[1] > 0) {
+      activeCell.value = [point[0], point[1] - 1]
+    }
+  },
+}
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (!activeCell.value) return
+
+  switch (event.code) {
+    case 'Tab':
+      if (event.shiftKey) {
+        actions.moveSelectionPrev(activeCell.value)
+      } else {
+        actions.moveSelectionNext(activeCell.value)
+      }
+      break
+    case 'ArrowUp':
+      event.preventDefault()
+      actions.moveSelectionUp(activeCell.value)
+      break
+    case 'ArrowRight':
+      event.preventDefault()
+      actions.moveSelectionRight(activeCell.value)
+      break
+    case 'ArrowDown':
+      event.preventDefault()
+      actions.moveSelectionDown(activeCell.value)
+      break
+    case 'ArrowLeft':
+      event.preventDefault()
+      actions.moveSelectionLeft(activeCell.value)
+      break
+  }
+}
+
+document.addEventListener('keydown', handleKeydown)
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
 })
 </script>

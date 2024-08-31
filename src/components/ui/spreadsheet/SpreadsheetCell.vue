@@ -14,7 +14,6 @@
       class="vsc-absolute vsc-w-full vsc-h-full vsc-cursor-default vsc-outline-none"
       :class="{ 'vsc-text-start vsc-px-1 vsc-whitespace-nowrap vsc-overflow-hidden vsc-text-zinc-200': !isHeader }"
       @click="emit('click', $event)"
-      @mousedown="emit('mousedown', $event)"
     >
       <slot />
     </button>
@@ -29,5 +28,5 @@ defineProps<{
   isActive?: boolean
 }>()
 
-const emit = defineEmits(['click', 'mousedown'])
+const emit = defineEmits(['click'])
 </script>
