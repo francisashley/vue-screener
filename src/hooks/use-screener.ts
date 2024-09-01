@@ -140,7 +140,15 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     navToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
     navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
-    updateItem: (updatedItem: Item) => allItems.value = allItems.value.map((item) => (updatedItem.id === item.id ? { ...item, ...updatedItem } : item)) // eslint-disable-line
+    updateItem: (id: string, partialData: Record<string | number, any>) => {
+      allItems.value = allItems.value.map((item) => {
+        if (id === item.id) {
+          const updatedData = { ...item.data, ...partialData }
+          return { ...item, data: updatedData }
+        }
+        return item
+      })
+    },
   }
 
   return {

@@ -19,7 +19,7 @@ export type Screener = {
     navToNextPage: () => void
     navToLastPage: () => void
     setDimensions: (dimensions: { height: number; width: number } | null) => void
-    updateItem: (updatedItem: Item) => void
+    updateItem: (id: string, partialData: Record<string | number, any>) => void
   }
 }
 

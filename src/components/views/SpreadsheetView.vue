@@ -104,7 +104,7 @@ const actions = {
   deleteCell: (point: Point) => {
     const selectedItem = props.screener.paginatedItems.value[point[0]]
     const selectedField = props.screener.columnDefs.value[point[1]].field
-    props.screener.actions.updateItem({ ...selectedItem, data: { ...selectedItem.data, [selectedField]: null } })
+    props.screener.actions.updateItem(selectedItem.id, { [selectedField]: null })
   },
 }
 
