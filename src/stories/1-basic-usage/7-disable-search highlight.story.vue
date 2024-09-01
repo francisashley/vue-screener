@@ -1,5 +1,5 @@
 <template>
-  <Story title="9. Disable search highlight" source="-">
+  <Story title="7. Disable search highlight" source="-">
     <DevSandbox title="Custom title" :screener="screener">
       <Screener :screener="screener" />
     </DevSandbox>

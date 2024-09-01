@@ -169,7 +169,6 @@ const ensureCurrentPageIsValid = (): void => {
 }
 
 const handleChangeItemsPerPage = (event: Event): void => {
-  const itemsPerPage = Number((event.target as HTMLInputElement).value)
-  props.screener.searchQuery.value.itemsPerPage = itemsPerPage
+  props.screener.actions.search({ itemsPerPage: Number((event.target as HTMLInputElement).value) })
 }
 </script>

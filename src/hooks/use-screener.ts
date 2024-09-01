@@ -1,7 +1,26 @@
-import { ColDefs, ColDef, Item, Screener, UnknownObject, UserPreferences, SearchQuery } from '@/interfaces/screener'
+import { ColDef, ColDefs, Item, Row, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
+
+type CellChangedEvent = {
+  newValue: any
+  oldValue: any
+  column: ColDef
+  item: Item
+}
+
+type ItemChangedEvent = {
+  newItem: Item
+  oldItem: Item
+  updatedCells: CellChangedEvent[]
+}
+
+type ChangedEvent = {
+  newData: Item[]
+  oldData: Item[]
+  updatedItem: ItemChangedEvent
+}
 
 type ScreenerOptions = {
   height?: string // a css height
@@ -13,21 +32,27 @@ type ScreenerOptions = {
   pick?: string[]
   omit?: string[]
   disableSearchHighlight?: boolean
+  editable?: boolean
+  onCellChanged?: (event: CellChangedEvent) => void
+  onItemChanged?: (event: ItemChangedEvent) => void
+  onChanged?: (event: ChangedEvent) => void
 }
 export const useScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
   // User preferences
   const preferences = ref<UserPreferences>({
     height: options.height ?? '400px',
+    editable: options.editable ?? false,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
     pick: options.pick ?? [],
     omit: options.omit ?? [],
   })
 
+  // Screener dimensions (width and height)
+  const dimensions = ref<{ width: number; height: number } | null>(null)
+
   // Data storage
-  const data = ref<unknown[]>(inputData ?? [])
-  const hasError = computed((): boolean => {
-    return !isValidInput(inputData)
-  })
+  const allItems = ref<Row[]>(isValidInput(inputData) ? normaliseInput(inputData) : [])
+  const hasError = computed((): boolean => !isValidInput(inputData))
 
   // Search query config
   const searchQuery = ref<SearchQuery>({
@@ -38,18 +63,14 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
       matchWord: false, // Whether to match whole word in search
     },
     page: options.defaultCurrentPage ?? 1, // Current page number
-    itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of items per page
+    itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of rows per page
     sortField: options.defaultSortField ?? null, // Field to sort by
     sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
   })
 
-  const allItems = computed((): Item[] => {
-    return isValidInput(data.value) ? normaliseInput(data.value as UnknownObject[]) : []
-  })
-
-  const queriedItems = computed((): Item[] => {
+  const queriedItems = computed((): Row[] => {
     return search({
-      items: allItems.value,
+      rows: allItems.value,
       columnDefs: columnDefs.value,
       searchText: searchQuery.value.searchText,
       matchRegex: searchQuery.value.searchTextOptions.matchRegex,
@@ -58,7 +79,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     })
   })
 
-  const sortedItems = computed((): Item[] => {
+  const sortedItems = computed((): Row[] => {
     const sortedItems = searchQuery.value.searchText ? queriedItems.value : allItems.value
 
     const _sortField = searchQuery.value.sortField
@@ -73,9 +94,9 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     }
   })
 
-  const paginatedItems = computed((): Item[] => {
+  const paginatedItems = computed((): Row[] => {
     return getPaginated({
-      items: sortedItems.value,
+      rows: sortedItems.value,
       page: searchQuery.value.page - 1,
       itemsPerPage: searchQuery.value.itemsPerPage,
     })
@@ -123,20 +144,15 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   })
 
   const actions = {
-    search: (_searchQuery: Partial<SearchQuery>) => {
-      searchQuery.value = {
-        ...searchQuery.value,
-        ..._searchQuery,
-      }
-    },
+    search: (_searchQuery?: Partial<SearchQuery>) => (searchQuery.value = { ...searchQuery.value, ..._searchQuery }),
     sort: (field: string | number) => {
-      const fieldConfig = columnDefs.value.find((columnDefs) => columnDefs.field === field)
+      const columnDef = columnDefs.value.find((columnDefs) => columnDefs.field === field)
       searchQuery.value.sortDirection =
         searchQuery.value.sortField === field
           ? searchQuery.value.sortDirection === 'desc'
             ? 'asc'
             : 'desc'
-          : fieldConfig?.defaultSortDirection || searchQuery.value.sortDirection
+          : columnDef?.defaultSortDirection || searchQuery.value.sortDirection
 
       searchQuery.value.sortField = field
     },
@@ -145,6 +161,54 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     navToPage: (page: number) => actions.search({ page }),
     navToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
     navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
+    setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
+    updateItem: (id: string, partialData: Record<string | number, any>) => {
+      let cellChanges: CellChangedEvent[] = []
+      let itemChanges: ItemChangedEvent | null = null
+
+      const updatedItems = allItems.value.map((item) => {
+        if (id === item.id) {
+          const updatedItem = { ...item.data, ...partialData }
+
+          cellChanges = Object.keys(partialData).map((key) => {
+            const columnDef = columnDefs.value.find((columnDefs) => columnDefs.field === key)
+            return {
+              newValue: partialData[key],
+              oldValue: item.data[key],
+              column: columnDef as ColDef,
+              item,
+            }
+          })
+
+          itemChanges = {
+            newItem: updatedItem,
+            oldItem: item.data,
+            updatedCells: cellChanges,
+          }
+
+          return { ...item, data: updatedItem }
+        }
+        return item
+      })
+
+      if (options.onCellChanged) {
+        cellChanges.forEach(options.onCellChanged)
+      }
+
+      if (options.onItemChanged && itemChanges) {
+        options.onItemChanged(itemChanges)
+      }
+
+      if (options.onChanged && itemChanges) {
+        options.onChanged({
+          newData: updatedItems.map((item) => item.data),
+          oldData: allItems.value.map((item) => item.data),
+          updatedItem: itemChanges,
+        })
+      }
+
+      allItems.value = updatedItems
+    },
   }
 
   return {
@@ -156,6 +220,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     hasError, // boolean indicating if the data is valid
     columnDefs, // columnDefs (field, label, width, isFirst, isLast, isSticky, isSortable, defaultSortDirection)
     visibleColumnDefs, // the visible columnDefs
+    dimensions, // screener dimensions
     actions, // actions
   }
 }

@@ -1,4 +1,4 @@
-import { DataType, Item, UnknownObject } from '@/interfaces/screener'
+import { DataType, Row, Item } from '@/interfaces/screener'
 import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -7,64 +7,64 @@ import { v4 as uuidv4 } from 'uuid'
  * @param {unknown} data - The data to check.
  * @returns {boolean} True if valid, false otherwise.
  */
-export function isValidInput(data: unknown): data is UnknownObject[] {
+export function isValidInput(data: unknown): data is Item[] {
   const isObject = (val: unknown) => typeof val === 'object' && val !== null
   return Array.isArray(data) && data.every((item: unknown) => Array.isArray(item) || isObject(item))
 }
 
 /**
  * Transforms input data into a consistent format.
- * @param {UnknownObject[]} data - The input data.
- * @returns {Item[]} The normalised data.
+ * @param {Item[]} data - The input data.
+ * @returns {Row[]} The normalised data.
  */
-export function normaliseInput(data: UnknownObject[]): Item[] {
+export function normaliseInput(data: Item[]): Row[] {
   // If the input data is an array of arrays, convert it to an array of objects.
   const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
 
   // Normalise each item into an array of normalised fields.
-  return transformedData.map((item: UnknownObject): Item => {
+  return transformedData.map((item: Item): Row => {
     return { id: uuidv4(), data: item }
   })
 }
 
 /**
- * Extracts unique field keys from normalised items.
- * @param {Item[]} items - The normalised items.
+ * Extracts unique field keys from rows.
+ * @param {Row[]} rows - The rows.
  * @returns {string[]} Unique field keys.
  */
-export function getFields(items: Item[]): string[] {
-  const fields = new Set<string>(items.flatMap((item) => Object.keys(item.data)))
+export function getFields(rows: Row[]): string[] {
+  const fields = new Set<string>(rows.flatMap((item) => Object.keys(item.data)))
   return Array.from(fields)
 }
 
 /**
- * Returns a paginated subset of normalised items.
+ * Returns a paginated subset of rows.
  * @param {Object} options - The options for pagination.
- * @returns {Item[]} Paginated items.
+ * @returns {Row[]} Paginated rows.
  */
 export function getPaginated({
-  items = [],
+  rows = [],
   page = 1,
   itemsPerPage = 25,
 }: {
-  items: Item[]
+  rows: Row[]
   page: number
   itemsPerPage: number
-}): Item[] {
+}): Row[] {
   const start = itemsPerPage * page
   const end = start + itemsPerPage
-  return items.slice(start, end)
+  return rows.slice(start, end)
 }
 
 export const sortItems = (
-  data: Item[],
+  data: Row[],
   options: { sortField: string | number | null; sortDirection: 'asc' | 'desc' },
-): Item[] => {
+): Row[] => {
   const sortField = options.sortField
   const sortDirection = options.sortDirection
 
   if (sortField && sortDirection) {
-    return [...orderBy(data, [(item: Item) => item.data[sortField]], [sortDirection])]
+    return [...orderBy(data, [(item: Row) => item.data[sortField]], [sortDirection])]
   } else {
     return data
   }

@@ -4,6 +4,7 @@
     :class="{
       [ui.class]: true,
     }"
+    ref="screenerRef"
   >
     <TableView
       v-if="view === 'table'"
@@ -18,6 +19,8 @@
         <slot name="data" v-bind="dataProps" />
       </template>
     </TableView>
+
+    <SpreadsheetView v-else-if="view === 'spreadsheet'" :screener="screener" :ui="props.ui?.spreadsheetView" />
 
     <NoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="no-data">No data provided</slot>
@@ -34,9 +37,10 @@
 
 <script lang="ts" setup>
 import type { Screener } from '../interfaces/screener'
-
-import { computed } from 'vue'
+import { useElementSize } from '../hooks/use-element-size'
+import { computed, ref } from 'vue'
 import TableView, { TableViewUI } from './views/TableView.vue'
+import SpreadsheetView, { SpreadsheetViewUI } from './views/SpreadsheetView.vue'
 import BadDataView, { BadDataViewUI } from './views/BadDataView.vue'
 import NoDataView, { NoDataViewUI } from './views/NoDataView.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
@@ -44,6 +48,7 @@ import { twMerge } from '../utils/tailwind-merge.utils'
 export type ScreenerUI = {
   class?: string
   tableView?: TableViewUI
+  spreadsheetView?: SpreadsheetViewUI
   noDataView?: NoDataViewUI
   badDataView?: BadDataViewUI
 }
@@ -53,8 +58,9 @@ const props = defineProps<{
   ui?: ScreenerUI
 }>()
 
-const view = computed<'bad-data' | 'no-data' | 'table'>(() => {
+const view = computed<'bad-data' | 'no-data' | 'spreadsheet' | 'table'>(() => {
   if (props.screener.hasError.value) return 'bad-data'
+  if (props.screener.preferences.value.editable) return 'spreadsheet'
   if (!props.screener.allItems.value.length) return 'no-data'
   return 'table'
 })
@@ -94,4 +100,8 @@ const ui = computed(() => {
     },
   }
 })
+
+const screenerRef = ref()
+
+useElementSize(screenerRef, props.screener.actions.setDimensions)
 </script>

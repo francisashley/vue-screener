@@ -4,11 +4,12 @@ export type Screener = {
   preferences: Ref<UserPreferences>
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
-  allItems: ComputedRef<Item[]>
-  queriedItems: ComputedRef<Item[]>
-  paginatedItems: ComputedRef<Item[]>
+  allItems: Ref<Row[]>
+  queriedItems: ComputedRef<Row[]>
+  paginatedItems: ComputedRef<Row[]>
   columnDefs: ComputedRef<ColDef[]>
   visibleColumnDefs: ComputedRef<ColDef[]>
+  dimensions: Ref<{ width: number; height: number } | null>
   actions: {
     search: (searchQuery: Partial<SearchQuery>) => void
     sort: (field: string | number) => void
@@ -17,6 +18,8 @@ export type Screener = {
     navToPage: (page: number) => void
     navToNextPage: () => void
     navToLastPage: () => void
+    setDimensions: (dimensions: { height: number; width: number } | null) => void
+    updateItem: (id: string, partialData: Record<string | number, any>) => void
   }
 }
 
@@ -25,6 +28,7 @@ export type UserPreferences = {
   disableSearchHighlight: boolean
   pick: (string | number)[]
   omit: (string | number)[]
+  editable: boolean
 }
 
 export type SearchTextOptions = {
@@ -37,7 +41,7 @@ export type SearchQuery = {
   // query
   searchText: string
   searchTextOptions: SearchTextOptions
-  // scope ()
+  // scope
   page: number
   itemsPerPage: number
   // sort
@@ -59,13 +63,13 @@ export type ColDef = {
 
 export type ColDefs = Record<string | number, Partial<ColDef>>
 
-export type Item = {
+export type Row = {
   id: string // A unique identifier for internal tracking and updating of the item.
-  data: Record<string | number, any> // The original data for the item.
+  data: Item // The original data for the item.
 }
 
-export interface UnknownObject {
-  [key: string | number]: unknown
+export interface Item {
+  [key: string | number]: any
 }
 
 export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'
