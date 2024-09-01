@@ -1,4 +1,4 @@
-import { ColDef, ColDefs, Item, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
+import { ColDef, ColDefs, Row, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -29,7 +29,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   const dimensions = ref<{ width: number; height: number } | null>(null)
 
   // Data storage
-  const allItems = ref<Item[]>(isValidInput(inputData) ? normaliseInput(inputData) : [])
+  const allItems = ref<Row[]>(isValidInput(inputData) ? normaliseInput(inputData) : [])
   const hasError = computed((): boolean => !isValidInput(inputData))
 
   // Search query config
@@ -41,14 +41,14 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
       matchWord: false, // Whether to match whole word in search
     },
     page: options.defaultCurrentPage ?? 1, // Current page number
-    itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of items per page
+    itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of rows per page
     sortField: options.defaultSortField ?? null, // Field to sort by
     sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
   })
 
-  const queriedItems = computed((): Item[] => {
+  const queriedItems = computed((): Row[] => {
     return search({
-      items: allItems.value,
+      rows: allItems.value,
       columnDefs: columnDefs.value,
       searchText: searchQuery.value.searchText,
       matchRegex: searchQuery.value.searchTextOptions.matchRegex,
@@ -57,7 +57,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     })
   })
 
-  const sortedItems = computed((): Item[] => {
+  const sortedItems = computed((): Row[] => {
     const sortedItems = searchQuery.value.searchText ? queriedItems.value : allItems.value
 
     const _sortField = searchQuery.value.sortField
@@ -72,9 +72,9 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     }
   })
 
-  const paginatedItems = computed((): Item[] => {
+  const paginatedItems = computed((): Row[] => {
     return getPaginated({
-      items: sortedItems.value,
+      rows: sortedItems.value,
       page: searchQuery.value.page - 1,
       itemsPerPage: searchQuery.value.itemsPerPage,
     })

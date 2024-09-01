@@ -4,9 +4,9 @@ export type Screener = {
   preferences: Ref<UserPreferences>
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
-  allItems: Ref<Item[]>
-  queriedItems: ComputedRef<Item[]>
-  paginatedItems: ComputedRef<Item[]>
+  allItems: Ref<Row[]>
+  queriedItems: ComputedRef<Row[]>
+  paginatedItems: ComputedRef<Row[]>
   columnDefs: ComputedRef<ColDef[]>
   visibleColumnDefs: ComputedRef<ColDef[]>
   dimensions: Ref<{ width: number; height: number } | null>
@@ -63,13 +63,13 @@ export type ColDef = {
 
 export type ColDefs = Record<string | number, Partial<ColDef>>
 
-export type Item = {
+export type Row = {
   id: string // A unique identifier for internal tracking and updating of the item.
-  data: Record<string | number, any> // The original data for the item.
+  data: Item // The original data for the item.
 }
 
-export interface UnknownObject {
-  [key: string | number]: unknown
+export interface Item {
+  [key: string | number]: any
 }
 
 export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'

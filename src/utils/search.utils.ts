@@ -1,4 +1,4 @@
-import { Item, ColDef } from '@/interfaces/screener'
+import { Row, ColDef } from '@/interfaces/screener'
 import { escapeRegExp } from './regex.utils'
 
 /**
@@ -94,39 +94,39 @@ const parseSearchText = (searchText: string) => {
 }
 
 /**
- * Search for items based on specified criteria.
+ * Search for rows based on specified criteria.
  *
  * @param {Object} options - The search options.
- * @param {Item[]} options.items - The data to search.
+ * @param {Row[]} options.rows - The data to search.
  * @param {string} options.searchText - The search query string.
  * @param {boolean} options.matchRegex - Whether to use regular expressions for the search.
  * @param {boolean} options.matchCase - Whether to match the case.
  * @param {boolean} options.matchWord - Whether to match whole words.
- * @returns {Item[]} - The matched data.
+ * @returns {Row[]} - The matched data.
  */
 export function search(options: {
-  items: Item[]
+  rows: Row[]
   columnDefs: ColDef[]
   searchText: string
   matchRegex: boolean
   matchCase: boolean
   matchWord: boolean
-}): Item[] {
+}): Row[] {
   const { searchText = '' } = options
 
-  if (!searchText) return options.items
+  if (!searchText) return options.rows
 
   // Parse search query and extract filters.
   const { searchText: parsedSearchText, excludeFilters, includeFilters } = parseSearchText(searchText)
 
   // Get the search options.
-  const { items, matchRegex = false, matchCase = false, matchWord = false } = options
+  const { rows, matchRegex = false, matchCase = false, matchWord = false } = options
 
   // Check if any of the filters match the item.
-  const testExcludeFilters = (filters: [string, string][], item: Item): boolean => {
+  const testExcludeFilters = (filters: [string, string][], row: Row): boolean => {
     return filters.some(([field, value]) => {
-      if (item.data[field]) {
-        return testCriteria(item.data[field].value as string, value, {
+      if (row.data[field]) {
+        return testCriteria(row.data[field].value as string, value, {
           matchCase,
           matchWord: true,
           matchRegex,
@@ -135,10 +135,10 @@ export function search(options: {
     })
   }
 
-  const testIncludeFilters = (filters: [string, string][], item: Item): boolean => {
+  const testIncludeFilters = (filters: [string, string][], row: Row): boolean => {
     return filters.every(([field, value]) => {
-      if (item.data[field]) {
-        return testCriteria(item.data[field].value as string, value, {
+      if (row.data[field]) {
+        return testCriteria(row.data[field].value as string, value, {
           matchCase,
           matchWord: true,
           matchRegex,
@@ -147,8 +147,8 @@ export function search(options: {
     })
   }
 
-  // Filter the items.
-  return items.filter((item): boolean => {
+  // Filter the rows.
+  return rows.filter((item): boolean => {
     let shouldExclude = false
     let shouldInclude = true
     let meetsSearchCriteria = true
