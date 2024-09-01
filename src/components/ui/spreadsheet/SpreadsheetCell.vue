@@ -127,6 +127,9 @@ const handleKeydown = (event: KeyboardEvent) => {
       if (!isEditing.value) {
         event.preventDefault() // do not add a new line after the last value
         isEditing.value = true
+      } else if (!event.shiftKey) {
+        isEditing.value = false
+        emit('update', stagedValue.value)
       }
       break
     case 'Escape':
