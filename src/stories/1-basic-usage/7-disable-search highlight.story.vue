@@ -1,6 +1,6 @@
 <template>
-  <Story title="10. Editable" source="-">
-    <DevSandbox title="Editable" :screener="screener" can-toggle-editable>
+  <Story title="7. Disable search highlight" source="-">
+    <DevSandbox title="Custom title" :screener="screener">
       <Screener :screener="screener" />
     </DevSandbox>
   </Story>
@@ -12,7 +12,6 @@ import DevSandbox from '../../components/dev/Sandbox.vue'
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {
-  editable: true,
-  defaultItemsPerPage: 20,
+  disableSearchHighlight: true,
 })
 </script>
