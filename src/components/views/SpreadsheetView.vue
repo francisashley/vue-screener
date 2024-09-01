@@ -27,7 +27,7 @@
         @select-left="actions.moveSelectionLeft([ri, ci])"
         @select-next="actions.moveSelectionNext([ri, ci])"
         @select-prev="actions.moveSelectionPrev([ri, ci])"
-        @clear-cell="actions.deleteCell([ri, ci])"
+        @clear="actions.deleteCell([ri, ci])"
         @update="screener.actions.updateItem(item.id, { [columnDef.field]: $event })"
       />
     </SpreadsheetRow>
