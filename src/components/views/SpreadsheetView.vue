@@ -123,19 +123,19 @@ const handleKeydown = (event: KeyboardEvent) => {
       }
       break
     case 'ArrowUp':
-      event.preventDefault()
+      event.preventDefault() // do not move the page
       actions.moveSelectionUp(activeCell.value)
       break
     case 'ArrowRight':
-      event.preventDefault()
+      event.preventDefault() // do not move the page
       actions.moveSelectionRight(activeCell.value)
       break
     case 'ArrowDown':
-      event.preventDefault()
+      event.preventDefault() // do not move the page
       actions.moveSelectionDown(activeCell.value)
       break
     case 'ArrowLeft':
-      event.preventDefault()
+      event.preventDefault() // do not move the page
       actions.moveSelectionLeft(activeCell.value)
       break
   }
