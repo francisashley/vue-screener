@@ -15,19 +15,26 @@
       <!-- // Row index -->
       <SpreadsheetCell is-header :point="[ri, -1]" :value="ri" />
       <SpreadsheetCell
-        :point="[ri, ci]"
         v-for="(columnDef, ci) in props.screener.columnDefs.value"
         :key="ci"
+        :point="[ri, ci]"
         :is-active="activeCell ? activeCell[0] === ri && activeCell[1] === ci : false"
-        @click="actions.selectCell([ri, ci])"
         :value="item?.data[columnDef.field]"
+        @select="actions.selectCell([ri, ci])"
+        @select-up="actions.moveSelectionUp([ri, ci])"
+        @select-right="actions.moveSelectionRight([ri, ci])"
+        @select-down="actions.moveSelectionDown([ri, ci])"
+        @select-left="actions.moveSelectionLeft([ri, ci])"
+        @select-next="actions.moveSelectionNext([ri, ci])"
+        @select-prev="actions.moveSelectionPrev([ri, ci])"
+        @clear-cell="actions.deleteCell([ri, ci])"
       />
     </SpreadsheetRow>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onUnmounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { Screener } from '../../interfaces/screener'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import SpreadsheetCell from '../ui/spreadsheet/SpreadsheetCell.vue'
@@ -108,43 +115,4 @@ const actions = {
     props.screener.actions.updateItem(selectedItem.id, { [selectedField]: null })
   },
 }
-
-const handleKeydown = (event: KeyboardEvent) => {
-  if (!activeCell.value) return
-
-  switch (event.code) {
-    case 'Backspace':
-      actions.deleteCell(activeCell.value)
-      break
-    case 'Tab':
-      if (event.shiftKey) {
-        actions.moveSelectionPrev(activeCell.value)
-      } else {
-        actions.moveSelectionNext(activeCell.value)
-      }
-      break
-    case 'ArrowUp':
-      event.preventDefault() // do not move the page
-      actions.moveSelectionUp(activeCell.value)
-      break
-    case 'ArrowRight':
-      event.preventDefault() // do not move the page
-      actions.moveSelectionRight(activeCell.value)
-      break
-    case 'ArrowDown':
-      event.preventDefault() // do not move the page
-      actions.moveSelectionDown(activeCell.value)
-      break
-    case 'ArrowLeft':
-      event.preventDefault() // do not move the page
-      actions.moveSelectionLeft(activeCell.value)
-      break
-  }
-}
-
-document.addEventListener('keydown', handleKeydown)
-
-onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeydown)
-})
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div :class="{ [ui.class]: true, [ui.headerClass]: isHeader, [ui.activeClass]: isActive }">
-    <button :class="{ [ui.buttonClass]: true, [ui.headerButtonClass]: isHeader }" @click="emit('click', $event)">
+    <button :class="{ [ui.buttonClass]: true, [ui.headerButtonClass]: isHeader }" @click="emit('select', $event)">
       {{ value }}
     </button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onUnmounted, ref, watchEffect } from 'vue'
 import { twMerge } from 'tailwind-merge'
 
 export type SpreadsheetCellUI = {
@@ -27,7 +27,16 @@ const props = defineProps<{
   isActive?: boolean
 }>()
 
-const emit = defineEmits(['click'])
+const emit = defineEmits([
+  'select',
+  'select-up',
+  'select-right',
+  'select-down',
+  'select-left',
+  'select-next',
+  'select-prev',
+  'clear',
+])
 
 const uiDefaults = {
   class: 'vsc-w-20 vsc-flex-shrink-0 vsc-h-6 vsc-relative vsc-border-r vsc-border-zinc-700',
@@ -45,5 +54,54 @@ const ui = computed(() => {
     buttonClass: twMerge(uiDefaults.buttonClass, props.ui?.buttonClass),
     headerButtonClass: twMerge(uiDefaults.headerButtonClass, props.ui?.buttonHeaderClass), // eslint-disable-line
   }
+})
+
+const stagedValue = ref(props.value)
+
+watchEffect(() => (stagedValue.value = props.value))
+
+// handle keyboard events
+
+const handleKeydown = (event: KeyboardEvent) => {
+  switch (event.code) {
+    case 'Backspace':
+      emit('clear')
+      break
+    case 'Tab':
+      if (!event.shiftKey) {
+        emit('select-next')
+      } else {
+        emit('select-prev')
+      }
+      break
+    case 'ArrowUp':
+      event.preventDefault() // do not move the page
+      emit('select-up')
+      break
+    case 'ArrowRight':
+      event.preventDefault() // do not move the page
+      emit('select-right')
+      break
+    case 'ArrowDown':
+      event.preventDefault() // do not move the page
+      emit('select-down')
+      break
+    case 'ArrowLeft':
+      event.preventDefault() // do not move the page
+      emit('select-left')
+      break
+  }
+}
+
+watchEffect(() => {
+  if (props.isActive) {
+    document.addEventListener('keydown', handleKeydown)
+  } else {
+    document.removeEventListener('keydown', handleKeydown)
+  }
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
 })
 </script>
