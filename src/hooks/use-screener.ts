@@ -1,7 +1,26 @@
-import { ColDef, ColDefs, Row, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
+import { ColDef, ColDefs, Item, Row, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
 import { getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
+
+type CellChangedEvent = {
+  newValue: any
+  oldValue: any
+  column: ColDef
+  item: Item
+}
+
+type ItemChangedEvent = {
+  newItem: Item
+  oldItem: Item
+  updatedCells: CellChangedEvent[]
+}
+
+type ChangedEvent = {
+  newData: Item[]
+  oldData: Item[]
+  updatedItem: ItemChangedEvent
+}
 
 type ScreenerOptions = {
   height?: string // a css height
@@ -14,6 +33,9 @@ type ScreenerOptions = {
   omit?: string[]
   disableSearchHighlight?: boolean
   editable?: boolean
+  onCellChanged?: (event: CellChangedEvent) => void
+  onItemChanged?: (event: ItemChangedEvent) => void
+  onChanged?: (event: ChangedEvent) => void
 }
 export const useScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
   // User preferences
@@ -141,13 +163,51 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
     updateItem: (id: string, partialData: Record<string | number, any>) => {
-      allItems.value = allItems.value.map((item) => {
+      let cellChanges: CellChangedEvent[] = []
+      let itemChanges: ItemChangedEvent | null = null
+
+      const updatedItems = allItems.value.map((item) => {
         if (id === item.id) {
-          const updatedData = { ...item.data, ...partialData }
-          return { ...item, data: updatedData }
+          const updatedItem = { ...item.data, ...partialData }
+
+          cellChanges = Object.keys(partialData).map((key) => {
+            const columnDef = columnDefs.value.find((columnDefs) => columnDefs.field === key)
+            return {
+              newValue: partialData[key],
+              oldValue: item.data[key],
+              column: columnDef as ColDef,
+              item,
+            }
+          })
+
+          itemChanges = {
+            newItem: updatedItem,
+            oldItem: item.data,
+            updatedCells: cellChanges,
+          }
+
+          return { ...item, data: updatedItem }
         }
         return item
       })
+
+      if (options.onCellChanged) {
+        cellChanges.forEach(options.onCellChanged)
+      }
+
+      if (options.onItemChanged && itemChanges) {
+        options.onItemChanged(itemChanges)
+      }
+
+      if (options.onChanged && itemChanges) {
+        options.onChanged({
+          newData: updatedItems.map((item) => item.data),
+          oldData: allItems.value.map((item) => item.data),
+          updatedItem: itemChanges,
+        })
+      }
+
+      allItems.value = updatedItems
     },
   }
 
