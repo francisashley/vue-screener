@@ -1,7 +1,7 @@
 <template>
   <div :class="{ [ui.class]: true, [ui.headerClass]: isHeader, [ui.activeClass]: isActive }">
     <button :class="{ [ui.buttonClass]: true, [ui.headerButtonClass]: isHeader }" @click="emit('click', $event)">
-      <slot />
+      {{ value }}
     </button>
   </div>
 </template>
@@ -20,6 +20,7 @@ export type SpreadsheetCellUI = {
 
 const props = defineProps<{
   ui?: SpreadsheetCellUI
+  value?: any
   point: [rowIndex: number, colIndex: number]
   isHeader?: boolean
   isSelectable?: boolean

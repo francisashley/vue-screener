@@ -3,24 +3,25 @@
     <!-- // Field columns -->
     <SpreadsheetRow>
       <SpreadsheetCell is-header :point="[-1, -1]" />
-      <SpreadsheetCell is-header v-for="(columnDef, ci) in props.screener.columnDefs.value" :key="ci" :point="[-1, ci]">
-        {{ columnDef.field }}
-      </SpreadsheetCell>
+      <SpreadsheetCell
+        is-header
+        v-for="(columnDef, ci) in props.screener.columnDefs.value"
+        :key="ci"
+        :point="[-1, ci]"
+        :value="columnDef.field"
+      />
     </SpreadsheetRow>
     <SpreadsheetRow v-for="(item, ri) in screener.paginatedItems.value" :key="ri">
       <!-- // Row index -->
-      <SpreadsheetCell is-header :point="[ri, -1]">
-        {{ ri }}
-      </SpreadsheetCell>
+      <SpreadsheetCell is-header :point="[ri, -1]" :value="ri" />
       <SpreadsheetCell
         :point="[ri, ci]"
         v-for="(columnDef, ci) in props.screener.columnDefs.value"
         :key="ci"
         :is-active="activeCell ? activeCell[0] === ri && activeCell[1] === ci : false"
         @click="actions.selectCell([ri, ci])"
-      >
-        {{ item?.data[columnDef.field] }}
-      </SpreadsheetCell>
+        :value="item?.data[columnDef.field]"
+      />
     </SpreadsheetRow>
   </div>
 </template>
