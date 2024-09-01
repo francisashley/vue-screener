@@ -4,7 +4,7 @@
     :data-value="modelValue"
     ref="container"
   >
-    <textarea ref="textarea" :value="modelValue" @input="handleInput" />
+    <textarea ref="textarea" :value="modelValue" @input="handleInput" @blur="emit('blur')" />
   </div>
 </template>
 
@@ -18,7 +18,7 @@ const props = defineProps<{
   modelValue?: any
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'blur'])
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLTextAreaElement
