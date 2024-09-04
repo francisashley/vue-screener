@@ -48,8 +48,7 @@ onMounted(() => {
     border: none;
     overflow: hidden;
     padding: 0 4px;
-    @apply vsc-bg-white;
-    @apply vsc-border;
+    @apply vsc-bg-white vsc-border vsc-text-zinc-950;
   }
 
   textarea {
