@@ -1,5 +1,5 @@
 <template>
-  <div v-if="screener.dimensions" :ui="ui.spreadsheetView" class="vsc-border vsc-border-zinc-700">
+  <div v-if="screener.dimensions" :ui="ui.spreadsheetView" class="vsc-border vsc-border-zinc-700 vsc-bg-[#1f1f22]">
     <!-- // Field columns -->
     <SpreadsheetRow>
       <SpreadsheetCell is-header :point="[-1, -1]" />
