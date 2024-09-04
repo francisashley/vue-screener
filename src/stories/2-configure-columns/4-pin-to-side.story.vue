@@ -2,10 +2,10 @@
   <Story title="4. Stick to the side" source="-">
     <DevSandbox title="Results" :screener="screener">
       <Screener :screener="screener" :style="{ marginBottom: '12px' }">
-        <template #head="props">
+        <template #table-head="props">
           <TableCell v-if="props.column.isSticky" v-bind="props">Actions</TableCell>
         </template>
-        <template #data="props">
+        <template #table-cell="props">
           <TableCell v-if="props.column.isSticky" v-bind="props">
             <div :style="{ display: 'flex', gap: '5px', padding: '3px 0' }">
               <button
@@ -38,9 +38,8 @@ const handleClickEdit = (item: unknown) => console.log('edit', item)
 const handleClickDelete = (item: unknown) => console.log('delete', item)
 
 const screener = useScreener(baseData, {
-  pick: ['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'actions'],
   columnDefs: {
-    actions: { field: 'actions', isSticky: true },
+    actions: { isSticky: true },
   },
 })
 </script>

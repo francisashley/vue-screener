@@ -12,16 +12,15 @@ import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener = useScreener(baseData, {
-  pick: ['id', 'first_name', 'last_name', 'ip_address'],
   columnDefs: {
-    id: { field: 'id', width: '50px' },
-    first_name: { field: 'first_name', width: '150px', format: (value) => '😎' + value + '😎' },
-    last_name: { field: 'last_name', width: '150px', format: (value) => '😎' + value + '😎' },
+    id: { width: '50px', order: 0 },
+    first_name: { width: '150px', format: (value) => '😎' + value + '😎', order: 1 },
+    last_name: { width: '150px', format: (value) => '😎' + value + '😎', order: 2 },
     ip_address: {
-      field: 'ip_address',
       width: 'minmax(150px, 1fr)',
       isSortable: false,
       format: (value) => '😎' + value + '😎',
+      order: 3,
     },
   },
 })

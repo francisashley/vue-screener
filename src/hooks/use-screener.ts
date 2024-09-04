@@ -1,5 +1,5 @@
-import { ColDef, ColDefs, Item, Row, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
-import { getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
+import { ColDef, Item, Row, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
+import { createColumnDef, getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 
@@ -28,9 +28,7 @@ type ScreenerOptions = {
   defaultItemsPerPage?: number
   defaultSortField?: string
   defaultSortDirection?: 'asc' | 'desc'
-  columnDefs?: ColDefs
-  pick?: string[]
-  omit?: string[]
+  columnDefs?: Record<PropertyKey, Partial<ColDef>>
   disableSearchHighlight?: boolean
   editable?: boolean
   onCellChanged?: (event: CellChangedEvent) => void
@@ -43,8 +41,6 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     height: options.height ?? '400px',
     editable: options.editable ?? false,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
-    pick: options.pick ?? [],
-    omit: options.omit ?? [],
   })
 
   // Screener dimensions (width and height)
@@ -102,42 +98,55 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     })
   })
 
-  const columnDefs = computed<ColDef[]>(() => {
-    const fields = getFields(allItems.value)
+  const columnDefsMap = computed<Record<PropertyKey, ColDef>>(() => {
+    const userColDefs = options.columnDefs
+      ? Object.entries(options.columnDefs).map(([field, colDef]) => createColumnDef({ field, label: field, ...colDef }))
+      : []
 
-    const columns: ColDef[] = fields.map((field, i) => {
-      const inputColumn = options.columnDefs?.[field] ?? {}
-      let width = inputColumn.width ?? 'auto'
+    const dataColDefs = getFields(allItems.value).map((field) => createColumnDef({ field, label: field }))
 
-      if (!isNaN(Number(width))) width = width + 'px'
+    const additionalUserDefs = userColDefs.filter(
+      (userColDef) => !dataColDefs.map((dataColDef) => dataColDef.field).includes(userColDef.field),
+    )
 
-      return {
-        field,
-        label: field,
-        isFirst: i === 0,
-        isLast: i === fields.length - 1,
-        isSticky: false,
-        isSortable: true,
-        defaultSortDirection: inputColumn?.defaultSortDirection ?? 'desc',
-        ...inputColumn,
-        width,
-      }
-    })
+    const mergedDataColDefs = dataColDefs.reduce(
+      (acc, colDef) => {
+        acc[colDef.field] = {
+          ...colDef,
+          ...(userColDefs.find((userColDef) => userColDef.field === colDef.field) ?? {}),
+        }
+        return acc
+      },
+      {} as Record<string, ColDef>,
+    )
 
-    return columns
+    const mergedAdditionalUserDefs = additionalUserDefs.reduce(
+      (acc, colDef) => {
+        acc[colDef.field] = {
+          ...colDef,
+          ...(dataColDefs.find((dataColDef) => dataColDef.field === colDef.field) ?? {}),
+        }
+        return acc
+      },
+      {} as Record<string, ColDef>,
+    )
+
+    return {
+      ...mergedDataColDefs,
+      ...mergedAdditionalUserDefs,
+    }
   })
 
   // Columns to display
-  const visibleColumnDefs = computed<ColDef[]>(() => {
-    let columns: ColDef[] = columnDefs.value
-    const { pick, omit } = preferences.value
+  const columnDefs = computed<ColDef[]>(() => {
+    let columns: ColDef[] = Object.values(columnDefsMap.value)
 
-    if (pick.length > 0) {
-      columns = columns.filter((column) => pick.includes(column.field))
-    }
+    columns = columns.sort((a, b) => a.order - b.order)
 
-    if (omit.length > 0) {
-      columns = columns.filter((column) => !omit.includes(column.field))
+    columns = columns.filter((column) => !column.hide)
+
+    if (columns.some((column) => column.only)) {
+      columns = columns.filter((column) => column.only)
     }
 
     return columns
@@ -218,8 +227,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     queriedItems, // filtered data (after search query)
     paginatedItems, // paginated data (cut from queriedItems)
     hasError, // boolean indicating if the data is valid
-    columnDefs, // columnDefs (field, label, width, isFirst, isLast, isSticky, isSortable, defaultSortDirection)
-    visibleColumnDefs, // the visible columnDefs
+    columnDefs, // columnDefs (field, label, width, isSticky, isSortable, defaultSortDirection)s
     dimensions, // screener dimensions
     actions, // actions
   }

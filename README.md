@@ -51,7 +51,7 @@ Set the title:
 </template>
 ```
 
-Pick fields (in order) to show:
+Pick fields to show:
 
 ```vue
 <template>

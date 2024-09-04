@@ -1,5 +1,5 @@
 <template>
-  <Story title="7. Pick + omit fields" source="-">
+  <Story title="6. Hide fields" source="-">
     <DevSandbox title="Results" :screener="screener">
       <Screener :screener="screener" />
     </DevSandbox>
@@ -12,7 +12,10 @@ import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener = useScreener(baseData, {
-  pick: ['id', 'first_name', 'last_name'],
-  omit: ['id'],
+  columnDefs: {
+    id: { hide: true, order: 0 },
+    first_name: { hide: true, order: 1 },
+    last_name: { hide: true, order: 2 },
+  },
 })
 </script>

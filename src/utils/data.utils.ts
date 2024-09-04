@@ -1,4 +1,4 @@
-import { DataType, Row, Item } from '@/interfaces/screener'
+import { DataType, Row, Item, ColDef } from '@/interfaces/screener'
 import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -36,6 +36,26 @@ export function getFields(rows: Row[]): string[] {
   const fields = new Set<string>(rows.flatMap((item) => Object.keys(item.data)))
   return Array.from(fields)
 }
+
+/**
+ * Creates a column definition by merging the provided partial column definition
+ * with default values.
+ *
+ * @param {Partial<ColDef>} colDef - The partial column definition to merge with defaults.
+ * @returns {ColDef} The complete column definition.
+ */
+export const createColumnDef = (colDef: Partial<ColDef>): ColDef => ({
+  field: '',
+  label: '',
+  isSticky: false,
+  isSortable: true,
+  defaultSortDirection: 'desc',
+  width: 'auto',
+  order: 0,
+  only: false,
+  hide: false,
+  ...colDef,
+})
 
 /**
  * Returns a paginated subset of rows.
