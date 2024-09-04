@@ -8,7 +8,6 @@ export type Screener = {
   queriedItems: ComputedRef<Row[]>
   paginatedItems: ComputedRef<Row[]>
   columnDefs: ComputedRef<ColDef[]>
-  visibleColumnDefs: ComputedRef<ColDef[]>
   dimensions: Ref<{ width: number; height: number } | null>
   actions: {
     search: (searchQuery: Partial<SearchQuery>) => void
@@ -53,15 +52,11 @@ export type ColDef = {
   field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
   label: string | number // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
-  isFirst: boolean // Flag indicating if it is the first column.
-  isLast: boolean // Flag indicating if it is the last column.
   isSticky: boolean // Flag indicating if the field is sticky.
   isSortable: boolean // Flag indicating if the field is sortable.
   defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
   format?: (item: string | number) => string // Format the value of the field.
 }
-
-export type ColDefs = Record<string | number, Partial<ColDef>>
 
 export type Row = {
   id: string // A unique identifier for internal tracking and updating of the item.

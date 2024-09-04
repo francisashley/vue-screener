@@ -3,13 +3,11 @@
     <template #default="{ isScrollable, isScrolledEnd }">
       <TableHead :ui="ui.table.header">
         <!-- @ts-ignore -->
-        <template v-for="(column, _i) in screener.visibleColumnDefs.value" :key="_i">
+        <template v-for="(column, _i) in screener.columnDefs.value" :key="_i">
           <slot
             name="table-head"
             :column="column"
             :value="column.field"
-            :is-first="column.isFirst"
-            :is-last="column.isLast"
             :is-sticky="column.isSticky"
             :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
             :ui="ui.table.header.cell"
@@ -21,8 +19,6 @@
           >
             <TableCell
               :value="column.field"
-              :is-first="column.isFirst"
-              :is-last="column.isLast"
               :is-sticky="column.isSticky"
               :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
               :ui="ui.table.header.cell"
@@ -46,13 +42,11 @@
       </TableHead>
       <template v-for="(item, _i) in screener.paginatedItems.value" :key="_i">
         <TableRow :ui="ui.table.row">
-          <template v-for="(column, _j) in screener.visibleColumnDefs.value" :key="_j">
+          <template v-for="(column, _j) in screener.columnDefs.value" :key="_j">
             <slot
               name="table-cell"
               :column="column"
               :value="column.field"
-              :is-first="column.isFirst"
-              :is-last="column.isLast"
               :is-sticky="column.isSticky"
               :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
               :item="item"
@@ -63,8 +57,6 @@
               <TableCell
                 :column="column"
                 :value="column.field"
-                :is-first="column.isFirst"
-                :is-last="column.isLast"
                 :is-sticky="column.isSticky"
                 :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
                 :item="item"
