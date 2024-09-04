@@ -19,7 +19,7 @@ export type Screener = {
     navToNextPage: () => void
     navToLastPage: () => void
     setDimensions: (dimensions: { height: number; width: number } | null) => void
-    updateItem: (id: string, partialData: Record<string | number, any>) => void
+    updateItem: (id: string, partialData: Record<PropertyKey, any>) => void
   }
 }
 
@@ -61,7 +61,7 @@ export type ColDef = {
   format?: (item: string | number) => string // Format the value of the field.
 }
 
-export type ColDefs = Record<string | number, Partial<ColDef>>
+export type ColDefs = Record<PropertyKey, Partial<ColDef>>
 
 export type Row = {
   id: string // A unique identifier for internal tracking and updating of the item.
