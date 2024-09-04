@@ -10,5 +10,5 @@
 import { Screener, useScreener } from '../../index'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const screener = useScreener(null)
+const screener = useScreener([])
 </script>
