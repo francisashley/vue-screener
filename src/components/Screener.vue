@@ -12,11 +12,11 @@
       :ui="ui.tableView"
       :style="{ height: screener.preferences.value.height }"
     >
-      <template #head="headProps">
-        <slot name="head" v-bind="headProps" />
+      <template #table-head="headProps">
+        <slot name="table-head" v-bind="headProps" />
       </template>
-      <template #data="dataProps">
-        <slot name="data" v-bind="dataProps" />
+      <template #table-cell="cellProps">
+        <slot name="table-cell" v-bind="cellProps" />
       </template>
     </TableView>
 

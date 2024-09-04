@@ -5,7 +5,7 @@
         <!-- @ts-ignore -->
         <template v-for="(column, _i) in screener.visibleColumnDefs.value" :key="_i">
           <slot
-            name="head"
+            name="table-head"
             :column="column"
             :value="column.field"
             :is-first="column.isFirst"
@@ -48,7 +48,7 @@
         <TableRow :ui="ui.table.row">
           <template v-for="(column, _j) in screener.visibleColumnDefs.value" :key="_j">
             <slot
-              name="data"
+              name="table-cell"
               :column="column"
               :value="column.field"
               :is-first="column.isFirst"
