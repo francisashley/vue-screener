@@ -104,7 +104,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
 
   const columnDefsMap = computed<Record<PropertyKey, ColDef>>(() => {
     const userColDefs = options.columnDefs
-      ? Object.entries(options.columnDefs).map(([field, colDef]) => createColumnDef({ field, ...colDef }))
+      ? Object.entries(options.columnDefs).map(([field, colDef]) => createColumnDef({ field, label: field, ...colDef }))
       : []
 
     const dataColDefs = getFields(allItems.value).map((field) => createColumnDef({ field, label: field }))
