@@ -1,5 +1,10 @@
 <template>
-  <div v-if="screener.dimensions" :ui="ui.spreadsheetView" class="vsc-border vsc-border-zinc-700 vsc-bg-[#1f1f22]">
+  <div
+    v-if="screener.dimensions"
+    :ui="ui.spreadsheetView"
+    class="vsc-border vsc-border-zinc-700 vsc-bg-[#1f1f22] vsc-grid vsc-auto-rows-min"
+    :style="style"
+  >
     <!-- // Field columns -->
     <SpreadsheetRow>
       <SpreadsheetCell is-header :point="[-1, -1]" />
@@ -116,4 +121,9 @@ const actions = {
     props.screener.actions.updateItem(selectedItem.id, { [selectedField]: null })
   },
 }
+
+const style = computed(() => {
+  const sizes = props.screener.columnDefs.value.map(() => 'minmax(min-content, auto)')
+  return { 'grid-template-columns': 'minmax(48px, min-content) ' + sizes.join(' ') }
+})
 </script>

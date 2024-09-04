@@ -47,7 +47,7 @@ onMounted(() => {
     appearance: none;
     border: none;
     overflow: hidden;
-    padding: 0 4px;
+    padding: 2px 6px;
     @apply vsc-bg-white vsc-border vsc-text-zinc-950;
   }
 

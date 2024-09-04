@@ -1,14 +1,13 @@
 <template>
   <div :class="{ [ui.class]: true, [ui.headerClass]: isHeader, [ui.activeClass]: isActive }" ref="cell">
     <button
-      v-if="!isEditing"
       :class="{ [ui.buttonClass]: true, [ui.headerButtonClass]: isHeader }"
       @click="emit('select', $event)"
       @dblclick="isEditing = true"
     >
-      {{ stagedValue }}
+      {{ value }}
     </button>
-    <UiTextarea v-else v-model="stagedValue" :class="ui.textareaClass" autofocus @blur="handleBlurTextarea" />
+    <UiTextarea v-if="isEditing" v-model="stagedValue" :class="ui.textareaClass" autofocus @blur="handleBlurTextarea" />
   </div>
 </template>
 
@@ -51,12 +50,12 @@ const emit = defineEmits([
 const isEditing = ref(false)
 
 const uiDefaults = {
-  class: 'vsc-w-20 vsc-flex-shrink-0 vsc-h-6 vsc-relative vsc-border-r vsc-border-zinc-700',
+  class: 'vsc-relative vsc-border-r vsc-border-zinc-700 vsc-flex vsc-items-center',
   headerClass: 'vsc-font-bold vsc-bg-[#1f1f22] vsc-text-zinc-200 vsc-text-xs',
   activeClass: 'vsc-outline vsc-outline-blue-500 vsc-outline-offset-[-1px]',
-  textareaClass: 'vsc-absolute vsc-top-0 vsc-left-0 vsc-min-w-full vsc-w-fit vsc-min-h-full vsc-outline-none vsc-z-50', // eslint-disable-line
-  buttonClass: 'vsc-absolute vsc-w-full vsc-h-full vsc-cursor-default vsc-outline-none vsc-text-start vsc-px-1 vsc-whitespace-nowrap vsc-overflow-hidden vsc-text-zinc-200', // eslint-disable-line
-  headerButtonClass: '!vsc-text-center',
+  textareaClass: '!vsc-absolute vsc-top-0 vsc-left-0 vsc-min-w-full vsc-w-fit vsc-min-h-full vsc-outline-none vsc-z-50', // eslint-disable-line
+  buttonClass: 'vsc-cursor-default vsc-w-full vsc-outline-none vsc-text-start vsc-px-1.5 vsc-whitespace-pre vsc-overflow-hidden vsc-text-zinc-200', // eslint-disable-line
+  headerButtonClass: '!vsc-text-center !vsc-whitespace-normal !vsc-h-6',
 }
 
 const ui = computed(() => {
