@@ -40,7 +40,7 @@ const handleClickDelete = (item: unknown) => console.log('delete', item)
 const screener = useScreener(baseData, {
   pick: ['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'actions'],
   columnDefs: {
-    actions: { field: 'actions', isSticky: true },
+    actions: { isSticky: true },
   },
 })
 </script>

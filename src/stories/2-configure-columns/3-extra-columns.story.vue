@@ -14,13 +14,13 @@ import DevSandbox from '../../components/dev/Sandbox.vue'
 const screener = useScreener(baseData, {
   pick: ['id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', 'extra_column'],
   columnDefs: {
-    id: { field: 'id', width: '50px' },
-    first_name: { field: 'first_name', width: '150px' },
-    last_name: { field: 'last_name', width: '150px' },
-    full_name: { field: 'full_name', width: '150px' },
-    email: { field: 'email', width: '200px' },
-    gender: { field: 'gender', width: '100px' },
-    ip_address: { field: 'ip_address', width: 'minmax(150px, 1fr)' },
+    id: { width: '50px' },
+    first_name: { width: '150px' },
+    last_name: { width: '150px' },
+    full_name: { width: '150px' },
+    email: { width: '200px' },
+    gender: { width: '100px' },
+    ip_address: { width: 'minmax(150px, 1fr)' },
     extra_column: { width: '100px' },
   },
 })
