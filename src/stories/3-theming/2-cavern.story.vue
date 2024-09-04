@@ -77,16 +77,16 @@ import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, us
 import baseData from '../../fixtures/data.json'
 
 const screener = useScreener(baseData, {
-  pick: ['', 'id', 'first_name', 'last_name', 'full_name', 'email', 'gender', 'ip_address', ''],
   columnDefs: {
-    id: { width: 'min-content' },
-    first_name: { width: 'min-content' },
-    last_name: { width: '1fr' },
-    full_name: { width: '1fr' },
-    email: { width: '1fr' },
-    gender: { width: '1fr' },
-    ip_address: { width: '1fr' },
-    '': { width: '1fr' },
+    before: { label: '', width: '1fr', order: 0 },
+    id: { width: 'min-content', order: 1 },
+    first_name: { width: 'min-content', order: 2 },
+    last_name: { width: '1fr', order: 3 },
+    full_name: { width: '1fr', order: 4 },
+    email: { width: '1fr', order: 5 },
+    gender: { width: '1fr', order: 6 },
+    ip_address: { width: '1fr', order: 7 },
+    after: { label: '', width: '1fr', order: 8 },
   },
 })
 </script>

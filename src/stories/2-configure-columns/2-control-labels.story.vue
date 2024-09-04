@@ -45,13 +45,12 @@ const screener2 = useScreener(primitivesData, {
 })
 
 const screener3 = useScreener(mixedObjectsData, {
-  pick: ['id', 'name', 'address', 'country', 'flag_colours'],
   columnDefs: {
-    id: { label: 'ID' },
-    name: { label: 'Name' },
-    address: { label: 'Address' },
-    country: { label: 'Country' },
-    flag_colours: { label: 'Flag colours' },
+    id: { label: 'ID', order: 0 },
+    name: { label: 'Name', order: 1 },
+    address: { label: 'Address', order: 2 },
+    country: { label: 'Country', order: 3 },
+    flag_colours: { label: 'Flag colours', order: 4 },
   },
 })
 </script>

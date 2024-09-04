@@ -51,6 +51,9 @@ export const createColumnDef = (colDef: Partial<ColDef>): ColDef => ({
   isSortable: true,
   defaultSortDirection: 'desc',
   width: 'auto',
+  order: 0,
+  only: false,
+  hide: false,
   ...colDef,
 })
 

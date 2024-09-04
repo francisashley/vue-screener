@@ -29,8 +29,6 @@ type ScreenerOptions = {
   defaultSortField?: string
   defaultSortDirection?: 'asc' | 'desc'
   columnDefs?: Record<PropertyKey, Partial<ColDef>>
-  pick?: string[]
-  omit?: string[]
   disableSearchHighlight?: boolean
   editable?: boolean
   onCellChanged?: (event: CellChangedEvent) => void
@@ -43,8 +41,6 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     height: options.height ?? '400px',
     editable: options.editable ?? false,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
-    pick: options.pick ?? [],
-    omit: options.omit ?? [],
   })
 
   // Screener dimensions (width and height)
@@ -145,14 +141,12 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
   const columnDefs = computed<ColDef[]>(() => {
     let columns: ColDef[] = Object.values(columnDefsMap.value)
 
-    const { pick, omit } = preferences.value
+    columns = columns.sort((a, b) => a.order - b.order)
 
-    if (pick.length > 0) {
-      columns = columns.filter((column) => pick.includes(column.field))
-    }
+    columns = columns.filter((column) => !column.hide)
 
-    if (omit.length > 0) {
-      columns = columns.filter((column) => !omit.includes(column.field))
+    if (columns.some((column) => column.only)) {
+      columns = columns.filter((column) => column.only)
     }
 
     return columns

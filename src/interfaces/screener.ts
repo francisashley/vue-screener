@@ -25,8 +25,6 @@ export type Screener = {
 export type UserPreferences = {
   height: string
   disableSearchHighlight: boolean
-  pick: (string | number)[]
-  omit: (string | number)[]
   editable: boolean
 }
 
@@ -55,6 +53,9 @@ export type ColDef = {
   isSticky: boolean // Flag indicating if the field is sticky.
   isSortable: boolean // Flag indicating if the field is sortable.
   defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
+  order: number // The order of the column in the table.
+  only: boolean // Flag indicating if the column should be the only one displayed.
+  hide: boolean // Flag indicating if the column should be hidden.
   format?: (item: string | number) => string // Format the value of the field.
 }
 
