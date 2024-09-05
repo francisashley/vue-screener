@@ -3,7 +3,7 @@
     <button
       :class="{ [ui.buttonClass]: true, [ui.headerButtonClass]: isHeader }"
       @click="emit('select', $event)"
-      @dblclick="isEditing = true"
+      @dblclick="!isHeader && (isEditing = true)"
     >
       {{ value }}
     </button>
