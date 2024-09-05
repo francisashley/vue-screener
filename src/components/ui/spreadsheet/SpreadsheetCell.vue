@@ -53,8 +53,8 @@ const uiDefaults = {
   class: 'vsc-relative vsc-border-r vsc-border-zinc-700 vsc-flex vsc-items-center',
   headerClass: 'vsc-font-bold vsc-bg-[#1f1f22] vsc-text-zinc-200 vsc-text-xs',
   activeClass: 'vsc-outline vsc-outline-blue-500 vsc-outline-offset-[-1px]',
-  textareaClass: '!vsc-absolute vsc-top-0 vsc-left-0 vsc-min-w-full vsc-w-fit vsc-min-h-full vsc-outline-none vsc-z-50', // eslint-disable-line
-  buttonClass: 'vsc-cursor-default vsc-w-full vsc-h-full vsc-outline-none vsc-text-start vsc-px-1.5 vsc-whitespace-pre vsc-overflow-hidden vsc-text-zinc-200', // eslint-disable-line
+  textareaClass: '!vsc-absolute vsc-top-0 vsc-left-0 vsc-min-w-full vsc-w-fit vsc-min-h-full vsc-outline-none vsc-z-50 vsc-whitespace-pre ', // eslint-disable-line
+  buttonClass: 'vsc-cursor-default vsc-w-full vsc-h-full vsc-outline-none vsc-text-start vsc-px-1.5 vsc-overflow-hidden vsc-text-zinc-200', // eslint-disable-line
   headerButtonClass: '!vsc-text-center !vsc-whitespace-normal !vsc-h-6',
 }
 

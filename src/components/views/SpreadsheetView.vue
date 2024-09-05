@@ -123,7 +123,7 @@ const actions = {
 }
 
 const style = computed(() => {
-  const sizes = props.screener.columnDefs.value.map(() => 'minmax(min-content, auto)')
+  const sizes = props.screener.columnDefs.value.map(() => 'minmax(auto, 300px)')
   return { 'grid-template-columns': 'minmax(48px, min-content) ' + sizes.join(' ') }
 })
 </script>
