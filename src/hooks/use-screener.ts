@@ -143,7 +143,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
 
     columns = columns.sort((a, b) => a.order - b.order)
 
-    columns = columns.filter((column) => !column.hide)
+    columns = columns.filter((column) => !column.hidden)
 
     if (columns.some((column) => column.only)) {
       columns = columns.filter((column) => column.only)

@@ -13,9 +13,9 @@ import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener = useScreener(baseData, {
   columnDefs: {
-    id: { hide: true, order: 0 },
-    first_name: { hide: true, order: 1 },
-    last_name: { hide: true, order: 2 },
+    id: { hidden: true, order: 0 },
+    first_name: { hidden: true, order: 1 },
+    last_name: { hidden: true, order: 2 },
   },
 })
 </script>

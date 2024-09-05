@@ -55,7 +55,7 @@ export type ColDef = {
   defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
   order: number // The order of the column in the table.
   only: boolean // Flag indicating if the column should be the only one displayed.
-  hide: boolean // Flag indicating if the column should be hidden.
+  hidden: boolean // Flag indicating if the column should be hidden.
   format?: (item: string | number) => string // Format the value of the field.
 }
 

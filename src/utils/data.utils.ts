@@ -53,7 +53,7 @@ export const createColumnDef = (colDef: Partial<ColDef>): ColDef => ({
   width: 'auto',
   order: 0,
   only: false,
-  hide: false,
+  hidden: false,
   ...colDef,
 })
 
