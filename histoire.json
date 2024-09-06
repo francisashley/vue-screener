@@ -302,8 +302,8 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-2-configure-columns-5-pick-fields-story-vue",
-      "title": "5. Pick fields",
+      "id": "src-stories-2-configure-columns-5-only-fields-story-vue",
+      "title": "5. Only fields",
       "layout": {
         "type": "single",
         "iframe": true
@@ -316,17 +316,17 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/2-configure-columns/5-pick-fields.story.vue",
+      "relativePath": "src/stories/2-configure-columns/5-only-fields.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "5. Pick fields"
+        "5. Only fields"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-2-configure-columns-6-omit-fields-story-vue",
-      "title": "6. Omit fields",
+      "id": "src-stories-2-configure-columns-6-hide-fields-story-vue",
+      "title": "6. Hide fields",
       "layout": {
         "type": "single",
         "iframe": true
@@ -339,39 +339,16 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/2-configure-columns/6-omit-fields.story.vue",
+      "relativePath": "src/stories/2-configure-columns/6-hide-fields.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "6. Omit fields"
+        "6. Hide fields"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-2-configure-columns-7-pick-omit-fields-story-vue",
-      "title": "7. Pick + omit fields",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/2-configure-columns/7-pick-omit-fields.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "7. Pick + omit fields"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-2-configure-columns-8-disable-sort-story-vue",
+      "id": "src-stories-2-configure-columns-7-disable-sort-story-vue",
       "title": "8. Disable sort",
       "layout": {
         "type": "single",
@@ -385,7 +362,7 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/2-configure-columns/8-disable-sort.story.vue",
+      "relativePath": "src/stories/2-configure-columns/7-disable-sort.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
         "8. Disable sort"
@@ -394,7 +371,7 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-2-configure-columns-9-format-column-story-vue",
+      "id": "src-stories-2-configure-columns-8-format-column-story-vue",
       "title": "9. Format column",
       "layout": {
         "type": "single",
@@ -408,7 +385,7 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/2-configure-columns/9-format-column.story.vue",
+      "relativePath": "src/stories/2-configure-columns/8-format-column.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
         "9. Format column"
