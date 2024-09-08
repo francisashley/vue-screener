@@ -112,8 +112,14 @@ const uiDefaults = {
     header: {
       cell: {
         class:
-          'vsc-inline-flex vsc-items-center vsc-font-bold vsc-whitespace-nowrap vsc-h-8 vsc-gap-2 vsc-bg-[#1f1f22] vsc-text-xs',
+          'vsc-inline-flex vsc-items-center vsc-font-bold vsc-whitespace-nowrap vsc-h-8 vsc-gap-2 vsc-bg-[#1f1f22] vsc-text-xs last:vsc-border-r-0',
         sortableClass: 'vsc-inline-flex vsc-items-center vsc-gap-2 vsc-cursor-pointer',
+      },
+    },
+    row: {
+      class: 'last:vsc-border-b-0',
+      cell: {
+        class: 'last:vsc-border-r-0',
       },
     },
   },
@@ -131,14 +137,18 @@ const ui = computed(() => {
             uiDefaults.table.header.cell.sortableClass,
             props.ui?.table?.header?.cell?.sortableClass,
           ),
-          sortingClass: twMerge(
-            props.ui?.table?.header?.cell?.sortingClass,
-            props.ui?.table?.header?.cell?.sortingClass,
-          ),
+          sortingClass: twMerge(uiDefaults.table.header.cell.class, props.ui?.table?.header?.cell?.sortingClass),
           sortIcon: props.ui?.table?.header?.cell?.sortIcon,
         },
       },
-      row: props.ui?.table?.row,
+      row: {
+        ...props.ui?.table?.row,
+        class: twMerge(uiDefaults.table.row.class, props.ui?.table?.row?.class),
+        cell: {
+          ...props.ui?.table?.row?.cell,
+          class: twMerge(uiDefaults.table.row.cell.class, props.ui?.table?.row?.cell?.class),
+        },
+      },
     },
   }
 })
