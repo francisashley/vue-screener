@@ -70,8 +70,8 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-4-no-data-story-vue",
-      "title": "4. No data",
+      "id": "src-stories-1-basic-usage-4-loading-story-vue",
+      "title": "4. Loading",
       "layout": {
         "type": "single",
         "iframe": true
@@ -84,17 +84,17 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/4-no-data.story.vue",
+      "relativePath": "src/stories/1-basic-usage/4-loading.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "4. No data"
+        "4. Loading"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-5-bad-data-story-vue",
-      "title": "5. Bad data",
+      "id": "src-stories-1-basic-usage-5-no-data-story-vue",
+      "title": "5. No data",
       "layout": {
         "type": "single",
         "iframe": true
@@ -107,16 +107,39 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/5-bad-data.story.vue",
+      "relativePath": "src/stories/1-basic-usage/5-no-data.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "5. Bad data"
+        "5. No data"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-6-sort-default-sort-directions-story-vue",
+      "id": "src-stories-1-basic-usage-6-bad-data-story-vue",
+      "title": "6. Bad data",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/1-basic-usage/6-bad-data.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "6. Bad data"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-1-basic-usage-7-sort-default-sort-directions-story-vue",
       "title": " Default sort directions",
       "layout": {
         "type": "single",
@@ -130,17 +153,17 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/6-sort-default-sort-directions.story.vue",
+      "relativePath": "src/stories/1-basic-usage/7-sort-default-sort-directions.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "6. Sorting ",
+        "7. Sorting ",
         " Default sort directions"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-6-sort-default-sort-story-vue",
+      "id": "src-stories-1-basic-usage-7-sort-default-sort-story-vue",
       "title": " Default sort",
       "layout": {
         "type": "single",
@@ -154,18 +177,18 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/6-sort-default-sort.story.vue",
+      "relativePath": "src/stories/1-basic-usage/7-sort-default-sort.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "6. Sorting ",
+        "7. Sorting ",
         " Default sort"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-7-disable-search-highlight-story-vue",
-      "title": "7. Disable search highlight",
+      "id": "src-stories-1-basic-usage-8-disable-search-highlight-story-vue",
+      "title": "8. Disable search highlight",
       "layout": {
         "type": "single",
         "iframe": true
@@ -178,17 +201,17 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/7-disable-search highlight.story.vue",
+      "relativePath": "src/stories/1-basic-usage/8-disable-search highlight.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "7. Disable search highlight"
+        "8. Disable search highlight"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-8-editable-story-vue",
-      "title": "8. Editable",
+      "id": "src-stories-1-basic-usage-9-editable-story-vue",
+      "title": "9. Editable",
       "layout": {
         "type": "single",
         "iframe": true
@@ -201,10 +224,10 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/8-editable.story.vue",
+      "relativePath": "src/stories/1-basic-usage/9-editable.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "8. Editable"
+        "9. Editable"
       ],
       "virtual": false,
       "markdownFile": null
