@@ -171,6 +171,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     navToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
     navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
+    setData: (inputData: unknown) => (allItems.value = isValidInput(inputData) ? normaliseInput(inputData) : []),
     updateItem: (id: string, partialData: Record<PropertyKey, any>) => {
       let cellChanges: CellChangedEvent[] = []
       let itemChanges: ItemChangedEvent | null = null
