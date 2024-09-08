@@ -1,6 +1,6 @@
 <template>
-  <Story title="6. Sorting / Default sort directions" source="-">
-    <DevSandbox title="Sorting / Default sort directions" :screener="screener">
+  <Story title="7. Sorting / Default sort" source="-">
+    <DevSandbox title="Custom title" :screener="screener">
       <Screener
         :screener="screener"
         :ui="{
@@ -25,14 +25,5 @@ import baseData from '../../fixtures/data.json'
 const screener = useScreener(baseData, {
   defaultSortField: 'first_name',
   defaultSortDirection: 'desc',
-  columnDefs: {
-    id: { defaultSortDirection: 'asc' },
-    first_name: { defaultSortDirection: 'desc' },
-    last_name: { defaultSortDirection: 'asc' },
-    full_name: { defaultSortDirection: 'desc' },
-    email: { defaultSortDirection: 'asc' },
-    gender: { defaultSortDirection: 'desc' },
-    ip_address: { defaultSortDirection: 'asc' },
-  },
 })
 </script>

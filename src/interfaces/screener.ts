@@ -20,6 +20,7 @@ export type Screener = {
     setDimensions: (dimensions: { height: number; width: number } | null) => void
     setData: (inputData: unknown[]) => void
     updateItem: (id: string, partialData: Record<PropertyKey, any>) => void
+    setLoading: (loading: boolean) => void
   }
 }
 
@@ -27,6 +28,7 @@ export type UserPreferences = {
   height: string
   disableSearchHighlight: boolean
   editable: boolean
+  loading: boolean
 }
 
 export type SearchTextOptions = {

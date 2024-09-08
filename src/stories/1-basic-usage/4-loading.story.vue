@@ -1,6 +1,6 @@
 <template>
-  <Story title="5. Bad data" source="-">
-    <DevSandbox title="Bad data" :screener="screener">
+  <Story title="4. Loading" source="-">
+    <DevSandbox title="Loading" :screener="screener">
       <Screener :screener="screener" />
     </DevSandbox>
   </Story>
@@ -9,7 +9,9 @@
 <script lang="ts" setup>
 import { Screener, useScreener } from '../../index'
 import DevSandbox from '../../components/dev/Sandbox.vue'
+import baseData from '../../fixtures/data.json'
 
-const badData: any = 'bad data'
-const screener = useScreener(badData)
+const screener = useScreener(baseData, {
+  loading: true,
+})
 </script>

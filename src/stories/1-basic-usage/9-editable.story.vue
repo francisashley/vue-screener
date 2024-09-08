@@ -1,5 +1,5 @@
 <template>
-  <Story title="8. Editable" source="-">
+  <Story title="9. Editable" source="-">
     <DevSandbox title="Editable" :screener="screener" can-toggle-editable>
       <Screener :screener="screener" />
     </DevSandbox>

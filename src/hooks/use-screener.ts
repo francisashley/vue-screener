@@ -31,6 +31,7 @@ type ScreenerOptions = {
   columnDefs?: Record<PropertyKey, Partial<ColDef>>
   disableSearchHighlight?: boolean
   editable?: boolean
+  loading?: boolean
   onCellChanged?: (event: CellChangedEvent) => void
   onItemChanged?: (event: ItemChangedEvent) => void
   onChanged?: (event: ChangedEvent) => void
@@ -41,6 +42,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
     height: options.height ?? '400px',
     editable: options.editable ?? false,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
+    loading: options.loading ?? false,
   })
 
   // Screener dimensions (width and height)
@@ -219,6 +221,7 @@ export const useScreener = (inputData: unknown[], options: ScreenerOptions = {})
 
       allItems.value = updatedItems
     },
+    setLoading: (loading: boolean) => (preferences.value.loading = loading),
   }
 
   return {

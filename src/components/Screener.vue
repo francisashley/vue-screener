@@ -22,6 +22,12 @@
 
     <SpreadsheetView v-else-if="view === 'spreadsheet'" :screener="screener" :ui="props.ui?.spreadsheetView" />
 
+    <LoadingView v-else-if="view === 'loading'" :ui="ui?.loadingView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
+      <slot name="no-data">
+        <UiSpinner />
+      </slot>
+    </LoadingView>
+
     <NoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="no-data">No data provided</slot>
     </NoDataView>
@@ -44,11 +50,14 @@ import SpreadsheetView, { SpreadsheetViewUI } from './views/SpreadsheetView.vue'
 import BadDataView, { BadDataViewUI } from './views/BadDataView.vue'
 import NoDataView, { NoDataViewUI } from './views/NoDataView.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
+import LoadingView, { LoadingViewUI } from './views/LoadingView.vue'
+import UiSpinner from './ui/spinner/Spinner.vue'
 
 export type ScreenerUI = {
   class?: string
   tableView?: TableViewUI
   spreadsheetView?: SpreadsheetViewUI
+  loadingView?: LoadingViewUI
   noDataView?: NoDataViewUI
   badDataView?: BadDataViewUI
 }
@@ -58,7 +67,8 @@ const props = defineProps<{
   ui?: ScreenerUI
 }>()
 
-const view = computed<'bad-data' | 'no-data' | 'spreadsheet' | 'table'>(() => {
+const view = computed<'bad-data' | 'loading' | 'no-data' | 'spreadsheet' | 'table'>(() => {
+  if (props.screener.preferences.value.loading) return 'loading'
   if (props.screener.hasError.value) return 'bad-data'
   if (props.screener.preferences.value.editable) return 'spreadsheet'
   if (!props.screener.allItems.value.length) return 'no-data'
@@ -71,6 +81,9 @@ const uiDefaults = {
     table: {
       class: 'vsc-overflow-y-auto',
     },
+  },
+  loadingView: {
+    class: 'vsc-overflow-y-auto',
   },
   noDataView: {
     class: 'vsc-overflow-y-auto',
@@ -89,6 +102,10 @@ const ui = computed(() => {
         ...props.ui?.tableView?.table,
         class: twMerge(uiDefaults.tableView.table.class, props.ui?.tableView?.table.class),
       },
+    },
+    loadingView: {
+      ...props.ui?.loadingView,
+      class: twMerge(uiDefaults.loadingView.class, props.ui?.loadingView?.class),
     },
     noDataView: {
       ...props.ui?.noDataView,
