@@ -1,13 +1,13 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createVNode } from "./vendor-BU1pZ-lL.js";
-import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-CTuEq1Lt.js";
-import { D as DevSandbox } from "./Sandbox-CXuKwcMg.js";
-import { b as baseData } from "./data-BnlYeNVr.js";
+import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-BY7tALh7.js";
+import { D as DevSandbox } from "./Sandbox-CovMIZhP.js";
+const badData = "bad data";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "1-array-of-objects.story",
+  __name: "5-bad-data.story",
   setup(__props, { expose: __expose }) {
     __expose();
-    const screener = useScreener(baseData);
-    const __returned__ = { screener, get Screener() {
+    const screener = useScreener(badData);
+    const __returned__ = { badData, screener, get Screener() {
       return Screener;
     }, DevSandbox };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
@@ -17,12 +17,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "1. Array of objects",
+    title: "5. Bad data",
     source: "-"
   }, {
     default: withCtx(() => [
       createVNode($setup["DevSandbox"], {
-        title: "Array of objects",
+        title: "Bad data",
         screener: $setup.screener
       }, {
         default: withCtx(() => [
@@ -36,8 +36,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/1-basic-usage/1-array-of-objects.story.vue";
-const _1ArrayOfObjects_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/1-array-of-objects.story.vue"]]);
+_sfc_main.__file = "src/stories/1-basic-usage/5-bad-data.story.vue";
+const _5BadData_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/5-bad-data.story.vue"]]);
 export {
-  _1ArrayOfObjects_story as default
+  _5BadData_story as default
 };

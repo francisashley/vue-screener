@@ -1,18 +1,12 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createVNode } from "./vendor-BU1pZ-lL.js";
-import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-CTuEq1Lt.js";
-import { b as baseData } from "./data-BnlYeNVr.js";
-import { D as DevSandbox } from "./Sandbox-CXuKwcMg.js";
+import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-BY7tALh7.js";
+import { D as DevSandbox } from "./Sandbox-CovMIZhP.js";
+import { p as primitivesData } from "./primitives-data-BLkuaWoG.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "6-hide-fields.story",
+  __name: "2-array-of-primitives.story",
   setup(__props, { expose: __expose }) {
     __expose();
-    const screener = useScreener(baseData, {
-      columnDefs: {
-        id: { hidden: true, order: 0 },
-        first_name: { hidden: true, order: 1 },
-        last_name: { hidden: true, order: 2 }
-      }
-    });
+    const screener = useScreener(primitivesData);
     const __returned__ = { screener, get Screener() {
       return Screener;
     }, DevSandbox };
@@ -23,12 +17,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "6. Hide fields",
+    title: "2. Array of primitives",
     source: "-"
   }, {
     default: withCtx(() => [
       createVNode($setup["DevSandbox"], {
-        title: "Results",
+        title: "Array of primitives",
         screener: $setup.screener
       }, {
         default: withCtx(() => [
@@ -42,8 +36,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/2-configure-columns/6-hide-fields.story.vue";
-const _6HideFields_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/6-hide-fields.story.vue"]]);
+_sfc_main.__file = "src/stories/1-basic-usage/2-array-of-primitives.story.vue";
+const _2ArrayOfPrimitives_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/2-array-of-primitives.story.vue"]]);
 export {
-  _6HideFields_story as default
+  _2ArrayOfPrimitives_story as default
 };

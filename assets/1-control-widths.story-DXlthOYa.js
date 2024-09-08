@@ -1,41 +1,42 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createVNode, ax as createBaseVNode } from "./vendor-BU1pZ-lL.js";
-import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-CTuEq1Lt.js";
+import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-BY7tALh7.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
 import { p as primitivesData } from "./primitives-data-BLkuaWoG.js";
 import { m as mixedObjectsData } from "./mix-objects-data-Ds6Uxao6.js";
-import { D as DevSandbox } from "./Sandbox-CXuKwcMg.js";
+import { D as DevSandbox } from "./Sandbox-CovMIZhP.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "2-control-labels.story",
+  __name: "1-control-widths.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const screener1 = useScreener(baseData, {
       columnDefs: {
-        id: { label: "ID" },
-        first_name: { label: "First name" },
-        last_name: { label: "Last name" },
-        full_name: { label: "Full name" },
-        email: { label: "Email" },
-        gender: { label: "Gender" },
-        ip_address: { label: "IP address" }
+        id: { width: "50px" },
+        first_name: { width: "150px" },
+        last_name: { width: "150px" },
+        full_name: { width: "150px" },
+        email: { width: "200px" },
+        gender: { width: "100px" },
+        ip_address: { width: "minmax(150px, 1fr)" }
       }
     });
     const screener2 = useScreener(primitivesData, {
       columnDefs: {
-        0: { label: "ID" },
-        1: { label: "First name" },
-        2: { label: "Last name" },
-        3: { label: "Email" },
-        4: { label: "Gender" },
-        5: { label: "IP address" }
+        0: { width: "50px" },
+        1: { width: "100px" },
+        2: { width: "100px" },
+        3: { width: "1fr" },
+        4: { width: "100px" },
+        5: { width: "150px" }
       }
     });
     const screener3 = useScreener(mixedObjectsData, {
       columnDefs: {
-        id: { label: "ID", order: 0 },
-        name: { label: "Name", order: 1 },
-        address: { label: "Address", order: 2 },
-        country: { label: "Country", order: 3 },
-        flag_colours: { label: "Flag colours", order: 4 }
+        type: { width: "75px", order: 1 },
+        name: { width: "100px", order: 2 },
+        id: { width: "50px", order: 0 },
+        address: { width: "minmax(200px, 1fr)", order: 3 },
+        country: { width: "100px", order: 4 },
+        flag_colours: { width: "200px", order: 5 }
       }
     });
     const __returned__ = { screener1, screener2, screener3, get Screener() {
@@ -62,7 +63,7 @@ const _hoisted_2 = /* @__PURE__ */ createBaseVNode(
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "2. Control labels",
+    title: "1. Control widths",
     source: "-"
   }, {
     default: withCtx(() => [
@@ -103,8 +104,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/2-configure-columns/2-control-labels.story.vue";
-const _2ControlLabels_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/2-control-labels.story.vue"]]);
+_sfc_main.__file = "src/stories/2-configure-columns/1-control-widths.story.vue";
+const _1ControlWidths_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/1-control-widths.story.vue"]]);
 export {
-  _2ControlLabels_story as default
+  _1ControlWidths_story as default
 };

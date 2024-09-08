@@ -2067,6 +2067,7 @@ const useScreener = (inputData, options = {}) => {
     navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
     setDimensions: (_dimensions) => dimensions.value = _dimensions,
     // eslint-disable-line
+    setData: (inputData2) => allItems.value = isValidInput(inputData2) ? normaliseInput(inputData2) : [],
     updateItem: (id, partialData) => {
       let cellChanges = [];
       let itemChanges = null;

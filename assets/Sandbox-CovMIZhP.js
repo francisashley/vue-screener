@@ -1,5 +1,5 @@
 import { ar as defineComponent, at as openBlock, aC as createElementBlock, ax as createBaseVNode, aD as toDisplayString, aB as createCommentVNode, aA as createTextVNode, aw as createVNode, aE as renderSlot } from "./vendor-BU1pZ-lL.js";
-import { _ as _export_sfc, c as ScreenerPagination, a as ScreenerSearch, b as ScreenerSearchOptions } from "./use-screener-CTuEq1Lt.js";
+import { _ as _export_sfc, c as ScreenerPagination, a as ScreenerSearch, b as ScreenerSearchOptions } from "./use-screener-BY7tALh7.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "Sandbox",
   props: {

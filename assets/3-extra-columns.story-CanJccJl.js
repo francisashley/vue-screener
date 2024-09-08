@@ -1,13 +1,22 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createVNode } from "./vendor-BU1pZ-lL.js";
-import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-CTuEq1Lt.js";
-import { D as DevSandbox } from "./Sandbox-CXuKwcMg.js";
+import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-BY7tALh7.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
+import { D as DevSandbox } from "./Sandbox-CovMIZhP.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "7-disable-search highlight.story",
+  __name: "3-extra-columns.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const screener = useScreener(baseData, {
-      disableSearchHighlight: true
+      columnDefs: {
+        id: { width: "50px", order: 0 },
+        first_name: { width: "150px", order: 1 },
+        last_name: { width: "150px", order: 2 },
+        full_name: { width: "150px", order: 3 },
+        email: { width: "200px", order: 4 },
+        gender: { width: "100px", order: 5 },
+        ip_address: { width: "minmax(150px, 1fr)", order: 6 },
+        extra_column: { width: "100px", order: 7 }
+      }
     });
     const __returned__ = { screener, get Screener() {
       return Screener;
@@ -19,12 +28,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "7. Disable search highlight",
+    title: "3. Extra columns",
     source: "-"
   }, {
     default: withCtx(() => [
       createVNode($setup["DevSandbox"], {
-        title: "Custom title",
+        title: "Results",
         screener: $setup.screener
       }, {
         default: withCtx(() => [
@@ -38,8 +47,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/1-basic-usage/7-disable-search highlight.story.vue";
-const _7DisableSearch_highlight_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/7-disable-search highlight.story.vue"]]);
+_sfc_main.__file = "src/stories/2-configure-columns/3-extra-columns.story.vue";
+const _3ExtraColumns_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/3-extra-columns.story.vue"]]);
 export {
-  _7DisableSearch_highlight_story as default
+  _3ExtraColumns_story as default
 };
