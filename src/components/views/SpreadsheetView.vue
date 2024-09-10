@@ -6,7 +6,7 @@
     :style="style"
   >
     <!-- // Field columns -->
-    <SpreadsheetRow>
+    <SpreadsheetRow :class="ui.row.class">
       <SpreadsheetCell is-header :point="[-1, -1]" />
       <SpreadsheetCell
         is-header
@@ -47,7 +47,10 @@ import SpreadsheetCell from '../ui/spreadsheet/SpreadsheetCell.vue'
 import SpreadsheetRow from '../ui/spreadsheet/SpreadsheetRow.vue'
 
 export type SpreadsheetViewUI = {
-  class: string
+  class?: string
+  row?: {
+    class?: string
+  }
 }
 
 type Point = [rowIndex: number, colIndex: number]
@@ -59,11 +62,17 @@ const props = defineProps<{
 
 const uiDefaults = {
   class: '',
+  row: {
+    class: '',
+  },
 }
 
 const ui = computed(() => {
   return {
     class: twMerge(uiDefaults.class, props.ui?.class),
+    row: {
+      class: twMerge(uiDefaults.row.class, props.ui?.row?.class),
+    },
   }
 })
 
