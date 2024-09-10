@@ -47,9 +47,7 @@ import SpreadsheetCell from '../ui/spreadsheet/SpreadsheetCell.vue'
 import SpreadsheetRow from '../ui/spreadsheet/SpreadsheetRow.vue'
 
 export type SpreadsheetViewUI = {
-  spreadsheetView?: {
-    class: string
-  }
+  class: string
 }
 
 type Point = [rowIndex: number, colIndex: number]
@@ -60,14 +58,12 @@ const props = defineProps<{
 }>()
 
 const uiDefaults = {
-  spreadsheetView: {
-    class: '',
-  },
+  class: '',
 }
 
 const ui = computed(() => {
   return {
-    spreadsheetView: { class: twMerge(uiDefaults.spreadsheetView?.class, props.ui?.spreadsheetView?.class) },
+    spreadsheetView: { class: twMerge(uiDefaults.class, props.ui?.class) },
   }
 })
 
