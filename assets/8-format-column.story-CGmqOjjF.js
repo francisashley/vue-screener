@@ -1,16 +1,22 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createVNode } from "./vendor-DkvGWHs0.js";
-import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-De4zNbQY.js";
+import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-DwJAgkUi.js";
 import { b as baseData } from "./data-BnlYeNVr.js";
-import { D as DevSandbox } from "./Sandbox-BRn05viR.js";
+import { D as DevSandbox } from "./Sandbox-XIr9hPYy.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "6-hide-fields.story",
+  __name: "8-format-column.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const screener = useScreener(baseData, {
       columnDefs: {
-        id: { hidden: true, order: 0 },
-        first_name: { hidden: true, order: 1 },
-        last_name: { hidden: true, order: 2 }
+        id: { width: "50px", order: 0 },
+        first_name: { width: "150px", format: (value) => "😎" + value + "😎", order: 1 },
+        last_name: { width: "150px", format: (value) => "😎" + value + "😎", order: 2 },
+        ip_address: {
+          width: "minmax(150px, 1fr)",
+          isSortable: false,
+          format: (value) => "😎" + value + "😎",
+          order: 3
+        }
       }
     });
     const __returned__ = { screener, get Screener() {
@@ -23,7 +29,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "6. Hide fields",
+    title: "9. Format column",
     source: "-"
   }, {
     default: withCtx(() => [
@@ -42,8 +48,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/2-configure-columns/6-hide-fields.story.vue";
-const _6HideFields_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/6-hide-fields.story.vue"]]);
+_sfc_main.__file = "src/stories/2-configure-columns/8-format-column.story.vue";
+const _8FormatColumn_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/8-format-column.story.vue"]]);
 export {
-  _6HideFields_story as default
+  _8FormatColumn_story as default
 };

@@ -1,18 +1,11 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createVNode } from "./vendor-DkvGWHs0.js";
-import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-De4zNbQY.js";
-import { D as DevSandbox } from "./Sandbox-BRn05viR.js";
-import { b as baseData } from "./data-BnlYeNVr.js";
+import { _ as _export_sfc, u as useScreener, S as Screener } from "./use-screener-DwJAgkUi.js";
+import { D as DevSandbox } from "./Sandbox-XIr9hPYy.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "9-editable.story",
+  __name: "5-no-data.story",
   setup(__props, { expose: __expose }) {
     __expose();
-    const screener = useScreener(baseData, {
-      editable: true,
-      defaultItemsPerPage: 20,
-      onCellChanged: (event) => console.log("CellChangedEvent >>>", event),
-      onItemChanged: (event) => console.log("ItemChangedEvent >>>", event),
-      onChanged: (event) => console.log("ChangedEvent >>>", event)
-    });
+    const screener = useScreener([]);
     const __returned__ = { screener, get Screener() {
       return Screener;
     }, DevSandbox };
@@ -23,14 +16,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "9. Editable",
+    title: "5. No data",
     source: "-"
   }, {
     default: withCtx(() => [
       createVNode($setup["DevSandbox"], {
-        title: "Editable",
-        screener: $setup.screener,
-        "can-toggle-editable": ""
+        title: "No data",
+        screener: $setup.screener
       }, {
         default: withCtx(() => [
           createVNode($setup["Screener"], { screener: $setup.screener }, null, 8, ["screener"])
@@ -43,8 +35,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/1-basic-usage/9-editable.story.vue";
-const _9Editable_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/9-editable.story.vue"]]);
+_sfc_main.__file = "src/stories/1-basic-usage/5-no-data.story.vue";
+const _5NoData_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/5-no-data.story.vue"]]);
 export {
-  _9Editable_story as default
+  _5NoData_story as default
 };

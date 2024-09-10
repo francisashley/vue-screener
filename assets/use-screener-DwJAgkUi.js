@@ -271,7 +271,7 @@ function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
 _sfc_main$m.__file = "src/components/ui/table/TableHead.vue";
 const TableHead = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$m], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/ui/table/TableHead.vue"]]);
 const _sfc_main$l = {};
-const _hoisted_1$b = {
+const _hoisted_1$a = {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24",
   fill: "currentColor"
@@ -287,7 +287,7 @@ const _hoisted_3$4 = [
   _hoisted_2$7
 ];
 function _sfc_render$l(_ctx, _cache) {
-  return openBlock(), createElementBlock("svg", _hoisted_1$b, [..._hoisted_3$4]);
+  return openBlock(), createElementBlock("svg", _hoisted_1$a, [..._hoisted_3$4]);
 }
 _sfc_main$l.__file = "src/components/icons/RemixSortDescIcon.vue";
 const RemixSortDescIcon = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$l], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/icons/RemixSortDescIcon.vue"]]);
@@ -429,7 +429,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$a = ["innerHTML"];
+const _hoisted_1$9 = ["innerHTML"];
 const _hoisted_2$6 = ["innerHTML"];
 function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock($setup["Table"], {
@@ -484,7 +484,7 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
                         renderSlot(_ctx.$slots, "default", {}, () => [
                           createBaseVNode("span", {
                             innerHTML: column.label
-                          }, null, 8, _hoisted_1$a)
+                          }, null, 8, _hoisted_1$9)
                         ])
                       ];
                     }),
@@ -597,7 +597,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$9 = ["data-value"];
+const _hoisted_1$8 = ["data-value"];
 const _hoisted_2$5 = ["value"];
 function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
@@ -611,7 +611,7 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
       onInput: $setup.handleInput,
       onBlur: _cache[0] || (_cache[0] = ($event) => $setup.emit("blur"))
     }, null, 40, _hoisted_2$5)
-  ], 8, _hoisted_1$9);
+  ], 8, _hoisted_1$8);
 }
 _sfc_main$i.__file = "src/components/ui/textarea/Textarea.vue";
 const UiTextarea = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$i], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/ui/textarea/Textarea.vue"]]);
@@ -794,9 +794,9 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
 _sfc_main$h.__file = "src/components/ui/spreadsheet/SpreadsheetCell.vue";
 const SpreadsheetCell = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$h], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/ui/spreadsheet/SpreadsheetCell.vue"]]);
 const _sfc_main$g = {};
-const _hoisted_1$8 = { class: "vsc-relative vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-border-b vsc-border-zinc-700 last:vsc-border-b-0 vsc-w-fit vsc-bg-zinc-800" };
+const _hoisted_1$7 = { class: "vsc-relative vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-border-b vsc-border-zinc-700 last:vsc-border-b-0 vsc-w-fit vsc-bg-zinc-800" };
 function _sfc_render$g(_ctx, _cache) {
-  return openBlock(), createElementBlock("div", _hoisted_1$8, [
+  return openBlock(), createElementBlock("div", _hoisted_1$7, [
     renderSlot(_ctx.$slots, "default")
   ]);
 }
@@ -812,14 +812,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     __expose();
     const props = __props;
     const uiDefaults = {
-      spreadsheetView: {
-        class: ""
-      }
+      class: ""
     };
     const ui = computed(() => {
-      var _a, _b, _c;
+      var _a;
       return {
-        spreadsheetView: twMerge((_a = uiDefaults.spreadsheetView) == null ? void 0 : _a.class, (_c = (_b = props.ui) == null ? void 0 : _b.spreadsheetView) == null ? void 0 : _c.class)
+        class: twMerge(uiDefaults.class, (_a = props.ui) == null ? void 0 : _a.class)
       };
     });
     const activeCell = ref(null);
@@ -880,89 +878,93 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1$7 = ["ui"];
 function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
-  return $props.screener.dimensions ? (openBlock(), createElementBlock("div", {
-    key: 0,
-    ui: $setup.ui.spreadsheetView,
-    class: "vsc-border vsc-border-zinc-700 vsc-bg-[#1f1f22] vsc-grid vsc-auto-rows-min",
-    style: normalizeStyle($setup.style)
-  }, [
-    createCommentVNode(" // Field columns "),
-    createVNode($setup["SpreadsheetRow"], null, {
-      default: withCtx(() => [
-        createVNode($setup["SpreadsheetCell"], {
-          "is-header": "",
-          point: [-1, -1]
-        }),
-        (openBlock(true), createElementBlock(
-          Fragment,
-          null,
-          renderList($setup.props.screener.columnDefs.value, (columnDef, ci) => {
-            return openBlock(), createBlock($setup["SpreadsheetCell"], {
-              "is-header": "",
-              key: ci,
-              point: [-1, ci],
-              value: columnDef.field
-            }, null, 8, ["point", "value"]);
+  return $props.screener.dimensions ? (openBlock(), createElementBlock(
+    "div",
+    {
+      key: 0,
+      class: normalizeClass([$setup.ui.class, "vsc-border vsc-border-zinc-700 vsc-bg-[#1f1f22] vsc-grid vsc-auto-rows-min"]),
+      style: normalizeStyle($setup.style)
+    },
+    [
+      createCommentVNode(" // Field columns "),
+      createVNode($setup["SpreadsheetRow"], null, {
+        default: withCtx(() => [
+          createVNode($setup["SpreadsheetCell"], {
+            "is-header": "",
+            point: [-1, -1]
           }),
-          128
-          /* KEYED_FRAGMENT */
-        ))
-      ]),
-      _: 1
-      /* STABLE */
-    }),
-    (openBlock(true), createElementBlock(
-      Fragment,
-      null,
-      renderList($props.screener.paginatedItems.value, (item, ri) => {
-        return openBlock(), createBlock(
-          $setup["SpreadsheetRow"],
-          { key: ri },
-          {
-            default: withCtx(() => [
-              createCommentVNode(" // Row index "),
-              createVNode($setup["SpreadsheetCell"], {
+          (openBlock(true), createElementBlock(
+            Fragment,
+            null,
+            renderList($setup.props.screener.columnDefs.value, (columnDef, ci) => {
+              return openBlock(), createBlock($setup["SpreadsheetCell"], {
                 "is-header": "",
-                point: [ri, -1],
-                value: ri
-              }, null, 8, ["point", "value"]),
-              (openBlock(true), createElementBlock(
-                Fragment,
-                null,
-                renderList($setup.props.screener.columnDefs.value, (columnDef, ci) => {
-                  return openBlock(), createBlock($setup["SpreadsheetCell"], {
-                    key: ci,
-                    point: [ri, ci],
-                    "is-active": $setup.activeCell ? $setup.activeCell[0] === ri && $setup.activeCell[1] === ci : false,
-                    value: item == null ? void 0 : item.data[columnDef.field],
-                    onSelect: ($event) => $setup.actions.selectCell([ri, ci]),
-                    onSelectUp: ($event) => $setup.actions.moveSelectionUp([ri, ci]),
-                    onSelectRight: ($event) => $setup.actions.moveSelectionRight([ri, ci]),
-                    onSelectDown: ($event) => $setup.actions.moveSelectionDown([ri, ci]),
-                    onSelectLeft: ($event) => $setup.actions.moveSelectionLeft([ri, ci]),
-                    onSelectNext: ($event) => $setup.actions.moveSelectionNext([ri, ci]),
-                    onSelectPrev: ($event) => $setup.actions.moveSelectionPrev([ri, ci]),
-                    onClear: ($event) => $setup.actions.deleteCell([ri, ci]),
-                    onUpdate: ($event) => $props.screener.actions.updateItem(item.id, { [columnDef.field]: $event })
-                  }, null, 8, ["point", "is-active", "value", "onSelect", "onSelectUp", "onSelectRight", "onSelectDown", "onSelectLeft", "onSelectNext", "onSelectPrev", "onClear", "onUpdate"]);
-                }),
-                128
-                /* KEYED_FRAGMENT */
-              ))
-            ]),
-            _: 2
-            /* DYNAMIC */
-          },
-          1024
-          /* DYNAMIC_SLOTS */
-        );
+                key: ci,
+                point: [-1, ci],
+                value: columnDef.field
+              }, null, 8, ["point", "value"]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ]),
+        _: 1
+        /* STABLE */
       }),
-      128
-      /* KEYED_FRAGMENT */
-    ))
-  ], 12, _hoisted_1$7)) : createCommentVNode("v-if", true);
+      (openBlock(true), createElementBlock(
+        Fragment,
+        null,
+        renderList($props.screener.paginatedItems.value, (item, ri) => {
+          return openBlock(), createBlock(
+            $setup["SpreadsheetRow"],
+            { key: ri },
+            {
+              default: withCtx(() => [
+                createCommentVNode(" // Row index "),
+                createVNode($setup["SpreadsheetCell"], {
+                  "is-header": "",
+                  point: [ri, -1],
+                  value: ri
+                }, null, 8, ["point", "value"]),
+                (openBlock(true), createElementBlock(
+                  Fragment,
+                  null,
+                  renderList($setup.props.screener.columnDefs.value, (columnDef, ci) => {
+                    return openBlock(), createBlock($setup["SpreadsheetCell"], {
+                      key: ci,
+                      point: [ri, ci],
+                      "is-active": $setup.activeCell ? $setup.activeCell[0] === ri && $setup.activeCell[1] === ci : false,
+                      value: item == null ? void 0 : item.data[columnDef.field],
+                      onSelect: ($event) => $setup.actions.selectCell([ri, ci]),
+                      onSelectUp: ($event) => $setup.actions.moveSelectionUp([ri, ci]),
+                      onSelectRight: ($event) => $setup.actions.moveSelectionRight([ri, ci]),
+                      onSelectDown: ($event) => $setup.actions.moveSelectionDown([ri, ci]),
+                      onSelectLeft: ($event) => $setup.actions.moveSelectionLeft([ri, ci]),
+                      onSelectNext: ($event) => $setup.actions.moveSelectionNext([ri, ci]),
+                      onSelectPrev: ($event) => $setup.actions.moveSelectionPrev([ri, ci]),
+                      onClear: ($event) => $setup.actions.deleteCell([ri, ci]),
+                      onUpdate: ($event) => $props.screener.actions.updateItem(item.id, { [columnDef.field]: $event })
+                    }, null, 8, ["point", "is-active", "value", "onSelect", "onSelectUp", "onSelectRight", "onSelectDown", "onSelectLeft", "onSelectNext", "onSelectPrev", "onClear", "onUpdate"]);
+                  }),
+                  128
+                  /* KEYED_FRAGMENT */
+                ))
+              ]),
+              _: 2
+              /* DYNAMIC */
+            },
+            1024
+            /* DYNAMIC_SLOTS */
+          );
+        }),
+        128
+        /* KEYED_FRAGMENT */
+      ))
+    ],
+    6
+    /* CLASS, STYLE */
+  )) : createCommentVNode("v-if", true);
 }
 _sfc_main$f.__file = "src/components/views/SpreadsheetView.vue";
 const SpreadsheetView = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$f], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/views/SpreadsheetView.vue"]]);
