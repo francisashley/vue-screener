@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="screener.dimensions"
-    :ui="ui.spreadsheetView"
+    :class="ui.spreadsheetView"
     class="vsc-border vsc-border-zinc-700 vsc-bg-[#1f1f22] vsc-grid vsc-auto-rows-min"
     :style="style"
   >
@@ -67,7 +67,7 @@ const uiDefaults = {
 
 const ui = computed(() => {
   return {
-    spreadsheetView: twMerge(uiDefaults.spreadsheetView?.class, props.ui?.spreadsheetView?.class),
+    spreadsheetView: { class: twMerge(uiDefaults.spreadsheetView?.class, props.ui?.spreadsheetView?.class) },
   }
 })
 
