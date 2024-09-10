@@ -6,7 +6,7 @@
     :style="style"
   >
     <!-- // Field columns -->
-    <SpreadsheetRow :class="ui.row.class">
+    <SpreadsheetRow :class="ui.headerRow.class">
       <SpreadsheetCell is-header :point="[-1, -1]" />
       <SpreadsheetCell
         is-header
@@ -16,7 +16,7 @@
         :value="columnDef.field"
       />
     </SpreadsheetRow>
-    <SpreadsheetRow v-for="(item, ri) in screener.paginatedItems.value" :key="ri">
+    <SpreadsheetRow v-for="(item, ri) in screener.paginatedItems.value" :key="ri" :class="ui.row.class">
       <!-- // Row index -->
       <SpreadsheetCell is-header :point="[ri, -1]" :value="ri" />
       <SpreadsheetCell
@@ -48,6 +48,9 @@ import SpreadsheetRow from '../ui/spreadsheet/SpreadsheetRow.vue'
 
 export type SpreadsheetViewUI = {
   class?: string
+  headerRow: {
+    class?: string
+  }
   row?: {
     class?: string
   }
@@ -62,6 +65,9 @@ const props = defineProps<{
 
 const uiDefaults = {
   class: '',
+  headerRow: {
+    class: '',
+  },
   row: {
     class: '',
   },
@@ -70,6 +76,9 @@ const uiDefaults = {
 const ui = computed(() => {
   return {
     class: twMerge(uiDefaults.class, props.ui?.class),
+    headerRow: {
+      class: twMerge(uiDefaults.headerRow.class, props.ui?.headerRow?.class),
+    },
     row: {
       class: twMerge(uiDefaults.row.class, props.ui?.row?.class),
     },
