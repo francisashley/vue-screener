@@ -100,33 +100,33 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     })
   })
 
-  const columnDefsMap = computed<Record<PropertyKey, Column>>(() => {
-    const userColDefs = options.columns
-      ? Object.entries(options.columns).map(([field, colDef]) => createColumnDef({ field, label: field, ...colDef }))
+  const columnsMap = computed<Record<PropertyKey, Column>>(() => {
+    const userColumns = options.columns
+      ? Object.entries(options.columns).map(([field, column]) => createColumnDef({ field, label: field, ...column }))
       : []
 
-    const dataColDefs = getFields(allItems.value).map((field) => createColumnDef({ field, label: field }))
+    const dataColumns = getFields(allItems.value).map((field) => createColumnDef({ field, label: field }))
 
-    const additionalUserDefs = userColDefs.filter(
-      (userColDef) => !dataColDefs.map((dataColDef) => dataColDef.field).includes(userColDef.field),
+    const additionalUserColumns = userColumns.filter(
+      (userColumn) => !dataColumns.map((dataColumn) => dataColumn.field).includes(userColumn.field),
     )
 
-    const mergedDataColDefs = dataColDefs.reduce(
-      (acc, colDef) => {
-        acc[colDef.field] = {
-          ...colDef,
-          ...(userColDefs.find((userColDef) => userColDef.field === colDef.field) ?? {}),
+    const mergedDataColumns = dataColumns.reduce(
+      (acc, column) => {
+        acc[column.field] = {
+          ...column,
+          ...(userColumns.find((userColumn) => userColumn.field === column.field) ?? {}),
         }
         return acc
       },
       {} as Record<string, Column>,
     )
 
-    const mergedAdditionalUserDefs = additionalUserDefs.reduce(
-      (acc, colDef) => {
-        acc[colDef.field] = {
-          ...colDef,
-          ...(dataColDefs.find((dataColDef) => dataColDef.field === colDef.field) ?? {}),
+    const mergedAdditionalUserColumns = additionalUserColumns.reduce(
+      (acc, column) => {
+        acc[column.field] = {
+          ...column,
+          ...(dataColumns.find((dataColumn) => dataColumn.field === column.field) ?? {}),
         }
         return acc
       },
@@ -134,14 +134,14 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     )
 
     return {
-      ...mergedDataColDefs,
-      ...mergedAdditionalUserDefs,
+      ...mergedDataColumns,
+      ...mergedAdditionalUserColumns,
     }
   })
 
   // Columns to display
   const columns = computed<Column[]>(() => {
-    let columns: Column[] = Object.values(columnDefsMap.value)
+    let columns: Column[] = Object.values(columnsMap.value)
 
     columns = columns.sort((a, b) => a.order - b.order)
 

@@ -41,10 +41,10 @@ export function getFields(rows: Row[]): string[] {
  * Creates a column definition by merging the provided partial column definition
  * with default values.
  *
- * @param {Partial<Column>} colDef - The partial column definition to merge with defaults.
+ * @param {Partial<Column>} column - The partial column definition to merge with defaults.
  * @returns {Column} The complete column definition.
  */
-export const createColumnDef = (colDef: Partial<Column>): Column => ({
+export const createColumnDef = (column: Partial<Column>): Column => ({
   field: '',
   label: '',
   isSticky: false,
@@ -54,7 +54,7 @@ export const createColumnDef = (colDef: Partial<Column>): Column => ({
   order: 0,
   only: false,
   hidden: false,
-  ...colDef,
+  ...column,
 })
 
 /**

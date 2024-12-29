@@ -166,10 +166,10 @@ const handleClickColumnHeader = (column: Column) => {
   }
 }
 
-const processValue = (value: any, colDef: Column): string => {
+const processValue = (value: any, column: Column): string => {
   // allow the user to format the value
-  if (colDef.format) {
-    value = colDef.format(value)
+  if (column.format) {
+    value = column.format(value)
   }
   // highlight search matches
   const disableSearchHighlight = props.screener.preferences.value.disableSearchHighlight
