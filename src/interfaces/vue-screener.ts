@@ -31,16 +31,12 @@ export type UserPreferences = {
   loading: boolean
 }
 
-export type SearchTextOptions = {
+export type SearchQuery = {
+  // query
+  text: string
   caseSensitive: boolean
   wholeWord: boolean
   regex: boolean
-}
-
-export type SearchQuery = {
-  // query
-  searchText: string
-  searchTextOptions: SearchTextOptions
   // scope
   page: number
   itemsPerPage: number

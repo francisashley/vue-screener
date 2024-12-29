@@ -54,12 +54,10 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
 
   // Search query config
   const searchQuery = ref<SearchQuery>({
-    searchText: '', // Search text
-    searchTextOptions: {
-      regex: false, // Whether to match regex in search
-      caseSensitive: false, // Whether to match case in search
-      wholeWord: false, // Whether to match whole word in search
-    },
+    text: '', // Search text
+    regex: false, // Whether to match regex in search
+    caseSensitive: false, // Whether to match case in search
+    wholeWord: false, // Whether to match whole word in search
     page: options.defaultCurrentPage ?? 1, // Current page number
     itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of rows per page
     sortField: options.defaultSortField ?? null, // Field to sort by
@@ -70,15 +68,15 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     return search({
       rows: allItems.value,
       columns: columns.value,
-      searchText: searchQuery.value.searchText,
-      regex: searchQuery.value.searchTextOptions.regex,
-      caseSensitive: searchQuery.value.searchTextOptions.caseSensitive,
-      wholeWord: searchQuery.value.searchTextOptions.wholeWord,
+      text: searchQuery.value.text,
+      regex: searchQuery.value.regex,
+      caseSensitive: searchQuery.value.caseSensitive,
+      wholeWord: searchQuery.value.wholeWord,
     })
   })
 
   const sortedItems = computed((): Row[] => {
-    const sortedItems = searchQuery.value.searchText ? queriedItems.value : allItems.value
+    const sortedItems = searchQuery.value.text ? queriedItems.value : allItems.value
 
     const _sortField = searchQuery.value.sortField
 
@@ -226,7 +224,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
 
   return {
     preferences, // user preferences
-    searchQuery, // search options (searchText, pagination, sort)
+    searchQuery, // search options (text, pagination, sort)
     allItems, // all data
     queriedItems, // filtered data (after search query)
     paginatedItems, // paginated data (cut from queriedItems)

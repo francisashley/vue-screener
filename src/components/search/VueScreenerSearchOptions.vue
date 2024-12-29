@@ -2,7 +2,7 @@
   <ToggleButtonGroup :ui="ui">
     <ToggleButton
       title="Match case"
-      :active="props.screener.searchQuery.value.searchTextOptions.caseSensitive"
+      :active="props.screener.searchQuery.value.caseSensitive"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
     >
@@ -10,7 +10,7 @@
     </ToggleButton>
     <ToggleButton
       title="Match word"
-      :active="props.screener.searchQuery.value.searchTextOptions.wholeWord"
+      :active="props.screener.searchQuery.value.wholeWord"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
     >
@@ -18,7 +18,7 @@
     </ToggleButton>
     <ToggleButton
       title="Use regular expression"
-      :active="props.screener.searchQuery.value.searchTextOptions.regex"
+      :active="props.screener.searchQuery.value.regex"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-regex')"
     >
@@ -70,16 +70,16 @@ const ui = computed(() => {
 })
 
 const toggleOption = (searchTextOption: 'match-case' | 'match-word' | 'match-regex') => {
-  const updatedSearchTextOptions = { ...props.screener.searchQuery.value.searchTextOptions }
+  const updatedSearchQuery = { ...props.screener.searchQuery.value }
 
   if (searchTextOption === 'match-case') {
-    updatedSearchTextOptions.caseSensitive = !updatedSearchTextOptions.caseSensitive
+    updatedSearchQuery.caseSensitive = !updatedSearchQuery.caseSensitive
   } else if (searchTextOption === 'match-word') {
-    updatedSearchTextOptions.wholeWord = !updatedSearchTextOptions.wholeWord
+    updatedSearchQuery.wholeWord = !updatedSearchQuery.wholeWord
   } else if (searchTextOption === 'match-regex') {
-    updatedSearchTextOptions.regex = !updatedSearchTextOptions.regex
+    updatedSearchQuery.regex = !updatedSearchQuery.regex
   }
 
-  props.screener.actions.search({ searchTextOptions: updatedSearchTextOptions })
+  props.screener.actions.search(updatedSearchQuery)
 }
 </script>

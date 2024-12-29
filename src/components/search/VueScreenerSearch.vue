@@ -2,7 +2,7 @@
   <UiInput
     type="text"
     :ui="ui"
-    :value="screener.searchQuery.value.searchText"
+    :value="screener.searchQuery.value.text"
     :error="regex && !isValidQuery"
     placeholder="Search..."
     @keydown="onKeydown"
@@ -38,11 +38,11 @@ const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
 const regex = computed<boolean>(() => {
-  return props.screener.searchQuery.value.searchTextOptions.regex
+  return props.screener.searchQuery.value.regex
 })
 
 const isValidQuery = computed((): boolean => {
-  return isValidRegExp(props.screener.searchQuery.value.searchText)
+  return isValidRegExp(props.screener.searchQuery.value.text)
 })
 
 const onKeydown = (event: KeyboardEvent) => {
@@ -50,12 +50,12 @@ const onKeydown = (event: KeyboardEvent) => {
   const isPressingDown = event.key === 'ArrowDown'
   const isEnter = event.key === 'Enter'
 
-  const searchText = (event.target as HTMLInputElement).value
+  const text = (event.target as HTMLInputElement).value
 
   if (isEnter) {
-    props.screener.actions.search({ searchText })
-    if (searchText) {
-      history.value.push(searchText)
+    props.screener.actions.search({ text })
+    if (text) {
+      history.value.push(text)
       historyIndex.value = history.value.length - 1
     }
   }
@@ -73,11 +73,11 @@ const onKeydown = (event: KeyboardEvent) => {
     historyIndex.value++
   }
 
-  props.screener.actions.search({ searchText: history.value[historyIndex.value] })
+  props.screener.actions.search({ text: history.value[historyIndex.value] })
 }
 
 const onInput = (event: Event) => {
-  const searchText = (event.target as HTMLInputElement).value
-  props.screener.actions.search({ searchText })
+  const text = (event.target as HTMLInputElement).value
+  props.screener.actions.search({ text })
 }
 </script>
