@@ -22,7 +22,7 @@ type DataChangedEvent = {
   updatedRow: RowChangedEvent
 }
 
-type ScreenerOptions = {
+type VueScreenerOptions = {
   height?: string // a css height
   defaultCurrentPage?: number
   defaultRowsPerPage?: number
@@ -36,7 +36,7 @@ type ScreenerOptions = {
   onRowChanged?: (event: RowChangedEvent) => void
   onDataChanged?: (event: DataChangedEvent) => void
 }
-export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = {}): VueScreener => {
+export const useVueScreener = (inputData?: unknown[], options: VueScreenerOptions = {}): VueScreener => {
   // User preferences
   const preferences = ref<UserPreferences>({
     height: options.height ?? '400px',
