@@ -1,55 +1,57 @@
 <template>
   <div :class="{ [ui.class]: true }">
-    <div
-      :class="{
-        [ui.leftSide.class]: true,
-      }"
-    >
-      <template v-if="!screener.queriedRows.value.length">Showing 0 results</template>
-      <template v-else>
-        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.queriedRows.value.length }}
-      </template>
-    </div>
+    <slot>
+      <div
+        :class="{
+          [ui.leftSide.class]: true,
+        }"
+      >
+        <template v-if="!screener.queriedRows.value.length">Showing 0 results</template>
+        <template v-else>
+          Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.queriedRows.value.length }}
+        </template>
+      </div>
 
-    <div :class="{ [ui.nav.class]: true }">
+      <div :class="{ [ui.nav.class]: true }">
       <UiButton :disabled="!canNavigateFirst" @click="screener.actions.goToPage(1)" :ui="ui.nav.button">First</UiButton> <!-- eslint-disable-line -->
-      <UiButton
-        :disabled="!canNavigatePrev"
-        @click="screener.actions.goToPage(props.screener.searchQuery.value.page - 1)"
-        :ui="ui.nav.button"
-        >Prev</UiButton
-      >
+        <UiButton
+          :disabled="!canNavigatePrev"
+          @click="screener.actions.goToPage(props.screener.searchQuery.value.page - 1)"
+          :ui="ui.nav.button"
+          >Prev</UiButton
+        >
       <UiButton v-for="page in getPages" :key="page" :active="isActive(page)" @click="screener.actions.goToPage(page)" :ui="ui.nav.button"> <!-- eslint-disable-line -->
-        {{ page }}
-      </UiButton>
-      <UiButton
-        :disabled="!canNavigateNext"
-        @click="screener.actions.goToPage(props.screener.searchQuery.value.page + 1)"
-        :ui="ui.nav.button"
-        >Next</UiButton
-      >
-      <UiButton
-        :disabled="!canNavigateLast"
-        @click="screener.actions.goToPage(Math.ceil(totalPages / screener.searchQuery.value.rowsPerPage))"
-        :ui="ui.nav.button"
-        >Last</UiButton
-      >
-    </div>
+          {{ page }}
+        </UiButton>
+        <UiButton
+          :disabled="!canNavigateNext"
+          @click="screener.actions.goToPage(props.screener.searchQuery.value.page + 1)"
+          :ui="ui.nav.button"
+          >Next</UiButton
+        >
+        <UiButton
+          :disabled="!canNavigateLast"
+          @click="screener.actions.goToPage(Math.ceil(totalPages / screener.searchQuery.value.rowsPerPage))"
+          :ui="ui.nav.button"
+          >Last</UiButton
+        >
+      </div>
 
-    <div
-      :class="{
-        [ui.rightSide.class]: true,
-      }"
-    >
-      <UiInput
-        type="number"
-        :value="screener.searchQuery.value.rowsPerPage"
-        min="1"
-        step="1"
-        @input="handleChangerowsPerPage"
-        :ui="ui.rightSide.perPageInput"
-      />
-    </div>
+      <div
+        :class="{
+          [ui.rightSide.class]: true,
+        }"
+      >
+        <UiInput
+          type="number"
+          :value="screener.searchQuery.value.rowsPerPage"
+          min="1"
+          step="1"
+          @input="handleChangerowsPerPage"
+          :ui="ui.rightSide.perPageInput"
+        />
+      </div>
+    </slot>
   </div>
 </template>
 
