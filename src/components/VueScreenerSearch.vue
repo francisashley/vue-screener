@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener } from '@/interfaces/screener'
+import { VueScreener } from '@/interfaces/screener'
 import { computed, ref } from 'vue'
 import { isValidRegExp } from '../utils/regex.utils'
 import UiInput, { InputUI } from './ui/input/Input.vue'
@@ -20,7 +20,7 @@ import { twMerge } from '../utils/tailwind-merge.utils'
 export type VueScreenerSearchUI = InputUI
 
 const props = defineProps<{
-  screener: Screener
+  screener: VueScreener
   ui?: VueScreenerSearchUI
 }>()
 

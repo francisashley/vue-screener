@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { Screener } from '@/interfaces/screener'
+import { VueScreener } from '@/interfaces/screener'
 import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
 import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
 import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
@@ -47,7 +47,7 @@ export type VueScreenerSearchOptionsUI = {
 }
 
 const props = defineProps<{
-  screener: Screener
+  screener: VueScreener
   ui?: VueScreenerSearchOptionsUI
 }>()
 

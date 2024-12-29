@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import type { Screener } from '../../interfaces/screener'
+import type { VueScreener } from '../../interfaces/screener'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import SpreadsheetCell from '../ui/spreadsheet/SpreadsheetCell.vue'
 import SpreadsheetRow from '../ui/spreadsheet/SpreadsheetRow.vue'
@@ -59,7 +59,7 @@ export type SpreadsheetViewUI = {
 type Point = [rowIndex: number, colIndex: number]
 
 const props = defineProps<{
-  screener: Screener
+  screener: VueScreener
   ui?: SpreadsheetViewUI
 }>()
 

@@ -78,7 +78,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import type { Screener, ColDef } from '../../interfaces/screener'
+import type { VueScreener, ColDef } from '../../interfaces/screener'
 import VueScreenerTableRow, { TableRowUI } from '../ui/table/VueScreenerTableRow.vue'
 import VueScreenerTableCell, { TableCellUI } from '../ui/table/VueScreenerTableCell.vue'
 import VueScreenerTable, { TableUI } from '../ui/table/VueScreenerTable.vue'
@@ -103,7 +103,7 @@ export type TableViewUI = {
 }
 
 const props = defineProps<{
-  screener: Screener
+  screener: VueScreener
   ui?: TableViewUI
 }>()
 

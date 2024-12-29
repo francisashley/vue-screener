@@ -26,11 +26,11 @@
 
 <script lang="ts" setup>
 import { VueScreenerPagination } from '../../index'
-import { Screener } from '../../interfaces/screener'
+import { VueScreener } from '../../interfaces/screener'
 import { VueScreenerSearch, VueScreenerSearchOptions } from '../../index'
 
 defineProps<{
-  screener: Screener
+  screener: VueScreener
   title: string
   canToggleEditable?: boolean
 }>()

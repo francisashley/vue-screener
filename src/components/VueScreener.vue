@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Screener } from '../interfaces/screener'
+import type { VueScreener } from '../interfaces/screener'
 import { useElementSize } from '../hooks/use-element-size'
 import { computed, ref } from 'vue'
 import TableView, { TableViewUI } from './views/TableView.vue'
@@ -63,7 +63,7 @@ export type VueScreenerUI = {
 }
 
 const props = defineProps<{
-  screener: Screener
+  screener: VueScreener
   ui?: VueScreenerUI
 }>()
 

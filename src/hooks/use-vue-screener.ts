@@ -1,4 +1,4 @@
-import { ColDef, Item, Row, Screener, SearchQuery, UserPreferences } from '@/interfaces/screener'
+import { ColDef, Item, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/screener'
 import { createColumnDef, getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -36,7 +36,7 @@ type ScreenerOptions = {
   onItemChanged?: (event: ItemChangedEvent) => void
   onChanged?: (event: ChangedEvent) => void
 }
-export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
+export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = {}): VueScreener => {
   // User preferences
   const preferences = ref<UserPreferences>({
     height: options.height ?? '400px',
@@ -45,7 +45,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     loading: options.loading ?? false,
   })
 
-  // Screener dimensions (width and height)
+  // VueScreener dimensions (width and height)
   const dimensions = ref<{ width: number; height: number } | null>(null)
 
   // Data storage

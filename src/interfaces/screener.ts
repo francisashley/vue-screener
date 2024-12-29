@@ -1,6 +1,6 @@
 import { ComputedRef, Ref } from 'vue'
 
-export type Screener = {
+export type VueScreener = {
   preferences: Ref<UserPreferences>
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>

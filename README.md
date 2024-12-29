@@ -36,7 +36,7 @@ yarn add vue-screener
 </template>
 
 <script lang="ts">
-import { Screener } from 'vue-screener'
+import { VueScreener } from 'vue-screener'
 import 'vue-screener/style.css'
 </script>
 ```
@@ -96,10 +96,10 @@ Add a sticky column on the right to put stuff in.
         <button @click="handleClickDelete(props.item)">Delete</button>
       </Data>
     </template>
-  </Screener>
+  </VueScreener>
 </template>
 <script setup>
-import Screener, { Head, Data } from 'vue-screener'
+import VueScreener, { Head, Data } from 'vue-screener'
 </script>
 ```
 
@@ -119,7 +119,7 @@ Custom head cell renderer:
   </vue-screener>
 </template>
 <script>
-import Screener, { HeadCell } from 'vue-screener'
+import VueScreener, { HeadCell } from 'vue-screener'
 import CurrencyPicker from './components/currency-picker'
 </script>
 ```
@@ -142,7 +142,7 @@ Custom value cell renderer:
   </vue-screener>
 </template>
 <script>
-import Screener, { Data } from 'vue-screener'
+import VueScreener, { Data } from 'vue-screener'
 import { formatPrice } from './utils/currency'
 </script>
 ```
