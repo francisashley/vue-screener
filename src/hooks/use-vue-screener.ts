@@ -36,7 +36,7 @@ type ScreenerOptions = {
   onItemChanged?: (event: ItemChangedEvent) => void
   onChanged?: (event: ChangedEvent) => void
 }
-export const useScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
+export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = {}): Screener => {
   // User preferences
   const preferences = ref<UserPreferences>({
     height: options.height ?? '400px',

@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import Screener from './components/Screener.vue'
-import { useScreener } from './hooks/use-screener'
+import { useVueScreener } from './hooks/use-vue-screener'
 
-const screener = useScreener([])
+const screener = useVueScreener([])
 </script>

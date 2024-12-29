@@ -15,13 +15,13 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { Screener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const screener1 = useScreener(baseData, {
+const screener1 = useVueScreener(baseData, {
   columnDefs: {
     id: { width: '50px' },
     first_name: { width: '150px' },
@@ -33,7 +33,7 @@ const screener1 = useScreener(baseData, {
   },
 })
 
-const screener2 = useScreener(primitivesData, {
+const screener2 = useVueScreener(primitivesData, {
   columnDefs: {
     0: { width: '50px' },
     1: { width: '100px' },
@@ -44,7 +44,7 @@ const screener2 = useScreener(primitivesData, {
   },
 })
 
-const screener3 = useScreener(mixedObjectsData, {
+const screener3 = useVueScreener(mixedObjectsData, {
   columnDefs: {
     type: { width: '75px', order: 1 },
     name: { width: '100px', order: 2 },

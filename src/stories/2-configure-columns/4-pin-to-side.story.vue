@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { Screener, useVueScreener } from '../../index'
 import TableCell from '../../components/ui/table/TableCell.vue'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
@@ -37,7 +37,7 @@ import DevSandbox from '../../components/dev/Sandbox.vue'
 const handleClickEdit = (item: unknown) => console.log('edit', item)
 const handleClickDelete = (item: unknown) => console.log('delete', item)
 
-const screener = useScreener(baseData, {
+const screener = useVueScreener(baseData, {
   columnDefs: {
     actions: { isSticky: true },
   },

@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { Screener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const screener = useScreener(baseData, {
+const screener = useVueScreener(baseData, {
   columnDefs: {
     id: { width: '50px', order: 0 },
     first_name: { width: '150px', format: (value) => '😎' + value + '😎', order: 1 },

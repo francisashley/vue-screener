@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { Screener, useVueScreener } from '../../index'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const badData: any = 'bad data'
-const screener = useScreener(badData)
+const screener = useVueScreener(badData)
 </script>

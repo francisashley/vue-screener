@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { Screener, useVueScreener } from '../../index'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 
-const screener = useScreener(mixedObjectsData)
+const screener = useVueScreener(mixedObjectsData)
 </script>

@@ -73,10 +73,10 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useScreener } from '../../index'
+import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 
-const screener = useScreener(baseData, {
+const screener = useVueScreener(baseData, {
   columnDefs: {
     before: { label: '', width: '1fr', order: 0 },
     id: { width: 'min-content', order: 1 },
