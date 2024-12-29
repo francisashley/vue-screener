@@ -165,11 +165,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
 
       searchQuery.value.sortField = field
     },
-    goToFirstPage: () => actions.search({ page: 1 }),
-    goToPrevPage: () => actions.search({ page: Math.max(searchQuery.value.page - 1, 1) }),
     goToPage: (page: number) => actions.search({ page }),
-    goToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allRows.value.length / searchQuery.value.rowsPerPage)) }), // eslint-disable-line
-    goToLastPage: () => actions.search({ page: Math.ceil(allRows.value.length / searchQuery.value.rowsPerPage) }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
     setData: (inputData: unknown) => (allRows.value = isValidInput(inputData) ? convertToRows(inputData) : []),
     updateRow: (id: string, partialData: Record<PropertyKey, any>) => {

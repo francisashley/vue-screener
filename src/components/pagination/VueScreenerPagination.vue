@@ -12,13 +12,28 @@
     </div>
 
     <div :class="{ [ui.nav.class]: true }">
-      <UiButton :disabled="!canNavigateFirst" @click="screener.actions.goToFirstPage" :ui="ui.nav.button">First</UiButton> <!-- eslint-disable-line -->
-      <UiButton :disabled="!canNavigatePrev" @click="screener.actions.goToPrevPage" :ui="ui.nav.button">Prev</UiButton>
+      <UiButton :disabled="!canNavigateFirst" @click="screener.actions.goToPage(1)" :ui="ui.nav.button">First</UiButton> <!-- eslint-disable-line -->
+      <UiButton
+        :disabled="!canNavigatePrev"
+        @click="screener.actions.goToPage(props.screener.searchQuery.value.page - 1)"
+        :ui="ui.nav.button"
+        >Prev</UiButton
+      >
       <UiButton v-for="page in getPages" :key="page" :active="isActive(page)" @click="screener.actions.goToPage(page)" :ui="ui.nav.button"> <!-- eslint-disable-line -->
         {{ page }}
       </UiButton>
-      <UiButton :disabled="!canNavigateNext" @click="screener.actions.goToNextPage" :ui="ui.nav.button">Next</UiButton>
-      <UiButton :disabled="!canNavigateLast" @click="screener.actions.goToLastPage" :ui="ui.nav.button">Last</UiButton>
+      <UiButton
+        :disabled="!canNavigateNext"
+        @click="screener.actions.goToPage(props.screener.searchQuery.value.page + 1)"
+        :ui="ui.nav.button"
+        >Next</UiButton
+      >
+      <UiButton
+        :disabled="!canNavigateLast"
+        @click="screener.actions.goToPage(Math.ceil(totalPages / screener.searchQuery.value.rowsPerPage))"
+        :ui="ui.nav.button"
+        >Last</UiButton
+      >
     </div>
 
     <div
