@@ -18,13 +18,11 @@ export function isValidInput(data: unknown): data is Row[] {
  * @returns {Row[]} The normalised data.
  */
 export function convertToRows(data: Row[]): Row[] {
-  // If the input data is an array of arrays, convert it to an array of objects.
-  const transformedData = data.map((row) => (Array.isArray(row) ? { ...row } : row))
-
-  // Normalise each row into an array of normalised fields.
-  return transformedData.map((row: Row): Row => {
-    return { id: uuidv4(), data: row }
-  })
+  return data.map((row) => ({
+    id: uuidv4(),
+    // Handle both array and object inputs in one step
+    data: Array.isArray(row) ? Object.fromEntries(row.entries()) : row,
+  }))
 }
 
 /**
