@@ -1,6 +1,6 @@
 <template>
   <div :class="{ [ui.class]: true }" :style="style" ref="mainRef">
-    <slot :is-scrollable="isScrollable" :is-scrolled-end="isScrolledEnd" />
+    <slot :is-scrollable="hasHorizontalOverflow" :is-scrolled-end="isScrolledToRightEdge" />
   </div>
 </template>
 
@@ -34,5 +34,5 @@ const style = computed(() => {
   return { 'grid-template-columns': sizes.join(' ') }
 })
 
-const { ref: mainRef, isScrollable, isScrolledEnd } = useScrollable()
+const { ref: mainRef, hasHorizontalOverflow, isScrolledToRightEdge } = useScrollable()
 </script>
