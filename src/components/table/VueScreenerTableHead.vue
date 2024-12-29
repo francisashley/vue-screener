@@ -6,18 +6,19 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { twMerge } from '../../../utils/tailwind-merge.utils'
+import { twMerge } from '../../utils/tailwind-merge.utils'
 
-export type TableRowUI = {
+export type TableHeadUI = {
   class?: string
 }
 
 const props = defineProps<{
-  ui?: TableRowUI
+  ui?: TableHeadUI
 }>()
 
 const uiDefaults = {
-  class: 'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-border-b vsc-border-zinc-700 vsc-h-fit', // eslint-disable-line
+  class:
+    'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-font-bold vsc-border-b vsc-border-zinc-700 vsc-sticky vsc-top-0 vsc-h-fit',
 }
 
 const ui = computed(() => {

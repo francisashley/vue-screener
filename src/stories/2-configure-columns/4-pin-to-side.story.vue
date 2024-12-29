@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import { VueScreener, useVueScreener } from '../../index'
-import VueScreenerTableCell from '../../components/ui/table/VueScreenerTableCell.vue'
+import VueScreenerTableCell from '../../components/table/VueScreenerTableCell.vue'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 

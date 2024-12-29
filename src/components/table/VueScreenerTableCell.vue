@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { computed, defineProps } from 'vue'
-import { twMerge } from '../../../utils/tailwind-merge.utils'
+import { twMerge } from '../../utils/tailwind-merge.utils'
 
 export type TableCellUI = {
   class?: string

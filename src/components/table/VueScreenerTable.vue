@@ -6,9 +6,9 @@
 
 <script lang="ts" setup>
 import { computed, defineProps } from 'vue'
-import type { ColDef } from '../../../interfaces/screener'
-import { twMerge } from '../../../utils/tailwind-merge.utils'
-import { useScrollable } from '../../../hooks/use-scrollable'
+import type { ColDef } from '../../interfaces/screener'
+import { twMerge } from '../../utils/tailwind-merge.utils'
+import { useScrollable } from '../../hooks/use-scrollable'
 
 export type TableUI = {
   class?: string
