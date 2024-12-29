@@ -56,9 +56,9 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
   const searchQuery = ref<SearchQuery>({
     searchText: '', // Search text
     searchTextOptions: {
-      matchRegex: false, // Whether to match regex in search
-      matchCase: false, // Whether to match case in search
-      matchWord: false, // Whether to match whole word in search
+      regex: false, // Whether to match regex in search
+      caseSensitive: false, // Whether to match case in search
+      wholeWord: false, // Whether to match whole word in search
     },
     page: options.defaultCurrentPage ?? 1, // Current page number
     itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of rows per page
@@ -71,9 +71,9 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
       rows: allItems.value,
       columnDefs: columnDefs.value,
       searchText: searchQuery.value.searchText,
-      matchRegex: searchQuery.value.searchTextOptions.matchRegex,
-      matchCase: searchQuery.value.searchTextOptions.matchCase,
-      matchWord: searchQuery.value.searchTextOptions.matchWord,
+      regex: searchQuery.value.searchTextOptions.regex,
+      caseSensitive: searchQuery.value.searchTextOptions.caseSensitive,
+      wholeWord: searchQuery.value.searchTextOptions.wholeWord,
     })
   })
 

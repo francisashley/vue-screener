@@ -3,7 +3,7 @@
     type="text"
     :ui="ui"
     :value="screener.searchQuery.value.searchText"
-    :error="matchRegex && !isValidQuery"
+    :error="regex && !isValidQuery"
     placeholder="Search..."
     @keydown="onKeydown"
     @input="onInput"
@@ -37,8 +37,8 @@ const ui = computed(() => {
 const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)
 
-const matchRegex = computed<boolean>(() => {
-  return props.screener.searchQuery.value.searchTextOptions.matchRegex
+const regex = computed<boolean>(() => {
+  return props.screener.searchQuery.value.searchTextOptions.regex
 })
 
 const isValidQuery = computed((): boolean => {

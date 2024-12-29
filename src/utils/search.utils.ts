@@ -7,31 +7,31 @@ import { escapeRegExp } from './regex.utils'
  * @param {string} subject - The subject string to be searched.
  * @param {string} pattern - The search query pattern.
  * @param {string} options - The search options.
- * @param {boolean} options.matchCase - Whether to match the case.
- * @param {boolean} options.matchWord - Whether to match whole words.
- * @param {boolean} options.matchRegex - Whether to use regular expressions for the search.
+ * @param {boolean} options.caseSensitive - Whether to match the case.
+ * @param {boolean} options.wholeWord - Whether to match whole words.
+ * @param {boolean} options.regex - Whether to use regular expressions for the search.
  * @returns {boolean}
  */
 const testCriteria = (
   subject: string,
   pattern: string,
   options: {
-    matchCase: boolean
-    matchWord: boolean
-    matchRegex: boolean
+    caseSensitive: boolean
+    wholeWord: boolean
+    regex: boolean
   },
 ): boolean => {
-  const { matchCase = false, matchWord = false, matchRegex = false } = options
+  const { caseSensitive = false, wholeWord = false, regex = false } = options
 
-  if (!matchRegex) {
+  if (!regex) {
     pattern = escapeRegExp(pattern)
   }
 
-  if (matchWord) {
+  if (wholeWord) {
     pattern = `\\b(${pattern})\\b`
   }
 
-  const flags = matchCase ? 'g' : 'gi'
+  const flags = caseSensitive ? 'g' : 'gi'
 
   return new RegExp(pattern, flags).test(subject)
 }
@@ -99,18 +99,18 @@ const parseSearchText = (searchText: string) => {
  * @param {Object} options - The search options.
  * @param {Row[]} options.rows - The data to search.
  * @param {string} options.searchText - The search query string.
- * @param {boolean} options.matchRegex - Whether to use regular expressions for the search.
- * @param {boolean} options.matchCase - Whether to match the case.
- * @param {boolean} options.matchWord - Whether to match whole words.
+ * @param {boolean} options.regex - Whether to use regular expressions for the search.
+ * @param {boolean} options.caseSensitive - Whether to match the case.
+ * @param {boolean} options.wholeWord - Whether to match whole words.
  * @returns {Row[]} - The matched data.
  */
 export function search(options: {
   rows: Row[]
   columnDefs: ColDef[]
   searchText: string
-  matchRegex: boolean
-  matchCase: boolean
-  matchWord: boolean
+  regex: boolean
+  caseSensitive: boolean
+  wholeWord: boolean
 }): Row[] {
   const { searchText = '' } = options
 
@@ -120,16 +120,16 @@ export function search(options: {
   const { searchText: parsedSearchText, excludeFilters, includeFilters } = parseSearchText(searchText)
 
   // Get the search options.
-  const { rows, matchRegex = false, matchCase = false, matchWord = false } = options
+  const { rows, regex = false, caseSensitive = false, wholeWord = false } = options
 
   // Check if any of the filters match the item.
   const testExcludeFilters = (filters: [string, string][], row: Row): boolean => {
     return filters.some(([field, value]) => {
       if (row.data[field]) {
         return testCriteria(row.data[field].value as string, value, {
-          matchCase,
-          matchWord: true,
-          matchRegex,
+          caseSensitive,
+          wholeWord: true,
+          regex,
         })
       }
     })
@@ -139,9 +139,9 @@ export function search(options: {
     return filters.every(([field, value]) => {
       if (row.data[field]) {
         return testCriteria(row.data[field].value as string, value, {
-          matchCase,
-          matchWord: true,
-          matchRegex,
+          caseSensitive,
+          wholeWord: true,
+          regex,
         })
       }
     })
@@ -164,9 +164,9 @@ export function search(options: {
     meetsSearchCriteria = options.columnDefs.some((columnDef) => {
       if (
         testCriteria(String(columnDef.field ? item.data[columnDef.field] : ''), parsedSearchText, {
-          matchCase,
-          matchWord,
-          matchRegex,
+          caseSensitive,
+          wholeWord,
+          regex,
         })
       ) {
         return true

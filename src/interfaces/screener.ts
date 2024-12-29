@@ -32,9 +32,9 @@ export type UserPreferences = {
 }
 
 export type SearchTextOptions = {
-  matchCase: boolean
-  matchWord: boolean
-  matchRegex: boolean
+  caseSensitive: boolean
+  wholeWord: boolean
+  regex: boolean
 }
 
 export type SearchQuery = {
