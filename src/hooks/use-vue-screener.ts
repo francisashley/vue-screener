@@ -100,10 +100,10 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
 
   const columnsMap = computed<Record<PropertyKey, Column>>(() => {
     const userColumns = options.columns
-      ? Object.entries(options.columns).map(([field, column]) => createColumn({ field, label: field, ...column }))
+      ? Object.entries(options.columns).map(([field, column]) => createColumn({ field, ...column }))
       : []
 
-    const dataColumns = getFields(allRows.value).map((field) => createColumn({ field, label: field }))
+    const dataColumns = getFields(allRows.value).map((field) => createColumn({ field }))
 
     const additionalUserColumns = userColumns.filter(
       (userColumn) => !dataColumns.map((dataColumn) => dataColumn.field).includes(userColumn.field),
@@ -225,7 +225,7 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     queriedRows, // filtered data (after search query)
     paginatedRows, // paginated data (cut from queriedRows)
     hasError, // boolean indicating if the data is valid
-    columns, // columns (field, label, width, isPinned, isSortable, defaultSortDirection)s
+    columns, // columns (field, label, width, isPinned, isSortable, defaultSortDirection)
     dimensions, // screener dimensions
     actions, // actions
   }
