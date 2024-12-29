@@ -6,7 +6,7 @@
       :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
     >
-      <MatchCaseIcon :class="ui.toggleButton.icon.class" />
+      <CaseSensitiveIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
     <ToggleButton
       title="Match word"
@@ -14,7 +14,7 @@
       :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
     >
-      <MatchWordIcon :class="ui.toggleButton.icon.class" />
+      <WholeWordIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
     <ToggleButton
       title="Use regular expression"
@@ -22,7 +22,7 @@
       :ui="ui?.toggleButton"
       @click="toggleOption('match-regex')"
     >
-      <RegularExpressionIcon :class="ui.toggleButton.icon.class" />
+      <RegexIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
   </ToggleButtonGroup>
 </template>
@@ -30,9 +30,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { VueScreener } from '@/interfaces/screener'
-import MatchCaseIcon from '../icons/MaterialDesignMatchCase.vue'
-import MatchWordIcon from '../icons/MaterialDesignMatchWord.vue'
-import RegularExpressionIcon from '../icons/MaterialDesignRegularExpression.vue'
+import { CaseSensitiveIcon, RegexIcon, WholeWordIcon } from 'lucide-vue-next'
 import ToggleButtonGroup from '../ui/toggle-button/ToggleButtonGroup.vue'
 import ToggleButton, { ToggleButtonUI } from '../ui/toggle-button/ToggleButton.vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'

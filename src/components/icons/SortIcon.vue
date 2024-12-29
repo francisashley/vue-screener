@@ -1,21 +1,21 @@
 <template>
-  <remix-sort-desc-icon
     :class="{
       [ui.class]: true,
       [ui.ascClass]: direction === 'asc',
     }"
+  <ArrowDown
   />
 </template>
 
 <script lang="ts" setup>
 import { computed, defineProps } from 'vue'
-import RemixSortDescIcon from '../icons/RemixSortDescIcon.vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 
 export type SortIconUI = {
   class?: string
   ascClass?: string
 }
+import { ArrowDown } from 'lucide-vue-next'
 
 const props = defineProps<{
   direction?: null | 'asc' | 'desc'
