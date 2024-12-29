@@ -13,9 +13,9 @@ import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData, {
   editable: true,
-  defaultItemsPerPage: 20,
+  defaultRowsPerPage: 20,
   onCellChanged: (event) => console.log('CellChangedEvent >>>', event),
-  onItemChanged: (event) => console.log('ItemChangedEvent >>>', event),
-  onChanged: (event) => console.log('ChangedEvent >>>', event),
+  onRowChanged: (event) => console.log('RowChangedEvent >>>', event),
+  onDataChanged: (event) => console.log('DataChangedEvent >>>', event),
 })
 </script>

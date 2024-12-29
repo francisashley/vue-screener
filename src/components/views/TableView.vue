@@ -40,7 +40,7 @@
           </slot>
         </template>
       </VueScreenerTableHead>
-      <template v-for="(item, _i) in screener.paginatedItems.value" :key="_i">
+      <template v-for="(item, _i) in screener.paginatedRows.value" :key="_i">
         <VueScreenerTableRow :ui="ui.table.row">
           <template v-for="(column, _j) in screener.columns.value" :key="_j">
             <slot

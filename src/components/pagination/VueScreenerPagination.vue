@@ -5,9 +5,9 @@
         [ui.leftSide.class]: true,
       }"
     >
-      <template v-if="!screener.queriedItems.value.length">Showing 0 results</template>
+      <template v-if="!screener.queriedRows.value.length">Showing 0 results</template>
       <template v-else>
-        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.queriedItems.value.length }}
+        Showing {{ firstIndexOfCurrentPage }}-{{ lastIndexOfCurrentPage }} of {{ screener.queriedRows.value.length }}
       </template>
     </div>
 
@@ -28,10 +28,10 @@
     >
       <UiInput
         type="number"
-        :value="screener.searchQuery.value.itemsPerPage"
+        :value="screener.searchQuery.value.rowsPerPage"
         min="1"
         step="1"
-        @input="handleChangeItemsPerPage"
+        @input="handleChangerowsPerPage"
         :ui="ui.rightSide.perPageInput"
       />
     </div>
@@ -91,7 +91,7 @@ const ui = computed(() => {
 })
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.screener.queriedItems.value.length / props.screener.searchQuery.value.itemsPerPage) || 0
+  return Math.ceil(props.screener.queriedRows.value.length / props.screener.searchQuery.value.rowsPerPage) || 0
 })
 
 const getPages = computed(() => {
@@ -133,16 +133,16 @@ const canNavigateLast = computed(() => {
 
 const firstIndexOfCurrentPage = computed(() => {
   return (
-    props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage -
-    props.screener.searchQuery.value.itemsPerPage +
+    props.screener.searchQuery.value.page * props.screener.searchQuery.value.rowsPerPage -
+    props.screener.searchQuery.value.rowsPerPage +
     1
   )
 })
 
 const lastIndexOfCurrentPage = computed(() => {
-  return props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage > props.screener.queriedItems.value.length // eslint-disable-line
-    ? props.screener.queriedItems.value.length
-    : props.screener.searchQuery.value.page * props.screener.searchQuery.value.itemsPerPage
+  return props.screener.searchQuery.value.page * props.screener.searchQuery.value.rowsPerPage > props.screener.queriedRows.value.length // eslint-disable-line
+    ? props.screener.queriedRows.value.length
+    : props.screener.searchQuery.value.page * props.screener.searchQuery.value.rowsPerPage
 })
 
 const currentPageIsInRange = computed((): boolean => {
@@ -154,7 +154,7 @@ onMounted(() => {
 })
 
 watch(
-  () => props.screener.queriedItems.value.length,
+  () => props.screener.queriedRows.value.length,
   () => ensureCurrentPageIsValid(),
 )
 
@@ -168,7 +168,7 @@ const ensureCurrentPageIsValid = (): void => {
   }
 }
 
-const handleChangeItemsPerPage = (event: Event): void => {
-  props.screener.actions.search({ itemsPerPage: Number((event.target as HTMLInputElement).value) })
+const handleChangerowsPerPage = (event: Event): void => {
+  props.screener.actions.search({ rowsPerPage: Number((event.target as HTMLInputElement).value) })
 }
 </script>

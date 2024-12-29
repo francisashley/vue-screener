@@ -16,7 +16,7 @@
         :value="columnDef.field"
       />
     </SpreadsheetRow>
-    <SpreadsheetRow v-for="(item, ri) in screener.paginatedItems.value" :key="ri" :class="ui.row.class">
+    <SpreadsheetRow v-for="(item, ri) in screener.paginatedRows.value" :key="ri" :class="ui.row.class">
       <!-- // Row index -->
       <SpreadsheetCell is-header :point="[ri, -1]" :value="ri" />
       <SpreadsheetCell
@@ -33,7 +33,7 @@
         @select-next="actions.moveSelectionNext([ri, ci])"
         @select-prev="actions.moveSelectionPrev([ri, ci])"
         @clear="actions.deleteCell([ri, ci])"
-        @update="screener.actions.updateItem(item.id, { [columnDef.field]: $event })"
+        @update="screener.actions.updateRow(item.id, { [columnDef.field]: $event })"
       />
     </SpreadsheetRow>
   </div>
@@ -120,7 +120,7 @@ const actions = {
     }
   },
   moveSelectionDown: (point: Point) => {
-    if (point[0] < props.screener.paginatedItems.value.length - 1) {
+    if (point[0] < props.screener.paginatedRows.value.length - 1) {
       activeCell.value = [point[0] + 1, point[1]]
     }
   },
@@ -130,9 +130,9 @@ const actions = {
     }
   },
   deleteCell: (point: Point) => {
-    const selectedItem = props.screener.paginatedItems.value[point[0]]
+    const selectedItem = props.screener.paginatedRows.value[point[0]]
     const selectedField = props.screener.columns.value[point[1]].field
-    props.screener.actions.updateItem(selectedItem.id, { [selectedField]: null })
+    props.screener.actions.updateRow(selectedItem.id, { [selectedField]: null })
   },
 }
 

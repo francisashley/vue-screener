@@ -1,5 +1,5 @@
-import { Column, Item, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/vue-screener'
-import { createColumnDef, getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
+import { Column, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/vue-screener'
+import { createColumn, getFields, getPaginated, isValidInput, convertToRows, sortRows } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 
@@ -7,25 +7,25 @@ type CellChangedEvent = {
   newValue: any
   oldValue: any
   column: Column
-  item: Item
+  row: Row
 }
 
-type ItemChangedEvent = {
-  newItem: Item
-  oldItem: Item
+type RowChangedEvent = {
+  newRow: Row
+  oldRow: Row
   updatedCells: CellChangedEvent[]
 }
 
-type ChangedEvent = {
-  newData: Item[]
-  oldData: Item[]
-  updatedItem: ItemChangedEvent
+type DataChangedEvent = {
+  newData: Row[]
+  oldData: Row[]
+  updatedRow: RowChangedEvent
 }
 
 type ScreenerOptions = {
   height?: string // a css height
   defaultCurrentPage?: number
-  defaultItemsPerPage?: number
+  defaultRowsPerPage?: number
   defaultSortField?: string
   defaultSortDirection?: 'asc' | 'desc'
   columns?: Record<PropertyKey, Partial<Column>>
@@ -33,8 +33,8 @@ type ScreenerOptions = {
   editable?: boolean
   loading?: boolean
   onCellChanged?: (event: CellChangedEvent) => void
-  onItemChanged?: (event: ItemChangedEvent) => void
-  onChanged?: (event: ChangedEvent) => void
+  onRowChanged?: (event: RowChangedEvent) => void
+  onDataChanged?: (event: DataChangedEvent) => void
 }
 export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = {}): VueScreener => {
   // User preferences
@@ -49,7 +49,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
   const dimensions = ref<{ width: number; height: number } | null>(null)
 
   // Data storage
-  const allItems = ref<Row[]>(isValidInput(inputData) ? normaliseInput(inputData) : [])
+  const allRows = ref<Row[]>(isValidInput(inputData) ? convertToRows(inputData) : [])
   const hasError = computed((): boolean => !isValidInput(inputData))
 
   // Search query config
@@ -59,14 +59,14 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     caseSensitive: false, // Whether to match case in search
     wholeWord: false, // Whether to match whole word in search
     page: options.defaultCurrentPage ?? 1, // Current page number
-    itemsPerPage: options.defaultItemsPerPage ?? 25, // Number of rows per page
+    rowsPerPage: options.defaultRowsPerPage ?? 25, // Number of rows per page
     sortField: options.defaultSortField ?? null, // Field to sort by
     sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
   })
 
-  const queriedItems = computed((): Row[] => {
+  const queriedRows = computed((): Row[] => {
     return search({
-      rows: allItems.value,
+      rows: allRows.value,
       columns: columns.value,
       text: searchQuery.value.text,
       regex: searchQuery.value.regex,
@@ -75,35 +75,35 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     })
   })
 
-  const sortedItems = computed((): Row[] => {
-    const sortedItems = searchQuery.value.text ? queriedItems.value : allItems.value
+  const sortedRows = computed((): Row[] => {
+    const sortedRows = searchQuery.value.text ? queriedRows.value : allRows.value
 
     const _sortField = searchQuery.value.sortField
 
     if (_sortField && searchQuery.value.sortDirection) {
-      return sortItems(sortedItems, {
+      return sortRows(sortedRows, {
         sortField: _sortField,
         sortDirection: searchQuery.value.sortDirection,
       })
     } else {
-      return sortedItems
+      return sortedRows
     }
   })
 
-  const paginatedItems = computed((): Row[] => {
+  const paginatedRows = computed((): Row[] => {
     return getPaginated({
-      rows: sortedItems.value,
+      rows: sortedRows.value,
       page: searchQuery.value.page - 1,
-      itemsPerPage: searchQuery.value.itemsPerPage,
+      rowsPerPage: searchQuery.value.rowsPerPage,
     })
   })
 
   const columnsMap = computed<Record<PropertyKey, Column>>(() => {
     const userColumns = options.columns
-      ? Object.entries(options.columns).map(([field, column]) => createColumnDef({ field, label: field, ...column }))
+      ? Object.entries(options.columns).map(([field, column]) => createColumn({ field, label: field, ...column }))
       : []
 
-    const dataColumns = getFields(allItems.value).map((field) => createColumnDef({ field, label: field }))
+    const dataColumns = getFields(allRows.value).map((field) => createColumn({ field, label: field }))
 
     const additionalUserColumns = userColumns.filter(
       (userColumn) => !dataColumns.map((dataColumn) => dataColumn.field).includes(userColumn.field),
@@ -155,69 +155,69 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
   const actions = {
     search: (_searchQuery?: Partial<SearchQuery>) => (searchQuery.value = { ...searchQuery.value, ..._searchQuery }),
     sort: (field: string | number) => {
-      const columnDef = columns.value.find((columns) => columns.field === field)
+      const column = columns.value.find((columns) => columns.field === field)
       searchQuery.value.sortDirection =
         searchQuery.value.sortField === field
           ? searchQuery.value.sortDirection === 'desc'
             ? 'asc'
             : 'desc'
-          : columnDef?.defaultSortDirection || searchQuery.value.sortDirection
+          : column?.defaultSortDirection || searchQuery.value.sortDirection
 
       searchQuery.value.sortField = field
     },
     goToFirstPage: () => actions.search({ page: 1 }),
     goToPrevPage: () => actions.search({ page: Math.max(searchQuery.value.page - 1, 1) }),
     goToPage: (page: number) => actions.search({ page }),
-    goToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
-    goToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
+    goToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allRows.value.length / searchQuery.value.rowsPerPage)) }), // eslint-disable-line
+    goToLastPage: () => actions.search({ page: Math.ceil(allRows.value.length / searchQuery.value.rowsPerPage) }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
-    setData: (inputData: unknown) => (allItems.value = isValidInput(inputData) ? normaliseInput(inputData) : []),
-    updateItem: (id: string, partialData: Record<PropertyKey, any>) => {
+    setData: (inputData: unknown) => (allRows.value = isValidInput(inputData) ? convertToRows(inputData) : []),
+    updateRow: (id: string, partialData: Record<PropertyKey, any>) => {
       let cellChanges: CellChangedEvent[] = []
-      let itemChanges: ItemChangedEvent | null = null
+      let rowChanges: RowChangedEvent | null = null
 
-      const updatedItems = allItems.value.map((item) => {
-        if (id === item.id) {
-          const updatedItem = { ...item.data, ...partialData }
+      const updatedRows = allRows.value.map((row) => {
+        if (id === row.id) {
+          const updatedRow = { ...row.data, ...partialData }
 
           cellChanges = Object.keys(partialData).map((key) => {
-            const columnDef = columns.value.find((columns) => columns.field === key)
+            const column = columns.value.find((columns) => columns.field === key)
             return {
               newValue: partialData[key],
-              oldValue: item.data[key],
-              column: columnDef as Column,
-              item,
+              oldValue: row.data[key],
+              column: column as Column,
+              row,
             }
           })
 
-          itemChanges = {
-            newItem: updatedItem,
-            oldItem: item.data,
+          rowChanges = {
+            newRow: updatedRow,
+            oldRow: row.data,
             updatedCells: cellChanges,
           }
 
-          return { ...item, data: updatedItem }
+          return { ...row, data: updatedRow }
         }
-        return item
+        return row
       })
 
       if (options.onCellChanged) {
         cellChanges.forEach(options.onCellChanged)
       }
 
-      if (options.onItemChanged && itemChanges) {
-        options.onItemChanged(itemChanges)
+      if (options.onRowChanged && rowChanges) {
+        options.onRowChanged(rowChanges)
       }
 
-      if (options.onChanged && itemChanges) {
-        options.onChanged({
-          newData: updatedItems.map((item) => item.data),
-          oldData: allItems.value.map((item) => item.data),
-          updatedItem: itemChanges,
+      if (options.onDataChanged && rowChanges) {
+        options.onDataChanged({
+          newData: updatedRows.map((row) => row.data),
+          oldData: allRows.value.map((row) => row.data),
+          updatedRow: rowChanges,
         })
       }
 
-      allItems.value = updatedItems
+      allRows.value = updatedRows
     },
     setLoading: (loading: boolean) => (preferences.value.loading = loading),
   }
@@ -225,9 +225,9 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
   return {
     preferences, // user preferences
     searchQuery, // search options (text, pagination, sort)
-    allItems, // all data
-    queriedItems, // filtered data (after search query)
-    paginatedItems, // paginated data (cut from queriedItems)
+    allRows, // all data
+    queriedRows, // filtered data (after search query)
+    paginatedRows, // paginated data (cut from queriedRows)
     hasError, // boolean indicating if the data is valid
     columns, // columns (field, label, width, isSticky, isSortable, defaultSortDirection)s
     dimensions, // screener dimensions

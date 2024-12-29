@@ -4,9 +4,9 @@ export type VueScreener = {
   preferences: Ref<UserPreferences>
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
-  allItems: Ref<Row[]>
-  queriedItems: ComputedRef<Row[]>
-  paginatedItems: ComputedRef<Row[]>
+  allRows: Ref<Row[]>
+  queriedRows: ComputedRef<Row[]>
+  paginatedRows: ComputedRef<Row[]>
   columns: ComputedRef<Column[]>
   dimensions: Ref<{ width: number; height: number } | null>
   actions: {
@@ -19,7 +19,7 @@ export type VueScreener = {
     goToLastPage: () => void
     setDimensions: (dimensions: { height: number; width: number } | null) => void
     setData: (inputData: unknown[]) => void
-    updateItem: (id: string, partialData: Record<PropertyKey, any>) => void
+    updateRow: (id: string, partialData: Record<PropertyKey, any>) => void
     setLoading: (loading: boolean) => void
   }
 }
@@ -39,7 +39,7 @@ export type SearchQuery = {
   regex: boolean
   // scope
   page: number
-  itemsPerPage: number
+  rowsPerPage: number
   // sort
   sortField: string | number | null
   sortDirection: 'asc' | 'desc'
@@ -59,12 +59,8 @@ export type Column = {
 }
 
 export type Row = {
-  id: string // A unique identifier for internal tracking and updating of the item.
-  data: Item // The original data for the item.
-}
-
-export interface Item {
-  [key: string | number]: any
+  id: string // A unique identifier for internal tracking and updating of the row.
+  data: { [key: string | number]: any } // The original data for the row.
 }
 
 export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'

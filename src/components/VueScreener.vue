@@ -71,7 +71,7 @@ const view = computed<'bad-data' | 'loading' | 'no-data' | 'spreadsheet' | 'tabl
   if (props.screener.preferences.value.loading) return 'loading'
   if (props.screener.hasError.value) return 'bad-data'
   if (props.screener.preferences.value.editable) return 'spreadsheet'
-  if (!props.screener.allItems.value.length) return 'no-data'
+  if (!props.screener.allRows.value.length) return 'no-data'
   return 'table'
 })
 

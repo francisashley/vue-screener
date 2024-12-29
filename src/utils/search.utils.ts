@@ -49,7 +49,7 @@ const testCriteria = (
  *   excludeFilters: [field: string, value: string][]
  * }} - Parsed search query, include filters, and exclude filters.
  */
-const parseText = (text: string) => {
+const parseSearchText = (text: string) => {
   const excludeFilters: [field: string, value: string][] = []
   // get exclude filters that look like: field:value
   text = text.replace(/(?<!\w)-\w+:\w+/g, (match) => {
@@ -117,7 +117,7 @@ export function search(options: {
   if (!text) return options.rows
 
   // Parse search query and extract filters.
-  const { text: parsedText, excludeFilters, includeFilters } = parseText(text)
+  const { text: parsedText, excludeFilters, includeFilters } = parseSearchText(text)
 
   // Get the search options.
   const { rows, regex = false, caseSensitive = false, wholeWord = false } = options
@@ -161,9 +161,9 @@ export function search(options: {
       shouldInclude = false
     }
 
-    meetsSearchCriteria = options.columns.some((columnDef) => {
+    meetsSearchCriteria = options.columns.some((column) => {
       if (
-        testCriteria(String(columnDef.field ? item.data[columnDef.field] : ''), parsedText, {
+        testCriteria(String(column.field ? row.data[column.field] : ''), parsedText, {
           caseSensitive,
           wholeWord,
           regex,
