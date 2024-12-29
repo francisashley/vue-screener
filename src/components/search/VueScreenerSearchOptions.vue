@@ -30,12 +30,12 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { VueScreener } from '@/interfaces/screener'
-import MatchCaseIcon from './icons/MaterialDesignMatchCase.vue'
-import MatchWordIcon from './icons/MaterialDesignMatchWord.vue'
-import RegularExpressionIcon from './icons/MaterialDesignRegularExpression.vue'
-import ToggleButtonGroup from './ui/toggle-button/ToggleButtonGroup.vue'
-import ToggleButton, { ToggleButtonUI } from './ui/toggle-button/ToggleButton.vue'
-import { twMerge } from '../utils/tailwind-merge.utils'
+import MatchCaseIcon from '../icons/MaterialDesignMatchCase.vue'
+import MatchWordIcon from '../icons/MaterialDesignMatchWord.vue'
+import RegularExpressionIcon from '../icons/MaterialDesignRegularExpression.vue'
+import ToggleButtonGroup from '../ui/toggle-button/ToggleButtonGroup.vue'
+import ToggleButton, { ToggleButtonUI } from '../ui/toggle-button/ToggleButton.vue'
+import { twMerge } from '../../utils/tailwind-merge.utils'
 
 export type VueScreenerSearchOptionsUI = {
   class?: string
