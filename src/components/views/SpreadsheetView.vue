@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import type { VueScreener } from '../../interfaces/screener'
+import type { VueScreener } from '../../interfaces/vue-screener'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import SpreadsheetCell from '../ui/spreadsheet/SpreadsheetCell.vue'
 import SpreadsheetRow from '../ui/spreadsheet/SpreadsheetRow.vue'

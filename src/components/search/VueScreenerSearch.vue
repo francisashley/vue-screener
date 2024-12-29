@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from '@/interfaces/screener'
+import { VueScreener } from '@/interfaces/vue-screener'
 import { computed, ref } from 'vue'
 import { isValidRegExp } from '../../utils/regex.utils'
 import UiInput, { InputUI } from '../ui/input/Input.vue'

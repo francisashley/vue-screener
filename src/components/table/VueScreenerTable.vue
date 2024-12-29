@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { computed, defineProps } from 'vue'
-import type { ColDef } from '../../interfaces/screener'
+import type { ColDef } from '../../interfaces/vue-screener'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import { useScrollable } from '../../hooks/use-scrollable'
 

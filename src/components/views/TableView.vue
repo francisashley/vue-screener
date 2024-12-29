@@ -78,7 +78,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import type { VueScreener, ColDef } from '../../interfaces/screener'
+import type { VueScreener, ColDef } from '../../interfaces/vue-screener'
 import VueScreenerTableRow, { TableRowUI } from '../table/VueScreenerTableRow.vue'
 import VueScreenerTableCell, { TableCellUI } from '../table/VueScreenerTableCell.vue'
 import VueScreenerTable, { TableUI } from '../table/VueScreenerTable.vue'

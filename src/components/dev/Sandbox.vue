@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { VueScreenerPagination } from '../../index'
-import { VueScreener } from '../../interfaces/screener'
+import { VueScreener } from '../../interfaces/vue-screener'
 import { VueScreenerSearch, VueScreenerSearchOptions } from '../../index'
 
 defineProps<{

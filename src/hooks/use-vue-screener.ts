@@ -1,4 +1,4 @@
-import { ColDef, Item, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/screener'
+import { ColDef, Item, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/vue-screener'
 import { createColumnDef, getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'

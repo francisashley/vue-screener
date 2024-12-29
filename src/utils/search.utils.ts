@@ -1,4 +1,4 @@
-import { Row, ColDef } from '@/interfaces/screener'
+import { Row, ColDef } from '@/interfaces/vue-screener'
 import { escapeRegExp } from './regex.utils'
 
 /**

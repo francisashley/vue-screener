@@ -29,7 +29,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { VueScreener } from '@/interfaces/screener'
+import { VueScreener } from '@/interfaces/vue-screener'
 import { CaseSensitiveIcon, RegexIcon, WholeWordIcon } from 'lucide-vue-next'
 import ToggleButtonGroup from '../ui/toggle-button/ToggleButtonGroup.vue'
 import ToggleButton, { ToggleButtonUI } from '../ui/toggle-button/ToggleButton.vue'

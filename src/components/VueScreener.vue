@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { VueScreener } from '../interfaces/screener'
+import type { VueScreener } from '../interfaces/vue-screener'
 import { useElementSize } from '../hooks/use-element-size'
 import { computed, ref } from 'vue'
 import TableView, { TableViewUI } from './views/TableView.vue'

@@ -1,4 +1,4 @@
-import { DataType, Row, Item, ColDef } from '@/interfaces/screener'
+import { DataType, Row, Item, ColDef } from '@/interfaces/vue-screener'
 import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
