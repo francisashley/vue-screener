@@ -1,7 +1,7 @@
 <template>
   <ToggleButtonGroup :ui="ui">
     <ToggleButton
-      title="Match case"
+      title="Case sensitive"
       :active="props.screener.searchQuery.value.caseSensitive"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-case')"
@@ -9,7 +9,7 @@
       <CaseSensitiveIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
     <ToggleButton
-      title="Match word"
+      title="Whole word"
       :active="props.screener.searchQuery.value.wholeWord"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-word')"
@@ -17,7 +17,7 @@
       <WholeWordIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
     <ToggleButton
-      title="Use regular expression"
+      title="Regular expression"
       :active="props.screener.searchQuery.value.regex"
       :ui="ui?.toggleButton"
       @click="toggleOption('match-regex')"
