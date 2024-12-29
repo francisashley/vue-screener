@@ -187,8 +187,8 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
           })
 
           rowChanges = {
-            newRow: updatedRow,
-            oldRow: row.data,
+            newRow: updatedRow.data,
+            oldRow: row.data.data,
             updatedCells: cellChanges,
           }
 
@@ -207,8 +207,8 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
 
       if (options.onDataChanged && rowChanges) {
         options.onDataChanged({
-          newData: updatedRows.map((row) => row.data),
-          oldData: allRows.value.map((row) => row.data),
+          newData: updatedRows.map((row) => row.data.data),
+          oldData: allRows.value.map((row) => row.data.data),
           updatedRow: rowChanges,
         })
       }
