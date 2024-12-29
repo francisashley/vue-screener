@@ -45,7 +45,7 @@ export function getFields(rows: Row[]): string[] {
 export const createColumn = (column: Partial<Column>): Column => ({
   field: '',
   label: '',
-  isSticky: false,
+  isPinned: false,
   isSortable: true,
   defaultSortDirection: 'desc',
   width: 'auto',

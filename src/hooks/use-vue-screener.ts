@@ -229,7 +229,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     queriedRows, // filtered data (after search query)
     paginatedRows, // paginated data (cut from queriedRows)
     hasError, // boolean indicating if the data is valid
-    columns, // columns (field, label, width, isSticky, isSortable, defaultSortDirection)s
+    columns, // columns (field, label, width, isPinned, isSortable, defaultSortDirection)s
     dimensions, // screener dimensions
     actions, // actions
   }

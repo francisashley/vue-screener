@@ -3,10 +3,10 @@
     <DevSandbox title="Results" :screener="screener">
       <VueScreener :screener="screener" :style="{ marginBottom: '12px' }">
         <template #header-cell="props">
-          <VueScreenerTableCell v-if="props.column.isSticky" v-bind="props">Actions</VueScreenerTableCell>
+          <VueScreenerTableCell v-if="props.column.isPinned" v-bind="props">Actions</VueScreenerTableCell>
         </template>
         <template #body-cell="props">
-          <VueScreenerTableCell v-if="props.column.isSticky" v-bind="props">
+          <VueScreenerTableCell v-if="props.column.isPinned" v-bind="props">
             <div :style="{ display: 'flex', gap: '5px', padding: '3px 0' }">
               <button
                 @click="handleClickEdit(props.item)"
@@ -39,7 +39,7 @@ const handleClickDelete = (item: unknown) => console.log('delete', item)
 
 const screener = useVueScreener(baseData, {
   columns: {
-    actions: { isSticky: true },
+    actions: { isPinned: true },
   },
 })
 </script>

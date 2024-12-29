@@ -49,7 +49,7 @@ export type Column = {
   field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
   label: string | number // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
-  isSticky: boolean // Flag indicating if the field is sticky.
+  isPinned: boolean // Flag indicating if the field is pinned.
   isSortable: boolean // Flag indicating if the field is sortable.
   defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
   order: number // The order of the column in the table.

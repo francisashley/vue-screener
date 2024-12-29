@@ -8,8 +8,8 @@
             name="header-cell"
             :column="column"
             :value="column.field"
-            :is-sticky="column.isSticky"
-            :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
+            :is-pinned="column.isPinned"
+            :is-pinned-overlapping="column.isPinned && isScrollable && !isScrolledEnd"
             :ui="ui.table.header.cell"
             :class="{
               [ui.table.header?.cell.sortableClass]: column.isSortable,
@@ -19,8 +19,8 @@
           >
             <VueScreenerTableCell
               :value="column.field"
-              :is-sticky="column.isSticky"
-              :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
+              :is-pinned="column.isPinned"
+              :is-pinned-overlapping="column.isPinned && isScrollable && !isScrolledEnd"
               :ui="ui.table.header.cell"
               :class="{
                 [ui.table.header?.cell.sortableClass]: column.isSortable,
@@ -47,8 +47,8 @@
               name="body-cell"
               :column="column"
               :value="column.field"
-              :is-sticky="column.isSticky"
-              :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
+              :is-pinned="column.isPinned"
+              :is-pinned-overlapping="column.isPinned && isScrollable && !isScrolledEnd"
               :item="item"
               :ui="ui.table.row?.cell"
               :highlight-matches="highlightMatches"
@@ -57,8 +57,8 @@
               <VueScreenerTableCell
                 :column="column"
                 :value="column.field"
-                :is-sticky="column.isSticky"
-                :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
+                :is-pinned="column.isPinned"
+                :is-pinned-overlapping="column.isPinned && isScrollable && !isScrolledEnd"
                 :item="item"
                 :ui="ui.table.row?.cell"
                 :highlight-matches="highlightMatches"

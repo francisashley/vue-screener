@@ -73,7 +73,7 @@ Omit fields:
 </template>
 ```
 
-Add a sticky column on the right to put stuff in.
+Add a pinned column on the right to put stuff in.
 
 ```vue
 <template>
@@ -83,12 +83,12 @@ Add a sticky column on the right to put stuff in.
       { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true }
     ]"
     :columns="{
-      action: { field: 'action', isSticky: true }
+      action: { field: 'action', isPinned: true }
     }"
     :pick=""
   >
     <template #head="props">
-      <Head v-if="props.column.isSticky" v-bind="props">Actions</Head>
+      <Head v-if="props.column.isPinned" v-bind="props">Actions</Head>
     </template>
     <template #data="props">
       <Data v-if="props.column.field === 'action'" v-bind="props">

@@ -4,7 +4,7 @@
       [ui.class]: true,
       [ui.isFirstClass]: isFirst,
       [ui.isLastClass]: isLast,
-      [ui.isStickyClass]: isSticky,
+      [ui.isStickyClass]: isPinned,
       [ui.isStickyOverlappingClass]: isStickyOverlapping,
     }"
   >
@@ -27,7 +27,7 @@ export type TableCellUI = {
 const props = defineProps<{
   isFirst?: boolean
   isLast?: boolean
-  isSticky?: boolean
+  isPinned?: boolean
   isStickyOverlapping?: boolean
   ui?: TableCellUI
 }>()
