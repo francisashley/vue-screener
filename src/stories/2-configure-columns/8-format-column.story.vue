@@ -1,13 +1,13 @@
 <template>
   <Story title="9. Format column" source="-">
     <DevSandbox title="Results" :screener="screener">
-      <Screener :screener="screener" />
+      <VueScreener :screener="screener" />
     </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, useVueScreener } from '../../index'
+import { VueScreener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 

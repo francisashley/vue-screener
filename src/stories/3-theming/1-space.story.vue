@@ -23,7 +23,7 @@
           />
         </div>
       </div>
-      <Screener
+      <VueScreener
         :screener="screener"
         class="vsc-mb-4"
         :ui="{
@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useVueScreener } from '../../index'
+import { VueScreener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData)

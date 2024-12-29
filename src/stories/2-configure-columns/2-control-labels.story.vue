@@ -1,21 +1,21 @@
 <template>
   <Story title="2. Control labels" source="-">
     <DevSandbox title="Results" :screener="screener1">
-      <Screener :screener="screener1" />
+      <VueScreener :screener="screener1" />
     </DevSandbox>
     <br />
     <DevSandbox title="Results" :screener="screener2">
-      <Screener :screener="screener2" />
+      <VueScreener :screener="screener2" />
     </DevSandbox>
     <br />
     <DevSandbox title="Results" :screener="screener3">
-      <Screener :screener="screener3" />
+      <VueScreener :screener="screener3" />
     </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, useVueScreener } from '../../index'
+import { VueScreener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'

@@ -77,7 +77,7 @@ Add a sticky column on the right to put stuff in.
 
 ```vue
 <template>
-  <Screener
+  <VueScreener
     :data="[
       { category: 'Technology', product: 'Laptop', price: '£799', inStock: true },
       { category: 'Clothing', product: 'Sneakers', price: '£60', inStock: true }

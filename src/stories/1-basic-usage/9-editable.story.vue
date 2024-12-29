@@ -1,13 +1,13 @@
 <template>
   <Story title="9. Editable" source="-">
     <DevSandbox title="Editable" :screener="screener" can-toggle-editable>
-      <Screener :screener="screener" />
+      <VueScreener :screener="screener" />
     </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, useVueScreener } from '../../index'
+import { VueScreener, useVueScreener } from '../../index'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 import baseData from '../../fixtures/data.json'
 

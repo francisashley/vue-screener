@@ -23,7 +23,7 @@
           />
         </div>
       </div>
-      <Screener
+      <VueScreener
         :screener="screener"
         :ui="{
           tableView: {
@@ -73,7 +73,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useVueScreener } from '../../index'
+import { VueScreener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData, {

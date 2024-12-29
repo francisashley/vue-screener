@@ -1,7 +1,7 @@
 <template>
   <Story title="4. Stick to the side" source="-">
     <DevSandbox title="Results" :screener="screener">
-      <Screener :screener="screener" :style="{ marginBottom: '12px' }">
+      <VueScreener :screener="screener" :style="{ marginBottom: '12px' }">
         <template #table-head="props">
           <TableCell v-if="props.column.isSticky" v-bind="props">Actions</TableCell>
         </template>
@@ -23,13 +23,13 @@
             </div>
           </TableCell>
         </template>
-      </Screener>
+      </VueScreener>
     </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, useVueScreener } from '../../index'
+import { VueScreener, useVueScreener } from '../../index'
 import TableCell from '../../components/ui/table/TableCell.vue'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'

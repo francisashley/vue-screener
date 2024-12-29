@@ -1,15 +1,15 @@
 <template>
   <Story title="1. Control widths" source="-">
     <DevSandbox title="Results" :screener="screener1">
-      <Screener :screener="screener1" />
+      <VueScreener :screener="screener1" />
     </DevSandbox>
     <br />
     <DevSandbox title="Results" :screener="screener2">
-      <Screener :screener="screener2" />
+      <VueScreener :screener="screener2" />
     </DevSandbox>
     <br />
     <DevSandbox title="Results" :screener="screener3">
-      <Screener :screener="screener3" />
+      <VueScreener :screener="screener3" />
     </DevSandbox>
   </Story>
 </template>
