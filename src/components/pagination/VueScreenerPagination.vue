@@ -12,13 +12,13 @@
     </div>
 
     <div :class="{ [ui.nav.class]: true }">
-      <UiButton :disabled="!canNavigateFirst" @click="screener.actions.navToFirstPage" :ui="ui.nav.button">First</UiButton> <!-- eslint-disable-line -->
-      <UiButton :disabled="!canNavigatePrev" @click="screener.actions.navToPrevPage" :ui="ui.nav.button">Prev</UiButton>
-      <UiButton v-for="page in getPages" :key="page" :active="isActive(page)" @click="screener.actions.navToPage(page)" :ui="ui.nav.button"> <!-- eslint-disable-line -->
+      <UiButton :disabled="!canNavigateFirst" @click="screener.actions.goToFirstPage" :ui="ui.nav.button">First</UiButton> <!-- eslint-disable-line -->
+      <UiButton :disabled="!canNavigatePrev" @click="screener.actions.goToPrevPage" :ui="ui.nav.button">Prev</UiButton>
+      <UiButton v-for="page in getPages" :key="page" :active="isActive(page)" @click="screener.actions.goToPage(page)" :ui="ui.nav.button"> <!-- eslint-disable-line -->
         {{ page }}
       </UiButton>
-      <UiButton :disabled="!canNavigateNext" @click="screener.actions.navToNextPage" :ui="ui.nav.button">Next</UiButton>
-      <UiButton :disabled="!canNavigateLast" @click="screener.actions.navToLastPage" :ui="ui.nav.button">Last</UiButton>
+      <UiButton :disabled="!canNavigateNext" @click="screener.actions.goToNextPage" :ui="ui.nav.button">Next</UiButton>
+      <UiButton :disabled="!canNavigateLast" @click="screener.actions.goToLastPage" :ui="ui.nav.button">Last</UiButton>
     </div>
 
     <div
@@ -164,7 +164,7 @@ const isActive = (page: number): boolean => {
 
 const ensureCurrentPageIsValid = (): void => {
   if (!currentPageIsInRange.value) {
-    props.screener.actions.navToPage(totalPages.value ? totalPages.value : 1)
+    props.screener.actions.goToPage(totalPages.value ? totalPages.value : 1)
   }
 }
 

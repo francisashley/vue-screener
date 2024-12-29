@@ -165,11 +165,11 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
 
       searchQuery.value.sortField = field
     },
-    navToFirstPage: () => actions.search({ page: 1 }),
-    navToPrevPage: () => actions.search({ page: Math.max(searchQuery.value.page - 1, 1) }),
-    navToPage: (page: number) => actions.search({ page }),
-    navToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
-    navToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
+    goToFirstPage: () => actions.search({ page: 1 }),
+    goToPrevPage: () => actions.search({ page: Math.max(searchQuery.value.page - 1, 1) }),
+    goToPage: (page: number) => actions.search({ page }),
+    goToNextPage: () => actions.search({ page: Math.min(searchQuery.value.page + 1, Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage)) }), // eslint-disable-line
+    goToLastPage: () => actions.search({ page: Math.ceil(allItems.value.length / searchQuery.value.itemsPerPage) }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
     setData: (inputData: unknown) => (allItems.value = isValidInput(inputData) ? normaliseInput(inputData) : []),
     updateItem: (id: string, partialData: Record<PropertyKey, any>) => {

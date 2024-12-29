@@ -12,11 +12,11 @@ export type VueScreener = {
   actions: {
     search: (searchQuery: Partial<SearchQuery>) => void
     sort: (field: string | number) => void
-    navToFirstPage: () => void
-    navToPrevPage: () => void
-    navToPage: (page: number) => void
-    navToNextPage: () => void
-    navToLastPage: () => void
+    goToFirstPage: () => void
+    goToPrevPage: () => void
+    goToPage: (page: number) => void
+    goToNextPage: () => void
+    goToLastPage: () => void
     setDimensions: (dimensions: { height: number; width: number } | null) => void
     setData: (inputData: unknown[]) => void
     updateItem: (id: string, partialData: Record<PropertyKey, any>) => void
