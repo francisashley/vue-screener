@@ -6,7 +6,7 @@
     }"
     ref="screenerRef"
   >
-    <TableView
+    <VueScreenerTableView
       v-if="view === 'table'"
       :screener="screener"
       :ui="ui.tableView"
@@ -18,26 +18,30 @@
       <template #body-cell="cellProps">
         <slot name="body-cell" v-bind="cellProps" />
       </template>
-    </TableView>
+    </VueScreenerTableView>
 
-    <SpreadsheetView v-else-if="view === 'spreadsheet'" :screener="screener" :ui="props.ui?.spreadsheetView" />
+    <VueScreenerSpreadsheetView
+      v-else-if="view === 'spreadsheet'"
+      :screener="screener"
+      :ui="props.ui?.spreadsheetView"
+    />
 
-    <LoadingView v-else-if="view === 'loading'" :ui="ui?.loadingView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
+    <VueScreenerLoadingView v-else-if="view === 'loading'" :ui="ui?.loadingView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="no-data">
         <UiSpinner />
       </slot>
-    </LoadingView>
+    </VueScreenerLoadingView>
 
-    <NoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
+    <VueScreenerNoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="no-data">No data provided</slot>
-    </NoDataView>
+    </VueScreenerNoDataView>
 
-    <BadDataView v-else-if="view === 'bad-data'" :ui="ui?.badDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
+    <VueScreenerBadDataView v-else-if="view === 'bad-data'" :ui="ui?.badDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="bad-data">
         <h4 class="vsc-font-medium vsc-mb-1">Invalid data provided.</h4>
         <p>Please provide an array of objects or an array of arrays.</p>
       </slot>
-    </BadDataView>
+    </VueScreenerBadDataView>
   </section>
 </template>
 
@@ -45,12 +49,12 @@
 import type { VueScreener } from '../interfaces/vue-screener'
 import { useElementSize } from '../hooks/use-element-size'
 import { computed, ref } from 'vue'
-import TableView, { TableViewUI } from './views/TableView.vue'
-import SpreadsheetView, { SpreadsheetViewUI } from './views/SpreadsheetView.vue'
-import BadDataView, { BadDataViewUI } from './views/BadDataView.vue'
-import NoDataView, { NoDataViewUI } from './views/NoDataView.vue'
+import VueScreenerTableView, { TableViewUI } from './views/VueScreenerTableView.vue'
+import VueScreenerSpreadsheetView, { SpreadsheetViewUI } from './views/VueScreenerSpreadsheetView.vue'
+import VueScreenerBadDataView, { BadDataViewUI } from './views/VueScreenerBadDataView.vue'
+import VueScreenerNoDataView, { NoDataViewUI } from './views/VueScreenerNoDataView.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
-import LoadingView, { LoadingViewUI } from './views/LoadingView.vue'
+import VueScreenerLoadingView, { LoadingViewUI } from './views/VueScreenerLoadingView.vue'
 import UiSpinner from './ui/spinner/Spinner.vue'
 
 export type VueScreenerUI = {
