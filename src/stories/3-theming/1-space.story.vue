@@ -4,13 +4,13 @@
       <div class="vsc-flex vsc-justify-between vsc-items-center vsc-mb-4 vsc-text-white">
         <h3 v-text="'Space theme'" class="vsc-text-base vsc-mb-0" />
         <div class="vsc-flex vsc-items-center vsc-gap-2">
-          <ScreenerSearch
+          <VueScreenerSearch
             :screener="screener"
             :ui="{
               class: 'vsc-border-[#374151] vsc-bg-[#1f2937] vsc-text-white',
             }"
           />
-          <ScreenerSearchOptions
+          <VueScreenerSearchOptions
             :screener="screener"
             :ui="{
               class: 'vsc-border-[#374151] vsc-bg-[#1f2937]',
@@ -53,7 +53,7 @@
           '--vs-header-cell-bg-color': '#1f2937',
         }"
       />
-      <ScreenerPagination
+      <VueScreenerPagination
         v-if="!screener.hasError.value"
         :screener="screener"
         :ui="{
@@ -78,7 +78,13 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useVueScreener } from '../../index'
+import {
+  VueScreener,
+  VueScreenerSearch,
+  VueScreenerSearchOptions,
+  VueScreenerPagination,
+  useVueScreener,
+} from '../../index'
 import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData)

@@ -37,7 +37,7 @@ import ToggleButtonGroup from './ui/toggle-button/ToggleButtonGroup.vue'
 import ToggleButton, { ToggleButtonUI } from './ui/toggle-button/ToggleButton.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
 
-export type ScreenerSearchOptionsUI = {
+export type VueScreenerSearchOptionsUI = {
   class?: string
   toggleButton?: ToggleButtonUI & {
     icon?: {
@@ -48,7 +48,7 @@ export type ScreenerSearchOptionsUI = {
 
 const props = defineProps<{
   screener: Screener
-  ui?: ScreenerSearchOptionsUI
+  ui?: VueScreenerSearchOptionsUI
 }>()
 
 const uiDefaults = {

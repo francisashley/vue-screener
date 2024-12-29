@@ -159,7 +159,7 @@ You can style components and their subcomponents by passing an object to the ui 
       class?: string
       header?: { // TableHead
         class?: string
-        cell?: { // TableCell
+        cell?: { // VueScreenerTableCell
           class?: string
           isFirstClass?: string
           isLastClass?: string
@@ -175,7 +175,7 @@ You can style components and their subcomponents by passing an object to the ui 
       }
       row?: { // TableRow
         class?: string
-        cell?: { // TableCell
+        cell?: { // VueScreenerTableCell
           class?: string
           isFirstClass?: string
           isLastClass?: string
@@ -194,7 +194,7 @@ You can style components and their subcomponents by passing an object to the ui 
 }
 
 
-{ // ScreenerPagination
+{ // VueScreenerPagination
   class?: string
   leftSide?: {
     class?: string
@@ -216,7 +216,7 @@ You can style components and their subcomponents by passing an object to the ui 
   }
 }
 
-{ // ScreenerSearchOptions
+{ // VueScreenerSearchOptions
   class?: string
   toggleButton?: { // ToggleButton
     class?: string

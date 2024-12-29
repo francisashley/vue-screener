@@ -45,7 +45,7 @@ import UiButton, { ButtonUI } from './ui/button/Button.vue'
 import UiInput, { InputUI } from './ui/input/Input.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
 
-export type ScreenerPaginationUI = {
+export type VueScreenerPaginationUI = {
   class?: string
   leftSide?: {
     class?: string
@@ -62,7 +62,7 @@ export type ScreenerPaginationUI = {
 
 const props = defineProps<{
   screener: Screener
-  ui?: ScreenerPaginationUI
+  ui?: VueScreenerPaginationUI
 }>()
 
 const uiDefaults = {

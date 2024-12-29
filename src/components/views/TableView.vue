@@ -1,7 +1,7 @@
 <template>
-  <Table :column-defs="screener.columnDefs.value" :ui="ui.table">
+  <VueScreenerTable :column-defs="screener.columnDefs.value" :ui="ui.table">
     <template #default="{ isScrollable, isScrolledEnd }">
-      <TableHead :ui="ui.table.header">
+      <VueScreenerTableHead :ui="ui.table.header">
         <!-- @ts-ignore -->
         <template v-for="(column, _i) in screener.columnDefs.value" :key="_i">
           <slot
@@ -17,7 +17,7 @@
             }"
             @click="handleClickColumnHeader(column)"
           >
-            <TableCell
+            <VueScreenerTableCell
               :value="column.field"
               :is-sticky="column.isSticky"
               :is-sticky-overlapping="column.isSticky && isScrollable && !isScrolledEnd"
@@ -36,12 +36,12 @@
               <slot>
                 <span v-html="column.label" />
               </slot>
-            </TableCell>
+            </VueScreenerTableCell>
           </slot>
         </template>
-      </TableHead>
+      </VueScreenerTableHead>
       <template v-for="(item, _i) in screener.paginatedItems.value" :key="_i">
-        <TableRow :ui="ui.table.row">
+        <VueScreenerTableRow :ui="ui.table.row">
           <template v-for="(column, _j) in screener.columnDefs.value" :key="_j">
             <slot
               name="table-cell"
@@ -54,7 +54,7 @@
               :highlight-matches="highlightMatches"
               :search-text="screener.searchQuery.value.searchText"
             >
-              <TableCell
+              <VueScreenerTableCell
                 :column="column"
                 :value="column.field"
                 :is-sticky="column.isSticky"
@@ -67,22 +67,22 @@
                 <slot>
                   <span v-html="processValue(item.data[column.field], column)" />
                 </slot>
-              </TableCell>
+              </VueScreenerTableCell>
             </slot>
           </template>
-        </TableRow>
+        </VueScreenerTableRow>
       </template>
     </template>
-  </Table>
+  </VueScreenerTable>
 </template>
 
 <script lang="ts" setup>
 import { computed } from 'vue'
 import type { Screener, ColDef } from '../../interfaces/screener'
-import TableRow, { TableRowUI } from '../ui/table/TableRow.vue'
-import TableCell, { TableCellUI } from '../ui/table/TableCell.vue'
-import Table, { TableUI } from '../ui/table/Table.vue'
-import TableHead, { TableHeadUI } from '../ui/table/TableHead.vue'
+import VueScreenerTableRow, { TableRowUI } from '../ui/table/VueScreenerTableRow.vue'
+import VueScreenerTableCell, { TableCellUI } from '../ui/table/VueScreenerTableCell.vue'
+import VueScreenerTable, { TableUI } from '../ui/table/VueScreenerTable.vue'
+import VueScreenerTableHead, { TableHeadUI } from '../ui/table/VueScreenerTableHead.vue'
 import SortIcon, { SortIconUI } from '../icons/SortIcon.vue'
 import { highlightMatches } from '../../utils/text.utils'
 import { twMerge } from '../../utils/tailwind-merge.utils'

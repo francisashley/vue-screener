@@ -1,9 +1,16 @@
 import VueScreener from './components/VueScreener.vue'
-import ScreenerPagination from './components/ScreenerPagination.vue'
-import ScreenerSearch from './components/ScreenerSearch.vue'
-import ScreenerSearchOptions from './components/ScreenerSearchOptions.vue'
-import TableCell from './components/ui/table/TableCell.vue'
+import VueScreenerPagination from './components/VueScreenerPagination.vue'
+import VueScreenerSearch from './components/VueScreenerSearch.vue'
+import VueScreenerSearchOptions from './components/VueScreenerSearchOptions.vue'
+import VueScreenerTableCell from './components/ui/table/VueScreenerTableCell.vue'
 import { useVueScreener } from './hooks/use-vue-screener'
 import './assets/tailwind.css'
 
-export { VueScreener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, TableCell, useVueScreener }
+export {
+  VueScreener,
+  VueScreenerSearch,
+  VueScreenerSearchOptions,
+  VueScreenerPagination,
+  VueScreenerTableCell,
+  useVueScreener,
+}

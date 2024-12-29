@@ -13,21 +13,21 @@
           />
           Editable
         </label>
-        <ScreenerSearch :screener="screener" />
-        <ScreenerSearchOptions :screener="screener" />
+        <VueScreenerSearch :screener="screener" />
+        <VueScreenerSearchOptions :screener="screener" />
       </div>
     </div>
     <div class="vsc-py-2">
       <slot />
     </div>
-    <ScreenerPagination :screener="screener" />
+    <VueScreenerPagination :screener="screener" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ScreenerPagination } from '../../index'
+import { VueScreenerPagination } from '../../index'
 import { Screener } from '../../interfaces/screener'
-import { ScreenerSearch, ScreenerSearchOptions } from '../../index'
+import { VueScreenerSearch, VueScreenerSearchOptions } from '../../index'
 
 defineProps<{
   screener: Screener

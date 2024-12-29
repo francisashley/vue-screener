@@ -3,10 +3,10 @@
     <DevSandbox title="Results" :screener="screener">
       <VueScreener :screener="screener" :style="{ marginBottom: '12px' }">
         <template #table-head="props">
-          <TableCell v-if="props.column.isSticky" v-bind="props">Actions</TableCell>
+          <VueScreenerTableCell v-if="props.column.isSticky" v-bind="props">Actions</VueScreenerTableCell>
         </template>
         <template #table-cell="props">
-          <TableCell v-if="props.column.isSticky" v-bind="props">
+          <VueScreenerTableCell v-if="props.column.isSticky" v-bind="props">
             <div :style="{ display: 'flex', gap: '5px', padding: '3px 0' }">
               <button
                 @click="handleClickEdit(props.item)"
@@ -21,7 +21,7 @@
                 Delete
               </button>
             </div>
-          </TableCell>
+          </VueScreenerTableCell>
         </template>
       </VueScreener>
     </DevSandbox>
@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 import { VueScreener, useVueScreener } from '../../index'
-import TableCell from '../../components/ui/table/TableCell.vue'
+import VueScreenerTableCell from '../../components/ui/table/VueScreenerTableCell.vue'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 

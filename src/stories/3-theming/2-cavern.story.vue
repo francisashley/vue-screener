@@ -4,13 +4,13 @@
       <div class="vsc-flex vsc-p-4 vsc-justify-between vsc-items-center vsc-text-white">
         <h3 v-text="'Cavern theme'" class="vsc-text-base vsc-mb-0" />
         <div class="vsc-flex vsc-items-center vsc-gap-2">
-          <ScreenerSearch
+          <VueScreenerSearch
             :screener="screener"
             :ui="{
               class: 'vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-text-white vsc-h-[30px]',
             }"
           />
-          <ScreenerSearchOptions
+          <VueScreenerSearchOptions
             :screener="screener"
             :ui="{
               class: 'vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-p-px vsc-h-[30px]',
@@ -47,7 +47,7 @@
         }"
       />
       <div class="vsc-p-4">
-        <ScreenerPagination
+        <VueScreenerPagination
           v-if="!screener.hasError.value"
           :screener="screener"
           :ui="{
@@ -73,7 +73,13 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, ScreenerSearch, ScreenerSearchOptions, ScreenerPagination, useVueScreener } from '../../index'
+import {
+  VueScreener,
+  VueScreenerSearch,
+  VueScreenerSearchOptions,
+  VueScreenerPagination,
+  useVueScreener,
+} from '../../index'
 import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData, {

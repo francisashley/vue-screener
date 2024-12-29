@@ -53,7 +53,7 @@ import { twMerge } from '../utils/tailwind-merge.utils'
 import LoadingView, { LoadingViewUI } from './views/LoadingView.vue'
 import UiSpinner from './ui/spinner/Spinner.vue'
 
-export type ScreenerUI = {
+export type VueScreenerUI = {
   class?: string
   tableView?: TableViewUI
   spreadsheetView?: SpreadsheetViewUI
@@ -64,7 +64,7 @@ export type ScreenerUI = {
 
 const props = defineProps<{
   screener: Screener
-  ui?: ScreenerUI
+  ui?: VueScreenerUI
 }>()
 
 const view = computed<'bad-data' | 'loading' | 'no-data' | 'spreadsheet' | 'table'>(() => {
