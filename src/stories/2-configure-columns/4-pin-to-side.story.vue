@@ -2,10 +2,10 @@
   <Story title="4. Stick to the side" source="-">
     <DevSandbox title="Results" :screener="screener">
       <VueScreener :screener="screener" :style="{ marginBottom: '12px' }">
-        <template #table-head="props">
+        <template #header-cell="props">
           <VueScreenerTableCell v-if="props.column.isSticky" v-bind="props">Actions</VueScreenerTableCell>
         </template>
-        <template #table-cell="props">
+        <template #body-cell="props">
           <VueScreenerTableCell v-if="props.column.isSticky" v-bind="props">
             <div :style="{ display: 'flex', gap: '5px', padding: '3px 0' }">
               <button

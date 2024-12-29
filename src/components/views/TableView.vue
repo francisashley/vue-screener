@@ -5,7 +5,7 @@
         <!-- @ts-ignore -->
         <template v-for="(column, _i) in screener.columns.value" :key="_i">
           <slot
-            name="table-head"
+            name="header-cell"
             :column="column"
             :value="column.field"
             :is-sticky="column.isSticky"
@@ -44,7 +44,7 @@
         <VueScreenerTableRow :ui="ui.table.row">
           <template v-for="(column, _j) in screener.columns.value" :key="_j">
             <slot
-              name="table-cell"
+              name="body-cell"
               :column="column"
               :value="column.field"
               :is-sticky="column.isSticky"
