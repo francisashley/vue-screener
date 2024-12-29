@@ -4,7 +4,7 @@
       title="Case sensitive"
       :active="props.screener.searchQuery.value.caseSensitive"
       :ui="ui?.toggleButton"
-      @click="toggleOption('match-case')"
+      @click="toggleOption('case-sensitive')"
     >
       <CaseSensitiveIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
@@ -12,7 +12,7 @@
       title="Whole word"
       :active="props.screener.searchQuery.value.wholeWord"
       :ui="ui?.toggleButton"
-      @click="toggleOption('match-word')"
+      @click="toggleOption('whole-word')"
     >
       <WholeWordIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
@@ -20,7 +20,7 @@
       title="Regular expression"
       :active="props.screener.searchQuery.value.regex"
       :ui="ui?.toggleButton"
-      @click="toggleOption('match-regex')"
+      @click="toggleOption('regex')"
     >
       <RegexIcon :class="ui.toggleButton.icon.class" />
     </ToggleButton>
@@ -69,14 +69,14 @@ const ui = computed(() => {
   }
 })
 
-const toggleOption = (searchTextOption: 'match-case' | 'match-word' | 'match-regex') => {
+const toggleOption = (searchTextOption: 'case-sensitive' | 'whole-word' | 'regex') => {
   const updatedSearchQuery = { ...props.screener.searchQuery.value }
 
-  if (searchTextOption === 'match-case') {
+  if (searchTextOption === 'case-sensitive') {
     updatedSearchQuery.caseSensitive = !updatedSearchQuery.caseSensitive
-  } else if (searchTextOption === 'match-word') {
+  } else if (searchTextOption === 'whole-word') {
     updatedSearchQuery.wholeWord = !updatedSearchQuery.wholeWord
-  } else if (searchTextOption === 'match-regex') {
+  } else if (searchTextOption === 'regex') {
     updatedSearchQuery.regex = !updatedSearchQuery.regex
   }
 
