@@ -55,7 +55,7 @@ export type Column = {
   order: number // The order of the column in the table.
   only: boolean // Flag indicating if the column should be the only one displayed.
   hidden: boolean // Flag indicating if the column should be hidden.
-  format?: (item: string | number) => string // Format the value of the field.
+  format?: (field: string | number) => string // Format the value of the field.
 }
 
 export type Row = {

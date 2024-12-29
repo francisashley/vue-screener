@@ -40,7 +40,7 @@
           </slot>
         </template>
       </VueScreenerTableHead>
-      <template v-for="(item, _i) in screener.paginatedRows.value" :key="_i">
+      <template v-for="(row, _i) in screener.paginatedRows.value" :key="_i">
         <VueScreenerTableRow :ui="ui.table.row">
           <template v-for="(column, _j) in screener.columns.value" :key="_j">
             <slot
@@ -49,7 +49,7 @@
               :value="column.field"
               :is-pinned="column.isPinned"
               :is-pinned-overlapping="column.isPinned && isScrollable && !isScrolledEnd"
-              :item="item"
+              :row="row"
               :ui="ui.table.row?.cell"
               :highlight-matches="highlightMatches"
               :search-text="screener.searchQuery.value.text"
@@ -59,13 +59,13 @@
                 :value="column.field"
                 :is-pinned="column.isPinned"
                 :is-pinned-overlapping="column.isPinned && isScrollable && !isScrolledEnd"
-                :item="item"
+                :row="row"
                 :ui="ui.table.row?.cell"
                 :highlight-matches="highlightMatches"
                 :search-text="screener.searchQuery.value.text"
               >
                 <slot>
-                  <span v-html="processValue(item.data[column.field], column)" />
+                  <span v-html="processValue(row.data[column.field], column)" />
                 </slot>
               </VueScreenerTableCell>
             </slot>

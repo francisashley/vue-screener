@@ -122,7 +122,7 @@ export function search(options: {
   // Get the search options.
   const { rows, regex = false, caseSensitive = false, wholeWord = false } = options
 
-  // Check if any of the filters match the item.
+  // Check if any of the filters match the row.
   const testExcludeFilters = (filters: [string, string][], row: Row): boolean => {
     return filters.some(([field, value]) => {
       if (row.data[field]) {
@@ -148,16 +148,16 @@ export function search(options: {
   }
 
   // Filter the rows.
-  return rows.filter((item): boolean => {
+  return rows.filter((row): boolean => {
     let shouldExclude = false
     let shouldInclude = true
     let meetsSearchCriteria = true
 
-    if (excludeFilters.length && testExcludeFilters(excludeFilters, item)) {
+    if (excludeFilters.length && testExcludeFilters(excludeFilters, row)) {
       shouldExclude = true
     }
 
-    if (includeFilters.length && !testIncludeFilters(includeFilters, item)) {
+    if (includeFilters.length && !testIncludeFilters(includeFilters, row)) {
       shouldInclude = false
     }
 

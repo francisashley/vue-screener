@@ -9,7 +9,7 @@
           <VueScreenerTableCell v-if="props.column.isPinned" v-bind="props">
             <div :style="{ display: 'flex', gap: '5px', padding: '3px 0' }">
               <button
-                @click="handleClickEdit(props.item)"
+                @click="handleClickEdit(props.row)"
                 class="vsc-border vsc-border-black vsc-rounded vsc-px-1.5 vsc-py-0.5 vsc-leading-none vsc-text-xs vsc-bg-neutral-100 vsc-text-black"
               >
                 Edit
@@ -34,8 +34,8 @@ import VueScreenerTableCell from '../../components/table/VueScreenerTableCell.vu
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const handleClickEdit = (item: unknown) => console.log('edit', item)
-const handleClickDelete = (item: unknown) => console.log('delete', item)
+const handleClickEdit = (row: unknown) => console.log('edit', row)
+const handleClickDelete = (row: unknown) => console.log('delete', row)
 
 const screener = useVueScreener(baseData, {
   columns: {

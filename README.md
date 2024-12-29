@@ -92,8 +92,8 @@ Add a pinned column on the right to put stuff in.
     </template>
     <template #data="props">
       <Data v-if="props.column.field === 'action'" v-bind="props">
-        <button @click="handleClickEdit(props.item)">Edit</button>
-        <button @click="handleClickDelete(props.item)">Delete</button>
+        <button @click="handleClickEdit(props.row)">Edit</button>
+        <button @click="handleClickDelete(props.row)">Delete</button>
       </Data>
     </template>
   </VueScreener>

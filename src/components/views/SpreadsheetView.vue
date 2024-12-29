@@ -10,21 +10,21 @@
       <SpreadsheetCell is-header :point="[-1, -1]" />
       <SpreadsheetCell
         is-header
-        v-for="(columnDef, ci) in props.screener.columns.value"
+        v-for="(column, ci) in props.screener.columns.value"
         :key="ci"
         :point="[-1, ci]"
-        :value="columnDef.field"
+        :value="column.field"
       />
     </SpreadsheetRow>
-    <SpreadsheetRow v-for="(item, ri) in screener.paginatedRows.value" :key="ri" :class="ui.row.class">
+    <SpreadsheetRow v-for="(row, ri) in screener.paginatedRows.value" :key="ri" :class="ui.row.class">
       <!-- // Row index -->
       <SpreadsheetCell is-header :point="[ri, -1]" :value="ri" />
       <SpreadsheetCell
-        v-for="(columnDef, ci) in props.screener.columns.value"
+        v-for="(column, ci) in props.screener.columns.value"
         :key="ci"
         :point="[ri, ci]"
         :is-active="activeCell ? activeCell[0] === ri && activeCell[1] === ci : false"
-        :value="item?.data[columnDef.field]"
+        :value="row?.data[column.field]"
         @select="actions.selectCell([ri, ci])"
         @select-up="actions.moveSelectionUp([ri, ci])"
         @select-right="actions.moveSelectionRight([ri, ci])"
@@ -33,7 +33,7 @@
         @select-next="actions.moveSelectionNext([ri, ci])"
         @select-prev="actions.moveSelectionPrev([ri, ci])"
         @clear="actions.deleteCell([ri, ci])"
-        @update="screener.actions.updateRow(item.id, { [columnDef.field]: $event })"
+        @update="screener.actions.updateRow(row.id, { [column.field]: $event })"
       />
     </SpreadsheetRow>
   </div>
