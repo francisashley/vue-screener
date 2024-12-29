@@ -1,9 +1,9 @@
 <template>
+  <ArrowDown
     :class="{
       [ui.class]: true,
       [ui.ascClass]: direction === 'asc',
     }"
-  <ArrowDown
   />
 </template>
 
