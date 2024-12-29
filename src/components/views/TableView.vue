@@ -1,9 +1,9 @@
 <template>
-  <VueScreenerTable :column-defs="screener.columnDefs.value" :ui="ui.table">
+  <VueScreenerTable :columns="screener.columns.value" :ui="ui.table">
     <template #default="{ isScrollable, isScrolledEnd }">
       <VueScreenerTableHead :ui="ui.table.header">
         <!-- @ts-ignore -->
-        <template v-for="(column, _i) in screener.columnDefs.value" :key="_i">
+        <template v-for="(column, _i) in screener.columns.value" :key="_i">
           <slot
             name="table-head"
             :column="column"
@@ -42,7 +42,7 @@
       </VueScreenerTableHead>
       <template v-for="(item, _i) in screener.paginatedItems.value" :key="_i">
         <VueScreenerTableRow :ui="ui.table.row">
-          <template v-for="(column, _j) in screener.columnDefs.value" :key="_j">
+          <template v-for="(column, _j) in screener.columns.value" :key="_j">
             <slot
               name="table-cell"
               :column="column"
@@ -78,7 +78,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import type { VueScreener, ColDef } from '../../interfaces/vue-screener'
+import type { VueScreener, Column } from '../../interfaces/vue-screener'
 import VueScreenerTableRow, { TableRowUI } from '../table/VueScreenerTableRow.vue'
 import VueScreenerTableCell, { TableCellUI } from '../table/VueScreenerTableCell.vue'
 import VueScreenerTable, { TableUI } from '../table/VueScreenerTable.vue'
@@ -160,13 +160,13 @@ const getSortDirection = (field: string | number): 'asc' | 'desc' | null => {
   return null
 }
 
-const handleClickColumnHeader = (column: ColDef) => {
+const handleClickColumnHeader = (column: Column) => {
   if (column.isSortable) {
     props.screener.actions.sort(column.field)
   }
 }
 
-const processValue = (value: any, colDef: ColDef): string => {
+const processValue = (value: any, colDef: Column): string => {
   // allow the user to format the value
   if (colDef.format) {
     value = colDef.format(value)

@@ -1,4 +1,4 @@
-import { DataType, Row, Item, ColDef } from '@/interfaces/vue-screener'
+import { DataType, Row, Item, Column } from '@/interfaces/vue-screener'
 import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -41,10 +41,10 @@ export function getFields(rows: Row[]): string[] {
  * Creates a column definition by merging the provided partial column definition
  * with default values.
  *
- * @param {Partial<ColDef>} colDef - The partial column definition to merge with defaults.
- * @returns {ColDef} The complete column definition.
+ * @param {Partial<Column>} colDef - The partial column definition to merge with defaults.
+ * @returns {Column} The complete column definition.
  */
-export const createColumnDef = (colDef: Partial<ColDef>): ColDef => ({
+export const createColumnDef = (colDef: Partial<Column>): Column => ({
   field: '',
   label: '',
   isSticky: false,

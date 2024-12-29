@@ -1,4 +1,4 @@
-import { ColDef, Item, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/vue-screener'
+import { Column, Item, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/vue-screener'
 import { createColumnDef, getFields, getPaginated, isValidInput, normaliseInput, sortItems } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -6,7 +6,7 @@ import { search } from '../utils/search.utils'
 type CellChangedEvent = {
   newValue: any
   oldValue: any
-  column: ColDef
+  column: Column
   item: Item
 }
 
@@ -28,7 +28,7 @@ type ScreenerOptions = {
   defaultItemsPerPage?: number
   defaultSortField?: string
   defaultSortDirection?: 'asc' | 'desc'
-  columnDefs?: Record<PropertyKey, Partial<ColDef>>
+  columns?: Record<PropertyKey, Partial<Column>>
   disableSearchHighlight?: boolean
   editable?: boolean
   loading?: boolean
@@ -69,7 +69,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
   const queriedItems = computed((): Row[] => {
     return search({
       rows: allItems.value,
-      columnDefs: columnDefs.value,
+      columns: columns.value,
       searchText: searchQuery.value.searchText,
       regex: searchQuery.value.searchTextOptions.regex,
       caseSensitive: searchQuery.value.searchTextOptions.caseSensitive,
@@ -100,9 +100,9 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     })
   })
 
-  const columnDefsMap = computed<Record<PropertyKey, ColDef>>(() => {
-    const userColDefs = options.columnDefs
-      ? Object.entries(options.columnDefs).map(([field, colDef]) => createColumnDef({ field, label: field, ...colDef }))
+  const columnDefsMap = computed<Record<PropertyKey, Column>>(() => {
+    const userColDefs = options.columns
+      ? Object.entries(options.columns).map(([field, colDef]) => createColumnDef({ field, label: field, ...colDef }))
       : []
 
     const dataColDefs = getFields(allItems.value).map((field) => createColumnDef({ field, label: field }))
@@ -119,7 +119,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
         }
         return acc
       },
-      {} as Record<string, ColDef>,
+      {} as Record<string, Column>,
     )
 
     const mergedAdditionalUserDefs = additionalUserDefs.reduce(
@@ -130,7 +130,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
         }
         return acc
       },
-      {} as Record<string, ColDef>,
+      {} as Record<string, Column>,
     )
 
     return {
@@ -140,8 +140,8 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
   })
 
   // Columns to display
-  const columnDefs = computed<ColDef[]>(() => {
-    let columns: ColDef[] = Object.values(columnDefsMap.value)
+  const columns = computed<Column[]>(() => {
+    let columns: Column[] = Object.values(columnDefsMap.value)
 
     columns = columns.sort((a, b) => a.order - b.order)
 
@@ -157,7 +157,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
   const actions = {
     search: (_searchQuery?: Partial<SearchQuery>) => (searchQuery.value = { ...searchQuery.value, ..._searchQuery }),
     sort: (field: string | number) => {
-      const columnDef = columnDefs.value.find((columnDefs) => columnDefs.field === field)
+      const columnDef = columns.value.find((columns) => columns.field === field)
       searchQuery.value.sortDirection =
         searchQuery.value.sortField === field
           ? searchQuery.value.sortDirection === 'desc'
@@ -183,11 +183,11 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
           const updatedItem = { ...item.data, ...partialData }
 
           cellChanges = Object.keys(partialData).map((key) => {
-            const columnDef = columnDefs.value.find((columnDefs) => columnDefs.field === key)
+            const columnDef = columns.value.find((columns) => columns.field === key)
             return {
               newValue: partialData[key],
               oldValue: item.data[key],
-              column: columnDef as ColDef,
+              column: columnDef as Column,
               item,
             }
           })
@@ -231,7 +231,7 @@ export const useVueScreener = (inputData: unknown[], options: ScreenerOptions = 
     queriedItems, // filtered data (after search query)
     paginatedItems, // paginated data (cut from queriedItems)
     hasError, // boolean indicating if the data is valid
-    columnDefs, // columnDefs (field, label, width, isSticky, isSortable, defaultSortDirection)s
+    columns, // columns (field, label, width, isSticky, isSortable, defaultSortDirection)s
     dimensions, // screener dimensions
     actions, // actions
   }

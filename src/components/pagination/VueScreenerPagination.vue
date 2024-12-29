@@ -41,9 +41,9 @@
 <script lang="ts" setup>
 import { VueScreener } from '@/interfaces/vue-screener'
 import { computed, onMounted, watch } from 'vue'
-import UiButton, { ButtonUI } from './ui/button/Button.vue'
-import UiInput, { InputUI } from './ui/input/Input.vue'
-import { twMerge } from '../utils/tailwind-merge.utils'
+import UiButton, { ButtonUI } from '../ui/button/Button.vue'
+import UiInput, { InputUI } from '../ui/input/Input.vue'
+import { twMerge } from '../../utils/tailwind-merge.utils'
 
 export type VueScreenerPaginationUI = {
   class?: string

@@ -38,7 +38,7 @@ const handleClickEdit = (item: unknown) => console.log('edit', item)
 const handleClickDelete = (item: unknown) => console.log('delete', item)
 
 const screener = useVueScreener(baseData, {
-  columnDefs: {
+  columns: {
     actions: { isSticky: true },
   },
 })

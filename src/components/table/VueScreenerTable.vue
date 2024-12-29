@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { computed, defineProps } from 'vue'
-import type { ColDef } from '../../interfaces/vue-screener'
+import type { Column } from '../../interfaces/vue-screener'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import { useScrollable } from '../../hooks/use-scrollable'
 
@@ -15,7 +15,7 @@ export type TableUI = {
 }
 
 const props = defineProps<{
-  columnDefs: ColDef[]
+  columns: Column[]
   ui?: TableUI
 }>()
 
@@ -30,7 +30,7 @@ const ui = computed(() => {
 })
 
 const style = computed(() => {
-  const sizes = props.columnDefs.map((columnDef) => columnDef.width ?? '1fr')
+  const sizes = props.columns.map((columnDef) => columnDef.width ?? '1fr')
   return { 'grid-template-columns': sizes.join(' ') }
 })
 

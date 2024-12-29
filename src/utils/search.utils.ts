@@ -1,4 +1,4 @@
-import { Row, ColDef } from '@/interfaces/vue-screener'
+import { Row, Column } from '@/interfaces/vue-screener'
 import { escapeRegExp } from './regex.utils'
 
 /**
@@ -106,7 +106,7 @@ const parseSearchText = (searchText: string) => {
  */
 export function search(options: {
   rows: Row[]
-  columnDefs: ColDef[]
+  columns: Column[]
   searchText: string
   regex: boolean
   caseSensitive: boolean
@@ -161,7 +161,7 @@ export function search(options: {
       shouldInclude = false
     }
 
-    meetsSearchCriteria = options.columnDefs.some((columnDef) => {
+    meetsSearchCriteria = options.columns.some((columnDef) => {
       if (
         testCriteria(String(columnDef.field ? item.data[columnDef.field] : ''), parsedSearchText, {
           caseSensitive,

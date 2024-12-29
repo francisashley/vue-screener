@@ -83,7 +83,7 @@ import {
 import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData, {
-  columnDefs: {
+  columns: {
     before: { label: '', width: '1fr', order: 0 },
     id: { width: 'min-content', order: 1 },
     first_name: { width: 'min-content', order: 2 },

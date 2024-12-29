@@ -12,7 +12,7 @@ import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener = useVueScreener(baseData, {
-  columnDefs: {
+  columns: {
     id: { width: '50px', order: 0 },
     first_name: { width: '150px', format: (value) => '😎' + value + '😎', order: 1 },
     last_name: { width: '150px', format: (value) => '😎' + value + '😎', order: 2 },

@@ -7,7 +7,7 @@ export type VueScreener = {
   allItems: Ref<Row[]>
   queriedItems: ComputedRef<Row[]>
   paginatedItems: ComputedRef<Row[]>
-  columnDefs: ComputedRef<ColDef[]>
+  columns: ComputedRef<Column[]>
   dimensions: Ref<{ width: number; height: number } | null>
   actions: {
     search: (searchQuery: Partial<SearchQuery>) => void
@@ -49,7 +49,7 @@ export type SearchQuery = {
   sortDirection: 'asc' | 'desc'
 }
 
-export type ColDef = {
+export type Column = {
   field: string | number // The unique identifier for the column. This must match a field in the data for values to show.
   label: string | number // The label to display in the header of the column. Will default to the key.
   width: string // The width of the column. Defaults to '1fr' if not provided.
