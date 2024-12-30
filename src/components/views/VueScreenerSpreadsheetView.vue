@@ -130,9 +130,9 @@ const actions = {
     }
   },
   deleteCell: (point: Point) => {
-    const selectedItem = props.screener.paginatedRows.value[point[0]]
+    const selectedRow = props.screener.paginatedRows.value[point[0]]
     const selectedField = props.screener.columns.value[point[1]].field
-    props.screener.actions.updateRow(selectedItem.id, { [selectedField]: null })
+    props.screener.actions.updateRow(selectedRow.id, { [selectedField]: null })
   },
 }
 
