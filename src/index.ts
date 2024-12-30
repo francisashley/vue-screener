@@ -3,6 +3,7 @@ import VueScreenerPagination from './components/pagination/VueScreenerPagination
 import VueScreenerSearch from './components/search/VueScreenerSearch.vue'
 import VueScreenerSearchOptions from './components/search/VueScreenerSearchOptions.vue'
 import VueScreenerTableCell from './components/table/VueScreenerTableCell.vue'
+import VueScreenerTableHeadCell from './components/table/VueScreenerTableHeadCell.vue'
 import { useVueScreener } from './hooks/use-vue-screener'
 import './assets/tailwind.css'
 
@@ -12,5 +13,6 @@ export {
   VueScreenerSearchOptions,
   VueScreenerPagination,
   VueScreenerTableCell,
+  VueScreenerTableHeadCell,
   useVueScreener,
 }

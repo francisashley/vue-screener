@@ -3,7 +3,7 @@
     <DevSandbox title="Results" :screener="screener">
       <VueScreener :screener="screener" :style="{ marginBottom: '12px' }">
         <template #header-cell="props">
-          <VueScreenerTableCell v-if="props.column.isPinned" v-bind="props">Actions</VueScreenerTableCell>
+          <VueScreenerTableHeadCell v-if="props.column.isPinned" v-bind="props">Actions</VueScreenerTableHeadCell>
         </template>
         <template #body-cell="props">
           <VueScreenerTableCell v-if="props.column.isPinned" v-bind="props">
@@ -31,6 +31,7 @@
 <script lang="ts" setup>
 import { VueScreener, useVueScreener } from '../../index'
 import VueScreenerTableCell from '../../components/table/VueScreenerTableCell.vue'
+import VueScreenerTableHeadCell from '../../components/table/VueScreenerTableHeadCell.vue'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
