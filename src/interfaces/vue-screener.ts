@@ -29,7 +29,7 @@ export type VueScreener = {
 }
 
 export type UserPreferences = {
-  height: string
+  height?: string
   disableSearchHighlight: boolean
   editable: boolean
   loading: boolean
