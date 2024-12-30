@@ -9,6 +9,8 @@ export type VueScreener = {
   paginatedRows: ComputedRef<Row[]>
   columns: ComputedRef<Column[]>
   dimensions: Ref<{ width: number; height: number } | null>
+  hasHorizontalOverflow: Ref<boolean>
+  isScrolledToRightEdge: Ref<boolean>
   actions: {
     search: (searchQuery: Partial<SearchQuery>) => void
     sort: (field: string | number) => void
@@ -17,6 +19,8 @@ export type VueScreener = {
     setData: (inputData: unknown[]) => void
     updateRow: (id: string, partialData: Record<PropertyKey, any>) => void
     setLoading: (loading: boolean) => void
+    setHasHorizontalOverflow: (hasHorizontalOverflow: boolean) => void
+    setIsScrolledToRightEdge: (isScrolledToRightEdge: boolean) => void
   }
   totalSearchedRows: Ref<number>
   currentPage: Ref<number>
@@ -54,6 +58,7 @@ export type Column = {
   order: number // The order of the column in the table.
   only: boolean // Flag indicating if the column should be the only one displayed.
   hidden: boolean // Flag indicating if the column should be hidden.
+  isOverlayingColumns?: boolean // Flag indicating if this pinned column should show overlay shadow
   format?: <T>(value: T, row: Row) => string // Format the value of the field.
 }
 

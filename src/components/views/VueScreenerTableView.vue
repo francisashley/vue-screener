@@ -179,4 +179,12 @@ const processValue = (value: any, column: Column): string => {
   }
   return value
 }
+
+const handleHasHorizontalOverflow = (hasHorizontalOverflow: boolean) => {
+  props.screener.actions.setHasHorizontalOverflow(hasHorizontalOverflow)
+}
+
+const handleIsScrolledToRightEdge = (isScrolledToRightEdge: boolean) => {
+  props.screener.actions.setIsScrolledToRightEdge(isScrolledToRightEdge)
+}
 </script>

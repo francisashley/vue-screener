@@ -48,6 +48,9 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
   // VueScreener dimensions (width and height)
   const dimensions = ref<{ width: number; height: number } | null>(null)
 
+  const hasHorizontalOverflow = ref<boolean>(false)
+  const isScrolledToRightEdge = ref<boolean>(false)
+
   // Data storage
   const allRows = ref<Row[]>(isValidInput(inputData) ? convertToRows(inputData) : [])
   const hasError = computed((): boolean => !isValidInput(inputData))
@@ -208,6 +211,8 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
       allRows.value = updatedRows
     },
     setLoading: (loading: boolean) => (preferences.value.loading = loading),
+    setHasHorizontalOverflow: (value: boolean) => (hasHorizontalOverflow.value = value),
+    setIsScrolledToRightEdge: (value: boolean) => (isScrolledToRightEdge.value = value),
   }
 
   return {
@@ -219,6 +224,8 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     hasError, // boolean indicating if the data is valid
     columns, // columns (field, label, width, isPinned, isSortable, defaultSortDirection)
     dimensions, // screener dimensions
+    hasHorizontalOverflow,
+    isScrolledToRightEdge,
     actions, // actions
     totalSearchedRows,
     currentPage,
