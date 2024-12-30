@@ -1,11 +1,11 @@
 <template>
   <div :class="{ [ui.class]: true }" :style="style" ref="mainRef">
-    <slot :is-scrollable="hasHorizontalOverflow" :is-scrolled-end="isScrolledToRightEdge" />
+    <slot />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps } from 'vue'
+import { computed, defineProps, watchEffect } from 'vue'
 import type { Column } from '../../interfaces/vue-screener'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import { useScrollable } from '../../hooks/use-scrollable'
@@ -28,6 +28,7 @@ const ui = computed(() => {
     class: twMerge(uiDefaults.class, props.ui?.class),
   }
 })
+const emit = defineEmits(['has-horizontal-overflow', 'is-scrolled-to-right-edge'])
 
 const style = computed(() => {
   const sizes = props.columns.map((column) => {
@@ -38,4 +39,9 @@ const style = computed(() => {
 })
 
 const { ref: mainRef, hasHorizontalOverflow, isScrolledToRightEdge } = useScrollable()
+
+watchEffect(() => {
+  emit('has-horizontal-overflow', hasHorizontalOverflow.value)
+  emit('is-scrolled-to-right-edge', isScrolledToRightEdge.value)
+})
 </script>
