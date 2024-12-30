@@ -53,6 +53,7 @@
               :ui="ui.table.row?.cell"
               :highlight-matches="highlightMatches"
               :search-text="screener.searchQuery.value.text"
+              :cell="createCell({ row, column, searchText: screener.searchQuery.value.text })"
             >
               <VueScreenerTableCell
                 :column="column"
@@ -78,12 +79,12 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import type { VueScreener, Column } from '../../interfaces/vue-screener'
 import VueScreenerTableRow, { TableRowUI } from '../table/VueScreenerTableRow.vue'
 import VueScreenerTableCell, { TableCellUI } from '../table/VueScreenerTableCell.vue'
 import VueScreenerTable, { TableUI } from '../table/VueScreenerTable.vue'
 import VueScreenerTableHead, { TableHeadUI } from '../table/VueScreenerTableHead.vue'
 import SortIcon, { SortIconUI } from '../icons/SortIcon.vue'
+import type { VueScreener, Column, Row, Cell } from '../../interfaces/vue-screener'
 import { highlightMatches } from '../../utils/text.utils'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 
@@ -186,5 +187,16 @@ const handleHasHorizontalOverflow = (hasHorizontalOverflow: boolean) => {
 
 const handleIsScrolledToRightEdge = (isScrolledToRightEdge: boolean) => {
   props.screener.actions.setIsScrolledToRightEdge(isScrolledToRightEdge)
+}
+
+const createCell = ({ row, column, searchText }: { row: Row; column: Column; searchText?: string }): Cell => {
+  const value = row.data[column.field]
+  const cell: Cell = { row, column, value }
+
+  if (searchText && (typeof value === 'string' || typeof value === 'number')) {
+    cell.highlightedValue = formatCellContent(value, column, row)
+  }
+
+  return cell
 }
 </script>

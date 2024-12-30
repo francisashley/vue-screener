@@ -67,4 +67,11 @@ export type Row = {
   data: { [key: string | number]: any } // The original data for the row.
 }
 
+export type Cell = {
+  row: Row
+  column: Column
+  value: any
+  highlightedValue?: string
+}
+
 export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'
