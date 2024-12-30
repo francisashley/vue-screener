@@ -98,43 +98,31 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     })
   })
 
-  const columnsMap = computed<Record<PropertyKey, Column>>(() => {
-    const userColumns = options.columns
-      ? Object.entries(options.columns).map(([field, column]) => createColumn({ field, ...column }))
-      : []
+  const totalSearchedRows = computed(() => queriedRows.value.length ?? 0)
+  const currentPage = computed(() => searchQuery.value.page)
+  const rowsPerPage = computed(() => searchQuery.value.rowsPerPage)
 
-    const dataColumns = getFields(allRows.value).map((field) => createColumn({ field }))
+  const columnsMap = computed(() => {
+    // Get unique fields from data
+    const dataFields = getFields(allRows.value)
 
-    const additionalUserColumns = userColumns.filter(
-      (userColumn) => !dataColumns.map((dataColumn) => dataColumn.field).includes(userColumn.field),
-    )
+    // Start with user defined columns
+    const columns = new Map()
 
-    const mergedDataColumns = dataColumns.reduce(
-      (acc, column) => {
-        acc[column.field] = {
-          ...column,
-          ...(userColumns.find((userColumn) => userColumn.field === column.field) ?? {}),
-        }
-        return acc
-      },
-      {} as Record<string, Column>,
-    )
+    // Add data fields first with defaults
+    dataFields.forEach((field) => columns.set(field, createColumn({ field })))
 
-    const mergedAdditionalUserColumns = additionalUserColumns.reduce(
-      (acc, column) => {
-        acc[column.field] = {
-          ...column,
-          ...(dataColumns.find((dataColumn) => dataColumn.field === column.field) ?? {}),
-        }
-        return acc
-      },
-      {} as Record<string, Column>,
-    )
-
-    return {
-      ...mergedDataColumns,
-      ...mergedAdditionalUserColumns,
+    // Override with user configs
+    if (options.columns) {
+      Object.entries(options.columns).forEach(([field, config]) => {
+        columns.set(field, {
+          ...(columns.get(field) || createColumn({ field })),
+          ...config,
+        })
+      })
     }
+
+    return Object.fromEntries(columns)
   })
 
   // Columns to display
@@ -142,8 +130,12 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     let columns: Column[] = Object.values(columnsMap.value)
 
     columns = columns.sort((a, b) => a.order - b.order)
-
     columns = columns.filter((column) => !column.hidden)
+
+    columns = columns.map((column) => ({
+      ...column,
+      isOverlayingColumns: Boolean(column.isPinned && hasHorizontalOverflow.value && !isScrolledToRightEdge.value),
+    }))
 
     if (columns.some((column) => column.only)) {
       columns = columns.filter((column) => column.only)
@@ -228,5 +220,8 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     columns, // columns (field, label, width, isPinned, isSortable, defaultSortDirection)
     dimensions, // screener dimensions
     actions, // actions
+    totalSearchedRows,
+    currentPage,
+    rowsPerPage,
   }
 }
