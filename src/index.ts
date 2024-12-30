@@ -11,7 +11,6 @@ import VueScreenerTableView from './components/views/VueScreenerTableView.vue'
 import VueScreenerEmptyView from './components/views/VueScreenerEmptyView.vue'
 import VueScreenerErrorView from './components/views/VueScreenerErrorView.vue'
 import VueScreenerLoadingView from './components/views/VueScreenerLoadingView.vue'
-import VueScreenerSpreadsheetView from './components/views/VueScreenerSpreadsheetView.vue'
 import { useVueScreener } from './hooks/use-vue-screener'
 import './assets/tailwind.css'
 
@@ -29,6 +28,5 @@ export {
   VueScreenerEmptyView,
   VueScreenerErrorView,
   VueScreenerLoadingView,
-  VueScreenerSpreadsheetView,
   useVueScreener,
 }

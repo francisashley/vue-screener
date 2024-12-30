@@ -1,7 +1,5 @@
 <template>
-  <VueScreenerSpreadsheetView v-if="screener.preferences.value.editable" :screener="screener" /> <!-- eslint-disable-line -->
   <VueScreenerTable
-    v-else
     :columns="screener.columns.value"
     @has-horizontal-overflow="handleHasHorizontalOverflow"
     @is-scrolled-to-right-edge="handleIsScrolledToRightEdge"
@@ -45,7 +43,6 @@ import VueScreenerTableHeadCell from '../table/VueScreenerTableHeadCell.vue'
 import VueScreenerTable from '../table/VueScreenerTable.vue'
 import VueScreenerTableHead from '../table/VueScreenerTableHead.vue'
 import { highlightMatches } from '../../utils/text.utils'
-import VueScreenerSpreadsheetView from '../views/VueScreenerSpreadsheetView.vue'
 
 const props = defineProps<{
   screener: VueScreener
