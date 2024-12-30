@@ -8,12 +8,12 @@
 import { defineProps, computed } from 'vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 
-export type BadDataViewUI = {
+export type ErrorViewUI = {
   class?: string
 }
 
 const props = defineProps<{
-  ui?: BadDataViewUI
+  ui?: ErrorViewUI
 }>()
 
 const uiDefaults = {

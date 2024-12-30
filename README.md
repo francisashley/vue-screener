@@ -185,10 +185,10 @@ You can style components and their subcomponents by passing an object to the ui 
       }
     }
   }
-  noDataView?: { // VueScreenerNoDataView
+  emptyView?: { // VueScreenerEmptyView
     class?: string
   }
-  badDataView?: { // VueScreenerBadDataView
+  errorView?: { // VueScreenerErrorView
     class?: string
   }
 }

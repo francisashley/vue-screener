@@ -27,21 +27,21 @@
     />
 
     <VueScreenerLoadingView v-else-if="view === 'loading'" :ui="ui?.loadingView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
-      <slot name="no-data">
+      <slot name="empty">
         <UiSpinner />
       </slot>
     </VueScreenerLoadingView>
 
-    <VueScreenerNoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
-      <slot name="no-data">No data provided</slot>
-    </VueScreenerNoDataView>
+    <VueScreenerEmptyView v-else-if="view === 'empty'" :ui="ui?.emptyView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
+      <slot name="empty">No data provided</slot>
+    </VueScreenerEmptyView>
 
-    <VueScreenerBadDataView v-else-if="view === 'bad-data'" :ui="ui?.badDataView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
-      <slot name="bad-data">
+    <VueScreenerErrorView v-else-if="view === 'error'" :ui="ui?.errorView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
+      <slot name="error">
         <h4 class="vsc-font-medium vsc-mb-1">Invalid data provided.</h4>
         <p>Please provide an array of objects or an array of arrays.</p>
       </slot>
-    </VueScreenerBadDataView>
+    </VueScreenerErrorView>
   </section>
 </template>
 
@@ -51,8 +51,8 @@ import { useElementSize } from '../hooks/use-element-size'
 import { computed, ref } from 'vue'
 import VueScreenerTableView, { TableViewUI } from './views/VueScreenerTableView.vue'
 import VueScreenerSpreadsheetView, { SpreadsheetViewUI } from './views/VueScreenerSpreadsheetView.vue'
-import VueScreenerBadDataView, { BadDataViewUI } from './views/VueScreenerBadDataView.vue'
-import VueScreenerNoDataView, { NoDataViewUI } from './views/VueScreenerNoDataView.vue'
+import VueScreenerErrorView, { ErrorViewUI } from './views/VueScreenerErrorView.vue'
+import VueScreenerEmptyView, { EmptyViewUI } from './views/VueScreenerEmptyView.vue'
 import { twMerge } from '../utils/tailwind-merge.utils'
 import VueScreenerLoadingView, { LoadingViewUI } from './views/VueScreenerLoadingView.vue'
 import UiSpinner from './ui/spinner/Spinner.vue'
@@ -62,8 +62,8 @@ export type VueScreenerUI = {
   tableView?: TableViewUI
   spreadsheetView?: SpreadsheetViewUI
   loadingView?: LoadingViewUI
-  noDataView?: NoDataViewUI
-  badDataView?: BadDataViewUI
+  emptyView?: EmptyViewUI
+  errorView?: ErrorViewUI
 }
 import { useVueScreener } from '../hooks/use-vue-screener'
 
@@ -78,11 +78,11 @@ const internalScreener = computed(() => {
   return useVueScreener(props.data ?? [])
 })
 
-const view = computed<'bad-data' | 'loading' | 'no-data' | 'spreadsheet' | 'table'>(() => {
+const view = computed<'error' | 'loading' | 'empty' | 'spreadsheet' | 'table'>(() => {
   if (internalScreener.value.preferences.value.loading) return 'loading'
-  if (internalScreener.value.hasError.value) return 'bad-data'
+  if (internalScreener.value.hasError.value) return 'error'
   if (internalScreener.value.preferences.value.editable) return 'spreadsheet'
-  if (!internalScreener.value.allRows.value.length) return 'no-data'
+  if (!internalScreener.value.allRows.value.length) return 'empty'
   return 'table'
 })
 
@@ -96,10 +96,10 @@ const uiDefaults = {
   loadingView: {
     class: 'vsc-overflow-y-auto',
   },
-  noDataView: {
+  emptyView: {
     class: 'vsc-overflow-y-auto',
   },
-  badDataView: {
+  errorView: {
     class: 'vsc-overflow-y-auto',
   },
 }
@@ -118,13 +118,13 @@ const ui = computed(() => {
       ...props.ui?.loadingView,
       class: twMerge(uiDefaults.loadingView.class, props.ui?.loadingView?.class),
     },
-    noDataView: {
-      ...props.ui?.noDataView,
-      class: twMerge(uiDefaults.noDataView.class, props.ui?.noDataView?.class),
+    emptyView: {
+      ...props.ui?.emptyView,
+      class: twMerge(uiDefaults.emptyView.class, props.ui?.emptyView?.class),
     },
-    badDataView: {
-      ...props.ui?.badDataView,
-      class: twMerge(uiDefaults.badDataView.class, props.ui?.badDataView?.class),
+    errorView: {
+      ...props.ui?.errorView,
+      class: twMerge(uiDefaults.errorView.class, props.ui?.errorView?.class),
     },
   }
 })
