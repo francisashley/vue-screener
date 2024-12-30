@@ -30,7 +30,10 @@ const ui = computed(() => {
 })
 
 const style = computed(() => {
-  const sizes = props.columns.map((columnDef) => columnDef.width ?? '1fr')
+  const sizes = props.columns.map((column) => {
+    if (typeof column.width === 'number') return column.width + 'px'
+    return '1fr'
+  })
   return { 'grid-template-columns': sizes.join(' ') }
 })
 
