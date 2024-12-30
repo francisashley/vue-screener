@@ -1,28 +1,17 @@
 <template>
-  <div :class="{ [ui.class]: true }">
-    <slot />
+  <div
+    class="vsc-overflow-hidden vsc-overflow-y-auto vsc-flex vsc-flex-col vsc-text-center vsc-justify-center vsc-items-center vsc-py-24 vsc-border vsc-border-red-500 vsc-text-red-500 vsc-rounded"
+  >
+    <slot>
+      <h4 class="vsc-font-medium vsc-mb-1" v-if="message">{{ message }}</h4>
+      <p v-if="description">{{ description }}</p>
+    </slot>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, computed } from 'vue'
-import { twMerge } from '../../utils/tailwind-merge.utils'
-
-export type ErrorViewUI = {
-  class?: string
-}
-
-const props = defineProps<{
-  ui?: ErrorViewUI
+defineProps<{
+  message?: string
+  description?: string
 }>()
-
-const uiDefaults = {
-  class: 'vsc-overflow-hidden vsc-flex vsc-flex-col vsc-text-center vsc-justify-center vsc-items-center vsc-py-24 vsc-border vsc-border-red-500 vsc-text-red-500 vsc-rounded', // eslint-disable-line
-}
-
-const ui = computed(() => {
-  return {
-    class: twMerge(uiDefaults.class, props.ui?.class),
-  }
-})
 </script>

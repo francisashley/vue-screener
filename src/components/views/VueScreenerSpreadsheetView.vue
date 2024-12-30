@@ -1,12 +1,11 @@
 <template>
   <div
     v-if="screener.dimensions"
-    :class="ui.class"
-    class="vsc-border vsc-border-zinc-700 vsc-bg-[#1f1f22] vsc-grid vsc-auto-rows-min"
+    class="vsc-bg-[#1f1f22] vsc-grid vsc-auto-rows-min vsc-sticky vsc-top-0"
     :style="style"
   >
     <!-- // Field columns -->
-    <SpreadsheetRow :class="ui.headerRow.class">
+    <SpreadsheetRow>
       <SpreadsheetCell is-header :point="[-1, -1]" />
       <SpreadsheetCell
         is-header
@@ -16,7 +15,7 @@
         :value="column.field"
       />
     </SpreadsheetRow>
-    <SpreadsheetRow v-for="(row, ri) in screener.paginatedRows.value" :key="ri" :class="ui.row.class">
+    <SpreadsheetRow v-for="(row, ri) in screener.paginatedRows.value" :key="ri">
       <!-- // Row index -->
       <SpreadsheetCell is-header :point="[ri, -1]" :value="ri" />
       <SpreadsheetCell
@@ -42,48 +41,14 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import type { VueScreener } from '../../interfaces/vue-screener'
-import { twMerge } from '../../utils/tailwind-merge.utils'
 import SpreadsheetCell from '../ui/spreadsheet/SpreadsheetCell.vue'
 import SpreadsheetRow from '../ui/spreadsheet/SpreadsheetRow.vue'
-
-export type SpreadsheetViewUI = {
-  class?: string
-  headerRow: {
-    class?: string
-  }
-  row?: {
-    class?: string
-  }
-}
 
 type Point = [rowIndex: number, colIndex: number]
 
 const props = defineProps<{
   screener: VueScreener
-  ui?: SpreadsheetViewUI
 }>()
-
-const uiDefaults = {
-  class: '',
-  headerRow: {
-    class: '',
-  },
-  row: {
-    class: '',
-  },
-}
-
-const ui = computed(() => {
-  return {
-    class: twMerge(uiDefaults.class, props.ui?.class),
-    headerRow: {
-      class: twMerge(uiDefaults.headerRow.class, props.ui?.headerRow?.class),
-    },
-    row: {
-      class: twMerge(uiDefaults.row.class, props.ui?.row?.class),
-    },
-  }
-})
 
 const activeCell = ref<null | Point>(null)
 

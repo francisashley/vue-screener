@@ -1,7 +1,7 @@
 <template>
   <UiInput
+    class="vsc-w-[200px] vsc-flex vsc-items-center vsc-gap-2 vsc-relative"
     type="text"
-    :ui="ui"
     :value="screener.searchQuery.value.text"
     :error="regex && !isValidQuery"
     placeholder="Search..."
@@ -14,25 +14,11 @@
 import { VueScreener } from '@/interfaces/vue-screener'
 import { computed, ref } from 'vue'
 import { isValidRegExp } from '../../utils/regex.utils'
-import UiInput, { InputUI } from '../ui/input/Input.vue'
-import { twMerge } from '../../utils/tailwind-merge.utils'
-
-export type VueScreenerSearchUI = InputUI
+import UiInput from '../ui/input/Input.vue'
 
 const props = defineProps<{
   screener: VueScreener
-  ui?: VueScreenerSearchUI
 }>()
-
-const uiDefaults = {
-  class: 'vsc-w-[200px]',
-}
-
-const ui = computed(() => {
-  return {
-    class: twMerge(uiDefaults.class, props.ui?.class),
-  }
-})
 
 const history = ref<string[]>([])
 const historyIndex = ref<number | null>(null)

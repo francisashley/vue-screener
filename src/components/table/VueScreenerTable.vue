@@ -1,5 +1,9 @@
 <template>
-  <div :class="{ [ui.class]: true }" :style="style" ref="mainRef">
+  <div
+    class="vsc-grid vsc-overflow-auto vsc-h-full vsc-sticky vsc-top-0 vsc-text-zinc-200 vsc-auto-rows-min"
+    :style="style"
+    ref="mainRef"
+  >
     <slot />
   </div>
 </template>
@@ -7,27 +11,12 @@
 <script lang="ts" setup>
 import { computed, defineProps, watchEffect } from 'vue'
 import type { Column } from '../../interfaces/vue-screener'
-import { twMerge } from '../../utils/tailwind-merge.utils'
 import { useScrollable } from '../../hooks/use-scrollable'
-
-export type TableUI = {
-  class?: string
-}
 
 const props = defineProps<{
   columns: Column[]
-  ui?: TableUI
 }>()
 
-const uiDefaults = {
-  class: 'vsc-grid vsc-rounded vsc-border vsc-overflow-auto vsc-border-zinc-700 vsc-text-zinc-200 vsc-auto-rows-min',
-}
-
-const ui = computed(() => {
-  return {
-    class: twMerge(uiDefaults.class, props.ui?.class),
-  }
-})
 const emit = defineEmits(['has-horizontal-overflow', 'is-scrolled-to-right-edge'])
 
 const style = computed(() => {

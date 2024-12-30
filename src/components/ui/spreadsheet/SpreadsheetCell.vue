@@ -1,33 +1,53 @@
 <template>
-  <div :class="{ [ui.class]: true, [ui.headerClass]: isHeader, [ui.activeClass]: isActive }" ref="cell">
+  <div
+    class="vsc-relative vsc-border-r vsc-border-zinc-700 vsc-flex vsc-items-center"
+    :class="[
+      isHeader && twMerge('vsc-font-bold vsc-bg-[#1f1f22] vsc-text-zinc-200 vsc-text-xs', props.headerClass),
+      isActive && twMerge('vsc-outline vsc-outline-blue-500 vsc-outline-offset-[-1px]', props.activeClass),
+    ]"
+    ref="cell"
+  >
     <button
-      :class="{ [ui.buttonClass]: true, [ui.headerButtonClass]: isHeader }"
+      :class="[
+        twMerge(
+          'vsc-cursor-default vsc-w-full vsc-h-full vsc-outline-none vsc-text-start vsc-px-1.5 vsc-overflow-hidden vsc-text-zinc-200',
+          props.buttonClass,
+        ),
+        isHeader && twMerge('!vsc-text-center !vsc-whitespace-normal !vsc-h-6', props.buttonHeaderClass),
+      ]"
       @click="emit('select', $event)"
       @dblclick="!isHeader && (isEditing = true)"
     >
       {{ value }}
     </button>
-    <UiTextarea v-if="isEditing" v-model="stagedValue" :class="ui.textareaClass" autofocus @blur="handleBlurTextarea" />
+    <UiTextarea
+      v-if="isEditing"
+      v-model="stagedValue"
+      :class="
+        twMerge(
+          '!vsc-absolute vsc-top-0 vsc-left-0 vsc-min-w-full vsc-w-fit vsc-min-h-full vsc-outline-none vsc-z-50 vsc-whitespace-pre',
+          props.textareaClass,
+        )
+      "
+      autofocus
+      @blur="handleBlurTextarea"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, onUnmounted, ref, watchEffect } from 'vue'
+import { onUnmounted, ref, watchEffect } from 'vue'
 import UiTextarea from '../../ui/textarea/Textarea.vue'
 import { twMerge } from 'tailwind-merge'
 import { isCharacterKeyPress } from '../../../utils/keyboard.utils'
 
-export type SpreadsheetCellUI = {
-  class?: string
+const props = defineProps<{
   headerClass?: string
   activeClass?: string
   textareaClass?: string
   buttonClass?: string
   buttonHeaderClass?: string
-}
 
-const props = defineProps<{
-  ui?: SpreadsheetCellUI
   value?: any
   point: [rowIndex: number, colIndex: number]
   isHeader?: boolean
@@ -48,26 +68,6 @@ const emit = defineEmits([
 ])
 
 const isEditing = ref(false)
-
-const uiDefaults = {
-  class: 'vsc-relative vsc-border-r vsc-border-zinc-700 vsc-flex vsc-items-center',
-  headerClass: 'vsc-font-bold vsc-bg-[#1f1f22] vsc-text-zinc-200 vsc-text-xs',
-  activeClass: 'vsc-outline vsc-outline-blue-500 vsc-outline-offset-[-1px]',
-  textareaClass: '!vsc-absolute vsc-top-0 vsc-left-0 vsc-min-w-full vsc-w-fit vsc-min-h-full vsc-outline-none vsc-z-50 vsc-whitespace-pre ', // eslint-disable-line
-  buttonClass: 'vsc-cursor-default vsc-w-full vsc-h-full vsc-outline-none vsc-text-start vsc-px-1.5 vsc-overflow-hidden vsc-text-zinc-200', // eslint-disable-line
-  headerButtonClass: '!vsc-text-center !vsc-whitespace-normal !vsc-h-6',
-}
-
-const ui = computed(() => {
-  return {
-    class: twMerge(uiDefaults.class, props.ui?.class),
-    headerClass: twMerge(uiDefaults.headerClass, props.ui?.headerClass),
-    activeClass: twMerge(uiDefaults.activeClass, props.ui?.activeClass),
-    textareaClass: twMerge(uiDefaults.textareaClass, props.ui?.textareaClass),
-    buttonClass: twMerge(uiDefaults.buttonClass, props.ui?.buttonClass),
-    headerButtonClass: twMerge(uiDefaults.headerButtonClass, props.ui?.buttonHeaderClass), // eslint-disable-line
-  }
-})
 
 const stagedValue = ref(props.value)
 
