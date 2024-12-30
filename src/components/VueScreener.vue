@@ -8,9 +8,9 @@
   >
     <VueScreenerTableView
       v-if="view === 'table'"
-      :screener="screener"
+      :screener="internalScreener"
       :ui="ui.tableView"
-      :style="{ height: screener.preferences.value.height }"
+      :style="{ height: internalScreener.preferences.value.height }"
     >
       <template #header-cell="headProps">
         <slot name="header-cell" v-bind="headProps" />
@@ -22,21 +22,21 @@
 
     <VueScreenerSpreadsheetView
       v-else-if="view === 'spreadsheet'"
-      :screener="screener"
+      :screener="internalScreener"
       :ui="props.ui?.spreadsheetView"
     />
 
-    <VueScreenerLoadingView v-else-if="view === 'loading'" :ui="ui?.loadingView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
+    <VueScreenerLoadingView v-else-if="view === 'loading'" :ui="ui?.loadingView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="no-data">
         <UiSpinner />
       </slot>
     </VueScreenerLoadingView>
 
-    <VueScreenerNoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
+    <VueScreenerNoDataView v-else-if="view === 'no-data'" :ui="ui?.noDataView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="no-data">No data provided</slot>
     </VueScreenerNoDataView>
 
-    <VueScreenerBadDataView v-else-if="view === 'bad-data'" :ui="ui?.badDataView" :style="{ height: screener.preferences.value.height }"> <!-- eslint-disable-line -->
+    <VueScreenerBadDataView v-else-if="view === 'bad-data'" :ui="ui?.badDataView" :style="{ height: internalScreener.preferences.value.height }"> <!-- eslint-disable-line -->
       <slot name="bad-data">
         <h4 class="vsc-font-medium vsc-mb-1">Invalid data provided.</h4>
         <p>Please provide an array of objects or an array of arrays.</p>
@@ -65,17 +65,24 @@ export type VueScreenerUI = {
   noDataView?: NoDataViewUI
   badDataView?: BadDataViewUI
 }
+import { useVueScreener } from '../hooks/use-vue-screener'
 
 const props = defineProps<{
-  screener: VueScreener
   ui?: VueScreenerUI
+  screener?: VueScreener
+  data?: any[]
 }>()
 
+const internalScreener = computed(() => {
+  if (props.screener) return props.screener as VueScreener
+  return useVueScreener(props.data ?? [])
+})
+
 const view = computed<'bad-data' | 'loading' | 'no-data' | 'spreadsheet' | 'table'>(() => {
-  if (props.screener.preferences.value.loading) return 'loading'
-  if (props.screener.hasError.value) return 'bad-data'
-  if (props.screener.preferences.value.editable) return 'spreadsheet'
-  if (!props.screener.allRows.value.length) return 'no-data'
+  if (internalScreener.value.preferences.value.loading) return 'loading'
+  if (internalScreener.value.hasError.value) return 'bad-data'
+  if (internalScreener.value.preferences.value.editable) return 'spreadsheet'
+  if (!internalScreener.value.allRows.value.length) return 'no-data'
   return 'table'
 })
 
@@ -124,5 +131,5 @@ const ui = computed(() => {
 
 const screenerRef = ref()
 
-useElementSize(screenerRef, props.screener.actions.setDimensions)
+useElementSize(screenerRef, internalScreener.value.actions.setDimensions)
 </script>
