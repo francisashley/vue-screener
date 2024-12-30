@@ -18,6 +18,9 @@ export type VueScreener = {
     updateRow: (id: string, partialData: Record<PropertyKey, any>) => void
     setLoading: (loading: boolean) => void
   }
+  totalSearchedRows: Ref<number>
+  currentPage: Ref<number>
+  rowsPerPage: Ref<number>
 }
 
 export type UserPreferences = {
