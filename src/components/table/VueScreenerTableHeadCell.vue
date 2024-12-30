@@ -5,7 +5,7 @@
     :is-pinned="column.isPinned"
     :is-pinned-overlapping="column.isOverlayingColumns"
     :class="[
-      'vsc-inline-flex vsc-items-center vsc-font-bold vsc-whitespace-nowrap vsc-h-8 vsc-gap-2 vsc-text-xs last:vsc-border-r-0',
+      'vsc-inline-flex !vsc-bg-[#1f1f22] vsc-items-center vsc-font-bold vsc-whitespace-nowrap vsc-h-8 vsc-gap-2 vsc-text-xs last:vsc-border-r-0',
       isSortable && twMerge('vsc-inline-flex vsc-items-center vsc-gap-2 vsc-cursor-pointer', props.sortableClass),
       Boolean(column.isSortable && getSortDirection(column.field)) && props.sortingClass,
     ]"
