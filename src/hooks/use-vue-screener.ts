@@ -161,6 +161,7 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
       searchQuery.value.sortField = field
     },
     goToPage: (page: number) => actions.search({ page }),
+    setPerPage: (rowsPerPage: number) => actions.search({ rowsPerPage }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
     setData: (inputData: unknown) => (allRows.value = isValidInput(inputData) ? convertToRows(inputData) : []),
     updateRow: (id: string, partialData: Record<PropertyKey, any>) => {

@@ -15,6 +15,7 @@ export type VueScreener = {
     search: (searchQuery: Partial<SearchQuery>) => void
     sort: (field: string | number) => void
     goToPage: (page: number) => void
+    setPerPage: (perPage: number) => void
     setDimensions: (dimensions: { height: number; width: number } | null) => void
     setData: (inputData: unknown[]) => void
     updateRow: (id: string, partialData: Record<PropertyKey, any>) => void
