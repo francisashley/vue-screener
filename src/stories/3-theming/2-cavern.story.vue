@@ -6,67 +6,70 @@
         <div class="vsc-flex vsc-items-center vsc-gap-2">
           <VueScreenerSearch
             :screener="screener"
-            :ui="{
-              class: 'vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-text-white vsc-h-[30px]',
-            }"
+            class="!vsc-border-[#2a2b2b] !vsc-bg-[#171717] !vsc-text-white !vsc-h-[30px]"
           />
           <VueScreenerSearchOptions
             :screener="screener"
-            :ui="{
-              class: 'vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-p-px vsc-h-[30px]',
-              toggleButton: {
-                class:
-                  'vsc-bg-transparent hover:vsc-bg-[#2a2b2b] vsc-text-white vsc-rounded-sm vsc-w-[26px] vsc-h-[26px]',
-                activeClass: '!vsc-bg-[#3e51b5]',
-              },
-            }"
+            class="!vsc-border-[#2a2b2b] !vsc-bg-[#171717] !vsc-p-px !vsc-h-[30px]"
+            toggle-button-class="!vsc-bg-transparent hover:!vsc-bg-[#2a2b2b] !vsc-text-white !vsc-rounded-sm !vsc-w-[26px] !vsc-h-[26px]"
+            toggle-button-active-class="!vsc-bg-[#3e51b5]"
           />
         </div>
       </div>
-      <VueScreener
-        :screener="screener"
-        :ui="{
-          tableView: {
-            table: {
-              class: 'vsc-border-transparent',
-              header: {
-                cell: {
-                  class: 'vsc-bg-transparent vsc-border-transparent vsc-uppercase vsc-text-[10px] vsc-h-6 vsc-py-0',
-                },
-              },
-              row: {
-                class:
-                  'vsc-border-gray-700 vsc-font-medium vsc-text-[10px] vsc-text-uppercase vsc-p-2 hover:vsc-bg-[#242424] vsc-border-[#2a2b2b]',
 
-                cell: {
-                  class: 'vsc-bg-transparent vsc-border-transparent vsc-text-[11px]',
-                },
-              },
-            },
-          },
-        }"
-      />
+      <VueScreener :screener="screener" class="!vsc-border-transparent">
+        <template #default="{ screener: internalScreener }">
+          <VueScreenerTableView :screener="internalScreener">
+            <VueScreenerTableHead class="!vsc-bg-[#171717]">
+              <VueScreenerTableHeadCell
+                v-for="(column, i) in screener.columns.value"
+                :key="i"
+                :screener="screener"
+                :column="column"
+                :text="column.label ?? column.field"
+                class="!vsc-bg-transparent !vsc-border-transparent !vsc-uppercase !vsc-text-[10px] !vsc-h-6 !vsc-py-0"
+              />
+            </VueScreenerTableHead>
+            <VueScreenerTableRow
+              v-for="(row, i) in screener.paginatedRows.value"
+              :key="i"
+              class="!vsc-font-medium !vsc-text-[10px] !vsc-text-uppercase !vsc-p-2 hover:!vsc-bg-[#242424] !vsc-border-[#2a2b2b]"
+            >
+              <VueScreenerTableCell
+                v-for="(column, j) in screener.columns.value"
+                :key="j"
+                :screener="screener"
+                :column="column"
+                :row="row"
+                class="!vsc-bg-transparent !vsc-border-transparent !vsc-text-[11px]"
+              />
+            </VueScreenerTableRow>
+          </VueScreenerTableView>
+        </template>
+      </VueScreener>
+
       <div class="vsc-p-4">
-        <VueScreenerPagination
-          v-if="!screener.hasError.value"
-          :screener="screener"
-          :ui="{
-            nav: {
-              button: {
-                class: 'vsc-text-white vsc-h-7 vsc-py-0 vsc-px-5 vsc-bg-[#171717] hover:vsc-bg-[#2a2b2b] vsc-border-[#2a2b2b] hover:vsc-border-[#2a2b2b]', // eslint-disable-line
-                activeClass: '!vsc-border-[#2a2b2b] vsc-text-[#2463eb]',
-              },
-            },
-            leftSide: {
-              class: 'vsc-text-xs vsc-min-w-[150px]',
-            },
-            rightSide: {
-              perPageInput: {
-                class: 'vsc-bg-[#171717] vsc-border-[#2a2b2b] vsc-text-white vsc-h-7',
-              },
-            },
-          }"
-        />
+        <VueScreenerPagination :screener="screener">
+          <VueScreenerPaginationResults
+            :total="screener.queriedRows.value.length ?? 0"
+            :current-page="screener.searchQuery.value.page"
+            :per-page="screener.searchQuery.value.rowsPerPage"
+            class="!vsc-text-xs !vsc-min-w-[150px]"
+          />
+          <VueScreenerPaginationButtons
+            :total="screener.queriedRows.value.length"
+            :per-page="screener.searchQuery.value.rowsPerPage"
+            :current-page="screener.searchQuery.value.page"
+            @go-to="screener.actions.goToPage"
+            button-class="!vsc-text-white !vsc-h-7 !vsc-py-0 !vsc-px-5 !vsc-bg-[#171717] hover:!vsc-bg-[#2a2b2b] !vsc-border-[#2a2b2b] hover:!vsc-border-[#2a2b2b]"
+            active-button-class="!vsc-border-[#2a2b2b] !vsc-text-[#2463eb]"
+          />
+          <VueScreenerPaginationRowsPerPage
+            :value="screener.searchQuery.value.rowsPerPage"
+            @change="screener.actions.setPerPage"
+            class="!vsc-bg-[#171717] !vsc-border-[#2a2b2b] !vsc-text-white !vsc-h-7 vsc-ml-auto"
+          />
+        </VueScreenerPagination>
       </div>
     </div>
   </Story>
@@ -79,6 +82,14 @@ import {
   VueScreenerSearchOptions,
   VueScreenerPagination,
   useVueScreener,
+  VueScreenerPaginationRowsPerPage,
+  VueScreenerPaginationResults,
+  VueScreenerPaginationButtons,
+  VueScreenerTableView,
+  VueScreenerTableHead,
+  VueScreenerTableHeadCell,
+  VueScreenerTableRow,
+  VueScreenerTableCell,
 } from '../../index'
 import baseData from '../../fixtures/data.json'
 
