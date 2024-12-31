@@ -6,18 +6,38 @@
       column.isOverlayingColumns && twMerge('!vsc-shadow-[-3px_0px_2px_rgba(0,0,0,0.11)]', props.pinnedOverlappingClass), // eslint-disable-line
     ]"
   >
-    <slot />
+    <slot>
+      <span v-html="formatCellContent(row.data[column.field], column, row)" />
+    </slot>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { defineProps } from 'vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
-import { Column } from '@/interfaces/vue-screener'
+import { Column, Row, VueScreener } from '@/interfaces/vue-screener'
+import { highlightMatches } from '../../utils/text.utils'
 
 const props = defineProps<{
+  screener: VueScreener
   column: Column
+  row: Row
   pinnedClass?: string
   pinnedOverlappingClass?: string
+  text?: string
 }>()
+
+const formatCellContent = (value: any, column: Column, row: Row): string => {
+  // allow the user to format the value
+  if (column.format) {
+    value = column.format(value, row)
+  }
+  // highlight search matches
+  const disableSearchHighlight = props.screener.preferences.value.disableSearchHighlight
+  const text = props.screener.searchQuery.value.text
+  if (!disableSearchHighlight && text && value !== undefined) {
+    value = highlightMatches(String(value), text)
+  }
+  return value
+}
 </script>

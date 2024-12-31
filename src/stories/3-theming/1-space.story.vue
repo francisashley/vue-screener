@@ -35,6 +35,11 @@
           },
         }"
       >
+        <template #default="{ screener: internalScreener }">
+          <VueScreenerTableView :screener="internalScreener">
+            <template>123</template>
+          </VueScreenerTableView>
+        </template>
       </VueScreener>
       <VueScreenerPagination :screener="screener">
         <VueScreenerPaginationResults
@@ -70,6 +75,7 @@ import {
   VueScreenerPaginationRowsPerPage,
   VueScreenerPaginationResults,
   VueScreenerPaginationButtons,
+  VueScreenerTableView,
 } from '../../index'
 
 import baseData from '../../fixtures/data.json'

@@ -12,7 +12,7 @@
     @click="handleClickColumnHeader(column)"
   >
     <SortIcon v-if="column.isSortable && getSortDirection(column.field)" :direction="getSortDirection(column.field)" />
-    <slot />
+    <slot>{{ text }}</slot>
   </VueScreenerTableCell>
 </template>
 
@@ -28,6 +28,7 @@ const props = defineProps<{
   column: Column
   sortableClass?: string
   sortingClass?: string
+  text?: string | number
 }>()
 
 const isSortable = computed(() => props.column.isSortable)
