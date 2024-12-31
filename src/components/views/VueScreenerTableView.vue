@@ -4,24 +4,26 @@
     @has-horizontal-overflow="screener.actions.setHasHorizontalOverflow"
     @is-scrolled-to-right-edge="screener.actions.setIsScrolledToRightEdge"
   >
-    <VueScreenerTableHead>
-      <VueScreenerTableHeadCell
-        v-for="(column, i) in screener.columns.value"
-        :key="i"
-        :screener="screener"
-        :column="column"
-        :text="column.label ?? column.field"
-      />
-    </VueScreenerTableHead>
-    <VueScreenerTableRow v-for="(row, i) in screener.paginatedRows.value" :key="i">
-      <VueScreenerTableCell
-        v-for="(column, j) in screener.columns.value"
-        :key="j"
-        :screener="screener"
-        :column="column"
-        :row="row"
-      />
-    </VueScreenerTableRow>
+    <slot>
+      <VueScreenerTableHead>
+        <VueScreenerTableHeadCell
+          v-for="(column, i) in screener.columns.value"
+          :key="i"
+          :screener="screener"
+          :column="column"
+          :text="column.label ?? column.field"
+        />
+      </VueScreenerTableHead>
+      <VueScreenerTableRow v-for="(row, i) in screener.paginatedRows.value" :key="i">
+        <VueScreenerTableCell
+          v-for="(column, j) in screener.columns.value"
+          :key="j"
+          :screener="screener"
+          :column="column"
+          :row="row"
+        />
+      </VueScreenerTableRow>
+    </slot>
   </VueScreenerTable>
 </template>
 

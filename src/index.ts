@@ -6,7 +6,9 @@ import VueScreenerPaginationRowsPerPage from './components/pagination/VueScreene
 import VueScreenerSearch from './components/search/VueScreenerSearch.vue'
 import VueScreenerSearchOptions from './components/search/VueScreenerSearchOptions.vue'
 import VueScreenerTableCell from './components/table/VueScreenerTableCell.vue'
+import VueScreenerTableRow from './components/table/VueScreenerTableRow.vue'
 import VueScreenerTableHeadCell from './components/table/VueScreenerTableHeadCell.vue'
+import VueScreenerTableHead from './components/table/VueScreenerTableHead.vue'
 import VueScreenerTableView from './components/views/VueScreenerTableView.vue'
 import VueScreenerEmptyView from './components/views/VueScreenerEmptyView.vue'
 import VueScreenerErrorView from './components/views/VueScreenerErrorView.vue'
@@ -24,9 +26,11 @@ export {
   VueScreenerPaginationRowsPerPage,
   VueScreenerTableCell,
   VueScreenerTableHeadCell,
+  VueScreenerTableHead,
   VueScreenerTableView,
   VueScreenerEmptyView,
   VueScreenerErrorView,
   VueScreenerLoadingView,
+  VueScreenerTableRow,
   useVueScreener,
 }

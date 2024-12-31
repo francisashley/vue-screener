@@ -13,31 +13,29 @@
           />
         </div>
       </div>
-      <VueScreener
-        :screener="screener"
-        class="vsc-mb-4"
-        :ui="{
-          tableView: {
-            table: {
-              class: 'vsc-border-gray-700',
-              header: {
-                cell: {
-                  class: 'vsc-bg-gray-800 vsc-border-gray-700',
-                },
-              },
-              row: {
-                class: 'vsc-border-gray-700',
-                cell: {
-                  class: 'vsc-bg-gray-900 vsc-border-gray-700',
-                },
-              },
-            },
-          },
-        }"
-      >
+      <VueScreener :screener="screener" class="vsc-mb-4 !vsc-border-gray-700">
         <template #default="{ screener: internalScreener }">
           <VueScreenerTableView :screener="internalScreener">
-            <template>123</template>
+            <VueScreenerTableHead class="!vsc-border-gray-700">
+              <VueScreenerTableHeadCell
+                v-for="(column, i) in screener.columns.value"
+                :key="i"
+                :screener="screener"
+                :column="column"
+                :text="column.label ?? column.field"
+                class="!vsc-bg-gray-800 !vsc-border-gray-700"
+              />
+            </VueScreenerTableHead>
+            <VueScreenerTableRow v-for="(row, i) in screener.paginatedRows.value" :key="i" class="!vsc-border-gray-700">
+              <VueScreenerTableCell
+                v-for="(column, j) in screener.columns.value"
+                :key="j"
+                :screener="screener"
+                :column="column"
+                :row="row"
+                class="!vsc-bg-gray-900 !vsc-border-gray-700"
+              />
+            </VueScreenerTableRow>
           </VueScreenerTableView>
         </template>
       </VueScreener>
@@ -76,6 +74,10 @@ import {
   VueScreenerPaginationResults,
   VueScreenerPaginationButtons,
   VueScreenerTableView,
+  VueScreenerTableHead,
+  VueScreenerTableHeadCell,
+  VueScreenerTableRow,
+  VueScreenerTableCell,
 } from '../../index'
 
 import baseData from '../../fixtures/data.json'
