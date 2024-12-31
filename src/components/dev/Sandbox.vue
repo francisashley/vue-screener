@@ -1,5 +1,5 @@
 <template>
-  <div class="vsc-bg-zinc-800 vsc-rounded-lg vsc-p-4">
+  <div :class="twMerge('vsc-bg-zinc-800 vsc-rounded-lg vsc-p-4', props.class)">
     <div class="vsc-flex vsc-justify-between vsc-items-center">
       <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
         {{ title }}
@@ -28,10 +28,13 @@
 import { VueScreenerPagination } from '../../index'
 import { VueScreener } from '../../interfaces/vue-screener'
 import { VueScreenerSearch, VueScreenerSearchOptions } from '../../index'
+import { HTMLAttributes } from 'vue'
+import { twMerge } from 'tailwind-merge'
 
-defineProps<{
+const props = defineProps<{
   screener: VueScreener
   title: string
   canToggleEditable?: boolean
+  class?: HTMLAttributes['class']
 }>()
 </script>

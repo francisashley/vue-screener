@@ -1,6 +1,11 @@
 <template>
   <div
-    class="vsc-grid vsc-overflow-auto vsc-h-full vsc-sticky vsc-top-0 vsc-text-zinc-200 vsc-auto-rows-min"
+    :class="
+      twMerge(
+        'vsc-grid vsc-overflow-auto vsc-h-full vsc-sticky vsc-top-0 vsc-text-zinc-200 vsc-auto-rows-min',
+        props.class,
+      )
+    "
     :style="style"
     ref="mainRef"
   >
@@ -9,12 +14,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, watchEffect } from 'vue'
+import { computed, defineProps, HTMLAttributes, watchEffect } from 'vue'
 import type { Column } from '../../interfaces/vue-screener'
 import { useScrollable } from '../../hooks/use-scrollable'
+import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
   columns: Column[]
+  class?: HTMLAttributes['class']
 }>()
 
 const emit = defineEmits(['has-horizontal-overflow', 'is-scrolled-to-right-edge'])

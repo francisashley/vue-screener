@@ -1,6 +1,6 @@
 <template>
   <UiInput
-    class="vsc-w-[200px] vsc-flex vsc-items-center vsc-gap-2 vsc-relative"
+    :class="twMerge('vsc-w-[200px] vsc-flex vsc-items-center vsc-gap-2 vsc-relative', props.class)"
     type="text"
     :value="screener.searchQuery.value.text"
     :error="regex && !isValidQuery"
@@ -12,12 +12,14 @@
 
 <script lang="ts" setup>
 import { VueScreener } from '@/interfaces/vue-screener'
-import { computed, ref } from 'vue'
+import { computed, HTMLAttributes, ref } from 'vue'
 import { isValidRegExp } from '../../utils/regex.utils'
 import UiInput from '../ui/input/Input.vue'
+import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
   screener: VueScreener
+  class?: HTMLAttributes['class']
 }>()
 
 const history = ref<string[]>([])

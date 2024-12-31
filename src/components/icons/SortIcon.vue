@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue'
+import { defineProps, HTMLAttributes } from 'vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import { ArrowDown } from 'lucide-vue-next'
 
 const props = defineProps<{
   direction?: null | 'asc' | 'desc'
-  class?: string // eslint-disable-line
+  class?: HTMLAttributes['class']
   ascClass?: string
 }>()
 </script>

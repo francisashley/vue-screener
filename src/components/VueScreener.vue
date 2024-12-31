@@ -1,5 +1,5 @@
 <template>
-  <section class="vs-screener vsc-font-sans vsc-overflow-auto vsc-text-sm vsc-rounded vsc-border vsc-border-zinc-700" :style="{ height: internalScreener.preferences.value.height }" ref="screenerRef"> <!-- eslint-disable-line -->
+  <section :class="twMerge('vs-screener vsc-font-sans vsc-overflow-auto vsc-text-sm vsc-rounded vsc-border vsc-border-zinc-700',props.class)" :style="{ height: internalScreener.preferences.value.height }" ref="screenerRef"> <!-- eslint-disable-line -->
     <slot v-if="view === 'default'" name="default" :screener="internalScreener">
       <VueScreenerTableView :screener="internalScreener" />
     </slot>
@@ -27,10 +27,12 @@ import VueScreenerErrorView from './views/VueScreenerErrorView.vue'
 import VueScreenerEmptyView from './views/VueScreenerEmptyView.vue'
 import VueScreenerLoadingView from './views/VueScreenerLoadingView.vue'
 import { useVueScreener } from '../hooks/use-vue-screener'
+import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
   screener?: VueScreener
   data?: any[]
+  class?: string
 }>()
 
 const internalScreener = computed(() => {

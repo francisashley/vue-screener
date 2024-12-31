@@ -1,6 +1,11 @@
 <template>
   <div
-    class="vsc-textarea-container vsc-h-fit vsc-inline-grid vsc-align-top vsc-relative vsc-min-w-full vsc-w-max vsc-max-w-[150px]"
+    :class="
+      twMerge(
+        'vsc-textarea-container vsc-h-fit vsc-inline-grid vsc-align-top vsc-relative vsc-min-w-full vsc-w-max vsc-max-w-[150px]',
+        props.class,
+      )
+    "
     :data-value="modelValue"
     ref="container"
   >
@@ -9,11 +14,13 @@
 </template>
 
 <script setup lang="ts">
+import { twMerge } from 'tailwind-merge'
 import { ref, onMounted } from 'vue'
 const container = ref<HTMLDivElement | null>(null)
 const textarea = ref<HTMLDivElement | null>(null)
 
 const props = defineProps<{
+  class?: string
   autofocus?: boolean
   modelValue?: any
 }>()

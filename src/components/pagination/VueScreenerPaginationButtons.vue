@@ -1,5 +1,5 @@
 <template>
-  <div class="vsc-flex vsc-gap-2">
+  <div :class="twMerge('vsc-flex vsc-gap-2', props.class)">
     <UiButton
       :disabled="!canNavigateFirst"
       @click="emit('go-to', 1)"
@@ -46,10 +46,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, HTMLAttributes } from 'vue'
 import UiButton from '../ui/button/Button.vue'
+import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
+  class?: HTMLAttributes['class']
   buttonClass?: string
   activeButtonClass?: string
   total: number

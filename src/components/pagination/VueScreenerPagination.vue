@@ -1,6 +1,11 @@
 <template>
   <div
-    class="vsc-grid vsc-items-center vsc-justify-between vsc-text-zinc-300 vsc-text-sm vsc-gap-2 vsc-whitespace-nowrap vsc-grid-cols-[150px_auto_150px]"
+    :class="
+      twMerge(
+        'vsc-grid vsc-items-center vsc-justify-between vsc-text-zinc-300 vsc-text-sm vsc-gap-2 vsc-whitespace-nowrap vsc-grid-cols-[150px_auto_150px]',
+        props.class,
+      )
+    "
   >
     <slot :screener="screener">
       <VueScreenerPaginationResults
@@ -27,13 +32,15 @@
 
 <script lang="ts" setup>
 import { VueScreener } from '@/interfaces/vue-screener'
-import { computed, onMounted, watch } from 'vue'
+import { computed, HTMLAttributes, onMounted, watch } from 'vue'
 import VueScreenerPaginationRowsPerPage from '../pagination/VueScreenerPaginationRowsPerPage.vue'
 import VueScreenerPaginationResults from '../pagination/VueScreenerPaginationResults.vue'
 import VueScreenerPaginationButtons from '../pagination/VueScreenerPaginationButtons.vue'
+import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
   screener: VueScreener
+  class?: HTMLAttributes['class']
 }>()
 
 const totalPages = computed((): number => {
