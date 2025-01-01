@@ -1,13 +1,4 @@
-import {
-  Column,
-  Row,
-  VueScreener,
-  SearchQuery,
-  UserPreferences,
-  VueScreenerOptions,
-  CellChangedEvent,
-  RowChangedEvent,
-} from '@/interfaces/vue-screener'
+import { Column, Row, VueScreener, SearchQuery, UserPreferences, VueScreenerOptions } from '@/interfaces/vue-screener'
 import { createColumn, getFields, getPaginated, isValidInput, convertToRows, sortRows } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -16,7 +7,6 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
   // User preferences
   const preferences = ref<UserPreferences>({
     height: options.height ?? '400px',
-    editable: options.editable ?? false,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
     loading: options.loading ?? false,
   })
@@ -140,53 +130,6 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     setPerPage: (rowsPerPage: number) => actions.search({ rowsPerPage }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
     setData: (inputData: unknown) => (allRows.value = isValidInput(inputData) ? convertToRows(inputData) : []),
-    updateRow: (id: string, partialData: Record<PropertyKey, any>) => {
-      let cellChanges: CellChangedEvent[] = []
-      let rowChanges: RowChangedEvent | null = null
-
-      const updatedRows = allRows.value.map((row) => {
-        if (id === row.id) {
-          const updatedRow = { ...row.data, ...partialData }
-
-          cellChanges = Object.keys(partialData).map((key) => {
-            const column = columns.value.find((columns) => columns.field === key)
-            return {
-              newValue: partialData[key],
-              oldValue: row.data[key],
-              column: column as Column,
-              row,
-            }
-          })
-
-          rowChanges = {
-            newRow: updatedRow.data,
-            oldRow: row.data.data,
-            updatedCells: cellChanges,
-          }
-
-          return { ...row, data: updatedRow }
-        }
-        return row
-      })
-
-      if (options.onCellChanged) {
-        cellChanges.forEach(options.onCellChanged)
-      }
-
-      if (options.onRowChanged && rowChanges) {
-        options.onRowChanged(rowChanges)
-      }
-
-      if (options.onDataChanged && rowChanges) {
-        options.onDataChanged({
-          newData: updatedRows.map((row) => row.data.data),
-          oldData: allRows.value.map((row) => row.data.data),
-          updatedRow: rowChanges,
-        })
-      }
-
-      allRows.value = updatedRows
-    },
     setLoading: (loading: boolean) => (preferences.value.loading = loading),
     setHasHorizontalOverflow: (value: boolean) => (hasHorizontalOverflow.value = value),
     setIsScrolledToRightEdge: (value: boolean) => (isScrolledToRightEdge.value = value),
@@ -194,7 +137,6 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
       preferences.value = {
         ...preferences.value,
         height: newOptions.height ?? preferences.value.height,
-        editable: newOptions.editable ?? preferences.value.editable,
         disableSearchHighlight: newOptions.disableSearchHighlight ?? preferences.value.disableSearchHighlight,
         loading: newOptions.loading ?? preferences.value.loading,
       }

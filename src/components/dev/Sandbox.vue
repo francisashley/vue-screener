@@ -5,14 +5,6 @@
         {{ title }}
       </h3>
       <div class="vsc-flex vsc-items-center vsc-gap-2">
-        <label v-if="canToggleEditable" class="vsc-gap-2 vsc-flex vsc-text-zinc-300">
-          <input
-            type="checkbox"
-            :checked="screener.preferences.value.editable"
-            @click="screener.preferences.value.editable = !screener.preferences.value.editable"
-          />
-          Editable
-        </label>
         <VueScreenerSearch :screener="screener" />
         <VueScreenerSearchOptions :screener="screener" />
       </div>
@@ -34,7 +26,6 @@ import { twMerge } from 'tailwind-merge'
 const props = defineProps<{
   screener: VueScreener
   title: string
-  canToggleEditable?: boolean
   class?: HTMLAttributes['class']
 }>()
 </script>

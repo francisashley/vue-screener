@@ -1,24 +1,5 @@
 import { ComputedRef, Ref } from 'vue'
 
-export type CellChangedEvent = {
-  newValue: any
-  oldValue: any
-  column: Column
-  row: Row
-}
-
-export type RowChangedEvent = {
-  newRow: Row
-  oldRow: Row
-  updatedCells: CellChangedEvent[]
-}
-
-export type DataChangedEvent = {
-  newData: Row[]
-  oldData: Row[]
-  updatedRow: RowChangedEvent
-}
-
 export type VueScreenerOptions = {
   height?: string // a css height
   defaultCurrentPage?: number
@@ -27,11 +8,7 @@ export type VueScreenerOptions = {
   defaultSortDirection?: 'asc' | 'desc'
   columns?: Record<PropertyKey, Partial<Column>>
   disableSearchHighlight?: boolean
-  editable?: boolean
   loading?: boolean
-  onCellChanged?: (event: CellChangedEvent) => void
-  onRowChanged?: (event: RowChangedEvent) => void
-  onDataChanged?: (event: DataChangedEvent) => void
 }
 
 export type VueScreener = {
@@ -52,7 +29,6 @@ export type VueScreener = {
     setPerPage: (perPage: number) => void
     setDimensions: (dimensions: { height: number; width: number } | null) => void
     setData: (inputData: unknown[]) => void
-    updateRow: (id: string, partialData: Record<PropertyKey, any>) => void
     setLoading: (loading: boolean) => void
     setHasHorizontalOverflow: (hasHorizontalOverflow: boolean) => void
     setIsScrolledToRightEdge: (isScrolledToRightEdge: boolean) => void
@@ -66,7 +42,6 @@ export type VueScreener = {
 export type UserPreferences = {
   height?: string
   disableSearchHighlight: boolean
-  editable: boolean
   loading: boolean
 }
 

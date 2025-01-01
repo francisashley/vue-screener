@@ -41,7 +41,6 @@ const props = defineProps<{
   defaultSortDirection?: 'asc' | 'desc'
   columns?: Record<PropertyKey, Partial<Column>>
   disableSearchHighlight?: boolean
-  editable?: boolean
   loading?: boolean
 }>()
 
@@ -61,7 +60,6 @@ watchEffect(() => {
     defaultSortDirection: props.defaultSortDirection,
     columns: props.columns,
     disableSearchHighlight: props.disableSearchHighlight,
-    editable: props.editable,
     loading: props.loading,
   }
 
