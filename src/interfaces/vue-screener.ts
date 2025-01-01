@@ -1,5 +1,39 @@
 import { ComputedRef, Ref } from 'vue'
 
+export type CellChangedEvent = {
+  newValue: any
+  oldValue: any
+  column: Column
+  row: Row
+}
+
+export type RowChangedEvent = {
+  newRow: Row
+  oldRow: Row
+  updatedCells: CellChangedEvent[]
+}
+
+export type DataChangedEvent = {
+  newData: Row[]
+  oldData: Row[]
+  updatedRow: RowChangedEvent
+}
+
+export type VueScreenerOptions = {
+  height?: string // a css height
+  defaultCurrentPage?: number
+  defaultRowsPerPage?: number
+  defaultSortField?: string
+  defaultSortDirection?: 'asc' | 'desc'
+  columns?: Record<PropertyKey, Partial<Column>>
+  disableSearchHighlight?: boolean
+  editable?: boolean
+  loading?: boolean
+  onCellChanged?: (event: CellChangedEvent) => void
+  onRowChanged?: (event: RowChangedEvent) => void
+  onDataChanged?: (event: DataChangedEvent) => void
+}
+
 export type VueScreener = {
   preferences: Ref<UserPreferences>
   searchQuery: Ref<SearchQuery>
@@ -22,6 +56,7 @@ export type VueScreener = {
     setLoading: (loading: boolean) => void
     setHasHorizontalOverflow: (hasHorizontalOverflow: boolean) => void
     setIsScrolledToRightEdge: (isScrolledToRightEdge: boolean) => void
+    setOptions: (newOptions: Partial<VueScreenerOptions>) => void
   }
   totalSearchedRows: Ref<number>
   currentPage: Ref<number>

@@ -1,41 +1,17 @@
-import { Column, Row, VueScreener, SearchQuery, UserPreferences } from '@/interfaces/vue-screener'
+import {
+  Column,
+  Row,
+  VueScreener,
+  SearchQuery,
+  UserPreferences,
+  VueScreenerOptions,
+  CellChangedEvent,
+  RowChangedEvent,
+} from '@/interfaces/vue-screener'
 import { createColumn, getFields, getPaginated, isValidInput, convertToRows, sortRows } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 
-type CellChangedEvent = {
-  newValue: any
-  oldValue: any
-  column: Column
-  row: Row
-}
-
-type RowChangedEvent = {
-  newRow: Row
-  oldRow: Row
-  updatedCells: CellChangedEvent[]
-}
-
-type DataChangedEvent = {
-  newData: Row[]
-  oldData: Row[]
-  updatedRow: RowChangedEvent
-}
-
-type VueScreenerOptions = {
-  height?: string // a css height
-  defaultCurrentPage?: number
-  defaultRowsPerPage?: number
-  defaultSortField?: string
-  defaultSortDirection?: 'asc' | 'desc'
-  columns?: Record<PropertyKey, Partial<Column>>
-  disableSearchHighlight?: boolean
-  editable?: boolean
-  loading?: boolean
-  onCellChanged?: (event: CellChangedEvent) => void
-  onRowChanged?: (event: RowChangedEvent) => void
-  onDataChanged?: (event: DataChangedEvent) => void
-}
 export const useVueScreener = (inputData?: unknown[], options: VueScreenerOptions = {}): VueScreener => {
   // User preferences
   const preferences = ref<UserPreferences>({
@@ -214,6 +190,15 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     setLoading: (loading: boolean) => (preferences.value.loading = loading),
     setHasHorizontalOverflow: (value: boolean) => (hasHorizontalOverflow.value = value),
     setIsScrolledToRightEdge: (value: boolean) => (isScrolledToRightEdge.value = value),
+    setOptions: (newOptions: Partial<VueScreenerOptions>) => {
+      preferences.value = {
+        ...preferences.value,
+        height: newOptions.height ?? preferences.value.height,
+        editable: newOptions.editable ?? preferences.value.editable,
+        disableSearchHighlight: newOptions.disableSearchHighlight ?? preferences.value.disableSearchHighlight,
+        loading: newOptions.loading ?? preferences.value.loading,
+      }
+    },
   }
 
   return {
