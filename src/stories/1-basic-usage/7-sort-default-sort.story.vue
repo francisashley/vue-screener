@@ -1,7 +1,7 @@
 <template>
   <Story title="7. Sorting / Default sort" source="-">
     <DevSandbox title="Custom title" :screener="screener">
-      <Screener
+      <VueScreener
         :screener="screener"
         :ui="{
           tableView: {
@@ -18,11 +18,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { VueScreener, useVueScreener } from '../../index'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 import baseData from '../../fixtures/data.json'
 
-const screener = useScreener(baseData, {
+const screener = useVueScreener(baseData, {
   defaultSortField: 'first_name',
   defaultSortDirection: 'desc',
 })

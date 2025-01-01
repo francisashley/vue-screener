@@ -1,15 +1,15 @@
 <template>
   <Story title="4. Stick to the side" source="-">
     <DevSandbox title="Results" :screener="screener">
-      <Screener :screener="screener" :style="{ marginBottom: '12px' }">
-        <template #table-head="props">
-          <TableCell v-if="props.column.isSticky" v-bind="props">Actions</TableCell>
+      <VueScreener :screener="screener" :style="{ marginBottom: '12px' }">
+        <template #header-cell="props">
+          <VueScreenerTableHeadCell v-if="props.column.isPinned" v-bind="props">Actions</VueScreenerTableHeadCell>
         </template>
-        <template #table-cell="props">
-          <TableCell v-if="props.column.isSticky" v-bind="props">
+        <template #body-cell="props">
+          <VueScreenerTableCell v-if="props.column.isPinned" v-bind="props">
             <div :style="{ display: 'flex', gap: '5px', padding: '3px 0' }">
               <button
-                @click="handleClickEdit(props.item)"
+                @click="handleClickEdit(props.row)"
                 class="vsc-border vsc-border-black vsc-rounded vsc-px-1.5 vsc-py-0.5 vsc-leading-none vsc-text-xs vsc-bg-neutral-100 vsc-text-black"
               >
                 Edit
@@ -21,25 +21,26 @@
                 Delete
               </button>
             </div>
-          </TableCell>
+          </VueScreenerTableCell>
         </template>
-      </Screener>
+      </VueScreener>
     </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
-import TableCell from '../../components/ui/table/TableCell.vue'
+import { VueScreener, useVueScreener } from '../../index'
+import VueScreenerTableCell from '../../components/table/VueScreenerTableCell.vue'
+import VueScreenerTableHeadCell from '../../components/table/VueScreenerTableHeadCell.vue'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const handleClickEdit = (item: unknown) => console.log('edit', item)
-const handleClickDelete = (item: unknown) => console.log('delete', item)
+const handleClickEdit = (row: unknown) => console.log('edit', row)
+const handleClickDelete = (row: unknown) => console.log('delete', row)
 
-const screener = useScreener(baseData, {
-  columnDefs: {
-    actions: { isSticky: true },
+const screener = useVueScreener(baseData, {
+  columns: {
+    actions: { isPinned: true },
   },
 })
 </script>

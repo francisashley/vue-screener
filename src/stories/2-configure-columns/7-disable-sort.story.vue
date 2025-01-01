@@ -1,18 +1,18 @@
 <template>
   <Story title="8. Disable sort" source="-">
     <DevSandbox title="Results" :screener="screener">
-      <Screener :screener="screener" />
+      <VueScreener :screener="screener" />
     </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { VueScreener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const screener = useScreener(baseData, {
-  columnDefs: {
+const screener = useVueScreener(baseData, {
+  columns: {
     id: { width: '50px', order: 0 },
     first_name: { width: '150px', order: 1 },
     last_name: { width: '150px', order: 2 },

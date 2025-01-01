@@ -1,4 +1,4 @@
-import { DataType, Row, Item, ColDef } from '@/interfaces/screener'
+import { DataType, Row, Column } from '@/interfaces/vue-screener'
 import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -7,24 +7,22 @@ import { v4 as uuidv4 } from 'uuid'
  * @param {unknown} data - The data to check.
  * @returns {boolean} True if valid, false otherwise.
  */
-export function isValidInput(data: unknown): data is Item[] {
+export function isValidInput(data: unknown): data is Row[] {
   const isObject = (val: unknown) => typeof val === 'object' && val !== null
-  return Array.isArray(data) && data.every((item: unknown) => Array.isArray(item) || isObject(item))
+  return Array.isArray(data) && data.every((row: unknown) => Array.isArray(row) || isObject(row))
 }
 
 /**
  * Transforms input data into a consistent format.
- * @param {Item[]} data - The input data.
+ * @param {Row[]} data - The input data.
  * @returns {Row[]} The normalised data.
  */
-export function normaliseInput(data: Item[]): Row[] {
-  // If the input data is an array of arrays, convert it to an array of objects.
-  const transformedData = data.map((item) => (Array.isArray(item) ? { ...item } : item))
-
-  // Normalise each item into an array of normalised fields.
-  return transformedData.map((item: Item): Row => {
-    return { id: uuidv4(), data: item }
-  })
+export function convertToRows(data: Row[]): Row[] {
+  return data.map((row) => ({
+    id: uuidv4(),
+    // Handle both array and object inputs in one step
+    data: Array.isArray(row) ? Object.fromEntries(row.entries()) : row,
+  }))
 }
 
 /**
@@ -33,7 +31,7 @@ export function normaliseInput(data: Item[]): Row[] {
  * @returns {string[]} Unique field keys.
  */
 export function getFields(rows: Row[]): string[] {
-  const fields = new Set<string>(rows.flatMap((item) => Object.keys(item.data)))
+  const fields = new Set<string>(rows.flatMap((row) => Object.keys(row.data)))
   return Array.from(fields)
 }
 
@@ -41,20 +39,19 @@ export function getFields(rows: Row[]): string[] {
  * Creates a column definition by merging the provided partial column definition
  * with default values.
  *
- * @param {Partial<ColDef>} colDef - The partial column definition to merge with defaults.
- * @returns {ColDef} The complete column definition.
+ * @param {Partial<Column>} column - The partial column definition to merge with defaults.
+ * @returns {Column} The complete column definition.
  */
-export const createColumnDef = (colDef: Partial<ColDef>): ColDef => ({
+export const createColumn = (column: Partial<Column>): Column => ({
   field: '',
-  label: '',
-  isSticky: false,
+  isPinned: false,
   isSortable: true,
   defaultSortDirection: 'desc',
   width: 'auto',
   order: 0,
   only: false,
   hidden: false,
-  ...colDef,
+  ...column,
 })
 
 /**
@@ -65,18 +62,18 @@ export const createColumnDef = (colDef: Partial<ColDef>): ColDef => ({
 export function getPaginated({
   rows = [],
   page = 1,
-  itemsPerPage = 25,
+  rowsPerPage = 25,
 }: {
   rows: Row[]
   page: number
-  itemsPerPage: number
+  rowsPerPage: number
 }): Row[] {
-  const start = itemsPerPage * page
-  const end = start + itemsPerPage
+  const start = rowsPerPage * page
+  const end = start + rowsPerPage
   return rows.slice(start, end)
 }
 
-export const sortItems = (
+export const sortRows = (
   data: Row[],
   options: { sortField: string | number | null; sortDirection: 'asc' | 'desc' },
 ): Row[] => {
@@ -84,7 +81,7 @@ export const sortItems = (
   const sortDirection = options.sortDirection
 
   if (sortField && sortDirection) {
-    return [...orderBy(data, [(item: Row) => item.data[sortField]], [sortDirection])]
+    return [...orderBy(data, [(row: Row) => row.data[sortField]], [sortDirection])]
   } else {
     return data
   }

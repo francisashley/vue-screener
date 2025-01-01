@@ -1,28 +1,28 @@
 <template>
   <Story title="1. Control widths" source="-">
     <DevSandbox title="Results" :screener="screener1">
-      <Screener :screener="screener1" />
+      <VueScreener :screener="screener1" />
     </DevSandbox>
     <br />
     <DevSandbox title="Results" :screener="screener2">
-      <Screener :screener="screener2" />
+      <VueScreener :screener="screener2" />
     </DevSandbox>
     <br />
     <DevSandbox title="Results" :screener="screener3">
-      <Screener :screener="screener3" />
+      <VueScreener :screener="screener3" />
     </DevSandbox>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { Screener, useScreener } from '../../index'
+import { VueScreener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 import DevSandbox from '../../components/dev/Sandbox.vue'
 
-const screener1 = useScreener(baseData, {
-  columnDefs: {
+const screener1 = useVueScreener(baseData, {
+  columns: {
     id: { width: '50px' },
     first_name: { width: '150px' },
     last_name: { width: '150px' },
@@ -33,8 +33,8 @@ const screener1 = useScreener(baseData, {
   },
 })
 
-const screener2 = useScreener(primitivesData, {
-  columnDefs: {
+const screener2 = useVueScreener(primitivesData, {
+  columns: {
     0: { width: '50px' },
     1: { width: '100px' },
     2: { width: '100px' },
@@ -44,8 +44,8 @@ const screener2 = useScreener(primitivesData, {
   },
 })
 
-const screener3 = useScreener(mixedObjectsData, {
-  columnDefs: {
+const screener3 = useVueScreener(mixedObjectsData, {
+  columns: {
     type: { width: '75px', order: 1 },
     name: { width: '100px', order: 2 },
     id: { width: '50px', order: 0 },
