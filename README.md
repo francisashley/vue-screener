@@ -4,6 +4,8 @@
   <img src="https://raw.githubusercontent.com/francisashley/vue-screener/main/logo.png" alt="Logo" style="max-width: 400px;">
   <br/>
   <em>Easily search and filter data in Vue3</em>
+  <br/>
+  <a href="https://francisashley.github.io/vue-screener/">Documentation</a>
 </div>
 
 ## Install
