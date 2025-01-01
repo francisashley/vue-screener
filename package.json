@@ -30,11 +30,11 @@
     "lint": "eslint src --ext .ts,.vue"
   },
   "dependencies": {
-    "lucide-vue-next": "^0.469.0",
     "vue": "^3.4.27"
   },
   "devDependencies": {
     "@histoire/plugin-vue": "^0.17.17",
+    "@iconify/vue": "^4.2.0",
     "@types/estree": "^1.0.5",
     "@types/lodash-es": "^4.17.12",
     "@types/uuid": "^10.0.0",
