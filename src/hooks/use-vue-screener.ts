@@ -79,7 +79,13 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     const columns = new Map()
 
     // Add data fields first with defaults
-    dataFields.forEach((field) => columns.set(field, createColumn({ field })))
+    dataFields.forEach((field) => {
+      const defaults: Partial<Column> = { field }
+      if (typeof options.defaultTruncate === 'boolean') {
+        defaults.truncate = options.defaultTruncate
+      }
+      columns.set(field, createColumn(defaults))
+    })
 
     // Override with user configs
     if (options.columns) {

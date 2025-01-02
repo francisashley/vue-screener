@@ -51,6 +51,7 @@ export const createColumn = (column: Partial<Column>): Column => ({
   order: 0,
   only: false,
   hidden: false,
+  truncate: true,
   ...column,
 })
 

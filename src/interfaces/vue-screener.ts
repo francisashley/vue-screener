@@ -6,6 +6,7 @@ export type VueScreenerOptions = {
   defaultRowsPerPage?: number
   defaultSortField?: string
   defaultSortDirection?: 'asc' | 'desc'
+  defaultTruncate?: boolean
   columns?: Record<PropertyKey, Partial<Column>>
   disableSearchHighlight?: boolean
   loading?: boolean
@@ -70,6 +71,7 @@ export type Column = {
   only: boolean // Flag indicating if the column should be the only one displayed.
   hidden: boolean // Flag indicating if the column should be hidden.
   isOverlayingColumns?: boolean // Flag indicating if this pinned column should show overlay shadow
+  truncate?: boolean // Flag indicating if the content should be truncated with an ellipsis
   format?: <T>(value: T, row: Row) => string // Format the value of the field.
 }
 
