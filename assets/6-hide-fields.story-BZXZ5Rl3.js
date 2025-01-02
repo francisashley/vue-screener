@@ -1,15 +1,14 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createBaseVNode, ax as createVNode } from "./vendor-BjHKTJun.js";
-import { _ as _export_sfc, u as useVueScreener, b as baseData, V as VueScreener } from "./data-RdoU3UI6.js";
+import { _ as _export_sfc, u as useVueScreener, b as baseData, V as VueScreener } from "./data-qTo4tToe.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "4-disable-search highlight.story",
+  __name: "6-hide-fields.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const screener = useVueScreener(baseData, {
-      disableSearchHighlight: true,
       columns: {
-        id: {
-          width: "minmax(50px, max-content)"
-        }
+        id: { hidden: true, order: 0 },
+        first_name: { hidden: true, order: 1 },
+        last_name: { hidden: true, order: 2 }
       }
     });
     const __returned__ = { screener, get VueScreener() {
@@ -23,14 +22,14 @@ const _hoisted_1 = { class: "vsc-p-4 vsc-bg-zinc-800" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "4. Disable search highlight",
+    title: "6. Hide fields",
     source: "-"
   }, {
     default: withCtx(() => [
       createBaseVNode("div", _hoisted_1, [
         createVNode($setup["VueScreener"], {
           screener: $setup.screener,
-          title: "Custom title"
+          title: "Results"
         }, null, 8, ["screener"])
       ])
     ]),
@@ -38,8 +37,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/1-basic-usage/4-disable-search highlight.story.vue";
-const _4DisableSearch_highlight_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/1-basic-usage/4-disable-search highlight.story.vue"]]);
+_sfc_main.__file = "src/stories/2-configure-columns/6-hide-fields.story.vue";
+const _6HideFields_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/6-hide-fields.story.vue"]]);
 export {
-  _4DisableSearch_highlight_story as default
+  _6HideFields_story as default
 };

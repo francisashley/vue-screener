@@ -1721,7 +1721,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               1
               /* TEXT */
             )) : createCommentVNode("v-if", true),
-            createVNode($setup["VueScreenerSearch"], { screener: $setup.internalScreener }, null, 8, ["screener"])
+            createVNode($setup["VueScreenerSearch"], {
+              screener: $setup.internalScreener,
+              class: "vsc-ml-auto"
+            }, null, 8, ["screener"])
           ])
         ]),
         renderSlot(_ctx.$slots, "viewport", { screener: $setup.internalScreener }, () => [

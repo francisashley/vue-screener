@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/1-data.story-CAr3jRoy.js","assets/vendor-BjHKTJun.js","assets/data-RdoU3UI6.js","assets/mix-objects-data-D5HdiZTi.js","assets/2-states.story-JhHgeYj8.js","assets/3-column-sorting.story-C6_9ODkN.js","assets/4-disable-search highlight.story-hd397D1O.js","assets/1-control-widths.story-dp6Mwa16.js","assets/2-control-labels.story-BI46Zr4K.js","assets/3-extra-columns.story-BsWgHx3b.js","assets/4-pin-to-side.story-DRx41HX9.js","assets/5-only-fields.story-CHiYWu_O.js","assets/6-hide-fields.story-BNTgFnjM.js","assets/7-disable-sort.story-DGiiMXXm.js","assets/8-format-column.story-BAYrorN5.js","assets/1-space.story-BnucFrYf.js","assets/2-cavern.story-BkfHnaJE.js","assets/HomeView.vue-CgDBpJi_.js","assets/story-mYDjoDXS.js","assets/StoryView.vue-UNeTaJkl.js","assets/MobileOverlay.vue2-tjSJWsFd.js","assets/BaseEmpty.vue-BBBpX5z8.js","assets/state-BEW7t_eC.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/1-data.story-Db-v-tvg.js","assets/vendor-BjHKTJun.js","assets/data-qTo4tToe.js","assets/mix-objects-data-D5HdiZTi.js","assets/2-states.story-B2qY_VTC.js","assets/3-column-sorting.story-Bcwu1iu-.js","assets/4-disable-search highlight.story-BVxrN_AJ.js","assets/1-control-widths.story-abB3Oujl.js","assets/2-control-labels.story-Yhs0mnZ5.js","assets/3-extra-columns.story-CnBAF-Qj.js","assets/4-pin-to-side.story-B0d3dgro.js","assets/5-only-fields.story-DPFqpvoh.js","assets/6-hide-fields.story-BZXZ5Rl3.js","assets/7-disable-sort.story-Dk9H7MHo.js","assets/8-format-column.story-G1t76_Oy.js","assets/1-space.story-BKAHuf8v.js","assets/2-cavern.story-BxsGl-1e.js","assets/HomeView.vue-D1ETY4DJ.js","assets/story-Bt42Qmwb.js","assets/StoryView.vue-DSRMtp0I.js","assets/MobileOverlay.vue2-tjSJWsFd.js","assets/BaseEmpty.vue-BBBpX5z8.js","assets/state-DroiNtJn.js"])))=>i.map(i=>d[i]);
 import { Q as Comp14, R as defineAsyncComponent, S as createRouter, U as createWebHistory, V as createWebHashHistory, W as useDark, X as useToggle, k as watch, Y as markRaw, E as reactive, d as defineComponent, r as ref, Z as watchEffect, o as openBlock, q as createBlock, _ as mergeProps, $ as resolveDynamicComponent, h as createCommentVNode } from "./vendor-BjHKTJun.js";
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
@@ -57,20 +57,20 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   });
 };
-const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./1-data.story-CAr3jRoy.js"), true ? __vite__mapDeps([0,1,2,3]) : void 0));
-const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./2-states.story-JhHgeYj8.js"), true ? __vite__mapDeps([4,1,2]) : void 0));
-const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./3-column-sorting.story-C6_9ODkN.js"), true ? __vite__mapDeps([5,1,2]) : void 0));
-const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./4-disable-search highlight.story-hd397D1O.js"), true ? __vite__mapDeps([6,1,2]) : void 0));
-const Comp4 = defineAsyncComponent(() => __vitePreload(() => import("./1-control-widths.story-dp6Mwa16.js"), true ? __vite__mapDeps([7,1,2,3]) : void 0));
-const Comp5 = defineAsyncComponent(() => __vitePreload(() => import("./2-control-labels.story-BI46Zr4K.js"), true ? __vite__mapDeps([8,1,2,3]) : void 0));
-const Comp6 = defineAsyncComponent(() => __vitePreload(() => import("./3-extra-columns.story-BsWgHx3b.js"), true ? __vite__mapDeps([9,1,2]) : void 0));
-const Comp7 = defineAsyncComponent(() => __vitePreload(() => import("./4-pin-to-side.story-DRx41HX9.js"), true ? __vite__mapDeps([10,1,2]) : void 0));
-const Comp8 = defineAsyncComponent(() => __vitePreload(() => import("./5-only-fields.story-CHiYWu_O.js"), true ? __vite__mapDeps([11,1,2]) : void 0));
-const Comp9 = defineAsyncComponent(() => __vitePreload(() => import("./6-hide-fields.story-BNTgFnjM.js"), true ? __vite__mapDeps([12,1,2]) : void 0));
-const Comp10 = defineAsyncComponent(() => __vitePreload(() => import("./7-disable-sort.story-DGiiMXXm.js"), true ? __vite__mapDeps([13,1,2]) : void 0));
-const Comp11 = defineAsyncComponent(() => __vitePreload(() => import("./8-format-column.story-BAYrorN5.js"), true ? __vite__mapDeps([14,1,2]) : void 0));
-const Comp12 = defineAsyncComponent(() => __vitePreload(() => import("./1-space.story-BnucFrYf.js"), true ? __vite__mapDeps([15,1,2]) : void 0));
-const Comp13 = defineAsyncComponent(() => __vitePreload(() => import("./2-cavern.story-BkfHnaJE.js"), true ? __vite__mapDeps([16,1,2]) : void 0));
+const Comp0 = defineAsyncComponent(() => __vitePreload(() => import("./1-data.story-Db-v-tvg.js"), true ? __vite__mapDeps([0,1,2,3]) : void 0));
+const Comp1 = defineAsyncComponent(() => __vitePreload(() => import("./2-states.story-B2qY_VTC.js"), true ? __vite__mapDeps([4,1,2]) : void 0));
+const Comp2 = defineAsyncComponent(() => __vitePreload(() => import("./3-column-sorting.story-Bcwu1iu-.js"), true ? __vite__mapDeps([5,1,2]) : void 0));
+const Comp3 = defineAsyncComponent(() => __vitePreload(() => import("./4-disable-search highlight.story-BVxrN_AJ.js"), true ? __vite__mapDeps([6,1,2]) : void 0));
+const Comp4 = defineAsyncComponent(() => __vitePreload(() => import("./1-control-widths.story-abB3Oujl.js"), true ? __vite__mapDeps([7,1,2,3]) : void 0));
+const Comp5 = defineAsyncComponent(() => __vitePreload(() => import("./2-control-labels.story-Yhs0mnZ5.js"), true ? __vite__mapDeps([8,1,2,3]) : void 0));
+const Comp6 = defineAsyncComponent(() => __vitePreload(() => import("./3-extra-columns.story-CnBAF-Qj.js"), true ? __vite__mapDeps([9,1,2]) : void 0));
+const Comp7 = defineAsyncComponent(() => __vitePreload(() => import("./4-pin-to-side.story-B0d3dgro.js"), true ? __vite__mapDeps([10,1,2]) : void 0));
+const Comp8 = defineAsyncComponent(() => __vitePreload(() => import("./5-only-fields.story-DPFqpvoh.js"), true ? __vite__mapDeps([11,1,2]) : void 0));
+const Comp9 = defineAsyncComponent(() => __vitePreload(() => import("./6-hide-fields.story-BZXZ5Rl3.js"), true ? __vite__mapDeps([12,1,2]) : void 0));
+const Comp10 = defineAsyncComponent(() => __vitePreload(() => import("./7-disable-sort.story-Dk9H7MHo.js"), true ? __vite__mapDeps([13,1,2]) : void 0));
+const Comp11 = defineAsyncComponent(() => __vitePreload(() => import("./8-format-column.story-G1t76_Oy.js"), true ? __vite__mapDeps([14,1,2]) : void 0));
+const Comp12 = defineAsyncComponent(() => __vitePreload(() => import("./1-space.story-BKAHuf8v.js"), true ? __vite__mapDeps([15,1,2]) : void 0));
+const Comp13 = defineAsyncComponent(() => __vitePreload(() => import("./2-cavern.story-BxsGl-1e.js"), true ? __vite__mapDeps([16,1,2]) : void 0));
 let files = [
   { "id": "src-stories-1-basic-usage-1-data-story-vue", "path": ["1. Input data"], "filePath": "src/stories/1-basic-usage/1-data.story.vue", "story": { "id": "src-stories-1-basic-usage-1-data-story-vue", "title": "1. Input data", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }], "autoPropsDisabled": true }, "supportPluginId": "vue3", "index": 0, component: Comp0, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-1-basic-usage-1-data-story-vue-CX2BKPMY.js"), true ? [] : void 0) },
   { "id": "src-stories-1-basic-usage-2-states-story-vue", "path": ["2. States"], "filePath": "src/stories/1-basic-usage/2-states.story.vue", "story": { "id": "src-stories-1-basic-usage-2-states-story-vue", "title": "2. States", "layout": { "type": "single", "iframe": true }, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }], "autoPropsDisabled": true }, "supportPluginId": "vue3", "index": 1, component: Comp1, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-stories-1-basic-usage-2-states-story-vue-Y7ewgKeB.js"), true ? [] : void 0) },
@@ -109,12 +109,12 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => __vitePreload(() => import("./HomeView.vue-CgDBpJi_.js"), true ? __vite__mapDeps([17,18,1]) : void 0)
+      component: () => __vitePreload(() => import("./HomeView.vue-D1ETY4DJ.js"), true ? __vite__mapDeps([17,18,1]) : void 0)
     },
     {
       path: "/story/:storyId",
       name: "story",
-      component: () => __vitePreload(() => import("./StoryView.vue-UNeTaJkl.js"), true ? __vite__mapDeps([19,1,18,20,21,22]) : void 0)
+      component: () => __vitePreload(() => import("./StoryView.vue-DSRMtp0I.js"), true ? __vite__mapDeps([19,1,18,20,21,22]) : void 0)
     }
   ]
 });
