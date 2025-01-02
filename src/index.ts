@@ -7,6 +7,7 @@ import VueScreenerTableState from './components/viewport/states/VueScreenerTable
 import VueScreenerTableHead from './components/table/VueScreenerTableHead.vue'
 import VueScreenerTableHeadCell from './components/table/VueScreenerTableHeadCell.vue'
 import VueScreenerTableRow from './components/table/VueScreenerTableRow.vue'
+import VueScreenerTableSummaryRow from './components/table/VueScreenerTableSummaryRow.vue'
 import VueScreenerTableCell from './components/table/VueScreenerTableCell.vue'
 import VueScreenerEmptyState from './components/viewport/states/VueScreenerEmptyState.vue'
 import VueScreenerErrorState from './components/viewport/states/VueScreenerErrorState.vue'
@@ -31,6 +32,7 @@ export {
   VueScreenerTableHead,
   VueScreenerTableHeadCell,
   VueScreenerTableRow,
+  VueScreenerTableSummaryRow,
   VueScreenerTableCell,
   VueScreenerEmptyState,
   VueScreenerErrorState,
