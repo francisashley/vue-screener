@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { twMerge } from 'tailwind-merge'
-import UiSpinner from '../ui/spinner/Spinner.vue'
+import UiSpinner from '../../ui/spinner/Spinner.vue'
 
 const props = defineProps<{
   class?: string

@@ -15,7 +15,7 @@
       </div>
       <VueScreener :screener="screener" class="vsc-mb-4 vsc-border-gray-700">
         <template #default="{ screener: internalScreener }">
-          <VueScreenerTableView :screener="internalScreener">
+          <VueScreenerTableState :screener="internalScreener">
             <VueScreenerTableHead class="vsc-border-gray-700">
               <VueScreenerTableHeadCell
                 v-for="(column, i) in screener.columns.value"
@@ -36,7 +36,7 @@
                 class="vsc-bg-gray-900 vsc-border-gray-700"
               />
             </VueScreenerTableRow>
-          </VueScreenerTableView>
+          </VueScreenerTableState>
         </template>
       </VueScreener>
       <VueScreenerPagination :screener="screener">
@@ -73,7 +73,7 @@ import {
   VueScreenerPaginationRowsPerPage,
   VueScreenerPaginationResults,
   VueScreenerPaginationButtons,
-  VueScreenerTableView,
+  VueScreenerTableState,
   VueScreenerTableHead,
   VueScreenerTableHeadCell,
   VueScreenerTableRow,

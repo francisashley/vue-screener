@@ -28,12 +28,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { VueScreener } from '../../interfaces/vue-screener'
-import VueScreenerTableRow from '../table/VueScreenerTableRow.vue'
-import VueScreenerTableCell from '../table/VueScreenerTableCell.vue'
-import VueScreenerTableHeadCell from '../table/VueScreenerTableHeadCell.vue'
-import VueScreenerTable from '../table/VueScreenerTable.vue'
-import VueScreenerTableHead from '../table/VueScreenerTableHead.vue'
+import type { VueScreener } from '../../../interfaces/vue-screener'
+import VueScreenerTableRow from '../../table/VueScreenerTableRow.vue'
+import VueScreenerTableCell from '../../table/VueScreenerTableCell.vue'
+import VueScreenerTableHeadCell from '../../table/VueScreenerTableHeadCell.vue'
+import VueScreenerTable from '../../table/VueScreenerTable.vue'
+import VueScreenerTableHead from '../../table/VueScreenerTableHead.vue'
 
 defineProps<{
   screener: VueScreener
