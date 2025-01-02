@@ -48,7 +48,7 @@ import 'vue-screener/style.css'
 const screener = useVueScreener(data, {
   height: '400px',
   defaultCurrentPage: 1,
-  defaultRowsPerPage: 25,
+  defaultRowsPerPage: 10,
   defaultSortField: 'id',
   defaultSortDirection: 'desc',
   columns: {
@@ -125,7 +125,7 @@ const screener = useVueScreener(data)
 ### useVueScreener Options
 * `height`: CSS height (default: '400px')
 * `defaultCurrentPage`: number (default: 1)
-* `defaultRowsPerPage`: number (default: 25)
+* `defaultRowsPerPage`: number (default: 10)
 * `defaultSortField`: string
 * `defaultSortDirection`: 'asc' | 'desc'
 * `columns`: Record<PropertyKey, Column>

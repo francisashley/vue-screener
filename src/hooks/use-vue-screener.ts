@@ -6,7 +6,7 @@ import { search } from '../utils/search.utils'
 export const useVueScreener = (inputData?: unknown[], options: VueScreenerOptions = {}): VueScreener => {
   // User preferences
   const preferences = ref<UserPreferences>({
-    height: options.height ?? '400px',
+    height: options.height,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
     loading: options.loading ?? false,
   })
@@ -28,7 +28,7 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     caseSensitive: false, // Whether to match case in search
     wholeWord: false, // Whether to match whole word in search
     page: options.defaultCurrentPage ?? 1, // Current page number
-    rowsPerPage: options.defaultRowsPerPage ?? 25, // Number of rows per page
+    rowsPerPage: options.defaultRowsPerPage ?? 10, // Number of rows per page
     sortField: options.defaultSortField ?? null, // Field to sort by
     sortDirection: options.defaultSortDirection ?? 'desc', // Sort direction
   })

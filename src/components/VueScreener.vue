@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import type { Column, VueScreener } from '../interfaces/vue-screener'
 import { useElementSize } from '../hooks/use-element-size'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { computed, ref, watch } from 'vue'
 import VueScreenerTableView from './views/VueScreenerTableView.vue'
 import VueScreenerErrorView from './views/VueScreenerErrorView.vue'
 import VueScreenerEmptyView from './views/VueScreenerEmptyView.vue'

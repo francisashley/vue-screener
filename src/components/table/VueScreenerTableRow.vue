@@ -2,7 +2,7 @@
   <div
     :class="
       twMerge(
-        'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-border-b vsc-border-zinc-700 vsc-h-fit',
+        'vsc-grid vsc-col-span-full vsc-grid-cols-subgrid vsc-border-b last:vsc-border-b-0 vsc-border-zinc-700 vsc-h-fit',
         props.class,
       )
     "
