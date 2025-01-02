@@ -60,7 +60,7 @@ const formattedValue = computed(() => {
   if (!disableSearchHighlight && text && formattedValue !== undefined) {
     const updatedFormattedValue = highlightMatches(String(formattedValue.value), text)
     formattedValue = {
-      isHighlighted: formattedValue.value !== updatedFormattedValue,
+      isHighlighted: formattedValue.value != updatedFormattedValue,
       value: updatedFormattedValue,
     }
   }
