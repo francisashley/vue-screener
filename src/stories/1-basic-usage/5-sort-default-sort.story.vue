@@ -1,5 +1,5 @@
 <template>
-  <Story title="7. Sorting / Default sort" source="-">
+  <Story title="5. Sorting / Default sort" source="-">
     <div class="vsc-p-4 vsc-bg-zinc-800">
       <VueScreener :screener="screener" title="Custom title" />
     </div>
