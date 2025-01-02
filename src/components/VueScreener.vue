@@ -6,10 +6,7 @@
           <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
             {{ title }}
           </h3>
-          <div class="vsc-flex vsc-items-center vsc-gap-2">
-            <VueScreenerSearch :screener="internalScreener" />
-            <VueScreenerSearchOptions :screener="internalScreener" />
-          </div>
+          <VueScreenerSearch :screener="internalScreener" />
         </div>
       </slot>
       <slot name="viewport" :screener="internalScreener">
@@ -29,7 +26,6 @@ import { computed, ref, watch } from 'vue'
 import VueScreenerViewport from './viewport/VueScreenerViewport.vue'
 import VueScreenerPagination from '../components/pagination/VueScreenerPagination.vue'
 import VueScreenerSearch from '../components/search/VueScreenerSearch.vue'
-import VueScreenerSearchOptions from '../components/search/VueScreenerSearchOptions.vue'
 import { useVueScreener } from '../hooks/use-vue-screener'
 import { twMerge } from 'tailwind-merge'
 

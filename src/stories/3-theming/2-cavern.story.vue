@@ -7,10 +7,7 @@
           <VueScreenerSearch
             :screener="screener"
             class="vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-text-white vsc-h-[30px]"
-          />
-          <VueScreenerSearchOptions
-            :screener="screener"
-            class="vsc-border-[#2a2b2b] vsc-bg-[#171717] vsc-p-px vsc-h-[30px]"
+            options-class="vsc-p-px vsc-h-[30px]"
             toggle-button-class="vsc-bg-transparent hover:vsc-bg-[#2a2b2b] vsc-text-white vsc-rounded-sm vsc-w-[26px] vsc-h-[26px]"
             toggle-button-active-class="vsc-bg-[#3e51b5]"
           />
@@ -79,7 +76,6 @@
 import {
   VueScreener,
   VueScreenerSearch,
-  VueScreenerSearchOptions,
   VueScreenerPagination,
   useVueScreener,
   VueScreenerPaginationRowsPerPage,

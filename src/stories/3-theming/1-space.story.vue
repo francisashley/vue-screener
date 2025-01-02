@@ -4,10 +4,9 @@
       <div class="vsc-flex vsc-justify-between vsc-items-center vsc-mb-4 vsc-text-white">
         <h3 class="vsc-text-base vsc-mb-0">Space theme</h3>
         <div class="vsc-flex vsc-items-center vsc-gap-2">
-          <VueScreenerSearch :screener="screener" class="vsc-border-[#374151] vsc-bg-[#1f2937] vsc-text-white" />
-          <VueScreenerSearchOptions
+          <VueScreenerSearch
             :screener="screener"
-            class="vsc-border-[#374151] vsc-bg-[#1f2937]"
+            class="vsc-border-[#374151] vsc-bg-[#1f2937] vsc-text-white"
             toggle-button-class="vsc-bg-[#1f2937] hover:vsc-bg-[#374151] vsc-text-white vsc-rounded-sm vsc-w-[25px] vsc-h-[25px]"
             toggle-button-active-class="vsc-bg-[#3e51b5]"
           />
@@ -67,7 +66,6 @@
 import {
   VueScreener,
   VueScreenerSearch,
-  VueScreenerSearchOptions,
   VueScreenerPagination,
   useVueScreener,
   VueScreenerPaginationRowsPerPage,

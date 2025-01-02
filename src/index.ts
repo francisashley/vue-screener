@@ -1,7 +1,6 @@
 import VueScreener from './components/VueScreener.vue'
 
 import VueScreenerSearch from './components/search/VueScreenerSearch.vue'
-import VueScreenerSearchOptions from './components/search/VueScreenerSearchOptions.vue'
 
 import VueScreenerTableState from './components/viewport/states/VueScreenerTableState.vue'
 import VueScreenerTableHead from './components/table/VueScreenerTableHead.vue'
@@ -26,7 +25,6 @@ export {
   VueScreener,
   // Header
   VueScreenerSearch,
-  VueScreenerSearchOptions,
   // Viewport
   VueScreenerTableState,
   VueScreenerTableHead,
