@@ -1,7 +1,7 @@
 import { ComputedRef, Ref } from 'vue'
 
 export type VueScreenerOptions = {
-  height?: string // a css height
+  contentHeight?: string // a css height
   defaultCurrentPage?: number
   defaultRowsPerPage?: number
   defaultSortField?: string
@@ -40,7 +40,7 @@ export type VueScreener = {
 }
 
 export type UserPreferences = {
-  height?: string
+  contentHeight?: string
   disableSearchHighlight: boolean
   loading: boolean
 }

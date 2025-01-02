@@ -6,7 +6,7 @@ import { search } from '../utils/search.utils'
 export const useVueScreener = (inputData?: unknown[], options: VueScreenerOptions = {}): VueScreener => {
   // User preferences
   const preferences = ref<UserPreferences>({
-    height: options.height,
+    contentHeight: options.contentHeight,
     disableSearchHighlight: options.disableSearchHighlight ?? false,
     loading: options.loading ?? false,
   })
@@ -136,7 +136,7 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     setOptions: (newOptions: Partial<VueScreenerOptions>) => {
       preferences.value = {
         ...preferences.value,
-        height: newOptions.height ?? preferences.value.height,
+        contentHeight: newOptions.contentHeight ?? preferences.value.contentHeight,
         disableSearchHighlight: newOptions.disableSearchHighlight ?? preferences.value.disableSearchHighlight,
         loading: newOptions.loading ?? preferences.value.loading,
       }

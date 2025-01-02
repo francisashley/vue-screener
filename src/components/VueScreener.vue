@@ -1,5 +1,5 @@
 <template>
-  <section :class="twMerge('vs-screener vsc-font-sans vsc-text-sm vsc-flex vsc-flex-col vsc-gap-2',props.class)" :style="{ height: internalScreener.preferences.value.height }" ref="screenerRef"> <!-- eslint-disable-line -->
+  <section :class="twMerge('vs-screener vsc-font-sans vsc-text-sm vsc-flex vsc-flex-col vsc-gap-2',props.class)" ref="screenerRef"> <!-- eslint-disable-line -->
     <div class="vsc-flex vsc-justify-between vsc-items-center">
       <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
         {{ title }}
@@ -9,7 +9,10 @@
         <VueScreenerSearchOptions :screener="internalScreener" />
       </div>
     </div>
-    <div class="vsc-border vsc-border-zinc-700 vsc-rounded vsc-overflow-auto">
+    <div
+      class="vsc-border vsc-border-zinc-700 vsc-rounded vsc-overflow-auto"
+      :style="{ height: internalScreener.preferences.value.contentHeight }"
+    >
       <slot v-if="view === 'default'" name="default" :screener="internalScreener">
         <VueScreenerTableView :screener="internalScreener" />
       </slot>
@@ -49,7 +52,7 @@ const props = defineProps<{
   data?: any[]
   class?: string
   // options
-  height?: string
+  contentHeight?: string
   defaultCurrentPage?: number
   defaultRowsPerPage?: number
   defaultSortField?: string
@@ -69,7 +72,7 @@ const internalScreener = computed(() => {
 
 watch(
   [
-    props.height,
+    props.contentHeight,
     props.defaultCurrentPage,
     props.defaultRowsPerPage,
     props.defaultSortField,
@@ -80,7 +83,7 @@ watch(
   ],
   () => {
     const options = {
-      height: props.height,
+      height: props.contentHeight,
       defaultCurrentPage: props.defaultCurrentPage,
       defaultRowsPerPage: props.defaultRowsPerPage,
       defaultSortField: props.defaultSortField,
