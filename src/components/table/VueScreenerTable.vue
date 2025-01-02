@@ -31,7 +31,7 @@ const style = computed(() => {
     if (typeof column.width === 'number') return column.width + 'px'
     return 'minmax(100px,auto)'
   })
-  return { 'grid-template-columns': sizes.join(' ') }
+  return { 'grid-template-columns': sizes.join(' '), 'color-scheme': 'dark' }
 })
 
 const { ref: mainRef, hasHorizontalOverflow, isScrolledToRightEdge } = useScrollable()
