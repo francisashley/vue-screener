@@ -1,8 +1,8 @@
 {
   "stories": [
     {
-      "id": "src-stories-1-basic-usage-1-array-of-objects-story-vue",
-      "title": "1. Array of objects",
+      "id": "src-stories-1-basic-usage-1-data-story-vue",
+      "title": "1. Input data",
       "layout": {
         "type": "single",
         "iframe": true
@@ -15,17 +15,17 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/1-array-of-objects.story.vue",
+      "relativePath": "src/stories/1-basic-usage/1-data.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "1. Array of objects"
+        "1. Input data"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-2-array-of-primitives-story-vue",
-      "title": "2. Array of primitives",
+      "id": "src-stories-1-basic-usage-2-states-story-vue",
+      "title": "2. States",
       "layout": {
         "type": "single",
         "iframe": true
@@ -38,17 +38,17 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/2-array-of-primitives.story.vue",
+      "relativePath": "src/stories/1-basic-usage/2-states.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "2. Array of primitives"
+        "2. States"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-3-array-of-mixed-objects-story-vue",
-      "title": "3. Array of mixed objects",
+      "id": "src-stories-1-basic-usage-3-column-sorting-story-vue",
+      "title": "3. Sort columns",
       "layout": {
         "type": "single",
         "iframe": true
@@ -61,17 +61,17 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/3-array-of-mixed-objects.story.vue",
+      "relativePath": "src/stories/1-basic-usage/3-column-sorting.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "3. Array of mixed objects"
+        "3. Sort columns"
       ],
       "virtual": false,
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-4-loading-story-vue",
-      "title": "4. Loading",
+      "id": "src-stories-1-basic-usage-4-disable-search-highlight-story-vue",
+      "title": "4. Disable search highlight",
       "layout": {
         "type": "single",
         "iframe": true
@@ -84,150 +84,10 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/4-loading.story.vue",
+      "relativePath": "src/stories/1-basic-usage/4-disable-search highlight.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "4. Loading"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-1-basic-usage-5-no-data-story-vue",
-      "title": "5. No data",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/5-no-data.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "5. No data"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-1-basic-usage-6-bad-data-story-vue",
-      "title": "6. Bad data",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/6-bad-data.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "6. Bad data"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-1-basic-usage-7-sort-default-sort-directions-story-vue",
-      "title": " Default sort directions",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/7-sort-default-sort-directions.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "7. Sorting ",
-        " Default sort directions"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-1-basic-usage-7-sort-default-sort-story-vue",
-      "title": " Default sort",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/7-sort-default-sort.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "7. Sorting ",
-        " Default sort"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-1-basic-usage-8-disable-search-highlight-story-vue",
-      "title": "8. Disable search highlight",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/8-disable-search highlight.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "8. Disable search highlight"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-1-basic-usage-9-editable-story-vue",
-      "title": "9. Editable",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/9-editable.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "9. Editable"
+        "4. Disable search highlight"
       ],
       "virtual": false,
       "markdownFile": null
@@ -303,7 +163,7 @@
     },
     {
       "id": "src-stories-2-configure-columns-4-pin-to-side-story-vue",
-      "title": "4. Stick to the side",
+      "title": "4. Pin to the side",
       "layout": {
         "type": "single",
         "iframe": true
@@ -319,7 +179,7 @@
       "relativePath": "src/stories/2-configure-columns/4-pin-to-side.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "4. Stick to the side"
+        "4. Pin to the side"
       ],
       "virtual": false,
       "markdownFile": null
@@ -458,29 +318,6 @@
       "supportPluginId": "vue3",
       "treePath": [
         "2. Cavern theme"
-      ],
-      "virtual": false,
-      "markdownFile": null
-    },
-    {
-      "id": "src-stories-4-other-1-stress-test-story-vue",
-      "title": "1. Stress Test",
-      "layout": {
-        "type": "single",
-        "iframe": true
-      },
-      "docsOnly": false,
-      "variants": [
-        {
-          "id": "_default",
-          "title": "default"
-        }
-      ],
-      "autoPropsDisabled": true,
-      "relativePath": "src/stories/4-other/1-stress-test.story.vue",
-      "supportPluginId": "vue3",
-      "treePath": [
-        "1. Stress Test"
       ],
       "virtual": false,
       "markdownFile": null
