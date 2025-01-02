@@ -1,5 +1,5 @@
 <template>
-  <Story title="4. States" source="-">
+  <Story title="2. States" source="-">
     <div class="vsc-p-4 vsc-bg-zinc-800">
       <VueScreener :screener="screener1" title="Loading" />
     </div>
