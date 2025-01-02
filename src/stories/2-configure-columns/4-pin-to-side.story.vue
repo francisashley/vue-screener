@@ -1,7 +1,7 @@
 <template>
   <Story title="4. Stick to the side" source="-">
-    <DevSandbox title="Results" :screener="screener">
-      <VueScreener :screener="screener" :style="{ marginBottom: '12px' }">
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener" title="Results">
         <template #header-cell="props">
           <VueScreenerTableHeadCell v-if="props.column.isPinned" v-bind="props">Actions</VueScreenerTableHeadCell>
         </template>
@@ -24,7 +24,7 @@
           </VueScreenerTableCell>
         </template>
       </VueScreener>
-    </DevSandbox>
+    </div>
   </Story>
 </template>
 
@@ -33,7 +33,6 @@ import { VueScreener, useVueScreener } from '../../index'
 import VueScreenerTableCell from '../../components/table/VueScreenerTableCell.vue'
 import VueScreenerTableHeadCell from '../../components/table/VueScreenerTableHeadCell.vue'
 import baseData from '../../fixtures/data.json'
-import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const handleClickEdit = (row: unknown) => console.log('edit', row)
 const handleClickDelete = (row: unknown) => console.log('delete', row)

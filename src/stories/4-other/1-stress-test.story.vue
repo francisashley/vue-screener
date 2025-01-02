@@ -1,15 +1,14 @@
 <template>
   <Story title="1. Stress Test" source="-">
-    <DevSandbox title="Results" :screener="screener">
-      <VueScreener :screener="screener" />
-    </DevSandbox>
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener" title="Results" />
+    </div>
   </Story>
 </template>
 
 <script lang="ts" setup>
 import { VueScreener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/stress-data.json'
-import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener = useVueScreener(baseData)
 </script>

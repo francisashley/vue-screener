@@ -1,14 +1,13 @@
 <template>
   <Story title="5. No data" source="-">
-    <DevSandbox title="No data" :screener="screener">
-      <VueScreener :screener="screener" />
-    </DevSandbox>
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener" title="No data" />
+    </div>
   </Story>
 </template>
 
 <script lang="ts" setup>
 import { VueScreener, useVueScreener } from '../../index'
-import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener = useVueScreener([])
 </script>

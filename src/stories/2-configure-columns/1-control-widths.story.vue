@@ -1,16 +1,16 @@
 <template>
   <Story title="1. Control widths" source="-">
-    <DevSandbox title="Results" :screener="screener1">
-      <VueScreener :screener="screener1" />
-    </DevSandbox>
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener1" title="Results" />
+    </div>
     <br />
-    <DevSandbox title="Results" :screener="screener2">
-      <VueScreener :screener="screener2" />
-    </DevSandbox>
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener2" title="Results" />
+    </div>
     <br />
-    <DevSandbox title="Results" :screener="screener3">
-      <VueScreener :screener="screener3" />
-    </DevSandbox>
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener3" title="Results" />
+    </div>
   </Story>
 </template>
 
@@ -19,7 +19,6 @@ import { VueScreener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 import primitivesData from '../../fixtures/primitives-data.json'
 import mixedObjectsData from '../../fixtures/mix-objects-data.json'
-import DevSandbox from '../../components/dev/Sandbox.vue'
 
 const screener1 = useVueScreener(baseData, {
   columns: {

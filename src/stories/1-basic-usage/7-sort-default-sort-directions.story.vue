@@ -1,25 +1,13 @@
 <template>
   <Story title="7. Sorting / Default sort directions" source="-">
-    <DevSandbox title="Sorting / Default sort directions" :screener="screener">
-      <VueScreener
-        :screener="screener"
-        :ui="{
-          tableView: {
-            table: {
-              header: {
-                cell: { class: 'vsc-text-blue-500', sortingClass: '!vsc-text-[gold]' },
-              },
-            },
-          },
-        }"
-      />
-    </DevSandbox>
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener" title="Sorting / Default sort directions" />
+    </div>
   </Story>
 </template>
 
 <script lang="ts" setup>
 import { VueScreener, useVueScreener } from '../../index'
-import DevSandbox from '../../components/dev/Sandbox.vue'
 import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData, {
