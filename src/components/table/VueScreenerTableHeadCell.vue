@@ -13,6 +13,7 @@
       Boolean(column.isSortable && getSortDirection(column.field)) && props.sortingClass,
     ]"
     @click="handleClickColumnHeader(column)"
+    :title="text"
   >
     <SortIcon v-if="column.isSortable && getSortDirection(column.field)" :direction="getSortDirection(column.field)" />
     <slot>{{ text }}</slot>
