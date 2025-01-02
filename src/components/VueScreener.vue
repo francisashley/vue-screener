@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import type { Column, VueScreener } from '../interfaces/vue-screener'
 import { useElementSize } from '../hooks/use-element-size'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 import VueScreenerTableView from './views/VueScreenerTableView.vue'
 import VueScreenerErrorView from './views/VueScreenerErrorView.vue'
 import VueScreenerEmptyView from './views/VueScreenerEmptyView.vue'
@@ -51,22 +51,34 @@ const internalScreener = computed(() => {
   return useVueScreener(props.data ?? [])
 })
 
-watchEffect(() => {
-  const options = {
-    height: props.height,
-    defaultCurrentPage: props.defaultCurrentPage,
-    defaultRowsPerPage: props.defaultRowsPerPage,
-    defaultSortField: props.defaultSortField,
-    defaultSortDirection: props.defaultSortDirection,
-    columns: props.columns,
-    disableSearchHighlight: props.disableSearchHighlight,
-    loading: props.loading,
-  }
+watch(
+  [
+    props.height,
+    props.defaultCurrentPage,
+    props.defaultRowsPerPage,
+    props.defaultSortField,
+    props.defaultSortDirection,
+    props.columns,
+    props.disableSearchHighlight,
+    props.loading,
+  ],
+  () => {
+    const options = {
+      height: props.height,
+      defaultCurrentPage: props.defaultCurrentPage,
+      defaultRowsPerPage: props.defaultRowsPerPage,
+      defaultSortField: props.defaultSortField,
+      defaultSortDirection: props.defaultSortDirection,
+      columns: props.columns,
+      disableSearchHighlight: props.disableSearchHighlight,
+      loading: props.loading,
+    }
 
-  if (internalScreener.value) {
-    internalScreener.value.actions.setOptions(options)
-  }
-})
+    if (internalScreener.value) {
+      internalScreener.value.actions.setOptions(options)
+    }
+  },
+)
 
 const view = computed<'default' | 'loading' | 'empty' | 'error'>(() => {
   if (internalScreener.value.preferences.value.loading) return 'loading'
