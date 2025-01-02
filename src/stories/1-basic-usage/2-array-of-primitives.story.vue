@@ -10,5 +10,11 @@
 import { VueScreener, useVueScreener } from '../../index'
 import primitivesData from '../../fixtures/primitives-data.json'
 
-const screener = useVueScreener(primitivesData)
+const screener = useVueScreener(primitivesData, {
+  columns: {
+    0: {
+      width: 'minmax(50px, max-content)',
+    },
+  },
+})
 </script>

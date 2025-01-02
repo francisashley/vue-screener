@@ -29,7 +29,7 @@ const emit = defineEmits(['has-horizontal-overflow', 'is-scrolled-to-right-edge'
 const style = computed(() => {
   const sizes = props.columns.map((column) => {
     if (typeof column.width === 'number') return column.width + 'px'
-    return 'minmax(100px,auto)'
+    return column.width
   })
   return { 'grid-template-columns': sizes.join(' '), 'color-scheme': 'dark' }
 })

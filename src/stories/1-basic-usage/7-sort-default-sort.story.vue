@@ -13,5 +13,10 @@ import baseData from '../../fixtures/data.json'
 const screener = useVueScreener(baseData, {
   defaultSortField: 'first_name',
   defaultSortDirection: 'desc',
+  columns: {
+    id: {
+      width: 'minmax(50px, max-content)',
+    },
+  },
 })
 </script>

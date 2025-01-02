@@ -12,5 +12,10 @@ import baseData from '../../fixtures/data.json'
 
 const screener = useVueScreener(baseData, {
   disableSearchHighlight: true,
+  columns: {
+    id: {
+      width: 'minmax(50px, max-content)',
+    },
+  },
 })
 </script>

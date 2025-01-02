@@ -1,5 +1,5 @@
 <template>
-  <Story title="4. Stick to the side" source="-">
+  <Story title="4. Pin to the side" source="-">
     <div class="vsc-p-4 vsc-bg-zinc-800">
       <VueScreener :screener="screener" title="Results">
         <template #header-cell="props">
@@ -39,6 +39,7 @@ const handleClickDelete = (row: unknown) => console.log('delete', row)
 
 const screener = useVueScreener(baseData, {
   columns: {
+    id: { width: 'minmax(50px, max-content)' },
     actions: { isPinned: true },
   },
 })

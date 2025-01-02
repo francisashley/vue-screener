@@ -96,7 +96,7 @@ import baseData from '../../fixtures/data.json'
 const screener = useVueScreener(baseData, {
   columns: {
     before: { label: '', width: '1fr', order: 0 },
-    id: { width: 'min-content', order: 1 },
+    id: { width: 'minmax(50px, max-content)', order: 1 },
     first_name: { width: 'min-content', order: 2 },
     last_name: { width: '1fr', order: 3 },
     full_name: { width: '1fr', order: 4 },

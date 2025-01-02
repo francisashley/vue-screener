@@ -14,7 +14,7 @@ const screener = useVueScreener(baseData, {
   defaultSortField: 'first_name',
   defaultSortDirection: 'desc',
   columns: {
-    id: { defaultSortDirection: 'asc' },
+    id: { defaultSortDirection: 'asc', width: 'minmax(50px, max-content)' },
     first_name: { defaultSortDirection: 'desc' },
     last_name: { defaultSortDirection: 'asc' },
     full_name: { defaultSortDirection: 'desc' },

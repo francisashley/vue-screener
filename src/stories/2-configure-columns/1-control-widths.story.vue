@@ -22,7 +22,7 @@ import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 
 const screener1 = useVueScreener(baseData, {
   columns: {
-    id: { width: '50px' },
+    id: { width: 'max-content' },
     first_name: { width: '150px' },
     last_name: { width: '150px' },
     full_name: { width: '150px' },
@@ -34,7 +34,7 @@ const screener1 = useVueScreener(baseData, {
 
 const screener2 = useVueScreener(primitivesData, {
   columns: {
-    0: { width: '50px' },
+    0: { width: 'max-content' },
     1: { width: '100px' },
     2: { width: '100px' },
     3: { width: '1fr' },
@@ -45,7 +45,7 @@ const screener2 = useVueScreener(primitivesData, {
 
 const screener3 = useVueScreener(mixedObjectsData, {
   columns: {
-    type: { width: '75px', order: 1 },
+    type: { width: 'minmax(50px, max-content)', order: 1 },
     name: { width: '100px', order: 2 },
     id: { width: '50px', order: 0 },
     address: { width: 'minmax(200px, 1fr)', order: 3 },

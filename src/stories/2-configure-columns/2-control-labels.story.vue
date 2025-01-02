@@ -22,7 +22,7 @@ import mixedObjectsData from '../../fixtures/mix-objects-data.json'
 
 const screener1 = useVueScreener(baseData, {
   columns: {
-    id: { label: 'ID' },
+    id: { label: 'ID', width: 'max-content' },
     first_name: { label: 'First name' },
     last_name: { label: 'Last name' },
     full_name: { label: 'Full name' },
@@ -34,7 +34,7 @@ const screener1 = useVueScreener(baseData, {
 
 const screener2 = useVueScreener(primitivesData, {
   columns: {
-    0: { label: 'ID' },
+    0: { label: 'ID', width: 'minmax(50px, max-content)' },
     1: { label: 'First name' },
     2: { label: 'Last name' },
     3: { label: 'Email' },

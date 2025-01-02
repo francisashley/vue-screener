@@ -10,5 +10,11 @@
 import { VueScreener, useVueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
 
-const screener = useVueScreener(baseData)
+const screener = useVueScreener(baseData, {
+  columns: {
+    id: {
+      width: 'minmax(50px, max-content)',
+    },
+  },
+})
 </script>
