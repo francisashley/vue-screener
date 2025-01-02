@@ -58,6 +58,7 @@ export type SearchQuery = {
   // sort
   sortField: string | number | null
   sortDirection: 'asc' | 'desc'
+  invertSort?: boolean
 }
 
 export type Column = {
@@ -72,6 +73,7 @@ export type Column = {
   hidden: boolean // Flag indicating if the column should be hidden.
   isOverlayingColumns?: boolean // Flag indicating if this pinned column should show overlay shadow
   truncate?: boolean // Flag indicating if the content should be truncated with an ellipsis
+  invertSort?: boolean // When true, reverses sort logic while maintaining arrow direction
   format?: <T>(value: T, row: Row) => string // Format the value of the field.
 }
 

@@ -5,7 +5,11 @@
     </div>
     <br />
     <div class="vsc-p-4 vsc-bg-zinc-800">
-      <VueScreener :screener="screener2" title="Default sort field direction" />
+      <VueScreener :screener="screener2" title="Invert sort field" />
+    </div>
+    <br />
+    <div class="vsc-p-4 vsc-bg-zinc-800">
+      <VueScreener :screener="screener3" title="Default sort field direction" />
     </div>
   </Story>
 </template>
@@ -24,7 +28,16 @@ const screener1 = useVueScreener(baseData, {
 const screener2 = useVueScreener(baseData, {
   defaultSortField: 'first_name',
   columns: {
-    id: { width: 'minmax(50px, max-content)', defaultSortDirection: 'asc' },
+    id: { width: 'minmax(50px, max-content)' },
+    first_name: { invertSort: true },
+  },
+})
+
+const screener3 = useVueScreener(baseData, {
+  defaultSortField: 'first_name',
+  defaultSortDirection: 'asc',
+  columns: {
+    id: { width: 'minmax(50px, max-content)' },
   },
 })
 </script>

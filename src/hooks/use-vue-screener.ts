@@ -49,10 +49,12 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
 
     const _sortField = searchQuery.value.sortField
 
+    const invertSort = _sortField && options.columns ? options.columns[_sortField]?.invertSort : undefined
     if (_sortField && searchQuery.value.sortDirection) {
       return sortRows(sortedRows, {
         sortField: _sortField,
         sortDirection: searchQuery.value.sortDirection,
+        invertSort,
       })
     } else {
       return sortedRows
@@ -123,12 +125,18 @@ export const useVueScreener = (inputData?: unknown[], options: VueScreenerOption
     search: (_searchQuery?: Partial<SearchQuery>) => (searchQuery.value = { ...searchQuery.value, ..._searchQuery }),
     sort: (field: string | number) => {
       const column = columns.value.find((columns) => columns.field === field)
-      searchQuery.value.sortDirection =
-        searchQuery.value.sortField === field
-          ? searchQuery.value.sortDirection === 'desc'
-            ? 'asc'
-            : 'desc'
-          : column?.defaultSortDirection || searchQuery.value.sortDirection
+      const currentDirection = searchQuery.value.sortDirection
+      const isCurrentField = searchQuery.value.sortField === field
+
+      // Calculate new direction
+      const newDirection = isCurrentField
+        ? currentDirection === 'desc'
+          ? 'asc'
+          : 'desc'
+        : column?.defaultSortDirection || 'desc'
+
+      searchQuery.value.sortDirection = newDirection // For arrow display
+      searchQuery.value.invertSort = Boolean(column?.invertSort)
 
       searchQuery.value.sortField = field
     },

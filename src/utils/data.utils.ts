@@ -76,16 +76,18 @@ export function getPaginated({
 
 export const sortRows = (
   data: Row[],
-  options: { sortField: string | number | null; sortDirection: 'asc' | 'desc' },
+  options: {
+    sortField: string | number | null
+    sortDirection: 'asc' | 'desc'
+    invertSort?: boolean
+  },
 ): Row[] => {
   const sortField = options.sortField
-  const sortDirection = options.sortDirection
-
+  const sortDirection = options.invertSort ? (options.sortDirection === 'asc' ? 'desc' : 'asc') : options.sortDirection
   if (sortField && sortDirection) {
     return [...orderBy(data, [(row: Row) => row.data[sortField]], [sortDirection])]
-  } else {
-    return data
   }
+  return data
 }
 
 /**
