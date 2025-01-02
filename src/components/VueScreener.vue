@@ -6,7 +6,7 @@
           <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
             {{ title }}
           </h3>
-          <VueScreenerSearch :screener="internalScreener" />
+          <VueScreenerSearch :screener="internalScreener" class="vsc-ml-auto" />
         </div>
       </slot>
       <slot name="viewport" :screener="internalScreener">
