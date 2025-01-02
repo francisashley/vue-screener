@@ -1,6 +1,7 @@
 <template>
   <div
-    class="vsc-border vsc-border-zinc-700 vsc-rounded vsc-overflow-auto"
+    class="vsc-border vsc-rounded vsc-overflow-auto"
+    :class="state === 'error' ? 'vsc-border-red-500' : 'vsc-border-zinc-700'"
     :style="{ height: screener.preferences.value.contentHeight }"
   >
     <slot v-if="state === 'default'" name="default" :screener="screener">
