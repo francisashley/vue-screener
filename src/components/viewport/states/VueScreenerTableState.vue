@@ -14,15 +14,22 @@
           :text="column.label ?? column.field"
         />
       </VueScreenerTableHead>
-      <VueScreenerTableRow v-for="(row, i) in screener.paginatedRows.value" :key="i">
-        <VueScreenerTableCell
-          v-for="(column, j) in screener.columns.value"
-          :key="j"
-          :screener="screener"
-          :column="column"
-          :row="row"
-        />
-      </VueScreenerTableRow>
+      <template v-if="screener.paginatedRows.value.length">
+        <VueScreenerTableRow v-for="(row, i) in screener.paginatedRows.value" :key="i">
+          <VueScreenerTableCell
+            v-for="(column, j) in screener.columns.value"
+            :key="j"
+            :screener="screener"
+            :column="column"
+            :row="row"
+          />
+        </VueScreenerTableRow>
+      </template>
+      <template v-else>
+        <VueScreenerTableSummaryRow class="vsc-text-center">
+          <div class="vsc-p-4">No results found</div>
+        </VueScreenerTableSummaryRow>
+      </template>
     </slot>
   </VueScreenerTable>
 </template>
@@ -30,6 +37,7 @@
 <script lang="ts" setup>
 import type { VueScreener } from '../../../interfaces/vue-screener'
 import VueScreenerTableRow from '../../table/VueScreenerTableRow.vue'
+import VueScreenerTableSummaryRow from '../../table/VueScreenerTableSummaryRow.vue'
 import VueScreenerTableCell from '../../table/VueScreenerTableCell.vue'
 import VueScreenerTableHeadCell from '../../table/VueScreenerTableHeadCell.vue'
 import VueScreenerTable from '../../table/VueScreenerTable.vue'
