@@ -1497,14 +1497,14 @@ const useVueScreener = (inputData, defaultOptions = {}) => {
   const columnsConfig = ref(defaultOptions.columns);
   const options = computed(() => ({
     contentHeight: contentHeight.value,
+    defaultCurrentPage: defaultCurrentPage.value,
+    defaultRowsPerPage: defaultRowsPerPage.value,
+    defaultSortField: defaultSortField.value,
+    defaultSortDirection: defaultSortDirection.value,
+    defaultTruncate: defaultTruncate.value,
+    columns: columnsConfig.value,
     disableSearchHighlight: disableSearchHighlight.value,
-    loading: loading.value,
-    defaultCurrentPage,
-    defaultRowsPerPage,
-    defaultSortField,
-    defaultSortDirection,
-    defaultTruncate,
-    columnsConfig
+    loading: loading.value
   }));
   const dimensions = ref(null);
   const hasHorizontalOverflow = ref(false);
@@ -1613,7 +1613,7 @@ const useVueScreener = (inputData, defaultOptions = {}) => {
     setDimensions: (_dimensions) => dimensions.value = _dimensions,
     // eslint-disable-line
     setData: (inputData2) => allRows.value = isValidInput(inputData2) ? convertToRows(inputData2) : [],
-    setLoading: (loading2) => options.value.loading = loading2,
+    setLoading: (isLoading) => loading.value = isLoading,
     setHasHorizontalOverflow: (value) => hasHorizontalOverflow.value = value,
     setIsScrolledToRightEdge: (value) => isScrolledToRightEdge.value = value,
     setOptions: (newOptions) => {
@@ -1673,9 +1673,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose }) {
     __expose();
     const props = __props;
-    const internalScreener = computed(() => {
-      return props.screener ?? useVueScreener(props.data ?? []);
-    });
+    const internalScreener = computed(() => props.screener ?? useVueScreener(props.data ?? []));
+    watch(() => props.data, (data) => internalScreener.value.actions.setData(data));
     watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight }));
     watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage }));
     watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage }));

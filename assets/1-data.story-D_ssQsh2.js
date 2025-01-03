@@ -1,5 +1,5 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createBaseVNode, ax as createVNode } from "./vendor-BjHKTJun.js";
-import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-q-LMitYs.js";
+import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-DTPJc3TL.js";
 import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-D5HdiZTi.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "1-data.story",
