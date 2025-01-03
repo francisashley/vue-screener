@@ -45,7 +45,20 @@ const props = defineProps<{
   title?: string
 }>()
 
-const internalScreener = computed(() => props.screener ?? useVueScreener(props.data ?? []))
+const internalScreener = computed(
+  () =>
+    props.screener ??
+    useVueScreener(props.data ?? [], {
+      contentHeight: props.contentHeight,
+      defaultCurrentPage: props.defaultCurrentPage,
+      defaultRowsPerPage: props.defaultRowsPerPage,
+      defaultSortField: props.defaultSortField,
+      defaultSortDirection: props.defaultSortDirection,
+      columns: props.columns,
+      disableSearchHighlight: props.disableSearchHighlight,
+      loading: props.loading,
+    }),
+)
 
 watch(() => props.data, (data: any) => props.data && internalScreener.value.actions.setData(data), { immediate: true }) // eslint-disable-line
 watch(
@@ -60,7 +73,6 @@ watch(
     loading: props.loading,
   }),
   (options) => internalScreener.value.actions.setOptions(options),
-  { immediate: true },
 )
 
 const screenerRef = ref()
