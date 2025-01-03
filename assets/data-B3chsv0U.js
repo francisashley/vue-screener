@@ -1372,7 +1372,6 @@ const createColumn = (column) => ({
   isPinned: false,
   isSortable: true,
   defaultSortDirection: "desc",
-  order: 0,
   only: false,
   width: "minmax(100px,auto)",
   hidden: false,
@@ -1577,7 +1576,12 @@ const useVueScreener = (inputData, defaultOptions = {}) => {
   });
   const columns = computed(() => {
     let columns2 = Object.values(columnsMap.value);
-    columns2 = columns2.sort((a, b) => a.order - b.order);
+    columns2.filter((column) => typeof column.order === "number").forEach((column) => {
+      const currentIndex = columns2.indexOf(column);
+      const columnCopy = { ...column };
+      columns2.splice(currentIndex, 1);
+      columns2.splice(column.order, 0, columnCopy);
+    });
     columns2 = columns2.filter((column) => !column.hidden);
     columns2 = columns2.map((column) => ({
       ...column,
