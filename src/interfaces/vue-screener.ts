@@ -62,7 +62,7 @@ export type Column = {
   isPinned: boolean // Flag indicating if the field is pinned.
   isSortable: boolean // Flag indicating if the field is sortable.
   defaultSortDirection: 'asc' | 'desc' // Flag indicating the default direction to sort the field.
-  order: number // The order of the column in the table.
+  order?: number // Use defined column order override.
   only: boolean // Flag indicating if the column should be the only one displayed.
   hidden: boolean // Flag indicating if the column should be hidden.
   isOverlayingColumns?: boolean // Flag indicating if this pinned column should show overlay shadow

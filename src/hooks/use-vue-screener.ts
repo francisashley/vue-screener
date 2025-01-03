@@ -111,7 +111,20 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
   const columns = computed<Column[]>(() => {
     let columns: Column[] = Object.values(columnsMap.value)
 
-    columns = columns.sort((a, b) => a.order - b.order)
+    // reorder columns
+    columns
+      .filter((column) => typeof column.order === 'number')
+      .forEach((column) => {
+        // Find the current index of the column
+        const currentIndex = columns.indexOf(column)
+        // Create a copy of the column
+        const columnCopy = { ...column }
+        // Remove the column from its current position
+        columns.splice(currentIndex, 1)
+        // Insert the column at its desired order position
+        columns.splice(column.order!, 0, columnCopy)
+      })
+
     columns = columns.filter((column) => !column.hidden)
 
     columns = columns.map((column) => ({

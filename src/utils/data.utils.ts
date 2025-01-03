@@ -47,7 +47,6 @@ export const createColumn = (column: Partial<Column>): Column => ({
   isPinned: false,
   isSortable: true,
   defaultSortDirection: 'desc',
-  order: 0,
   only: false,
   width: 'minmax(100px,auto)',
   hidden: false,
