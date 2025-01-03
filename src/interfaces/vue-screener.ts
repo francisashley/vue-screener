@@ -13,7 +13,7 @@ export type VueScreenerOptions = {
 }
 
 export type VueScreener = {
-  options: Ref<UserOptions>
+  options: Ref<VueScreenerOptions>
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
   allRows: Ref<Row[]>
@@ -38,12 +38,6 @@ export type VueScreener = {
   totalSearchedRows: Ref<number>
   currentPage: Ref<number>
   rowsPerPage: Ref<number>
-}
-
-export type UserOptions = {
-  contentHeight?: string
-  disableSearchHighlight: boolean
-  loading: boolean
 }
 
 export type SearchQuery = {

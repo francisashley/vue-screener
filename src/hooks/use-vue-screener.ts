@@ -1,4 +1,4 @@
-import { Column, Row, VueScreener, SearchQuery, UserOptions, VueScreenerOptions } from '@/interfaces/vue-screener'
+import { Column, Row, VueScreener, SearchQuery, VueScreenerOptions } from '@/interfaces/vue-screener'
 import { createColumn, getFields, getPaginated, isValidInput, convertToRows, sortRows } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
@@ -14,16 +14,16 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
   const defaultTruncate = ref<boolean | undefined>(defaultOptions.defaultTruncate)
   const columnsConfig = ref<Record<PropertyKey, Partial<Column>> | undefined>(defaultOptions.columns)
 
-  const options = computed<UserOptions>(() => ({
+  const options = computed<VueScreenerOptions>(() => ({
     contentHeight: contentHeight.value,
+    defaultCurrentPage: defaultCurrentPage.value,
+    defaultRowsPerPage: defaultRowsPerPage.value,
+    defaultSortField: defaultSortField.value,
+    defaultSortDirection: defaultSortDirection.value,
+    defaultTruncate: defaultTruncate.value,
+    columns: columnsConfig.value,
     disableSearchHighlight: disableSearchHighlight.value,
     loading: loading.value,
-    defaultCurrentPage,
-    defaultRowsPerPage,
-    defaultSortField,
-    defaultSortDirection,
-    defaultTruncate,
-    columnsConfig,
   }))
 
   // VueScreener dimensions (width and height)
