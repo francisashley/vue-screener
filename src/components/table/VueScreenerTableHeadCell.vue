@@ -13,10 +13,10 @@
       Boolean(column.isSortable && getSortDirection(column.field)) && props.sortingClass,
     ]"
     @click="handleClickColumnHeader(column)"
-    :title="text"
   >
     <SortIcon v-if="column.isSortable && getSortDirection(column.field)" :direction="getSortDirection(column.field)" />
     <slot>{{ text }}</slot>
+    <Icon v-if="column.info" icon="codicon:info" class="vsc-ml-auto vsc-min-w-3 vsc-min-h-3" v-tooltip="column.info" />
   </VueScreenerTableCell>
 </template>
 
@@ -26,6 +26,8 @@ import type { IVueScreener, Column } from '../../interfaces/vue-screener'
 import VueScreenerTableCell from '../table/VueScreenerTableCell.vue'
 import SortIcon from '../icons/SortIcon.vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
+import { Icon } from '@iconify/vue'
+import { vTooltip } from 'floating-vue'
 
 const props = defineProps<{
   screener: IVueScreener

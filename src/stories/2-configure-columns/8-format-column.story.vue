@@ -1,5 +1,5 @@
 <template>
-  <Story title="9. Format column" source="-">
+  <Story title="8. Format column" source="-">
     <div class="vsc-p-4 vsc-bg-zinc-800">
       <VueScreener
         title="Results"

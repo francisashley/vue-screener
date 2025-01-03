@@ -1,6 +1,6 @@
 {
   "name": "vue-screener",
-  "version": "0.15.13",
+  "version": "0.15.14",
   "type": "module",
   "description": "Easily search and filter data in Vue3.",
   "author": "Francis Ashley",
@@ -30,6 +30,7 @@
     "lint": "eslint src --ext .ts,.vue"
   },
   "dependencies": {
+    "floating-vue": "^5.2.2",
     "vue": "^3.4.27"
   },
   "devDependencies": {
