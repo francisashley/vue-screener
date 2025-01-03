@@ -3521,6 +3521,9 @@ video {
 .vsc-h-full {
   height: 100%;
 }
+.vsc-min-h-3 {
+  min-height: 0.75rem;
+}
 .vsc-min-h-\[calc\(100vh_-_16px\)\] {
   min-height: calc(100vh - 16px);
 }
@@ -3548,6 +3551,9 @@ video {
 .vsc-w-max {
   width: -moz-max-content;
   width: max-content;
+}
+.vsc-min-w-3 {
+  min-width: 0.75rem;
 }
 .vsc-min-w-8 {
   min-width: 2rem;

@@ -1,4 +1,4 @@
-import { aF as ref, aG as onMounted, aH as onUnmounted, ar as defineComponent, aI as twMerge$1, at as openBlock, aC as createElementBlock, aJ as renderSlot, aK as normalizeClass, au as createBlock, av as withCtx, aw as createBaseVNode, aL as extendTailwindMerge, aM as computed, aB as createCommentVNode, aN as Icon, aA as createTextVNode, aO as toDisplayString, aP as debounce, aQ as watchEffect, aR as normalizeStyle, ax as createVNode, aE as Fragment, aD as renderList, aS as watch, aT as v4, aU as orderBy } from "./vendor-BjHKTJun.js";
+import { aF as ref, aG as onMounted, aH as onUnmounted, ar as defineComponent, aI as twMerge$1, at as openBlock, aC as createElementBlock, aJ as renderSlot, aK as normalizeClass, au as createBlock, av as withCtx, aw as createBaseVNode, aL as extendTailwindMerge, aM as computed, aB as createCommentVNode, aN as Icon, aO as Mt, aA as createTextVNode, aP as toDisplayString, aQ as withDirectives, aR as debounce, aS as watchEffect, aT as normalizeStyle, ax as createVNode, aE as Fragment, aD as renderList, aU as watch, aV as v4, aW as orderBy } from "./vendor-D3HZPgi2.js";
 function observeSize(element, onChangeCallback) {
   const resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
@@ -271,6 +271,10 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
     };
     const __returned__ = { props, isSortable, getSortDirection, handleClickColumnHeader, VueScreenerTableCell, SortIcon, get twMerge() {
       return twMerge;
+    }, get Icon() {
+      return Icon;
+    }, get vTooltip() {
+      return Mt;
     } };
     Object.defineProperty(__returned__, "__isScriptSetup", { enumerable: false, value: true });
     return __returned__;
@@ -290,8 +294,7 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
       $setup.isSortable && $setup.twMerge("vsc-inline-flex vsc-items-center vsc-gap-2 vsc-cursor-pointer", $setup.props.sortableClass),
       Boolean($props.column.isSortable && $setup.getSortDirection($props.column.field)) && $setup.props.sortingClass
     ]),
-    onClick: _cache[0] || (_cache[0] = ($event) => $setup.handleClickColumnHeader($props.column)),
-    title: $props.text
+    onClick: _cache[0] || (_cache[0] = ($event) => $setup.handleClickColumnHeader($props.column))
   }, {
     default: withCtx(() => [
       $props.column.isSortable && $setup.getSortDirection($props.column.field) ? (openBlock(), createBlock($setup["SortIcon"], {
@@ -304,11 +307,24 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
           1
           /* TEXT */
         )
-      ])
+      ]),
+      $props.column.info ? withDirectives((openBlock(), createBlock(
+        $setup["Icon"],
+        {
+          key: 1,
+          icon: "codicon:info",
+          class: "vsc-ml-auto vsc-min-w-3 vsc-min-h-3"
+        },
+        null,
+        512
+        /* NEED_PATCH */
+      )), [
+        [$setup["vTooltip"], $props.column.info]
+      ]) : createCommentVNode("v-if", true)
     ]),
     _: 3
     /* FORWARDED */
-  }, 8, ["column", "value", "is-pinned", "is-pinned-overlapping", "class", "title"]);
+  }, 8, ["column", "value", "is-pinned", "is-pinned-overlapping", "class"]);
 }
 _sfc_main$j.__file = "src/components/table/VueScreenerTableHeadCell.vue";
 const VueScreenerTableHeadCell = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$j], ["__file", "/home/runner/work/vue-screener/vue-screener/src/components/table/VueScreenerTableHeadCell.vue"]]);

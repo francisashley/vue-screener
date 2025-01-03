@@ -1,5 +1,5 @@
-import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createBaseVNode, ax as createVNode } from "./vendor-BjHKTJun.js";
-import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-B3chsv0U.js";
+import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createBaseVNode, ax as createVNode } from "./vendor-D3HZPgi2.js";
+import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-2AA9QROb.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "8-format-column.story",
   setup(__props, { expose: __expose }) {
@@ -17,7 +17,7 @@ const _hoisted_1 = { class: "vsc-p-4 vsc-bg-zinc-800" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "9. Format column",
+    title: "8. Format column",
     source: "-"
   }, {
     default: withCtx(() => [

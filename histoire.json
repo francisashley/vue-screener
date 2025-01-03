@@ -255,7 +255,7 @@
     },
     {
       "id": "src-stories-2-configure-columns-8-format-column-story-vue",
-      "title": "9. Format column",
+      "title": "8. Format column",
       "layout": {
         "type": "single",
         "iframe": true
@@ -271,7 +271,30 @@
       "relativePath": "src/stories/2-configure-columns/8-format-column.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "9. Format column"
+        "8. Format column"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-2-configure-columns-9-column-tooltips-story-vue",
+      "title": "9. Column tooltips",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/2-configure-columns/9-column-tooltips.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "9. Column tooltips"
       ],
       "virtual": false,
       "markdownFile": null
