@@ -45,10 +45,9 @@ const props = defineProps<{
   title?: string
 }>()
 
-const internalScreener = computed(() => {
-  return props.screener ?? useVueScreener(props.data ?? [])
-})
+const internalScreener = computed(() => props.screener ?? useVueScreener(props.data ?? []))
 
+watch(() => props.data, (data: any) => internalScreener.value.actions.setData(data)) // eslint-disable-line
 watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight })) // eslint-disable-line
 watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage })) // eslint-disable-line
 watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage })) // eslint-disable-line

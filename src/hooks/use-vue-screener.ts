@@ -159,7 +159,7 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
     setPerPage: (rowsPerPage: number) => actions.search({ rowsPerPage }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
     setData: (inputData: unknown) => (allRows.value = isValidInput(inputData) ? convertToRows(inputData) : []),
-    setLoading: (loading: boolean) => (options.value.loading = loading),
+    setLoading: (isLoading: boolean) => (loading.value = isLoading),
     setHasHorizontalOverflow: (value: boolean) => (hasHorizontalOverflow.value = value),
     setIsScrolledToRightEdge: (value: boolean) => (isScrolledToRightEdge.value = value),
     setOptions: (newOptions: Partial<VueScreenerOptions>) => {
