@@ -55,7 +55,7 @@ const formattedValue = computed(() => {
   }
 
   // highlight search matches
-  const disableSearchHighlight = props.screener.preferences.value.disableSearchHighlight
+  const disableSearchHighlight = props.screener.options.value.disableSearchHighlight
   const text = props.screener.searchQuery.value.text
   if (!disableSearchHighlight && text && formattedValue !== undefined) {
     const updatedFormattedValue = highlightMatches(String(formattedValue.value), text)

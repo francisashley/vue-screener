@@ -46,40 +46,17 @@ const props = defineProps<{
 }>()
 
 const internalScreener = computed(() => {
-  if (props.screener) {
-    return props.screener
-  }
-  return useVueScreener(props.data ?? [])
+  return props.screener ?? useVueScreener(props.data ?? [])
 })
 
-watch(
-  [
-    props.contentHeight,
-    props.defaultCurrentPage,
-    props.defaultRowsPerPage,
-    props.defaultSortField,
-    props.defaultSortDirection,
-    props.columns,
-    props.disableSearchHighlight,
-    props.loading,
-  ],
-  () => {
-    const options = {
-      height: props.contentHeight,
-      defaultCurrentPage: props.defaultCurrentPage,
-      defaultRowsPerPage: props.defaultRowsPerPage,
-      defaultSortField: props.defaultSortField,
-      defaultSortDirection: props.defaultSortDirection,
-      columns: props.columns,
-      disableSearchHighlight: props.disableSearchHighlight,
-      loading: props.loading,
-    }
-
-    if (internalScreener.value) {
-      internalScreener.value.actions.setOptions(options)
-    }
-  },
-)
+watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight })) // eslint-disable-line
+watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage })) // eslint-disable-line
+watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage })) // eslint-disable-line
+watch(() => props.defaultSortField, (defaultSortField) => internalScreener.value.actions.setOptions({ defaultSortField })) // eslint-disable-line
+watch(() => props.defaultSortDirection, (defaultSortDirection) => internalScreener.value.actions.setOptions({ defaultSortDirection })) // eslint-disable-line
+watch(() => props.columns, (columns) => internalScreener.value.actions.setOptions({ columns })) // eslint-disable-line
+watch(() => props.disableSearchHighlight, (disableSearchHighlight) => internalScreener.value.actions.setOptions({ disableSearchHighlight })) // eslint-disable-line
+watch(() => props.loading, (loading) => internalScreener.value.actions.setOptions({ loading })) // eslint-disable-line
 
 const screenerRef = ref()
 

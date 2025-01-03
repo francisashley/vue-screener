@@ -2,7 +2,7 @@
   <div
     class="vsc-border vsc-rounded vsc-overflow-auto"
     :class="state === 'error' ? 'vsc-border-red-500' : 'vsc-border-zinc-700'"
-    :style="{ height: screener.preferences.value.contentHeight }"
+    :style="{ height: screener.options.value.contentHeight }"
   >
     <slot v-if="state === 'default'" name="default" :screener="screener">
       <VueScreenerTableState :screener="screener" />
@@ -35,7 +35,7 @@ const props = defineProps<{
 }>()
 
 const state = computed<'default' | 'loading' | 'empty' | 'error'>(() => {
-  if (props.screener.preferences.value.loading) return 'loading'
+  if (props.screener.options.value.loading) return 'loading'
   if (props.screener.hasError.value) return 'error'
   if (!props.screener.allRows.value.length) return 'empty'
   return 'default'
