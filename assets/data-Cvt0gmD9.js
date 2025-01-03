@@ -1663,16 +1663,32 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props, { expose: __expose }) {
     __expose();
     const props = __props;
-    const internalScreener = computed(() => props.screener ?? useVueScreener(props.data ?? []));
-    watch(() => props.data, (data) => internalScreener.value.actions.setData(data), { immediate: true });
-    watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight }), { immediate: true });
-    watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage }), { immediate: true });
-    watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage }), { immediate: true });
-    watch(() => props.defaultSortField, (defaultSortField) => internalScreener.value.actions.setOptions({ defaultSortField }), { immediate: true });
-    watch(() => props.defaultSortDirection, (defaultSortDirection) => internalScreener.value.actions.setOptions({ defaultSortDirection }), { immediate: true });
-    watch(() => props.columns, (columns) => internalScreener.value.actions.setOptions({ columns }), { immediate: true });
-    watch(() => props.disableSearchHighlight, (disableSearchHighlight) => internalScreener.value.actions.setOptions({ disableSearchHighlight }), { immediate: true });
-    watch(() => props.loading, (loading) => internalScreener.value.actions.setOptions({ loading }), { immediate: true });
+    const internalScreener = computed(
+      () => props.screener ?? useVueScreener(props.data ?? [], {
+        contentHeight: props.contentHeight,
+        defaultCurrentPage: props.defaultCurrentPage,
+        defaultRowsPerPage: props.defaultRowsPerPage,
+        defaultSortField: props.defaultSortField,
+        defaultSortDirection: props.defaultSortDirection,
+        columns: props.columns,
+        disableSearchHighlight: props.disableSearchHighlight,
+        loading: props.loading
+      })
+    );
+    watch(() => props.data, (data) => props.data && internalScreener.value.actions.setData(data), { immediate: true });
+    watch(
+      () => ({
+        contentHeight: props.contentHeight,
+        defaultCurrentPage: props.defaultCurrentPage,
+        defaultRowsPerPage: props.defaultRowsPerPage,
+        defaultSortField: props.defaultSortField,
+        defaultSortDirection: props.defaultSortDirection,
+        columns: props.columns,
+        disableSearchHighlight: props.disableSearchHighlight,
+        loading: props.loading
+      }),
+      (options) => internalScreener.value.actions.setOptions(options)
+    );
     const screenerRef = ref();
     useElementSize(screenerRef, internalScreener.value.actions.setDimensions);
     const __returned__ = { props, internalScreener, screenerRef, VueScreenerViewport, VueScreenerPagination, VueScreenerSearch, get twMerge() {
