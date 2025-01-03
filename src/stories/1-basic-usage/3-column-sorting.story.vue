@@ -1,43 +1,36 @@
 <template>
   <Story title="3. Sort columns" source="-">
     <div class="vsc-p-4 vsc-bg-zinc-800">
-      <VueScreener :screener="screener1" title="Default sort field" />
+      <VueScreener
+        title="Default sort field"
+        :data="baseData"
+        default-sort-field="first_name"
+        :columns="{ id: { width: 'minmax(50px, max-content)' } }"
+      />
     </div>
     <br />
     <div class="vsc-p-4 vsc-bg-zinc-800">
-      <VueScreener :screener="screener2" title="Invert sort field" />
+      <VueScreener
+        title="Invert sort field"
+        :data="baseData"
+        default-sort-field="first_name"
+        :columns="{ id: { width: 'minmax(50px, max-content)' }, first_name: { invertSort: true } }"
+      />
     </div>
     <br />
     <div class="vsc-p-4 vsc-bg-zinc-800">
-      <VueScreener :screener="screener3" title="Default sort field direction" />
+      <VueScreener
+        title="Default sort field direction"
+        :data="baseData"
+        default-sort-field="first_name"
+        default-sort-direction="asc"
+        :columns="{ id: { width: 'minmax(50px, max-content)' } }"
+      />
     </div>
   </Story>
 </template>
 
 <script lang="ts" setup>
-import { VueScreener, useVueScreener } from '../../index'
+import { VueScreener } from '../../index'
 import baseData from '../../fixtures/data.json'
-
-const screener1 = useVueScreener(baseData, {
-  defaultSortField: 'first_name',
-  columns: {
-    id: { width: 'minmax(50px, max-content)' },
-  },
-})
-
-const screener2 = useVueScreener(baseData, {
-  defaultSortField: 'first_name',
-  columns: {
-    id: { width: 'minmax(50px, max-content)' },
-    first_name: { invertSort: true },
-  },
-})
-
-const screener3 = useVueScreener(baseData, {
-  defaultSortField: 'first_name',
-  defaultSortDirection: 'asc',
-  columns: {
-    id: { width: 'minmax(50px, max-content)' },
-  },
-})
 </script>
