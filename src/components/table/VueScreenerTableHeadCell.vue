@@ -28,6 +28,7 @@ import SortIcon from '../icons/SortIcon.vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import { Icon } from '@iconify/vue'
 import { vTooltip } from 'floating-vue'
+import 'floating-vue/dist/style.css'
 
 const props = defineProps<{
   screener: IVueScreener
@@ -53,3 +54,9 @@ const handleClickColumnHeader = (column: Column) => {
   }
 }
 </script>
+
+<style>
+.v-popper__popper {
+  @apply vsc-text-xs;
+}
+</style>
