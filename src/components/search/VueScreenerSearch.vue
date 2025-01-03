@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from '@/interfaces/vue-screener'
+import { IVueScreener } from '@/interfaces/vue-screener'
 import { computed, HTMLAttributes, ref } from 'vue'
 import { isValidRegExp } from '../../utils/regex.utils'
 import UiInput from '../ui/input/Input.vue'
@@ -28,7 +28,7 @@ import VueScreenerSearchOptions from './VueScreenerSearchOptions.vue'
 import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
-  screener: VueScreener
+  screener: IVueScreener
   inputClass?: HTMLAttributes['class']
   optionsClass?: string
   toggleButtonClass?: string

@@ -1,9 +1,9 @@
-import { Column, Row, VueScreener, SearchQuery, VueScreenerOptions } from '@/interfaces/vue-screener'
+import { Column, Row, IVueScreener, SearchQuery, VueScreenerOptions } from '@/interfaces/vue-screener'
 import { createColumn, getFields, getPaginated, isValidInput, convertToRows, sortRows } from '../utils/data.utils'
 import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 
-export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreenerOptions = {}): VueScreener => {
+export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreenerOptions = {}): IVueScreener => {
   const options = ref<VueScreenerOptions>({
     contentHeight: defaultOptions.contentHeight,
     disableSearchHighlight: defaultOptions.disableSearchHighlight ?? false,

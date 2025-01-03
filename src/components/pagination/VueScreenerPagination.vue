@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from '@/interfaces/vue-screener'
+import { IVueScreener } from '@/interfaces/vue-screener'
 import { computed, HTMLAttributes, onMounted, watch } from 'vue'
 import VueScreenerPaginationRowsPerPage from '../pagination/VueScreenerPaginationRowsPerPage.vue'
 import VueScreenerPaginationResults from '../pagination/VueScreenerPaginationResults.vue'
@@ -39,7 +39,7 @@ import VueScreenerPaginationButtons from '../pagination/VueScreenerPaginationBut
 import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
-  screener: VueScreener
+  screener: IVueScreener
   class?: HTMLAttributes['class']
 }>()
 

@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { VueScreener } from '../../../interfaces/vue-screener'
+import type { IVueScreener } from '../../../interfaces/vue-screener'
 import VueScreenerTableRow from '../../table/VueScreenerTableRow.vue'
 import VueScreenerTableSummaryRow from '../../table/VueScreenerTableSummaryRow.vue'
 import VueScreenerTableCell from '../../table/VueScreenerTableCell.vue'
@@ -44,6 +44,6 @@ import VueScreenerTable from '../../table/VueScreenerTable.vue'
 import VueScreenerTableHead from '../../table/VueScreenerTableHead.vue'
 
 defineProps<{
-  screener: VueScreener
+  screener: IVueScreener
 }>()
 </script>

@@ -31,14 +31,14 @@
 </template>
 
 <script lang="ts" setup>
-import { VueScreener } from '@/interfaces/vue-screener'
+import { IVueScreener } from '@/interfaces/vue-screener'
 import ToggleButtonGroup from '../ui/toggle-button/ToggleButtonGroup.vue'
 import ToggleButton from '../ui/toggle-button/ToggleButton.vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import { Icon } from '@iconify/vue'
 
 const props = defineProps<{
-  screener: VueScreener
+  screener: IVueScreener
   toggleButtonClass?: string
   toggleButtonActiveClass?: string
   iconClass?: string

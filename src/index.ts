@@ -20,6 +20,8 @@ import VueScreenerPaginationRowsPerPage from './components/pagination/VueScreene
 import { useVueScreener } from './hooks/use-vue-screener'
 import './assets/tailwind.css'
 
+export type { IVueScreener, VueScreenerOptions, SearchQuery, Column, Row, DataType } from './interfaces/vue-screener'
+
 export {
   // Base component
   VueScreener,

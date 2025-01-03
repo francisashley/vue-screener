@@ -22,13 +22,13 @@
 
 <script lang="ts" setup>
 import { computed, HTMLAttributes } from 'vue'
-import type { VueScreener, Column } from '../../interfaces/vue-screener'
+import type { IVueScreener, Column } from '../../interfaces/vue-screener'
 import VueScreenerTableCell from '../table/VueScreenerTableCell.vue'
 import SortIcon from '../icons/SortIcon.vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 
 const props = defineProps<{
-  screener: VueScreener
+  screener: IVueScreener
   column: Column
   sortableClass?: string
   sortingClass?: string

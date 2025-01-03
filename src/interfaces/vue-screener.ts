@@ -12,7 +12,7 @@ export type VueScreenerOptions = {
   loading?: boolean
 }
 
-export type VueScreener = {
+export interface IVueScreener {
   options: Ref<VueScreenerOptions>
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>

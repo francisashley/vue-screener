@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { VueScreener } from '../../interfaces/vue-screener'
+import type { IVueScreener } from '../../interfaces/vue-screener'
 import { computed } from 'vue'
 import VueScreenerTableState from './states/VueScreenerTableState.vue'
 import VueScreenerErrorState from './states/VueScreenerErrorState.vue'
@@ -31,7 +31,7 @@ import VueScreenerEmptyState from './states/VueScreenerEmptyState.vue'
 import VueScreenerLoadingState from './states/VueScreenerLoadingState.vue'
 
 const props = defineProps<{
-  screener: VueScreener
+  screener: IVueScreener
 }>()
 
 const state = computed<'default' | 'loading' | 'empty' | 'error'>(() => {

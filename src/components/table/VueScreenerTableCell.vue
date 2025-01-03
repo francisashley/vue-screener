@@ -21,11 +21,11 @@
 <script lang="ts" setup>
 import { computed, defineProps, HTMLAttributes } from 'vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
-import { Column, Row, VueScreener } from '@/interfaces/vue-screener'
+import { Column, Row, IVueScreener } from '@/interfaces/vue-screener'
 import { highlightMatches } from '../../utils/text.utils'
 
 const props = defineProps<{
-  screener?: VueScreener
+  screener?: IVueScreener
   column: Column
   row?: Row
   pinnedClass?: string

@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Column, VueScreener } from '../interfaces/vue-screener'
+import type { Column, IVueScreener } from '../interfaces/vue-screener'
 import { useElementSize } from '../hooks/use-element-size'
 import { computed, ref, watch } from 'vue'
 import VueScreenerViewport from './viewport/VueScreenerViewport.vue'
@@ -30,7 +30,7 @@ import { useVueScreener } from '../hooks/use-vue-screener'
 import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
-  screener?: VueScreener
+  screener?: IVueScreener
   data?: any[]
   class?: string
   // options
