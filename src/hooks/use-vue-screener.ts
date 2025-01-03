@@ -4,27 +4,17 @@ import { computed, ref } from 'vue'
 import { search } from '../utils/search.utils'
 
 export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreenerOptions = {}): VueScreener => {
-  const contentHeight = ref<string | undefined>(defaultOptions.contentHeight)
-  const disableSearchHighlight = ref<boolean>(defaultOptions.disableSearchHighlight ?? false)
-  const loading = ref<boolean>(defaultOptions.loading ?? false)
-  const defaultCurrentPage = ref<number>(defaultOptions.defaultCurrentPage ?? 1)
-  const defaultRowsPerPage = ref<number>(defaultOptions.defaultRowsPerPage ?? 10)
-  const defaultSortField = ref<string | undefined>(defaultOptions.defaultSortField)
-  const defaultSortDirection = ref<'asc' | 'desc' | undefined>(defaultOptions.defaultSortDirection)
-  const defaultTruncate = ref<boolean | undefined>(defaultOptions.defaultTruncate)
-  const columnsConfig = ref<Record<PropertyKey, Partial<Column>> | undefined>(defaultOptions.columns)
-
-  const options = computed<VueScreenerOptions>(() => ({
-    contentHeight: contentHeight.value,
-    defaultCurrentPage: defaultCurrentPage.value,
-    defaultRowsPerPage: defaultRowsPerPage.value,
-    defaultSortField: defaultSortField.value,
-    defaultSortDirection: defaultSortDirection.value,
-    defaultTruncate: defaultTruncate.value,
-    columns: columnsConfig.value,
-    disableSearchHighlight: disableSearchHighlight.value,
-    loading: loading.value,
-  }))
+  const options = ref<VueScreenerOptions>({
+    contentHeight: defaultOptions.contentHeight,
+    disableSearchHighlight: defaultOptions.disableSearchHighlight ?? false,
+    loading: defaultOptions.loading ?? false,
+    defaultCurrentPage: defaultOptions.defaultCurrentPage ?? 1,
+    defaultRowsPerPage: defaultOptions.defaultRowsPerPage ?? 10,
+    defaultSortField: defaultOptions.defaultSortField,
+    defaultSortDirection: defaultOptions.defaultSortDirection ?? 'desc',
+    defaultTruncate: defaultOptions.defaultTruncate,
+    columns: defaultOptions.columns,
+  })
 
   // VueScreener dimensions (width and height)
   const dimensions = ref<{ width: number; height: number } | null>(null)
@@ -42,10 +32,10 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
     regex: false, // Whether to match regex in search
     caseSensitive: false, // Whether to match case in search
     wholeWord: false, // Whether to match whole word in search
-    page: defaultCurrentPage.value, // Current page number
-    rowsPerPage: defaultRowsPerPage.value ?? 10, // Number of rows per page
-    sortField: defaultSortField.value ?? null, // Field to sort by
-    sortDirection: defaultSortDirection.value ?? 'desc', // Sort direction
+    page: options.value.defaultCurrentPage ?? 1, // Current page number
+    rowsPerPage: options.value.defaultRowsPerPage ?? 10, // Number of rows per page
+    sortField: options.value.defaultSortField ?? null, // Field to sort by
+    sortDirection: options.value.defaultSortDirection ?? 'desc', // Sort direction
   })
 
   const queriedRows = computed((): Row[] => {
@@ -64,7 +54,7 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
 
     const _sortField = searchQuery.value.sortField
 
-    const invertSort = _sortField && columnsConfig.value ? columnsConfig.value[_sortField]?.invertSort : undefined
+    const invertSort = _sortField && options.value.columns ? options.value.columns[_sortField]?.invertSort : undefined
     if (_sortField && searchQuery.value.sortDirection) {
       return sortRows(sortedRows, {
         sortField: _sortField,
@@ -98,15 +88,15 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
     // Add data fields first with defaults
     dataFields.forEach((field) => {
       const defaults: Partial<Column> = { field }
-      if (typeof defaultTruncate.value === 'boolean') {
-        defaults.truncate = defaultTruncate.value
+      if (typeof options.value.defaultTruncate === 'boolean') {
+        defaults.truncate = options.value.defaultTruncate
       }
       columns.set(field, createColumn(defaults))
     })
 
     // Override with user configs
-    if (columnsConfig.value) {
-      Object.entries(columnsConfig.value).forEach(([field, config]) => {
+    if (options.value.columns) {
+      Object.entries(options.value.columns).forEach(([field, config]) => {
         columns.set(field, {
           ...(columns.get(field) || createColumn({ field })),
           ...config,
@@ -159,19 +149,18 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
     setPerPage: (rowsPerPage: number) => actions.search({ rowsPerPage }),
     setDimensions: (_dimensions: { height: number; width: number } | null) => (dimensions.value = _dimensions), // eslint-disable-line
     setData: (inputData: unknown) => (allRows.value = isValidInput(inputData) ? convertToRows(inputData) : []),
-    setLoading: (isLoading: boolean) => (loading.value = isLoading),
+    setLoading: (loading: boolean) => (options.value.loading = loading),
     setHasHorizontalOverflow: (value: boolean) => (hasHorizontalOverflow.value = value),
     setIsScrolledToRightEdge: (value: boolean) => (isScrolledToRightEdge.value = value),
     setOptions: (newOptions: Partial<VueScreenerOptions>) => {
-      if (newOptions.contentHeight !== undefined) contentHeight.value = newOptions.contentHeight
-      if (newOptions.disableSearchHighlight !== undefined)
-        disableSearchHighlight.value = newOptions.disableSearchHighlight
-      if (newOptions.loading !== undefined) loading.value = newOptions.loading
-      if (newOptions.defaultCurrentPage !== undefined) defaultCurrentPage.value = newOptions.defaultCurrentPage
-      if (newOptions.defaultRowsPerPage !== undefined) defaultRowsPerPage.value = newOptions.defaultRowsPerPage
-      if (newOptions.defaultSortField !== undefined) defaultSortField.value = newOptions.defaultSortField
-      if (newOptions.defaultSortDirection !== undefined) defaultSortDirection.value = newOptions.defaultSortDirection
-      if (newOptions.columns !== undefined) columnsConfig.value = newOptions.columns
+      if (newOptions.contentHeight !== undefined) options.value.contentHeight = newOptions.contentHeight
+      if (newOptions.disableSearchHighlight !== undefined) options.value.disableSearchHighlight = newOptions.disableSearchHighlight // eslint-disable-line
+      if (newOptions.loading !== undefined) options.value.loading = newOptions.loading
+      if (newOptions.defaultCurrentPage !== undefined) options.value.defaultCurrentPage = newOptions.defaultCurrentPage
+      if (newOptions.defaultRowsPerPage !== undefined) options.value.defaultRowsPerPage = newOptions.defaultRowsPerPage
+      if (newOptions.defaultSortField !== undefined) options.value.defaultSortField = newOptions.defaultSortField
+      if (newOptions.defaultSortDirection !== undefined) options.value.defaultSortDirection = newOptions.defaultSortDirection // eslint-disable-line
+      if (newOptions.columns !== undefined) options.value.columns = newOptions.columns
     },
   }
 

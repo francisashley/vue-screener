@@ -47,15 +47,15 @@ const props = defineProps<{
 
 const internalScreener = computed(() => props.screener ?? useVueScreener(props.data ?? []))
 
-watch(() => props.data, (data: any) => internalScreener.value.actions.setData(data)) // eslint-disable-line
-watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight })) // eslint-disable-line
-watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage })) // eslint-disable-line
-watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage })) // eslint-disable-line
-watch(() => props.defaultSortField, (defaultSortField) => internalScreener.value.actions.setOptions({ defaultSortField })) // eslint-disable-line
-watch(() => props.defaultSortDirection, (defaultSortDirection) => internalScreener.value.actions.setOptions({ defaultSortDirection })) // eslint-disable-line
-watch(() => props.columns, (columns) => internalScreener.value.actions.setOptions({ columns })) // eslint-disable-line
-watch(() => props.disableSearchHighlight, (disableSearchHighlight) => internalScreener.value.actions.setOptions({ disableSearchHighlight })) // eslint-disable-line
-watch(() => props.loading, (loading) => internalScreener.value.actions.setOptions({ loading })) // eslint-disable-line
+watch(() => props.data, (data: any) => internalScreener.value.actions.setData(data), { immediate: true }) // eslint-disable-line
+watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight }), { immediate: true }) // eslint-disable-line
+watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage }), { immediate: true }) // eslint-disable-line
+watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage }), { immediate: true }) // eslint-disable-line
+watch(() => props.defaultSortField, (defaultSortField) => internalScreener.value.actions.setOptions({ defaultSortField }), { immediate: true }) // eslint-disable-line
+watch(() => props.defaultSortDirection, (defaultSortDirection) => internalScreener.value.actions.setOptions({ defaultSortDirection }), { immediate: true }) // eslint-disable-line
+watch(() => props.columns, (columns) => internalScreener.value.actions.setOptions({ columns }), { immediate: true }) // eslint-disable-line
+watch(() => props.disableSearchHighlight, (disableSearchHighlight) => internalScreener.value.actions.setOptions({ disableSearchHighlight }), { immediate: true }) // eslint-disable-line
+watch(() => props.loading, (loading) => internalScreener.value.actions.setOptions({ loading }), { immediate: true }) // eslint-disable-line
 
 const screenerRef = ref()
 
