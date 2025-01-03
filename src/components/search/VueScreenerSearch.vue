@@ -1,7 +1,7 @@
 <template>
   <div class="vsc-flex vsc-items-center vsc-gap-2 vsc-relative">
     <UiInput
-      :class="twMerge('vsc-w-[280px] vsc-flex vsc-items-center vsc-gap-2 vsc-relative vsc-pr-20', props.class)"
+      :class="twMerge('vsc-w-[280px] vsc-flex vsc-items-center vsc-gap-2 vsc-relative vsc-pr-20', props.inputClass)"
       type="text"
       :value="screener.searchQuery.value.text"
       :error="regex && !isValidQuery"
@@ -29,7 +29,7 @@ import { twMerge } from 'tailwind-merge'
 
 const props = defineProps<{
   screener: VueScreener
-  class?: HTMLAttributes['class']
+  inputClass?: HTMLAttributes['class']
   optionsClass?: string
   toggleButtonClass?: string
   toggleButtonActiveClass?: string
