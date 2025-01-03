@@ -1278,7 +1278,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "VueScreenerSearch",
   props: {
     screener: { type: Object, required: true },
-    class: { type: null, required: false },
+    inputClass: { type: null, required: false },
     optionsClass: { type: String, required: false },
     toggleButtonClass: { type: String, required: false },
     toggleButtonActiveClass: { type: String, required: false },
@@ -1333,7 +1333,7 @@ const _hoisted_1$1 = { class: "vsc-flex vsc-items-center vsc-gap-2 vsc-relative"
 function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", _hoisted_1$1, [
     createVNode($setup["UiInput"], {
-      class: normalizeClass($setup.twMerge("vsc-w-[280px] vsc-flex vsc-items-center vsc-gap-2 vsc-relative vsc-pr-20", $setup.props.class)),
+      class: normalizeClass($setup.twMerge("vsc-w-[280px] vsc-flex vsc-items-center vsc-gap-2 vsc-relative vsc-pr-20", $setup.props.inputClass)),
       type: "text",
       value: $props.screener.searchQuery.value.text,
       error: $setup.regex && !$setup.isValidQuery,
@@ -1486,26 +1486,17 @@ function search(options) {
   });
 }
 const useVueScreener = (inputData, defaultOptions = {}) => {
-  const contentHeight = ref(defaultOptions.contentHeight);
-  const disableSearchHighlight = ref(defaultOptions.disableSearchHighlight ?? false);
-  const loading = ref(defaultOptions.loading ?? false);
-  const defaultCurrentPage = ref(defaultOptions.defaultCurrentPage ?? 1);
-  const defaultRowsPerPage = ref(defaultOptions.defaultRowsPerPage ?? 10);
-  const defaultSortField = ref(defaultOptions.defaultSortField);
-  const defaultSortDirection = ref(defaultOptions.defaultSortDirection);
-  const defaultTruncate = ref(defaultOptions.defaultTruncate);
-  const columnsConfig = ref(defaultOptions.columns);
-  const options = computed(() => ({
-    contentHeight: contentHeight.value,
-    defaultCurrentPage: defaultCurrentPage.value,
-    defaultRowsPerPage: defaultRowsPerPage.value,
-    defaultSortField: defaultSortField.value,
-    defaultSortDirection: defaultSortDirection.value,
-    defaultTruncate: defaultTruncate.value,
-    columns: columnsConfig.value,
-    disableSearchHighlight: disableSearchHighlight.value,
-    loading: loading.value
-  }));
+  const options = ref({
+    contentHeight: defaultOptions.contentHeight,
+    disableSearchHighlight: defaultOptions.disableSearchHighlight ?? false,
+    loading: defaultOptions.loading ?? false,
+    defaultCurrentPage: defaultOptions.defaultCurrentPage ?? 1,
+    defaultRowsPerPage: defaultOptions.defaultRowsPerPage ?? 10,
+    defaultSortField: defaultOptions.defaultSortField,
+    defaultSortDirection: defaultOptions.defaultSortDirection ?? "desc",
+    defaultTruncate: defaultOptions.defaultTruncate,
+    columns: defaultOptions.columns
+  });
   const dimensions = ref(null);
   const hasHorizontalOverflow = ref(false);
   const isScrolledToRightEdge = ref(false);
@@ -1520,13 +1511,13 @@ const useVueScreener = (inputData, defaultOptions = {}) => {
     // Whether to match case in search
     wholeWord: false,
     // Whether to match whole word in search
-    page: defaultCurrentPage.value,
+    page: options.value.defaultCurrentPage ?? 1,
     // Current page number
-    rowsPerPage: defaultRowsPerPage.value ?? 10,
+    rowsPerPage: options.value.defaultRowsPerPage ?? 10,
     // Number of rows per page
-    sortField: defaultSortField.value ?? null,
+    sortField: options.value.defaultSortField ?? null,
     // Field to sort by
-    sortDirection: defaultSortDirection.value ?? "desc"
+    sortDirection: options.value.defaultSortDirection ?? "desc"
     // Sort direction
   });
   const queriedRows = computed(() => {
@@ -1543,7 +1534,7 @@ const useVueScreener = (inputData, defaultOptions = {}) => {
     var _a;
     const sortedRows2 = searchQuery.value.text ? queriedRows.value : allRows.value;
     const _sortField = searchQuery.value.sortField;
-    const invertSort = _sortField && columnsConfig.value ? (_a = columnsConfig.value[_sortField]) == null ? void 0 : _a.invertSort : void 0;
+    const invertSort = _sortField && options.value.columns ? (_a = options.value.columns[_sortField]) == null ? void 0 : _a.invertSort : void 0;
     if (_sortField && searchQuery.value.sortDirection) {
       return sortRows(sortedRows2, {
         sortField: _sortField,
@@ -1569,13 +1560,13 @@ const useVueScreener = (inputData, defaultOptions = {}) => {
     const columns2 = /* @__PURE__ */ new Map();
     dataFields.forEach((field) => {
       const defaults = { field };
-      if (typeof defaultTruncate.value === "boolean") {
-        defaults.truncate = defaultTruncate.value;
+      if (typeof options.value.defaultTruncate === "boolean") {
+        defaults.truncate = options.value.defaultTruncate;
       }
       columns2.set(field, createColumn(defaults));
     });
-    if (columnsConfig.value) {
-      Object.entries(columnsConfig.value).forEach(([field, config]) => {
+    if (options.value.columns) {
+      Object.entries(options.value.columns).forEach(([field, config]) => {
         columns2.set(field, {
           ...columns2.get(field) || createColumn({ field }),
           ...config
@@ -1613,19 +1604,18 @@ const useVueScreener = (inputData, defaultOptions = {}) => {
     setDimensions: (_dimensions) => dimensions.value = _dimensions,
     // eslint-disable-line
     setData: (inputData2) => allRows.value = isValidInput(inputData2) ? convertToRows(inputData2) : [],
-    setLoading: (isLoading) => loading.value = isLoading,
+    setLoading: (loading) => options.value.loading = loading,
     setHasHorizontalOverflow: (value) => hasHorizontalOverflow.value = value,
     setIsScrolledToRightEdge: (value) => isScrolledToRightEdge.value = value,
     setOptions: (newOptions) => {
-      if (newOptions.contentHeight !== void 0) contentHeight.value = newOptions.contentHeight;
-      if (newOptions.disableSearchHighlight !== void 0)
-        disableSearchHighlight.value = newOptions.disableSearchHighlight;
-      if (newOptions.loading !== void 0) loading.value = newOptions.loading;
-      if (newOptions.defaultCurrentPage !== void 0) defaultCurrentPage.value = newOptions.defaultCurrentPage;
-      if (newOptions.defaultRowsPerPage !== void 0) defaultRowsPerPage.value = newOptions.defaultRowsPerPage;
-      if (newOptions.defaultSortField !== void 0) defaultSortField.value = newOptions.defaultSortField;
-      if (newOptions.defaultSortDirection !== void 0) defaultSortDirection.value = newOptions.defaultSortDirection;
-      if (newOptions.columns !== void 0) columnsConfig.value = newOptions.columns;
+      if (newOptions.contentHeight !== void 0) options.value.contentHeight = newOptions.contentHeight;
+      if (newOptions.disableSearchHighlight !== void 0) options.value.disableSearchHighlight = newOptions.disableSearchHighlight;
+      if (newOptions.loading !== void 0) options.value.loading = newOptions.loading;
+      if (newOptions.defaultCurrentPage !== void 0) options.value.defaultCurrentPage = newOptions.defaultCurrentPage;
+      if (newOptions.defaultRowsPerPage !== void 0) options.value.defaultRowsPerPage = newOptions.defaultRowsPerPage;
+      if (newOptions.defaultSortField !== void 0) options.value.defaultSortField = newOptions.defaultSortField;
+      if (newOptions.defaultSortDirection !== void 0) options.value.defaultSortDirection = newOptions.defaultSortDirection;
+      if (newOptions.columns !== void 0) options.value.columns = newOptions.columns;
     }
   };
   return {
@@ -1674,15 +1664,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     __expose();
     const props = __props;
     const internalScreener = computed(() => props.screener ?? useVueScreener(props.data ?? []));
-    watch(() => props.data, (data) => internalScreener.value.actions.setData(data));
-    watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight }));
-    watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage }));
-    watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage }));
-    watch(() => props.defaultSortField, (defaultSortField) => internalScreener.value.actions.setOptions({ defaultSortField }));
-    watch(() => props.defaultSortDirection, (defaultSortDirection) => internalScreener.value.actions.setOptions({ defaultSortDirection }));
-    watch(() => props.columns, (columns) => internalScreener.value.actions.setOptions({ columns }));
-    watch(() => props.disableSearchHighlight, (disableSearchHighlight) => internalScreener.value.actions.setOptions({ disableSearchHighlight }));
-    watch(() => props.loading, (loading) => internalScreener.value.actions.setOptions({ loading }));
+    watch(() => props.data, (data) => internalScreener.value.actions.setData(data), { immediate: true });
+    watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight }), { immediate: true });
+    watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage }), { immediate: true });
+    watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage }), { immediate: true });
+    watch(() => props.defaultSortField, (defaultSortField) => internalScreener.value.actions.setOptions({ defaultSortField }), { immediate: true });
+    watch(() => props.defaultSortDirection, (defaultSortDirection) => internalScreener.value.actions.setOptions({ defaultSortDirection }), { immediate: true });
+    watch(() => props.columns, (columns) => internalScreener.value.actions.setOptions({ columns }), { immediate: true });
+    watch(() => props.disableSearchHighlight, (disableSearchHighlight) => internalScreener.value.actions.setOptions({ disableSearchHighlight }), { immediate: true });
+    watch(() => props.loading, (loading) => internalScreener.value.actions.setOptions({ loading }), { immediate: true });
     const screenerRef = ref();
     useElementSize(screenerRef, internalScreener.value.actions.setDimensions);
     const __returned__ = { props, internalScreener, screenerRef, VueScreenerViewport, VueScreenerPagination, VueScreenerSearch, get twMerge() {
