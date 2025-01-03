@@ -47,15 +47,21 @@ const props = defineProps<{
 
 const internalScreener = computed(() => props.screener ?? useVueScreener(props.data ?? []))
 
-watch(() => props.contentHeight, (contentHeight) => internalScreener.value.actions.setOptions({ contentHeight }), { immediate: true }) // eslint-disable-line
-watch(() => props.defaultCurrentPage, (defaultCurrentPage) => internalScreener.value.actions.setOptions({ defaultCurrentPage }), { immediate: true }) // eslint-disable-line
-watch(() => props.defaultRowsPerPage, (defaultRowsPerPage) => internalScreener.value.actions.setOptions({ defaultRowsPerPage }), { immediate: true }) // eslint-disable-line
-watch(() => props.defaultSortField, (defaultSortField) => internalScreener.value.actions.setOptions({ defaultSortField }), { immediate: true }) // eslint-disable-line
-watch(() => props.defaultSortDirection, (defaultSortDirection) => internalScreener.value.actions.setOptions({ defaultSortDirection }), { immediate: true }) // eslint-disable-line
-watch(() => props.columns, (columns) => internalScreener.value.actions.setOptions({ columns }), { immediate: true }) // eslint-disable-line
-watch(() => props.disableSearchHighlight, (disableSearchHighlight) => internalScreener.value.actions.setOptions({ disableSearchHighlight }), { immediate: true }) // eslint-disable-line
-watch(() => props.loading, (loading) => internalScreener.value.actions.setOptions({ loading }), { immediate: true }) // eslint-disable-line
 watch(() => props.data, (data: any) => props.data && internalScreener.value.actions.setData(data), { immediate: true }) // eslint-disable-line
+watch(
+  () => ({
+    contentHeight: props.contentHeight,
+    defaultCurrentPage: props.defaultCurrentPage,
+    defaultRowsPerPage: props.defaultRowsPerPage,
+    defaultSortField: props.defaultSortField,
+    defaultSortDirection: props.defaultSortDirection,
+    columns: props.columns,
+    disableSearchHighlight: props.disableSearchHighlight,
+    loading: props.loading,
+  }),
+  (options) => internalScreener.value.actions.setOptions(options),
+  { immediate: true },
+)
 
 const screenerRef = ref()
 
