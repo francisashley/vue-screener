@@ -9,11 +9,11 @@
           actions: { isPinned: true },
         }"
       >
-        <template #header-cell="props">
-          <VueScreenerTableHeadCell v-if="props.column.isPinned" v-bind="props">Actions</VueScreenerTableHeadCell>
+        <template #head-cell:actions="props">
+          <VueScreenerTableHeadCell v-bind="props">Actions</VueScreenerTableHeadCell>
         </template>
-        <template #body-cell="props">
-          <VueScreenerTableCell v-if="props.column.isPinned" v-bind="props">
+        <template #cell:actions="props">
+          <VueScreenerTableCell v-bind="props">
             <div :style="{ display: 'flex', gap: '5px', padding: '3px 0' }">
               <button
                 @click="handleClickEdit(props.row)"

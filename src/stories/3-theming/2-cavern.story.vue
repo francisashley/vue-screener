@@ -15,7 +15,7 @@
       </div>
 
       <VueScreener :screener="screener" class="vsc-border-transparent">
-        <template #default="{ screener: internalScreener }">
+        <template #table="{ screener: internalScreener }">
           <VueScreenerTableState :screener="internalScreener">
             <VueScreenerTableHead class="vsc-bg-[#171717]">
               <VueScreenerTableHeadCell

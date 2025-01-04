@@ -13,7 +13,7 @@
         </div>
       </div>
       <VueScreener :screener="screener" class="vsc-mb-4 vsc-border-gray-700">
-        <template #default="{ screener: internalScreener }">
+        <template #table="{ screener: internalScreener }">
           <VueScreenerTableState :screener="internalScreener">
             <VueScreenerTableHead class="vsc-border-gray-700">
               <VueScreenerTableHeadCell

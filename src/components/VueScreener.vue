@@ -1,20 +1,37 @@
 <template>
   <section :class="twMerge('vs-screener vsc-font-sans vsc-text-sm vsc-flex vsc-flex-col vsc-gap-2',props.class)" ref="screenerRef"> <!-- eslint-disable-line -->
-    <slot :screener="internalScreener">
-      <slot name="header" :screener="internalScreener">
-        <div class="vsc-flex vsc-justify-between vsc-items-center">
-          <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
-            {{ title }}
-          </h3>
-          <VueScreenerSearch :screener="internalScreener" class="vsc-ml-auto" />
-        </div>
-      </slot>
-      <slot name="viewport" :screener="internalScreener">
-        <VueScreenerViewport :screener="internalScreener" />
-      </slot>
-      <slot name="footer" :screener="internalScreener">
-        <VueScreenerPagination :screener="internalScreener" />
-      </slot>
+    <slot name="header" :screener="internalScreener">
+      <div class="vsc-flex vsc-justify-between vsc-items-center">
+        <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
+          {{ title }}
+        </h3>
+        <VueScreenerSearch :screener="internalScreener" class="vsc-ml-auto" />
+      </div>
+    </slot>
+    <slot name="viewport" :screener="internalScreener">
+      <VueScreenerViewport :screener="internalScreener">
+        <template #table="attrs">
+          <slot name="table" v-bind="attrs" />
+        </template>
+        <template v-for="(column, i) in internalScreener.columns.value" :key="i" #[`head-cell:${column.field}`]="attrs">
+          <slot :name="'head-cell:' + column.field" v-bind="attrs" />
+        </template>
+        <template v-for="(column, i) in internalScreener.columns.value" :key="i" #[`cell:${column.field}`]="attrs">
+          <slot :name="'cell:' + column.field" v-bind="attrs" />
+        </template>
+        <template #loading>
+          <slot name="loading" />
+        </template>
+        <template #empty>
+          <slot name="empty" />
+        </template>
+        <template #error>
+          <slot name="error" />
+        </template>
+      </VueScreenerViewport>
+    </slot>
+    <slot name="footer" :screener="internalScreener">
+      <VueScreenerPagination :screener="internalScreener" />
     </slot>
   </section>
 </template>

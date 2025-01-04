@@ -6,23 +6,29 @@
   >
     <slot>
       <VueScreenerTableHead>
-        <VueScreenerTableHeadCell
+        <slot
+          :name="'head-cell:' + column.field"
           v-for="(column, i) in screener.columns.value"
           :key="i"
           :screener="screener"
           :column="column"
           :text="column.label ?? column.field"
-        />
+        >
+          <VueScreenerTableHeadCell :screener="screener" :column="column" :text="column.label ?? column.field" />
+        </slot>
       </VueScreenerTableHead>
       <template v-if="screener.paginatedRows.value.length">
         <VueScreenerTableRow v-for="(row, i) in screener.paginatedRows.value" :key="i">
-          <VueScreenerTableCell
+          <slot
+            :name="'cell:' + column.field"
             v-for="(column, j) in screener.columns.value"
             :key="j"
             :screener="screener"
             :column="column"
             :row="row"
-          />
+          >
+            <VueScreenerTableCell :screener="screener" :column="column" :row="row" />
+          </slot>
         </VueScreenerTableRow>
       </template>
       <template v-else>
