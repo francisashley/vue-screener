@@ -94,7 +94,7 @@ export const sortRows = (
   const sortField = options.sortField
   const sortDirection = options.invertSort ? (options.sortDirection === 'asc' ? 'desc' : 'asc') : options.sortDirection
   if (sortField && sortDirection) {
-    return [...orderBy(data, [(row: Row) => row.cells[sortField]], [sortDirection])]
+    return [...orderBy(data, [(row: Row) => row.cells[sortField].value], [sortDirection])]
   }
   return data
 }
