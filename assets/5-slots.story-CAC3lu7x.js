@@ -1,5 +1,5 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createBaseVNode, ax as createVNode, ay as normalizeProps, az as guardReactiveProps } from "./vendor-BJ2uxNJx.js";
-import { _ as _export_sfc, V as VueScreener, a as VueScreenerTableCell, c as VueScreenerTableHeadCell, b as baseData } from "./data-B2IrIHtJ.js";
+import { _ as _export_sfc, V as VueScreener, a as VueScreenerTableCell, c as VueScreenerTableHeadCell, b as baseData } from "./data-Bb_gaFmt.js";
 const invalidData = "this is invalid data";
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "5-slots.story",

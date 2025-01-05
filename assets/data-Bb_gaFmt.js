@@ -1423,7 +1423,7 @@ const sortRows = (data, options) => {
   const sortField = options.sortField;
   const sortDirection = options.invertSort ? options.sortDirection === "asc" ? "desc" : "asc" : options.sortDirection;
   if (sortField && sortDirection) {
-    return [...orderBy(data, [(row) => row.cells[sortField]], [sortDirection])];
+    return [...orderBy(data, [(row) => row.cells[sortField].value], [sortDirection])];
   }
   return data;
 };
@@ -1725,7 +1725,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     columns: { type: Object, required: false },
     disableSearchHighlight: { type: Boolean, required: false },
     loading: { type: Boolean, required: false },
-    title: { type: String, required: false }
+    title: { type: String, required: false },
+    includeHeader: { type: Boolean, required: false, default: true },
+    includeFooter: { type: Boolean, required: false, default: true }
   },
   setup(__props, { expose: __expose }) {
     __expose();
@@ -1765,7 +1767,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     return __returned__;
   }
 });
-const _hoisted_1 = { class: "vsc-flex vsc-justify-between vsc-items-center" };
+const _hoisted_1 = {
+  key: 0,
+  class: "vsc-flex vsc-justify-between vsc-items-center"
+};
 const _hoisted_2 = {
   key: 0,
   class: "vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300"
@@ -1780,7 +1785,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     [
       createCommentVNode(" eslint-disable-line "),
       renderSlot(_ctx.$slots, "header", { screener: $setup.internalScreener }, () => [
-        createBaseVNode("div", _hoisted_1, [
+        $props.includeHeader ? (openBlock(), createElementBlock("div", _hoisted_1, [
           $props.title ? (openBlock(), createElementBlock(
             "h3",
             _hoisted_2,
@@ -1792,7 +1797,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             screener: $setup.internalScreener,
             class: "vsc-ml-auto"
           }, null, 8, ["screener"])
-        ])
+        ])) : createCommentVNode("v-if", true)
       ]),
       renderSlot(_ctx.$slots, "viewport", { screener: $setup.internalScreener }, () => [
         createVNode($setup["VueScreenerViewport"], { screener: $setup.internalScreener }, createSlots({
@@ -1830,7 +1835,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         ]), 1032, ["screener"])
       ]),
       renderSlot(_ctx.$slots, "footer", { screener: $setup.internalScreener }, () => [
-        createVNode($setup["VueScreenerPagination"], { screener: $setup.internalScreener }, null, 8, ["screener"])
+        $props.includeFooter ? (openBlock(), createBlock($setup["VueScreenerPagination"], {
+          key: 0,
+          screener: $setup.internalScreener
+        }, null, 8, ["screener"])) : createCommentVNode("v-if", true)
       ])
     ],
     2
