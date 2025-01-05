@@ -1,7 +1,7 @@
 <template>
   <section :class="twMerge('vs-screener vsc-font-sans vsc-text-sm vsc-flex vsc-flex-col vsc-gap-2',props.class)" ref="screenerRef"> <!-- eslint-disable-line -->
-    <slot name="header" :screener="internalScreener" v-if="includeHeader !== false">
-      <div class="vsc-flex vsc-justify-between vsc-items-center">
+    <slot name="header" :screener="internalScreener">
+      <div class="vsc-flex vsc-justify-between vsc-items-center" v-if="includeHeader !== false">
         <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
           {{ title }}
         </h3>
@@ -30,8 +30,8 @@
         </template>
       </VueScreenerViewport>
     </slot>
-    <slot name="footer" :screener="internalScreener" v-if="includeFooter !== true">
-      <VueScreenerPagination :screener="internalScreener" />
+    <slot name="footer" :screener="internalScreener">
+      <VueScreenerPagination :screener="internalScreener" v-if="includeFooter !== false" />
     </slot>
   </section>
 </template>
