@@ -1,7 +1,7 @@
 <template>
   <section :class="twMerge('vs-screener vsc-font-sans vsc-text-sm vsc-flex vsc-flex-col vsc-gap-2',props.class)" ref="screenerRef"> <!-- eslint-disable-line -->
     <slot name="header" :screener="internalScreener">
-      <div class="vsc-flex vsc-justify-between vsc-items-center" v-if="includeHeader !== false">
+      <div class="vsc-flex vsc-justify-between vsc-items-center" v-if="includeHeader">
         <h3 v-if="title" class="vsc-font-normal vsc-text-base vsc-mb-0 vsc-text-zinc-300">
           {{ title }}
         </h3>
@@ -31,7 +31,7 @@
       </VueScreenerViewport>
     </slot>
     <slot name="footer" :screener="internalScreener">
-      <VueScreenerPagination :screener="internalScreener" v-if="includeFooter !== false" />
+      <VueScreenerPagination :screener="internalScreener" v-if="includeFooter" />
     </slot>
   </section>
 </template>
@@ -46,23 +46,29 @@ import VueScreenerSearch from '../components/search/VueScreenerSearch.vue'
 import { useVueScreener } from '../hooks/use-vue-screener'
 import { twMerge } from 'tailwind-merge'
 
-const props = defineProps<{
-  screener?: IVueScreener
-  data?: any[]
-  class?: string
-  // options
-  contentHeight?: string
-  defaultCurrentPage?: number
-  defaultRowsPerPage?: number
-  defaultSortField?: string
-  defaultSortDirection?: 'asc' | 'desc'
-  columns?: Record<PropertyKey, Partial<Column>>
-  disableSearchHighlight?: boolean
-  loading?: boolean
-  title?: string
-  includeHeader?: boolean
-  includeFooter?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    screener?: IVueScreener
+    data?: any[]
+    class?: string
+    // options
+    contentHeight?: string
+    defaultCurrentPage?: number
+    defaultRowsPerPage?: number
+    defaultSortField?: string
+    defaultSortDirection?: 'asc' | 'desc'
+    columns?: Record<PropertyKey, Partial<Column>>
+    disableSearchHighlight?: boolean
+    loading?: boolean
+    title?: string
+    includeHeader?: boolean
+    includeFooter?: boolean
+  }>(),
+  {
+    includeHeader: true,
+    includeFooter: true,
+  },
+)
 
 const internalScreener = computed(
   () =>
