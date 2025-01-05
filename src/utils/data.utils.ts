@@ -1,4 +1,4 @@
-import { DataType, Row, Column } from '@/interfaces/vue-screener'
+import { DataType, Row, Column, Cell } from '@/interfaces/vue-screener'
 import { orderBy } from 'natural-orderby'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -17,12 +17,22 @@ export function isValidInput(data: unknown): data is Row[] {
  * @param {Row[]} data - The input data.
  * @returns {Row[]} The normalised data.
  */
-export function convertToRows(data: Row[]): Row[] {
-  return data.map((row) => ({
-    id: uuidv4(),
-    // Handle both array and object inputs in one step
-    data: Array.isArray(row) ? Object.fromEntries(row.entries()) : row,
-  }))
+export function convertToRows(data: any[]): Row[] {
+  return data.map((row) => {
+    const rowData = Array.isArray(row) ? Object.fromEntries(row.entries()) : row
+    const cells: Record<string | number, Cell> = {}
+
+    Object.entries(rowData).forEach(([key, value]) => {
+      cells[key] = {
+        value: value,
+        stringValue: String(value),
+        htmlValue: String(value),
+        type: getTypeOf(value),
+      }
+    })
+
+    return { id: uuidv4(), cells }
+  })
 }
 
 /**
@@ -31,7 +41,7 @@ export function convertToRows(data: Row[]): Row[] {
  * @returns {string[]} Unique field keys.
  */
 export function getFields(rows: Row[]): string[] {
-  const fields = new Set<string>(rows.flatMap((row) => Object.keys(row.data)))
+  const fields = new Set<string>(rows.flatMap((row) => Object.keys(row.cells)))
   return Array.from(fields)
 }
 
@@ -84,7 +94,7 @@ export const sortRows = (
   const sortField = options.sortField
   const sortDirection = options.invertSort ? (options.sortDirection === 'asc' ? 'desc' : 'asc') : options.sortDirection
   if (sortField && sortDirection) {
-    return [...orderBy(data, [(row: Row) => row.data[sortField]], [sortDirection])]
+    return [...orderBy(data, [(row: Row) => row.cells[sortField]], [sortDirection])]
   }
   return data
 }

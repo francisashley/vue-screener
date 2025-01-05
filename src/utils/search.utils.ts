@@ -45,43 +45,43 @@ const testCriteria = (
  * @param {string} text - The search query to parse.
  * @returns {{
  *   text: string,
- *   includeFilters: [field: string, value: string][],
- *   excludeFilters: [field: string, value: string][]
+ *   includeFilters: [field: string, term: string][],
+ *   excludeFilters: [field: string, term: string][]
  * }} - Parsed search query, include filters, and exclude filters.
  */
 const parseSearchText = (text: string) => {
-  const excludeFilters: [field: string, value: string][] = []
-  // get exclude filters that look like: field:value
+  const excludeFilters: [field: string, term: string][] = []
+  // get exclude filters that look like: field:term
   text = text.replace(/(?<!\w)-\w+:\w+/g, (match) => {
-    const [field, value] = match.replace('-', '').split(':')
-    excludeFilters.push([field, value])
+    const [field, term] = match.replace('-', '').split(':')
+    excludeFilters.push([field, term])
     return ''
   })
 
-  // get exclude filters that look like: -field:"value" or -field:"some value"
+  // get exclude filters that look like: -field:"term" or -field:"some term"
   text = text
     .replace(/(?<!\w)-\w+:"[^"]*"$/g, (match) => {
-      const [field, value] = match.replace('-', '').split(':')
-      excludeFilters.push([field, value.slice(1, -1)])
+      const [field, term] = match.replace('-', '').split(':')
+      excludeFilters.push([field, term.slice(1, -1)])
       return ''
     })
     .trim()
 
-  const includeFilters: [field: string, value: string][] = []
-  // get include filters that look like: field:value
+  const includeFilters: [field: string, term: string][] = []
+  // get include filters that look like: field:term
   text = text
     .replace(/\b\w+:\w+\b/g, (match) => {
-      const [field, value] = match.split(':')
-      includeFilters.push([field, value])
+      const [field, term] = match.split(':')
+      includeFilters.push([field, term])
       return ''
     })
     .trim()
 
-  // get include filters that look like: field:"value" or field:"some value"
+  // get include filters that look like: field:"term" or field:"some term"
   text = text
     .replace(/\b\w+:"[^"]*"$/g, (match) => {
-      const [field, value] = match.split(':')
-      includeFilters.push([field, value.slice(1, -1)])
+      const [field, term] = match.split(':')
+      includeFilters.push([field, term.slice(1, -1)])
       return ''
     })
     .trim()
@@ -122,23 +122,10 @@ export function search(options: {
   // Get the search options.
   const { rows, regex = false, caseSensitive = false, wholeWord = false } = options
 
-  // Check if any of the filters match the row.
-  const testExcludeFilters = (filters: [string, string][], row: Row): boolean => {
-    return filters.some(([field, value]) => {
-      if (row.data[field]) {
-        return testCriteria(row.data[field].value as string, value, {
-          caseSensitive,
-          wholeWord: true,
-          regex,
-        })
-      }
-    })
-  }
-
   const testIncludeFilters = (filters: [string, string][], row: Row): boolean => {
     return filters.every(([field, value]) => {
-      if (row.data[field]) {
-        return testCriteria(row.data[field].value as string, value, {
+      if (row.cells[field]) {
+        return testCriteria(row.cells[field].stringValue, value, {
           caseSensitive,
           wholeWord: true,
           regex,
@@ -148,31 +135,39 @@ export function search(options: {
   }
 
   // Filter the rows.
-  return rows.filter((row): boolean => {
-    let shouldExclude = false
-    let shouldInclude = true
-    let meetsSearchCriteria = true
-
-    if (excludeFilters.length && testExcludeFilters(excludeFilters, row)) {
-      shouldExclude = true
-    }
-
-    if (includeFilters.length && !testIncludeFilters(includeFilters, row)) {
-      shouldInclude = false
-    }
-
-    meetsSearchCriteria = options.columns.some((column) => {
-      if (
-        testCriteria(String(column.field ? row.data[column.field] : ''), parsedText, {
-          caseSensitive,
-          wholeWord,
-          regex,
-        })
-      ) {
-        return true
-      }
+  return rows
+    .filter((row) => {
+      // Remove exclude matches
+      const hasExcludeFilters = Boolean(excludeFilters.length)
+      if (hasExcludeFilters) return true
+      return !excludeFilters.some(([field, term]) => {
+        return testCriteria(row.cells[field].stringValue, term, { caseSensitive, wholeWord: true, regex })
+      })
     })
+    .map((row) => {
+      let shouldInclude = true
+      let meetsSearchCriteria = true
 
-    return !shouldExclude && shouldInclude && meetsSearchCriteria
-  })
+      if (includeFilters.length && !testIncludeFilters(includeFilters, row)) {
+        shouldInclude = false
+      }
+
+      meetsSearchCriteria = options.columns.some((column) => {
+        if (
+          testCriteria(String(column.field ? row.cells[column.field].stringValue : ''), parsedText, {
+            caseSensitive,
+            wholeWord,
+            regex,
+          })
+        ) {
+          return true
+        }
+      })
+
+      const hasMatch = shouldInclude && meetsSearchCriteria
+
+      return { hasMatch, row }
+    })
+    .filter(({ hasMatch }) => hasMatch)
+    .map(({ row }) => row)
 }

@@ -48,13 +48,13 @@
       <div class="vsc-p-4">
         <VueScreenerPagination :screener="screener">
           <VueScreenerPaginationResults
-            :total="screener.queriedRows.value.length ?? 0"
+            :total="screener.searchedRows.value.length ?? 0"
             :current-page="screener.searchQuery.value.page"
             :per-page="screener.searchQuery.value.rowsPerPage"
             class="vsc-text-xs vsc-min-w-[150px]"
           />
           <VueScreenerPaginationButtons
-            :total="screener.queriedRows.value.length"
+            :total="screener.searchedRows.value.length"
             :per-page="screener.searchQuery.value.rowsPerPage"
             :current-page="screener.searchQuery.value.page"
             @go-to="screener.actions.goToPage"

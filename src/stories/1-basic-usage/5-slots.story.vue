@@ -52,7 +52,7 @@
       <VueScreener title="Override Table Head Cell" :data="baseData">
         <template #head-cell:id="props">
           <VueScreenerTableHeadCell v-bind="props">
-            <div class="vsc-text-yellow-400">Overridden Table Head Cell</div>
+            <div class="vsc-text-yellow-400" v-html="props.column.field ?? props.column.label" />
           </VueScreenerTableHeadCell>
         </template>
       </VueScreener>
@@ -62,7 +62,7 @@
       <VueScreener title="Override Table Cell" :data="baseData">
         <template #cell:id="props">
           <VueScreenerTableCell v-bind="props">
-            <div class="vsc-text-yellow-400">Overridden Table Cell</div>
+            <div class="vsc-text-yellow-400" v-html="props.cell.htmlValue" />
           </VueScreenerTableCell>
         </template>
       </VueScreener>

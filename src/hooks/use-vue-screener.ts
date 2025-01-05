@@ -1,7 +1,7 @@
 import { Column, Row, IVueScreener, SearchQuery, VueScreenerOptions } from '@/interfaces/vue-screener'
 import { createColumn, getFields, getPaginated, isValidInput, convertToRows, sortRows } from '../utils/data.utils'
 import { computed, ref } from 'vue'
-import { search } from '../utils/search.utils'
+import Search from '../utils/search'
 
 export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreenerOptions = {}): IVueScreener => {
   const options = ref<VueScreenerOptions>({
@@ -38,19 +38,46 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
     sortDirection: options.value.defaultSortDirection ?? 'desc', // Sort direction
   })
 
-  const queriedRows = computed((): Row[] => {
-    return search({
-      rows: allRows.value,
-      columns: columns.value,
-      text: searchQuery.value.text,
-      regex: searchQuery.value.regex,
-      caseSensitive: searchQuery.value.caseSensitive,
-      wholeWord: searchQuery.value.wholeWord,
+  const parsedRows = computed((): Row[] => {
+    // If no columns defined, return unmodified rows
+    if (!options.value.columns) return allRows.value
+
+    // Filter to only columns with formatters
+    const columnsWithFormatters = Object.entries(options.value.columns).filter(([, column]) => column?.format)
+
+    // If no formatters, return original rows
+    if (columnsWithFormatters.length === 0) return allRows.value
+
+    // Map over each row
+    return allRows.value.map((row) => {
+      // Create a deep copy of the row
+      const formattedRow = {
+        ...row,
+        cells: Object.fromEntries(Object.entries(row.cells).map(([key, cell]) => [key, { ...cell }])),
+      }
+
+      // Only iterate over columns that have formatters
+      columnsWithFormatters.forEach(([key, column]) => {
+        if (row.cells[key] !== undefined) {
+          formattedRow.cells[key].value = column!.format!(row.cells[key], row)
+        }
+      })
+
+      return formattedRow
     })
   })
 
+  const searchedRows = computed((): Row[] => {
+    return new Search(parsedRows.value, {
+      regex: searchQuery.value.regex,
+      caseSensitive: searchQuery.value.caseSensitive,
+      wholeWord: searchQuery.value.wholeWord,
+      disableSearchHighlight: options.value.disableSearchHighlight,
+    }).execute(searchQuery.value.text)
+  })
+
   const sortedRows = computed((): Row[] => {
-    const sortedRows = searchQuery.value.text ? queriedRows.value : allRows.value
+    const sortedRows = searchQuery.value.text ? searchedRows.value : allRows.value
 
     const _sortField = searchQuery.value.sortField
 
@@ -74,7 +101,7 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
     })
   })
 
-  const totalSearchedRows = computed(() => queriedRows.value.length ?? 0)
+  const totalSearchedRows = computed(() => searchedRows.value.length ?? 0)
   const currentPage = computed(() => searchQuery.value.page)
   const rowsPerPage = computed(() => searchQuery.value.rowsPerPage)
 
@@ -181,8 +208,8 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
     options, // user options
     searchQuery, // search options (text, pagination, sort)
     allRows, // all data
-    queriedRows, // filtered data (after search query)
-    paginatedRows, // paginated data (cut from queriedRows)
+    searchedRows, // filtered data (after search query)
+    paginatedRows, // paginated data (cut from searchedRows)
     hasError, // boolean indicating if the data is valid
     columns, // columns (field, label, width, isPinned, isSortable, defaultSortDirection)
     dimensions, // screener dimensions

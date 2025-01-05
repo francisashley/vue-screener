@@ -9,13 +9,13 @@
   >
     <slot :screener="screener">
       <VueScreenerPaginationResults
-        :total="screener.queriedRows.value.length ?? 0"
+        :total="screener.searchedRows.value.length ?? 0"
         :current-page="props.screener.searchQuery.value.page"
         :per-page="props.screener.searchQuery.value.rowsPerPage"
       />
 
       <VueScreenerPaginationButtons
-        :total="props.screener.queriedRows.value.length"
+        :total="props.screener.searchedRows.value.length"
         :per-page="props.screener.searchQuery.value.rowsPerPage"
         :current-page="props.screener.searchQuery.value.page"
         @go-to="screener.actions.goToPage"
@@ -44,7 +44,7 @@ const props = defineProps<{
 }>()
 
 const totalPages = computed((): number => {
-  return Math.ceil(props.screener.queriedRows.value.length / props.screener.searchQuery.value.rowsPerPage) || 0
+  return Math.ceil(props.screener.searchedRows.value.length / props.screener.searchQuery.value.rowsPerPage) || 0
 })
 
 const currentPageIsInRange = computed((): boolean => {
@@ -56,7 +56,7 @@ onMounted(() => {
 })
 
 watch(
-  () => props.screener.queriedRows.value.length,
+  () => props.screener.searchedRows.value.length,
   () => ensureCurrentPageIsValid(),
 )
 

@@ -26,8 +26,17 @@
             :screener="screener"
             :column="column"
             :row="row"
+            :cell="row.cells[column.field]"
+            :text="row.cells[column.field]?.htmlValue"
+            :is-search-match="row.cells[column.field]?.isSearchMatch"
           >
-            <VueScreenerTableCell :screener="screener" :column="column" :row="row" />
+            <VueScreenerTableCell
+              :screener="screener"
+              :column="column"
+              :row="row"
+              :text="row.cells[column.field]?.htmlValue"
+              :is-search-match="row.cells[column.field]?.isSearchMatch"
+            />
           </slot>
         </VueScreenerTableRow>
       </template>

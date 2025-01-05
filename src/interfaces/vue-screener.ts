@@ -1,5 +1,7 @@
 import { ComputedRef, Ref } from 'vue'
 
+export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'
+
 export type VueScreenerOptions = {
   contentHeight?: string // a css height
   defaultCurrentPage?: number
@@ -17,7 +19,7 @@ export interface IVueScreener {
   searchQuery: Ref<SearchQuery>
   hasError: ComputedRef<boolean>
   allRows: Ref<Row[]>
-  queriedRows: ComputedRef<Row[]>
+  searchedRows: ComputedRef<Row[]>
   paginatedRows: ComputedRef<Row[]>
   columns: ComputedRef<Column[]>
   dimensions: Ref<{ width: number; height: number } | null>
@@ -74,7 +76,13 @@ export type Column = {
 
 export type Row = {
   id: string // A unique identifier for internal tracking and updating of the row.
-  data: { [key: string | number]: any } // The original data for the row.
+  cells: { [key: string | number]: Cell } // The original data for the row.
 }
 
-export type DataType = 'string' | 'number' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'null' | 'array' | 'object'
+export type Cell = {
+  value: any
+  stringValue: string
+  htmlValue: string
+  type: DataType
+  isSearchMatch?: boolean
+}
