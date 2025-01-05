@@ -93,6 +93,29 @@
       "markdownFile": null
     },
     {
+      "id": "src-stories-1-basic-usage-5-slots-story-vue",
+      "title": "5. Slots",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/1-basic-usage/5-slots.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "5. Slots"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
       "id": "src-stories-2-configure-columns-1-control-widths-story-vue",
       "title": "1. Control widths",
       "layout": {
