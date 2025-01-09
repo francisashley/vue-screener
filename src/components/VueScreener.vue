@@ -49,7 +49,7 @@ import { twMerge } from 'tailwind-merge'
 const props = withDefaults(
   defineProps<{
     screener?: IVueScreener
-    data?: any[]
+    data?: any[] | null
     class?: string
     // options
     contentHeight?: string
