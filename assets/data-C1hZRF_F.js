@@ -1715,7 +1715,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "VueScreener",
   props: {
     screener: { type: Object, required: false },
-    data: { type: Array, required: false },
+    data: { type: [Array, null], required: false },
     class: { type: String, required: false },
     contentHeight: { type: String, required: false },
     defaultCurrentPage: { type: Number, required: false },
