@@ -30,6 +30,12 @@
         :text="text"
         :is-search-match="isSearchMatch"
       />
+      <VueScreenerNullRenderer
+        v-else-if="!disableDataTypeHighlight && type === 'null'"
+        :truncate="column.truncate"
+        :text="text"
+        :is-search-match="isSearchMatch"
+      />
       <VueScreenerDefaultRenderer v-else :truncate="column.truncate" :text="text" :is-search-match="isSearchMatch" />
     </slot>
   </div>
@@ -43,6 +49,7 @@ import VueScreenerDefaultRenderer from '../renderers/VueScreenerDefaultRenderer.
 import VueScreenerStringRenderer from '../renderers/VueScreenerStringRenderer.vue'
 import VueScreenerNumberRenderer from '../renderers/VueScreenerNumberRenderer.vue'
 import VueScreenerBooleanRenderer from '../renderers/VueScreenerBooleanRenderer.vue'
+import VueScreenerNullRenderer from '../renderers/VueScreenerNullRenderer.vue'
 
 const props = defineProps<{
   column: Column

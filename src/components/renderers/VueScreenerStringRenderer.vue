@@ -2,7 +2,7 @@
   <div
     :class="[
       twMerge(
-        'vsc-relative vsc-inset-0 vsc-break-words vsc-py-2 vsc-px-2 vsc-text-[#4caf50]',
+        'vsc-relative vsc-inset-0 vsc-break-words vsc-py-2 vsc-px-2 vsc-text-[#cb9077]',
         truncate && 'vsc-whitespace-nowrap vsc-text-ellipsis vsc-overflow-hidden',
         props.class,
       ),
