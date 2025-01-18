@@ -1,5 +1,5 @@
 <template>
-  <Story title="5. Slots" source="-">
+  <Story title="6. Slots" source="-">
     <div class="vsc-p-4 vsc-bg-zinc-800">
       <VueScreener title="Override header" :data="baseData">
         <template #header>

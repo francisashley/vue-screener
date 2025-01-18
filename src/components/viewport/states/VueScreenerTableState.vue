@@ -34,8 +34,10 @@
               :screener="screener"
               :column="column"
               :row="row"
+              :type="row.cells[column.field]?.type"
               :text="row.cells[column.field]?.htmlValue"
               :is-search-match="row.cells[column.field]?.isSearchMatch"
+              :disable-data-type-highlight="screener.options.value.disableDataTypeHighlight"
             />
           </slot>
         </VueScreenerTableRow>
