@@ -7,6 +7,7 @@ export const useVueScreener = (inputData?: unknown[], defaultOptions: VueScreene
   const options = ref<VueScreenerOptions>({
     contentHeight: defaultOptions.contentHeight,
     disableSearchHighlight: defaultOptions.disableSearchHighlight ?? false,
+    disableDataTypeHighlight: defaultOptions.disableDataTypeHighlight ?? false,
     loading: defaultOptions.loading ?? false,
     defaultCurrentPage: defaultOptions.defaultCurrentPage ?? 1,
     defaultRowsPerPage: defaultOptions.defaultRowsPerPage ?? 10,

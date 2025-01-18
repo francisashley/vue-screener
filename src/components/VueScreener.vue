@@ -59,6 +59,7 @@ const props = withDefaults(
     defaultSortDirection?: 'asc' | 'desc'
     columns?: Record<PropertyKey, Partial<Column>>
     disableSearchHighlight?: boolean
+    disableDataTypeHighlight?: boolean
     loading?: boolean
     title?: string
     includeHeader?: boolean
@@ -81,6 +82,7 @@ const internalScreener = computed(
       defaultSortDirection: props.defaultSortDirection,
       columns: props.columns,
       disableSearchHighlight: props.disableSearchHighlight,
+      disableDataTypeHighlight: props.disableDataTypeHighlight,
       loading: props.loading,
     }),
 )
@@ -95,6 +97,7 @@ watch(
     defaultSortDirection: props.defaultSortDirection,
     columns: props.columns,
     disableSearchHighlight: props.disableSearchHighlight,
+    disableDataTypeHighlight: props.disableDataTypeHighlight,
     loading: props.loading,
   }),
   (options) => internalScreener.value.actions.setOptions(options),

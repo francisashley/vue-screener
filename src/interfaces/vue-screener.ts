@@ -11,6 +11,7 @@ export type VueScreenerOptions = {
   defaultTruncate?: boolean
   columns?: Record<PropertyKey, Partial<Column>>
   disableSearchHighlight?: boolean
+  disableDataTypeHighlight?: boolean
   loading?: boolean
 }
 
