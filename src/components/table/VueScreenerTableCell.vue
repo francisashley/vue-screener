@@ -2,7 +2,7 @@
   <div
     :class="[
       twMerge(
-        'vsc-border-r vsc-border-zinc-700 vsc-py-2 vsc-px-2 vsc-whitespace-inherit last:vsc-border-r-0 vsc-bg-zinc-800 vsc-break-words vsc-relative',
+        'vsc-border-r vsc-border-zinc-700 vsc-whitespace-inherit last:vsc-border-r-0 vsc-bg-zinc-800 vsc-relative',
         column.truncate && 'vsc-whitespace-nowrap vsc-text-ellipsis vsc-overflow-hidden',
         props.class,
       ),
@@ -12,8 +12,7 @@
     :title="column.truncate ? text : ''"
   >
     <slot>
-      <span v-html="text" />
-      <div v-if="isSearchMatch" class="vsc-absolute vsc-inset-0 vsc-bg-yellow-400/5" />
+      <VueScreenerDefaultRenderer :truncate="column.truncate" :text="text" :is-search-match="isSearchMatch" />
     </slot>
   </div>
 </template>
@@ -22,6 +21,7 @@
 import { defineProps, HTMLAttributes } from 'vue'
 import { twMerge } from '../../utils/tailwind-merge.utils'
 import { Column } from '@/interfaces/vue-screener'
+import VueScreenerDefaultRenderer from '../renderers/VueScreenerDefaultRenderer.vue'
 
 const props = defineProps<{
   column: Column
