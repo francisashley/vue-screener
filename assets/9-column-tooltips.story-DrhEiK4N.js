@@ -1,7 +1,7 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createBaseVNode, ax as createVNode } from "./vendor-B4nEsnDH.js";
-import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-BAg6L1QX.js";
+import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-DBjJt0Ql.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "6-hide-fields.story",
+  __name: "9-column-tooltips.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const __returned__ = { get VueScreener() {
@@ -17,7 +17,7 @@ const _hoisted_1 = { class: "vsc-p-4 vsc-bg-zinc-800" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "6. Hide fields",
+    title: "9. Column tooltips",
     source: "-"
   }, {
     default: withCtx(() => [
@@ -26,9 +26,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           title: "Results",
           data: $setup.baseData,
           columns: {
-            id: { hidden: true, order: 0 },
-            first_name: { hidden: true, order: 1 },
-            last_name: { hidden: true, order: 2 }
+            id: { info: "The ID column" },
+            first_name: { info: "The First Name column" },
+            last_name: { info: "The Last Name column" },
+            full_name: { info: "The Full Name column" },
+            email: { info: "The Email column" },
+            gender: { info: "The Gender column" },
+            ip_address: { info: "The IP column" }
           }
         }, null, 8, ["data"])
       ])
@@ -37,8 +41,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/2-configure-columns/6-hide-fields.story.vue";
-const _6HideFields_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/6-hide-fields.story.vue"]]);
+_sfc_main.__file = "src/stories/2-configure-columns/9-column-tooltips.story.vue";
+const _9ColumnTooltips_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/9-column-tooltips.story.vue"]]);
 export {
-  _6HideFields_story as default
+  _9ColumnTooltips_story as default
 };

@@ -1,8 +1,8 @@
 import { ar as defineComponent, as as resolveComponent, at as openBlock, au as createBlock, av as withCtx, aw as createBaseVNode, ax as createVNode } from "./vendor-B4nEsnDH.js";
-import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-BAg6L1QX.js";
-import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-D5HdiZTi.js";
+import { _ as _export_sfc, V as VueScreener, b as baseData } from "./data-DBjJt0Ql.js";
+import { p as primitivesData, m as mixedObjectsData } from "./mix-objects-data-CEg_0Ck-.js";
 const _sfc_main = /* @__PURE__ */ defineComponent({
-  __name: "1-control-widths.story",
+  __name: "2-control-labels.story",
   setup(__props, { expose: __expose }) {
     __expose();
     const __returned__ = { get VueScreener() {
@@ -38,7 +38,7 @@ const _hoisted_5 = { class: "vsc-p-4 vsc-bg-zinc-800" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_Story = resolveComponent("Story");
   return openBlock(), createBlock(_component_Story, {
-    title: "1. Control widths",
+    title: "2. Control labels",
     source: "-"
   }, {
     default: withCtx(() => [
@@ -47,13 +47,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           title: "Results",
           data: $setup.baseData,
           columns: {
-            id: { width: "max-content" },
-            first_name: { width: "150px" },
-            last_name: { width: "150px" },
-            full_name: { width: "150px" },
-            email: { width: "200px" },
-            gender: { width: "100px" },
-            ip_address: { width: "minmax(150px, 1fr)" }
+            id: { label: "ID", width: "max-content" },
+            first_name: { label: "First name" },
+            last_name: { label: "Last name" },
+            full_name: { label: "Full name" },
+            email: { label: "Email" },
+            gender: { label: "Gender" },
+            ip_address: { label: "IP address" }
           }
         }, null, 8, ["data"])
       ]),
@@ -63,12 +63,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           title: "Results",
           data: $setup.primitivesData,
           columns: {
-            0: { width: "max-content" },
-            1: { width: "100px" },
-            2: { width: "100px" },
-            3: { width: "1fr" },
-            4: { width: "100px" },
-            5: { width: "150px" }
+            0: { label: "ID", width: "minmax(50px, max-content)" },
+            1: { label: "First name" },
+            2: { label: "Last name" },
+            3: { label: "Email" },
+            4: { label: "Gender" },
+            5: { label: "IP address" }
           }
         }, null, 8, ["data"])
       ]),
@@ -78,12 +78,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           title: "Results",
           data: $setup.mixedObjectsData,
           columns: {
-            type: { width: "minmax(50px, max-content)", order: 1 },
-            name: { width: "100px", order: 2 },
-            id: { width: "50px", order: 0 },
-            address: { width: "minmax(200px, 1fr)", order: 3 },
-            country: { width: "100px", order: 4 },
-            flag_colours: { width: "200px", order: 5 }
+            id: { label: "ID", order: 0 },
+            name: { label: "Name", order: 1 },
+            address: { label: "Address", order: 2 },
+            country: { label: "Country", order: 3 },
+            flag_colours: { label: "Flag colours", order: 4 }
           }
         }, null, 8, ["data"])
       ])
@@ -92,8 +91,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
   });
 }
-_sfc_main.__file = "src/stories/2-configure-columns/1-control-widths.story.vue";
-const _1ControlWidths_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/1-control-widths.story.vue"]]);
+_sfc_main.__file = "src/stories/2-configure-columns/2-control-labels.story.vue";
+const _2ControlLabels_story = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/home/runner/work/vue-screener/vue-screener/src/stories/2-configure-columns/2-control-labels.story.vue"]]);
 export {
-  _1ControlWidths_story as default
+  _2ControlLabels_story as default
 };
