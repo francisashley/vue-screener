@@ -93,8 +93,8 @@
       "markdownFile": null
     },
     {
-      "id": "src-stories-1-basic-usage-5-slots-story-vue",
-      "title": "5. Slots",
+      "id": "src-stories-1-basic-usage-5-disable-data-type-highlighting-story-vue",
+      "title": "5. Disable data type highlighting",
       "layout": {
         "type": "single",
         "iframe": true
@@ -107,10 +107,33 @@
         }
       ],
       "autoPropsDisabled": true,
-      "relativePath": "src/stories/1-basic-usage/5-slots.story.vue",
+      "relativePath": "src/stories/1-basic-usage/5-disable-data-type-highlighting.story.vue",
       "supportPluginId": "vue3",
       "treePath": [
-        "5. Slots"
+        "5. Disable data type highlighting"
+      ],
+      "virtual": false,
+      "markdownFile": null
+    },
+    {
+      "id": "src-stories-1-basic-usage-6-slots-story-vue",
+      "title": "6. Slots",
+      "layout": {
+        "type": "single",
+        "iframe": true
+      },
+      "docsOnly": false,
+      "variants": [
+        {
+          "id": "_default",
+          "title": "default"
+        }
+      ],
+      "autoPropsDisabled": true,
+      "relativePath": "src/stories/1-basic-usage/6-slots.story.vue",
+      "supportPluginId": "vue3",
+      "treePath": [
+        "6. Slots"
       ],
       "virtual": false,
       "markdownFile": null
